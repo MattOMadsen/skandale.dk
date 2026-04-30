@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skandale.dk v6 • Per-politiker JSON • 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="bg-slate-50">
+    <!-- Navbar -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-x-4">
+                    <div class="flex items-center gap-x-3">
+                        <div class="w-12 h-12 bg-[#C8102E] rounded-2xl flex items-center justify-center shadow-lg">
+                            <i class="fa-solid fa-balance-scale text-white text-3xl"></i>
+                        </div>
+                        <div>
+                            <span class="font-bold text-3xl tracking-tighter text-slate-900">Skandale</span>
+                            <span class="font-bold text-3xl tracking-tighter text-[#C8102E]">.dk</span>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex items-center bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full">
+                        <i class="fa-solid fa-check-double mr-1.5"></i>
+                        <span>v6.0 JSON Split</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-x-4">
+                    <button onclick="showAddScandalModal()" class="flex items-center gap-x-2 bg-[#C8102E] hover:bg-[#A00E26] transition-colors text-white px-5 py-2.5 rounded-2xl text-sm font-semibold shadow-sm">
+                        <i class="fa-solid fa-plus mr-2"></i>
+                        <span class="hidden sm:inline">Tilføj skandale</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+        <div class="max-w-5xl mx-auto px-6 pt-16 pb-20 text-center">
+            <div class="inline-flex items-center gap-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full mb-6 text-sm">
+                <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                <span class="font-medium">v6.0 • 4 politikere • 12 skandaler • 28+ medieartikler</span>
+            </div>
+            
+            <h1 class="text-6xl md:text-7xl font-bold tracking-tighter heading-font mb-6">
+                Alle skandaler.<br>Én oversigt.
+            </h1>
+            <p class="max-w-2xl mx-auto text-xl text-slate-300 mb-10">
+                Søg på en politiker – se skandaler, medier og hvad der burde være sket ifølge loven.
+            </p>
+            
+            <div class="max-w-xl mx-auto relative">
+                <input id="searchInput" type="text" placeholder="Søg efter politiker (f.eks. Mette)..." 
+                       class="search-input w-full bg-white text-slate-900 border border-white/20 focus:border-[#C8102E] px-6 py-4 pl-14 rounded-3xl text-lg shadow-xl outline-none" 
+                       onkeyup="filterPoliticians()">
+                <i class="fa-solid fa-search absolute left-6 top-4.5 text-xl text-slate-400"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Politicians Grid -->
+    <div class="max-w-7xl mx-auto px-6 py-16">
+        <h2 class="text-4xl font-bold tracking-tight text-slate-900 mb-8">Kendte politikere</h2>
+        <div id="politiciansGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- JS populates this -->
+        </div>
+    </div>
+
+    <!-- Retfærdighed intro -->
+    <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white py-16">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h3 class="text-4xl font-bold tracking-tight mb-4">Hvad burde være sket?</h3>
+            <p class="max-w-2xl mx-auto text-slate-300">Klik på en politiker for at se den detaljerede analyse af, hvad der burde være sket ifølge lov og eksperter.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-sm">Skandale.dk v6.0 • Per-politiker JSON-filer • Klar til GitHub Pages</p>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="politicianModal" onclick="if (event.target.id === 'politicianModal') closeModal()" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+        <div onclick="event.stopImmediatePropagation()" class="bg-white rounded-3xl max-w-3xl w-full max-h-[94vh] overflow-hidden shadow-2xl modal">
+            <div id="modalHeader" class="px-8 pt-8 pb-6 flex items-start justify-between border-b">
+                <div class="flex items-center gap-x-5">
+                    <div id="modalAvatar" class="w-20 h-20 rounded-3xl flex-shrink-0 flex items-center justify-center text-white text-4xl font-bold shadow-inner"></div>
+                    <div>
+                        <div id="modalName" class="text-4xl font-bold tracking-tight"></div>
+                        <div class="flex items-center gap-x-3 mt-1">
+                            <div id="modalParty" class="inline-block px-3.5 py-1 text-xs font-bold tracking-wider rounded-full"></div>
+                            <div id="modalRole" class="text-sm text-slate-500"></div>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 p-3 -mr-3 -mt-3">
+                    <i class="fa-solid fa-times text-3xl"></i>
+                </button>
+            </div>
+            
+            <div class="p-8 overflow-y-auto max-h-[calc(94vh-170px)]">
+                <div class="mb-8">
+                    <div class="uppercase tracking-[2px] text-xs font-semibold text-slate-500 mb-2">OM POLITIKEREN</div>
+                    <div id="modalBio" class="text-slate-600 leading-relaxed"></div>
+                </div>
+                
+                <div>
+                    <div class="flex items-center justify-between mb-5">
+                        <div>
+                            <span class="uppercase tracking-[2px] text-xs font-semibold text-slate-500">SKANDALER</span>
+                            <span id="modalScandalCount" class="ml-3 text-2xl font-bold text-slate-900"></span>
+                        </div>
+                    </div>
+                    <div id="modalScandals" class="space-y-4">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
