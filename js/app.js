@@ -1,4 +1,4 @@
-// Skandale.dk v6.1 - Per-skandale justiceAnalysis + collapsible + voting fix
+// Skandale.dk v6.1 - Komplet version med per-skandale justiceAnalysis + voting
 let politicians = [];
 
 async function loadPoliticians() {
@@ -20,6 +20,7 @@ async function loadPoliticians() {
 
 function renderPoliticians(filtered = null) {
   const grid = document.getElementById('politiciansGrid');
+  if (!grid) return;
   grid.innerHTML = '';
   const list = filtered || politicians;
 
@@ -164,15 +165,40 @@ function closeModal() {
   document.getElementById('politicianModal').classList.add('hidden');
 }
 
-// Voting functions (restored)
+// ==================== AFSTEMNING (VOTING) ====================
 let metteVotes = { ja: 1247, nej: 389, vedikke: 518 };
-function loadMetteVotes() { /* ... */ }
-function updateVoteDisplay() { /* ... */ }
-function voteMette(choice) { /* ... */ }
+
+function loadMetteVotes() {
+  const saved = localStorage.getItem('metteVotes');
+  if (saved) metteVotes = JSON.parse(saved);
+  updateVoteDisplay();
+}
+
+function updateVoteDisplay() {
+  const jaEl = document.getElementById('vote-ja');
+  const nejEl = document.getElementById('vote-nej');
+  const vedikkeEl = document.getElementById('vote-vedikke');
+  if (jaEl) jaEl.textContent = metteVotes.ja.toLocaleString('da-DK');
+  if (nejEl) nejEl.textContent = metteVotes.nej.toLocaleString('da-DK');
+  if (vedikkeEl) vedikkeEl.textContent = metteVotes.vedikke.toLocaleString('da-DK');
+}
+
+function voteMette(choice) {
+  if (localStorage.getItem('metteVoted')) {
+    alert('Du har allerede stemt på denne sag (demo)');
+    return;
+  }
+  metteVotes[choice]++;
+  localStorage.setItem('metteVotes', JSON.stringify(metteVotes));
+  localStorage.setItem('metteVoted', 'true');
+  updateVoteDisplay();
+  alert('Tak for din stemme! (Demo – gemt lokalt)');
+}
 
 function initializeEverything() {
   loadPoliticians();
-  console.log('%c[Skandale.dk v6.1] Per-skandale justiceAnalysis aktiveret!', 'color:#10b981');
+  loadMetteVotes();
+  console.log('%c[Skandale.dk v6.1] Per-skandale justiceAnalysis + voting aktiveret!', 'color:#10b981');
 }
 
 window.onload = initializeEverything;
