@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skandale.dk v6.2 • Timeline + Filtre • 2026</title>
+    <title>Skandale.dk v6.3 • 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -25,14 +25,12 @@
                     </div>
                     <div class="hidden md:flex items-center bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full">
                         <i class="fa-solid fa-check-double mr-1.5"></i>
-                        <span>v6.2 Timeline + Filtre</span>
+                        <span>v6.3</span>
                     </div>
                 </div>
                 
                 <div class="flex items-center gap-x-3">
-                    <!-- Tidslinje knap -->
-                    <button onclick="showTimeline()" 
-                            class="flex items-center gap-x-2 px-5 py-2.5 rounded-2xl text-sm font-semibold border border-slate-300 hover:bg-slate-100 transition-colors">
+                    <button onclick="showTimeline()" class="flex items-center gap-x-2 px-5 py-2.5 rounded-2xl text-sm font-semibold border border-slate-300 hover:bg-slate-100 transition-colors">
                         <i class="fa-solid fa-clock-rotate-left mr-2"></i>
                         <span>Tidslinje</span>
                     </button>
@@ -51,7 +49,7 @@
         <div class="max-w-5xl mx-auto px-6 pt-16 pb-20 text-center">
             <div class="inline-flex items-center gap-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full mb-6 text-sm">
                 <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                <span class="font-medium">v6.2 • 8 politikere • 20+ skandaler • 40+ medieartikler</span>
+                <span class="font-medium">v6.3 • 8 politikere • 20+ skandaler</span>
             </div>
             
             <h1 class="text-6xl md:text-7xl font-bold tracking-tighter heading-font mb-6">
@@ -62,9 +60,7 @@
             </p>
             
             <div class="max-w-xl mx-auto relative">
-                <input id="searchInput" type="text" placeholder="Søg efter politiker (f.eks. Mette)..." 
-                       class="search-input w-full bg-white text-slate-900 border border-white/20 focus:border-[#C8102E] px-6 py-4 pl-14 rounded-3xl text-lg shadow-xl outline-none" 
-                       onkeyup="filterPoliticians()">
+                <input id="searchInput" type="text" placeholder="Søg efter politiker..." class="search-input w-full bg-white text-slate-900 border border-white/20 focus:border-[#C8102E] px-6 py-4 pl-14 rounded-3xl text-lg shadow-xl outline-none" onkeyup="filterPoliticians()">
                 <i class="fa-solid fa-search absolute left-6 top-4.5 text-xl text-slate-400"></i>
             </div>
         </div>
@@ -74,7 +70,7 @@
     <div class="max-w-7xl mx-auto px-6 py-16">
         <h2 class="text-4xl font-bold tracking-tight text-slate-900 mb-8">Kendte politikere</h2>
         <div id="politiciansGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- JS populates this -->
+            <!-- JS populates -->
         </div>
     </div>
 
@@ -89,7 +85,7 @@
     <!-- Footer -->
     <footer class="bg-slate-900 text-slate-400 py-12">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <p class="text-sm">Skandale.dk v6.2 • Timeline + Filtre • 8 politikere</p>
+            <p class="text-sm">Skandale.dk v6.3 • Timeline + Filtre • 8 politikere</p>
         </div>
     </footer>
 
@@ -129,6 +125,19 @@
                         <!-- Populated by JS -->
                     </div>
                 </div>
+                
+                <!-- AFSTEMNING INDE I MODALEN -->
+                <div class="mt-10 pt-8 border-t">
+                    <div class="flex items-center gap-x-2 mb-4">
+                        <i class="fa-solid fa-vote-yea text-[#C8102E]"></i>
+                        <span class="font-bold">Hvad synes du om denne politiker?</span>
+                    </div>
+                    <div class="flex gap-3">
+                        <button onclick="votePolitician('ja')" class="flex-1 py-3 px-4 bg-emerald-100 hover:bg-emerald-200 text-emerald-700 rounded-2xl font-semibold text-sm transition-colors">Godt</button>
+                        <button onclick="votePolitician('nej')" class="flex-1 py-3 px-4 bg-red-100 hover:bg-red-200 text-red-700 rounded-2xl font-semibold text-sm transition-colors">Dårligt</button>
+                        <button onclick="votePolitician('vedikke')" class="flex-1 py-3 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-2xl font-semibold text-sm transition-colors">Neutral</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -144,7 +153,6 @@
                 <button onclick="closeTimeline()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
             </div>
             
-            <!-- Filtre -->
             <div class="px-8 py-4 border-b bg-slate-50 flex flex-wrap gap-4 items-center">
                 <div>
                     <label class="text-xs font-semibold text-slate-500 block mb-1">PARTI</label>
@@ -156,7 +164,7 @@
                     <label class="text-xs font-semibold text-slate-500 block mb-1">ALVORLIGHED</label>
                     <select id="filterSeverity" onchange="filterTimeline()" class="border border-slate-300 rounded-xl px-3 py-1.5 text-sm">
                         <option value="">Alle</option>
-                        <option value="5">5 stjerner (Meget alvorlig)</option>
+                        <option value="5">5 stjerner</option>
                         <option value="4">4+ stjerner</option>
                         <option value="3">3+ stjerner</option>
                     </select>

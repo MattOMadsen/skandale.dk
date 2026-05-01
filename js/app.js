@@ -1,4 +1,4 @@
-// Skandale.dk v6.2 - Komplet med Timeline + Filtre + 8 politikere
+// Skandale.dk v6.4 - Per-skandale afstemning
 let politicians = [];
 
 async function loadPoliticians() {
@@ -111,6 +111,9 @@ function showPoliticianModal(id) {
   scandalsContainer.innerHTML = '';
 
   politician.scandals.forEach((scandal) => {
+    // Hent gemte stemmer for denne skandale
+    const savedVotes = JSON.parse(localStorage.getItem(`vote_${scandal.id}`) || '{"ja":0,"nej":0,"vedikke":0}');
+
     let justiceHTML = '';
     if (scandal.justiceAnalysis) {
       justiceHTML = `
@@ -155,6 +158,24 @@ function showPoliticianModal(id) {
       `;
     }
 
+    // NY: Per-skandale afstemning
+    const voteHTML = `
+      <div class="mt-4 pt-4 border-t border-slate-200">
+        <div class="text-sm font-semibold mb-2">Hvad synes du om denne sag?</div>
+        <div class="flex gap-2">
+          <button onclick="voteScandal(${scandal.id}, 'ja', this)" class="flex-1 py-2 px-3 text-xs bg-emerald-100 hover:bg-emerald-200 text-emerald-700 rounded-xl font-medium transition-colors">
+            Godt <span class="font-bold">(${savedVotes.ja})</span>
+          </button>
+          <button onclick="voteScandal(${scandal.id}, 'nej', this)" class="flex-1 py-2 px-3 text-xs bg-red-100 hover:bg-red-200 text-red-700 rounded-xl font-medium transition-colors">
+            Dårligt <span class="font-bold">(${savedVotes.nej})</span>
+          </button>
+          <button onclick="voteScandal(${scandal.id}, 'vedikke', this)" class="flex-1 py-2 px-3 text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-medium transition-colors">
+            Neutral <span class="font-bold">(${savedVotes.vedikke})</span>
+          </button>
+        </div>
+      </div>
+    `;
+
     const scandalHTML = `
       <div class="border border-slate-200 rounded-2xl overflow-hidden scandal-card">
         <div onclick="toggleScandalDetails(this)" class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50">
@@ -175,6 +196,7 @@ function showPoliticianModal(id) {
             </div>
             ${justiceHTML}
             ${mediaHTML}
+            ${voteHTML}
           </div>
         </div>
       </div>
@@ -213,6 +235,30 @@ function toggleScandalDetails(element) {
 function closeModal() {
   document.getElementById('politicianModal').classList.remove('flex');
   document.getElementById('politicianModal').classList.add('hidden');
+}
+
+// ==================== PER-SKANDALE AFSTEMNING ====================
+function voteScandal(scandalId, choice, button) {
+  const key = `vote_${scandalId}`;
+  let votes = JSON.parse(localStorage.getItem(key) || '{"ja":0,"nej":0,"vedikke":0}');
+  
+  votes[choice]++;
+  localStorage.setItem(key, JSON.stringify(votes));
+  
+  // Opdater knapperne med nye tal
+  const parent = button.parentElement;
+  const buttons = parent.querySelectorAll('button');
+  
+  buttons[0].innerHTML = `Godt <span class="font-bold">(${votes.ja})</span>`;
+  buttons[1].innerHTML = `Dårligt <span class="font-bold">(${votes.nej})</span>`;
+  buttons[2].innerHTML = `Neutral <span class="font-bold">(${votes.vedikke})</span>`;
+  
+  // Vis tak
+  const originalText = button.innerHTML;
+  button.innerHTML = 'Tak!';
+  setTimeout(() => {
+    button.innerHTML = originalText;
+  }, 800);
 }
 
 // ==================== TIMELINE ====================
@@ -320,33 +366,9 @@ function closeTimeline() {
   modal.classList.add('hidden');
 }
 
-// ==================== VOTING ====================
-let metteVotes = { ja: 1247, nej: 389, vedikke: 518 };
-
-function loadMetteVotes() {
-  const saved = localStorage.getItem('metteVotes');
-  if (saved) metteVotes = JSON.parse(saved);
-}
-
-function updateVoteDisplay() {
-  // Add this function if you have voting elements in your HTML
-}
-
-function voteMette(choice) {
-  if (localStorage.getItem('metteVoted')) {
-    alert('Du har allerede stemt (demo)');
-    return;
-  }
-  metteVotes[choice]++;
-  localStorage.setItem('metteVotes', JSON.stringify(metteVotes));
-  localStorage.setItem('metteVoted', 'true');
-  alert('Tak for din stemme! (Demo)');
-}
-
 function initializeEverything() {
   loadPoliticians();
-  loadMetteVotes();
-  console.log('%c[Skandale.dk v6.2] Timeline + Filtre aktiveret!', 'color:#10b981');
+  console.log('%c[Skandale.dk v6.4] Per-skandale afstemning aktiveret!', 'color:#10b981');
 }
 
 window.onload = initializeEverything;
