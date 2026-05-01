@@ -1,4 +1,4 @@
-// Skandale.dk v6.4 - Per-skandale afstemning
+// Skandale.dk v6.5 - Kommentarer per skandale
 let politicians = [];
 
 async function loadPoliticians() {
@@ -17,7 +17,6 @@ async function loadPoliticians() {
     const responses = await Promise.all(politicianFiles.map(file => fetch(file)));
     politicians = await Promise.all(responses.map(res => res.json()));
     renderPoliticians();
-    populatePartyFilter();
   } catch (error) {
     console.error('Kunne ikke loade data:', error);
   }
@@ -111,9 +110,6 @@ function showPoliticianModal(id) {
   scandalsContainer.innerHTML = '';
 
   politician.scandals.forEach((scandal) => {
-    // Hent gemte stemmer for denne skandale
-    const savedVotes = JSON.parse(localStorage.getItem(`vote_${scandal.id}`) || '{"ja":0,"nej":0,"vedikke":0}');
-
     let justiceHTML = '';
     if (scandal.justiceAnalysis) {
       justiceHTML = `
@@ -158,20 +154,25 @@ function showPoliticianModal(id) {
       `;
     }
 
-    // NY: Per-skandale afstemning
-    const voteHTML = `
+    // NY: Kommentar sektion
+    const comments = JSON.parse(localStorage.getItem(`comments_${scandal.id}`) || '[]');
+    let commentsHTML = '';
+    if (comments.length > 0) {
+      commentsHTML = `<div class="mt-3 space-y-2">${comments.map(c => `
+        <div class="bg-slate-100 p-3 rounded-xl text-sm">
+          <div class="text-slate-600">${c.text}</div>
+          <div class="text-[10px] text-slate-400 mt-1">${c.date}</div>
+        </div>
+      `).join('')}</div>`;
+    }
+
+    const commentSection = `
       <div class="mt-4 pt-4 border-t border-slate-200">
-        <div class="text-sm font-semibold mb-2">Hvad synes du om denne sag?</div>
-        <div class="flex gap-2">
-          <button onclick="voteScandal(${scandal.id}, 'ja', this)" class="flex-1 py-2 px-3 text-xs bg-emerald-100 hover:bg-emerald-200 text-emerald-700 rounded-xl font-medium transition-colors">
-            Godt <span class="font-bold">(${savedVotes.ja})</span>
-          </button>
-          <button onclick="voteScandal(${scandal.id}, 'nej', this)" class="flex-1 py-2 px-3 text-xs bg-red-100 hover:bg-red-200 text-red-700 rounded-xl font-medium transition-colors">
-            Dårligt <span class="font-bold">(${savedVotes.nej})</span>
-          </button>
-          <button onclick="voteScandal(${scandal.id}, 'vedikke', this)" class="flex-1 py-2 px-3 text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-medium transition-colors">
-            Neutral <span class="font-bold">(${savedVotes.vedikke})</span>
-          </button>
+        <div class="font-semibold text-sm mb-2">Kommentarer (${comments.length})</div>
+        ${commentsHTML}
+        <div class="flex gap-2 mt-3">
+          <input type="text" id="comment-input-${scandal.id}" placeholder="Skriv en kommentar..." class="flex-1 border border-slate-300 rounded-xl px-3 py-2 text-sm">
+          <button onclick="postComment(${scandal.id})" class="px-4 py-2 bg-[#C8102E] text-white rounded-xl text-sm font-semibold">Send</button>
         </div>
       </div>
     `;
@@ -196,7 +197,7 @@ function showPoliticianModal(id) {
             </div>
             ${justiceHTML}
             ${mediaHTML}
-            ${voteHTML}
+            ${commentSection}
           </div>
         </div>
       </div>
@@ -206,6 +207,29 @@ function showPoliticianModal(id) {
 
   document.getElementById('politicianModal').classList.remove('hidden');
   document.getElementById('politicianModal').classList.add('flex');
+}
+
+function postComment(scandalId) {
+  const input = document.getElementById(`comment-input-${scandalId}`);
+  if (!input || !input.value.trim()) return;
+
+  const key = `comments_${scandalId}`;
+  const comments = JSON.parse(localStorage.getItem(key) || '[]');
+  
+  comments.push({
+    text: input.value.trim(),
+    date: new Date().toLocaleDateString('da-DK') + ' ' + new Date().toLocaleTimeString('da-DK', {hour: '2-digit', minute:'2-digit'})
+  });
+  
+  localStorage.setItem(key, JSON.stringify(comments));
+  input.value = '';
+  
+  // Genindlæs modalen for at vise den nye kommentar
+  const modal = document.getElementById('politicianModal');
+  const politicianId = parseInt(modal.dataset.currentPoliticianId || 0);
+  if (politicianId) {
+    showPoliticianModal(politicianId);
+  }
 }
 
 function toggleJusticeAnalysis(btn) {
@@ -237,30 +261,6 @@ function closeModal() {
   document.getElementById('politicianModal').classList.add('hidden');
 }
 
-// ==================== PER-SKANDALE AFSTEMNING ====================
-function voteScandal(scandalId, choice, button) {
-  const key = `vote_${scandalId}`;
-  let votes = JSON.parse(localStorage.getItem(key) || '{"ja":0,"nej":0,"vedikke":0}');
-  
-  votes[choice]++;
-  localStorage.setItem(key, JSON.stringify(votes));
-  
-  // Opdater knapperne med nye tal
-  const parent = button.parentElement;
-  const buttons = parent.querySelectorAll('button');
-  
-  buttons[0].innerHTML = `Godt <span class="font-bold">(${votes.ja})</span>`;
-  buttons[1].innerHTML = `Dårligt <span class="font-bold">(${votes.nej})</span>`;
-  buttons[2].innerHTML = `Neutral <span class="font-bold">(${votes.vedikke})</span>`;
-  
-  // Vis tak
-  const originalText = button.innerHTML;
-  button.innerHTML = 'Tak!';
-  setTimeout(() => {
-    button.innerHTML = originalText;
-  }, 800);
-}
-
 // ==================== TIMELINE ====================
 let allScandals = [];
 
@@ -285,17 +285,11 @@ function showTimeline() {
   modal.classList.add('flex');
 
   renderTimeline(allScandals);
-  populatePartyFilter();
 }
 
 function renderTimeline(scandalsToShow) {
   const container = document.getElementById('timelineContent');
   container.innerHTML = '';
-
-  if (scandalsToShow.length === 0) {
-    container.innerHTML = '<p class="text-center text-slate-500 py-8">Ingen skandaler matcher dine filtre.</p>';
-    return;
-  }
 
   scandalsToShow.forEach(scandal => {
     const entryHTML = `
@@ -323,43 +317,6 @@ function renderTimeline(scandalsToShow) {
   });
 }
 
-function filterTimeline() {
-  const party = document.getElementById('filterParty').value;
-  const severity = document.getElementById('filterSeverity').value;
-
-  let filtered = allScandals;
-
-  if (party) {
-    filtered = filtered.filter(s => s.party === party);
-  }
-
-  if (severity) {
-    filtered = filtered.filter(s => s.severity >= parseInt(severity));
-  }
-
-  renderTimeline(filtered);
-}
-
-function populatePartyFilter() {
-  const select = document.getElementById('filterParty');
-  if (!select) return;
-
-  const parties = [...new Set(politicians.map(p => p.party))];
-  select.innerHTML = '<option value="">Alle partier</option>';
-  parties.forEach(party => {
-    const option = document.createElement('option');
-    option.value = party;
-    option.textContent = party;
-    select.appendChild(option);
-  });
-}
-
-function resetTimelineFilters() {
-  document.getElementById('filterParty').value = '';
-  document.getElementById('filterSeverity').value = '';
-  renderTimeline(allScandals);
-}
-
 function closeTimeline() {
   const modal = document.getElementById('timelineModal');
   modal.classList.remove('flex');
@@ -368,7 +325,7 @@ function closeTimeline() {
 
 function initializeEverything() {
   loadPoliticians();
-  console.log('%c[Skandale.dk v6.4] Per-skandale afstemning aktiveret!', 'color:#10b981');
+  console.log('%c[Skandale.dk v6.5] Kommentarer aktiveret!', 'color:#10b981');
 }
 
 window.onload = initializeEverything;
