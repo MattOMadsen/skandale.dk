@@ -1,0 +1,39 @@
+{
+  "id": 7,
+  "name": "Anders Fogh Rasmussen",
+  "party": "Venstre",
+  "partyColor": "#004B87",
+  "role": "Statsminister 2001-2009",
+  "avatarColor": "#004B87",
+  "initials": "AFR",
+  "bio": "Tidligere statsminister for Venstre (2001-2009). Senere generalsekretær for NATO. Kendt for 'Fogh-regeringerne' og Danmarks deltagelse i Irak-krigen.",
+  "scandals": [
+    {
+      "id": 701,
+      "title": "Irak-krigen og våbeninspektørerne",
+      "year": "2002-2003",
+      "severity": 5,
+      "shortDesc": "Danmark gik i krig i Irak på et tvivlsomt grundlag.",
+      "longDesc": "Anders Fogh Rasmussen førte Danmark ind i Irak-krigen i 2003 med henvisning til, at Saddam Hussein havde masseødelæggelsesvåben. Senere viste det sig, at grundlaget var meget svagt, og at efterretningerne var usikre. Sagen har været genstand for stor debat i Danmark i mange år.",
+      "outcome": "Danmark mistede 6 soldater i Irak. Sagen har skadet tilliden til politiske beslutninger om krig og fred.",
+      "justiceAnalysis": "Beslutningen om at gå i krig burde have været underlagt en mere grundig og uafhængig vurdering af efterretningsgrundlaget. En rigsretssag eller uafhængig kommission burde have undersøgt, om der blev givet vildledende oplysninger til Folketinget.",
+      "mediaLinks": [
+        {"name": "DR", "url": "https://dr.dk", "title": "Fogh og Irak-krigen", "date": "2003"},
+        {"name": "Politiken", "url": "https://politiken.dk", "title": "Irak-krigen: Fogh under pres", "date": "2004"}
+      ]
+    },
+    {
+      "id": 702,
+      "title": "Efterretningssagen",
+      "year": "2004-2005",
+      "severity": 4,
+      "shortDesc": "Anklaget for at have brugt efterretninger politisk.",
+      "longDesc": "Anders Fogh Rasmussen blev anklaget for at have brugt efterretninger fra PET og FE på en måde, der tjente hans politiske formål, herunder i debatten om terror og integration.",
+      "outcome": "Sagen førte til skærpet debat om efterretningstjenesternes rolle og politisk brug af følsomme oplysninger.",
+      "justiceAnalysis": "Brug af efterretninger i den politiske debat bør altid være underlagt streng kontrol for at undgå manipulation. En klarere adskillelse mellem efterretning og politik ville have været ønskelig.",
+      "mediaLinks": [
+        {"name": "Berlingske", "url": "https://berlingske.dk", "title": "Fogh og efterretningerne", "date": "2005"}
+      ]
+    }
+  ]
+}

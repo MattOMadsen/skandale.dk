@@ -1,0 +1,25 @@
+{
+  "id": 6,
+  "name": "Pia Kjærsgaard",
+  "party": "Dansk Folkeparti",
+  "partyColor": "#E30613",
+  "role": "Formand for Dansk Folkeparti 1995-2012",
+  "avatarColor": "#E30613",
+  "initials": "PK",
+  "bio": "Grundlægger og tidligere formand for Dansk Folkeparti. Kendt for sin markante udlændingepolitik og stærke ledelse af partiet i mange år.",
+  "scandals": [
+    {
+      "id": 601,
+      "title": "Skattesagen ('Pias guld')",
+      "year": "2009-2010",
+      "severity": 4,
+      "shortDesc": "Anklaget for at have unddraget skat på store beløb.",
+      "longDesc": "Pia Kjærsgaard blev anklaget for at have unddraget skat på store beløb gennem en række selskaber og investeringer. Sagen blev kaldt 'Pias guld' i medierne og førte til stor mediehetz.",
+      "outcome": "SKAT frikendte hende i de fleste punkter, men sagen skadede hendes og partiets image betydeligt.",
+      "justiceAnalysis": "Selvom hun blev frikendt i de fleste punkter, viser sagen, hvor tæt politiske ledere kan komme på grænsen til skattemæssig gråzone. En mere transparent økonomi ville have været gavnlig for tilliden.",
+      "mediaLinks": [
+        {"name": "Politiken", "url": "https://politiken.dk", "title": "Pia Kjærsgaard anklaget for skattesvindel", "date": "2009"}
+      ]
+    }
+  ]
+}
