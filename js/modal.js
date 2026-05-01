@@ -1,8 +1,11 @@
-// js/modal.js - Modal, afstemning og kommentarer
+// js/modal.js - Modal + Afstemning + Kommentarer (RETTET v6.5.1)
 
 function showPoliticianModal(id) {
   const politician = politicians.find(p => p.id === id);
   if (!politician) return;
+
+  // Gem politiker ID til senere brug
+  document.getElementById('politicianModal').dataset.currentPoliticianId = id;
 
   document.getElementById('modalName').innerHTML = politician.name;
   document.getElementById('modalParty').innerHTML = politician.party;
@@ -21,6 +24,49 @@ function showPoliticianModal(id) {
   scandalsContainer.innerHTML = '';
 
   politician.scandals.forEach((scandal) => {
+    // === AFSTEMNING (NY) ===
+    const savedVotes = JSON.parse(localStorage.getItem(`vote_${scandal.id}`) || '{"ja":0,"nej":0,"vedikke":0}');
+
+    const voteHTML = `
+      <div class="mt-4 pt-4 border-t border-slate-200">
+        <div class="text-sm font-semibold mb-2">Hvad synes du om denne sag?</div>
+        <div class="flex gap-2">
+          <button onclick="voteScandal(${scandal.id}, 'ja', this)" class="flex-1 py-2 px-3 text-xs bg-emerald-100 hover:bg-emerald-200 text-emerald-700 rounded-xl font-medium transition-colors">
+            Godt <span class="font-bold">(${savedVotes.ja})</span>
+          </button>
+          <button onclick="voteScandal(${scandal.id}, 'nej', this)" class="flex-1 py-2 px-3 text-xs bg-red-100 hover:bg-red-200 text-red-700 rounded-xl font-medium transition-colors">
+            Dårligt <span class="font-bold">(${savedVotes.nej})</span>
+          </button>
+          <button onclick="voteScandal(${scandal.id}, 'vedikke', this)" class="flex-1 py-2 px-3 text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-medium transition-colors">
+            Neutral <span class="font-bold">(${savedVotes.vedikke})</span>
+          </button>
+        </div>
+      </div>
+    `;
+
+    // === KOMMENTARER ===
+    const comments = JSON.parse(localStorage.getItem(`comments_${scandal.id}`) || '[]');
+    let commentsHTML = '';
+    if (comments.length > 0) {
+      commentsHTML = `<div class="mt-3 space-y-2">${comments.map(c => `
+        <div class="bg-slate-100 p-3 rounded-xl text-sm">
+          <div class="text-slate-600">${c.text}</div>
+          <div class="text-[10px] text-slate-400 mt-1">${c.date}</div>
+        </div>
+      `).join('')}</div>`;
+    }
+
+    const commentSection = `
+      <div class="mt-4 pt-4 border-t border-slate-200">
+        <div class="font-semibold text-sm mb-2">Kommentarer (${comments.length})</div>
+        ${commentsHTML}
+        <div class="flex gap-2 mt-3">
+          <input type="text" id="comment-input-${scandal.id}" placeholder="Skriv en kommentar..." class="flex-1 border border-slate-300 rounded-xl px-3 py-2 text-sm">
+          <button onclick="postComment(${scandal.id})" class="px-4 py-2 bg-[#C8102E] text-white rounded-xl text-sm font-semibold">Send</button>
+        </div>
+      </div>
+    `;
+
     let justiceHTML = '';
     if (scandal.justiceAnalysis) {
       justiceHTML = `
@@ -65,29 +111,6 @@ function showPoliticianModal(id) {
       `;
     }
 
-    // Kommentarer
-    const comments = JSON.parse(localStorage.getItem(`comments_${scandal.id}`) || '[]');
-    let commentsHTML = '';
-    if (comments.length > 0) {
-      commentsHTML = `<div class="mt-3 space-y-2">${comments.map(c => `
-        <div class="bg-slate-100 p-3 rounded-xl text-sm">
-          <div class="text-slate-600">${c.text}</div>
-          <div class="text-[10px] text-slate-400 mt-1">${c.date}</div>
-        </div>
-      `).join('')}</div>`;
-    }
-
-    const commentSection = `
-      <div class="mt-4 pt-4 border-t border-slate-200">
-        <div class="font-semibold text-sm mb-2">Kommentarer (${comments.length})</div>
-        ${commentsHTML}
-        <div class="flex gap-2 mt-3">
-          <input type="text" id="comment-input-${scandal.id}" placeholder="Skriv en kommentar..." class="flex-1 border border-slate-300 rounded-xl px-3 py-2 text-sm">
-          <button onclick="postComment(${scandal.id})" class="px-4 py-2 bg-[#C8102E] text-white rounded-xl text-sm font-semibold">Send</button>
-        </div>
-      </div>
-    `;
-
     const scandalHTML = `
       <div class="border border-slate-200 rounded-2xl overflow-hidden scandal-card">
         <div onclick="toggleScandalDetails(this)" class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50">
@@ -108,6 +131,7 @@ function showPoliticianModal(id) {
             </div>
             ${justiceHTML}
             ${mediaHTML}
+            ${voteHTML}
             ${commentSection}
           </div>
         </div>
@@ -149,6 +173,30 @@ function closeModal() {
   document.getElementById('politicianModal').classList.add('hidden');
 }
 
+// ==================== PER-SKANDALE AFSTEMNING ====================
+function voteScandal(scandalId, choice, button) {
+  const key = `vote_${scandalId}`;
+  let votes = JSON.parse(localStorage.getItem(key) || '{"ja":0,"nej":0,"vedikke":0}');
+  
+  votes[choice]++;
+  localStorage.setItem(key, JSON.stringify(votes));
+  
+  // Opdater knapperne
+  const parent = button.parentElement;
+  const buttons = parent.querySelectorAll('button');
+  
+  buttons[0].innerHTML = `Godt <span class="font-bold">(${votes.ja})</span>`;
+  buttons[1].innerHTML = `Dårligt <span class="font-bold">(${votes.nej})</span>`;
+  buttons[2].innerHTML = `Neutral <span class="font-bold">(${votes.vedikke})</span>`;
+  
+  const originalText = button.innerHTML;
+  button.innerHTML = 'Tak!';
+  setTimeout(() => {
+    button.innerHTML = originalText;
+  }, 600);
+}
+
+// ==================== KOMMENTARER ====================
 function postComment(scandalId) {
   const input = document.getElementById(`comment-input-${scandalId}`);
   if (!input || !input.value.trim()) return;
@@ -164,6 +212,10 @@ function postComment(scandalId) {
   localStorage.setItem(key, JSON.stringify(comments));
   input.value = '';
   
-  const politicianId = parseInt(document.getElementById('politicianModal').dataset.currentPoliticianId || 0);
-  if (politicianId) showPoliticianModal(politicianId);
+  // Genindlæs modalen
+  const modal = document.getElementById('politicianModal');
+  const politicianId = parseInt(modal.dataset.currentPoliticianId);
+  if (politicianId) {
+    showPoliticianModal(politicianId);
+  }
 }
