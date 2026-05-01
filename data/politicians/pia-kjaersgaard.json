@@ -7,6 +7,23 @@
   "avatarColor": "#E30613",
   "initials": "PK",
   "bio": "Grundlægger og tidligere formand for Dansk Folkeparti. Kendt for sin markante udlændingepolitik og stærke ledelse af partiet i mange år.",
+  "economicSupport": [
+    {
+      "name": "Dansk Folkeparti",
+      "amount": "340.000 kr",
+      "type": "Partistøtte"
+    },
+    {
+      "name": "Dansk Industri",
+      "amount": "95.000 kr",
+      "type": "Erhvervsstøtte"
+    },
+    {
+      "name": "Landbrugsorganisationer",
+      "amount": "75.000 kr",
+      "type": "Erhvervsstøtte"
+    }
+  ],
   "scandals": [
     {
       "id": 601,

@@ -7,6 +7,23 @@
   "avatarColor": "#00AEEF",
   "initials": "LLR",
   "bio": "Tidligere statsminister for Venstre (2009-2011 og 2015-2019). Kendt for pragmatisk politik, men også involveret i flere sager om gaver, biler og partifinansiering.",
+  "economicSupport": [
+    {
+      "name": "Venstre",
+      "amount": "265.000 kr",
+      "type": "Partistøtte"
+    },
+    {
+      "name": "TrygFonden",
+      "amount": "90.000 kr",
+      "type": "Privat donation"
+    },
+    {
+      "name": "Dansk Erhverv",
+      "amount": "140.000 kr",
+      "type": "Erhvervsstøtte"
+    }
+  ],
   "scandals": [
     {
       "id": 501,

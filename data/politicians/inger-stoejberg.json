@@ -7,6 +7,23 @@
   "avatarColor": "#0055A5",
   "initials": "IS",
   "bio": "Tidligere Venstre-politiker og nu formand for Danmarksdemokraterne. Kendt for stram udlændingepolitik. Dømt i rigsretssag – den første dom mod en minister i 25 år.",
+  "economicSupport": [
+    {
+      "name": "Dansk Folkeparti",
+      "amount": "320.000 kr",
+      "type": "Partistøtte"
+    },
+    {
+      "name": "Jyske Bank",
+      "amount": "85.000 kr",
+      "type": "Privat donation"
+    },
+    {
+      "name": "Landbrug & Fødevarer",
+      "amount": "110.000 kr",
+      "type": "Erhvervsstøtte"
+    }
+  ],
   "scandals": [
     {
       "id": 201,

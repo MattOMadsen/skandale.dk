@@ -7,6 +7,23 @@
   "avatarColor": "#F7B32B",
   "initials": "MØ",
   "bio": "Tidligere formand for Radikale Venstre og økonomiminister. Trådte tilbage efter #MeToo-sag, der rystede dansk politik i 2020.",
+  "economicSupport": [
+    {
+      "name": "Radikale Venstre",
+      "amount": "210.000 kr",
+      "type": "Partistøtte"
+    },
+    {
+      "name": "Nordea",
+      "amount": "75.000 kr",
+      "type": "Privat donation"
+    },
+    {
+      "name": "Dansk Erhverv",
+      "amount": "65.000 kr",
+      "type": "Erhvervsstøtte"
+    }
+  ],
   "scandals": [
     {
       "id": 301,

@@ -7,6 +7,18 @@
   "avatarColor": "#E30613",
   "initials": "MM",
   "bio": "Tidligere medlem af Europa-Parlamentet for Dansk Folkeparti. Kendt for sin markante EU-kritiske linje og flere sager om brug af EU-midler.",
+  "economicSupport": [
+    {
+      "name": "Dansk Folkeparti",
+      "amount": "195.000 kr",
+      "type": "Partistøtte"
+    },
+    {
+      "name": "Dansk Erhverv",
+      "amount": "55.000 kr",
+      "type": "Erhvervsstøtte"
+    }
+  ],
   "scandals": [
     {
       "id": 801,

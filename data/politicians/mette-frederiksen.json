@@ -7,6 +7,28 @@
   "avatarColor": "#C8102E",
   "initials": "MF",
   "bio": "Danmarks statsminister siden 2019 og formand for Socialdemokratiet. Kendt for stærk kriseledelse under corona-pandemien, men også kritiseret for flere kontroversielle beslutninger.",
+  "economicSupport": [
+    {
+      "name": "Novo Nordisk",
+      "amount": "245.000 kr",
+      "type": "Partistøtte"
+    },
+    {
+      "name": "DI - Dansk Industri",
+      "amount": "180.000 kr",
+      "type": "Partistøtte"
+    },
+    {
+      "name": "A.P. Møller-Mærsk",
+      "amount": "95.000 kr",
+      "type": "Privat donation"
+    },
+    {
+      "name": "Dansk Metal",
+      "amount": "120.000 kr",
+      "type": "Fagforeningsstøtte"
+    }
+  ],
   "scandals": [
     {
       "id": 101,

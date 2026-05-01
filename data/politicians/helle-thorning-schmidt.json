@@ -7,6 +7,23 @@
   "avatarColor": "#C8102E",
   "initials": "HTS",
   "bio": "Danmarks første kvindelige statsminister (2011-2015). Ledede en centrum-venstre regering, men var involveret i flere kontroverser omkring privatøkonomi og offentlige optrædener.",
+  "economicSupport": [
+    {
+      "name": "Socialdemokratiet",
+      "amount": "285.000 kr",
+      "type": "Partistøtte"
+    },
+    {
+      "name": "LO - Landsorganisationen i Danmark",
+      "amount": "150.000 kr",
+      "type": "Fagforeningsstøtte"
+    },
+    {
+      "name": "Carlsberg",
+      "amount": "70.000 kr",
+      "type": "Privat donation"
+    }
+  ],
   "scandals": [
     {
       "id": 401,

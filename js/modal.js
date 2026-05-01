@@ -1,10 +1,9 @@
-// js/modal.js - Modal + Afstemning + Kommentarer (RETTET v6.5.1)
+// js/modal.js - v6.6 med Økonomisk støtte
 
 function showPoliticianModal(id) {
   const politician = politicians.find(p => p.id === id);
   if (!politician) return;
 
-  // Gem politiker ID til senere brug
   document.getElementById('politicianModal').dataset.currentPoliticianId = id;
 
   document.getElementById('modalName').innerHTML = politician.name;
@@ -24,7 +23,6 @@ function showPoliticianModal(id) {
   scandalsContainer.innerHTML = '';
 
   politician.scandals.forEach((scandal) => {
-    // === AFSTEMNING (NY) ===
     const savedVotes = JSON.parse(localStorage.getItem(`vote_${scandal.id}`) || '{"ja":0,"nej":0,"vedikke":0}');
 
     const voteHTML = `
@@ -44,7 +42,6 @@ function showPoliticianModal(id) {
       </div>
     `;
 
-    // === KOMMENTARER ===
     const comments = JSON.parse(localStorage.getItem(`comments_${scandal.id}`) || '[]');
     let commentsHTML = '';
     if (comments.length > 0) {
@@ -140,6 +137,51 @@ function showPoliticianModal(id) {
     scandalsContainer.innerHTML += scandalHTML;
   });
 
+  // ===================== ØKONOMISK STØTTE =====================
+  let supportHTML = '';
+  if (politician.economicSupport && politician.economicSupport.length > 0) {
+    supportHTML = `
+      <div class="mt-10 pt-8 border-t">
+        <div class="flex items-center gap-x-2 mb-4">
+          <i class="fa-solid fa-handshake text-[#C8102E]"></i>
+          <span class="font-bold text-lg">Økonomisk støtte (2023–2025)</span>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden">
+          <table class="w-full text-sm">
+            <thead class="bg-slate-100">
+              <tr>
+                <th class="text-left px-4 py-3 font-semibold">Bidragyder</th>
+                <th class="text-right px-4 py-3 font-semibold">Beløb</th>
+                <th class="text-left px-4 py-3 font-semibold">Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${politician.economicSupport.map(s => `
+                <tr class="border-t border-slate-200">
+                  <td class="px-4 py-3">${s.name}</td>
+                  <td class="px-4 py-3 text-right font-medium">${s.amount}</td>
+                  <td class="px-4 py-3 text-xs text-slate-500">${s.type}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+        <p class="text-[10px] text-slate-400 mt-2">Data baseret på offentligt tilgængelige regnskaber. Kan være ufuldstændigt.</p>
+      </div>
+    `;
+  }
+
+  const modalContent = document.querySelector('#politicianModal .p-8');
+  if (modalContent) {
+    const oldSupport = modalContent.querySelector('.economic-support');
+    if (oldSupport) oldSupport.remove();
+
+    const supportDiv = document.createElement('div');
+    supportDiv.className = 'economic-support';
+    supportDiv.innerHTML = supportHTML;
+    modalContent.appendChild(supportDiv);
+  }
+
   document.getElementById('politicianModal').classList.remove('hidden');
   document.getElementById('politicianModal').classList.add('flex');
 }
@@ -173,49 +215,37 @@ function closeModal() {
   document.getElementById('politicianModal').classList.add('hidden');
 }
 
-// ==================== PER-SKANDALE AFSTEMNING ====================
 function voteScandal(scandalId, choice, button) {
   const key = `vote_${scandalId}`;
   let votes = JSON.parse(localStorage.getItem(key) || '{"ja":0,"nej":0,"vedikke":0}');
-  
   votes[choice]++;
   localStorage.setItem(key, JSON.stringify(votes));
-  
-  // Opdater knapperne
+
   const parent = button.parentElement;
   const buttons = parent.querySelectorAll('button');
-  
   buttons[0].innerHTML = `Godt <span class="font-bold">(${votes.ja})</span>`;
   buttons[1].innerHTML = `Dårligt <span class="font-bold">(${votes.nej})</span>`;
   buttons[2].innerHTML = `Neutral <span class="font-bold">(${votes.vedikke})</span>`;
-  
+
   const originalText = button.innerHTML;
   button.innerHTML = 'Tak!';
-  setTimeout(() => {
-    button.innerHTML = originalText;
-  }, 600);
+  setTimeout(() => { button.innerHTML = originalText; }, 600);
 }
 
-// ==================== KOMMENTARER ====================
 function postComment(scandalId) {
   const input = document.getElementById(`comment-input-${scandalId}`);
   if (!input || !input.value.trim()) return;
 
   const key = `comments_${scandalId}`;
   const comments = JSON.parse(localStorage.getItem(key) || '[]');
-  
   comments.push({
     text: input.value.trim(),
     date: new Date().toLocaleDateString('da-DK') + ' ' + new Date().toLocaleTimeString('da-DK', {hour: '2-digit', minute:'2-digit'})
   });
-  
   localStorage.setItem(key, JSON.stringify(comments));
   input.value = '';
-  
-  // Genindlæs modalen
+
   const modal = document.getElementById('politicianModal');
   const politicianId = parseInt(modal.dataset.currentPoliticianId);
-  if (politicianId) {
-    showPoliticianModal(politicianId);
-  }
+  if (politicianId) showPoliticianModal(politicianId);
 }
