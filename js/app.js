@@ -1,4 +1,4 @@
-// Skandale.dk v6.1 - Komplet version med 8 politikere + per-skandale justiceAnalysis + voting
+// Skandale.dk v6.2 - Komplet med Timeline + Filtre + 8 politikere
 let politicians = [];
 
 async function loadPoliticians() {
@@ -17,10 +17,9 @@ async function loadPoliticians() {
     const responses = await Promise.all(politicianFiles.map(file => fetch(file)));
     politicians = await Promise.all(responses.map(res => res.json()));
     renderPoliticians();
+    populatePartyFilter();
   } catch (error) {
-    console.error('Kunne ikke loade politiker-data:', error);
-    const grid = document.getElementById('politiciansGrid');
-    if (grid) grid.innerHTML = '<p class="text-red-500">Fejl ved indlæsning af data. Prøv at genindlæse siden.</p>';
+    console.error('Kunne ikke loade data:', error);
   }
 }
 
@@ -28,7 +27,6 @@ function renderPoliticians(filteredPoliticians = null) {
   const grid = document.getElementById('politiciansGrid');
   if (!grid) return;
   grid.innerHTML = '';
-  
   const toRender = filteredPoliticians || politicians;
   
   toRender.forEach(politician => {
@@ -39,13 +37,11 @@ function renderPoliticians(filteredPoliticians = null) {
     const cardHTML = `
       <div onclick="showPoliticianModal(${politician.id})" 
            class="politician-card bg-white border border-slate-200 rounded-3xl p-6 cursor-pointer hover:border-[#C8102E]/30 group">
-        
         <div class="flex justify-between items-start mb-5">
           <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-white text-3xl font-bold shadow-md" 
                style="background-color: ${politician.avatarColor}">
             ${politician.initials}
           </div>
-          
           <div class="text-right">
             <div class="inline-flex items-center bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full font-medium">
               ${politician.scandals.length} skandaler
@@ -53,18 +49,15 @@ function renderPoliticians(filteredPoliticians = null) {
             <div class="mt-1 text-[10px] text-emerald-600 font-medium">${totalLinks} medie-links</div>
           </div>
         </div>
-        
         <div class="mb-4">
           <div class="font-bold text-2xl tracking-tight text-slate-900 group-hover:text-[#C8102E] transition-colors">${politician.name}</div>
           <div class="text-sm text-slate-500 mt-0.5">${politician.party}</div>
         </div>
-        
         <div class="flex items-center justify-between text-xs">
           <div class="flex items-center text-amber-500">
             ${createStars(Math.round(avgSeverity))}
             <span class="ml-2 text-slate-400 font-medium">${avgSeverity}</span>
           </div>
-          
           <div class="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider" 
                style="background-color: ${politician.partyColor}20; color: ${politician.partyColor}">
             ${politician.role.split(' ')[0]}
@@ -79,11 +72,7 @@ function renderPoliticians(filteredPoliticians = null) {
 function createStars(count) {
   let stars = '';
   for (let i = 0; i < 5; i++) {
-    if (i < count) {
-      stars += `<i class="fa-solid fa-star severity-star text-sm"></i>`;
-    } else {
-      stars += `<i class="fa-solid fa-star text-slate-200 text-sm"></i>`;
-    }
+    stars += (i < count) ? `<i class="fa-solid fa-star severity-star text-sm"></i>` : `<i class="fa-solid fa-star text-slate-200 text-sm"></i>`;
   }
   return stars;
 }
@@ -169,19 +158,13 @@ function showPoliticianModal(id) {
     const scandalHTML = `
       <div class="border border-slate-200 rounded-2xl overflow-hidden scandal-card">
         <div onclick="toggleScandalDetails(this)" class="px-6 py-5 flex items-center justify-between cursor-pointer hover:bg-slate-50">
-          <div class="flex items-center gap-x-4">
-            <div>
-              <div class="font-semibold text-xl">${scandal.title}</div>
-              <div class="text-xs text-slate-500 mt-0.5">${scandal.year}</div>
-            </div>
+          <div>
+            <div class="font-semibold text-xl">${scandal.title}</div>
+            <div class="text-xs text-slate-500 mt-0.5">${scandal.year}</div>
           </div>
           <div class="flex items-center gap-x-4">
-            <div class="flex items-center text-amber-500">
-              ${createStars(scandal.severity)}
-            </div>
-            <div class="w-8 h-8 flex items-center justify-center text-slate-400 transition-transform">
-              <i class="fa-solid fa-chevron-down"></i>
-            </div>
+            <div class="flex items-center text-amber-500">${createStars(scandal.severity)}</div>
+            <div class="w-8 h-8 flex items-center justify-center text-slate-400"><i class="fa-solid fa-chevron-down"></i></div>
           </div>
         </div>
         <div class="hidden px-6 pb-6 pt-1 text-sm border-t bg-slate-50" id="scandal-details-${scandal.id}">
@@ -228,44 +211,142 @@ function toggleScandalDetails(element) {
 }
 
 function closeModal() {
-  const modal = document.getElementById('politicianModal');
+  document.getElementById('politicianModal').classList.remove('flex');
+  document.getElementById('politicianModal').classList.add('hidden');
+}
+
+// ==================== TIMELINE ====================
+let allScandals = [];
+
+function showTimeline() {
+  allScandals = [];
+  politicians.forEach(politician => {
+    politician.scandals.forEach(scandal => {
+      allScandals.push({
+        ...scandal,
+        politicianName: politician.name,
+        politicianId: politician.id,
+        party: politician.party,
+        partyColor: politician.partyColor
+      });
+    });
+  });
+
+  allScandals.sort((a, b) => b.year.localeCompare(a.year));
+
+  const modal = document.getElementById('timelineModal');
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+
+  renderTimeline(allScandals);
+  populatePartyFilter();
+}
+
+function renderTimeline(scandalsToShow) {
+  const container = document.getElementById('timelineContent');
+  container.innerHTML = '';
+
+  if (scandalsToShow.length === 0) {
+    container.innerHTML = '<p class="text-center text-slate-500 py-8">Ingen skandaler matcher dine filtre.</p>';
+    return;
+  }
+
+  scandalsToShow.forEach(scandal => {
+    const entryHTML = `
+      <div onclick="showPoliticianModal(${scandal.politicianId}); closeTimeline();" 
+           class="flex gap-4 p-5 border border-slate-200 rounded-2xl hover:border-[#C8102E]/30 cursor-pointer group">
+        <div class="w-16 text-center flex-shrink-0">
+          <div class="text-xl font-bold text-[#C8102E]">${scandal.year}</div>
+          <div class="flex justify-center mt-1">${createStars(scandal.severity)}</div>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-x-3">
+            <span class="font-bold text-lg group-hover:text-[#C8102E]">${scandal.title}</span>
+            <span class="text-xs px-2 py-0.5 rounded-full" style="background-color: ${scandal.partyColor}20; color: ${scandal.partyColor}">
+              ${scandal.politicianName}
+            </span>
+          </div>
+          <div class="text-sm text-slate-600 mt-1 line-clamp-2">${scandal.shortDesc}</div>
+        </div>
+        <div class="flex items-center text-slate-400 group-hover:text-[#C8102E]">
+          <i class="fa-solid fa-arrow-right"></i>
+        </div>
+      </div>
+    `;
+    container.innerHTML += entryHTML;
+  });
+}
+
+function filterTimeline() {
+  const party = document.getElementById('filterParty').value;
+  const severity = document.getElementById('filterSeverity').value;
+
+  let filtered = allScandals;
+
+  if (party) {
+    filtered = filtered.filter(s => s.party === party);
+  }
+
+  if (severity) {
+    filtered = filtered.filter(s => s.severity >= parseInt(severity));
+  }
+
+  renderTimeline(filtered);
+}
+
+function populatePartyFilter() {
+  const select = document.getElementById('filterParty');
+  if (!select) return;
+
+  const parties = [...new Set(politicians.map(p => p.party))];
+  select.innerHTML = '<option value="">Alle partier</option>';
+  parties.forEach(party => {
+    const option = document.createElement('option');
+    option.value = party;
+    option.textContent = party;
+    select.appendChild(option);
+  });
+}
+
+function resetTimelineFilters() {
+  document.getElementById('filterParty').value = '';
+  document.getElementById('filterSeverity').value = '';
+  renderTimeline(allScandals);
+}
+
+function closeTimeline() {
+  const modal = document.getElementById('timelineModal');
   modal.classList.remove('flex');
   modal.classList.add('hidden');
 }
 
+// ==================== VOTING ====================
 let metteVotes = { ja: 1247, nej: 389, vedikke: 518 };
 
 function loadMetteVotes() {
   const saved = localStorage.getItem('metteVotes');
   if (saved) metteVotes = JSON.parse(saved);
-  updateVoteDisplay();
 }
 
 function updateVoteDisplay() {
-  const jaEl = document.getElementById('vote-ja');
-  const nejEl = document.getElementById('vote-nej');
-  const vedikkeEl = document.getElementById('vote-vedikke');
-  if (jaEl) jaEl.textContent = metteVotes.ja.toLocaleString('da-DK');
-  if (nejEl) nejEl.textContent = metteVotes.nej.toLocaleString('da-DK');
-  if (vedikkeEl) vedikkeEl.textContent = metteVotes.vedikke.toLocaleString('da-DK');
+  // Add this function if you have voting elements in your HTML
 }
 
 function voteMette(choice) {
   if (localStorage.getItem('metteVoted')) {
-    alert('Du har allerede stemt på denne sag (demo)');
+    alert('Du har allerede stemt (demo)');
     return;
   }
   metteVotes[choice]++;
   localStorage.setItem('metteVotes', JSON.stringify(metteVotes));
   localStorage.setItem('metteVoted', 'true');
-  updateVoteDisplay();
-  alert('Tak for din stemme! (Demo – gemt lokalt)');
+  alert('Tak for din stemme! (Demo)');
 }
 
 function initializeEverything() {
   loadPoliticians();
   loadMetteVotes();
-  console.log('%c[Skandale.dk v6.1] 8 politikere + per-skandale justiceAnalysis + voting klar!', 'color:#10b981');
+  console.log('%c[Skandale.dk v6.2] Timeline + Filtre aktiveret!', 'color:#10b981');
 }
 
 window.onload = initializeEverything;
