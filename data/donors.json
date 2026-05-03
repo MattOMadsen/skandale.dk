@@ -1,0 +1,18 @@
+{
+  "donors": [
+    {
+      "name": "Novo Nordisk",
+      "supported": [
+        {"politicianId": 1, "amount": "245.000 kr", "year": "2024"},
+        {"politicianId": 5, "amount": "180.000 kr", "year": "2023"}
+      ]
+    },
+    {
+      "name": "DI - Dansk Industri",
+      "supported": [
+        {"politicianId": 1, "amount": "180.000 kr", "year": "2024"},
+        {"politicianId": 3, "amount": "65.000 kr", "year": "2023"}
+      ]
+    }
+  ]
+}
