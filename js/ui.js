@@ -1,4 +1,4 @@
-// js/ui.js - Sikker version (Løsning A) - virker med din nuværende struktur
+// js/ui.js - Ren og korrekt version (v2.0)
 
 function renderPoliticians(filteredPoliticians = null) {
   const grid = document.getElementById('politiciansGrid');
@@ -8,9 +8,7 @@ function renderPoliticians(filteredPoliticians = null) {
   const toRender = filteredPoliticians || politicians;
 
   toRender.forEach(politician => {
-    // Sikkerhed: sørg altid for at scandals er et array
     const scandals = Array.isArray(politician.scandals) ? politician.scandals : [];
-    
     const totalSeverity = scandals.reduce((sum, s) => sum + (s.severity || 0), 0);
     const avgSeverity = scandals.length > 0 ? (totalSeverity / scandals.length).toFixed(1) : '0.0';
     const totalLinks = scandals.reduce((sum, s) => sum + (s.mediaLinks ? s.mediaLinks.length : 0), 0);
@@ -43,7 +41,7 @@ function renderPoliticians(filteredPoliticians = null) {
           </div>
           <div class="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider" 
                style="background-color: ${politician.partyColor || '#64748b'}20; color: ${politician.partyColor || '#64748b'}">
-            ${politician.isFormer ? 'Tidligere ' : ''}${(politician.role || '').split(' ')[0]}
+            ${politician.isFormer ? 'Tidligere ' : ''}${politician.role || ''}
           </div>
         </div>
       </div>
