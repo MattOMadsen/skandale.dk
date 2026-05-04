@@ -24,6 +24,15 @@
       "type": "Erhvervsstøtte"
     }
   ],
+  "affiliations": [],
+  "brokenPromises": [
+    {
+      "title": "Vi lover at stoppe indvandringen og beskytte dansk kultur",
+      "year": "2001",
+      "whatHappened": "Antallet af indvandrere og flygtninge steg markant i de år, hun var formand, og integrationen gik langsomt.",
+      "source": "Udlændingestyrelsen og Danmarks Statistik"
+    }
+  ],
   "scandals": [
     {
       "id": 601,
