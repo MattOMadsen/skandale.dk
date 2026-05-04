@@ -41,7 +41,7 @@ function renderPoliticians(filteredPoliticians = null) {
           </div>
           <div class="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider" 
                style="background-color: ${politician.partyColor || '#64748b'}20; color: ${politician.partyColor || '#64748b'}">
-            ${politician.isFormer ? 'Tidligere ' : ''}${politician.role || ''}
+            ${politician.role || ''}
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-// js/modal-core.js - Bedste version (kombineret)
+// js/modal-core.js - Komplet version med alle sektioner
 
 let currentPolitician = null;
 
@@ -27,7 +27,7 @@ function showPoliticianModal(idOrPolitician) {
     avatar.style.backgroundColor = politician.avatarColor || politician.color || '#C8102E';
     avatar.innerHTML = `<span class="font-bold">${politician.initials || politician.name.split(' ').map(n => n[0]).join('')}</span>`;
     
-    // Ryd gamle dynamiske sektioner (vigtigt!)
+    // Ryd gamle sektioner
     const modalBody = document.querySelector('#politicianModal .p-8');
     if (modalBody) {
         const oldSections = modalBody.querySelectorAll('.dynamic-section, .economic-support');
@@ -38,10 +38,15 @@ function showPoliticianModal(idOrPolitician) {
     document.getElementById('politicianModal').classList.remove('hidden');
     document.getElementById('politicianModal').classList.add('flex');
     
-    // Indlæs sektioner
+    // ===================== IND LÆS ALLE SEKTIONER =====================
     if (typeof loadScandals === 'function') loadScandals(politician);
     if (typeof addEconomicSupportSection === 'function') addEconomicSupportSection(politician);
     if (typeof initShareButton === 'function') initShareButton(politician);
+    
+    // Nye sektioner
+    if (typeof loadVoting === 'function') loadVoting(politician);
+    if (typeof loadComments === 'function') loadComments(politician);
+    if (typeof loadBrokenPromises === 'function') loadBrokenPromises(politician);
 }
 
 function closeModal() {
