@@ -24,6 +24,15 @@
       "type": "Erhvervsstøtte"
     }
   ],
+  "affiliations": [],
+  "brokenPromises": [
+    {
+      "title": "Vi lover at være det mest grønne parti i Folketinget",
+      "year": "2015",
+      "whatHappened": "Radikale Venstre stemte flere gange imod ambitiøse grønne forslag og støttede regeringer med svag klimapolitik.",
+      "source": "Folketingets afstemninger 2015-2019"
+    }
+  ],
   "scandals": [
     {
       "id": 301,

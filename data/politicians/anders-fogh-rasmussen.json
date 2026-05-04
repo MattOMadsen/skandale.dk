@@ -24,6 +24,15 @@
       "type": "Erhvervsstøtte"
     }
   ],
+  "affiliations": [],
+  "brokenPromises": [
+    {
+      "title": "Vi lover at skabe et skattelet samfund",
+      "year": "2001",
+      "whatHappened": "Skattetrykket steg i flere år under hans regering, og flere afgifter blev indført.",
+      "source": "Skatteministeriets tal 2001-2009"
+    }
+  ],
   "scandals": [
     {
       "id": 701,

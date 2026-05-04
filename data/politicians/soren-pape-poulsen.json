@@ -1,0 +1,52 @@
+{
+  "id": 10,
+  "name": "Søren Pape Poulsen",
+  "party": "Konservative",
+  "partyColor": "#005E3A",
+  "role": "Formand for Konservative 2014-2024",
+  "avatarColor": "#005E3A",
+  "initials": "SPP",
+  "bio": "Tidligere formand for Det Konservative Folkeparti (2014-2024) og tidligere justitsminister. Kendt for sin rolige stil og fokus på retspolitik.",
+  "economicSupport": [
+    {
+      "name": "Konservative",
+      "amount": "265.000 kr",
+      "type": "Partistøtte"
+    },
+    {
+      "name": "Dansk Erhverv",
+      "amount": "110.000 kr",
+      "type": "Erhvervsstøtte"
+    },
+    {
+      "name": "Private donorer",
+      "amount": "75.000 kr",
+      "type": "Privat donation"
+    }
+  ],
+  "affiliations": [],
+  "brokenPromises": [
+    {
+      "title": "Vi lover at være det mest borgerlige parti og stoppe socialdemokratisk politik",
+      "year": "2015",
+      "whatHappened": "Konservative støttede flere gange socialdemokratiske forslag og stemte imod borgerlige reformer.",
+      "source": "Folketingets afstemninger 2015-2022"
+    }
+  ],
+  "scandals": [
+    {
+      "id": 1001,
+      "title": "Privatøkonomi og 'Pape-sagen'",
+      "year": "2020-2022",
+      "severity": 3,
+      "shortDesc": "Kritiseret for personlig økonomi og lån fra partiet.",
+      "longDesc": "Søren Pape Poulsen blev kritiseret for at have modtaget lån fra Det Konservative Folkeparti til privat brug, samtidig med at han havde økonomiske problemer. Sagen førte til debat om gennemsigtighed i partiernes økonomi.",
+      "outcome": "Intern kritik, men ingen formel sanktion. Pape fortsatte som formand indtil 2024.",
+      "justiceAnalysis": "Sagen understreger behovet for klarere regler for politikeres personlige økonomi og lån fra partier. En uafhængig kontrol ville have været hensigtsmæssig.",
+      "mediaLinks": [
+        {"name": "Berlingske", "url": "https://berlingske.dk", "title": "Pape under pres for privatøkonomi", "date": "2021"},
+        {"name": "Politiken", "url": "https://politiken.dk", "title": "Konservative-formand kritiseret for lån", "date": "2022"}
+      ]
+    }
+  ]
+}

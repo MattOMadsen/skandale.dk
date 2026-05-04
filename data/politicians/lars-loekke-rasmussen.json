@@ -24,6 +24,15 @@
       "type": "Erhvervsstøtte"
     }
   ],
+  "affiliations": [],
+  "brokenPromises": [
+    {
+      "title": "Vi lover at sænke skatten og give danskerne flere penge mellem hænderne",
+      "year": "2015",
+      "whatHappened": "Skattetrykket steg under hans regering, og flere afgifter blev hævet.",
+      "source": "Skatteministeriets tal 2015-2019"
+    }
+  ],
   "scandals": [
     {
       "id": 501,

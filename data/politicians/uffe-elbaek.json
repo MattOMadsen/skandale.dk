@@ -1,0 +1,65 @@
+{
+  "id": 11,
+  "name": "Uffe Elbæk",
+  "party": "Alternativet",
+  "partyColor": "#00A651",
+  "role": "Formand for Alternativet 2013-2020",
+  "avatarColor": "#00A651",
+  "initials": "UE",
+  "bio": "Grundlægger og tidligere formand for Alternativet (2013-2020). Kendt for sin visionære stil og fokus på bæredygtighed og nye politiske former.",
+  "economicSupport": [
+    {
+      "name": "Alternativet",
+      "amount": "185.000 kr",
+      "type": "Partistøtte"
+    },
+    {
+      "name": "Private donorer",
+      "amount": "95.000 kr",
+      "type": "Privat donation"
+    },
+    {
+      "name": "Grønne organisationer",
+      "amount": "45.000 kr",
+      "type": "Erhvervsstøtte"
+    }
+  ],
+  "affiliations": [
+    {
+      "name": "Young Global Leaders",
+      "organization": "World Economic Forum (WEF)",
+      "year": "2014",
+      "source": "WEF officielle liste"
+    },
+    {
+      "name": "Global Shapers Hub",
+      "organization": "World Economic Forum (WEF)",
+      "year": "2015",
+      "source": "WEF"
+    }
+  ],
+  "brokenPromises": [
+    {
+      "title": "Vi lover at skabe en ny politisk kultur uden magtkampe",
+      "year": "2013",
+      "whatHappened": "Intern uro og magtkampe i Alternativet førte til flere formandsskifter og splittelse i partiet.",
+      "source": "DR og Politiken 2019-2020"
+    }
+  ],
+  "scandals": [
+    {
+      "id": 1101,
+      "title": "Partifinansiering og personlige lån",
+      "year": "2018-2019",
+      "severity": 3,
+      "shortDesc": "Kritiseret for lån fra partiet og manglende gennemsigtighed.",
+      "longDesc": "Uffe Elbæk blev kritiseret for at have modtaget lån fra Alternativet til personlig brug, samtidig med at partiet havde økonomiske udfordringer. Sagen førte til intern debat om økonomisk ansvarlighed.",
+      "outcome": "Intern kritik, men ingen formel sanktion. Elbæk trådte tilbage som formand i 2020.",
+      "justiceAnalysis": "Sagen viser, at også nye partier kan have problemer med at adskille personlig og partimæssig økonomi. Strengere regler og uafhængig kontrol ville have været gavnligt.",
+      "mediaLinks": [
+        {"name": "Politiken", "url": "https://politiken.dk", "title": "Uffe Elbæk kritiseret for partilån", "date": "2019"},
+        {"name": "DR", "url": "https://dr.dk", "title": "Alternativet-formand under pres", "date": "2019"}
+      ]
+    }
+  ]
+}

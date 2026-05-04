@@ -24,6 +24,15 @@
       "type": "Privat donation"
     }
   ],
+  "affiliations": [],
+  "brokenPromises": [
+    {
+      "title": "Vi lover at skabe flere arbejdspladser og stoppe arbejdsløsheden",
+      "year": "2011",
+      "whatHappened": "Arbejdsløsheden steg i de første år af hendes regeringstid, og mange unge kom i langvarig ledighed.",
+      "source": "Danmarks Statistik og Beskæftigelsesministeriet 2011-2014"
+    }
+  ],
   "scandals": [
     {
       "id": 401,

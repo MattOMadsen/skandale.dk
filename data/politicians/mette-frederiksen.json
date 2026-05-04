@@ -6,7 +6,7 @@
   "role": "Statsminister siden 2019",
   "avatarColor": "#C8102E",
   "initials": "MF",
-  "bio": "Danmarks statsminister siden 2019 og formand for Socialdemokratiet. Kendt for stærk kriseledelse under corona-pandemien, men også kritiseret for flere kontroversielle beslutninger.",
+  "bio": "Danmarks statsminister siden 2019 og formand for Socialdemokratiet.",
   "economicSupport": [
     {
       "name": "Novo Nordisk",
@@ -29,6 +29,34 @@
       "type": "Fagforeningsstøtte"
     }
   ],
+  "affiliations": [
+    {
+      "name": "Young Global Leaders",
+      "organization": "World Economic Forum (WEF)",
+      "year": "2009",
+      "source": "WEF officielle liste"
+    },
+    {
+      "name": "Global Shapers Hub",
+      "organization": "World Economic Forum (WEF)",
+      "year": "2011-2013",
+      "source": "WEF"
+    }
+  ],
+  "brokenPromises": [
+    {
+      "title": "Vi lover at beskytte velfærden og ikke skære i kerneydelserne",
+      "year": "2019",
+      "whatHappened": "I 2022–2024 gennemførte regeringen store besparelser på plejehjem, hjemmehjælp og sygehuspersonale i flere kommuner.",
+      "source": "DR, Politiken og KL’s økonomiske redegørelser 2023–2024"
+    },
+    {
+      "title": "Vi lover at sænke skatten for almindelige lønmodtagere",
+      "year": "2019",
+      "whatHappened": "Skattetrykket steg i flere år. Særligt mellemindkomster oplevede ingen reel skattelettelse, mens afgifter på energi og transport steg markant.",
+      "source": "Skatteministeriets tal og CEPOS 2023"
+    }
+  ],
   "scandals": [
     {
       "id": 101,
@@ -38,7 +66,7 @@
       "shortDesc": "Ulovlig ordre om aflivning af alle mink i Danmark uden lovhjemmel.",
       "longDesc": "Den 4. november 2020 meddelte statsminister Mette Frederiksen på et pressemøde, at alle mink i Danmark skulle aflives på grund af risiko for mutation af COVID-19. Beslutningen blev truffet uden tilstrækkelig lovhjemmel, hvilket førte til en massiv skandale. Fødevareminister Mogens Jensen trådte tilbage. Folketinget gav både Frederiksen og Jensen en næse. En granskningskommission undersøgte forløbet. Sagen involverede også kontrovers om slettede SMS-beskeder fra statsministeren og hendes rådgivere, som ikke kunne genskabes. Sagen er blevet kaldt 'Danmarkshistoriens største politiske skandale' af flere partier.",
       "outcome": "Næse fra Folketinget, ministerfald, erstatningssager til minkavlere (over 20 mia. kr.), politisk pres for rigsretssag (nedstemt).",
-      "justiceAnalysis": "Minkkommissionen fastslog, at beslutningen var \"klart ulovlig\" og hendes udtalelser \"groft vildledende\". I stedet for kun en politisk næse fra Folketinget burde der have været en uafhængig advokatundersøgelse med henblik på rigsretssag jf. Ministeransvarlighedsloven § 5. Rigsret er muligt når en minister groft tilsidesætter sine pligter (sml. Støjberg-dommen). Forældelsesfristen på 5 år betyder, at muligheden udløber i efteråret 2025 – et demokratisk problem ifølge flere eksperter og partier.",
+      "justiceAnalysis": "Minkkommissionen fastslog, at beslutningen var \"klart ulovlig\" og hendes udtalelser \"groft vildledende\". I stedet for kun en politisk næse fra Folketinget burde der have været en uafhængig advokatundersøgelse med henblik på rigsretssag jf. Ministeransvarlighedsloven § 5. Rigsret er muligt når en minister groft tilsidesætter sine pligter (sml. Støjberg-dommen). Forældelsesfristen på 5 år betyder, that muligheden udløber i efteråret 2025 – et demokratisk problem ifølge flere eksperter og partier.",
       "mediaLinks": [
         {"name": "Berlingske", "url": "https://www.berlingske.dk/politik/nye-detaljer-i-minkskandalen-oeger-presset-paa-mette-frederiksen-det-illustrerer-en-overraskende-mangel-paa-respekt-for-loven", "title": "Nye detaljer i minkskandalen øger presset på Mette Frederiksen", "date": "20. nov 2020"},
         {"name": "Berlingske", "url": "https://www.berlingske.dk/politik/minkkommissionen-mette-frederiksen-vildledte-groft", "title": "Minkkommissionen: Mette Frederiksen vildledte groft", "date": "30. jun 2022"},
