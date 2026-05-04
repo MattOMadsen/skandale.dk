@@ -7,7 +7,32 @@
   "avatarColor": "#0055A5",
   "initials": "IS",
   "bio": "Tidligere Venstre-politiker og nu formand for Danmarksdemokraterne. Kendt for stram udlændingepolitik. Dømt i rigsretssag – den første dom mod en minister i 25 år.",
-  "justiceAnalysis": "<div class=\"mt-8 p-6 bg-blue-50 border-l-4 border-blue-500 rounded-r-3xl\"><div class=\"font-bold text-blue-700 flex items-center gap-x-2 mb-3\"><i class=\"fa-solid fa-gavel\"></i> <span>Hvad burde være sket?</span></div><div class=\"text-sm text-slate-700 leading-relaxed\">Her skete det \"rigtigt\": Rigsretssag, dom og 60 dages fængsel (fodlænke). Det viser, at systemet kan fungere. Dog fortsatte hun sin politiske karriere og stiftede nyt parti – mange mener, at en dom for brud på ministeransvarlighedsloven burde have haft <strong>permanente konsekvenser</strong> for politisk embede (f.eks. karantæne fra ministerposter eller folketingsvalg). Debatten handler nu om, hvorvidt straffen var afskrækkende nok.</div><div class=\"mt-3 text-xs text-blue-600\">Kilder: Rigsretten 2021, Altinget, DR</div></div>",
+  "economicSupport": [
+    {
+      "name": "Dansk Folkeparti",
+      "amount": "320.000 kr",
+      "type": "Partistøtte"
+    },
+    {
+      "name": "Jyske Bank",
+      "amount": "85.000 kr",
+      "type": "Privat donation"
+    },
+    {
+      "name": "Landbrug & Fødevarer",
+      "amount": "110.000 kr",
+      "type": "Erhvervsstøtte"
+    }
+  ],
+  "affiliations": [],
+  "brokenPromises": [
+    {
+      "title": "Vi lover at beskytte danske værdier og stoppe islamiseringen",
+      "year": "2015",
+      "whatHappened": "Mens hun var minister, fortsatte antallet af muslimske indvandrere og asylansøgere at stige markant i flere år.",
+      "source": "Udlændingestyrelsen og Danmarks Statistik 2015-2019"
+    }
+  ],
   "scandals": [
     {
       "id": 201,
@@ -17,6 +42,7 @@
       "shortDesc": "Udstedte ulovlig instruks om adskillelse af asylpar, hvoraf den ene var mindreårig. Dømt skyldig.",
       "longDesc": "Som udlændinge- og integrationsminister gav Inger Støjberg i 2015 en instruks til Udlændingestyrelsen om at adskille asylpar, hvor den ene part var under 18 år. Instruksen var ulovlig. 23 par blev tvangsadskilt. Instrukskommissionen fastslog, at Støjberg havde brudt loven og givet urigtige oplysninger til Folketinget. I december 2021 blev hun kendt skyldig ved Rigsretten i forsætlig overtrædelse af ministeransvarlighedsloven og idømt 60 dages ubetinget fængsel (den strengeste straf til en minister i nyere tid).",
       "outcome": "60 dages fængselsdom (ubetinget), frataget ministerpost, politisk karriere påvirket, men fortsatte som folketingsmedlem og stiftede nyt parti. Afsonede med fodlænke.",
+      "justiceAnalysis": "Her skete det \"rigtigt\": Rigsretssag, dom og 60 dages fængsel (fodlænke). Det viser, at systemet kan fungere. Dog fortsatte hun sin politiske karriere og stiftede nyt parti – mange mener, at en dom for brud på ministeransvarlighedsloven burde have haft permanente konsekvenser for politisk embede (f.eks. karantæne fra ministerposter eller folketingsvalg). Debatten handler nu om, hvorvidt straffen var afskrækkende nok.",
       "mediaLinks": [
         {"name": "Altinget", "url": "https://www.altinget.dk/artikel/60-dages-fodlaenke-stoejberg-er-begyndt-at-afsone-sin-straf", "title": "60 dages fodlænke: Støjberg er begyndt at afsone sin straf", "date": "28. mar 2022"},
         {"name": "Altinget", "url": "https://www.altinget.dk/artikel/laes-dommen-her-er-hovedargumenterne-for-dommen-over-stoejberg", "title": "Her er hovedargumenterne for dommen over Støjberg", "date": "13. dec 2021"},
