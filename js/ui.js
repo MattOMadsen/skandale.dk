@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-// js/ui.js - Ren og korrekt version (v2.0)
-=======
-// js/ui.js - Fuld version med alle fixes (ingen fejl)
->>>>>>> e12d0616647cdcd051d2d92d4d977e7ba2a262c6
+// js/ui.js - Ren version (v2.0)
 
 function renderPoliticians(filteredPoliticians = null) {
   const grid = document.getElementById('politiciansGrid');
@@ -16,7 +12,7 @@ function renderPoliticians(filteredPoliticians = null) {
     const totalSeverity = scandals.reduce((sum, s) => sum + (s.severity || 0), 0);
     const avgSeverity = scandals.length > 0 ? (totalSeverity / scandals.length).toFixed(1) : '0.0';
     const totalLinks = scandals.reduce((sum, s) => sum + (s.mediaLinks ? s.mediaLinks.length : 0), 0);
-    const brokenPromises = Array.isArray(politician.brokenPromises) ? politician.brokenPromises.length : 0;
+    const brokenPromises = politician.brokenPromises || 0;
 
     const cardHTML = `
       <div onclick="showPoliticianModal(${politician.id})" 
@@ -45,11 +41,7 @@ function renderPoliticians(filteredPoliticians = null) {
           </div>
           <div class="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider" 
                style="background-color: ${politician.partyColor || '#64748b'}20; color: ${politician.partyColor || '#64748b'}">
-<<<<<<< HEAD
             ${politician.isFormer ? 'Tidligere ' : ''}${politician.role || ''}
-=======
-            \( {politician.isFormer ? 'Tidligere ' : ''} \){politician.role || ''}
->>>>>>> e12d0616647cdcd051d2d92d4d977e7ba2a262c6
           </div>
         </div>
       </div>
