@@ -1,40 +1,52 @@
-# Skandale.dk v6.6
+# Skandale.dk
 
-**En moderne, interaktiv og gennemsigtig oversigt over danske politiske skandaler.**
+**Version:** v6.9+  
+**Status:** Statisk hjemmeside klar til GitHub Pages
 
-Siden giver brugerne mulighed for at udforske skandaler, læse juridiske analyser, stemme på sagerne, skrive kommentarer og se, hvem der økonomisk støtter politikerne.
+## Formål
+En moderne, interaktiv og gennemsigtig hjemmeside, der giver danskerne et samlet overblik over politiske skandaler, økonomisk støtte, internationale netværk og brudte valgløfter. Målet er at skabe større gennemsigtighed i dansk politik.
 
-## 🚀 Aktuel version: v6.6
+## Teknisk setup
+- Ren HTML + Tailwind CSS + Font Awesome
+- Vanilla JavaScript delt op i 10 små filer (1 fil = 1 funktion)
+- Data i JSON-filer (én fil per politiker)
+- Klar til GitHub Pages
 
-### ✅ Funktioner der er implementeret
+## Aktuelle funktioner (12 politikere)
+- Søgning efter politikere
+- Detaljeret modal med skandaler
+- Per-skandale afstemning (Godt / Dårligt / Neutral)
+- Kommentarer under hver skandale
+- Tidslinje med filtre (parti + alvorlighed)
+- Økonomisk støtte (klikbar donor)
+- Internationale netværk & tilknytninger
+- Brudte valgløfter
+- **Deleknap med sociale medier** (X, Facebook, LinkedIn, WhatsApp + kopiér link)
 
-| Feature                        | Status     | Beskrivelse |
-|--------------------------------|------------|-----------|
-| **8 politikere**               | ✅ Færdig  | Mette Frederiksen, Inger Støjberg, Morten Østergaard, Helle Thorning-Schmidt, Lars Løkke Rasmussen, Pia Kjærsgaard, Anders Fogh Rasmussen, Morten Messerschmidt |
-| **Per-skandale afstemning**    | ✅ Færdig  | Godt / Dårligt / Neutral på hver enkelt skandale |
-| **Kommentarer**                | ✅ Færdig  | Brugere kan skrive og læse kommentarer under hver skandale |
-| **Tidslinje + Filtre**         | ✅ Færdig  | Alle skandaler sorteret efter år + filtre på parti og alvorlighed |
-| **"Hvad burde være sket?"**    | ✅ Færdig  | Juridisk analyse under hver skandale (klappbar) |
-| **Økonomisk støtte**           | ✅ Færdig  | Viser største bidragydere og beløb for hver politiker (2023–2025) |
-| **Split JS struktur**          | ✅ Færdig  | Koden er delt op i 5 mindre, overskuelige filer |
-| **Tilføj ny skandale**         | ✅ Færdig  | Brugere kan tilføje nye skandaler (demo) |
-| **Media links**                | ✅ Færdig  | Direkte links til artikler fra Berlingske, DR, Politiken, Altinget m.fl. |
+## Politikere
+Mette Frederiksen, Inger Støjberg, Morten Østergaard, Helle Thorning-Schmidt, Lars Løkke Rasmussen, Pia Kjærsgaard, Anders Fogh Rasmussen, Morten Messerschmidt, Kristian Thulesen Dahl, Søren Pape Poulsen, Uffe Elbæk, Claus Hjort Frederiksen.
 
-### 📋 Todo / Mangler
+## Filer
+- index.html
+- css/styles.css
+- js/ (10 filer: modal-core, modal-scandal, modal-voting, modal-comments, modal-donor, modal-broken-promises, data, ui, timeline, main, **modal-share**)
+- data/politicians/ (12 JSON-filer)
+- README.md
 
-- [ ] **Delt afstemning** – Stemmer gemmes centralt (Supabase/Firebase) så alle ser de samme tal
-- [ ] **Sikkerhed på kommentarer** – Anti-spam, moderation, mulighed for at slette egne kommentarer
-- [ ] **Flere politikere** – F.eks. Kristian Thulesen Dahl, Søren Pape, Uffe Elbæk m.fl.
-- [ ] **Dark mode** – Mørkt tema
-- [ ] **Bedre UX på kommentarer** – Vis kommentar med det samme uden at skulle genindlæse modalen
-- [ ] **Export / PDF** – Download en politikers fulde skandale-rapport
-- [ ] **Sammenlign politikere** – Vælg to politikere og sammenlign deres skandaler og støtte
-- [ ] **PWA / Mobil app** – Kan installeres på telefon
+## Fremtidige planer / Todo-liste
+- [ ] Delt afstemning (central database – f.eks. Supabase)
+- [ ] Kommentar-moderation og sikkerhed
+- [ ] Flere politikere
+- [ ] Dark mode
+- [ ] PDF-eksport af en politikers rapport
+- [ ] Sammenlign to politikere
+- [ ] PWA (kan installeres på telefon)
+- [ ] Mulighed for at tilføje nye skandaler direkte på siden
+- [ ] **Deep linking via URL-parameter** (f.eks. `?politician=mette-frederiksen` så delte links åbner direkte i modalen)
 
-## 🛠 Teknisk setup
+## Ønsket stil
+Professionel, neutral og troværdig • Nem at vedligeholde • God brugeroplevelse på mobil og computer • Fokus på fakta og kilder
 
-- Ren statisk hjemmeside (klar til GitHub Pages)
-- Tailwind CSS + Font Awesome
-- JavaScript delt op i 5 filer: `data.js`, `ui.js`, `modal.js`, `timeline.js`, `main.js`
-- Alt data ligger i JSON-filer (nemt at vedligeholde og udvide)
-- Alt gemmes lokalt i browseren (localStorage) indtil delt afstemning implementeres
+---
+
+**Live demo:** https://mattomadsen.github.io/skandale.dk/
