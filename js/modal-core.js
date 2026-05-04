@@ -1,9 +1,8 @@
-// js/modal-core.js - Ren version der virker med dine cards
+// js/modal-core.js - Bedste version (kombineret)
 
 let currentPolitician = null;
 
 function showPoliticianModal(idOrPolitician) {
-    // Hvis der sendes et ID, find politikeren
     let politician;
     if (typeof idOrPolitician === 'number' || typeof idOrPolitician === 'string') {
         politician = politicians.find(p => p.id == idOrPolitician);
@@ -28,19 +27,21 @@ function showPoliticianModal(idOrPolitician) {
     avatar.style.backgroundColor = politician.avatarColor || politician.color || '#C8102E';
     avatar.innerHTML = `<span class="font-bold">${politician.initials || politician.name.split(' ').map(n => n[0]).join('')}</span>`;
     
-    // Skandaler (fra modal-scandal.js)
-    if (typeof loadScandals === 'function') {
-        loadScandals(politician);
+    // Ryd gamle dynamiske sektioner (vigtigt!)
+    const modalBody = document.querySelector('#politicianModal .p-8');
+    if (modalBody) {
+        const oldSections = modalBody.querySelectorAll('.dynamic-section, .economic-support');
+        oldSections.forEach(el => el.remove());
     }
     
     // Vis modal
     document.getElementById('politicianModal').classList.remove('hidden');
     document.getElementById('politicianModal').classList.add('flex');
     
-    // Aktivér deleknap (hvis den findes)
-    if (typeof initShareButton === 'function') {
-        initShareButton(politician);
-    }
+    // Indlæs sektioner
+    if (typeof loadScandals === 'function') loadScandals(politician);
+    if (typeof addEconomicSupportSection === 'function') addEconomicSupportSection(politician);
+    if (typeof initShareButton === 'function') initShareButton(politician);
 }
 
 function closeModal() {
@@ -52,6 +53,5 @@ function closeModal() {
     if (options) options.style.display = 'none';
 }
 
-// Gør funktionerne globale
 window.showPoliticianModal = showPoliticianModal;
 window.closeModal = closeModal;

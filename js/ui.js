@@ -1,4 +1,4 @@
-// js/ui.js - Ren version (v2.0)
+// js/ui.js - Ren version v2.0
 
 function renderPoliticians(filteredPoliticians = null) {
   const grid = document.getElementById('politiciansGrid');
@@ -12,7 +12,7 @@ function renderPoliticians(filteredPoliticians = null) {
     const totalSeverity = scandals.reduce((sum, s) => sum + (s.severity || 0), 0);
     const avgSeverity = scandals.length > 0 ? (totalSeverity / scandals.length).toFixed(1) : '0.0';
     const totalLinks = scandals.reduce((sum, s) => sum + (s.mediaLinks ? s.mediaLinks.length : 0), 0);
-    const brokenPromises = politician.brokenPromises || 0;
+    const brokenPromises = Number(politician.brokenPromises) || 0;
 
     const cardHTML = `
       <div onclick="showPoliticianModal(${politician.id})" 
