@@ -1,41 +1,43 @@
-// js/modal-core.js - Hovedmodal (åbn og luk)
+// js/modal-core.js
+// Håndterer åbning/lukning af modal + integration af deleknap
 
-function showPoliticianModal(id) {
-  const politician = politicians.find(p => p.id === id);
-  if (!politician) return;
+let currentPolitician = null;
 
-  document.getElementById('politicianModal').dataset.currentPoliticianId = id;
+function openModal(politician) {
+    currentPolitician = politician;
 
-  document.getElementById('modalName').innerHTML = politician.name;
-  document.getElementById('modalParty').innerHTML = politician.party;
-  document.getElementById('modalParty').style.backgroundColor = politician.partyColor + '20';
-  document.getElementById('modalParty').style.color = politician.partyColor;
-  document.getElementById('modalRole').innerHTML = politician.role;
-
-  const avatar = document.getElementById('modalAvatar');
-  avatar.style.backgroundColor = politician.avatarColor;
-  avatar.innerHTML = politician.initials;
-
-  document.getElementById('modalBio').innerHTML = politician.bio;
-  document.getElementById('modalScandalCount').innerHTML = politician.scandals.length;
-
-  const scandalsContainer = document.getElementById('modalScandals');
-  scandalsContainer.innerHTML = '';
-
-  politician.scandals.forEach((scandal) => {
-    // Vi kalder de andre filer for at bygge indholdet
-    const scandalHTML = buildScandalHTML(scandal);
-    scandalsContainer.innerHTML += scandalHTML;
-  });
-
-  // Tilføj økonomisk støtte sektion (fra modal-donor.js)
-  addEconomicSupportSection(politician);
-
-  document.getElementById('politicianModal').classList.remove('hidden');
-  document.getElementById('politicianModal').classList.add('flex');
+    // Udfyld modal
+    document.getElementById('modalName').textContent = politician.name;
+    document.getElementById('modalParty').textContent = politician.party;
+    document.getElementById('modalRole').textContent = politician.role || '';
+    document.getElementById('modalBio').textContent = politician.bio || 'Ingen beskrivelse tilgængelig.';
+    
+    const avatar = document.getElementById('modalAvatar');
+    avatar.style.backgroundColor = politician.color || '#C8102E';
+    avatar.innerHTML = `<span class="font-bold">${politician.name.split(' ').map(n => n[0]).join('')}</span>`;
+    
+    // Skandaler (fra modal-scandal.js)
+    if (typeof loadScandals === 'function') {
+        loadScandals(politician);
+    }
+    
+    // Vis modal
+    document.getElementById('politicianModal').classList.remove('hidden');
+    document.getElementById('politicianModal').classList.add('flex');
+    
+    // Aktivér deleknap (Version 2)
+    initShareButton(politician);
 }
 
 function closeModal() {
-  document.getElementById('politicianModal').classList.remove('flex');
-  document.getElementById('politicianModal').classList.add('hidden');
+    const modal = document.getElementById('politicianModal');
+    modal.classList.remove('flex');
+    modal.classList.add('hidden');
+    
+    const options = document.getElementById('share-options');
+    if (options) options.style.display = 'none';
 }
+
+// Gør funktionerne globale
+window.openModal = openModal;
+window.closeModal = closeModal;
