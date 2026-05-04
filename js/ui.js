@@ -50,3 +50,25 @@ function renderPoliticians(filteredPoliticians = null) {
     `;
     grid.innerHTML += cardHTML;
   });
+}
+
+function createStars(count) {
+  let stars = '';
+  for (let i = 0; i < 5; i++) {
+    stars += (i < count) ? `<i class="fa-solid fa-star severity-star text-sm"></i>` : `<i class="fa-solid fa-star text-slate-200 text-sm"></i>`;
+  }
+  return stars;
+}
+
+function filterPoliticians() {
+  const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+  if (!searchTerm) {
+    renderPoliticians();
+    return;
+  }
+  const filtered = politicians.filter(p => 
+    p.name.toLowerCase().includes(searchTerm) || 
+    p.party.toLowerCase().includes(searchTerm)
+  );
+  renderPoliticians(filtered);
+}
