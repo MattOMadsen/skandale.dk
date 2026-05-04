@@ -1,4 +1,4 @@
-// js/data.js - Data og indlæsning
+// js/data.js - Data og indlæsning (alle 12 politikere - korrekte filnavne)
 let politicians = [];
 
 async function loadPoliticians() {
@@ -11,6 +11,10 @@ async function loadPoliticians() {
     'data/politicians/pia-kjaersgaard.json',
     'data/politicians/anders-fogh-rasmussen.json',
     'data/politicians/morten-messerschmidt.json',
+    'data/politicians/kristian-thulesen-dahl.json',
+    'data/politicians/soeren-pape-poulsen.json',   // ← rettet til "soeren"
+    'data/politicians/uffe-elbaek.json',
+    'data/politicians/claus-hjort-frederiksen.json'
   ];
 
   try {
