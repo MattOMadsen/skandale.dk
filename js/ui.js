@@ -1,4 +1,4 @@
-// js/ui.js - Sikker version (Løsning A) - virker med din nuværende struktur
+// js/ui.js - Fuld version med alle fixes
 
 function renderPoliticians(filteredPoliticians = null) {
   const grid = document.getElementById('politiciansGrid');
@@ -12,7 +12,9 @@ function renderPoliticians(filteredPoliticians = null) {
     const totalSeverity = scandals.reduce((sum, s) => sum + (s.severity || 0), 0);
     const avgSeverity = scandals.length > 0 ? (totalSeverity / scandals.length).toFixed(1) : '0.0';
     const totalLinks = scandals.reduce((sum, s) => sum + (s.mediaLinks ? s.mediaLinks.length : 0), 0);
-    const brokenPromises = (typeof politician.brokenPromises === 'number') ? politician.brokenPromises : 0;
+    
+    // Fix: brug .length hvis det er et array
+    const brokenPromises = Array.isArray(politician.brokenPromises) ? politician.brokenPromises.length : 0;
 
     const cardHTML = `
       <div onclick="showPoliticianModal(${politician.id})" 
