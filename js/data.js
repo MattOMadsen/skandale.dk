@@ -1,4 +1,4 @@
-// js/data.js - Data og indlæsning (kun 8 politikere - midlertidig fix)
+// js/data.js - Data og indlæsning (alle 12 politikere - korrekte filnavne)
 let politicians = [];
 
 async function loadPoliticians() {
@@ -10,13 +10,17 @@ async function loadPoliticians() {
     'data/politicians/lars-loekke-rasmussen.json',
     'data/politicians/pia-kjaersgaard.json',
     'data/politicians/anders-fogh-rasmussen.json',
-    'data/politicians/morten-messerschmidt.json'
+    'data/politicians/morten-messerschmidt.json',
+    'data/politicians/kristian-thulesen-dahl.json',
+    'data/politicians/soeren-pape-poulsen.json',   // ← rettet til "soeren"
+    'data/politicians/uffe-elbaek.json',
+    'data/politicians/claus-hjort-frederiksen.json'
   ];
 
   try {
     const responses = await Promise.all(politicianFiles.map(file => fetch(file)));
     politicians = await Promise.all(responses.map(res => res.json()));
-    console.log('%c[Skandale.dk] 8 politikere loaded succesfuldt', 'color:#10b981');
+    console.log('%c[Skandale.dk] Alle 12 politikere loaded succesfuldt', 'color:#10b981');
   } catch (error) {
     console.error('Kunne ikke loade data:', error);
   }
