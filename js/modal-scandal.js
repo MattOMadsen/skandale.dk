@@ -1,30 +1,26 @@
-// js/modal-scandal.js - Skandale detaljer (toggle funktioner)
+// js/modal-scandal.js - Skandale detaljer (komplet version)
 
-function toggleJusticeAnalysis(btn) {
-  const content = btn.nextElementSibling;
-  const icon = btn.querySelector('.fa-chevron-down');
-  if (content.classList.contains('hidden')) {
-    content.classList.remove('hidden');
-    icon.classList.add('fa-rotate-180');
-  } else {
-    content.classList.add('hidden');
-    icon.classList.remove('fa-rotate-180');
+function loadScandals(politician) {
+  const container = document.getElementById('modalScandals');
+  if (!container) return;
+
+  container.innerHTML = '';
+
+  if (!politician.scandals || politician.scandals.length === 0) {
+    container.innerHTML = '<p class="text-slate-500 text-sm">Ingen skandaler registreret.</p>';
+    return;
   }
+
+  politician.scandals.forEach(scandal => {
+    const html = buildScandalHTML(scandal);
+    container.innerHTML += html;
+  });
+
+  // Gem politiker ID til brug i postComment
+  const modal = document.getElementById('politicianModal');
+  modal.dataset.currentPoliticianId = politician.id;
 }
 
-function toggleScandalDetails(element) {
-  const details = element.nextElementSibling;
-  const icon = element.querySelector('.fa-chevron-down');
-  if (details.classList.contains('hidden')) {
-    details.classList.remove('hidden');
-    icon.classList.add('fa-rotate-180');
-  } else {
-    details.classList.add('hidden');
-    icon.classList.remove('fa-rotate-180');
-  }
-}
-
-// Hjælpefunktion der bygger HTML til én skandale
 function buildScandalHTML(scandal) {
   const savedVotes = JSON.parse(localStorage.getItem(`vote_${scandal.id}`) || '{"ja":0,"nej":0,"vedikke":0}');
 
@@ -137,4 +133,72 @@ function buildScandalHTML(scandal) {
       </div>
     </div>
   `;
+}
+
+function toggleJusticeAnalysis(btn) {
+  const content = btn.nextElementSibling;
+  const icon = btn.querySelector('.fa-chevron-down');
+  if (content.classList.contains('hidden')) {
+    content.classList.remove('hidden');
+    icon.classList.add('fa-rotate-180');
+  } else {
+    content.classList.add('hidden');
+    icon.classList.remove('fa-rotate-180');
+  }
+}
+
+function toggleScandalDetails(element) {
+  const details = element.nextElementSibling;
+  const icon = element.querySelector('.fa-chevron-down');
+  if (details.classList.contains('hidden')) {
+    details.classList.remove('hidden');
+    icon.classList.add('fa-rotate-180');
+  } else {
+    details.classList.add('hidden');
+    icon.classList.remove('fa-rotate-180');
+  }
+}
+
+function voteScandal(scandalId, choice, button) {
+  const key = `vote_${scandalId}`;
+  let votes = JSON.parse(localStorage.getItem(key) || '{"ja":0,"nej":0,"vedikke":0}');
+  
+  votes[choice]++;
+  localStorage.setItem(key, JSON.stringify(votes));
+  
+  const parent = button.parentElement;
+  const buttons = parent.querySelectorAll('button');
+  
+  buttons[0].innerHTML = `Godt <span class="font-bold">(${votes.ja})</span>`;
+  buttons[1].innerHTML = `Dårligt <span class="font-bold">(${votes.nej})</span>`;
+  buttons[2].innerHTML = `Neutral <span class="font-bold">(${votes.vedikke})</span>`;
+  
+  const originalText = button.innerHTML;
+  button.innerHTML = 'Tak!';
+  setTimeout(() => {
+    button.innerHTML = originalText;
+  }, 600);
+}
+
+function postComment(scandalId) {
+  const input = document.getElementById(`comment-input-${scandalId}`);
+  if (!input || !input.value.trim()) return;
+
+  const key = `comments_${scandalId}`;
+  const comments = JSON.parse(localStorage.getItem(key) || '[]');
+  
+  comments.push({
+    text: input.value.trim(),
+    date: new Date().toLocaleDateString('da-DK') + ' ' + new Date().toLocaleTimeString('da-DK', {hour: '2-digit', minute:'2-digit'})
+  });
+  
+  localStorage.setItem(key, JSON.stringify(comments));
+  input.value = '';
+  
+  // Genindlæs modalen
+  const modal = document.getElementById('politicianModal');
+  const politicianId = parseInt(modal.dataset.currentPoliticianId);
+  if (politicianId) {
+    showPoliticianModal(politicianId);
+  }
 }
