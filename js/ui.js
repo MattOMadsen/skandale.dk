@@ -8,14 +8,10 @@ function renderPoliticians(filteredPoliticians = null) {
   const toRender = filteredPoliticians || politicians;
 
   toRender.forEach(politician => {
-    // Sikkerhed: sørg altid for at scandals er et array
     const scandals = Array.isArray(politician.scandals) ? politician.scandals : [];
-    
     const totalSeverity = scandals.reduce((sum, s) => sum + (s.severity || 0), 0);
     const avgSeverity = scandals.length > 0 ? (totalSeverity / scandals.length).toFixed(1) : '0.0';
     const totalLinks = scandals.reduce((sum, s) => sum + (s.mediaLinks ? s.mediaLinks.length : 0), 0);
-    
-    // Sikker håndtering af brokenPromises
     const brokenPromises = (typeof politician.brokenPromises === 'number') ? politician.brokenPromises : 0;
 
     const cardHTML = `
