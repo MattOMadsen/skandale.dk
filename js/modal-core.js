@@ -1,9 +1,21 @@
-// js/modal-core.js
-// Håndterer åbning/lukning af modal + integration af deleknap
+// js/modal-core.js - Ren version der virker med dine cards
 
 let currentPolitician = null;
 
-function openModal(politician) {
+function showPoliticianModal(idOrPolitician) {
+    // Hvis der sendes et ID, find politikeren
+    let politician;
+    if (typeof idOrPolitician === 'number' || typeof idOrPolitician === 'string') {
+        politician = politicians.find(p => p.id == idOrPolitician);
+    } else {
+        politician = idOrPolitician;
+    }
+
+    if (!politician) {
+        console.error('Politiker ikke fundet:', idOrPolitician);
+        return;
+    }
+
     currentPolitician = politician;
 
     // Udfyld modal
@@ -13,8 +25,8 @@ function openModal(politician) {
     document.getElementById('modalBio').textContent = politician.bio || 'Ingen beskrivelse tilgængelig.';
     
     const avatar = document.getElementById('modalAvatar');
-    avatar.style.backgroundColor = politician.color || '#C8102E';
-    avatar.innerHTML = `<span class="font-bold">${politician.name.split(' ').map(n => n[0]).join('')}</span>`;
+    avatar.style.backgroundColor = politician.avatarColor || politician.color || '#C8102E';
+    avatar.innerHTML = `<span class="font-bold">${politician.initials || politician.name.split(' ').map(n => n[0]).join('')}</span>`;
     
     // Skandaler (fra modal-scandal.js)
     if (typeof loadScandals === 'function') {
@@ -25,8 +37,10 @@ function openModal(politician) {
     document.getElementById('politicianModal').classList.remove('hidden');
     document.getElementById('politicianModal').classList.add('flex');
     
-    // Aktivér deleknap (Version 2)
-    initShareButton(politician);
+    // Aktivér deleknap (hvis den findes)
+    if (typeof initShareButton === 'function') {
+        initShareButton(politician);
+    }
 }
 
 function closeModal() {
@@ -39,5 +53,5 @@ function closeModal() {
 }
 
 // Gør funktionerne globale
-window.openModal = openModal;
+window.showPoliticianModal = showPoliticianModal;
 window.closeModal = closeModal;
