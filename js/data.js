@@ -11,11 +11,6 @@ async function loadPoliticians() {
     'data/politicians/pia-kjaersgaard.json',
     'data/politicians/anders-fogh-rasmussen.json',
     'data/politicians/morten-messerschmidt.json',
-    // === DE 4 NYE POLITIKERE ===
-    'data/politicians/kristian-thulesen-dahl.json',
-    'data/politicians/soeren-pape-poulsen.json',
-    'data/politicians/uffe-elbaek.json',
-    'data/politicians/claus-hjort-frederiksen.json'
   ];
 
   try {
