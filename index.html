@@ -31,25 +31,21 @@
                 </div>
                 
                 <div class="flex items-center gap-x-2">
-                    <!-- Tidslinje -->
                     <button onclick="showTimeline()" class="flex items-center gap-x-2 px-4 py-2 rounded-2xl text-sm font-semibold border border-slate-300 hover:bg-slate-100 transition-colors">
                         <i class="fa-solid fa-clock-rotate-left"></i>
                         <span class="hidden md:inline ml-1.5">Tidslinje</span>
                     </button>
                     
-                    <!-- Partier -->
                     <button onclick="showPartyOverview()" class="flex items-center gap-x-2 px-4 py-2 rounded-2xl text-sm font-semibold border border-slate-300 hover:bg-slate-100 transition-colors">
                         <i class="fa-solid fa-users"></i>
                         <span class="hidden md:inline ml-1.5">Partier</span>
                     </button>
                     
-                    <!-- Sammenlign -->
                     <button onclick="showCompareModal()" class="flex items-center gap-x-2 px-4 py-2 rounded-2xl text-sm font-semibold border border-slate-300 hover:bg-slate-100 transition-colors">
                         <i class="fa-solid fa-balance-scale"></i>
                         <span class="hidden md:inline ml-1.5">Sammenlign</span>
                     </button>
                     
-                    <!-- Tilføj skandale -->
                     <button onclick="showAddScandalModal()" class="flex items-center gap-x-2 bg-[#C8102E] hover:bg-[#A00E26] transition-colors text-white px-4 py-2 rounded-2xl text-sm font-semibold shadow-sm">
                         <i class="fa-solid fa-plus"></i>
                         <span class="hidden sm:inline ml-1.5">Tilføj</span>
@@ -98,6 +94,7 @@
     <!-- Politician Modal -->
     <div id="politicianModal" onclick="if (event.target.id === 'politicianModal') closeModal()" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
         <div onclick="event.stopImmediatePropagation()" class="bg-white rounded-3xl max-w-3xl w-full max-h-[94vh] overflow-hidden shadow-2xl modal">
+            
             <div id="modalHeader" class="px-8 pt-8 pb-6 flex items-start justify-between border-b">
                 <div class="flex items-center gap-x-5">
                     <div id="modalAvatar" class="w-20 h-20 rounded-3xl flex-shrink-0 flex items-center justify-center text-white text-4xl font-bold shadow-inner"></div>
@@ -111,9 +108,17 @@
                 </div>
                 
                 <div class="flex items-center gap-x-2">
+                    <!-- DELEKNAP -->
                     <button id="share-btn" class="flex items-center gap-x-2 px-4 py-2 text-sm font-semibold text-slate-700 hover:text-slate-900 border border-slate-300 hover:bg-slate-100 rounded-2xl transition-all">
                         <i class="fa-solid fa-share-alt"></i>
                         <span>Del</span>
+                    </button>
+                    
+                    <!-- PDF EKSPORT -->
+                    <button onclick="exportPoliticianToPDF(currentPolitician)" 
+                            class="flex items-center gap-x-2 px-4 py-2 text-sm font-semibold text-slate-700 hover:text-slate-900 border border-slate-300 hover:bg-slate-100 rounded-2xl transition-all">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span class="hidden sm:inline">PDF</span>
                     </button>
                     
                     <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 p-3 -mr-3 -mt-3">
@@ -192,6 +197,10 @@
     <script src="js/modal-share.js"></script>
     <script src="js/modal-party.js"></script>
     <script src="js/modal-compare.js"></script>
+    <script src="js/modal-pdf-export.js"></script>
+
+    <!-- jsPDF CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <script>
         function setVersion() {
