@@ -1,0 +1,46 @@
+{
+  "id": 3,
+  "scandals": [
+    {
+      "id": 301,
+      "title": "#MeToo-krænkelsessagen",
+      "year": "2020",
+      "severity": 4,
+      "shortDesc": "Indrømmede at have krænket en kvindelig kollega for 10 år siden – trådte tilbage som partileder.",
+      "longDesc": "I oktober 2020 blev det offentligt, at Morten Østergaard havde upassende berørt en kvindelig partikollega (Lotte Rod) på låret under et møde ca. 10 år tidligere. Først nedtonede han sagen, men indrømmede senere, at det var ham. Han havde tidligere været fortaler for #MeToo og nul-tolerance. Sagen førte til massiv medieomtale og internt oprør i partiet. Han trådte tilbage som politisk leder samme dag.",
+      "outcome": "Trådte tilbage som leder af Radikale Venstre, partiet mistede troværdighed på ligestillingsområdet, stor debat om magt og krænkelser i politik.",
+      "justiceAnalysis": "Resignationen som partileder var den rigtige konsekvens i #MeToo-sagen. Det sendte et stærkt signal om nul-tolerance. Dog kunne partiet have haft en mere transparent intern proces og måske en uafhængig undersøgelse for at genopbygge tillid. Sagen satte fokus på magt og krænkelser i dansk politik og førte til bredere debatter om partikultur.",
+      "mediaLinks": [
+        {"name": "Politiken", "url": "https://politiken.dk/debat/art7955054/Nu-roses-Morten-%C3%98stergaard.-Lotte-Rod-pilles-ned", "title": "MeToo classic: Nu roses Morten Østergaard. Lotte Rod pilles ned", "date": "10. okt 2020"},
+        {"name": "Altinget", "url": "https://www.altinget.dk/artikel/radikale-holder-krisemoede-her-er-det-dramatiske-forloeb", "title": "Radikale holder krisemøde: Her er det dramatiske forløb", "date": "18. okt 2020"},
+        {"name": "DR", "url": "https://www.dr.dk/nyheder/politik/morten-oestergaard-traekker-sig-efter-sag-om-kraenkelser", "title": "Morten Østergaard trækker sig efter sag om krænkelser", "date": "7. okt 2020"}
+      ]
+    }
+  ],
+  "economicSupport": [
+    {
+      "name": "Radikale Venstre",
+      "amount": "210.000 kr",
+      "type": "Partistøtte"
+    },
+    {
+      "name": "Nordea",
+      "amount": "75.000 kr",
+      "type": "Privat donation"
+    },
+    {
+      "name": "Dansk Erhverv",
+      "amount": "65.000 kr",
+      "type": "Erhvervsstøtte"
+    }
+  ],
+  "affiliations": [],
+  "brokenPromises": [
+    {
+      "title": "Vi lover at være det mest grønne parti i Folketinget",
+      "year": "2015",
+      "whatHappened": "Radikale Venstre stemte flere gange imod ambitiøse grønne forslag og støttede regeringer med svag klimapolitik.",
+      "source": "Folketingets afstemninger 2015-2019"
+    }
+  ]
+}

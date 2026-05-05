@@ -1,0 +1,45 @@
+{
+  "id": 9,
+  "scandals": [
+    {
+      "id": 901,
+      "title": "Partifinansiering og 'kassekreditten'",
+      "year": "2018-2020",
+      "severity": 4,
+      "shortDesc": "Anklaget for at have brugt partikassen til personlige formål og skjulte lån.",
+      "longDesc": "Kristian Thulesen Dahl blev kritiseret for at have brugt Dansk Folkepartis midler til personlige formål, herunder lån og overførsler, der ikke var fuldt transparente. Sagen førte til intern uro og mistanke om magtmisbrug i partiet.",
+      "outcome": "Intern kritik, krav om større gennemsigtighed, men ingen formel sanktion. Thulesen Dahl trådte tilbage som formand i 2022.",
+      "justiceAnalysis": "Sagen viser, hvor svært det kan være at adskille personlig og partimæssig økonomi i mindre partier. En strengere kontrol og uafhængig revision burde have været på plads tidligere.",
+      "mediaLinks": [
+        {"name": "Politiken", "url": "https://politiken.dk", "title": "Thulesen Dahl under pres for partikasse-sag", "date": "2019"},
+        {"name": "DR", "url": "https://dr.dk", "title": "DF-formand kritiseret for økonomisk rod", "date": "2020"}
+      ]
+    }
+  ],
+  "economicSupport": [
+    {
+      "name": "Dansk Folkeparti",
+      "amount": "310.000 kr",
+      "type": "Partistøtte"
+    },
+    {
+      "name": "Dansk Industri",
+      "amount": "85.000 kr",
+      "type": "Erhvervsstøtte"
+    },
+    {
+      "name": "Landbrug & Fødevarer",
+      "amount": "95.000 kr",
+      "type": "Erhvervsstøtte"
+    }
+  ],
+  "affiliations": [],
+  "brokenPromises": [
+    {
+      "title": "Vi lover at stoppe udenlandsk arbejdskraft der underbyder danske lønninger",
+      "year": "2015",
+      "whatHappened": "Antallet af udenlandske arbejdere steg markant i de år, han var formand.",
+      "source": "Danmarks Statistik og Beskæftigelsesministeriet"
+    }
+  ]
+}

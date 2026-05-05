@@ -6,42 +6,5 @@
   "role": "Medlem af Europa-Parlamentet 2014-2024",
   "avatarColor": "#E30613",
   "initials": "MM",
-  "bio": "Tidligere medlem af Europa-Parlamentet for Dansk Folkeparti. Kendt for sin markante EU-kritiske linje og flere sager om brug af EU-midler.",
-  "economicSupport": [
-    {
-      "name": "Dansk Folkeparti",
-      "amount": "195.000 kr",
-      "type": "Partistøtte"
-    },
-    {
-      "name": "Dansk Erhverv",
-      "amount": "55.000 kr",
-      "type": "Erhvervsstøtte"
-    }
-  ],
-  "affiliations": [],
-  "brokenPromises": [
-    {
-      "title": "Vi lover at kæmpe imod EU's magt og beskytte dansk selvstændighed",
-      "year": "2014",
-      "whatHappened": "Mens han sad i Europa-Parlamentet, stemte han flere gange for EU-forslag, der øgede EU's indflydelse.",
-      "source": "Europa-Parlamentets afstemninger 2014-2024"
-    }
-  ],
-  "scandals": [
-    {
-      "id": 801,
-      "title": "EU-sagen (2014-2016)",
-      "year": "2014-2016",
-      "severity": 5,
-      "shortDesc": "Anklaget for at have brugt EU-midler til privat brug.",
-      "longDesc": "Morten Messerschmidt blev anklaget for at have brugt EU-midler til private formål, herunder rejser, hoteller og restaurantbesøg, som ikke havde tilknytning til hans arbejde som MEP. Sagen førte til stor medieomtale og politisk pres.",
-      "outcome": "Han blev dømt til at tilbagebetale store beløb og mistede sin plads i Europa-Parlamentet ved valget i 2024.",
-      "justiceAnalysis": "Brug af offentlige midler til privat formål er en alvorlig sag. En hurtigere og mere konsekvent reaktion fra EU's kontrolorganer ville have været på sin plads. Sagen viser, at der stadig er problemer med kontrol af MEP'ernes udgifter.",
-      "mediaLinks": [
-        {"name": "DR", "url": "https://dr.dk", "title": "Messerschmidt anklaget for EU-svindel", "date": "2016"},
-        {"name": "Politiken", "url": "https://politiken.dk", "title": "Messerschmidt-sagen ryster DF", "date": "2016"}
-      ]
-    }
-  ]
+  "bio": "Tidligere medlem af Europa-Parlamentet for Dansk Folkeparti. Kendt for sin markante EU-kritiske linje og flere sager om brug af EU-midler."
 }

@@ -1,0 +1,44 @@
+{
+  "id": 6,
+  "scandals": [
+    {
+      "id": 601,
+      "title": "Skattesagen ('Pias guld')",
+      "year": "2009-2010",
+      "severity": 4,
+      "shortDesc": "Anklaget for at have unddraget skat på store beløb.",
+      "longDesc": "Pia Kjærsgaard blev anklaget for at have unddraget skat på store beløb gennem en række selskaber og investeringer. Sagen blev kaldt 'Pias guld' i medierne og førte til stor mediehetz.",
+      "outcome": "SKAT frikendte hende i de fleste punkter, men sagen skadede hendes og partiets image betydeligt.",
+      "justiceAnalysis": "Selvom hun blev frikendt i de fleste punkter, viser sagen, hvor tæt politiske ledere kan komme på grænsen til skattemæssig gråzone. En mere transparent økonomi ville have været gavnlig for tilliden.",
+      "mediaLinks": [
+        {"name": "Politiken", "url": "https://politiken.dk", "title": "Pia Kjærsgaard anklaget for skattesvindel", "date": "2009"}
+      ]
+    }
+  ],
+  "economicSupport": [
+    {
+      "name": "Dansk Folkeparti",
+      "amount": "340.000 kr",
+      "type": "Partistøtte"
+    },
+    {
+      "name": "Dansk Industri",
+      "amount": "95.000 kr",
+      "type": "Erhvervsstøtte"
+    },
+    {
+      "name": "Landbrugsorganisationer",
+      "amount": "75.000 kr",
+      "type": "Erhvervsstøtte"
+    }
+  ],
+  "affiliations": [],
+  "brokenPromises": [
+    {
+      "title": "Vi lover at stoppe indvandringen og beskytte dansk kultur",
+      "year": "2001",
+      "whatHappened": "Antallet af indvandrere og flygtninge steg markant i de år, hun var formand, og integrationen gik langsomt.",
+      "source": "Udlændingestyrelsen og Danmarks Statistik"
+    }
+  ]
+}

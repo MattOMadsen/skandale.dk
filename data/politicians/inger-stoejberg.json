@@ -6,49 +6,5 @@
   "role": "Tidligere udlændinge- og integrationsminister (2015-2019)",
   "avatarColor": "#0055A5",
   "initials": "IS",
-  "bio": "Tidligere Venstre-politiker og nu formand for Danmarksdemokraterne. Kendt for stram udlændingepolitik. Dømt i rigsretssag – den første dom mod en minister i 25 år.",
-  "economicSupport": [
-    {
-      "name": "Dansk Folkeparti",
-      "amount": "320.000 kr",
-      "type": "Partistøtte"
-    },
-    {
-      "name": "Jyske Bank",
-      "amount": "85.000 kr",
-      "type": "Privat donation"
-    },
-    {
-      "name": "Landbrug & Fødevarer",
-      "amount": "110.000 kr",
-      "type": "Erhvervsstøtte"
-    }
-  ],
-  "affiliations": [],
-  "brokenPromises": [
-    {
-      "title": "Vi lover at beskytte danske værdier og stoppe islamiseringen",
-      "year": "2015",
-      "whatHappened": "Mens hun var minister, fortsatte antallet af muslimske indvandrere og asylansøgere at stige markant i flere år.",
-      "source": "Udlændingestyrelsen og Danmarks Statistik 2015-2019"
-    }
-  ],
-  "scandals": [
-    {
-      "id": 201,
-      "title": "Rigsretssagen – Ulovlig asyl-instruks",
-      "year": "2015-2021",
-      "severity": 5,
-      "shortDesc": "Udstedte ulovlig instruks om adskillelse af asylpar, hvoraf den ene var mindreårig. Dømt skyldig.",
-      "longDesc": "Som udlændinge- og integrationsminister gav Inger Støjberg i 2015 en instruks til Udlændingestyrelsen om at adskille asylpar, hvor den ene part var under 18 år. Instruksen var ulovlig. 23 par blev tvangsadskilt. Instrukskommissionen fastslog, at Støjberg havde brudt loven og givet urigtige oplysninger til Folketinget. I december 2021 blev hun kendt skyldig ved Rigsretten i forsætlig overtrædelse af ministeransvarlighedsloven og idømt 60 dages ubetinget fængsel (den strengeste straf til en minister i nyere tid).",
-      "outcome": "60 dages fængselsdom (ubetinget), frataget ministerpost, politisk karriere påvirket, men fortsatte som folketingsmedlem og stiftede nyt parti. Afsonede med fodlænke.",
-      "justiceAnalysis": "Her skete det \"rigtigt\": Rigsretssag, dom og 60 dages fængsel (fodlænke). Det viser, at systemet kan fungere. Dog fortsatte hun sin politiske karriere og stiftede nyt parti – mange mener, at en dom for brud på ministeransvarlighedsloven burde have haft permanente konsekvenser for politisk embede (f.eks. karantæne fra ministerposter eller folketingsvalg). Debatten handler nu om, hvorvidt straffen var afskrækkende nok.",
-      "mediaLinks": [
-        {"name": "Altinget", "url": "https://www.altinget.dk/artikel/60-dages-fodlaenke-stoejberg-er-begyndt-at-afsone-sin-straf", "title": "60 dages fodlænke: Støjberg er begyndt at afsone sin straf", "date": "28. mar 2022"},
-        {"name": "Altinget", "url": "https://www.altinget.dk/artikel/laes-dommen-her-er-hovedargumenterne-for-dommen-over-stoejberg", "title": "Her er hovedargumenterne for dommen over Støjberg", "date": "13. dec 2021"},
-        {"name": "DR", "url": "https://www.dr.dk/nyheder/politik/live-rigsretten-afsiger-sin-dom-over-inger-stoejberg", "title": "LIVE: Rigsretten afsiger sin dom over Inger Støjberg", "date": "13. dec 2021"},
-        {"name": "Altinget", "url": "https://www.altinget.dk/artikel/stoejberg-er-skyldig-hvad-faar-det-af-konsekvenser", "title": "Støjberg er skyldig – hvad får det af konsekvenser?", "date": "13. dec 2021"}
-      ]
-    }
-  ]
+  "bio": "Tidligere Venstre-politiker og nu formand for Danmarksdemokraterne. Kendt for stram udlændingepolitik. Dømt i rigsretssag – den første dom mod en minister i 25 år."
 }

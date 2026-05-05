@@ -6,38 +6,5 @@
   "role": "Tidligere finans- og forsvarsminister",
   "avatarColor": "#004B87",
   "initials": "CHF",
-  "bio": "Tidligere finansminister (2010-2011) og forsvarsminister (2015-2019) for Venstre. Kendt for sin erfaring og stærke position i partiet.",
-  "economicSupport": [
-    {
-      "name": "Venstre",
-      "amount": "275.000 kr",
-      "type": "Partistøtte"
-    },
-    {
-      "name": "Dansk Erhverv",
-      "amount": "95.000 kr",
-      "type": "Erhvervsstøtte"
-    },
-    {
-      "name": "Private donorer",
-      "amount": "65.000 kr",
-      "type": "Privat donation"
-    }
-  ],
-  "scandals": [
-    {
-      "id": 1201,
-      "title": "Efterretningssag og 'FE-sagen'",
-      "year": "2019-2021",
-      "severity": 4,
-      "shortDesc": "Anklaget for at have brugt efterretninger politisk.",
-      "longDesc": "Claus Hjort Frederiksen blev kritiseret for sin rolle i en sag om brug af efterretninger fra Forsvarets Efterretningstjeneste (FE) i politisk øjemed. Sagen førte til stor debat om efterretningstjenesternes rolle.",
-      "outcome": "Intern kritik, men ingen formel sanktion. Sagen er stadig genstand for debat.",
-      "justiceAnalysis": "Brug af efterretninger i den politiske debat bør altid være underlagt streng kontrol for at undgå manipulation. En klarere adskillelse mellem efterretning og politik ville have været ønskelig.",
-      "mediaLinks": [
-        {"name": "Berlingske", "url": "https://berlingske.dk", "title": "Hjort kritiseret for FE-sag", "date": "2020"},
-        {"name": "DR", "url": "https://dr.dk", "title": "Efterretningssag ryster Venstre", "date": "2020"}
-      ]
-    }
-  ]
+  "bio": "Tidligere finansminister (2010-2011) og forsvarsminister (2015-2019) for Venstre. Kendt for sin erfaring og stærke position i partiet."
 }

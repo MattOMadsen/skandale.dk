@@ -1,0 +1,90 @@
+{
+  "id": 1,
+  "scandals": [
+    {
+      "id": 101,
+      "title": "Minkskandalen",
+      "year": "2020-2022",
+      "severity": 5,
+      "shortDesc": "Ulovlig ordre om aflivning af alle mink i Danmark uden lovhjemmel.",
+      "longDesc": "Den 4. november 2020 meddelte statsminister Mette Frederiksen på et pressemøde, at alle mink i Danmark skulle aflives på grund af risiko for mutation af COVID-19. Beslutningen blev truffet uden tilstrækkelig lovhjemmel, hvilket førte til en massiv skandale. Fødevareminister Mogens Jensen trådte tilbage. Folketinget gav både Frederiksen og Jensen en næse. En granskningskommission undersøgte forløbet. Sagen involverede også kontrovers om slettede SMS-beskeder fra statsministeren og hendes rådgivere, som ikke kunne genskabes. Sagen er blevet kaldt 'Danmarkshistoriens største politiske skandale' af flere partier.",
+      "outcome": "Næse fra Folketinget, ministerfald, erstatningssager til minkavlere (over 20 mia. kr.), politisk pres for rigsretssag (nedstemt).",
+      "justiceAnalysis": "Minkkommissionen fastslog, at beslutningen var \"klart ulovlig\" og hendes udtalelser \"groft vildledende\". I stedet for kun en politisk næse fra Folketinget burde der have været en uafhængig advokatundersøgelse med henblik på rigsretssag jf. Ministeransvarlighedsloven § 5. Rigsret er muligt når en minister groft tilsidesætter sine pligter (sml. Støjberg-dommen). Forældelsesfristen på 5 år betyder, at muligheden udløber i efteråret 2025 – et demokratisk problem ifølge flere eksperter og partier.",
+      "mediaLinks": [
+        {"name": "Berlingske", "url": "https://www.berlingske.dk/politik/nye-detaljer-i-minkskandalen-oeger-presset-paa-mette-frederiksen-det-illustrerer-en-overraskende-mangel-paa-respekt-for-loven", "title": "Nye detaljer i minkskandalen øger presset på Mette Frederiksen", "date": "20. nov 2020"},
+        {"name": "Berlingske", "url": "https://www.berlingske.dk/politik/minkkommissionen-mette-frederiksen-vildledte-groft", "title": "Minkkommissionen: Mette Frederiksen vildledte groft", "date": "30. jun 2022"},
+        {"name": "TV 2", "url": "https://nyheder.tv2.dk/politik/2025-07-10-mette-frederiksen-graed-og-sagde-undskyld-nu-er-hun-et-minut-fra-at-vaere-i-sikkerhed", "title": "Mette Frederiksen græd og sagde undskyld – nu er hun et minut fra at være i sikkerhed", "date": "10. jul 2025"},
+        {"name": "Berlingske", "url": "https://www.berlingske.dk/ledere/berlingske-mener-den-aabenlyse-manipulation-i-sms-sagen-er-ikke-et-demokrati-vaerdigt", "title": "Den åbenlyse manipulation i sms-sagen er ikke et demokrati værdigt", "date": "6. okt 2025"},
+        {"name": "TV 2", "url": "https://nyheder.tv2.dk/politik/2025-10-08-partier-vil-fjerne-fredning-af-mette-frederiksen-efter-tvivl-om-mink-smser", "title": "Partier vil fjerne 'fredning' af Mette Frederiksen efter tvivl om mink-sms'er", "date": "8. okt 2025"},
+        {"name": "TV Midtvest", "url": "https://www.tvmidtvest.dk/minksagen/sidste-chance-for-rigsretssag-mod-mette-frederiksen-minkavlere-foler-sig-svigtet-94050", "title": "Sidste chance for rigsretssag mod Mette Frederiksen – minkavlere føler sig svigtet", "date": "17. aug 2025"},
+        {"name": "Information", "url": "https://www.information.dk/indland/2025/10/minkspoegelset-hjemsoeger-gangene-paa-christiansborg", "title": "Minkspøgelset hjemsøger gangene på Christiansborg", "date": "9. okt 2025"}
+      ]
+    },
+    {
+      "id": 102,
+      "title": "Slettede SMS'er i mink-undersøgelsen",
+      "year": "2024-2025",
+      "severity": 4,
+      "shortDesc": "Statsministerens og rådgiveres SMS-beskeder fra de kritiske dage i minkskandalen blev slettet og kan ikke genskabes.",
+      "longDesc": "I forbindelse med den fortsatte granskning af minkskandalen kom det frem, at store mængder SMS-beskeder fra Mette Frederiksen og hendes nærmeste rådgivere (inkl. departementschef Barbara Bertelsen) var blevet slettet. Det skete kort efter valget i 2022. Kritikere mener, det var et bevidst forsøg på at skjule information om beslutningsprocessen. Sagen har rejst spørgsmål om magtmisbrug og manglende respekt for undersøgelsesprocesser.",
+      "outcome": "Øget politisk pres, krav om yderligere undersøgelser, men ingen nye sanktioner endnu. Forældelsesfrist nærmer sig.",
+      "justiceAnalysis": "Sagen rejser alvorlige spørgsmål om magtmisbrug og respekt for undersøgelsesprocesser. En uafhængig undersøgelse burde have været iværksat hurtigere for at genoprette tilliden til systemet. Den manglende gennemsigtighed skader demokratiet.",
+      "mediaLinks": [
+        {"name": "Berlingske", "url": "https://www.berlingske.dk/kommentatorer/derfor-er-bts-og-berlingskes-historie-om-mink-smserne-saa-vigtig", "title": "Derfor er B.T.s og Berlingskes historie om mink-sms'erne så vigtig", "date": "9. okt 2025"},
+        {"name": "Berlingske", "url": "https://www.berlingske.dk/ledere/berlingske-mener-den-aabenlyse-manipulation-i-sms-sagen-er-ikke-et-demokrati-vaerdigt", "title": "Den åbenlyse manipulation i sms-sagen er ikke et demokrati værdigt", "date": "6. okt 2025"},
+        {"name": "TV 2", "url": "https://nyheder.tv2.dk/politik/2025-10-08-partier-vil-fjerne-fredning-af-mette-frederiksen-efter-tvivl-om-mink-smser", "title": "Partier vil fjerne 'fredning' af Mette Frederiksen efter tvivl om mink-sms'er", "date": "8. okt 2025"},
+        {"name": "Information", "url": "https://www.information.dk/indland/2025/10/minkspoegelset-hjemsoeger-gangene-paa-christiansborg", "title": "Minkspøgelset hjemsøger gangene på Christiansborg", "date": "9. okt 2025"}
+      ]
+    }
+  ],
+  "economicSupport": [
+    {
+      "name": "Novo Nordisk",
+      "amount": "245.000 kr",
+      "type": "Partistøtte"
+    },
+    {
+      "name": "DI - Dansk Industri",
+      "amount": "180.000 kr",
+      "type": "Partistøtte"
+    },
+    {
+      "name": "A.P. Møller-Mærsk",
+      "amount": "95.000 kr",
+      "type": "Privat donation"
+    },
+    {
+      "name": "Dansk Metal",
+      "amount": "120.000 kr",
+      "type": "Fagforeningsstøtte"
+    }
+  ],
+  "affiliations": [
+    {
+      "name": "Young Global Leaders",
+      "organization": "World Economic Forum (WEF)",
+      "year": "2009",
+      "source": "WEF officielle liste"
+    },
+    {
+      "name": "Global Shapers Hub",
+      "organization": "World Economic Forum (WEF)",
+      "year": "2011-2013",
+      "source": "WEF"
+    }
+  ],
+  "brokenPromises": [
+    {
+      "title": "Vi lover at beskytte velfærden og ikke skære i kerneydelserne",
+      "year": "2019",
+      "whatHappened": "I 2022–2024 gennemførte regeringen store besparelser på plejehjem, hjemmehjælp og sygehuspersonale i flere kommuner.",
+      "source": "DR, Politiken og KL’s økonomiske redegørelser 2023–2024"
+    },
+    {
+      "title": "Vi lover at sænke skatten for almindelige lønmodtagere",
+      "year": "2019",
+      "whatHappened": "Skattetrykket steg i flere år. Særligt mellemindkomster oplevede ingen reel skattelettelse, mens afgifter på energi og transport steg markant.",
+      "source": "Skatteministeriets tal og CEPOS 2023"
+    }
+  ]
+}
