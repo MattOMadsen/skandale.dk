@@ -42,6 +42,7 @@ function showPoliticianModal(idOrPolitician) {
     if (typeof loadScandals === 'function') loadScandals(politician);
     if (typeof addEconomicSupportSection === 'function') addEconomicSupportSection(politician);
     if (typeof initShareButton === 'function') initShareButton(politician);
+    if (typeof addBrokenPromisesSection === 'function') addBrokenPromisesSection(politician);
     
     // Nye sektioner
     if (typeof loadVoting === 'function') loadVoting(politician);
