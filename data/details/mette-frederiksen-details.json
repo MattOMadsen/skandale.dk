@@ -7,12 +7,12 @@
       "year": "2020-2022",
       "severity": 5,
       "shortDesc": "Ulovlig ordre om aflivning af alle mink i Danmark uden lovhjemmel.",
-      "longDesc": "Den 4. november 2020 meddelte statsminister Mette Frederiksen på et pressemøde, at alle mink i Danmark skulle aflives på grund af risiko for mutation af COVID-19. Beslutningen blev truffet uden tilstrækkelig lovhjemmel. Sagen involverede også slettede SMS-beskeder fra statsministeren og hendes rådgivere.",
-      "outcome": "Næse fra Folketinget, ministerfald, erstatningssager (over 20 mia. kr). Sagen er stadig aktiv i 2025-2026 med nye afsløringer om slettede SMS'er.",
-      "justiceAnalysis": "Minkkommissionen fastslog, at beslutningen var \"klart ulovlig\" og hendes udtalelser \"groft vildledende\". Forældelsesfristen nærmer sig, og flere partier kræver stadig rigsretssag.",
+      "longDesc": "Den 4. november 2020 meddelte statsminister Mette Frederiksen på et pressemøde, at alle mink i Danmark skulle aflives på grund af risiko for mutation af COVID-19. Beslutningen blev truffet uden tilstrækkelig lovhjemmel. Fødevareminister Mogens Jensen trådte tilbage. Folketinget gav både Frederiksen og Jensen en næse. En granskningskommission undersøgte forløbet. Sagen involverede også kontrovers om slettede SMS-beskeder fra statsministeren og hendes rådgivere, som ikke kunne genskabes. Sagen er blevet kaldt 'Danmarkshistoriens største politiske skandale' af flere partier.",
+      "outcome": "Næse fra Folketinget, ministerfald, erstatningssager til minkavlere (over 20 mia. kr.), politisk pres for rigsretssag (nedstemt). Sagen er stadig aktiv i 2025-2026.",
+      "justiceAnalysis": "Minkkommissionen fastslog, at beslutningen var \"klart ulovlig\" og hendes udtalelser \"groft vildledende\". I stedet for kun en politisk næse fra Folketinget burde der have været en uafhængig advokatundersøgelse med henblik på rigsretssag jf. Ministeransvarlighedsloven § 5. Forældelsesfristen på 5 år betyder, at muligheden udløber i efteråret 2025 – et demokratisk problem ifølge flere eksperter og partier.",
       "mediaLinks": [
-        {"name": "Berlingske", "url": "https://www.berlingske.dk/politik/nye-detaljer-i-minkskandalen-oeger-presset-paa-mette-frederiksen", "title": "Nye detaljer i minkskandalen øger presset på Mette Frederiksen", "date": "20. nov 2020"},
-        {"name": "DR", "url": "https://www.dr.dk/nyheder/politik/mette-frederiksen-minksagen-var-en-politisk-skandale", "title": "Mette Frederiksen: Minksagen var en politisk skandale", "date": "30. aug 2022"},
+        {"name": "Berlingske", "url": "https://www.berlingske.dk/politik/nye-detaljer-i-minkskandalen-oeger-presset-paa-mette-frederiksen-det-illustrerer-en-overraskende-mangel-paa-respekt-for-loven", "title": "Nye detaljer i minkskandalen øger presset på Mette Frederiksen", "date": "20. nov 2020"},
+        {"name": "Berlingske", "url": "https://www.berlingske.dk/politik/minkkommissionen-mette-frederiksen-vildledte-groft", "title": "Minkkommissionen: Mette Frederiksen vildledte groft", "date": "30. jun 2022"},
         {"name": "Euractiv", "url": "https://www.euractiv.com/news/danish-pm-frederiksen-pulled-back-into-mink-scandal/", "title": "Danish PM Frederiksen pulled back into mink scandal", "date": "22. okt 2025"}
       ]
     },
@@ -22,9 +22,9 @@
       "year": "2022-2026",
       "severity": 5,
       "shortDesc": "Statsministerens og rådgiveres SMS-beskeder fra de kritiske dage blev slettet og kan ikke genskabes.",
-      "longDesc": "Store mængder SMS-beskeder fra Mette Frederiksen og hendes nærmeste rådgivere (inkl. Barbara Bertelsen) blev slettet kort efter valget i 2022. Sagen har fået fornyet opmærksomhed i 2025-2026 med nye dokumenter og krav om yderligere undersøgelser.",
-      "outcome": "Øget politisk pres og krav om rigsretssag. Sagen er stadig aktiv i Folketinget i 2026.",
-      "justiceAnalysis": "Sagen rejser alvorlige spørgsmål om magtmisbrug og respekt for undersøgelsesprocesser. Flere eksperter mener, det grænser til bevisødelæggelse.",
+      "longDesc": "I forbindelse med den fortsatte granskning af minkskandalen kom det frem, at store mængder SMS-beskeder fra Mette Frederiksen og hendes nærmeste rådgivere (inkl. departementschef Barbara Bertelsen) var blevet slettet. Det skete kort efter valget i 2022. Kritikere mener, det var et bevidst forsøg på at skjule information om beslutningsprocessen. Sagen har rejst spørgsmål om magtmisbrug og manglende respekt for undersøgelsesprocesser. I 2025-2026 er sagen blevet genåbnet med nye dokumenter og krav om yderligere undersøgelser.",
+      "outcome": "Øget politisk pres, krav om yderligere undersøgelser og rigsretssag. Sagen er stadig aktiv i Folketinget i 2026.",
+      "justiceAnalysis": "Sagen rejser alvorlige spørgsmål om magtmisbrug og respekt for undersøgelsesprocesser. En uafhængig undersøgelse burde have været iværksat hurtigere. Den manglende gennemsigtighed skader demokratiet og har ført til mistanke om bevisødelæggelse.",
       "mediaLinks": [
         {"name": "Berlingske", "url": "https://www.berlingske.dk/ledere/berlingske-mener-den-aabenlyse-manipulation-i-sms-sagen-er-ikke-et-demokrati-vaerdigt", "title": "Den åbenlyse manipulation i sms-sagen er ikke et demokrati værdigt", "date": "6. okt 2025"},
         {"name": "Euractiv", "url": "https://www.euractiv.com/news/danish-pm-frederiksen-pulled-back-into-mink-scandal/", "title": "Danish PM pulled back into mink scandal", "date": "22. okt 2025"}
@@ -34,13 +34,39 @@
       "id": 103,
       "title": "Grønlandsk præventionsskandale (Spiral-sagen)",
       "year": "2025",
-      "severity": 3,
+      "severity": 4,
       "shortDesc": "Mette Frederiksen undskyldte officielt for tvangssterilisation og præventionsskandale i Grønland i 1960'erne og 70'erne.",
-      "longDesc": "I september 2025 undskyldte Mette Frederiksen officielt over for grønlandske kvinder, der blev tvunget til at få spiral indsat uden samtykke som led i en dansk fødselskontrolkampagne. Sagen involverede tusindvis af kvinder, herunder piger helt ned til 12-årsalderen.",
-      "outcome": "Officiel undskyldning og erstatningskrav fra ofre. Sagen har genåbnet debatten om Danmarks koloniale fortid.",
-      "justiceAnalysis": "Undskyldningen var vigtig, men mange kritikere mener, at Danmark stadig skylder ofrene økonomisk kompensation og en mere grundig undersøgelse af ansvaret.",
+      "longDesc": "I september 2025 undskyldte Mette Frederiksen officielt over for grønlandske kvinder, der blev tvunget til at få spiral indsat uden samtykke som led i en dansk fødselskontrolkampagne i 1960'erne og 70'erne. En officiel undersøgelse konkluderede, at mindst 4.000 kvinder fik indsat spiral, svarende til ca. halvdelen af de fødedygtige grønlandske kvinder på det tidspunkt. I mere end 300 tilfælde var det piger helt ned til 12-årsalderen.",
+      "outcome": "Officiel undskyldning og erstatningskrav fra ofre. Sagen har genåbnet debatten om Danmarks koloniale fortid og ansvar over for Grønland.",
+      "justiceAnalysis": "Undskyldningen var vigtig, men mange kritikere mener, at Danmark stadig skylder ofrene økonomisk kompensation og en mere grundig undersøgelse af ansvaret på politisk niveau.",
       "mediaLinks": [
         {"name": "BBC", "url": "https://www.bbc.com/news/articles/c80gxd4x0z5o", "title": "Greenland contraception scandal victims hear Danish PM's apology", "date": "24. sep 2025"}
+      ]
+    },
+    {
+      "id": 104,
+      "title": "Nordic Waste-skandalen og ansvar",
+      "year": "2025-2026",
+      "severity": 3,
+      "shortDesc": "Mette Frederiksen talte om ansvar i forbindelse med Nordic Waste-skandalen, mens jord fra minkmassegrave skred mod Alling Å.",
+      "longDesc": "I forbindelse med Nordic Waste-skandalen og risikoen for miljøforurening fra minkmassegrave stod Mette Frederiksen frem og talte om ansvar. Kritikere mente, at det var upassende, at hun talte om ansvar, mens hendes egen regering havde ansvaret for de minkgrave, der nu truede miljøet.",
+      "outcome": "Øget kritik af regeringens håndtering af miljørisici og minkgrave.",
+      "justiceAnalysis": "Sagen viser en dobbeltmoral, når en statsminister taler om ansvar i en sag, hvor hendes egen regering har et direkte medansvar.",
+      "mediaLinks": [
+        {"name": "Effektivt Landbrug", "url": "https://effektivtlandbrug.landbrugnet.dk/artikler/leder/97303/lige-hvad-der-manglede-mette-f-der-talte-om-ansvar-i-nordic-waste-skandalen", "title": "Mette F. der talte om ansvar i Nordic Waste-skandalen", "date": "2025"}
+      ]
+    },
+    {
+      "id": 105,
+      "title": "Kritik af ledelsesstil og 'hybridkrig mod egen befolkning'",
+      "year": "2026",
+      "severity": 3,
+      "shortDesc": "Kritik af Mette Frederiksen for at føre 'hybridkrig mod egen befolkning' gennem alarmisme og kontrol.",
+      "longDesc": "I 2026 blev Mette Frederiksen kritiseret i flere medier for sin ledelsesstil og for at bruge alarmisme og kontrolmekanismer over for befolkningen. Kritikere mente, at hun brugte trusler om Rusland og andre ydre fjender til at skabe frygt og fastholde magt.",
+      "outcome": "Øget debat om hendes ledelsesstil og demokratisk legitimitet.",
+      "justiceAnalysis": "Sagen rejser spørgsmål om, hvor grænsen går mellem nødvendig sikkerhedspolitik og politisk manipulation af befolkningen.",
+      "mediaLinks": [
+        {"name": "Politiken", "url": "https://politiken.dk/debat/klummer/art10820237/Mette-Frederiksen-terroriserer-sin-egen-befolkning", "title": "Mette Frederiksen terroriserer sin egen befolkning", "date": "2026"}
       ]
     }
   ],
@@ -96,14 +122,24 @@
     {
       "title": "Vi lover at sænke skatten for almindelige lønmodtagere",
       "year": "2019",
-      "whatHappened": "Skattetrykket steg i flere år. Særligt mellemindkomster oplevede ingen reel skattelettelse.",
+      "whatHappened": "Skattetrykket steg i flere år. Særligt mellemindkomster oplevede ingen reel skattelettelse, mens afgifter på energi og transport steg markant.",
       "source": "Skatteministeriets tal og CEPOS 2023-2025"
     },
     {
       "title": "Vi lover at gøre Danmark grønnere og mere klimavenligt",
       "year": "2019",
-      "whatHappened": "Danmark har stadig svært ved at nå 2030-målene, og landbruget er fortsat en stor udfordring.",
+      "whatHappened": "Danmark har stadig svært ved at nå 2030-målene, og landbruget er fortsat en stor udfordring for den grønne omstilling.",
       "source": "Klimarådet og CONCITO 2024-2025"
+    },
+    {
+      "title": "Vi lover at skabe flere arbejdspladser og stoppe arbejdsløsheden",
+      "year": "2019",
+      "whatHappened": "Selvom arbejdsløsheden generelt er lav, er der stadig store udfordringer med langtidsledighed blandt unge og ikke-vestlige indvandrere.",
+      "source": "Danmarks Statistik og Beskæftigelsesministeriet 2023-2025"
     }
-  ]
+  ],
+  "beforePolitics": {
+    "title": "Før politik / Ungdom",
+    "content": "Mette Frederiksen blev født i 1977 og begyndte sin politiske karriere meget tidligt. Hun var aktiv i Danmarks Socialdemokratiske Ungdom (DSU) som teenager og blev valgt til Folketinget allerede i 2001 som 24-årig. Hendes første ministerpost var som Beskæftigelsesminister i 2011-2014 under Helle Thorning-Schmidts regering. Der er ingen større skandaler fra hendes tidlige karriere, men hun har altid været kendt for en hård og pragmatisk ledelsesstil."
+  }
 }
