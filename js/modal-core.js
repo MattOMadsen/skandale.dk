@@ -1,4 +1,4 @@
-// js/modal-core.js - Komplet version med collapsible karriereoversigt
+// js/modal-core.js - Komplet version med begge collapsible sektioner
 
 let currentPolitician = null;
 
@@ -68,6 +68,27 @@ function showPoliticianModal(idOrPolitician) {
         `;
         
         bioDiv.insertAdjacentHTML('afterend', timelineHTML);
+    }
+
+    // ===================== FØR POLITIK / UNGDOM (collapsible) =====================
+    if (politician.beforePolitics) {
+        const bioDiv = document.getElementById('modalBio');
+        
+        const beforeHTML = `
+            <div class="mt-4 pt-4 border-t career-timeline-wrapper">
+                <button onclick="toggleCareerTimeline(this)" 
+                        class="flex items-center justify-between w-full text-left font-semibold text-[#C8102E] hover:text-[#A00E26] transition-colors py-1">
+                    <span>${politician.beforePolitics.title}</span>
+                    <i class="fa-solid fa-chevron-down transition-transform text-lg"></i>
+                </button>
+                
+                <div class="career-timeline hidden mt-3 text-sm text-slate-600 leading-relaxed border-l-4 border-[#C8102E]/30 pl-4">
+                    ${politician.beforePolitics.content}
+                </div>
+            </div>
+        `;
+        
+        bioDiv.insertAdjacentHTML('afterend', beforeHTML);
     }
 }
 
