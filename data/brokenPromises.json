@@ -1,0 +1,26 @@
+[
+  {
+    "id": 201,
+    "politicianId": 1,
+    "title": "Vi lover at beskytte velfærden og ikke skære i kerneydelserne",
+    "year": "2019",
+    "whatHappened": "I 2022–2024 gennemførte regeringen store besparelser på plejehjem, hjemmehjælp og sygehuspersonale i flere kommuner.",
+    "source": "DR, Politiken og KL’s økonomiske redegørelser 2023–2024"
+  },
+  {
+    "id": 202,
+    "politicianId": 1,
+    "title": "Vi lover at sænke skatten for almindelige lønmodtagere",
+    "year": "2019",
+    "whatHappened": "Skattetrykket steg i flere år. Særligt mellemindkomster oplevede ingen reel skattelettelse, mens afgifter på energi og transport steg markant.",
+    "source": "Skatteministeriets tal og CEPOS 2023"
+  },
+  {
+    "id": 501,
+    "politicianId": 5,
+    "title": "Vi lover at sænke skatten og give danskerne flere penge mellem hænderne",
+    "year": "2015",
+    "whatHappened": "Skattetrykket steg under hans regering, og flere afgifter blev hævet.",
+    "source": "Skatteministeriets tal 2015-2019"
+  }
+]
