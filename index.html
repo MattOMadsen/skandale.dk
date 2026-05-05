@@ -24,7 +24,6 @@
                         </div>
                     </div>
                     
-                    <!-- Version badge -->
                     <div class="flex items-center bg-emerald-100 text-emerald-700 text-sm font-bold px-4 py-1.5 rounded-2xl border border-emerald-200">
                         <i class="fa-solid fa-check-double mr-2"></i>
                         <span id="navbar-version" class="font-extrabold tracking-wider"></span>
@@ -37,7 +36,6 @@
                         <span>Tidslinje</span>
                     </button>
                     
-                    <!-- NY PARTI-KNAP -->
                     <button onclick="showPartyOverview()" class="flex items-center gap-x-2 px-5 py-2.5 rounded-2xl text-sm font-semibold border border-slate-300 hover:bg-slate-100 transition-colors">
                         <i class="fa-solid fa-users mr-2"></i>
                         <span>Partier</span>
@@ -92,7 +90,6 @@
     <!-- Politician Modal -->
     <div id="politicianModal" onclick="if (event.target.id === 'politicianModal') closeModal()" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
         <div onclick="event.stopImmediatePropagation()" class="bg-white rounded-3xl max-w-3xl w-full max-h-[94vh] overflow-hidden shadow-2xl modal">
-            
             <div id="modalHeader" class="px-8 pt-8 pb-6 flex items-start justify-between border-b">
                 <div class="flex items-center gap-x-5">
                     <div id="modalAvatar" class="w-20 h-20 rounded-3xl flex-shrink-0 flex items-center justify-center text-white text-4xl font-bold shadow-inner"></div>
@@ -172,7 +169,7 @@
         </div>
     </div>
 
-    <!-- Scripts (vigtig rækkefølge) -->
+    <!-- Scripts -->
     <script src="js/version.js"></script>
     <script src="js/modal-core.js"></script>
     <script src="js/modal-scandal.js"></script>
@@ -187,12 +184,12 @@
     <script src="js/modal-share.js"></script>
     <script src="js/modal-party.js"></script>
 
-    <!-- Robust version sætning -->
+    <!-- Kombineret onload (vigtig!) -->
     <script>
         function setVersion() {
             if (typeof APP_VERSION !== 'undefined') {
-                const versionElements = ['app-version', 'app-version-hero', 'app-version-footer'];
-                versionElements.forEach(id => {
+                const ids = ['app-version', 'app-version-hero', 'app-version-footer'];
+                ids.forEach(id => {
                     const el = document.getElementById(id);
                     if (el) el.textContent = APP_VERSION;
                 });
@@ -202,13 +199,16 @@
             }
         }
         
-        // Kør når alt er loadet
         window.onload = function() {
+            // Kald begge funktioner
+            if (typeof initializeEverything === 'function') {
+                initializeEverything();
+            }
             setVersion();
+            
+            // Ekstra sikkerhed
+            setTimeout(setVersion, 500);
         };
-        
-        // Ekstra sikkerhed
-        setTimeout(setVersion, 300);
     </script>
 </body>
 </html>
