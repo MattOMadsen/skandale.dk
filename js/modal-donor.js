@@ -3,11 +3,44 @@
 function addEconomicSupportSection(politician) {
   let supportHTML = '';
   if (politician.economicSupport && politician.economicSupport.length > 0) {
+    const donations = politician.economicSupport;
+    const initialCount = 5;
+    const showMoreCount = 10;
+
+    let tableRows = '';
+    donations.forEach((s, index) => {
+      const hiddenClass = index >= initialCount ? 'hidden donation-row' : '';
+      tableRows += `
+        <tr class="border-t border-slate-200 hover:bg-slate-100 cursor-pointer ${hiddenClass}" onclick="showDonorModal('${s.name}')">
+          <td class="px-4 py-3 text-[#C8102E] hover:underline">${s.name}</td>
+          <td class="px-4 py-3 text-right font-medium">${s.amount}</td>
+          <td class="px-4 py-3 text-xs text-slate-500">${s.type}</td>
+        </tr>
+      `;
+    });
+
+    let showMoreHTML = '';
+    if (donations.length > initialCount) {
+      showMoreHTML = `
+        <div class="px-4 py-3 bg-slate-100 border-t flex justify-center gap-x-3" id="show-more-container-${politician.id}">
+          <button onclick="showMoreDonations(${politician.id}, ${initialCount}, ${showMoreCount})" 
+                  class="px-4 py-1.5 text-sm font-medium text-[#C8102E] hover:bg-white rounded-xl border border-[#C8102E]/30 transition-colors">
+            Vis ${Math.min(showMoreCount, donations.length - initialCount)} flere
+          </button>
+          <button onclick="hideAllDonations(${politician.id})" 
+                  class="px-4 py-1.5 text-sm font-medium text-slate-500 hover:bg-white rounded-xl border border-slate-300 transition-colors hidden" id="hide-all-btn-${politician.id}">
+            Skjul alle
+          </button>
+        </div>
+      `;
+    }
+
     supportHTML = `
       <div class="mt-10 pt-8 border-t">
         <div class="flex items-center gap-x-2 mb-4">
           <i class="fa-solid fa-handshake text-[#C8102E]"></i>
           <span class="font-bold text-lg">Økonomisk støtte (2023–2025)</span>
+          <span class="text-xs text-slate-500 ml-2">(${donations.length} donorer)</span>
         </div>
         <div class="bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden">
           <table class="w-full text-sm">
@@ -18,16 +51,11 @@ function addEconomicSupportSection(politician) {
                 <th class="text-left px-4 py-3 font-semibold">Type</th>
               </tr>
             </thead>
-            <tbody>
-              ${politician.economicSupport.map(s => `
-                <tr class="border-t border-slate-200 hover:bg-slate-100 cursor-pointer" onclick="showDonorModal('${s.name}')">
-                  <td class="px-4 py-3 text-[#C8102E] hover:underline">${s.name}</td>
-                  <td class="px-4 py-3 text-right font-medium">${s.amount}</td>
-                  <td class="px-4 py-3 text-xs text-slate-500">${s.type}</td>
-                </tr>
-              `).join('')}
+            <tbody id="donation-tbody-${politician.id}">
+              ${tableRows}
             </tbody>
           </table>
+          ${showMoreHTML}
         </div>
         <p class="text-[10px] text-slate-400 mt-2">Klik på et navn for at se alle de har støttet</p>
       </div>
@@ -73,6 +101,60 @@ function addEconomicSupportSection(politician) {
     supportDiv.className = 'economic-support';
     supportDiv.innerHTML = supportHTML + affiliationsHTML;
     modalContent.appendChild(supportDiv);
+  }
+}
+
+// Hjælpefunktioner til fold ud af donorer
+function showMoreDonations(politicianId, startIndex, count) {
+  const tbody = document.getElementById(`donation-tbody-${politicianId}`);
+  if (!tbody) return;
+
+  const rows = tbody.querySelectorAll('.donation-row.hidden');
+  let shown = 0;
+
+  rows.forEach((row, index) => {
+    if (shown < count) {
+      row.classList.remove('hidden');
+      shown++;
+    }
+  });
+
+  // Opdater knapper
+  const container = document.getElementById(`show-more-container-${politicianId}`);
+  if (container) {
+    const remaining = tbody.querySelectorAll('.donation-row.hidden').length;
+    if (remaining === 0) {
+      container.innerHTML = `
+        <button onclick="hideAllDonations(${politicianId})" 
+                class="px-4 py-1.5 text-sm font-medium text-slate-500 hover:bg-white rounded-xl border border-slate-300 transition-colors">
+          Skjul alle
+        </button>
+      `;
+    } else {
+      container.querySelector('button').innerHTML = `Vis ${Math.min(count, remaining)} flere`;
+    }
+  }
+}
+
+function hideAllDonations(politicianId) {
+  const tbody = document.getElementById(`donation-tbody-${politicianId}`);
+  if (!tbody) return;
+
+  const rows = tbody.querySelectorAll('.donation-row');
+  rows.forEach((row, index) => {
+    if (index >= 5) row.classList.add('hidden');
+  });
+
+  // Gendan knapper
+  const container = document.getElementById(`show-more-container-${politicianId}`);
+  if (container) {
+    const total = tbody.querySelectorAll('tr').length;
+    container.innerHTML = `
+      <button onclick="showMoreDonations(${politicianId}, 5, 10)" 
+              class="px-4 py-1.5 text-sm font-medium text-[#C8102E] hover:bg-white rounded-xl border border-[#C8102E]/30 transition-colors">
+        Vis ${Math.min(10, total - 5)} flere
+      </button>
+    `;
   }
 }
 
