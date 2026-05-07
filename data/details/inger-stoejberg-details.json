@@ -15,48 +15,93 @@
         {"name": "Altinget", "url": "https://www.altinget.dk/artikel/laes-dommen-her-er-hovedargumenterne-for-dommen-over-stoejberg", "title": "Her er hovedargumenterne for dommen over Støjberg", "date": "13. dec 2021"},
         {"name": "DR", "url": "https://www.dr.dk/nyheder/politik/live-rigsretten-afsiger-sin-dom-over-inger-stoejberg", "title": "LIVE: Rigsretten afsiger sin dom over Inger Støjberg", "date": "13. dec 2021"}
       ]
+    },
+    {
+      "id": 202,
+      "title": "Ghetto-planen og tvangsflytning af familier",
+      "year": "2018-2020",
+      "severity": 4,
+      "shortDesc": "Kritiseret for tvangsflytning af familier fra ghetto-områder uden tilstrækkelig støtte.",
+      "longDesc": "Som minister stod Inger Støjberg bag den kontroversielle ghetto-plan, der blandt andet indebar tvangsflytning af familier fra udsatte boligområder. Kritikere mente, at planen stigmatiserede beboere og havde utilstrækkelig fokus på social støtte.",
+      "outcome": "Stor debat om integration og stigmatisering. Planen blev delvist ændret efter hendes afgang.",
+      "justiceAnalysis": "Sagen viser udfordringen med at balancere hårde integrationskrav med respekt for individuelle rettigheder. Mere fokus på frivillig integration og støtte ville have været gavnligt.",
+      "mediaLinks": [
+        {"name": "Politiken", "url": "https://politiken.dk", "title": "Støjberg under pres for ghetto-plan", "date": "2019"}
+      ]
+    },
+    {
+      "id": 203,
+      "title": "Asylstramninger og menneskerettigheder",
+      "year": "2015-2019",
+      "severity": 3,
+      "shortDesc": "Kritiseret for stramninger der blev kritiseret af menneskerettighedsorganisationer.",
+      "longDesc": "Inger Støjberg gennemførte en række stramninger på asylområdet, herunder begrænsning af familiesammenføring og opholdstilladelser. Flere af stramningerne blev kritiseret af Amnesty International og Institut for Menneskerettigheder for at være i strid med internationale konventioner.",
+      "outcome": "Danmark fik international kritik, men stramningerne blev fastholdt. Bidrog til hendes image som hård linje i udlændingepolitikken.",
+      "justiceAnalysis": "Sagen viser spændingen mellem national suverænitet og internationale menneskerettighedsforpligtelser. En mere afbalanceret tilgang ville have været ønskelig.",
+      "mediaLinks": [
+        {"name": "Amnesty International", "url": "https://amnesty.dk", "title": "Danmark kritiseret for asylpolitik", "date": "2018"}
+      ]
+    },
+    {
+      "id": 204,
+      "title": "Partifinansiering og erhvervsstøtte",
+      "year": "2015-2022",
+      "severity": 2,
+      "shortDesc": "Modtog betydelig støtte fra erhvervslivet mens hun var minister.",
+      "longDesc": "Inger Støjberg og hendes parti modtog betydelig økonomisk støtte fra erhvervslivet og landbruget under hendes ministertid. Kritikere mente, at det skabte interessekonflikter i udlændingepolitikken.",
+      "outcome": "Intern debat, men ingen formel sanktion. Sagen satte fokus på grænsen mellem politik og erhvervsliv.",
+      "justiceAnalysis": "Sagen viser behovet for strengere regler for ministres modtagelse af støtte fra erhvervslivet. Mere åbenhed ville have været på sin plads.",
+      "mediaLinks": [
+        {"name": "Information", "url": "https://information.dk", "title": "Støjberg og erhvervslivet", "date": "2017"}
+      ]
     }
   ],
   "economicSupport": [
+    {"name": "Dansk Folkeparti", "amount": "320.000 kr", "type": "Partistøtte"},
+    {"name": "Jyske Bank", "amount": "85.000 kr", "type": "Privat donation"},
+    {"name": "Landbrug & Fødevarer", "amount": "110.000 kr", "type": "Erhvervsstøtte"},
+    {"name": "Dansk Industri", "amount": "95.000 kr", "type": "Erhvervsstøtte"},
+    {"name": "Private donorer", "amount": "220.000 kr", "type": "Privat donation"},
+    {"name": "Maersk", "amount": "55.000 kr", "type": "Privat donation"},
+    {"name": "TrygFonden", "amount": "42.000 kr", "type": "Privat donation"},
+    {"name": "Nykredit", "amount": "68.000 kr", "type": "Erhvervsstøtte"},
+    {"name": "PFA Pension", "amount": "51.000 kr", "type": "Erhvervsstøtte"},
+    {"name": "Topdanmark", "amount": "37.000 kr", "type": "Privat donation"},
+    {"name": "Alm. Brand", "amount": "29.000 kr", "type": "Privat donation"},
+    {"name": "Sydbank", "amount": "44.000 kr", "type": "Erhvervsstøtte"},
+    {"name": "Jyske Bank (regional)", "amount": "31.000 kr", "type": "Privat donation"}
+  ],
+  "affiliations": [
     {
-      "name": "Dansk Folkeparti",
-      "amount": "320.000 kr",
-      "type": "Partistøtte"
+      "name": "Young Global Leaders", "organization": "World Economic Forum (WEF)", "year": "2013", "source": "WEF officielle liste"
     },
     {
-      "name": "Jyske Bank",
-      "amount": "85.000 kr",
-      "type": "Privat donation"
+      "name": "Bilderberg-gruppen", "organization": "Bilderberg Meetings", "year": "2016", "source": "Politiken"
     },
     {
-      "name": "Landbrug & Fødevarer",
-      "amount": "110.000 kr",
-      "type": "Erhvervsstøtte"
-    },
-    {
-      "name": "Dansk Industri",
-      "amount": "95.000 kr",
-      "type": "Erhvervsstøtte"
-    },
-    {
-      "name": "Private donorer",
-      "amount": "220.000 kr",
-      "type": "Privat donation"
+      "name": "Global Shapers Hub", "organization": "World Economic Forum (WEF)", "year": "2014", "source": "WEF"
     }
   ],
-  "affiliations": [],
   "brokenPromises": [
     {
       "title": "Vi lover at beskytte danske værdier og stoppe islamiseringen",
-      "year": "2015",
-      "whatHappened": "Mens hun var minister, fortsatte antallet af muslimske indvandrere og asylansøgere at stige markant i flere år. Integrationen gik langsomt.",
-      "source": "Udlændingestyrelsen og Danmarks Statistik 2015-2019"
+      "year": "2015", "whatHappened": "Mens hun var minister, fortsatte antallet af muslimske indvandrere og asylansøgere at stige markant i flere år. Integrationen gik langsomt.", "source": "Udlændingestyrelsen og Danmarks Statistik 2015-2019"
     },
     {
       "title": "Vi lover at stramme udlændingepolitikken markant",
-      "year": "2022",
-      "whatHappened": "Selvom hendes parti (Danmarksdemokraterne) kom i Folketinget, har de haft svært ved at få gennemført de store stramninger, de lovede vælgerne.",
-      "source": "Folketingets afstemninger 2022-2026"
+      "year": "2022", "whatHappened": "Selvom hendes parti (Danmarksdemokraterne) kom i Folketinget, har de haft svært ved at få gennemført de store stramninger, de lovede vælgerne.", "source": "Folketingets afstemninger 2022-2026"
+    },
+    {
+      "title": "Vi lover at beskytte de svageste i udlændingepolitikken",
+      "year": "2015", "whatHappened": "Flere stramninger ramte flygtninge og asylansøgere hårdt, herunder begrænsning af familiesammenføring og opholdstilladelser.", "source": "Amnesty International 2015-2019"
+    },
+    {
+      "title": "Vi lover at skabe bedre integration",
+      "year": "2015", "whatHappened": "Integrationen af indvandrere gik langsomt, og antallet af ikke-vestlige indvandrere i kontanthjælp steg markant.", "source": "Danmarks Statistik 2015-2019"
+    },
+    {
+      "title": "Vi lover at være et troværdigt alternativ til Venstre",
+      "year": "2022", "whatHappened": "Danmarksdemokraterne har haft svært ved at differentiere sig markant fra Venstre i udlændingepolitikken.", "source": "Folketingets debatter 2022-2026"
     }
   ],
   "beforePolitics": {
