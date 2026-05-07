@@ -4,7 +4,8 @@ function addEconomicSupportSection(politician) {
   let supportHTML = '';
   if (politician.economicSupport && politician.economicSupport.length > 0) {
     const donations = politician.economicSupport;
-    const initialCount = Math.min(12, donations.length); // Vis 12 som standard
+    const initialCount = 5;
+    const showMoreCount = 10;
 
     let tableRows = '';
     donations.forEach((s, index) => {
@@ -20,12 +21,15 @@ function addEconomicSupportSection(politician) {
 
     let showMoreHTML = '';
     if (donations.length > initialCount) {
-      const remaining = donations.length - initialCount;
       showMoreHTML = `
-        <div class="px-4 py-3 bg-slate-100 border-t flex justify-center" id="show-more-container-${politician.id}">
-          <button onclick="showAllRemainingDonations(${politician.id})" 
-                  class="px-5 py-1.5 text-sm font-medium text-[#C8102E] hover:bg-white rounded-xl border border-[#C8102E]/30 transition-colors">
-            Vis alle ${remaining} resterende
+        <div class="px-4 py-3 bg-slate-100 border-t flex justify-center gap-x-3" id="show-more-container-${politician.id}">
+          <button onclick="showMoreDonations(${politician.id}, ${initialCount}, ${showMoreCount})" 
+                  class="px-4 py-1.5 text-sm font-medium text-[#C8102E] hover:bg-white rounded-xl border border-[#C8102E]/30 transition-colors">
+            Vis ${Math.min(showMoreCount, donations.length - initialCount)} flere
+          </button>
+          <button onclick="hideAllDonations(${politician.id})" 
+                  class="px-4 py-1.5 text-sm font-medium text-slate-500 hover:bg-white rounded-xl border border-slate-300 transition-colors hidden" id="hide-all-btn-${politician.id}">
+            Skjul alle
           </button>
         </div>
       `;
@@ -100,22 +104,33 @@ function addEconomicSupportSection(politician) {
   }
 }
 
-function showAllRemainingDonations(politicianId) {
+function showMoreDonations(politicianId, startIndex, count) {
   const tbody = document.getElementById(`donation-tbody-${politicianId}`);
   if (!tbody) return;
 
-  const hiddenRows = tbody.querySelectorAll('.donation-row.hidden');
-  hiddenRows.forEach(row => row.classList.remove('hidden'));
+  const rows = tbody.querySelectorAll('.donation-row.hidden');
+  let shown = 0;
 
-  // Erstat knap med "Skjul alle"
+  rows.forEach((row, index) => {
+    if (shown < count) {
+      row.classList.remove('hidden');
+      shown++;
+    }
+  });
+
   const container = document.getElementById(`show-more-container-${politicianId}`);
   if (container) {
-    container.innerHTML = `
-      <button onclick="hideAllDonations(${politicianId})" 
-              class="px-5 py-1.5 text-sm font-medium text-slate-500 hover:bg-white rounded-xl border border-slate-300 transition-colors">
-        Skjul alle
-      </button>
-    `;
+    const remaining = tbody.querySelectorAll('.donation-row.hidden').length;
+    if (remaining === 0) {
+      container.innerHTML = `
+        <button onclick="hideAllDonations(${politicianId})" 
+                class="px-4 py-1.5 text-sm font-medium text-slate-500 hover:bg-white rounded-xl border border-slate-300 transition-colors">
+          Skjul alle
+        </button>
+      `;
+    } else {
+      container.querySelector('button').innerHTML = `Vis ${Math.min(count, remaining)} flere`;
+    }
   }
 }
 
@@ -123,18 +138,18 @@ function hideAllDonations(politicianId) {
   const tbody = document.getElementById(`donation-tbody-${politicianId}`);
   if (!tbody) return;
 
-  const allRows = tbody.querySelectorAll('tr');
-  allRows.forEach((row, index) => {
-    if (index >= 12) row.classList.add('hidden');
+  const rows = tbody.querySelectorAll('.donation-row');
+  rows.forEach((row, index) => {
+    if (index >= 5) row.classList.add('hidden');
   });
 
   const container = document.getElementById(`show-more-container-${politicianId}`);
   if (container) {
-    const total = allRows.length;
+    const total = tbody.querySelectorAll('tr').length;
     container.innerHTML = `
-      <button onclick="showAllRemainingDonations(${politicianId})" 
-              class="px-5 py-1.5 text-sm font-medium text-[#C8102E] hover:bg-white rounded-xl border border-[#C8102E]/30 transition-colors">
-        Vis alle ${total - 12} resterende
+      <button onclick="showMoreDonations(${politicianId}, 5, 10)" 
+              class="px-4 py-1.5 text-sm font-medium text-[#C8102E] hover:bg-white rounded-xl border border-[#C8102E]/30 transition-colors">
+        Vis ${Math.min(10, total - 5)} flere
       </button>
     `;
   }
