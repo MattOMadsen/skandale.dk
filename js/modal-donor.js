@@ -1,4 +1,4 @@
-// js/modal-donor.js - Økonomisk støtte + Internationale netværk + begge modals (opdateret med årstal på donorer)
+// js/modal-donor.js - Økonomisk støtte + Internationale netværk (ren version uden rekursion)
 
 function addEconomicSupportSection(politician) {
   let supportHTML = '';
@@ -65,36 +65,6 @@ function addEconomicSupportSection(politician) {
     `;
   }
 
-  // INTERNATIONALE NETVÆRK – klikbare (samme design)
-  let affiliationsHTML = '';
-  if (politician.affiliations && politician.affiliations.length > 0) {
-    affiliationsHTML = `
-      <div class="mt-8 pt-6 border-t">
-        <div class="flex items-center gap-x-2 mb-4">
-          <i class="fa-solid fa-globe text-[#C8102E]"></i>
-          <span class="font-bold text-lg">Internationale netværk & tilknytninger</span>
-        </div>
-        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
-          <ul class="space-y-2 text-sm">
-            ${politician.affiliations.map(a => `
-              <li onclick="showAffiliationModal('${a.name}')" class="flex justify-between items-start cursor-pointer hover:bg-slate-100 p-2 rounded-xl transition-colors">
-                <div>
-                  <span class="font-medium text-[#C8102E] hover:underline">${a.name}</span>
-                  ${a.organization ? `<span class="text-xs text-slate-500">(${a.organization})</span>` : ''}
-                </div>
-                <div class="text-right text-xs text-slate-400">
-                  ${a.year || ''}<br>
-                  <span class="text-[10px]">${a.source || ''}</span>
-                </div>
-              </li>
-            `).join('')}
-          </ul>
-        </div>
-        <p class="text-[10px] text-slate-400 mt-2">Klik på et netværk for at se alle politikere med samme tilknytning</p>
-      </div>
-    `;
-  }
-
   const modalContent = document.querySelector('#politicianModal .p-8');
   if (modalContent) {
     const oldSupport = modalContent.querySelector('.economic-support');
@@ -102,7 +72,7 @@ function addEconomicSupportSection(politician) {
 
     const supportDiv = document.createElement('div');
     supportDiv.className = 'economic-support';
-    supportDiv.innerHTML = supportHTML + affiliationsHTML;
+    supportDiv.innerHTML = supportHTML;
     modalContent.appendChild(supportDiv);
   }
 }
@@ -159,8 +129,11 @@ function hideAllDonations(politicianId) {
 }
 
 function showDonorModal(donorName) {
-  document.getElementById('politicianModal').classList.remove('flex');
-  document.getElementById('politicianModal').classList.add('hidden');
+  const politicianModal = document.getElementById('politicianModal');
+  if (politicianModal) {
+    politicianModal.classList.remove('flex');
+    politicianModal.classList.add('hidden');
+  }
 
   let supportedPoliticians = [];
 
@@ -198,7 +171,7 @@ function showDonorModal(donorName) {
             <div class="space-y-3">
               ${supportedPoliticians.map(p => `
                 <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-200 hover:border-[#C8102E]/30 transition-colors cursor-pointer"
-                     onclick="closeDonorModal(); showPoliticianModal(${p.id})">
+                     onclick="closeDonorModalAndShowPolitician(${p.id})">
                   <div>
                     <div class="font-semibold">${p.name}</div>
                     <div class="text-xs text-slate-500">${p.type} • ${p.year}</div>
@@ -230,20 +203,13 @@ function showDonorModal(donorName) {
 function closeDonorModal() {
   const modal = document.getElementById('donorModal');
   if (modal) modal.remove();
-  
-  // Genåbn politiker-moda len hvis den var åben
-  const politicianModal = document.getElementById('politicianModal');
-  if (politicianModal && politicianModal.classList.contains('hidden')) {
-    politicianModal.classList.remove('hidden');
-    politicianModal.classList.add('flex');
-  }
 }
 
-// Hjælpefunktion til at vise politiker fra donor-modal
-function showPoliticianModal(politicianId) {
-  if (typeof window.showPoliticianModal === 'function') {
-    window.showPoliticianModal(politicianId);
-  } else {
-    console.warn('showPoliticianModal ikke fundet – genindlæs siden.');
-  }
+function closeDonorModalAndShowPolitician(politicianId) {
+  closeDonorModal();
+  setTimeout(() => {
+    if (typeof window.showPoliticianModal === 'function') {
+      window.showPoliticianModal(politicianId);
+    }
+  }, 50);
 }
