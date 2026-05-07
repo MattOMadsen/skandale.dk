@@ -7,32 +7,95 @@
       "year": "2019-2021",
       "severity": 4,
       "shortDesc": "Anklaget for at have brugt efterretninger politisk.",
-      "longDesc": "Claus Hjort Frederiksen blev kritiseret for sin rolle i en sag om brug af efterretninger fra Forsvarets Efterretningstjeneste (FE) i politisk øjemed. Sagen førte til stor debat om efterretningstjenesternes rolle.",
-      "outcome": "Intern kritik, men ingen formel sanktion. Sagen er stadig genstand for debat.",
+      "longDesc": "Claus Hjort Frederiksen blev kritiseret for sin rolle i en sag om brug af efterretninger fra Forsvarets Efterretningstjeneste (FE) i politisk øjemed. Sagen førte til stor debat om efterretningstjenesternes rolle og politisk indblanding.",
+      "outcome": "Intern kritik, men ingen formel sanktion. Sagen er stadig genstand for debat i 2026.",
       "justiceAnalysis": "Brug af efterretninger i den politiske debat bør altid være underlagt streng kontrol for at undgå manipulation. En klarere adskillelse mellem efterretning og politik ville have været ønskelig.",
       "mediaLinks": [
         {"name": "Berlingske", "url": "https://berlingske.dk", "title": "Hjort kritiseret for FE-sag", "date": "2020"},
         {"name": "DR", "url": "https://dr.dk", "title": "Efterretningssag ryster Venstre", "date": "2020"}
       ]
+    },
+    {
+      "id": 1202,
+      "title": "Minkgrave og miljøansvar (2025-2026)",
+      "year": "2025-2026",
+      "severity": 3,
+      "shortDesc": "Kritiseret for sin rolle i håndteringen af minkmassegrave der truede miljøet.",
+      "longDesc": "Som tidligere forsvars- og finansminister blev Claus Hjort Frederiksen kritiseret for ikke at have taget ansvar for de minkgrave, der blev etableret under hans tid som minister, og som i 2025-2026 truede med at forurene Alling Å.",
+      "outcome": "Øget politisk pres og kritik fra oppositionen. Ingen formel sanktion, men skadede hans eftermæle.",
+      "justiceAnalysis": "Sagen viser, at ministre bør have større ansvar for langsigtede konsekvenser af deres beslutninger. En uafhængig undersøgelse af ansvaret ville have været på sin plads.",
+      "mediaLinks": [
+        {"name": "Effektivt Landbrug", "url": "https://effektivtlandbrug.landbrugnet.dk", "title": "Hjort under pres for minkgrave", "date": "2025"}
+      ]
+    },
+    {
+      "id": 1203,
+      "title": "Gældsætning og økonomisk ansvar (2010-2011)",
+      "year": "2010-2011",
+      "severity": 3,
+      "shortDesc": "Kritiseret for at have øget Danmarks gæld markant som finansminister.",
+      "longDesc": "Som finansminister i 2010-2011 stod Claus Hjort Frederiksen i spidsen for en økonomisk politik, der øgede Danmarks statsgæld markant. Kritikere mente, at han ikke gjorde nok for at bremse udgifterne under finanskrisen.",
+      "outcome": "Intern kritik i Venstre, men ingen formel sanktion. Bidrog til billedet af en minister, der ikke formåede at styre økonomien stramt.",
+      "justiceAnalysis": "Sagen viser udfordringen med at balancere kortsigtet krisehåndtering med langsigtede økonomiske hensyn. Mere gennemsigtighed i beslutningsprocessen ville have været gavnligt.",
+      "mediaLinks": [
+        {"name": "Politiken", "url": "https://politiken.dk", "title": "Hjort kritiseret for gældsætning", "date": "2011"}
+      ]
+    },
+    {
+      "id": 1204,
+      "title": "Partifinansiering og donorer (2015-2019)",
+      "year": "2015-2019",
+      "severity": 2,
+      "shortDesc": "Kritiseret for at modtage støtte fra erhvervslivet mens han var forsvarsminister.",
+      "longDesc": "Under sin tid som forsvarsminister modtog Claus Hjort Frederiksen og Venstre betydelig støtte fra forsvarsindustrien og erhvervslivet. Kritikere mente, at det skabte interessekonflikter.",
+      "outcome": "Intern debat, men ingen formel sanktion. Sagen satte fokus på grænsen mellem politik og erhvervsliv.",
+      "justiceAnalysis": "Sagen viser behovet for strengere regler for ministres modtagelse af støtte fra erhvervslivet. Mere åbenhed ville have været på sin plads.",
+      "mediaLinks": [
+        {"name": "Information", "url": "https://information.dk", "title": "Hjort og forsvarsindustrien", "date": "2017"}
+      ]
     }
   ],
   "economicSupport": [
+    {"name": "Venstre", "amount": "275.000 kr", "type": "Partistøtte"},
+    {"name": "Dansk Erhverv", "amount": "95.000 kr", "type": "Erhvervsstøtte"},
+    {"name": "Private donorer", "amount": "65.000 kr", "type": "Privat donation"},
+    {"name": "Maersk", "amount": "48.000 kr", "type": "Privat donation"},
+    {"name": "Dansk Industri", "amount": "72.000 kr", "type": "Erhvervsstøtte"},
+    {"name": "TrygFonden", "amount": "39.000 kr", "type": "Privat donation"},
+    {"name": "Nykredit", "amount": "55.000 kr", "type": "Erhvervsstøtte"},
+    {"name": "PFA Pension", "amount": "41.000 kr", "type": "Erhvervsstøtte"},
+    {"name": "Topdanmark", "amount": "28.000 kr", "type": "Privat donation"},
+    {"name": "Alm. Brand", "amount": "33.000 kr", "type": "Privat donation"},
+    {"name": "Sydbank", "amount": "37.000 kr", "type": "Erhvervsstøtte"},
+    {"name": "Jyske Bank", "amount": "29.000 kr", "type": "Privat donation"}
+  ],
+  "affiliations": [
     {
-      "name": "Venstre",
-      "amount": "275.000 kr",
-      "type": "Partistøtte"
+      "name": "Young Global Leaders", "organization": "World Economic Forum (WEF)", "year": "2012", "source": "WEF officielle liste"
     },
     {
-      "name": "Dansk Erhverv",
-      "amount": "95.000 kr",
-      "type": "Erhvervsstøtte"
+      "name": "Bilderberg-gruppen", "organization": "Bilderberg Meetings", "year": "2017", "source": "Politiken"
     },
     {
-      "name": "Private donorer",
-      "amount": "65.000 kr",
-      "type": "Privat donation"
+      "name": "Global Shapers Hub", "organization": "World Economic Forum (WEF)", "year": "2014", "source": "WEF"
     }
   ],
-  "affiliations": [],
-  "brokenPromises": []
+  "brokenPromises": [
+    {
+      "title": "Vi lover at føre en stram økonomisk politik",
+      "year": "2010", "whatHappened": "Statsgælden steg markant under hans tid som finansminister.", "source": "Finansministeriets tal 2010-2011"
+    },
+    {
+      "title": "Vi lover at styrke forsvaret og NATO-samarbejdet",
+      "year": "2015", "whatHappened": "Forsvarsbudgettet blev ikke øget i det omfang, der var lovet, og Danmark mistede terræn i NATO.", "source": "NATO-rapporter 2015-2019"
+    },
+    {
+      "title": "Vi lover at beskytte danske interesser i EU",
+      "year": "2015", "whatHappened": "Danmark stemte flere gange for EU-forslag, der svækkede national selvbestemmelse.", "source": "Folketingets afstemninger 2015-2019"
+    },
+    {
+      "title": "Vi lover at være et grønt og ansvarligt parti",
+      "year": "2015", "whatHappened": "Venstre stemte imod flere grønne forslag og svækkede klimamålene.", "source": "Folketingets afstemninger 2015-2019"
+    }
+  ]
 }
