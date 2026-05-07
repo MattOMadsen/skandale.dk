@@ -1,0 +1,82 @@
+{
+  "politician": "Inger Støjberg",
+  "brokenPromises": [
+    {
+      "id": 1,
+      "title": "Vi lover at beskytte børn mod overgreb",
+      "year": "2010",
+      "whatHappened": "I Tønder-sagen blev der rettet skarp kritik mod myndighedernes (og Inger Støjbergs) håndtering af en alvorlig børnemishandlingssag.",
+      "source": {
+        "text": "DR og Politiken 2011",
+        "url": "https://www.dr.dk/nyheder/indland/toender-sagen"
+      },
+      "otherPoliticians": ["Helle Thorning-Schmidt"]
+    },
+    {
+      "id": 2,
+      "title": "Vi lover en human udlændingepolitik",
+      "year": "2015",
+      "whatHappened": "Inger Støjberg blev kritiseret for at føre en meget stram udlændingepolitik, der blev beskyldt for at krænke menneskerettigheder.",
+      "source": {
+        "text": "Amnesty International og Institut for Menneskerettigheder",
+        "url": "https://www.amnesty.dk/"
+      },
+      "otherPoliticians": ["Kristian Thulesen Dahl", "Pia Kjærsgaard"]
+    },
+    {
+      "id": 3,
+      "title": "Vi lover at bekæmpe racisme",
+      "year": "2016",
+      "whatHappened": "Inger Støjberg blev kritiseret for racistiske og nedladende kommentarer på Facebook.",
+      "source": {
+        "text": "Politiken og Berlingske 2016-2017",
+        "url": "https://politiken.dk/"
+      },
+      "otherPoliticians": ["Morten Østergaard"]
+    },
+    {
+      "id": 4,
+      "title": "Vi lover at respektere retsstaten",
+      "year": "2015",
+      "whatHappened": "Inger Støjberg blev dømt i rigsretten for ulovlig adskillelse af asylpar (2016-beslutningen).",
+      "source": {
+        "text": "Rigsretten og DR 2020-2021",
+        "url": "https://www.dr.dk/nyheder/politik/inger-stoejberg-doemt-i-rigsretten"
+      },
+      "otherPoliticians": ["Lars Løkke Rasmussen"]
+    },
+    {
+      "id": 5,
+      "title": "Vi lover at beskytte ytringsfriheden",
+      "year": "2017",
+      "whatHappened": "Inger Støjberg blev kritiseret for at ville begrænse ytringsfriheden for visse grupper.",
+      "source": {
+        "text": "Information og Weekendavisen",
+        "url": "https://www.information.dk/"
+      },
+      "otherPoliticians": ["Uffe Elbæk"]
+    },
+    {
+      "id": 6,
+      "title": "Vi lover at stå ved vores ministre",
+      "year": "2019",
+      "whatHappened": "Inger Støjberg trådte tilbage som minister efter rigsretssagen, men fortsatte som MF.",
+      "source": {
+        "text": "DR og Politiken 2019-2020",
+        "url": "https://www.dr.dk/nyheder/politik/inger-stoejberg-traeder-tilbage"
+      },
+      "otherPoliticians": ["Lars Løkke Rasmussen"]
+    },
+    {
+      "id": 7,
+      "title": "Vi lover at beskytte de svageste i samfundet",
+      "year": "2015",
+      "whatHappened": "Kritikere mente, at hendes stramme udlændingepolitik ramte de svageste hårdest.",
+      "source": {
+        "text": "Rådet for Socialt Udsatte og Amnesty",
+        "url": "https://www.udsatte.dk/"
+      },
+      "otherPoliticians": ["Morten Østergaard", "Helle Thorning-Schmidt"]
+    }
+  ]
+}
