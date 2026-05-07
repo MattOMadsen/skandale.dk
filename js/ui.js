@@ -1,76 +1,61 @@
-// js/ui.js - Ren version v2.0 (med fix til brokenPromises)
+// js/ui.js - Render politikere på forsiden (med data-id)
 
 function renderPoliticians(filteredPoliticians = null) {
   const grid = document.getElementById('politiciansGrid');
   if (!grid) return;
-  grid.innerHTML = '';
 
   const toRender = filteredPoliticians || politicians;
 
+  let html = '';
   toRender.forEach(politician => {
-    const scandals = Array.isArray(politician.scandals) ? politician.scandals : [];
-    const totalSeverity = scandals.reduce((sum, s) => sum + (s.severity || 0), 0);
-    const avgSeverity = scandals.length > 0 ? (totalSeverity / scandals.length).toFixed(1) : '0.0';
-    const totalLinks = scandals.reduce((sum, s) => sum + (s.mediaLinks ? s.mediaLinks.length : 0), 0);
-    
-    // Fix til brokenPromises (håndterer både array og tal)
-    const brokenPromises = Array.isArray(politician.brokenPromises) 
-      ? politician.brokenPromises.length 
-      : Number(politician.brokenPromises) || 0;
+    const scandalCount = politician.scandals ? politician.scandals.length : 0;
+    const brokenCount = politician.brokenPromises ? politician.brokenPromises.length : 0;
+    const donorCount = politician.economicSupport ? politician.economicSupport.length : 0;
+    const avgSeverity = politician.scandals && politician.scandals.length > 0 
+      ? (politician.scandals.reduce((sum, s) => sum + (s.severity || 3), 0) / politician.scandals.length).toFixed(1) 
+      : '0.0';
 
-    const cardHTML = `
-      <div onclick="showPoliticianModal(${politician.id})" 
-           class="politician-card bg-white border border-slate-200 rounded-3xl p-6 cursor-pointer hover:border-[#C8102E]/30 group">
-        <div class="flex justify-between items-start mb-5">
-          <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-white text-3xl font-bold shadow-md" 
-               style="background-color: ${politician.avatarColor || '#C8102E'}">
+    html += `
+      <div class="politician-card bg-white border border-slate-200 rounded-3xl p-6 cursor-pointer hover:border-[#C8102E]/30 group" 
+           data-id="${politician.id}">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-bold text-xl" 
+               style="background-color: ${politician.avatarColor || politician.color || '#C8102E'}">
             ${politician.initials || politician.name.split(' ').map(n => n[0]).join('')}
           </div>
           <div class="text-right">
-            <div class="inline-flex items-center bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full font-medium">
-              ${scandals.length} skandaler
-            </div>
-            <div class="mt-1 text-[10px] text-amber-600 font-medium">${brokenPromises} brudte løfter</div>
-            <div class="mt-0.5 text-[10px] text-emerald-600 font-medium">${totalLinks} medie-links</div>
+            <div class="text-xs text-slate-400">${politician.party}</div>
+            <div class="text-[10px] text-slate-400">${politician.role || ''}</div>
           </div>
         </div>
-        <div class="mb-4">
-          <div class="font-bold text-2xl tracking-tight text-slate-900 group-hover:text-[#C8102E] transition-colors">${politician.name}</div>
-          <div class="text-sm text-slate-500 mt-0.5">${politician.party || ''}</div>
+        
+        <div class="font-bold text-xl mb-1 group-hover:text-[#C8102E] transition-colors">${politician.name}</div>
+        
+        <div class="flex items-center gap-x-3 text-xs text-slate-500 mb-4">
+          <div class="flex items-center gap-x-1">
+            <i class="fa-solid fa-exclamation-triangle text-[#C8102E]"></i>
+            <span>${scandalCount} skandaler</span>
+          </div>
+          <div class="flex items-center gap-x-1">
+            <i class="fa-solid fa-link text-[#C8102E]"></i>
+            <span>${brokenCount} løfter</span>
+          </div>
         </div>
+
         <div class="flex items-center justify-between text-xs">
-          <div class="flex items-center text-amber-500">
-            ${createStars(Math.round(parseFloat(avgSeverity)))}
-            <span class="ml-2 text-slate-400 font-medium">${avgSeverity}</span>
+          <div class="flex items-center gap-x-1">
+            <div class="flex">
+              ${Array.from({length: 5}, (_, i) => 
+                `<i class="fa-solid fa-star ${i < Math.round(avgSeverity) ? 'text-[#C8102E]' : 'text-slate-300'}"></i>`
+              ).join('')}
+            </div>
+            <span class="text-slate-400 ml-1">${avgSeverity}</span>
           </div>
-          <div class="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider" 
-               style="background-color: ${politician.partyColor || '#64748b'}20; color: ${politician.partyColor || '#64748b'}">
-            ${politician.role || ''}
-          </div>
+          <div class="text-[#C8102E] group-hover:underline">Se detaljer →</div>
         </div>
       </div>
     `;
-    grid.innerHTML += cardHTML;
   });
-}
 
-function createStars(count) {
-  let stars = '';
-  for (let i = 0; i < 5; i++) {
-    stars += (i < count) ? `<i class="fa-solid fa-star severity-star text-sm"></i>` : `<i class="fa-solid fa-star text-slate-200 text-sm"></i>`;
-  }
-  return stars;
-}
-
-function filterPoliticians() {
-  const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
-  if (!searchTerm) {
-    renderPoliticians();
-    return;
-  }
-  const filtered = politicians.filter(p => 
-    p.name.toLowerCase().includes(searchTerm) || 
-    p.party.toLowerCase().includes(searchTerm)
-  );
-  renderPoliticians(filtered);
+  grid.innerHTML = html;
 }
