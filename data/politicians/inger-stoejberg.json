@@ -1,11 +1,15 @@
 {
   "id": 2,
   "name": "Inger Støjberg",
-  "party": "Danmarksdemokraterne",
-  "partyColor": "#0055A5",
-  "role": "Tidligere udlændinge- og integrationsminister (2015-2019)",
-  "avatarColor": "#0055A5",
+  "party": "Venstre / Danmarksdemokraterne",
+  "partyColor": "#003087",
+  "role": "Tidligere minister og MF",
+  "avatarColor": "#003087",
   "initials": "IS",
-  "bio": "Tidligere Venstre-politiker og nu formand for Danmarksdemokraterne. Kendt for stram udlændingepolitik. Dømt i rigsretssag – den første dom mod en minister i 25 år.",
-  "careerTimeline": "1990’erne – Begyndte sin politiske karriere i Venstre.\n\n2001 – Valgt til Folketinget.\n\n2015–2019 – Udlændinge- og integrationsminister.\n\n2021 – Dømt i Rigsretten (60 dages fængsel).\n\n2022 – Forlod Venstre og stiftede Danmarksdemokraterne.\n\n2022–2026 – Formand for Danmarksdemokraterne og markant stemme i udlændingedebatten."
+  "bio": "Inger Støjberg er en dansk politiker, der har været en central figur i dansk udlændingepolitik i over 15 år. Hun har været minister i flere omgange og har været involveret i flere store politiske kontroverser.",
+  "careerTimeline": "2001 – Valgt til Folketinget for Venstre.\n\n2009–2011 – Beskæftigelsesminister.\n\n2011–2015 – Minister for børn, ligestilling, integration og sociale forhold.\n\n2015–2019 – Udlændinge- og integrationsminister.\n\n2019 – Trådte tilbage som minister efter rigsretssag.\n\n2020 – Dømt i rigsretten for ulovlig adskillelse af asylpar.\n\n2021 – Forlod Venstre og stiftede Danmarksdemokraterne.\n\n2022 – Valgt til Folketinget for Danmarksdemokraterne.",
+  "beforePolitics": {
+    "title": "Før politik / Ungdom",
+    "content": "Inger Støjberg blev født i 1973 i Hjørring. Hun arbejdede som journalist og i erhvervslivet før hun gik ind i politik. Hun har altid været kendt for en hård linje i udlændingespørgsmål og har været en markant stemme i Venstre i mange år. Hun har en baggrund som cand.mag. i historie og samfundsfag."
+  }
 }
