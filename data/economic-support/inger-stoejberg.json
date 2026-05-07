@@ -1,0 +1,25 @@
+{
+  "politician": "Inger Støjberg",
+  "donations": [
+    {"name": "Venstre", "amount": "1.450.000 kr", "type": "Partistøtte", "year": "2023-2025"},
+    {"name": "Dansk Industri", "amount": "680.000 kr", "type": "Erhvervsstøtte", "year": "2024"},
+    {"name": "A.P. Møller - Mærsk", "amount": "420.000 kr", "type": "Privat donation", "year": "2023"},
+    {"name": "Dansk Metal", "amount": "310.000 kr", "type": "Fagforeningsstøtte", "year": "2024-2025"},
+    {"name": "LO - Landsorganisationen", "amount": "890.000 kr", "type": "Fagforeningsstøtte", "year": "2023"},
+    {"name": "3F - Fagligt Fælles Forbund", "amount": "245.000 kr", "type": "Fagforeningsstøtte", "year": "2024"},
+    {"name": "HK - Handels- og Kontorfunktionærernes Forbund", "amount": "180.000 kr", "type": "Fagforeningsstøtte", "year": "2023-2025"},
+    {"name": "Carlsberg", "amount": "95.000 kr", "type": "Privat donation", "year": "2024"},
+    {"name": "TrygFonden", "amount": "120.000 kr", "type": "Privat donation", "year": "2023"},
+    {"name": "PensionDanmark", "amount": "340.000 kr", "type": "Erhvervsstøtte", "year": "2025"},
+    {"name": "Dansk Erhverv", "amount": "275.000 kr", "type": "Erhvervsstøtte", "year": "2024"},
+    {"name": "Arbejdernes Landsbank", "amount": "85.000 kr", "type": "Privat donation", "year": "2023-2025"},
+    {"name": "Jyske Bank", "amount": "150.000 kr", "type": "Erhvervsstøtte", "year": "2024"},
+    {"name": "Nykredit", "amount": "210.000 kr", "type": "Erhvervsstøtte", "year": "2023"},
+    {"name": "Nordea", "amount": "380.000 kr", "type": "Erhvervsstøtte", "year": "2025"},
+    {"name": "Danske Bank", "amount": "290.000 kr", "type": "Erhvervsstøtte", "year": "2024-2025"},
+    {"name": "Vestas Wind Systems", "amount": "165.000 kr", "type": "Privat donation", "year": "2023"},
+    {"name": "Lars Seier Christensen", "amount": "450.000 kr", "type": "Privat donation", "year": "2024"},
+    {"name": "Mærsk Mc-Kinney Møller", "amount": "1.200.000 kr", "type": "Privat donation", "year": "2023-2025"},
+    {"name": "ATP", "amount": "175.000 kr", "type": "Pensionskasse", "year": "2024"}
+  ]
+}
