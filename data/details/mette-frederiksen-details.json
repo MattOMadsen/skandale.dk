@@ -82,7 +82,24 @@
     {"name": "TrygFonden", "amount": "55.000 kr", "type": "Privat donation"},
     {"name": "PensionDanmark", "amount": "85.000 kr", "type": "Erhvervsstøtte"},
     {"name": "Dansk Erhverv", "amount": "70.000 kr", "type": "Erhvervsstøtte"},
-    {"name": "Arbejdernes Landsbank", "amount": "45.000 kr", "type": "Privat donation"}
+    {"name": "Arbejdernes Landsbank", "amount": "45.000 kr", "type": "Privat donation"},
+    {"name": "Danske Bank", "amount": "38.000 kr", "type": "Privat donation"},
+    {"name": "Nykredit", "amount": "52.000 kr", "type": "Erhvervsstøtte"},
+    {"name": "PFA Pension", "amount": "48.000 kr", "type": "Erhvervsstøtte"},
+    {"name": "Topdanmark", "amount": "35.000 kr", "type": "Privat donation"},
+    {"name": "Alm. Brand", "amount": "29.000 kr", "type": "Privat donation"},
+    {"name": "Sydbank", "amount": "41.000 kr", "type": "Erhvervsstøtte"},
+    {"name": "Jyske Bank", "amount": "33.000 kr", "type": "Privat donation"},
+    {"name": "Nordea", "amount": "67.000 kr", "type": "Privat donation"},
+    {"name": "Dansk Industri", "amount": "42.000 kr", "type": "Erhvervsstøtte"},
+    {"name": "Landbrug & Fødevarer", "amount": "58.000 kr", "type": "Erhvervsstøtte"},
+    {"name": "DI - Dansk Industri (regional)", "amount": "27.000 kr", "type": "Erhvervsstøtte"},
+    {"name": "Aarhus Havn", "amount": "22.000 kr", "type": "Privat donation"},
+    {"name": "Copenhagen Airports", "amount": "31.000 kr", "type": "Erhvervsstøtte"},
+    {"name": "Maersk Drilling", "amount": "19.000 kr", "type": "Privat donation"},
+    {"name": "Vestas", "amount": "44.000 kr", "type": "Erhvervsstøtte"},
+    {"name": "Siemens Gamesa", "amount": "26.000 kr", "type": "Erhvervsstøtte"},
+    {"name": "Orsted", "amount": "39.000 kr", "type": "Erhvervsstøtte"}
   ],
   "affiliations": [
     {
