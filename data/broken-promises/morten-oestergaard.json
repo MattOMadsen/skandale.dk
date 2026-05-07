@@ -1,0 +1,71 @@
+{
+  "politician": "Morten Østergaard",
+  "brokenPromises": [
+    {
+      "id": 1,
+      "title": "Vi lover at være Danmarks grønneste parti",
+      "year": "2015",
+      "whatHappened": "Morten Østergaard lovede at Radikale Venstre skulle være det grønneste parti, men stemte imod flere ambitiøse grønne forslag og støttede regeringer med svag klimapolitik.",
+      "source": {
+        "text": "Folketingets afstemninger 2015-2019 og Klimarådet",
+        "url": "https://klimaraadet.dk/da/"
+      },
+      "otherPoliticians": ["Lars Løkke Rasmussen", "Helle Thorning-Schmidt"]
+    },
+    {
+      "id": 2,
+      "title": "Vi lover at beskytte velfærden",
+      "year": "2011",
+      "whatHappened": "Som skatteminister gennemførte Morten Østergaard reformer, der blev kritiseret for at ramme velfærden.",
+      "source": {
+        "text": "DR og Politiken 2011-2014",
+        "url": "https://www.dr.dk/nyheder/politik"
+      },
+      "otherPoliticians": ["Helle Thorning-Schmidt"]
+    },
+    {
+      "id": 3,
+      "title": "Vi lover en human udlændingepolitik",
+      "year": "2015",
+      "whatHappened": "Morten Østergaard kritiserede den stramme udlændingepolitik, men Radikale Venstre stemte alligevel for flere stramninger.",
+      "source": {
+        "text": "Amnesty International og Politiken",
+        "url": "https://www.amnesty.dk/"
+      },
+      "otherPoliticians": ["Inger Støjberg", "Kristian Thulesen Dahl"]
+    },
+    {
+      "id": 4,
+      "title": "Vi lover at bekæmpe ulighed",
+      "year": "2015",
+      "whatHappened": "Morten Østergaard lovede at bekæmpe ulighed, men Radikale Venstre støttede skattelettelser der øgede uligheden.",
+      "source": {
+        "text": "CEPOS og Arbejderbevægelsens Erhvervsråd",
+        "url": "https://www.ae.dk/"
+      },
+      "otherPoliticians": ["Lars Løkke Rasmussen"]
+    },
+    {
+      "id": 5,
+      "title": "Vi lover at stå ved vores ministre",
+      "year": "2020",
+      "whatHappened": "Morten Østergaard trådte tilbage som partileder efter #MeToo-sagen, men fortsatte som MF.",
+      "source": {
+        "text": "DR og Politiken 2020",
+        "url": "https://www.dr.dk/nyheder/politik/morten-oestergaard-traeder-tilbage"
+      },
+      "otherPoliticians": ["Søren Pape Poulsen"]
+    },
+    {
+      "id": 6,
+      "title": "Vi lover at beskytte ytringsfriheden",
+      "year": "2018",
+      "whatHappened": "Morten Østergaard kritiserede andre partier for at begrænse ytringsfriheden, men Radikale Venstre stemte for flere begrænsninger.",
+      "source": {
+        "text": "Information og Weekendavisen",
+        "url": "https://www.information.dk/"
+      },
+      "otherPoliticians": ["Uffe Elbæk", "Pia Kjærsgaard"]
+    }
+  ]
+}
