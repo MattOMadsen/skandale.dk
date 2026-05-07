@@ -1,4 +1,4 @@
-// js/ui.js - Render politikere på forsiden (med direkte click handler)
+// js/ui.js - Render politikere på forsiden (med onclick i HTML)
 
 function renderPoliticians(filteredPoliticians = null) {
   const grid = document.getElementById('politiciansGrid');
@@ -16,8 +16,8 @@ function renderPoliticians(filteredPoliticians = null) {
       : '0.0';
 
     html += `
-      <div class="politician-card bg-white border border-slate-200 rounded-3xl p-6 cursor-pointer hover:border-[#C8102E]/30 group" 
-           data-id="${politician.id}">
+      <div onclick="window.showPoliticianModal(${politician.id})" 
+           class="politician-card bg-white border border-slate-200 rounded-3xl p-6 cursor-pointer hover:border-[#C8102E]/30 group">
         <div class="flex items-start justify-between mb-4">
           <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-bold text-xl" 
                style="background-color: ${politician.avatarColor || politician.color || '#C8102E'}">
@@ -58,16 +58,4 @@ function renderPoliticians(filteredPoliticians = null) {
   });
 
   grid.innerHTML = html;
-
-  // Direkte click handler på hvert kort (mere robust end delegation)
-  grid.querySelectorAll('.politician-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const id = parseInt(card.dataset.id);
-      if (typeof window.showPoliticianModal === 'function') {
-        window.showPoliticianModal(id);
-      } else {
-        console.error('showPoliticianModal ikke fundet');
-      }
-    });
-  });
 }
