@@ -11,9 +11,9 @@ function addBrokenPromisesSection(politician) {
           <span class="font-bold text-lg">Brudte valgløfter</span>
         </div>
         <div class="space-y-4">
-          ${politician.brokenPromises.map(p => `
-            <div onclick="showBrokenPromiseDetail(${JSON.stringify(p).replace(/"/g, '"')})" 
-                 class="bg-slate-50 border border-slate-200 hover:border-[#C8102E]/30 rounded-2xl p-4 cursor-pointer transition-all">
+          ${politician.brokenPromises.map((p, index) => `
+            <div data-promise-index="${index}" 
+                 class="broken-promise-item bg-slate-50 border border-slate-200 hover:border-[#C8102E]/30 rounded-2xl p-4 cursor-pointer transition-all">
               <div class="font-semibold text-base mb-1">${p.title}</div>
               <div class="text-xs text-slate-500 mb-2">Lovet i ${p.year}</div>
               <div class="text-sm text-slate-700 mb-2">${p.whatHappened}</div>
@@ -35,10 +35,22 @@ function addBrokenPromisesSection(politician) {
     brokenDiv.className = 'broken-promises';
     brokenDiv.innerHTML = brokenPromisesHTML;
     modalContent.appendChild(brokenDiv);
+
+    // Tilføj click event listeners
+    const items = brokenDiv.querySelectorAll('.broken-promise-item');
+    items.forEach(item => {
+      item.addEventListener('click', () => {
+        const index = parseInt(item.dataset.promiseIndex);
+        const promise = politician.brokenPromises[index];
+        if (promise) {
+          showBrokenPromiseDetail(promise, politician);
+        }
+      });
+    });
   }
 }
 
-function showBrokenPromiseDetail(promise) {
+function showBrokenPromiseDetail(promise, politician) {
   const html = `
     <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[200] flex items-center justify-center p-4" id="brokenPromiseModal">
       <div onclick="event.target.id === 'brokenPromiseModal' && closeBrokenPromiseModal()" 
@@ -99,7 +111,6 @@ function closeBrokenPromiseModal() {
 }
 
 function showPoliticianByName(name) {
-  // Find politiker med matchende navn
   const politician = politicians.find(p => p.name.toLowerCase() === name.toLowerCase());
   if (politician) {
     closeBrokenPromiseModal();
