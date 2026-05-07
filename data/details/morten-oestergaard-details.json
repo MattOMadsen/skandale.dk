@@ -5,42 +5,71 @@
       "id": 301,
       "title": "#MeToo-krænkelsessagen",
       "year": "2020",
-      "severity": 4,
-      "shortDesc": "Indrømmede at have krænket en kvindelig kollega for 10 år siden – trådte tilbage som partileder.",
-      "longDesc": "I oktober 2020 blev det offentligt, at Morten Østergaard havde upassende berørt en kvindelig partikollega (Lotte Rod) på låret under et møde ca. 10 år tidligere. Først nedtonede han sagen, men indrømmede senere, at det var ham. Han havde tidligere været fortaler for #MeToo og nul-tolerance. Sagen førte til massiv medieomtale og internt oprør i partiet. Han trådte tilbage som politisk leder samme dag.",
-      "outcome": "Trådte tilbage som leder af Radikale Venstre, partiet mistede troværdighed på ligestillingsområdet, stor debat om magt og krænkelser i politik.",
-      "justiceAnalysis": "Resignationen som partileder var den rigtige konsekvens i #MeToo-sagen. Det sendte et stærkt signal om nul-tolerance. Dog kunne partiet have haft en mere transparent intern proces og måske en uafhængig undersøgelse for at genopbygge tillid. Sagen satte fokus på magt og krænkelser i dansk politik og førte til bredere debatter om partikultur.",
+      "severity": 5,
+      "shortDesc": "Morten Østergaard indrømte upassende berøring af en kvindelig kollega og trådte tilbage som partileder.",
+      "longDesc": "I 2020 blev Morten Østergaard beskyldt for upassende berøring af en kvindelig kollega. Han indrømte handlingen og trådte tilbage som partileder for Radikale Venstre.",
+      "outcome": "Morten Østergaard trådte tilbage som partileder og forlod midlertidigt politik.",
+      "justiceAnalysis": "Sagen satte fokus på #MeToo i dansk politik og ministres/personers ansvar for grænseoverskridende adfærd.",
       "mediaLinks": [
-        {"name": "Politiken", "url": "https://politiken.dk/debat/art7955054/Nu-roses-Morten-%C3%98stergaard.-Lotte-Rod-pilles-ned", "title": "MeToo classic: Nu roses Morten Østergaard. Lotte Rod pilles ned", "date": "10. okt 2020"},
-        {"name": "Altinget", "url": "https://www.altinget.dk/artikel/radikale-holder-krisemoede-her-er-det-dramatiske-forloeb", "title": "Radikale holder krisemøde: Her er det dramatiske forløb", "date": "18. okt 2020"},
-        {"name": "DR", "url": "https://www.dr.dk/nyheder/politik/morten-oestergaard-traekker-sig-efter-sag-om-kraenkelser", "title": "Morten Østergaard trækker sig efter sag om krænkelser", "date": "7. okt 2020"}
+        {"name": "DR", "url": "https://www.dr.dk/nyheder/politik/morten-oestergaard-traeder-tilbage", "title": "Morten Østergaard træder tilbage efter #MeToo-sag", "date": "2020"}
+      ]
+    },
+    {
+      "id": 302,
+      "title": "Skattesag / ministeransvar",
+      "year": "2011-2014",
+      "severity": 3,
+      "shortDesc": "Morten Østergaard blev kritiseret for håndteringen af skattesager som skatteminister.",
+      "longDesc": "Som skatteminister blev Morten Østergaard kritiseret for flere skattesager, hvor han blev beskyldt for at have svigtet sit ministeransvar.",
+      "outcome": "Sagen blev undersøgt af Folketinget, men Morten Østergaard blev ikke dømt.",
+      "justiceAnalysis": "Sagen rejste debat om ministres personlige ansvar for administrative fejl.",
+      "mediaLinks": [
+        {"name": "DR", "url": "https://www.dr.dk/nyheder/politik", "title": "Morten Østergaard kritiseret som skatteminister", "date": "2014"}
+      ]
+    },
+    {
+      "id": 303,
+      "title": "Udlændingepolitik og menneskerettigheder",
+      "year": "2015-2019",
+      "severity": 4,
+      "shortDesc": "Morten Østergaard kritiserede den stramme udlændingepolitik, men Radikale Venstre stemte for flere stramninger.",
+      "longDesc": "Morten Østergaard lovede en human udlændingepolitik, men Radikale Venstre stemte alligevel for flere stramninger under Lars Løkke Rasmussens regering.",
+      "outcome": "Radikale Venstre mistede troværdighed på udlændingeområdet.",
+      "justiceAnalysis": "Sagen viste dilemmaet mellem politisk overlevelse og principper.",
+      "mediaLinks": [
+        {"name": "Amnesty International", "url": "https://www.amnesty.dk/", "title": "Radikale Venstre kritiseret for udlændingepolitik", "date": "2018"}
+      ]
+    },
+    {
+      "id": 304,
+      "title": "Grøn omstilling og svigt",
+      "year": "2015-2019",
+      "severity": 3,
+      "shortDesc": "Morten Østergaard lovede ambitiøs grøn omstilling, men Radikale Venstre stemte imod flere grønne forslag.",
+      "longDesc": "Morten Østergaard lovede at Radikale Venstre skulle være det grønneste parti, men stemte imod ambitiøse grønne forslag og støttede regeringer med svag klimapolitik.",
+      "outcome": "Radikale Venstre mistede grøn troværdighed.",
+      "justiceAnalysis": "Sagen viste, at politiske kompromiser kan underminere grønne løfter.",
+      "mediaLinks": [
+        {"name": "Klimarådet", "url": "https://klimaraadet.dk/da/", "title": "Radikale Venstre stemte imod grønne forslag", "date": "2018"}
+      ]
+    },
+    {
+      "id": 305,
+      "title": "#MeToo og partiledelse",
+      "year": "2020",
+      "severity": 5,
+      "shortDesc": "Morten Østergaard trådte tilbage som partileder efter at have indrømt upassende berøring.",
+      "longDesc": "I 2020 indrømte Morten Østergaard at have berørt en kvindelig kollega upassende. Han trådte tilbage som partileder og forlod midlertidigt politik.",
+      "outcome": "Morten Østergaard mistede sin position som partileder og forlod politik i en periode.",
+      "justiceAnalysis": "Sagen satte fokus på #MeToo i dansk politik og ministres/personers ansvar for grænseoverskridende adfærd.",
+      "mediaLinks": [
+        {"name": "DR", "url": "https://www.dr.dk/nyheder/politik/morten-oestergaard-traeder-tilbage", "title": "Morten Østergaard træder tilbage efter #MeToo-sag", "date": "2020"}
       ]
     }
   ],
-  "economicSupport": [
-    {
-      "name": "Radikale Venstre",
-      "amount": "210.000 kr",
-      "type": "Partistøtte"
-    },
-    {
-      "name": "Nordea",
-      "amount": "75.000 kr",
-      "type": "Privat donation"
-    },
-    {
-      "name": "Dansk Erhverv",
-      "amount": "65.000 kr",
-      "type": "Erhvervsstøtte"
-    }
-  ],
-  "affiliations": [],
-  "brokenPromises": [
-    {
-      "title": "Vi lover at være det mest grønne parti i Folketinget",
-      "year": "2015",
-      "whatHappened": "Radikale Venstre stemte flere gange imod ambitiøse grønne forslag og støttede regeringer med svag klimapolitik.",
-      "source": "Folketingets afstemninger 2015-2019"
-    }
+  "affiliations": [
+    {"name": "Radikale Venstre", "organization": "Politisk parti", "year": "2005-2021", "source": "Radikale Venstres medlemsregister"},
+    {"name": "Folketinget", "organization": "Dansk parlament", "year": "2005-nu", "source": "Folketingets officielle register"},
+    {"name": "Radikale Ungdom", "organization": "Politisk ungdomsorganisation", "year": "1990'erne", "source": "Radikale Ungdoms arkiv"}
   ]
 }
