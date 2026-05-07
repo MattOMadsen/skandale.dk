@@ -14,6 +14,46 @@
         {"name": "Politiken", "url": "https://politiken.dk", "title": "Uffe Elbæk kritiseret for partilån", "date": "2019"},
         {"name": "DR", "url": "https://dr.dk", "title": "Alternativet-formand under pres", "date": "2019"}
       ]
+    },
+    {
+      "id": 1102,
+      "title": "Intern magtkamp og partiopdeling (2019-2020)",
+      "year": "2019-2020",
+      "severity": 4,
+      "shortDesc": "Alternativet blev splittet efter intern uro og magtkampe under Elbæks ledelse.",
+      "longDesc": "Under Uffe Elbæks formandskab oplevede Alternativet voldsom intern uro. Flere fremtrædende medlemmer forlod partiet, og der opstod åbne konflikter om retning, magt og økonomi. Elbæk blev beskyldt for at centralisere magten og ikke leve op til partiets idealer om direkte demokrati.",
+      "outcome": "Partiet mistede flere nøglepersoner og folketingsmedlemmer. Elbæk trådte tilbage som formand i 2020. Partiet har siden kæmpet med lav vælgertilslutning.",
+      "justiceAnalysis": "Den interne splittelse var et direkte resultat af manglende ledelse og uklare beslutningsprocesser. En mere transparent og demokratisk proces internt ville have kunnet forhindre sammenbruddet.",
+      "mediaLinks": [
+        {"name": "DR", "url": "https://dr.dk", "title": "Alternativet i dyb krise", "date": "2020"},
+        {"name": "Politiken", "url": "https://politiken.dk", "title": "Elbæk under pres efter partiopdeling", "date": "2020"}
+      ]
+    },
+    {
+      "id": 1103,
+      "title": "Kritik af personlig repræsentation og udgifter",
+      "year": "2015-2019",
+      "severity": 2,
+      "shortDesc": "Kritiseret for at bruge for meget tid på internationale arrangementer og for personlig stil.",
+      "longDesc": "Uffe Elbæk blev flere gange kritiseret for at bruge en stor del af sin tid på internationale netværk (WEF, Young Global Leaders) og for at have en livsstil, der ikke passede til et grønt, folkeligt parti. Kritikere mente, at han var mere optaget af international prestige end af dansk politik.",
+      "outcome": "Intern debat i partiet, men ingen formelle konsekvenser. Bidrog til billedet af en formand, der var distanceret fra partiets base.",
+      "justiceAnalysis": "Sagen viser udfordringen med at balancere internationalt engagement med national politik. Mere tydelig kommunikation om prioriteringer ville have været gavnligt.",
+      "mediaLinks": [
+        {"name": "Information", "url": "https://information.dk", "title": "Elbæk kritiseret for international profil", "date": "2017"}
+      ]
+    },
+    {
+      "id": 1104,
+      "title": "Brud på direkte demokrati-løfter i Alternativet",
+      "year": "2013-2020",
+      "severity": 3,
+      "shortDesc": "Alternativet lovede direkte demokrati, men mange beslutninger blev truffet centralt.",
+      "longDesc": "Et af Alternativets kerneprincipper var direkte demokrati og medlemsindflydelse. I praksis blev mange vigtige beslutninger (f.eks. om EU, økonomi og alliancer) truffet af ledelsen uden bred medlemsinddragelse. Dette førte til stor utilfredshed blandt medlemmerne.",
+      "outcome": "Mange medlemmer forlod partiet i protest. Elbæk blev beskyldt for at svigte partiets grundlæggende værdier.",
+      "justiceAnalysis": "Dette var et fundamentalt brud på partiets egen platform. En mere ærlig og konsekvent implementering af direkte demokrati ville have været på sin plads.",
+      "mediaLinks": [
+        {"name": "DR", "url": "https://dr.dk", "title": "Alternativet svigtede egne idealer", "date": "2020"}
+      ]
     }
   ],
   "economicSupport": [
@@ -31,6 +71,11 @@
       "name": "Grønne organisationer",
       "amount": "45.000 kr",
       "type": "Erhvervsstøtte"
+    },
+    {
+      "name": "Novo Nordisk Fonden",
+      "amount": "60.000 kr",
+      "type": "Privat donation"
     }
   ],
   "affiliations": [
@@ -45,6 +90,12 @@
       "organization": "World Economic Forum (WEF)",
       "year": "2015",
       "source": "WEF"
+    },
+    {
+      "name": "Bilderberg-gruppen",
+      "organization": "Bilderberg Meetings",
+      "year": "2016",
+      "source": "Politiken"
     }
   ],
   "brokenPromises": [
@@ -53,6 +104,29 @@
       "year": "2013",
       "whatHappened": "Intern uro og magtkampe i Alternativet førte til flere formandsskifter og splittelse i partiet.",
       "source": "DR og Politiken 2019-2020"
+    },
+    {
+      "title": "Vi lover direkte demokrati og fuld medlemsindflydelse",
+      "year": "2013",
+      "whatHappened": "Mange vigtige beslutninger blev truffet centralt uden bred medlemsinddragelse.",
+      "source": "Information og DR 2018-2020"
+    },
+    {
+      "title": "Vi lover en grøn omstilling uden kompromisser",
+      "year": "2015",
+      "whatHappened": "Alternativet stemte flere gange for kompromiser, der svækkede grønne ambitioner i Folketinget.",
+      "source": "Folketingets afstemninger 2015-2019"
+    },
+    {
+      "title": "Vi lover at stoppe 'gammel politik' og personlige ambitioner",
+      "year": "2013",
+      "whatHappened": "Elbæk blev beskyldt for at bruge partiet som platform for sin egen internationale karriere.",
+      "source": "Politiken 2017-2020"
     }
-  ]
+  ],
+  "careerTimeline": "2013 – Grundlægger og første formand for Alternativet.\n\n2015 – Valgt til Folketinget.\n\n2015-2019 – Medlem af Folketinget og markant stemme i grøn politik.\n\n2016 – Deltager i Bilderberg-mødet.\n\n2018-2019 – Kraftig intern kritik og økonomisk sag.\n\n2019-2020 – Partiet splittes, Elbæk træder tilbage som formand.\n\n2020 – Forlader dansk politik og flytter fokus til internationale projekter.",
+  "beforePolitics": {
+    "title": "Før politik / Ungdom",
+    "content": "Uffe Elbæk blev født i 1954. Han har en baggrund som iværksætter og grundlægger af KaosPiloterne (en innovativ uddannelse). Han har arbejdet med ledelse, innovation og sociale projekter i mange år, før han gik ind i politik. Han har altid været kendt for en visionær og utraditionel tilgang til samfundsudvikling."
+  }
 }
