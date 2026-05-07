@@ -1,4 +1,4 @@
-// js/modal-broken-promises.js - Brudte valgløfter (separat fil)
+// js/modal-broken-promises.js - Brudte valgløfter (opdateret med klikbare kilder)
 
 function addBrokenPromisesSection(politician) {
   let brokenPromisesHTML = '';
@@ -17,7 +17,14 @@ function addBrokenPromisesSection(politician) {
               <div class="font-semibold text-base mb-1">${p.title}</div>
               <div class="text-xs text-slate-500 mb-2">Lovet i ${p.year}</div>
               <div class="text-sm text-slate-700 mb-2">${p.whatHappened}</div>
-              ${p.source ? `<div class="text-[10px] text-slate-400">Kilde: ${p.source}</div>` : ''}
+              ${p.source ? `
+                <div class="text-[10px] text-slate-400">
+                  Kilde: 
+                  ${typeof p.source === 'object' && p.source.url 
+                    ? `<a href="${p.source.url}" target="_blank" class="text-[#C8102E] underline hover:text-[#C8102E]/80" onclick="event.stopImmediatePropagation()">${p.source.text || p.source.url}</a>`
+                    : p.source}
+                </div>
+              ` : ''}
               <div class="text-[10px] text-[#C8102E] mt-2 font-medium">Klik for detaljer →</div>
             </div>
           `).join('')}
@@ -51,6 +58,29 @@ function addBrokenPromisesSection(politician) {
 }
 
 function showBrokenPromiseDetail(promise, politician) {
+  let sourceHTML = '';
+  if (promise.source) {
+    if (typeof promise.source === 'object' && promise.source.url) {
+      sourceHTML = `
+        <div class="mb-6">
+          <div class="font-semibold text-sm text-slate-500 mb-1">Kilde</div>
+          <a href="${promise.source.url}" target="_blank" 
+             class="inline-flex items-center gap-x-1 text-[#C8102E] underline hover:text-[#C8102E]/80 text-sm">
+            ${promise.source.text || promise.source.url}
+            <i class="fa-solid fa-external-link-alt text-xs"></i>
+          </a>
+        </div>
+      `;
+    } else {
+      sourceHTML = `
+        <div class="mb-6">
+          <div class="font-semibold text-sm text-slate-500 mb-1">Kilde</div>
+          <div class="text-sm text-slate-600">${promise.source}</div>
+        </div>
+      `;
+    }
+  }
+
   const html = `
     <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[200] flex items-center justify-center p-4" id="brokenPromiseModal">
       <div onclick="event.target.id === 'brokenPromiseModal' && closeBrokenPromiseModal()" 
@@ -70,12 +100,7 @@ function showBrokenPromiseDetail(promise, politician) {
             <div class="text-slate-700">${promise.whatHappened}</div>
           </div>
           
-          ${promise.source ? `
-            <div class="mb-6">
-              <div class="font-semibold text-sm text-slate-500 mb-1">Kilde</div>
-              <div class="text-sm text-slate-600">${promise.source}</div>
-            </div>
-          ` : ''}
+          ${sourceHTML}
           
           ${promise.otherPoliticians && promise.otherPoliticians.length > 0 ? `
             <div>
@@ -86,8 +111,7 @@ function showBrokenPromiseDetail(promise, politician) {
                     <span class="font-medium">${name}</span>
                     <span class="text-xs text-[#C8102E] cursor-pointer hover:underline" 
                           onclick="closeBrokenPromiseModal(); showPoliticianByName('${name}')">
-                      Se politiker →
-                    </span>
+                      Se politiker →</span>
                   </div>
                 `).join('')}
               </div>
@@ -114,7 +138,9 @@ function showPoliticianByName(name) {
   const politician = politicians.find(p => p.name.toLowerCase() === name.toLowerCase());
   if (politician) {
     closeBrokenPromiseModal();
-    showPoliticianModal(politician.id);
+    if (typeof window.showPoliticianModal === 'function') {
+      window.showPoliticianModal(politician.id);
+    }
   } else {
     alert('Politiker ikke fundet i databasen.');
   }
