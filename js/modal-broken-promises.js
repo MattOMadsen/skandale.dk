@@ -1,4 +1,4 @@
-// js/modal-broken-promises.js - Brudte valgløfter (opdateret med klikbare kilder)
+// js/modal-broken-promises.js - Brudte valgløfter med klikbare kilder
 
 function addBrokenPromisesSection(politician) {
   let brokenPromisesHTML = '';
@@ -19,10 +19,7 @@ function addBrokenPromisesSection(politician) {
               <div class="text-sm text-slate-700 mb-2">${p.whatHappened}</div>
               ${p.source ? `
                 <div class="text-[10px] text-slate-400">
-                  Kilde: 
-                  ${typeof p.source === 'object' && p.source.url 
-                    ? `<a href="${p.source.url}" target="_blank" class="text-[#C8102E] underline hover:text-[#C8102E]/80" onclick="event.stopImmediatePropagation()">${p.source.text || p.source.url}</a>`
-                    : p.source}
+                  Kilde: ${linkifySource(p.source)}
                 </div>
               ` : ''}
               <div class="text-[10px] text-[#C8102E] mt-2 font-medium">Klik for detaljer →</div>
@@ -43,7 +40,6 @@ function addBrokenPromisesSection(politician) {
     brokenDiv.innerHTML = brokenPromisesHTML;
     modalContent.appendChild(brokenDiv);
 
-    // Tilføj click event listeners
     const items = brokenDiv.querySelectorAll('.broken-promise-item');
     items.forEach(item => {
       item.addEventListener('click', () => {
@@ -55,6 +51,16 @@ function addBrokenPromisesSection(politician) {
       });
     });
   }
+}
+
+function linkifySource(source) {
+  if (typeof source === 'object' && source.url) {
+    return `<a href="${source.url}" target="_blank" class="text-[#C8102E] underline hover:text-[#C8102E]/80">${source.text || source.url}</a>`;
+  }
+  
+  // Linkify URLs in plain text
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  return source.replace(urlRegex, '<a href="$1" target="_blank" class="text-[#C8102E] underline hover:text-[#C8102E]/80">$1</a>');
 }
 
 function showBrokenPromiseDetail(promise, politician) {
@@ -72,10 +78,11 @@ function showBrokenPromiseDetail(promise, politician) {
         </div>
       `;
     } else {
+      const linkedSource = linkifySource(promise.source);
       sourceHTML = `
         <div class="mb-6">
           <div class="font-semibold text-sm text-slate-500 mb-1">Kilde</div>
-          <div class="text-sm text-slate-600">${promise.source}</div>
+          <div class="text-sm text-slate-600">${linkedSource}</div>
         </div>
       `;
     }
