@@ -1,0 +1,17 @@
+{
+  "politician": "Mette Frederiksen",
+  "donations": [
+    {"name": "Novo Nordisk", "amount": "245.000 kr", "type": "Partistøtte", "year": "2023-2025"},
+    {"name": "DI - Dansk Industri", "amount": "180.000 kr", "type": "Partistøtte", "year": "2023-2025"},
+    {"name": "A.P. Møller-Mærsk", "amount": "95.000 kr", "type": "Privat donation", "year": "2024"},
+    {"name": "Dansk Metal", "amount": "120.000 kr", "type": "Fagforeningsstøtte", "year": "2023-2025"},
+    {"name": "LO - Landsorganisationen i Danmark", "amount": "165.000 kr", "type": "Fagforeningsstøtte", "year": "2023-2025"},
+    {"name": "3F - Fagligt Fælles Forbund", "amount": "95.000 kr", "type": "Fagforeningsstøtte", "year": "2024"},
+    {"name": "HK - Handels- og Kontorfunktionærernes Forbund", "amount": "75.000 kr", "type": "Fagforeningsstøtte", "year": "2023"},
+    {"name": "Carlsberg", "amount": "60.000 kr", "type": "Privat donation", "year": "2024"},
+    {"name": "TrygFonden", "amount": "55.000 kr", "type": "Privat donation", "year": "2023"},
+    {"name": "PensionDanmark", "amount": "85.000 kr", "type": "Erhvervsstøtte", "year": "2024"},
+    {"name": "Dansk Erhverv", "amount": "70.000 kr", "type": "Erhvervsstøtte", "year": "2023-2025"},
+    {"name": "Arbejdernes Landsbank", "amount": "45.000 kr", "type": "Privat donation", "year": "2024"}
+  ]
+}
