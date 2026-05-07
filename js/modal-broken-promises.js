@@ -1,4 +1,4 @@
-// js/modal-broken-promises.js - Brudte valgløfter med klikbare kilder
+// js/modal-broken-promises.js - Brudte valgløfter (robust kilde-håndtering)
 
 function addBrokenPromisesSection(politician) {
   let brokenPromisesHTML = '';
@@ -19,7 +19,7 @@ function addBrokenPromisesSection(politician) {
               <div class="text-sm text-slate-700 mb-2">${p.whatHappened}</div>
               ${p.source ? `
                 <div class="text-[10px] text-slate-400">
-                  Kilde: ${linkifySource(p.source)}
+                  Kilde: ${renderSourceLink(p.source)}
                 </div>
               ` : ''}
               <div class="text-[10px] text-[#C8102E] mt-2 font-medium">Klik for detaljer →</div>
@@ -53,39 +53,29 @@ function addBrokenPromisesSection(politician) {
   }
 }
 
-function linkifySource(source) {
+function renderSourceLink(source) {
+  if (!source) return '';
+  
   if (typeof source === 'object' && source.url) {
     return `<a href="${source.url}" target="_blank" class="text-[#C8102E] underline hover:text-[#C8102E]/80">${source.text || source.url}</a>`;
   }
   
-  // Linkify URLs in plain text
+  // Fallback: linkify hvis der er URL i streng
   const urlRegex = /(https?:\/\/[^\s]+)/g;
   return source.replace(urlRegex, '<a href="$1" target="_blank" class="text-[#C8102E] underline hover:text-[#C8102E]/80">$1</a>');
 }
 
 function showBrokenPromiseDetail(promise, politician) {
   let sourceHTML = '';
+  
   if (promise.source) {
-    if (typeof promise.source === 'object' && promise.source.url) {
-      sourceHTML = `
-        <div class="mb-6">
-          <div class="font-semibold text-sm text-slate-500 mb-1">Kilde</div>
-          <a href="${promise.source.url}" target="_blank" 
-             class="inline-flex items-center gap-x-1 text-[#C8102E] underline hover:text-[#C8102E]/80 text-sm">
-            ${promise.source.text || promise.source.url}
-            <i class="fa-solid fa-external-link-alt text-xs"></i>
-          </a>
-        </div>
-      `;
-    } else {
-      const linkedSource = linkifySource(promise.source);
-      sourceHTML = `
-        <div class="mb-6">
-          <div class="font-semibold text-sm text-slate-500 mb-1">Kilde</div>
-          <div class="text-sm text-slate-600">${linkedSource}</div>
-        </div>
-      `;
-    }
+    const linked = renderSourceLink(promise.source);
+    sourceHTML = `
+      <div class="mb-6">
+        <div class="font-semibold text-sm text-slate-500 mb-1">Kilde</div>
+        <div class="text-sm text-slate-600">${linked}</div>
+      </div>
+    `;
   }
 
   const html = `
