@@ -1,4 +1,4 @@
-// js/data.js - Minimal fix: brokenPromises hentes fra korrekt mappe
+// js/data.js - Komplet fix: Henter fra alle dedikerede mapper
 
 let politicians = [];
 
@@ -18,12 +18,15 @@ async function loadPoliticians() {
 
       let details = {};
       let brokenPromises = [];
+      let economicSupport = [];
 
+      // Details (scandals + affiliations)
       try {
         const d = await fetch(`data/details/${slug}-details.json`);
         if (d.ok) details = await d.json();
       } catch (e) {}
 
+      // Broken promises (dedikeret mappe)
       try {
         const b = await fetch(`data/broken-promises/${slug}.json`);
         if (b.ok) {
@@ -32,9 +35,18 @@ async function loadPoliticians() {
         }
       } catch (e) {}
 
+      // Economic support (dedikeret mappe)
+      try {
+        const e = await fetch(`data/economic-support/${slug}.json`);
+        if (e.ok) {
+          const eData = await e.json();
+          economicSupport = eData.donations || eData.economicSupport || [];
+        }
+      } catch (e) {}
+
       return {
         scandals: details.scandals || [],
-        economicSupport: details.economicSupport || [],
+        economicSupport: economicSupport,
         brokenPromises: brokenPromises,
         affiliations: details.affiliations || []
       };
@@ -47,7 +59,7 @@ async function loadPoliticians() {
       ...detailsList[index]
     }));
 
-    console.log(`[Skandale.dk] Alle ${politicians.length} politikere loaded`);
+    console.log(`[Skandale.dk] Alle ${politicians.length} politikere loaded med fuld data`);
     return politicians;
   } catch (error) {
     console.error('Fejl ved loading:', error);
