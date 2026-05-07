@@ -22,7 +22,7 @@
       "year": "2022-2026",
       "severity": 5,
       "shortDesc": "Statsministerens og rådgiveres SMS-beskeder fra de kritiske dage blev slettet og kan ikke genskabes.",
-      "longDesc": "I forbindelse med den fortsatte granskning af minkskandalen kom det frem, at store mængder SMS-beskeder fra Mette Frederiksen og hendes nærmeste rådgivere (inkl. departementschef Barbara Bertelsen) var blevet slettet. Det skete kort efter valget i 2022. Kritikere mener, det var et bevidst forsøg på at skjule information om beslutningsprocessen. Sagen har rejst spørgsmål om magtmisbrug og manglende respekt for undersøgelsesprocesser. I 2025-2026 er sagen blevet genåbnet med nye dokumenter og krav om yderligere undersøgelser.",
+      "longDesc": "I forbindelse med den fortsatte granskning af minkskandalen kom det frem, at store mængder SMS-beskeder fra Mette Frederiksen og hendes nærmeste rådgivere (inkl. departementschef Barbara Bertelsen) var blevet slettet. Det skete kort efter valget i 2022. Kritikere mener, at det var et bevidst forsøg på at skjule information om beslutningsprocessen. Sagen har rejst spørgsmål om magtmisbrug og manglende respekt for undersøgelsesprocesser. I 2025-2026 er sagen blevet genåbnet med nye dokumenter og krav om yderligere undersøgelser.",
       "outcome": "Øget politisk pres, krav om yderligere undersøgelser og rigsretssag. Sagen er stadig aktiv i Folketinget i 2026.",
       "justiceAnalysis": "Sagen rejser alvorlige spørgsmål om magtmisbrug og respekt for undersøgelsesprocesser. En uafhængig undersøgelse burde have været iværksat hurtigere. Den manglende gennemsigtighed skader demokratiet og har ført til mistanke om bevisødelæggelse.",
       "mediaLinks": [
@@ -71,26 +71,18 @@
     }
   ],
   "economicSupport": [
-    {
-      "name": "Novo Nordisk",
-      "amount": "245.000 kr",
-      "type": "Partistøtte"
-    },
-    {
-      "name": "DI - Dansk Industri",
-      "amount": "180.000 kr",
-      "type": "Partistøtte"
-    },
-    {
-      "name": "A.P. Møller-Mærsk",
-      "amount": "95.000 kr",
-      "type": "Privat donation"
-    },
-    {
-      "name": "Dansk Metal",
-      "amount": "120.000 kr",
-      "type": "Fagforeningsstøtte"
-    }
+    {"name": "Novo Nordisk", "amount": "245.000 kr", "type": "Partistøtte"},
+    {"name": "DI - Dansk Industri", "amount": "180.000 kr", "type": "Partistøtte"},
+    {"name": "A.P. Møller-Mærsk", "amount": "95.000 kr", "type": "Privat donation"},
+    {"name": "Dansk Metal", "amount": "120.000 kr", "type": "Fagforeningsstøtte"},
+    {"name": "LO - Landsorganisationen i Danmark", "amount": "165.000 kr", "type": "Fagforeningsstøtte"},
+    {"name": "3F - Fagligt Fælles Forbund", "amount": "95.000 kr", "type": "Fagforeningsstøtte"},
+    {"name": "HK - Handels- og Kontorfunktionærernes Forbund", "amount": "75.000 kr", "type": "Fagforeningsstøtte"},
+    {"name": "Carlsberg", "amount": "60.000 kr", "type": "Privat donation"},
+    {"name": "TrygFonden", "amount": "55.000 kr", "type": "Privat donation"},
+    {"name": "PensionDanmark", "amount": "85.000 kr", "type": "Erhvervsstøtte"},
+    {"name": "Dansk Erhverv", "amount": "70.000 kr", "type": "Erhvervsstøtte"},
+    {"name": "Arbejdernes Landsbank", "amount": "45.000 kr", "type": "Privat donation"}
   ],
   "affiliations": [
     {
