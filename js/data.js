@@ -1,62 +1,58 @@
-// js/data.js - Endelig version til details-mappe struktur (v2.1)
+// js/data.js - Data loading (opdateret til at bruge dedikeret broken-promises mappe)
 
 let politicians = [];
 
 async function loadPoliticians() {
-  const politicianFiles = [
-    'data/politicians/mette-frederiksen.json',
-    'data/politicians/inger-stoejberg.json',
-    'data/politicians/morten-oestergaard.json',
-    'data/politicians/helle-thorning-schmidt.json',
-    'data/politicians/lars-loekke-rasmussen.json',
-    'data/politicians/pia-kjaersgaard.json',
-    'data/politicians/anders-fogh-rasmussen.json',
-    'data/politicians/morten-messerschmidt.json',
-    'data/politicians/kristian-thulesen-dahl.json',
-    'data/politicians/soeren-pape-poulsen.json',
-    'data/politicians/uffe-elbaek.json',
-    'data/politicians/claus-hjort-frederiksen.json'
-  ];
-
   try {
-    // 1. Load alle core politician filer
-    const coreResponses = await Promise.all(politicianFiles.map(file => fetch(file)));
-    const cores = await Promise.all(coreResponses.map(res => res.json()));
+    // 1. Load core politikere
+    const coreFiles = [
+      'mette-frederiksen', 'inger-stoejberg', 'morten-oestergaard', 'helle-thorning-schmidt',
+      'lars-loekke-rasmussen', 'pia-kjaersgaard', 'anders-fogh-rasmussen', 'morten-messerschmidt',
+      'kristian-thulesen-dahl', 'soeren-pape-poulsen', 'uffe-elbaek', 'claus-hjort-frederiksen'
+    ];
 
-    // 2. Load details for hver politiker
-    const detailPromises = cores.map(core => {
+    const corePromises = coreFiles.map(slug => 
+      fetch(`data/politicians/${slug}.json`).then(r => r.json())
+    );
+    const cores = await Promise.all(corePromises);
+
+    // 2. Load details + brokenPromises fra dedikeret mappe
+    const detailPromises = cores.map(async (core) => {
       const slug = core.name.toLowerCase()
-        .replace(/æ/g, 'ae')
-        .replace(/ø/g, 'oe')
-        .replace(/å/g, 'aa')
+        .replace(/æ/g, 'ae').replace(/ø/g, 'oe').replace(/å/g, 'aa')
         .replace(/[^a-z0-9]+/g, '-');
-      
-      return fetch(`data/details/${slug}-details.json`)
-        .then(res => {
-          if (!res.ok) {
-            console.warn(`Ingen details fundet for ${core.name}`);
-            return { scandals: [], economicSupport: [], brokenPromises: [], affiliations: [] };
-          }
-          return res.json();
-        });
-    });
 
-    const detailsList = await Promise.all(detailPromises);
+      const [detailsRes, brokenRes] = await Promise.all([
+        fetch(`data/details/${slug}-details.json`).catch(() => ({ json: () => ({}) })),
+        fetch(`data/broken-promises/${slug}.json`).catch(() => ({ json: () => ({ brokenPromises: [] }) }))
+      ]);
 
-    // 3. Merge core + details
-    politicians = cores.map((core, index) => {
-      const details = detailsList[index];
+      const details = await detailsRes.json().catch(() => ({}));
+      const brokenData = await brokenRes.json().catch(() => ({}));
+
       return {
-        ...core,
         scandals: details.scandals || [],
         economicSupport: details.economicSupport || [],
-        brokenPromises: details.brokenPromises || [],
+        brokenPromises: brokenData.brokenPromises || details.brokenPromises || [],
         affiliations: details.affiliations || []
       };
     });
 
-    console.log('%c[Skandale.dk] Alle 12 politikere + details loaded succesfuldt', 'color:#10b981');
+    const detailsList = await Promise.all(detailPromises);
+
+    // 3. Merge
+    politicians = cores.map((core, index) => {
+      const d = detailsList[index];
+      return {
+        ...core,
+        ...d
+      };
+    });
+
+    console.log(`[Skandale.dk] Alle ${politicians.length} politikere + details loaded succesfuldt`);
+    return politicians;
   } catch (error) {
-    console.error('Kunne ikke loade data:', error);
+    console.error('Fejl ved loading af politikere:', error);
+    return [];
   }
 }
