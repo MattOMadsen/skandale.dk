@@ -1,4 +1,4 @@
-// js/ui.js - Render politikere på forsiden (med data-id)
+// js/ui.js - Render politikere på forsiden (med direkte click handler)
 
 function renderPoliticians(filteredPoliticians = null) {
   const grid = document.getElementById('politiciansGrid');
@@ -58,4 +58,16 @@ function renderPoliticians(filteredPoliticians = null) {
   });
 
   grid.innerHTML = html;
+
+  // Direkte click handler på hvert kort (mere robust end delegation)
+  grid.querySelectorAll('.politician-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const id = parseInt(card.dataset.id);
+      if (typeof window.showPoliticianModal === 'function') {
+        window.showPoliticianModal(id);
+      } else {
+        console.error('showPoliticianModal ikke fundet');
+      }
+    });
+  });
 }
