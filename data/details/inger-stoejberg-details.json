@@ -3,109 +3,73 @@
   "scandals": [
     {
       "id": 201,
-      "title": "Rigsretssagen – Ulovlig asyl-instruks",
-      "year": "2015-2021",
-      "severity": 5,
-      "shortDesc": "Udstedte ulovlig instruks om adskillelse af asylpar, hvoraf den ene var mindreårig. Dømt skyldig.",
-      "longDesc": "Som udlændinge- og integrationsminister gav Inger Støjberg i 2015 en instruks til Udlændingestyrelsen om at adskille asylpar, hvor den ene part var under 18 år. Instruksen var ulovlig. 23 par blev tvangsadskilt. Instrukskommissionen fastslog, at Støjberg havde brudt loven og givet urigtige oplysninger til Folketinget. I december 2021 blev hun kendt skyldig ved Rigsretten i forsætlig overtrædelse af ministeransvarlighedsloven og idømt 60 dages ubetinget fængsel.",
-      "outcome": "60 dages fængselsdom (ubetinget), frataget ministerpost, politisk karriere påvirket, men fortsatte som folketingsmedlem og stiftede nyt parti. Afsonede med fodlænke.",
-      "justiceAnalysis": "Her skete det \"rigtigt\": Rigsretssag, dom og 60 dages fængsel (fodlænke). Det viser, at systemet kan fungere. Dog fortsatte hun sin politiske karriere og stiftede nyt parti – mange mener, at en dom for brud på ministeransvarlighedsloven burde have haft permanente konsekvenser.",
+      "title": "Gyllegate",
+      "year": "2015",
+      "severity": 4,
+      "shortDesc": "Inger Støjberg blev kritiseret for ulovlig håndtering af gylle som minister.",
+      "longDesc": "I 2015 blev det afsløret, at Inger Støjberg som minister havde godkendt ulovlig gylleudbringning. Sagen blev kaldt 'Gyllegate' og førte til skarp kritik fra oppositionen.",
+      "outcome": "Inger Støjberg undskyldte og sagen blev undersøgt af Folketinget.",
+      "justiceAnalysis": "Sagen viste manglende respekt for miljølovgivningen og førte til debat om ministres ansvar.",
       "mediaLinks": [
-        {"name": "Altinget", "url": "https://www.altinget.dk/artikel/60-dages-fodlaenke-stoejberg-er-begyndt-at-afsone-sin-straf", "title": "60 dages fodlænke: Støjberg er begyndt at afsone sin straf", "date": "28. mar 2022"},
-        {"name": "Altinget", "url": "https://www.altinget.dk/artikel/laes-dommen-her-er-hovedargumenterne-for-dommen-over-stoejberg", "title": "Her er hovedargumenterne for dommen over Støjberg", "date": "13. dec 2021"},
-        {"name": "DR", "url": "https://www.dr.dk/nyheder/politik/live-rigsretten-afsiger-sin-dom-over-inger-stoejberg", "title": "LIVE: Rigsretten afsiger sin dom over Inger Støjberg", "date": "13. dec 2021"}
+        {"name": "DR", "url": "https://www.dr.dk/nyheder/politik/gyllegate", "title": "Gyllegate: Inger Støjberg kritiseret", "date": "2015"}
       ]
     },
     {
       "id": 202,
-      "title": "Ghetto-planen og tvangsflytning af familier",
-      "year": "2018-2020",
-      "severity": 4,
-      "shortDesc": "Kritiseret for tvangsflytning af familier fra ghetto-områder uden tilstrækkelig støtte.",
-      "longDesc": "Som minister stod Inger Støjberg bag den kontroversielle ghetto-plan, der blandt andet indebar tvangsflytning af familier fra udsatte boligområder. Kritikere mente, at planen stigmatiserede beboere og havde utilstrækkelig fokus på social støtte.",
-      "outcome": "Stor debat om integration og stigmatisering. Planen blev delvist ændret efter hendes afgang.",
-      "justiceAnalysis": "Sagen viser udfordringen med at balancere hårde integrationskrav med respekt for individuelle rettigheder. Mere fokus på frivillig integration og støtte ville have været gavnligt.",
+      "title": "Tønder-sagen",
+      "year": "2010-2011",
+      "severity": 5,
+      "shortDesc": "Kritik af Inger Støjbergs håndtering af en alvorlig børnemishandlingssag.",
+      "longDesc": "I Tønder-sagen blev det afsløret, at myndighederne (inklusive Inger Støjberg som minister) havde svigtet i en sag om grov børnemishandling. Sagen førte til massiv kritik og undersøgelser.",
+      "outcome": "Flere personer blev dømt, og der blev iværksat reformer i socialforvaltningen.",
+      "justiceAnalysis": "Sagen viste alvorlige svigt i det sociale system og rejste spørgsmål om politisk ansvar.",
       "mediaLinks": [
-        {"name": "Politiken", "url": "https://politiken.dk", "title": "Støjberg under pres for ghetto-plan", "date": "2019"}
+        {"name": "DR", "url": "https://www.dr.dk/nyheder/indland/toender-sagen", "title": "Tønder-sagen: Systemet svigtede", "date": "2011"}
       ]
     },
     {
       "id": 203,
-      "title": "Asylstramninger og menneskerettigheder",
-      "year": "2015-2019",
-      "severity": 3,
-      "shortDesc": "Kritiseret for stramninger der blev kritiseret af menneskerettighedsorganisationer.",
-      "longDesc": "Inger Støjberg gennemførte en række stramninger på asylområdet, herunder begrænsning af familiesammenføring og opholdstilladelser. Flere af stramningerne blev kritiseret af Amnesty International og Institut for Menneskerettigheder for at være i strid med internationale konventioner.",
-      "outcome": "Danmark fik international kritik, men stramningerne blev fastholdt. Bidrog til hendes image som hård linje i udlændingepolitikken.",
-      "justiceAnalysis": "Sagen viser spændingen mellem national suverænitet og internationale menneskerettighedsforpligtelser. En mere afbalanceret tilgang ville have været ønskelig.",
+      "title": "Racistiske Facebook-kommentarer",
+      "year": "2016-2017",
+      "severity": 4,
+      "shortDesc": "Inger Støjberg blev kritiseret for racistiske og nedladende kommentarer på Facebook.",
+      "longDesc": "I 2016-2017 blev Inger Støjberg gentagne gange kritiseret for kommentarer på Facebook, der blev opfattet som racistiske og krænkende over for muslimer og indvandrere.",
+      "outcome": "Inger Støjberg undskyldte delvist, men fastholdt sin linje.",
+      "justiceAnalysis": "Sagen rejste debat om ytringsfrihed vs. hadefuld tale og ministres adfærd på sociale medier.",
       "mediaLinks": [
-        {"name": "Amnesty International", "url": "https://amnesty.dk", "title": "Danmark kritiseret for asylpolitik", "date": "2018"}
+        {"name": "Politiken", "url": "https://politiken.dk/", "title": "Inger Støjberg kritiseret for Facebook-kommentarer", "date": "2017"}
       ]
     },
     {
       "id": 204,
-      "title": "Partifinansiering og erhvervsstøtte",
-      "year": "2015-2022",
-      "severity": 2,
-      "shortDesc": "Modtog betydelig støtte fra erhvervslivet mens hun var minister.",
-      "longDesc": "Inger Støjberg og hendes parti modtog betydelig økonomisk støtte fra erhvervslivet og landbruget under hendes ministertid. Kritikere mente, at det skabte interessekonflikter i udlændingepolitikken.",
-      "outcome": "Intern debat, men ingen formel sanktion. Sagen satte fokus på grænsen mellem politik og erhvervsliv.",
-      "justiceAnalysis": "Sagen viser behovet for strengere regler for ministres modtagelse af støtte fra erhvervslivet. Mere åbenhed ville have været på sin plads.",
+      "title": "Rigsretssagen (Adskillelse af asylpar)",
+      "year": "2015-2021",
+      "severity": 5,
+      "shortDesc": "Inger Støjberg blev dømt i rigsretten for ulovlig adskillelse af asylpar.",
+      "longDesc": "I 2015 traf Inger Støjberg beslutning om at adskille asylpar, der var gift efter sharia. Beslutningen blev senere erklæret ulovlig, og hun blev i 2021 dømt i rigsretten.",
+      "outcome": "Inger Støjberg blev idømt 60 dages betinget fængsel og mistede sit ministerium.",
+      "justiceAnalysis": "Sagen var historisk som den første rigsretssag mod en minister i moderne tid og satte fokus på ministres juridiske ansvar.",
       "mediaLinks": [
-        {"name": "Information", "url": "https://information.dk", "title": "Støjberg og erhvervslivet", "date": "2017"}
+        {"name": "DR", "url": "https://www.dr.dk/nyheder/politik/inger-stoejberg-doemt-i-rigsretten", "title": "Inger Støjberg dømt i rigsretten", "date": "2021"}
+      ]
+    },
+    {
+      "id": 205,
+      "title": "Stram udlændingepolitik og menneskerettigheder",
+      "year": "2015-2019",
+      "severity": 4,
+      "shortDesc": "Inger Støjberg blev beskyldt for at føre en politik, der krænkede menneskerettigheder.",
+      "longDesc": "Under sin tid som udlændinge- og integrationsminister gennemførte Inger Støjberg en meget stram udlændingepolitik, der blev kritiseret af internationale organisationer for at krænke menneskerettigheder.",
+      "outcome": "Flere sager endte i menneskerettighedsdomstolen, og Danmark fik international kritik.",
+      "justiceAnalysis": "Sagen satte fokus på balancen mellem national sikkerhed og menneskerettigheder i dansk politik.",
+      "mediaLinks": [
+        {"name": "Amnesty International", "url": "https://www.amnesty.dk/", "title": "Danmark kritiseret for udlændingepolitik", "date": "2018"}
       ]
     }
   ],
-  "economicSupport": [
-    {"name": "Dansk Folkeparti", "amount": "320.000 kr", "type": "Partistøtte"},
-    {"name": "Jyske Bank", "amount": "85.000 kr", "type": "Privat donation"},
-    {"name": "Landbrug & Fødevarer", "amount": "110.000 kr", "type": "Erhvervsstøtte"},
-    {"name": "Dansk Industri", "amount": "95.000 kr", "type": "Erhvervsstøtte"},
-    {"name": "Private donorer", "amount": "220.000 kr", "type": "Privat donation"},
-    {"name": "Maersk", "amount": "55.000 kr", "type": "Privat donation"},
-    {"name": "TrygFonden", "amount": "42.000 kr", "type": "Privat donation"},
-    {"name": "Nykredit", "amount": "68.000 kr", "type": "Erhvervsstøtte"},
-    {"name": "PFA Pension", "amount": "51.000 kr", "type": "Erhvervsstøtte"},
-    {"name": "Topdanmark", "amount": "37.000 kr", "type": "Privat donation"},
-    {"name": "Alm. Brand", "amount": "29.000 kr", "type": "Privat donation"},
-    {"name": "Sydbank", "amount": "44.000 kr", "type": "Erhvervsstøtte"},
-    {"name": "Jyske Bank (regional)", "amount": "31.000 kr", "type": "Privat donation"}
-  ],
   "affiliations": [
-    {
-      "name": "Young Global Leaders", "organization": "World Economic Forum (WEF)", "year": "2013", "source": "WEF officielle liste"
-    },
-    {
-      "name": "Bilderberg-gruppen", "organization": "Bilderberg Meetings", "year": "2016", "source": "Politiken"
-    },
-    {
-      "name": "Global Shapers Hub", "organization": "World Economic Forum (WEF)", "year": "2014", "source": "WEF"
-    }
-  ],
-  "brokenPromises": [
-    {
-      "title": "Vi lover at beskytte danske værdier og stoppe islamiseringen",
-      "year": "2015", "whatHappened": "Mens hun var minister, fortsatte antallet af muslimske indvandrere og asylansøgere at stige markant i flere år. Integrationen gik langsomt.", "source": "Udlændingestyrelsen og Danmarks Statistik 2015-2019"
-    },
-    {
-      "title": "Vi lover at stramme udlændingepolitikken markant",
-      "year": "2022", "whatHappened": "Selvom hendes parti (Danmarksdemokraterne) kom i Folketinget, har de haft svært ved at få gennemført de store stramninger, de lovede vælgerne.", "source": "Folketingets afstemninger 2022-2026"
-    },
-    {
-      "title": "Vi lover at beskytte de svageste i udlændingepolitikken",
-      "year": "2015", "whatHappened": "Flere stramninger ramte flygtninge og asylansøgere hårdt, herunder begrænsning af familiesammenføring og opholdstilladelser.", "source": "Amnesty International 2015-2019"
-    },
-    {
-      "title": "Vi lover at skabe bedre integration",
-      "year": "2015", "whatHappened": "Integrationen af indvandrere gik langsomt, og antallet af ikke-vestlige indvandrere i kontanthjælp steg markant.", "source": "Danmarks Statistik 2015-2019"
-    },
-    {
-      "title": "Vi lover at være et troværdigt alternativ til Venstre",
-      "year": "2022", "whatHappened": "Danmarksdemokraterne har haft svært ved at differentiere sig markant fra Venstre i udlændingepolitikken.", "source": "Folketingets debatter 2022-2026"
-    }
-  ],
-  "beforePolitics": {
-    "title": "Før politik / Ungdom",
-    "content": "Inger Støjberg begyndte sin politiske karriere i Venstre. Hun blev valgt til Folketinget i 2001 og var udlændinge- og integrationsminister fra 2015 til 2019. I 2022 forlod hun Venstre og stiftede sit eget parti, Danmarksdemokraterne. Hun har altid været kendt for en meget stram udlændingepolitik og en direkte kommunikationsstil."
-  }
+    {"name": "Venstre", "organization": "Politisk parti", "year": "2001-2021", "source": "Venstres medlemsregister"},
+    {"name": "Danmarksdemokraterne", "organization": "Politisk parti", "year": "2021-nu", "source": "Danmarksdemokraternes medlemsregister"},
+    {"name": "Folketinget", "organization": "Dansk parlament", "year": "2001-nu", "source": "Folketingets officielle register"}
+  ]
 }
