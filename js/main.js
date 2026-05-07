@@ -4,7 +4,7 @@ function initializeEverything() {
   loadPoliticians().then(() => {
     renderPoliticians();
     
-    // ROBUST FIX: Event delegation for politiker-kort på forsiden
+    // ROBUST EVENT DELEGATION for politiker-kort på forsiden
     const grid = document.getElementById('politiciansGrid');
     if (grid) {
       grid.addEventListener('click', function(e) {
