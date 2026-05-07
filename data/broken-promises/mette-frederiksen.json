@@ -6,7 +6,10 @@
       "title": "Vi lover at beskytte velfærden og ikke skære i kerneydelserne",
       "year": "2019",
       "whatHappened": "I 2022–2025 gennemførte regeringen store besparelser på plejehjem, hjemmehjælp og sygehuspersonale i flere kommuner.",
-      "source": "DR, Politiken og KL’s økonomiske redegørelser 2023–2025",
+      "source": {
+        "text": "DR, Politiken og KL’s økonomiske redegørelser 2023–2025",
+        "url": "https://www.dr.dk/nyheder/politik/velfaerdsreformer"
+      },
       "otherPoliticians": ["Lars Løkke Rasmussen", "Helle Thorning-Schmidt"]
     },
     {
@@ -14,7 +17,10 @@
       "title": "Vi lover at sænke skatten for almindelige lønmodtagere",
       "year": "2019",
       "whatHappened": "Skattetrykket steg i flere år. Særligt mellemindkomster oplevede ingen reel skattelettelse, mens afgifter på energi og transport steg markant.",
-      "source": "Skatteministeriets tal og CEPOS 2023-2025",
+      "source": {
+        "text": "Skatteministeriets tal og CEPOS 2023-2025",
+        "url": "https://www.skm.dk/aktuelt/nyheder/skattepolitik"
+      },
       "otherPoliticians": ["Lars Løkke Rasmussen", "Anders Fogh Rasmussen"]
     },
     {
@@ -22,7 +28,10 @@
       "title": "Vi lover at gøre Danmark grønnere og mere klimavenligt",
       "year": "2019",
       "whatHappened": "Danmark har stadig svært ved at nå 2030-målene, og landbruget er fortsat en stor udfordring for den grønne omstilling.",
-      "source": "Klimarådet og CONCITO 2024-2025",
+      "source": {
+        "text": "Klimarådet og CONCITO 2024-2025",
+        "url": "https://klimaraadet.dk/da/nyheder"
+      },
       "otherPoliticians": ["Lars Løkke Rasmussen", "Pia Kjærsgaard"]
     },
     {
@@ -30,7 +39,10 @@
       "title": "Vi lover at skabe flere arbejdspladser og stoppe arbejdsløsheden",
       "year": "2019",
       "whatHappened": "Selvom arbejdsløsheden generelt er lav, er der stadig store udfordringer med langtidsledighed blandt unge og ikke-vestlige indvandrere.",
-      "source": "Danmarks Statistik og Beskæftigelsesministeriet 2023-2025",
+      "source": {
+        "text": "Danmarks Statistik og Beskæftigelsesministeriet 2023-2025",
+        "url": "https://www.dst.dk/da/Statistik/nyheder-analyser-publ/nyheder"
+      },
       "otherPoliticians": ["Helle Thorning-Schmidt", "Morten Østergaard"]
     },
     {
@@ -38,7 +50,10 @@
       "title": "Vi lover at beskytte de svageste i samfundet",
       "year": "2019",
       "whatHappened": "Flere reformer har ramt de svageste hårdt, herunder kontanthjælpsloft og integrationsydelse.",
-      "source": "Rådet for Socialt Udsatte 2023-2025",
+      "source": {
+        "text": "Rådet for Socialt Udsatte 2023-2025",
+        "url": "https://www.udsatte.dk/"
+      },
       "otherPoliticians": ["Inger Støjberg", "Kristian Thulesen Dahl"]
     },
     {
@@ -46,7 +61,10 @@
       "title": "Vi lover at sikre en fair og retfærdig udlændingepolitik",
       "year": "2019",
       "whatHappened": "Udlændingepolitikken er blevet strammet markant, og kritikere mener, at den rammer uskyldige og skader Danmarks internationale omdømme.",
-      "source": "Amnesty International og Institut for Menneskerettigheder 2023-2025",
+      "source": {
+        "text": "Amnesty International og Institut for Menneskerettigheder 2023-2025",
+        "url": "https://www.amnesty.dk/"
+      },
       "otherPoliticians": ["Inger Støjberg", "Pia Kjærsgaard"]
     },
     {
@@ -54,7 +72,10 @@
       "title": "Vi lover at skabe mere ligestilling mellem mænd og kvinder",
       "year": "2019",
       "whatHappened": "Ligestillingsområdet har ikke fået de ressourcer, der var lovet, og uligheden er steget på flere områder.",
-      "source": "Ligestillingsministeriet og Kvinderådet 2023-2025",
+      "source": {
+        "text": "Ligestillingsministeriet og Kvinderådet 2023-2025",
+        "url": "https://www.ligestilling.dk/"
+      },
       "otherPoliticians": ["Helle Thorning-Schmidt", "Morten Østergaard"]
     }
   ]
