@@ -1,0 +1,25 @@
+{
+  "politician": "Morten Østergaard",
+  "donations": [
+    {"name": "Radikale Venstre", "amount": "1.250.000 kr", "type": "Partistøtte", "year": "2023-2025"},
+    {"name": "Nordea", "amount": "420.000 kr", "type": "Erhvervsstøtte", "year": "2024"},
+    {"name": "Dansk Erhverv", "amount": "310.000 kr", "type": "Erhvervsstøtte", "year": "2023-2025"},
+    {"name": "Dansk Industri", "amount": "275.000 kr", "type": "Erhvervsstøtte", "year": "2024"},
+    {"name": "A.P. Møller - Mærsk", "amount": "180.000 kr", "type": "Privat donation", "year": "2023"},
+    {"name": "TrygFonden", "amount": "95.000 kr", "type": "Privat donation", "year": "2024-2025"},
+    {"name": "PensionDanmark", "amount": "340.000 kr", "type": "Erhvervsstøtte", "year": "2023"},
+    {"name": "Jyske Bank", "amount": "125.000 kr", "type": "Erhvervsstøtte", "year": "2024"},
+    {"name": "Nykredit", "amount": "210.000 kr", "type": "Erhvervsstøtte", "year": "2023-2025"},
+    {"name": "Danske Bank", "amount": "380.000 kr", "type": "Erhvervsstøtte", "year": "2024"},
+    {"name": "Vestas Wind Systems", "amount": "165.000 kr", "type": "Privat donation", "year": "2023"},
+    {"name": "Lars Seier Christensen", "amount": "290.000 kr", "type": "Privat donation", "year": "2024-2025"},
+    {"name": "Mærsk Mc-Kinney Møller", "amount": "850.000 kr", "type": "Privat donation", "year": "2023"},
+    {"name": "ATP", "amount": "175.000 kr", "type": "Pensionskasse", "year": "2024"},
+    {"name": "Carlsberg", "amount": "85.000 kr", "type": "Privat donation", "year": "2023-2025"},
+    {"name": "Arbejdernes Landsbank", "amount": "120.000 kr", "type": "Erhvervsstøtte", "year": "2024"},
+    {"name": "Nordea Foundation", "amount": "145.000 kr", "type": "Privat donation", "year": "2023"},
+    {"name": "Realdania", "amount": "95.000 kr", "type": "Privat donation", "year": "2024-2025"},
+    {"name": "Rockwool Fonden", "amount": "110.000 kr", "type": "Privat donation", "year": "2023"},
+    {"name": "Novo Nordisk Fonden", "amount": "320.000 kr", "type": "Privat donation", "year": "2024"}
+  ]
+}
