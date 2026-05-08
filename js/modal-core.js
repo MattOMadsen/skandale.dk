@@ -1,4 +1,4 @@
-// js/modal-core.js - Komplet og stabil version (v2.00.48)
+// js/modal-core.js - Med collapsible sektioner (v2.00.49)
 
 function showPoliticianModal(politicianId) {
   const politician = politicians.find(p => p.id === politicianId);
@@ -7,7 +7,6 @@ function showPoliticianModal(politicianId) {
     return;
   }
 
-  // Luk eventuelle åbne modals
   const existingModals = document.querySelectorAll('.fixed.inset-0');
   existingModals.forEach(m => m.remove());
 
@@ -36,29 +35,39 @@ function showPoliticianModal(politicianId) {
         
         <div class="p-8 overflow-y-auto max-h-[calc(90vh-120px)]">
           
-          <!-- Bio -->
-          <div class="mb-8">
-            <div class="font-semibold text-sm text-slate-500 mb-2">Om politikeren</div>
+          <!-- Om Politikeren (altid synlig) -->
+          <div class="mb-6">
+            <div class="font-semibold text-sm text-slate-500 mb-2">Om Politikeren</div>
             <div class="text-slate-700">${politician.bio || 'Ingen beskrivelse tilgængelig.'}</div>
           </div>
           
-          <!-- Before Politics -->
+          <!-- Før politik / Ungdom (collapsible) -->
           ${politician.beforePolitics ? `
-            <div class="mb-8">
-              <div class="font-semibold text-sm text-slate-500 mb-2">${politician.beforePolitics.title || 'Før politik / Ungdom'}</div>
-              <div class="text-slate-700">${politician.beforePolitics.content}</div>
+            <div class="mb-4 border border-slate-200 rounded-2xl overflow-hidden">
+              <div onclick="toggleSection('beforePoliticsSection')" class="flex items-center justify-between p-4 bg-slate-50 cursor-pointer hover:bg-slate-100">
+                <div class="font-semibold text-sm">${politician.beforePolitics.title || 'Før politik / Ungdom'}</div>
+                <i class="fa-solid fa-chevron-down text-slate-400" id="beforePoliticsChevron"></i>
+              </div>
+              <div id="beforePoliticsSection" class="hidden p-4 border-t">
+                <div class="text-slate-700">${politician.beforePolitics.content}</div>
+              </div>
             </div>
           ` : ''}
           
-          <!-- Career Timeline -->
+          <!-- Karriereoversigt (collapsible) -->
           ${politician.careerTimeline ? `
-            <div class="mb-8">
-              <div class="font-semibold text-sm text-slate-500 mb-2">Karriereoversigt</div>
-              <div class="text-slate-700 whitespace-pre-line">${politician.careerTimeline}</div>
+            <div class="mb-4 border border-slate-200 rounded-2xl overflow-hidden">
+              <div onclick="toggleSection('careerSection')" class="flex items-center justify-between p-4 bg-slate-50 cursor-pointer hover:bg-slate-100">
+                <div class="font-semibold text-sm">Karriereoversigt</div>
+                <i class="fa-solid fa-chevron-down text-slate-400" id="careerChevron"></i>
+              </div>
+              <div id="careerSection" class="hidden p-4 border-t">
+                <div class="text-slate-700 whitespace-pre-line">${politician.careerTimeline}</div>
+              </div>
             </div>
           ` : ''}
           
-          <!-- Scandals -->
+          <!-- Skandaler -->
           <div class="mb-8">
             <div class="flex items-center gap-x-2 mb-4">
               <i class="fa-solid fa-exclamation-triangle text-[#C8102E]"></i>
@@ -103,7 +112,6 @@ function showPoliticianModal(politicianId) {
 
   document.body.insertAdjacentHTML('beforeend', html);
 
-  // Load dynamic sections
   setTimeout(() => {
     if (typeof loadScandals === 'function') loadScandals(politician);
     if (typeof addBrokenPromisesSection === 'function') addBrokenPromisesSection(politician);
@@ -116,5 +124,19 @@ function closePoliticianModal() {
   if (modal) modal.remove();
 }
 
-// Make function globally available
+function toggleSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  const chevron = document.getElementById(sectionId.replace('Section', 'Chevron'));
+  
+  if (section) {
+    if (section.classList.contains('hidden')) {
+      section.classList.remove('hidden');
+      if (chevron) chevron.classList.add('rotate-180');
+    } else {
+      section.classList.add('hidden');
+      if (chevron) chevron.classList.remove('rotate-180');
+    }
+  }
+}
+
 window.showPoliticianModal = showPoliticianModal;
