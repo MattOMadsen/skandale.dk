@@ -1,105 +1,142 @@
-// js/modal-core.js - Fuldt fungerende version (fix til klik fra forsiden)
-// Erstatter stubben der gjorde at modalen ikke åbnede
-
-let currentPolitician = null;
+// js/modal-core.js - Med collapsible sektioner (v2.00.50)
 
 function showPoliticianModal(politicianId) {
-  const politician = politicians.find(p => p.id === politicianId || p.id == politicianId);
+  const politician = politicians.find(p => p.id === politicianId);
   if (!politician) {
-    console.error('[Skandale.dk] Politiker ikke fundet med id:', politicianId);
-    alert('Kunne ikke finde politikeren. Prøv igen.');
+    console.error('Politiker ikke fundet:', politicianId);
     return;
   }
 
-  currentPolitician = politician;
+  const existingModals = document.querySelectorAll('.fixed.inset-0');
+  existingModals.forEach(m => m.remove());
 
-  // Avatar
-  const avatar = document.getElementById('modalAvatar');
-  if (avatar) {
-    avatar.style.backgroundColor = politician.avatarColor || '#C8102E';
-    avatar.textContent = politician.initials || politician.name.split(' ').map(n => n[0]).join('');
-  }
-
-  // Navn
-  const nameEl = document.getElementById('modalName');
-  if (nameEl) nameEl.textContent = politician.name;
-
-  // Parti
-  const partyEl = document.getElementById('modalParty');
-  if (partyEl) {
-    partyEl.textContent = politician.party || '';
-    partyEl.style.backgroundColor = (politician.partyColor || '#64748b') + '20';
-    partyEl.style.color = politician.partyColor || '#64748b';
-  }
-
-  // Rolle
-  const roleEl = document.getElementById('modalRole');
-  if (roleEl) roleEl.textContent = politician.role || '';
-
-  // Bio
-  const bioEl = document.getElementById('modalBio');
-  if (bioEl) bioEl.innerHTML = (politician.bio || '').replace(/\n/g, '<br>');
-
-  // Skandale tæller
-  const countEl = document.getElementById('modalScandalCount');
-  const scandals = Array.isArray(politician.scandals) ? politician.scandals : [];
-  if (countEl) countEl.textContent = scandals.length;
-
-  // Skandaler liste
-  const scandalsContainer = document.getElementById('modalScandals');
-  if (scandalsContainer) {
-    scandalsContainer.innerHTML = '';
-    if (scandals.length === 0) {
-      scandalsContainer.innerHTML = '<p class="text-slate-500">Ingen skandaler registreret.</p>';
-    } else {
-      scandals.forEach((scandal) => {
-        const div = document.createElement('div');
-        div.className = 'bg-slate-50 border border-slate-200 rounded-2xl p-5';
-        let mediaHTML = '';
-        if (scandal.mediaLinks && scandal.mediaLinks.length > 0) {
-          mediaHTML = `<div class="mt-3 flex flex-wrap gap-2">${scandal.mediaLinks.map(link => `<a href="${link.url || '#'}" target="_blank" class="text-xs px-2 py-1 bg-white border rounded-full hover:bg-slate-100 transition-colors">${link.label || 'Kilde'}</a>`).join('')}</div>`;
-        }
-        div.innerHTML = `
-          <div class="flex justify-between items-start">
-            <div>
-              <div class="font-bold text-lg">${scandal.title || 'Skandale'}</div>
-              <div class="text-xs text-slate-500 mt-1">${scandal.year || ''}</div>
+  const html = `
+    <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4" id="politicianModal">
+      <div onclick="event.target.id === 'politicianModal' && closePoliticianModal()" 
+           class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
+        
+        <!-- Header -->
+        <div class="px-8 pt-8 pb-6 border-b flex items-start justify-between">
+          <div class="flex items-center gap-x-4">
+            <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-white font-bold text-2xl" 
+                 style="background-color: ${politician.avatarColor || politician.color || '#C8102E'}">
+              ${politician.initials || politician.name.split(' ').map(n => n[0]).join('')}
             </div>
-            <div class="text-right">
-              <div class="text-amber-500">${createStars(scandal.severity || 3)}</div>
-              <div class="text-[10px] text-slate-400">${scandal.severity || 3}/5</div>
+            <div>
+              <h2 class="text-3xl font-bold">${politician.name}</h2>
+              <div class="flex items-center gap-x-2 mt-1">
+                <span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-sm">${politician.party}</span>
+                <span class="text-sm text-slate-500">${politician.role || ''}</span>
+              </div>
             </div>
           </div>
-          <div class="mt-3 text-sm text-slate-600 leading-relaxed">${scandal.description || ''}</div>
-          ${mediaHTML}
-        `;
-        scandalsContainer.appendChild(div);
-      });
+          <button onclick="closePoliticianModal()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+        </div>
+        
+        <div class="p-8 overflow-y-auto max-h-[calc(90vh-120px)]">
+          
+          <!-- Om Politikeren (altid synlig) -->
+          <div class="mb-6">
+            <div class="font-semibold text-sm text-slate-500 mb-2">Om Politikeren</div>
+            <div class="text-slate-700">${politician.bio || 'Ingen beskrivelse tilgængelig.'}</div>
+          </div>
+          
+          <!-- Før politik / Ungdom (collapsible) -->
+          ${politician.beforePolitics ? `
+            <div class="mb-4 border border-slate-200 rounded-2xl overflow-hidden">
+              <div onclick="toggleSection('beforePoliticsSection')" class="flex items-center justify-between p-4 bg-slate-50 cursor-pointer hover:bg-slate-100">
+                <div class="font-semibold text-sm">${politician.beforePolitics.title || 'Før politik / Ungdom'}</div>
+                <i class="fa-solid fa-chevron-down text-slate-400" id="beforePoliticsChevron"></i>
+              </div>
+              <div id="beforePoliticsSection" class="hidden p-4 border-t">
+                <div class="text-slate-700">${politician.beforePolitics.content}</div>
+              </div>
+            </div>
+          ` : ''}
+          
+          <!-- Karriereoversigt (collapsible) -->
+          ${politician.careerTimeline ? `
+            <div class="mb-4 border border-slate-200 rounded-2xl overflow-hidden">
+              <div onclick="toggleSection('careerSection')" class="flex items-center justify-between p-4 bg-slate-50 cursor-pointer hover:bg-slate-100">
+                <div class="font-semibold text-sm">Karriereoversigt</div>
+                <i class="fa-solid fa-chevron-down text-slate-400" id="careerChevron"></i>
+              </div>
+              <div id="careerSection" class="hidden p-4 border-t">
+                <div class="text-slate-700 whitespace-pre-line">${politician.careerTimeline}</div>
+              </div>
+            </div>
+          ` : ''}
+          
+          <!-- Skandaler -->
+          <div class="mb-8">
+            <div class="flex items-center gap-x-2 mb-4">
+              <i class="fa-solid fa-exclamation-triangle text-[#C8102E]"></i>
+              <span class="font-bold text-lg">Skandaler</span>
+              <span class="text-xs text-slate-500">(${politician.scandals ? politician.scandals.length : 0})</span>
+            </div>
+            <div id="scandalsContainer"></div>
+          </div>
+          
+          <!-- Økonomiske Støtte -->
+          <div id="economicSupportSection"></div>
+          
+          <!-- Internationale netværk & tilknytninger -->
+          ${politician.affiliations && politician.affiliations.length > 0 ? `
+            <div class="mt-8 pt-6 border-t">
+              <div class="flex items-center gap-x-2 mb-4">
+                <i class="fa-solid fa-globe text-[#C8102E]"></i>
+                <span class="font-bold text-lg">Internationale netværk & tilknytninger</span>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                ${politician.affiliations.map(aff => `
+                  <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+                    <div class="font-semibold">${aff.name}</div>
+                    <div class="text-xs text-slate-500">${aff.organization} • ${aff.year}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          ` : ''}
+          
+          <!-- Brudte valgløfter -->
+          <div id="brokenPromisesSection"></div>
+          
+        </div>
+        
+        <div class="px-8 py-4 border-t bg-slate-50 text-xs text-slate-400 text-center">
+          Data er baseret på offentligt tilgængelige kilder
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.insertAdjacentHTML('beforeend', html);
+
+  setTimeout(() => {
+    if (typeof loadScandals === 'function') loadScandals(politician);
+    if (typeof addBrokenPromisesSection === 'function') addBrokenPromisesSection(politician);
+    if (typeof addEconomicSupportSection === 'function') addEconomicSupportSection(politician);
+  }, 100);
+}
+
+function closePoliticianModal() {
+  const modal = document.getElementById('politicianModal');
+  if (modal) modal.remove();
+}
+
+function toggleSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  const chevron = document.getElementById(sectionId.replace('Section', 'Chevron'));
+  
+  if (section) {
+    if (section.classList.contains('hidden')) {
+      section.classList.remove('hidden');
+      if (chevron) chevron.classList.add('rotate-180');
+    } else {
+      section.classList.add('hidden');
+      if (chevron) chevron.classList.remove('rotate-180');
     }
   }
-
-  // Vis modal
-  const modal = document.getElementById('politicianModal');
-  if (modal) modal.classList.remove('hidden');
-
-  console.log(`%c[Skandale.dk] Åbnede modal for ${politician.name} (id: ${politicianId})`, 'color:#10b981');
 }
 
-function closeModal() {
-  const modal = document.getElementById('politicianModal');
-  if (modal) modal.classList.add('hidden');
-  currentPolitician = null;
-}
-
-// Gør funktionerne globale
 window.showPoliticianModal = showPoliticianModal;
-window.closeModal = closeModal;
-
-// Lokal createStars (sikkerhed hvis ui.js ikke er loadet endnu)
-function createStars(count) {
-  let stars = '';
-  for (let i = 0; i < 5; i++) {
-    stars += (i < count) ? `<i class="fa-solid fa-star severity-star text-sm"></i>` : `<i class="fa-solid fa-star text-slate-200 text-sm"></i>`;
-  }
-  return stars;
-}
