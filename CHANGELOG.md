@@ -1,13 +1,22 @@
 # Skandale.dk Changelog
 
-## v2.00.38 (7. maj 2026)
-- Tilføjet kilde-links til alle donorer hos Mette Frederiksen (14 donorer med kilde-URL)
-- Opdateret modal-donor.js til at vise kilde-links
+## v2.00.45 (8. maj 2026)
+- Oprettet tomme placeholder-filer for 9 politikere uden dedikerede data (ingen flere 404-fejl i konsollen)
+- Alle 18 dedikerede filer (broken-promises + economic-support) findes nu
 
-## v2.00.37 (7. maj 2026)
-- Morten Østergaard fuldt opdateret (5 skandaler, 20 donorer, 6 brudte løfter)
+## v2.00.44 (8. maj 2026)
+- Graceful 404-håndtering i data.js (try/catch + if (ok))
+
+## v2.00.43 (8. maj 2026)
+- Bekræftet graceful 404-håndtering
 
 ## Tidligere versioner
+- v2.00.42: onclick i HTML (front page click fix)
+- v2.00.41: Direkte click handler på hvert politiker-kort
+- v2.00.40: data-id til politiker-kort
+- v2.00.39: Front page click fix re-applied
+- v2.00.38: Kilde-links til donorer hos Mette Frederiksen
+- v2.00.37: Morten Østergaard fuldt opdateret
 - v2.00.36: Komplet data loading fix
 - v2.00.35: Inger Støjberg fuldt opdateret
 - v2.00.34: Inger Støjberg opdateret
