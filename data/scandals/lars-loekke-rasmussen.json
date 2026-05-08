@@ -1,0 +1,45 @@
+{
+  "politician": "Lars Løkke Rasmussen",
+  "scandals": [
+    {
+      "id": 1,
+      "title": "Tøjskandalen (2014)",
+      "year": "2014",
+      "description": "Lars Løkke brugte 152.000 kr på tøj og personlige udgifter på skatteydernes regning. Sagen førte til massiv kritik og truede hans position som partiformand.",
+      "source": {
+        "text": "Ekstra Bladet, DR og Jyllands-Posten 2014",
+        "url": "https://www.dr.dk/nyheder/politik/loekke-toej-sag"
+      }
+    },
+    {
+      "id": 2,
+      "title": "Hustruens fyring og magtmisbrug (2018)",
+      "year": "2018",
+      "description": "Lars Løkke ledsagede sin hustru til et møde med skoleledelsen, hvor hun blev fyret. Kritikere beskyldte ham for magtmisbrug ved at bruge sin position som statsminister.",
+      "source": {
+        "text": "Politiken og Berlingske 2018",
+        "url": "https://politiken.dk/"
+      }
+    },
+    {
+      "id": 3,
+      "title": "Skjulte donorer til Moderaterne (2022-2024)",
+      "year": "2022",
+      "description": "Moderaterne har som det eneste parti valgt ikke at offentliggøre sine største donorer fra valgåret 2022, på trods af krav om gennemsigtighed.",
+      "source": {
+        "text": "Altinget & DR.dk 2024",
+        "url": "https://www.altinget.dk/artikel/moderaterne-skjuler-sine-stoerste-pengedonorer-fra-valgaaret"
+      }
+    },
+    {
+      "id": 4,
+      "title": "Video om penge til folketingsmedlem (2025)",
+      "year": "2025",
+      "description": "En lækket video viste Lars Løkke tilbyde tidligere Moderaterne-MF Mike Fonseca 370.000 kr for at forlade Folketinget og give sit mandat til partiet. Sagen førte til mistillidsvotum og politianmeldelse.",
+      "source": {
+        "text": "DR.dk og Mads Brügger 2025",
+        "url": "https://www.dr.dk/nyheder/politik"
+      }
+    }
+  ]
+}
