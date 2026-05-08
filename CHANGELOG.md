@@ -1,7 +1,7 @@
 # Changelog
 
-## [2.00.08] - 2026-05-08
+## [2.00.22] - 2026-05-08
 
 ### Fixed
-- Rolled back to stable version v2.00.21 after regressions in later versions
-- Restored core functionality (timeline, modals, data loading)
+- Rolled back to stable version ~v2.00.21 after regressions introduced after v2.00.45
+- Restored core functionality (timeline, modals, clickable affiliations, data loading)
