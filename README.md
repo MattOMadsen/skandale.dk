@@ -1,6 +1,6 @@
 # Skandale.dk
 
-**Version:** v2.00.05  
+**Version:** v2.00.21
 **Status:** Statisk hjemmeside klar til GitHub Pages
 
 ## Formål
