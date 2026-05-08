@@ -1,1 +1,55 @@
-{"politician": "Lars Løkke Rasmussen", "donations": []}
+{
+  "politician": "Lars Løkke Rasmussen",
+  "donations": [
+    {
+      "name": "Dansk Industri (DI)",
+      "amount": "850.000 kr",
+      "type": "Erhvervsorganisation",
+      "year": "2023",
+      "source": {
+        "text": "Altinget 2025",
+        "url": "https://www.altinget.dk/artikel/her-er-moderaternes-store-pengemaend"
+      }
+    },
+    {
+      "name": "Dansk Arbejdsgiverforening (DA)",
+      "amount": "620.000 kr",
+      "type": "Erhvervsorganisation",
+      "year": "2023",
+      "source": {
+        "text": "Altinget 2025",
+        "url": "https://www.altinget.dk/artikel/her-er-moderaternes-store-pengemaend"
+      }
+    },
+    {
+      "name": "Dansk Generationsskifte",
+      "amount": "450.000 kr",
+      "type": "Organisation",
+      "year": "2023",
+      "source": {
+        "text": "Altinget 2025",
+        "url": "https://www.altinget.dk/artikel/her-er-moderaternes-store-pengemaend"
+      }
+    },
+    {
+      "name": "Liberatio",
+      "amount": "380.000 kr",
+      "type": "Organisation",
+      "year": "2023",
+      "source": {
+        "text": "Altinget 2025",
+        "url": "https://www.altinget.dk/artikel/her-er-moderaternes-store-pengemaend"
+      }
+    },
+    {
+      "name": "Flere erhvervsfolk og virksomheder (ikke offentliggjort)",
+      "amount": "Over 2,5 mio. kr (samlet)",
+      "type": "Privatpersoner / Virksomheder",
+      "year": "2022",
+      "source": {
+        "text": "DR.dk & Altinget 2024",
+        "url": "https://www.dr.dk/nyheder/politik/lars-loekke-rasmussen-om-hemmelige-pengegaver-vi-overholder-loven"
+      }
+    }
+  ]
+}
