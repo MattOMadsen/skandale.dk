@@ -1,70 +1,45 @@
 # Skandale.dk
 
-**Version:** v2.00.51  
+**Version:** v2.00.52  
 **Status:** Statisk hjemmeside klar til GitHub Pages
 
-## Seneste ændringer (v2.00.51)
-- **FIX**: Tidslinjen i menuen virker nu fuldt ud (modal åbner korrekt uden fejl)
-- Tilføjet `createStars(severity)`, `filterTimeline()` og `resetTimelineFilters()`
-- Automatisk populering af partifilter med alle partier
-- Sikkerhedstjek på modal-element + bedre fejlhåndtering
-- Version bump + fuld filter-support som lovet i projektbeskrivelsen
+## Seneste ændringer (v2.00.52)
+- **RESTORE**: Genskabt fuld detaljeret data for broken-promises og economic-support (Inger Støjberg, Mette Frederiksen, Morten Østergaard) fra commit f71317
+- Mange tabte brudte løfter og donationsdata er nu tilbage
 
-## Tidligere ændringer (v2.00.05)
-- Ny data-struktur med `data/details/` mappe (core + details adskilt)
-- Klikbar på internationale netværk (åbner modal med alle politikere der har samme tilknytning)
-- Version nummer nu tydeligt synligt i toppen af navbaren
-- Bedre vedligeholdelse og klar til flere politikere
+## Tidligere ændringer (v2.00.51)
+- FIX: Tidslinjen i menuen virker nu fuldt ud (modal åbner korrekt + filtre på parti + alvorlighed)
+- Tilføjet createStars(), filterTimeline() og resetTimelineFilters()
 
 ## Formål
-En moderne, interaktiv og gennemsigtig hjemmeside, der giver danskerne et samlet overblik over politiske skandaler, økonomisk støtte, internationale netværk og brudte valgløfter. Målet er at skabe større gennemsigtighed i dansk politik.
+En moderne, interaktiv og gennemsigtig hjemmeside, der giver danskerne et samlet overblik over politiske skandaler, økonomisk støtte, internationale netværk og brudte valgløfter.
 
 ## Teknisk setup
-- Ren HTML + Tailwind CSS (via CDN) + Font Awesome
+- Ren HTML + Tailwind CSS + Font Awesome
 - Vanilla JavaScript delt op i 10 små filer
-- Data i JSON-filer (core i `data/politicians/` + detaljer i `data/details/`)
+- Data i JSON-filer (politicians/, details/, broken-promises/, economic-support/)
 - Klar til GitHub Pages
 
 ## Aktuelle funktioner (12 politikere)
 - Søgning efter politikere
 - Detaljeret modal med skandaler
-- Per-skandale afstemning (Godt / Dårligt / Neutral)
+- Per-skandale afstemning
 - Kommentarer under hver skandale
-- Tidslinje med filtre (parti + alvorlighed) ← **NU FULDT FUNGERENDE**
+- Tidslinje med filtre (parti + alvorlighed)
 - Økonomisk støtte (klikbar donor)
-- Internationale netværk & tilknytninger (klikbar)
+- Internationale netværk & tilknytninger
 - Brudte valgløfter
-- Deleknap med sociale medier (X, Facebook, LinkedIn, WhatsApp + kopiér link)
 
 ## Politikere
 Mette Frederiksen, Inger Støjberg, Morten Østergaard, Helle Thorning-Schmidt, Lars Løkke Rasmussen, Pia Kjærsgaard, Anders Fogh Rasmussen, Morten Messerschmidt, Kristian Thulesen Dahl, Søren Pape Poulsen, Uffe Elbæk, Claus Hjort Frederiksen.
 
-## Mappe-struktur
-skandale.dk/
-├── index.html
-├── css/styles.css
-├── js/ (10 filer)
-├── data/
-│   ├── politicians/ (12 core JSON-filer)
-│   └── details/ (12 detalje JSON-filer)
-└── README.md
-
-
-## Fremtidige planer / Todo-liste
-- [ ] Delt afstemning (central database – f.eks. Supabase)
-- [ ] Kommentar-moderation og sikkerhed
-- [ ] Flere politikere fx 8 nye politikere (Mogens Jensen, Jakob Ellemann-Jensen, Troels Lund Poulsen, Mattias Tesfaye, Rasmus Prehn, Ane Halsboe-Jørgensen, Peter Hummelgaard, Barbara Bertelsen)
-- [ ] Dark mode
-- [ ] PDF-eksport af en politikers rapport
-- [ ] Sammenlign to politikere
-- [ ] PWA (kan installeres på telefon)
-- [ ] Mulighed for at tilføje nye skandaler direkte på siden
-- [ ] Deep linking via URL-parameter
-
-## Ønsket stil
-Professionel, neutral og troværdig • Nem at vedligeholde • God brugeroplevelse på mobil og computer • Fokus på fakta og kilder
-
----
+## Fremtidige planer
+- Delt afstemning (Supabase)
+- Flere politikere
+- Dark mode
+- PDF-eksport
+- Sammenlign to politikere
+- PWA
 
 **Live demo:** https://mattomadsen.github.io/skandale.dk/
 
