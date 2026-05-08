@@ -1,4 +1,5 @@
-// js/modal-core.js - Med collapsible sektioner (v2.00.50)
+// js/modal-core.js - Med collapsible sektioner + Del/PDF knapper (v2.00.51)
+let currentPolitician = null;
 
 function showPoliticianModal(politicianId) {
   const politician = politicians.find(p => p.id === politicianId);
@@ -6,6 +7,8 @@ function showPoliticianModal(politicianId) {
     console.error('Politiker ikke fundet:', politicianId);
     return;
   }
+
+  currentPolitician = politician; // Gem globalt til PDF og share
 
   const existingModals = document.querySelectorAll('.fixed.inset-0');
   existingModals.forEach(m => m.remove());
@@ -15,8 +18,8 @@ function showPoliticianModal(politicianId) {
       <div onclick="event.target.id === 'politicianModal' && closePoliticianModal()" 
            class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
         
-        <!-- Header -->
-        <div class="px-8 pt-8 pb-6 border-b flex items-start justify-between">
+        <!-- Header med Del + PDF + Luk -->
+        <div class="px-8 pt-8 pb-6 border-b flex flex-col sm:flex-row sm:items-start justify-between gap-y-4">
           <div class="flex items-center gap-x-4">
             <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-white font-bold text-2xl" 
                  style="background-color: ${politician.avatarColor || politician.color || '#C8102E'}">
@@ -30,18 +33,34 @@ function showPoliticianModal(politicianId) {
               </div>
             </div>
           </div>
-          <button onclick="closePoliticianModal()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+
+          <div class="flex items-center gap-x-2">
+            <!-- Del knap -->
+            <button id="share-btn" class="flex items-center gap-x-2 px-4 py-2 text-sm font-semibold text-slate-700 hover:text-slate-900 border border-slate-300 hover:bg-slate-100 rounded-2xl transition-all">
+              <i class="fa-solid fa-share-alt"></i>
+              <span class="hidden sm:inline">Del</span>
+            </button>
+            
+            <!-- PDF knap -->
+            <button onclick="exportPoliticianToPDF(currentPolitician)" class="flex items-center gap-x-2 px-4 py-2 text-sm font-semibold text-slate-700 hover:text-slate-900 border border-slate-300 hover:bg-slate-100 rounded-2xl transition-all">
+              <i class="fa-solid fa-file-pdf"></i>
+              <span class="hidden sm:inline">PDF</span>
+            </button>
+            
+            <!-- Luk -->
+            <button onclick="closePoliticianModal()" class="flex items-center justify-center w-10 h-10 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-2xl transition-all text-3xl leading-none">×</button>
+          </div>
         </div>
         
-        <div class="p-8 overflow-y-auto max-h-[calc(90vh-120px)]">
+        <div class="p-8 overflow-y-auto max-h-[calc(90vh-140px)]">
           
-          <!-- Om Politikeren (altid synlig) -->
+          <!-- Om Politikeren -->
           <div class="mb-6">
             <div class="font-semibold text-sm text-slate-500 mb-2">Om Politikeren</div>
             <div class="text-slate-700">${politician.bio || 'Ingen beskrivelse tilgængelig.'}</div>
           </div>
           
-          <!-- Før politik / Ungdom (collapsible) -->
+          <!-- Før politik / Ungdom -->
           ${politician.beforePolitics ? `
             <div class="mb-4 border border-slate-200 rounded-2xl overflow-hidden">
               <div onclick="toggleSection('beforePoliticsSection')" class="flex items-center justify-between p-4 bg-slate-50 cursor-pointer hover:bg-slate-100">
@@ -54,7 +73,7 @@ function showPoliticianModal(politicianId) {
             </div>
           ` : ''}
           
-          <!-- Karriereoversigt (collapsible) -->
+          <!-- Karriereoversigt -->
           ${politician.careerTimeline ? `
             <div class="mb-4 border border-slate-200 rounded-2xl overflow-hidden">
               <div onclick="toggleSection('careerSection')" class="flex items-center justify-between p-4 bg-slate-50 cursor-pointer hover:bg-slate-100">
@@ -77,10 +96,10 @@ function showPoliticianModal(politicianId) {
             <div id="scandalsContainer"></div>
           </div>
           
-          <!-- Økonomiske Støtte -->
+          <!-- Økonomisk støtte -->
           <div id="economicSupportSection"></div>
           
-          <!-- Internationale netværk & tilknytninger -->
+          <!-- Internationale netværk -->
           ${politician.affiliations && politician.affiliations.length > 0 ? `
             <div class="mt-8 pt-6 border-t">
               <div class="flex items-center gap-x-2 mb-4">
@@ -104,7 +123,7 @@ function showPoliticianModal(politicianId) {
         </div>
         
         <div class="px-8 py-4 border-t bg-slate-50 text-xs text-slate-400 text-center">
-          Data er baseret på offentligt tilgængelige kilder
+          Data er baseret på offentligt tilgængelige kilder • v2.00.51
         </div>
       </div>
     </div>
@@ -116,12 +135,14 @@ function showPoliticianModal(politicianId) {
     if (typeof loadScandals === 'function') loadScandals(politician);
     if (typeof addBrokenPromisesSection === 'function') addBrokenPromisesSection(politician);
     if (typeof addEconomicSupportSection === 'function') addEconomicSupportSection(politician);
+    if (typeof initShareButton === 'function') initShareButton(politician);
   }, 100);
 }
 
 function closePoliticianModal() {
   const modal = document.getElementById('politicianModal');
   if (modal) modal.remove();
+  currentPolitician = null;
 }
 
 function toggleSection(sectionId) {
