@@ -55,6 +55,39 @@
         "url": "https://www.altinget.dk/artikel/moderaterne-skjuler-sine-stoerste-pengedonorer-fra-valgaaret"
       },
       "otherPoliticians": []
+    },
+    {
+      "id": 6,
+      "title": "Vi lover at reducere bureaukratiet og gøre det nemmere at være borger",
+      "year": "2015",
+      "whatHappened": "Antallet af regler og administrative byrder steg markant under Løkkes regeringer. Flere erhvervsorganisationer kritiserede, at det modsatte af det lovede skete.",
+      "source": {
+        "text": "DI og Dansk Erhverv 2017-2019",
+        "url": "https://www.danskerhverv.dk/"
+      },
+      "otherPoliticians": ["Søren Pape Poulsen"]
+    },
+    {
+      "id": 7,
+      "title": "Vi lover at styrke integrationen og få flere i arbejde",
+      "year": "2015",
+      "whatHappened": "Trods løfter steg antallet af ikke-vestlige indvandrere på kontanthjælp, og integrationsindsatsen blev kritiseret for at være utilstrækkelig.",
+      "source": {
+        "text": "Integrationsministeriet og DR 2018",
+        "url": "https://www.dr.dk/nyheder/politik"
+      },
+      "otherPoliticians": ["Inger Støjberg"]
+    },
+    {
+      "id": 8,
+      "title": "Vi lover at være et troværdigt og stabilt parti",
+      "year": "2022",
+      "whatHappened": "Efter at have forladt Venstre og stiftet Moderaterne har Lars Løkke skiftet holdning flere gange på kort tid, hvilket har ført til kritik af manglende troværdighed.",
+      "source": {
+        "text": "Politiken & Berlingske 2023-2026",
+        "url": "https://politiken.dk/"
+      },
+      "otherPoliticians": []
     }
   ]
 }
