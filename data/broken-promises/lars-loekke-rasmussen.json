@@ -1,1 +1,60 @@
-{"politician": "Lars Løkke Rasmussen", "brokenPromises": []}
+{
+  "politician": "Lars Løkke Rasmussen",
+  "brokenPromises": [
+    {
+      "id": 1,
+      "title": "Vi lover aldrig at støtte en regering, der er afhængig af Enhedslisten",
+      "year": "2022",
+      "whatHappened": "Under dannelsen af Moderaterne og i valgkampen 2022 afviste Lars Løkke gentagne gange en regering, der var afhængig af Enhedslisten. I 2026-forhandlingerne er der alligevel åbnet for diskussioner om bredere samarbejde.",
+      "source": {
+        "text": "DR.dk 2026 & Berlingske 2026",
+        "url": "https://www.dr.dk/nyheder/politik/er-loekke-paa-vej-mod-kaempe-loeftebrud-han-vil-saelge-sin-gamle-bedstemor-en-ministerbil"
+      },
+      "otherPoliticians": ["Mette Frederiksen"]
+    },
+    {
+      "id": 2,
+      "title": "Vi lover at sænke skatten for almindelige danskere",
+      "year": "2015",
+      "whatHappened": "Under Løkkes anden regering (2015-2019) steg det samlede skattetryk, og flere afgifter blev hævet. De lovede skattelettelser til lav- og mellemindkomster blev ikke gennemført i det lovede omfang.",
+      "source": {
+        "text": "Skatteministeriet & CEPOS 2018-2019",
+        "url": "https://www.skm.dk/"
+      },
+      "otherPoliticians": ["Anders Fogh Rasmussen", "Helle Thorning-Schmidt"]
+    },
+    {
+      "id": 3,
+      "title": "Vi lover at beskytte og styrke velfærden",
+      "year": "2015",
+      "whatHappened": "Der blev gennemført besparelser på sygehuse, plejehjem og hjemmehjælp i flere kommuner under Løkkes regeringer. Kritikere peger på, at løftet om at beskytte kernevelfærden ikke blev holdt.",
+      "source": {
+        "text": "DR.dk & KL 2018-2019",
+        "url": "https://www.dr.dk/nyheder/politik"
+      },
+      "otherPoliticians": ["Helle Thorning-Schmidt", "Mette Frederiksen"]
+    },
+    {
+      "id": 4,
+      "title": "Vi lover en markant grønnere politik og mere ambitiøs klimaindsats",
+      "year": "2015",
+      "whatHappened": "Danmark nåede ikke de lovede klimamål i perioden, og landbruget blev ikke pålagt de nødvendige reduktioner. Kritik fra Klimarådet og grønne organisationer var massiv.",
+      "source": {
+        "text": "Klimarådet 2018-2019",
+        "url": "https://klimaraadet.dk/"
+      },
+      "otherPoliticians": ["Mette Frederiksen", "Pia Kjærsgaard"]
+    },
+    {
+      "id": 5,
+      "title": "Vi lover at skabe større gennemsigtighed i partifinansiering",
+      "year": "2022",
+      "whatHappened": "Moderaterne har som det eneste parti valgt ikke at offentliggøre sine donorer fra valgåret 2022, på trods af gentagne opfordringer fra andre partier og medier.",
+      "source": {
+        "text": "Altinget & DR.dk 2024",
+        "url": "https://www.altinget.dk/artikel/moderaterne-skjuler-sine-stoerste-pengedonorer-fra-valgaaret"
+      },
+      "otherPoliticians": []
+    }
+  ]
+}
