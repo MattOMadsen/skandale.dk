@@ -1,16 +1,23 @@
 # Skandale.dk
 
-**Version:** v2.00.05  
+**Version:** v2.00.51  
 **Status:** Statisk hjemmeside klar til GitHub Pages
 
-## Formål
-En moderne, interaktiv og gennemsigtig hjemmeside, der giver danskerne et samlet overblik over politiske skandaler, økonomisk støtte, internationale netværk og brudte valgløfter. Målet er at skabe større gennemsigtighed i dansk politik.
+## Seneste ændringer (v2.00.51)
+- **FIX**: Tidslinjen i menuen virker nu fuldt ud (modal åbner korrekt uden fejl)
+- Tilføjet `createStars(severity)`, `filterTimeline()` og `resetTimelineFilters()`
+- Automatisk populering af partifilter med alle partier
+- Sikkerhedstjek på modal-element + bedre fejlhåndtering
+- Version bump + fuld filter-support som lovet i projektbeskrivelsen
 
-## Seneste ændringer (v2.00.05)
+## Tidligere ændringer (v2.00.05)
 - Ny data-struktur med `data/details/` mappe (core + details adskilt)
 - Klikbar på internationale netværk (åbner modal med alle politikere der har samme tilknytning)
 - Version nummer nu tydeligt synligt i toppen af navbaren
 - Bedre vedligeholdelse og klar til flere politikere
+
+## Formål
+En moderne, interaktiv og gennemsigtig hjemmeside, der giver danskerne et samlet overblik over politiske skandaler, økonomisk støtte, internationale netværk og brudte valgløfter. Målet er at skabe større gennemsigtighed i dansk politik.
 
 ## Teknisk setup
 - Ren HTML + Tailwind CSS (via CDN) + Font Awesome
@@ -23,7 +30,7 @@ En moderne, interaktiv og gennemsigtig hjemmeside, der giver danskerne et samlet
 - Detaljeret modal med skandaler
 - Per-skandale afstemning (Godt / Dårligt / Neutral)
 - Kommentarer under hver skandale
-- Tidslinje med filtre (parti + alvorlighed)
+- Tidslinje med filtre (parti + alvorlighed) ← **NU FULDT FUNGERENDE**
 - Økonomisk støtte (klikbar donor)
 - Internationale netværk & tilknytninger (klikbar)
 - Brudte valgløfter
