@@ -1,4 +1,14 @@
-// js/ui.js - Render politikere på forsiden (med onclick i HTML)
+// js/ui.js - Render politikere på forsiden (med global open funktion)
+
+// Global funktion der altid er tilgængelig
+window.openPoliticianModal = function(id) {
+  if (typeof window.showPoliticianModal === 'function') {
+    window.showPoliticianModal(id);
+  } else {
+    console.error('showPoliticianModal ikke fundet - prøv at genindlæse siden');
+    alert('Der opstod en fejl. Prøv at genindlæse siden (Ctrl + Shift + R).');
+  }
+};
 
 function renderPoliticians(filteredPoliticians = null) {
   const grid = document.getElementById('politiciansGrid');
@@ -16,7 +26,7 @@ function renderPoliticians(filteredPoliticians = null) {
       : '0.0';
 
     html += `
-      <div onclick="window.showPoliticianModal(${politician.id})" 
+      <div onclick="window.openPoliticianModal(${politician.id})" 
            class="politician-card bg-white border border-slate-200 rounded-3xl p-6 cursor-pointer hover:border-[#C8102E]/30 group">
         <div class="flex items-start justify-between mb-4">
           <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-bold text-xl" 
