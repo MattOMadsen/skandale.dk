@@ -1,4 +1,4 @@
-// js/modal-core.js - Med collapsible sektioner (v2.00.49)
+// js/modal-core.js - Med collapsible sektioner (v2.00.50)
 
 function showPoliticianModal(politicianId) {
   const politician = politicians.find(p => p.id === politicianId);
@@ -77,13 +77,10 @@ function showPoliticianModal(politicianId) {
             <div id="scandalsContainer"></div>
           </div>
           
-          <!-- Broken Promises -->
-          <div id="brokenPromisesSection"></div>
-          
-          <!-- Economic Support -->
+          <!-- Økonomiske Støtte -->
           <div id="economicSupportSection"></div>
           
-          <!-- Affiliations -->
+          <!-- Internationale netværk & tilknytninger -->
           ${politician.affiliations && politician.affiliations.length > 0 ? `
             <div class="mt-8 pt-6 border-t">
               <div class="flex items-center gap-x-2 mb-4">
@@ -100,6 +97,9 @@ function showPoliticianModal(politicianId) {
               </div>
             </div>
           ` : ''}
+          
+          <!-- Brudte valgløfter -->
+          <div id="brokenPromisesSection"></div>
           
         </div>
         
