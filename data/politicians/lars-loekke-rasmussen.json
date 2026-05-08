@@ -6,5 +6,10 @@
   "role": "Statsminister 2009-2011 & 2015-2019",
   "avatarColor": "#00AEEF",
   "initials": "LLR",
-  "bio": "Tidligere statsminister for Venstre (2009-2011 og 2015-2019). Kendt for pragmatisk politik, men også involveret i flere sager om gaver, biler og partifinansiering."
+  "bio": "Tidligere statsminister for Venstre (2009-2011 og 2015-2019). Kendt for pragmatisk politik, men også involveret i flere sager om gaver, biler og partifinansiering.",
+  "beforePolitics": {
+    "title": "Før politik / Ungdom",
+    "content": "Lars Løkke Rasmussen blev født i 1964 i Vejle. Han studerede jura på Københavns Universitet og var aktiv i Venstres Ungdom, hvor han hurtigt avancerede til formand for organisationen. Hans tidlige karriere var præget af stærk organisatorisk sans og evnen til at bygge alliancer på tværs af det politiske spektrum."
+  },
+  "careerTimeline": "1990'erne: Formand for Venstres Ungdom (1986-1989) og medlem af Folketinget fra 1990.\n2001-2007: Indenrigs- og sundhedsminister under Anders Fogh Rasmussen.\n2007-2009: Finansminister.\n2009-2011: Statsminister (Venstre).\n2015-2019: Statsminister (Venstre) for anden gang.\n2019-2022: Formand for Venstre indtil han forlod partiet.\n2022: Stifter Moderaterne og bliver folketingsmedlem.\n2022-: Udenrigsminister i Mette Frederiksens regering."
 }
