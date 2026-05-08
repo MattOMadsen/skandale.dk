@@ -12,5 +12,51 @@
     "title": "Før politik / Ungdom",
     "content": "Helle Thorning-Schmidt blev født i 1966 og studerede statskundskab. Hun var aktiv i Danmarks Socialdemokratiske Ungdom (DSU) og blev hurtigt bemærket som et stort talent. Hun har en baggrund som cand.scient.pol. fra Københavns Universitet."
   },
+  "scandals": [
+    {
+      "id": 1,
+      "title": "Skattesagen / Kinnock-sagen (2010-2011)",
+      "year": "2010",
+      "description": "Helle Thorning-Schmidt og hendes mand Stephen Kinnock blev anklaget for skattesnyd i forbindelse med deres bopæl i Schweiz. Sagen førte til massiv kritik og truede hendes position som statsminister.",
+      "severity": 4,
+      "source": {
+        "text": "DR, Politiken og Ekstra Bladet 2014",
+        "url": "https://www.dr.dk/nyheder/politik/helle-thorning-schmidt-skattesag"
+      }
+    },
+    {
+      "id": 2,
+      "title": "Selfie-skandalen ved Mandela-begravelse (2013)",
+      "year": "2013",
+      "description": "Helle Thorning-Schmidt tog en selfie med Barack Obama og David Cameron under Nelson Mandelas begravelse. Billedet blev kritiseret verden over for at være upassende.",
+      "severity": 2,
+      "source": {
+        "text": "DR.dk og internationale medier 2013",
+        "url": "https://www.dr.dk/nyheder/udland/helle-thorning-schmidt-selfie-mandela"
+      }
+    },
+    {
+      "id": 3,
+      "title": "Minkskandalen (2020)",
+      "year": "2020",
+      "description": "Som tidligere statsminister blev Helle Thorning-Schmidt kritiseret for at have været en del af den regering der beordrede ulovlig aflivning af mink.",
+      "severity": 5,
+      "source": {
+        "text": "DR og Politiken 2020-2022",
+        "url": "https://www.dr.dk/nyheder/politik/minkskandalen"
+      }
+    },
+    {
+      "id": 4,
+      "title": "Grønlandsk præventionsskandale (2025)",
+      "year": "2025",
+      "description": "Afsløring af at tusindvis af grønlandske kvinder fik tvangssteriliseret eller fik spiral uden samtykke i 1960'erne-70'erne under dansk styre. Helle Thorning-Schmidt undskyldte sent og blev kritiseret for langsom reaktion.",
+      "severity": 4,
+      "source": {
+        "text": "DR.dk og Politiken 2025",
+        "url": "https://www.dr.dk/nyheder/politik"
+      }
+    }
+  ],
   "scandalsFile": "data/scandals/helle-thorning-schmidt.json"
 }
