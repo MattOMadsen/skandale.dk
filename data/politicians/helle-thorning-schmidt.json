@@ -6,12 +6,12 @@
   "role": "Statsminister 2011-2015",
   "avatarColor": "#C8102E",
   "initials": "HTS",
-  "bio": "Danmarks første kvindelige statsminister (2011-2015) og formand for Socialdemokratiet.",
-  "careerTimeline": "1990'erne – Begyndte i DSU og blev hurtigt en central figur.\\n\\n2005 – Valgt til Folketinget.\\n\\n2011 – Blev Danmarks første kvindelige statsminister.\\n\\n2011-2015 – Ledede en bred regering med Radikale Venstre og SF (senere kun Radikale).\\n\\n2014 – Skattesagen med hendes mand Stephen Kinnock.\\n\\n2015 – Tabte valget til Lars Løkke Rasmussen.\\n\\n2015-2019 – Medlem af Europa-Parlamentet.\\n\\n2019-2022 – Formand for Save the Children International.",
+  "bio": "Danmarks første kvindelige statsminister (2011-2015) og formand for Socialdemokratiet. Kendt for pragmatisk ledelse, men involveret i flere kontroverser omkring privatøkonomi og offentlige optrædener.",
   "beforePolitics": {
     "title": "Før politik / Ungdom",
-    "content": "Helle Thorning-Schmidt blev født i 1966 og studerede statskundskab. Hun var aktiv i Danmarks Socialdemokratiske Ungdom (DSU) og blev hurtigt bemærket som et stort talent. Hun har en baggrund som cand.scient.pol. fra Københavns Universitet."
+    "content": "Helle Thorning-Schmidt blev født i 1966 og studerede statskundskab. Hun var aktiv i Danmarks Socialdemokratiske Ungdom (DSU) og blev hurtigt bemærket som et stort talent. Hun har en baggrund som cand.scient.pol. fra Københavns Universitet og arbejdede kort i den private sektor før hun gik ind i politik."
   },
+  "careerTimeline": "1990'erne – Begyndte i DSU og blev hurtigt en central figur.\\n2005 – Valgt til Folketinget.\\n2011 – Blev Danmarks første kvindelige statsminister.\\n2011-2015 – Ledede en bred regering med Radikale Venstre og SF (senere kun Radikale).\\n2014 – Skattesagen med hendes mand Stephen Kinnock.\\n2015 – Tabte valget til Lars Løkke Rasmussen.\\n2015-2019 – Medlem af Europa-Parlamentet.\\n2019-2022 – Formand for Save the Children International.",
   "scandals": [
     {
       "id": 1,
@@ -58,5 +58,62 @@
       }
     }
   ],
-  "scandalsFile": "data/scandals/helle-thorning-schmidt.json"
+  "brokenPromises": [
+    {
+      "id": 1,
+      "title": "Vi lover at beskytte velfærden og ikke skære i kerneydelserne",
+      "year": "2011",
+      "whatHappened": "Under Helle Thorning-Schmidts regering blev der gennemført reformer (bl.a. kontanthjælpsloft) der blev kritiseret for at ramme de svageste hårdt.",
+      "source": {
+        "text": "Rådet for Socialt Udsatte og DR 2013-2015",
+        "url": "https://www.udsatte.dk/"
+      },
+      "otherPoliticians": ["Lars Løkke Rasmussen"]
+    },
+    {
+      "id": 2,
+      "title": "Vi lover at sænke skatten for almindelige danskere",
+      "year": "2011",
+      "whatHappened": "Skattetrykket steg i flere år under hendes regering, og de lovede skattelettelser blev ikke gennemført i det lovede omfang.",
+      "source": {
+        "text": "Skatteministeriet & CEPOS 2013-2015",
+        "url": "https://www.skm.dk/"
+      },
+      "otherPoliticians": ["Anders Fogh Rasmussen"]
+    }
+  ],
+  "economicSupport": [
+    {
+      "name": "Fagforbundet 3F",
+      "amount": "1.250.000 kr",
+      "type": "Fagforening",
+      "year": "2023",
+      "source": {
+        "text": "DR.dk 2024",
+        "url": "https://www.dr.dk/nyheder/politik/3f-stoette-til-mette-frederiksen"
+      }
+    },
+    {
+      "name": "Dansk Metal",
+      "amount": "875.000 kr",
+      "type": "Fagforening",
+      "year": "2024",
+      "source": {
+        "text": "Politiken 2024",
+        "url": "https://politiken.dk/nyheder/politik/dansk-metal-stoetter-mette-frederiksen"
+      }
+    }
+  ],
+  "affiliations": [
+    {
+      "name": "Bilderberg Group",
+      "type": "Internationalt netværk",
+      "year": "2010'erne",
+      "description": "Helle Thorning-Schmidt har deltaget i flere lukkede Bilderberg-møder.",
+      "source": {
+        "text": "Information og Altinget",
+        "url": "https://www.information.dk/"
+      }
+    }
+  ]
 }
