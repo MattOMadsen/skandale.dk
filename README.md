@@ -1,12 +1,16 @@
 # Skandale.dk
 
-**Version:** v2.00.21
+**Version:** v2.00.27
 **Status:** Statisk hjemmeside klar til GitHub Pages
 
 ## Formål
 En moderne, interaktiv og gennemsigtig hjemmeside, der giver danskerne et samlet overblik over politiske skandaler, økonomisk støtte, internationale netværk og brudte valgløfter. Målet er at skabe større gennemsigtighed i dansk politik.
 
-## Seneste ændringer (v2.00.05)
+## Seneste ændringer (v2.00.27)
+- **Fix:** Politikere kan nu åbnes fra forsiden (js/modal-core.js var en tom stub – nu fuldt fungerende med korrekt rendering af navn, parti, bio, skandaler og links)
+- Version bump + changelog opdateret
+
+## Tidligere ændringer (v2.00.05)
 - Ny data-struktur med `data/details/` mappe (core + details adskilt)
 - Klikbar på internationale netværk (åbner modal med alle politikere der har samme tilknytning)
 - Version nummer nu tydeligt synligt i toppen af navbaren
