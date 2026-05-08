@@ -1,4 +1,4 @@
-// js/modal-donor.js - Økonomisk støtte med kilde-links
+// js/modal-donor.js - Sikker version uden rekursion (v2.00.46)
 
 function addEconomicSupportSection(politician) {
   let supportHTML = '';
@@ -135,8 +135,11 @@ function hideAllDonations(politicianId) {
 }
 
 function showDonorModal(donorName) {
-  document.getElementById('politicianModal').classList.remove('flex');
-  document.getElementById('politicianModal').classList.add('hidden');
+  const politicianModal = document.getElementById('politicianModal');
+  if (politicianModal) {
+    politicianModal.classList.remove('flex');
+    politicianModal.classList.add('hidden');
+  }
 
   let supportedPoliticians = [];
 
@@ -179,7 +182,7 @@ function showDonorModal(donorName) {
                   : '';
                 return `
                   <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-200 hover:border-[#C8102E]/30 transition-colors cursor-pointer"
-                       onclick="closeDonorModal(); showPoliticianModal(${p.id})">
+                       onclick="closeDonorModalAndShowPolitician(${p.id})">
                     <div>
                       <div class="font-semibold">${p.name}</div>
                       <div class="text-xs text-slate-500">${p.type} • ${p.year}</div>
@@ -213,18 +216,13 @@ function showDonorModal(donorName) {
 function closeDonorModal() {
   const modal = document.getElementById('donorModal');
   if (modal) modal.remove();
-  
-  const politicianModal = document.getElementById('politicianModal');
-  if (politicianModal && politicianModal.classList.contains('hidden')) {
-    politicianModal.classList.remove('hidden');
-    politicianModal.classList.add('flex');
-  }
 }
 
-function showPoliticianModal(politicianId) {
-  if (typeof window.showPoliticianModal === 'function') {
-    window.showPoliticianModal(politicianId);
-  } else {
-    console.warn('showPoliticianModal ikke fundet');
-  }
+function closeDonorModalAndShowPolitician(politicianId) {
+  closeDonorModal();
+  setTimeout(() => {
+    if (typeof window.showPoliticianModal === 'function') {
+      window.showPoliticianModal(politicianId);
+    }
+  }, 50);
 }
