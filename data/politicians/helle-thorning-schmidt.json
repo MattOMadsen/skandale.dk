@@ -6,5 +6,11 @@
   "role": "Statsminister 2011-2015",
   "avatarColor": "#C8102E",
   "initials": "HTS",
-  "bio": "Danmarks første kvindelige statsminister (2011-2015). Ledede en centrum-venstre regering, men var involveret i flere kontroverser omkring privatøkonomi og offentlige optrædener."
+  "bio": "Danmarks første kvindelige statsminister (2011-2015) og formand for Socialdemokratiet.",
+  "careerTimeline": "1990'erne – Begyndte i DSU og blev hurtigt en central figur.\\n\\n2005 – Valgt til Folketinget.\\n\\n2011 – Blev Danmarks første kvindelige statsminister.\\n\\n2011-2015 – Ledede en bred regering med Radikale Venstre og SF (senere kun Radikale).\\n\\n2014 – Skattesagen med hendes mand Stephen Kinnock.\\n\\n2015 – Tabte valget til Lars Løkke Rasmussen.\\n\\n2015-2019 – Medlem af Europa-Parlamentet.\\n\\n2019-2022 – Formand for Save the Children International.",
+  "beforePolitics": {
+    "title": "Før politik / Ungdom",
+    "content": "Helle Thorning-Schmidt blev født i 1966 og studerede statskundskab. Hun var aktiv i Danmarks Socialdemokratiske Ungdom (DSU) og blev hurtigt bemærket som et stort talent. Hun har en baggrund som cand.scient.pol. fra Københavns Universitet."
+  },
+  "scandalsFile": "data/scandals/helle-thorning-schmidt.json"
 }
