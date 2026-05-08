@@ -1,11 +1,11 @@
 # Skandale.dk
 
-**Version:** v2.00.59  
+**Version:** v2.00.61  
 **Status:** Statisk hjemmeside klar til GitHub Pages
 
-## Seneste ændringer (v2.00.59)
-- Flyttet skandaler til separat mappe (`data/scandals/`) for både Lars Løkke Rasmussen og Mette Frederiksen
-- Struktur nu konsistent med broken-promises og economic-support
+## Seneste ændringer (v2.00.61)
+- Flyttet skandaler til separat mappe (`data/scandals/`) for Inger Støjberg
+- Nu 3 politikere med separat skandale-fil (Lars, Mette, Inger)
 
 **Live demo:** https://mattomadsen.github.io/skandale.dk/
 
