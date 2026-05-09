@@ -16,6 +16,18 @@ Hver politiker har følgende dedikerede JSON-filer:
 
 > **Note:** `data/details/` er legacy og bruges ikke længere til aktiv rendering.
 
+## Kilde links (vigtigt for gennemsigtighed)
+
+**Alle sektioner skal have klikbare kilde links**, så brugeren kan læse mere om emnet og verificere informationen:
+
+- **Skandaler**: Hver skandale skal have `mediaLinks` eller `source` med klikbar(e) kilde(r)
+- **Brudte valgløfter**: Kilde link under hvert løfte
+- **Internationale netværk**: Kilde link på hvert netværk
+- **Økonomisk støtte**: Kilde link på hver donor (hvis tilgængelig)
+- **Om Politikeren / Karriereoversigt**: Eventuelle kilder skal være klikbare
+
+Dette sikrer fuld gennemsigtighed og troværdighed.
+
 ## Anbefalet rækkefølge i modalen
 
 ### 1. Header (altid synlig)
@@ -62,4 +74,4 @@ Hver politiker har følgende dedikerede JSON-filer:
 - Data er JSON-baseret → nem at opdatere og udvide
 - Alle 12 politikere skal have identisk struktur for genkendelighed
 
-**Sidst opdateret:** 9. maj 2026 (v2.00.54) – Opdateret til aktuel mappe-struktur med scandals/, affiliations/ m.m.
+**Sidst opdateret:** 9. maj 2026 (v2.00.54) – Tilføjet krav om kilde links i alle sektioner + opdateret til aktuel mappe-struktur.
