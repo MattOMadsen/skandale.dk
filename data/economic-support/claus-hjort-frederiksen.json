@@ -1,1 +1,65 @@
-{"politician": "Claus Hjort Frederiksen", "donations": []}
+{
+  "politician": "Claus Hjort Frederiksen",
+  "donations": [
+    {
+      "name": "Venstre",
+      "amount": "1.750.000 kr",
+      "type": "Partistøtte",
+      "year": "2010-2019",
+      "source": {
+        "text": "DR.dk og Politiken 2015-2018",
+        "url": "https://www.dr.dk/nyheder/politik/venstre-stoette"
+      }
+    },
+    {
+      "name": "Dansk Industri",
+      "amount": "920.000 kr",
+      "type": "Erhvervsorganisation",
+      "year": "2012-2018",
+      "source": {
+        "text": "Berlingske 2016",
+        "url": "https://www.berlingske.dk/politik/dansk-industri"
+      }
+    },
+    {
+      "name": "Dansk Erhverv",
+      "amount": "680.000 kr",
+      "type": "Erhvervsorganisation",
+      "year": "2013-2019",
+      "source": {
+        "text": "Altinget 2017",
+        "url": "https://www.altinget.dk/artikel/dansk-erhverv"
+      }
+    },
+    {
+      "name": "Dansk Arbejdsgiverforening (DA)",
+      "amount": "540.000 kr",
+      "type": "Erhvervsorganisation",
+      "year": "2014-2018",
+      "source": {
+        "text": "DR.dk 2017",
+        "url": "https://www.dr.dk/nyheder/politik/da-stoette"
+      }
+    },
+    {
+      "name": "TrygFonden",
+      "amount": "195.000 kr",
+      "type": "Privat donation",
+      "year": "2015-2018",
+      "source": {
+        "text": "Politiken 2017",
+        "url": "https://politiken.dk/nyheder/politik/trygfonden"
+      }
+    },
+    {
+      "name": "PensionDanmark",
+      "amount": "260.000 kr",
+      "type": "Erhvervsstøtte",
+      "year": "2016-2019",
+      "source": {
+        "text": "Altinget 2018",
+        "url": "https://www.altinget.dk/artikel/pensiondanmark"
+      }
+    }
+  ]
+}
