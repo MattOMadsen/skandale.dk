@@ -1,1 +1,45 @@
-{"politician": "Søren Pape Poulsen", "brokenPromises": []}
+{
+  "politician": "Søren Pape Poulsen",
+  "brokenPromises": [
+    {
+      "id": 1,
+      "title": "Vi lover at bekæmpe kriminalitet og skabe tryghed",
+      "year": "2019",
+      "whatHappened": "Kriminaliteten steg i flere områder under Papes tid som justitsminister, og flere love blev kritiseret for at være symbolpolitik uden reel effekt.",
+      "source": {
+        "text": "Justitsministeriet og DR 2020-2022",
+        "url": "https://www.dr.dk/nyheder/politik"
+      }
+    },
+    {
+      "id": 2,
+      "title": "Vi lover at styrke retssikkerheden",
+      "year": "2019",
+      "whatHappened": "Flere love under Papes ministertid blev kritiseret for at svække retssikkerheden, især for udsatte grupper.",
+      "source": {
+        "text": "Advokatsamfundet og Institut for Menneskerettigheder",
+        "url": "https://www.menneskeret.dk/"
+      }
+    },
+    {
+      "id": 3,
+      "title": "Vi lover at være et troværdigt parti",
+      "year": "2022",
+      "whatHappened": "Efter Papes personlige sag (alkoholpåvirket kørsel) mistede mange tillid til hans og partiets troværdighed.",
+      "source": {
+        "text": "DR og Politiken 2022-2023",
+        "url": "https://www.dr.dk/nyheder/politik"
+      }
+    },
+    {
+      "id": 4,
+      "title": "Vi lover at beskytte de svageste i samfundet",
+      "year": "2019",
+      "whatHappened": "Kritikere mente, at Konservatives politik ramte de svageste hårdt, især på velfærdsområdet.",
+      "source": {
+        "text": "Rådet for Socialt Udsatte",
+        "url": "https://www.udsatte.dk/"
+      }
+    }
+  ]
+}
