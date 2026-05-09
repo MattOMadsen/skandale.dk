@@ -38,7 +38,6 @@ function showTimeline() {
         }
     });
 
-    // Sikker sortering (håndterer manglende year)
     allScandals.sort((a, b) => {
         const yearA = a.year || '0';
         const yearB = b.year || '0';
@@ -56,7 +55,6 @@ function showTimeline() {
     modal.classList.remove('hidden');
     modal.classList.add('flex');
 
-    // Populér partifilter
     const partySelect = document.getElementById('filterParty');
     if (partySelect) {
         partySelect.innerHTML = '<option value="">Alle partier</option>';
@@ -72,10 +70,7 @@ function showTimeline() {
     renderTimeline(allScandals);
 }
 
-// Gør funktionen global så navbar-linket virker
 window.showTimelineModal = showTimeline;
-
-// Gør alle nødvendige funktioner global så de virker fra onclick i HTML
 window.filterTimeline = filterTimeline;
 window.resetTimelineFilters = resetTimelineFilters;
 window.closeTimeline = closeTimeline;
