@@ -1,4 +1,4 @@
-// js/modal-core.js - Opdateret til at læse fra dedikerede mapper (scandals + affiliations)
+// js/modal-core.js - Med affiliations sektion (gendannet)
 let currentPolitician = null;
 
 async function showPoliticianModal(politicianId) {
@@ -122,8 +122,24 @@ async function showPoliticianModal(politicianId) {
           <!-- Økonomisk støtte -->
           <div id="economicSupportSection"></div>
           
-          <!-- Internationale netværk -->
-          <div id="affiliationsSection"></div>
+          <!-- Internationale netværk & tilknytninger -->
+          ${politician.affiliations && politician.affiliations.length > 0 ? `
+            <div class="mt-8 pt-6 border-t">
+              <div class="flex items-center gap-x-2 mb-4">
+                <i class="fa-solid fa-globe text-[#C8102E]"></i>
+                <span class="font-bold text-lg">Internationale netværk & tilknytninger</span>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                ${politician.affiliations.map(aff => `
+                  <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+                    <div class="font-semibold">${aff.name}</div>
+                    <div class="text-xs text-slate-500">${aff.role || aff.organization || ''} • ${aff.year}</div>
+                    ${aff.description ? `<div class="text-sm text-slate-600 mt-1">${aff.description}</div>` : ''}
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          ` : ''}
           
           <!-- Brudte valgløfter -->
           <div id="brokenPromisesSection"></div>
@@ -143,7 +159,6 @@ async function showPoliticianModal(politicianId) {
     if (typeof loadScandals === 'function') loadScandals(politician);
     if (typeof addBrokenPromisesSection === 'function') addBrokenPromisesSection(politician);
     if (typeof addEconomicSupportSection === 'function') addEconomicSupportSection(politician);
-    if (typeof loadAffiliations === 'function') loadAffiliations(politician);
     if (typeof initShareButton === 'function') initShareButton(politician);
   }, 100);
 }
