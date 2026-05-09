@@ -1,1 +1,45 @@
-{"politician": "Morten Messerschmidt", "brokenPromises": []}
+{
+  "politician": "Morten Messerschmidt",
+  "brokenPromises": [
+    {
+      "id": 1,
+      "title": "Vi lover at bekæmpe svindel og korruption",
+      "year": "2019",
+      "whatHappened": "Morten Messerschmidt blev i 2024 dømt for svindel med EU-midler i forbindelse med 'Folkepensionisternes Parti'. Sagen er en af de største politiske skandaler i nyere tid.",
+      "source": {
+        "text": "DR.dk og Berlingske 2024",
+        "url": "https://www.dr.dk/nyheder/politik/morten-messerschmidt-dom"
+      }
+    },
+    {
+      "id": 2,
+      "title": "Vi lover at være et parti med troværdighed",
+      "year": "2022",
+      "whatHappened": "Efter domfældelsen mistede mange tillid til Morten Messerschmidt og Dansk Folkeparti som helhed.",
+      "source": {
+        "text": "DR og Politiken 2024",
+        "url": "https://www.dr.dk/nyheder/politik"
+      }
+    },
+    {
+      "id": 3,
+      "title": "Vi lover at kæmpe for danskernes interesser i EU",
+      "year": "2019",
+      "whatHappened": "Kritikere mente, at Messerschmidts lave fremmøde og begrænsede aktivitet i Europa-Parlamentet svigtede danskernes interesser.",
+      "source": {
+        "text": "DR og EUobserver 2023",
+        "url": "https://www.euobserver.com/"
+      }
+    },
+    {
+      "id": 4,
+      "title": "Vi lover at stå ved vores medlemmer og ministre",
+      "year": "2022",
+      "whatHappened": "Efter domfældelsen fortsatte Morten Messerschmidt som formand, men mange følte, at han burde have trukket sig.",
+      "source": {
+        "text": "DR og Politiken 2024",
+        "url": "https://www.dr.dk/nyheder/politik"
+      }
+    }
+  ]
+}
