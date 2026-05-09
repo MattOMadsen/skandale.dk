@@ -28,7 +28,7 @@
             <a href="#" onclick="if (typeof window.showTimelineModal === 'function') { window.showTimelineModal(); } else { alert('Tidslinje kommer snart!'); }" class="text-slate-600 hover:text-[#C8102E] transition-colors">Tidslinje</a>
             <a href="#" onclick="if (typeof window.showCompareModal === 'function') { window.showCompareModal(); } else { alert('Sammenlign kommer snart!'); }" class="text-slate-600 hover:text-[#C8102E] transition-colors">Sammenlign</a>
             <a href="#" onclick="if (typeof window.showStatsModal === 'function') { window.showStatsModal(); } else { alert('Statistik kommer snart!'); }" class="text-slate-600 hover:text-[#C8102E] transition-colors">Statistik</a>
-            <a href="#" onclick="if (typeof window.showPartyModal === 'function') { window.showPartyModal(); } else { alert('Parti oversigt kommer snart!'); }" class="text-slate-600 hover:text-[#C8102E] transition-colors font-medium">Parti oversigt</a>
+            <a href="#" onclick="showPartyOverviewModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors font-medium">Parti oversigt</a>
             <a href="#" onclick="showAboutModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors">Om projektet</a>
         </div>
 
@@ -80,10 +80,9 @@
     </div>
 </div>
 
-<!-- Timeline Modal (tilføjet så tidslinjen virker igen) -->
+<!-- Timeline Modal -->
 <div id="timelineModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[150] items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-6xl w-full max-h-[92vh] overflow-hidden shadow-2xl flex flex-col">
-        <!-- Header -->
         <div class="px-8 pt-8 pb-6 border-b flex items-center justify-between flex-shrink-0">
             <div>
                 <h3 class="text-3xl font-bold tracking-tight">Tidslinje over skandaler</h3>
@@ -91,8 +90,6 @@
             </div>
             <button onclick="closeTimeline()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
         </div>
-
-        <!-- Filtre -->
         <div class="px-8 py-6 border-b flex flex-wrap gap-4 items-end flex-shrink-0">
             <div>
                 <label class="block text-xs font-medium text-slate-500 mb-1">Parti</label>
@@ -113,10 +110,23 @@
             </div>
             <button onclick="resetTimelineFilters()" class="px-5 py-2 text-sm border border-slate-300 rounded-2xl hover:bg-slate-100 transition-colors">Nulstil filtre</button>
         </div>
-
-        <!-- Indhold -->
         <div id="timelineContent" class="flex-1 overflow-y-auto p-8 space-y-4">
-            <!-- Indsættes dynamisk via JS -->
+        </div>
+    </div>
+</div>
+
+<!-- Parti Oversigt Modal -->
+<div id="partyOverviewModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[150] items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-hidden shadow-2xl flex flex-col">
+        <div class="px-8 pt-8 pb-6 border-b flex items-center justify-between flex-shrink-0">
+            <div>
+                <h3 class="text-3xl font-bold tracking-tight">Parti oversigt</h3>
+                <p class="text-slate-500 mt-1">Overblik over alle partier og deres skandaler</p>
+            </div>
+            <button onclick="closePartyOverviewModal()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+        </div>
+        <div id="partyOverviewContent" class="flex-1 overflow-y-auto p-8">
+            <!-- Indsættes dynamisk -->
         </div>
     </div>
 </div>
@@ -155,6 +165,91 @@
             const navbar = document.getElementById('navbar-version');
             if (navbar) navbar.textContent = APP_VERSION + " Split";
         }
+    }
+
+    // Parti Oversigt funktion
+    function showPartyOverviewModal() {
+        const modal = document.getElementById('partyOverviewModal');
+        const content = document.getElementById('partyOverviewContent');
+        if (!modal || !content || !window.politicians) return;
+
+        // Gruppér politikere efter parti
+        const partyGroups = {};
+        window.politicians.forEach(p => {
+            if (!partyGroups[p.party]) {
+                partyGroups[p.party] = { count: 0, scandals: 0, politicians: [] };
+            }
+            partyGroups[p.party].count++;
+            partyGroups[p.party].scandals += (p.scandals ? p.scandals.length : 0);
+            partyGroups[p.party].politicians.push(p.name);
+        });
+
+        let html = '<div class="grid grid-cols-1 md:grid-cols-2 gap-6">';
+        Object.keys(partyGroups).sort().forEach(party => {
+            const g = partyGroups[party];
+            html += `
+                <div class="border border-slate-200 rounded-3xl p-6 hover:border-[#C8102E]/30 cursor-pointer" onclick="showPartyDetail('${party}')">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="font-bold text-xl">${party}</div>
+                            <div class="text-sm text-slate-500">${g.count} politikere</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-3xl font-bold text-[#C8102E]">${g.scandals}</div>
+                            <div class="text-xs text-slate-500">skandaler</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        html += '</div>';
+        content.innerHTML = html;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
+
+    function closePartyOverviewModal() {
+        const modal = document.getElementById('partyOverviewModal');
+        if (modal) {
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+    }
+
+    function showPartyDetail(party) {
+        closePartyOverviewModal();
+        const politiciansInParty = window.politicians.filter(p => p.party === party);
+        let html = `<div class="mb-6"><h4 class="font-bold text-2xl">${party}</h4><p class="text-slate-500">${politiciansInParty.length} politikere</p></div>`;
+        html += '<div class="space-y-3">';
+        politiciansInParty.forEach(p => {
+            const scandalCount = p.scandals ? p.scandals.length : 0;
+            html += `
+                <div onclick="window.openPoliticianModal(${p.id}); closePartyDetailModal();" class="flex justify-between items-center p-4 border border-slate-200 rounded-2xl hover:border-[#C8102E]/30 cursor-pointer">
+                    <div class="font-medium">${p.name}</div>
+                    <div class="text-sm text-[#C8102E] font-bold">${scandalCount} skandaler</div>
+                </div>
+            `;
+        });
+        html += '</div>';
+
+        const detailModal = document.createElement('div');
+        detailModal.id = 'partyDetailModal';
+        detailModal.className = 'fixed inset-0 bg-black/70 backdrop-blur-sm z-[160] flex items-center justify-center p-4';
+        detailModal.innerHTML = `
+            <div class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl">
+                <div class="px-8 pt-8 pb-6 border-b flex justify-between">
+                    <h3 class="text-2xl font-bold">${party}</h3>
+                    <button onclick="closePartyDetailModal()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+                </div>
+                <div class="p-8">${html}</div>
+            </div>
+        `;
+        document.body.appendChild(detailModal);
+    }
+
+    function closePartyDetailModal() {
+        const modal = document.getElementById('partyDetailModal');
+        if (modal) modal.remove();
     }
 
     function showAboutModal() {
