@@ -1,4 +1,4 @@
-// js/modal-core.js - Robust loading af scandals + affiliations
+// js/modal-core.js - Robust og stabil modal (ingen timing-problemer)
 let currentPolitician = null;
 
 async function showPoliticianModal(politicianId) {
@@ -8,13 +8,11 @@ async function showPoliticianModal(politicianId) {
     return;
   }
 
-  // Hent scandals fra separat fil (robust)
+  // Hent scandals (robust)
   if (!politician.scandals && politician.scandalsFile) {
     try {
       const response = await fetch(politician.scandalsFile);
       const data = await response.json();
-      
-      // Håndter både {scandals: [...]} og {"politician": "...", "scandals": [...]}
       if (data.scandals && Array.isArray(data.scandals)) {
         politician.scandals = data.scandals;
       } else if (Array.isArray(data)) {
@@ -28,7 +26,7 @@ async function showPoliticianModal(politicianId) {
     }
   }
 
-  // Hent affiliations fra separat fil
+  // Hent affiliations
   if (!politician.affiliations && politician.id) {
     try {
       const affPath = `data/affiliations/${politician.name.toLowerCase().replace(/\s+/g, '-')}.json`;
@@ -44,8 +42,8 @@ async function showPoliticianModal(politicianId) {
 
   currentPolitician = politician;
 
-  const existingModals = document.querySelectorAll('.fixed.inset-0');
-  existingModals.forEach(m => m.remove());
+  // Fjern eksisterende modaler
+  document.querySelectorAll('.fixed.inset-0').forEach(m => m.remove());
 
   const html = `
     <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4" id="politicianModal">
@@ -73,12 +71,10 @@ async function showPoliticianModal(politicianId) {
               <i class="fa-solid fa-share-alt"></i>
               <span class="hidden sm:inline">Del</span>
             </button>
-            
             <button onclick="exportPoliticianToPDF(currentPolitician)" class="flex items-center gap-x-2 px-4 py-2 text-sm font-semibold text-slate-700 hover:text-slate-900 border border-slate-300 hover:bg-slate-100 rounded-2xl transition-all">
               <i class="fa-solid fa-file-pdf"></i>
               <span class="hidden sm:inline">PDF</span>
             </button>
-            
             <button onclick="closePoliticianModal()" class="flex items-center justify-center w-10 h-10 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-2xl transition-all text-3xl leading-none">×</button>
           </div>
         </div>
@@ -125,9 +121,6 @@ async function showPoliticianModal(politicianId) {
               <span class="text-xs text-slate-500">(${politician.scandals ? politician.scandals.length : 0})</span>
             </div>
             <div id="scandalsContainer"></div>
-            ${(!politician.scandals || politician.scandals.length === 0) ? `
-              <div class="text-xs text-slate-400 mt-2">Hvis skandaler ikke vises, prøv at genindlæse siden (Ctrl+Shift+R)</div>
-            ` : ''}
           </div>
           
           <!-- Økonomisk støtte -->
@@ -158,7 +151,7 @@ async function showPoliticianModal(politicianId) {
         </div>
         
         <div class="px-8 py-4 border-t bg-slate-50 text-xs text-slate-400 text-center">
-          Data er baseret på offentligt tilgængelige kilder • v2.00.53
+          Data er baseret på offentligt tilgængelige kilder • v2.00.54
         </div>
       </div>
     </div>
@@ -166,18 +159,39 @@ async function showPoliticianModal(politicianId) {
 
   document.body.insertAdjacentHTML('beforeend', html);
 
-  setTimeout(() => {
-    try {
-      if (typeof loadScandals === 'function') {
+  // === ROBUST KALD TIL loadScandals (ingen race condition) ===
+  const tryLoadScandals = () => {
+    if (typeof loadScandals === 'function') {
+      try {
         loadScandals(politician);
+      } catch (e) {
+        console.error('Fejl i loadScandals:', e);
+        // Fallback: vis simpel liste
+        const container = document.getElementById('scandalsContainer');
+        if (container && politician.scandals && politician.scandals.length > 0) {
+          container.innerHTML = politician.scandals.map(s => `
+            <div class="border border-slate-200 rounded-2xl p-4 mb-3">
+              <div class="font-bold">${s.title}</div>
+              <div class="text-sm text-slate-600 mt-1">${s.shortDesc || s.description || ''}</div>
+            </div>
+          `).join('');
+        }
       }
-      if (typeof addBrokenPromisesSection === 'function') addBrokenPromisesSection(politician);
-      if (typeof addEconomicSupportSection === 'function') addEconomicSupportSection(politician);
-      if (typeof initShareButton === 'function') initShareButton(politician);
-    } catch (e) {
-      console.error('Fejl ved indlæsning af sektioner i modal:', e);
+    } else {
+      // Prøv igen om 50ms hvis filen ikke er indlæst endnu
+      setTimeout(tryLoadScandals, 50);
     }
-  }, 300);
+  };
+
+  // Start robust loading
+  setTimeout(tryLoadScandals, 50);
+
+  // Andre sektioner
+  setTimeout(() => {
+    if (typeof addBrokenPromisesSection === 'function') addBrokenPromisesSection(politician);
+    if (typeof addEconomicSupportSection === 'function') addEconomicSupportSection(politician);
+    if (typeof initShareButton === 'function') initShareButton(politician);
+  }, 100);
 }
 
 function closePoliticianModal() {
