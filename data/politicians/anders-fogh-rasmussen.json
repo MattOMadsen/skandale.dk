@@ -6,5 +6,11 @@
   "role": "Statsminister 2001-2009",
   "avatarColor": "#004B87",
   "initials": "AFR",
-  "bio": "Tidligere statsminister for Venstre (2001-2009). Senere generalsekretær for NATO. Kendt for 'Fogh-regeringerne' og Danmarks deltagelse i Irak-krigen."
+  "bio": "Tidligere statsminister for Venstre (2001-2009). Senere generalsekretær for NATO. Kendt for 'Fogh-regeringerne' og Danmarks deltagelse i Irak-krigen.",
+  "careerTimeline": "1980'erne – Begyndte i Venstres Ungdom og blev hurtigt en central figur.\n\n1990'erne – Valgt til Folketinget.\n\n2001-2009 – Statsminister (Venstre).\n\n2003 – Irak-krigen.\n\n2007-2009 – Anden periode som statsminister.\n\n2009-2014 – Generalsekretær for NATO.\n\n2014- – Senior Advisor hos konsulentfirmaer og internationalt arbejde.",
+  "beforePolitics": {
+    "title": "Før politik / Ungdom",
+    "content": "Anders Fogh Rasmussen blev født i 1953 i Ginnerup. Han studerede statskundskab på Aarhus Universitet og var aktiv i Venstres Ungdom, hvor han hurtigt avancerede. Han har en baggrund som cand.scient.pol. og arbejdede som konsulent før han gik ind i politik på fuld tid."
+  },
+  "scandalsFile": "data/scandals/anders-fogh-rasmussen.json"
 }
