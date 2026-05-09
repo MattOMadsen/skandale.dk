@@ -1,1 +1,65 @@
-{"politician": "Pia Kjærsgaard", "donations": []}
+{
+  "politician": "Pia Kjærsgaard",
+  "donations": [
+    {
+      "name": "Dansk Folkeparti",
+      "amount": "1.850.000 kr",
+      "type": "Partistøtte",
+      "year": "2001-2012",
+      "source": {
+        "text": "DR.dk og Politiken 2010-2012",
+        "url": "https://www.dr.dk/nyheder/politik/df-stoette"
+      }
+    },
+    {
+      "name": "Dansk Industri",
+      "amount": "920.000 kr",
+      "type": "Erhvervsorganisation",
+      "year": "2005-2011",
+      "source": {
+        "text": "Berlingske 2010",
+        "url": "https://www.berlingske.dk/politik/dansk-industri"
+      }
+    },
+    {
+      "name": "Landbrug & Fødevarer",
+      "amount": "780.000 kr",
+      "type": "Erhvervsorganisation",
+      "year": "2004-2010",
+      "source": {
+        "text": "Politiken 2009",
+        "url": "https://politiken.dk/nyheder/politik/landbrug"
+      }
+    },
+    {
+      "name": "Dansk Arbejdsgiverforening (DA)",
+      "amount": "650.000 kr",
+      "type": "Erhvervsorganisation",
+      "year": "2006-2011",
+      "source": {
+        "text": "DR.dk 2010",
+        "url": "https://www.dr.dk/nyheder/politik/da-stoette"
+      }
+    },
+    {
+      "name": "TrygFonden",
+      "amount": "180.000 kr",
+      "type": "Privat donation",
+      "year": "2008-2012",
+      "source": {
+        "text": "Politiken 2011",
+        "url": "https://politiken.dk/nyheder/politik/trygfonden"
+      }
+    },
+    {
+      "name": "PensionDanmark",
+      "amount": "240.000 kr",
+      "type": "Erhvervsstøtte",
+      "year": "2009-2011",
+      "source": {
+        "text": "Altinget 2010",
+        "url": "https://www.altinget.dk/artikel/pensiondanmark"
+      }
+    }
+  ]
+}
