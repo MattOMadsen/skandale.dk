@@ -67,6 +67,9 @@ function showTimeline() {
     renderTimeline(allScandals);
 }
 
+// Gør funktionen global så navbar-linket virker
+window.showTimelineModal = showTimeline;
+
 function renderTimeline(scandalsToShow) {
     const container = document.getElementById('timelineContent');
     if (!container) return;
@@ -133,7 +136,7 @@ function resetTimelineFilters() {
     
     if (partySelect) partySelect.value = '';
     if (severitySelect) severitySelect.value = '';
-    
+
     renderTimeline(allScandals);
 }
 
