@@ -1,1 +1,27 @@
-{"politician": "Helle Thorning-Schmidt", "brokenPromises": []}
+{
+  "politician": "Helle Thorning-Schmidt",
+  "brokenPromises": [
+    {
+      "id": 1,
+      "title": "Vi lover at beskytte velfærden og ikke skære i kerneydelserne",
+      "year": "2011",
+      "whatHappened": "Under Helle Thorning-Schmidts regering blev der gennemført reformer (bl.a. kontanthjælpsloft) der blev kritiseret for at ramme de svageste hårdt.",
+      "source": {
+        "text": "Rådet for Socialt Udsatte og DR 2013-2015",
+        "url": "https://www.udsatte.dk/"
+      },
+      "otherPoliticians": ["Lars Løkke Rasmussen"]
+    },
+    {
+      "id": 2,
+      "title": "Vi lover at sænke skatten for almindelige danskere",
+      "year": "2011",
+      "whatHappened": "Skattetrykket steg i flere år under hendes regering, og de lovede skattelettelser blev ikke gennemført i det lovede omfang.",
+      "source": {
+        "text": "Skatteministeriet & CEPOS 2013-2015",
+        "url": "https://www.skm.dk/"
+      },
+      "otherPoliticians": ["Anders Fogh Rasmussen"]
+    }
+  ]
+}
