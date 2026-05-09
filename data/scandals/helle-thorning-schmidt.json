@@ -2,48 +2,56 @@
   "politician": "Helle Thorning-Schmidt",
   "scandals": [
     {
-      "id": 1,
+      "id": "skattesag-2014",
       "title": "Skattesag (2014)",
       "year": "2014",
-      "description": "Helle Thorning-Schmidt og hendes mand Stephen Kinnock blev anklaget for skattesnyd i forbindelse med deres bopæl i Schweiz. Sagen førte til massiv kritik og truede hendes position som statsminister.",
+      "shortDesc": "Helle Thorning-Schmidt og hendes mand Stephen Kinnock blev anklaget for skattesnyd i forbindelse med deres bopæl i Schweiz. Sagen førte til massiv kritik og truede hendes position som statsminister.",
       "severity": 4,
-      "source": {
-        "text": "DR, Politiken og Ekstra Bladet 2014",
-        "url": "https://www.dr.dk/nyheder/politik/helle-thorning-schmidt-skattesag"
-      }
+      "mediaLinks": [
+        {
+          "name": "DR, Politiken og Ekstra Bladet 2014",
+          "url": "https://www.dr.dk/nyheder/politik/helle-thorning-schmidt-skattesag"
+        }
+      ]
     },
     {
-      "id": 2,
+      "id": "velfaerdsreformer-2013",
       "title": "Kritik af velfærdsreformer og kontanthjælpsloft (2013-2015)",
       "year": "2013",
-      "description": "Under Helle Thorning-Schmidts regering blev der gennemført reformer der blev kritiseret for at ramme de svageste og skære i velfærden (bl.a. kontanthjælpsloft og førtidspension).",
+      "shortDesc": "Under Helle Thorning-Schmidts regering blev der gennemført reformer der blev kritiseret for at ramme de svageste og skære i velfærden (bl.a. kontanthjælpsloft og førtidspension).",
       "severity": 3,
-      "source": {
-        "text": "Rådet for Socialt Udsatte og DR 2013-2015",
-        "url": "https://www.udsatte.dk/"
-      }
+      "mediaLinks": [
+        {
+          "name": "Rådet for Socialt Udsatte og DR 2013-2015",
+          "url": "https://www.udsatte.dk/"
+        }
+      ]
     },
     {
-      "id": 3,
+      "id": "bilderberg-2010erne",
       "title": "Bilderberg-møder og manglende åbenhed",
       "year": "2010'erne",
-      "description": "Helle Thorning-Schmidt deltog gentagne gange i lukkede Bilderberg-møder uden fuld information til Folketinget. Kritik for manglende gennemsigtighed.",
+      "shortDesc": "Helle Thorning-Schmidt deltog gentagne gange i lukkede Bilderberg-møder uden fuld information til Folketinget. Kritik for manglende gennemsigtighed.",
       "severity": 3,
-      "source": {
-        "text": "Information og Altinget",
-        "url": "https://www.information.dk/"
-      }
+      "mediaLinks": [
+        {
+          "name": "Information og Altinget",
+          "url": "https://www.information.dk/"
+        }
+      ]
     },
     {
-      "id": 4,
+      "id": "oekonomisk-politik-2008-2015",
       "title": "Kritik af regeringens økonomiske politik under finanskrisen",
       "year": "2008-2015",
-      "description": "Som statsminister og tidligere oppositionspolitiker blev Helle Thorning-Schmidt kritiseret for håndteringen af finanskrisen og de økonomiske reformer, der fulgte.",
+      "shortDesc": "Som statsminister og tidligere oppositionspolitiker blev Helle Thorning-Schmidt kritiseret for håndteringen af finanskrisen og de økonomiske reformer, der fulgte.",
       "severity": 3,
-      "source": {
-        "text": "DR, Politiken og Berlingske 2008-2015",
-        "url": "https://www.dr.dk/nyheder/politik"
-      }
+      "mediaLinks": [
+        {
+          "name": "DR, Politiken og Berlingske 2008-2015",
+          "url": "https://www.dr.dk/nyheder/politik"
+        }
+      ]
     }
   ]
 }
