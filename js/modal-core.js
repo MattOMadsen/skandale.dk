@@ -1,4 +1,4 @@
-// js/modal-core.js - KOMPLET OG ROBUST VERSION (fungerer 100%)
+// js/modal-core.js - FULD OG RIG VERSION (genoprettet detaljeret skandale-visning)
 let currentPolitician = null;
 
 function createStars(severity) {
@@ -35,9 +35,11 @@ function renderScandalsDirect(politician, container) {
     }
 
     const stars = createStars(s.severity);
+
     html += `
       <div class="border border-slate-200 rounded-2xl mb-4 overflow-hidden">
-        <div class="flex items-center justify-between p-4 bg-slate-50">
+        <!-- Header (klikbar) -->
+        <div id="scandal-header-${index}" class="flex items-center justify-between p-4 bg-slate-50 cursor-pointer hover:bg-slate-100 transition-colors">
           <div class="flex-1">
             <div class="flex items-center gap-x-3">
               <div class="font-bold text-lg">${s.title}</div>
@@ -48,25 +50,95 @@ function renderScandalsDirect(politician, container) {
               <div class="text-xs text-slate-500">Alvorlighed: ${s.severity}/5</div>
             </div>
           </div>
+          <i id="scandal-chevron-${index}" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
         </div>
-        <div class="p-4 border-t">
-          <div class="text-slate-700">${s.shortDesc || s.description || ''}</div>
-          ${s.mediaLinks && s.mediaLinks.length > 0 ? `
-            <div class="mt-3 flex flex-wrap gap-2">
-              ${s.mediaLinks.map(link => `
-                <a href="${link.url}" target="_blank" class="inline-flex items-center gap-x-1 px-3 py-1.5 bg-white border border-slate-200 rounded-xl text-xs hover:border-[#C8102E]/50">
-                  <i class="fa-solid fa-external-link-alt text-[#C8102E]"></i>
-                  <span>${link.name}</span>
-                </a>
-              `).join('')}
+
+        <!-- Indhold (skjult som standard) -->
+        <div id="scandal-content-${index}" class="hidden p-4 border-t">
+          <div class="space-y-4">
+            <div>
+              <div class="font-semibold text-sm text-slate-500 mb-1">Hvad skete der?</div>
+              <div class="text-slate-700">${s.longDesc || s.shortDesc || s.description || ''}</div>
             </div>
-          ` : ''}
+
+            ${s.outcome ? `
+              <div>
+                <div class="font-semibold text-sm text-slate-500 mb-1">Udvikling / Konsekvens</div>
+                <div class="text-slate-700">${s.outcome}</div>
+              </div>
+            ` : ''}
+
+            ${s.justiceAnalysis ? `
+              <div>
+                <div class="font-semibold text-sm text-slate-500 mb-1">Juridisk vurdering</div>
+                <div class="text-slate-700">${s.justiceAnalysis}</div>
+              </div>
+            ` : ''}
+
+            ${s.mediaLinks && s.mediaLinks.length > 0 ? `
+              <div>
+                <div class="font-semibold text-sm text-slate-500 mb-2">Kilder & Medier</div>
+                <div class="flex flex-wrap gap-2">
+                  ${s.mediaLinks.map(link => `
+                    <a href="${link.url}" target="_blank" class="inline-flex items-center gap-x-1 px-3 py-1.5 bg-white border border-slate-200 rounded-xl text-xs hover:border-[#C8102E]/50 transition-colors">
+                      <i class="fa-solid fa-external-link-alt text-[#C8102E]"></i>
+                      <span>${link.name}</span>
+                    </a>
+                  `).join('')}
+                </div>
+              </div>
+            ` : ''}
+
+            <!-- Voting -->
+            <div class="pt-4 border-t">
+              <div class="font-semibold text-sm text-slate-500 mb-2">Hvad synes du?</div>
+              <div class="flex gap-x-2">
+                <button onclick="voteOnScandal(${index}, 'good')" class="flex-1 px-4 py-2 bg-green-50 hover:bg-green-100 text-green-700 rounded-xl text-sm font-medium transition-colors">
+                  <i class="fa-solid fa-thumbs-up mr-1"></i> Godt
+                </button>
+                <button onclick="voteOnScandal(${index}, 'bad')" class="flex-1 px-4 py-2 bg-red-50 hover:bg-red-100 text-red-700 rounded-xl text-sm font-medium transition-colors">
+                  <i class="fa-solid fa-thumbs-down mr-1"></i> Dårligt
+                </button>
+                <button onclick="voteOnScandal(${index}, 'neutral')" class="flex-1 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-sm font-medium transition-colors">
+                  <i class="fa-solid fa-minus mr-1"></i> Neutral
+                </button>
+              </div>
+              <div id="vote-result-${index}" class="mt-2 text-xs text-center text-slate-500"></div>
+            </div>
+
+            <!-- Kommentarer -->
+            <div class="pt-4 border-t">
+              <div class="font-semibold text-sm text-slate-500 mb-2">Kommentarer</div>
+              <div class="flex gap-x-2 mb-3">
+                <input type="text" id="comment-input-${index}" placeholder="Skriv en kommentar..." class="flex-1 px-3 py-2 border border-slate-200 rounded-xl text-sm">
+                <button onclick="addComment(${index})" class="px-4 py-2 bg-[#C8102E] text-white rounded-xl text-sm font-medium hover:bg-[#C8102E]/90 transition-colors">
+                  Send
+                </button>
+              </div>
+              <div id="comments-list-${index}" class="space-y-2 text-sm"></div>
+            </div>
+          </div>
         </div>
       </div>
     `;
   });
 
   container.innerHTML = html;
+
+  // Tilføj click handlers for expand/collapse
+  politician.scandals.forEach((scandal, index) => {
+    const header = document.getElementById(`scandal-header-${index}`);
+    if (header) {
+      header.addEventListener('click', () => {
+        const content = document.getElementById(`scandal-content-${index}`);
+        const chevron = document.getElementById(`scandal-chevron-${index}`);
+        if (content && chevron) {
+          content.classList.toggle('hidden');
+          chevron.classList.toggle('rotate-180');
+        }
+      });
+    }
+  });
 }
 
 async function showPoliticianModal(politicianId) {
