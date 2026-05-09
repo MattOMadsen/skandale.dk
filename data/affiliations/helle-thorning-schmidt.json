@@ -1,38 +1,40 @@
 {
-  "politician": "Helle Thorning-Schmidt",
   "affiliations": [
     {
+      "name": "UN Sustainable Development Goals (SDGs)",
+      "organization": "United Nations",
+      "year": "2016–2024",
+      "role": "Advocate & High-Level Champion"
+    },
+    {
       "name": "Save the Children International",
-      "type": "International organisation",
-      "year": "2019-2022",
-      "role": "Formand",
-      "description": "Helle Thorning-Schmidt var formand for Save the Children International og arbejdede globalt for børns rettigheder.",
-      "source": {
-        "text": "Save the Children",
-        "url": "https://www.savethechildren.net/"
-      }
+      "organization": "Save the Children",
+      "year": "2016–2023",
+      "role": "CEO"
     },
     {
-      "name": "Europa-Parlamentet",
-      "type": "Internationalt parlament",
-      "year": "2015-2019",
-      "role": "Medlem",
-      "description": "Efter sin tid som statsminister blev Helle Thorning-Schmidt valgt til Europa-Parlamentet for Socialdemokratiet.",
-      "source": {
-        "text": "Europa-Parlamentet",
-        "url": "https://www.europarl.europa.eu/"
-      }
+      "name": "World Economic Forum (WEF)",
+      "organization": "World Economic Forum",
+      "year": "2012–2023",
+      "role": "Participant & Speaker"
     },
     {
-      "name": "FN's Børnefond (UNICEF)",
-      "type": "Internationalt samarbejde",
-      "year": "2010'erne",
-      "role": "Ambassadør / Støtte",
-      "description": "Helle Thorning-Schmidt har støttet UNICEF's arbejde og deltaget i internationale kampagner for børn i nød.",
-      "source": {
-        "text": "UNICEF Danmark",
-        "url": "https://www.unicef.dk/"
-      }
+      "name": "Bilderberg Meetings",
+      "organization": "Bilderberg Group",
+      "year": "2014, 2016, 2019",
+      "role": "Deltager"
+    },
+    {
+      "name": "European Council on Foreign Relations (ECFR)",
+      "organization": "ECFR",
+      "year": "2018–2024",
+      "role": "Council Member"
+    },
+    {
+      "name": "Global Citizen",
+      "organization": "Global Citizen",
+      "year": "2017–2024",
+      "role": "Co-Chair & Advocate"
     }
   ]
 }
