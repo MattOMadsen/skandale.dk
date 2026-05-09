@@ -1,14 +1,40 @@
-// js/modal-core.js - Med collapsible sektioner + Del/PDF knapper (v2.00.51)
+// js/modal-core.js - Opdateret til at læse fra dedikerede mapper (scandals + affiliations)
 let currentPolitician = null;
 
-function showPoliticianModal(politicianId) {
+async function showPoliticianModal(politicianId) {
   const politician = politicians.find(p => p.id === politicianId);
   if (!politician) {
     console.error('Politiker ikke fundet:', politicianId);
     return;
   }
 
-  currentPolitician = politician; // Gem globalt til PDF og share
+  // Hent scandals fra separat fil
+  if (!politician.scandals && politician.scandalsFile) {
+    try {
+      const response = await fetch(politician.scandalsFile);
+      const data = await response.json();
+      politician.scandals = data.scandals || [];
+    } catch (e) {
+      console.error('Kunne ikke hente skandaler:', e);
+      politician.scandals = [];
+    }
+  }
+
+  // Hent affiliations fra separat fil
+  if (!politician.affiliations && politician.id) {
+    try {
+      const affPath = `data/affiliations/${politician.name.toLowerCase().replace(/\s+/g, '-')}.json`;
+      const response = await fetch(affPath);
+      if (response.ok) {
+        const data = await response.json();
+        politician.affiliations = data.affiliations || [];
+      }
+    } catch (e) {
+      politician.affiliations = [];
+    }
+  }
+
+  currentPolitician = politician;
 
   const existingModals = document.querySelectorAll('.fixed.inset-0');
   existingModals.forEach(m => m.remove());
@@ -18,7 +44,7 @@ function showPoliticianModal(politicianId) {
       <div onclick="event.target.id === 'politicianModal' && closePoliticianModal()" 
            class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
         
-        <!-- Header med Del + PDF + Luk -->
+        <!-- Header -->
         <div class="px-8 pt-8 pb-6 border-b flex flex-col sm:flex-row sm:items-start justify-between gap-y-4">
           <div class="flex items-center gap-x-4">
             <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-white font-bold text-2xl" 
@@ -35,19 +61,16 @@ function showPoliticianModal(politicianId) {
           </div>
 
           <div class="flex items-center gap-x-2">
-            <!-- Del knap -->
             <button id="share-btn" class="flex items-center gap-x-2 px-4 py-2 text-sm font-semibold text-slate-700 hover:text-slate-900 border border-slate-300 hover:bg-slate-100 rounded-2xl transition-all">
               <i class="fa-solid fa-share-alt"></i>
               <span class="hidden sm:inline">Del</span>
             </button>
             
-            <!-- PDF knap -->
             <button onclick="exportPoliticianToPDF(currentPolitician)" class="flex items-center gap-x-2 px-4 py-2 text-sm font-semibold text-slate-700 hover:text-slate-900 border border-slate-300 hover:bg-slate-100 rounded-2xl transition-all">
               <i class="fa-solid fa-file-pdf"></i>
               <span class="hidden sm:inline">PDF</span>
             </button>
             
-            <!-- Luk -->
             <button onclick="closePoliticianModal()" class="flex items-center justify-center w-10 h-10 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-2xl transition-all text-3xl leading-none">×</button>
           </div>
         </div>
@@ -100,22 +123,7 @@ function showPoliticianModal(politicianId) {
           <div id="economicSupportSection"></div>
           
           <!-- Internationale netværk -->
-          ${politician.affiliations && politician.affiliations.length > 0 ? `
-            <div class="mt-8 pt-6 border-t">
-              <div class="flex items-center gap-x-2 mb-4">
-                <i class="fa-solid fa-globe text-[#C8102E]"></i>
-                <span class="font-bold text-lg">Internationale netværk & tilknytninger</span>
-              </div>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                ${politician.affiliations.map(aff => `
-                  <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
-                    <div class="font-semibold">${aff.name}</div>
-                    <div class="text-xs text-slate-500">${aff.organization} • ${aff.year}</div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-          ` : ''}
+          <div id="affiliationsSection"></div>
           
           <!-- Brudte valgløfter -->
           <div id="brokenPromisesSection"></div>
@@ -123,7 +131,7 @@ function showPoliticianModal(politicianId) {
         </div>
         
         <div class="px-8 py-4 border-t bg-slate-50 text-xs text-slate-400 text-center">
-          Data er baseret på offentligt tilgængelige kilder • v2.00.51
+          Data er baseret på offentligt tilgængelige kilder • v2.00.52
         </div>
       </div>
     </div>
@@ -135,6 +143,7 @@ function showPoliticianModal(politicianId) {
     if (typeof loadScandals === 'function') loadScandals(politician);
     if (typeof addBrokenPromisesSection === 'function') addBrokenPromisesSection(politician);
     if (typeof addEconomicSupportSection === 'function') addEconomicSupportSection(politician);
+    if (typeof loadAffiliations === 'function') loadAffiliations(politician);
     if (typeof initShareButton === 'function') initShareButton(politician);
   }, 100);
 }
