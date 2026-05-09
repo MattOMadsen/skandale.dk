@@ -80,6 +80,47 @@
     </div>
 </div>
 
+<!-- Timeline Modal (tilføjet så tidslinjen virker igen) -->
+<div id="timelineModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[150] items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-6xl w-full max-h-[92vh] overflow-hidden shadow-2xl flex flex-col">
+        <!-- Header -->
+        <div class="px-8 pt-8 pb-6 border-b flex items-center justify-between flex-shrink-0">
+            <div>
+                <h3 class="text-3xl font-bold tracking-tight">Tidslinje over skandaler</h3>
+                <p class="text-slate-500 mt-1">Sorteret efter år – nyeste først</p>
+            </div>
+            <button onclick="closeTimeline()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+        </div>
+
+        <!-- Filtre -->
+        <div class="px-8 py-6 border-b flex flex-wrap gap-4 items-end flex-shrink-0">
+            <div>
+                <label class="block text-xs font-medium text-slate-500 mb-1">Parti</label>
+                <select id="filterParty" onchange="filterTimeline()" class="border border-slate-300 rounded-2xl px-4 py-2 text-sm w-56">
+                    <option value="">Alle partier</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs font-medium text-slate-500 mb-1">Minimum alvorlighed</label>
+                <select id="filterSeverity" onchange="filterTimeline()" class="border border-slate-300 rounded-2xl px-4 py-2 text-sm w-48">
+                    <option value="">Alle</option>
+                    <option value="1">1+ stjerner</option>
+                    <option value="2">2+ stjerner</option>
+                    <option value="3">3+ stjerner</option>
+                    <option value="4">4+ stjerner</option>
+                    <option value="5">5 stjerner</option>
+                </select>
+            </div>
+            <button onclick="resetTimelineFilters()" class="px-5 py-2 text-sm border border-slate-300 rounded-2xl hover:bg-slate-100 transition-colors">Nulstil filtre</button>
+        </div>
+
+        <!-- Indhold -->
+        <div id="timelineContent" class="flex-1 overflow-y-auto p-8 space-y-4">
+            <!-- Indsættes dynamisk via JS -->
+        </div>
+    </div>
+</div>
+
 <!-- Scripts -->
 <script src="js/version.js"></script>
 <script src="js/modal-core.js"></script>
