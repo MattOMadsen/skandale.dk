@@ -1,7 +1,6 @@
 // js/modal-party.js - Parti-oversigt modal
 
 function showPartyOverview() {
-    // Gruppér politikere efter parti
     const parties = {};
     
     politicians.forEach(p => {
@@ -33,13 +32,11 @@ function showPartyOverview() {
         }
     });
 
-    // Byg HTML
     let html = `
         <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[150] flex items-center justify-center p-4" id="partyModal">
             <div onclick="event.target.id === 'partyModal' && closePartyModal()" 
                  class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
                 
-                <!-- Header -->
                 <div class="px-8 pt-8 pb-6 border-b flex items-center justify-between">
                     <div>
                         <h3 class="text-3xl font-bold tracking-tight">Parti-oversigt</h3>
@@ -97,14 +94,13 @@ function showPartyOverview() {
     document.body.insertAdjacentHTML('beforeend', html);
 }
 
-// Gør alle funktioner global så navbar og onclick virker
 window.showPartyModal = showPartyOverview;
 window.showPartyDetail = showPartyDetail;
 window.closePartyModal = closePartyModal;
 window.closePartyDetailModal = closePartyDetailModal;
 
 function showPartyDetail(partyName, partyColor) {
-    closePartyModal(); // Luk oversigten
+    closePartyModal();
 
     const partyPoliticians = politicians.filter(p => p.party === partyName);
     
@@ -132,7 +128,6 @@ function showPartyDetail(partyName, partyColor) {
             <div onclick="event.target.id === 'partyDetailModal' && closePartyDetailModal()" 
                  class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
                 
-                <!-- Header -->
                 <div class="px-8 pt-8 pb-6 border-b flex items-center justify-between" style="border-color: ${partyColor}30">
                     <div class="flex items-center gap-x-4">
                         <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white text-3xl font-bold" 
@@ -148,7 +143,6 @@ function showPartyDetail(partyName, partyColor) {
                 </div>
                 
                 <div class="p-8">
-                    <!-- Statistik -->
                     <div class="grid grid-cols-3 gap-4 mb-8">
                         <div class="bg-slate-50 rounded-2xl p-4 text-center">
                             <div class="text-3xl font-bold">${totalScandals}</div>
@@ -164,7 +158,6 @@ function showPartyDetail(partyName, partyColor) {
                         </div>
                     </div>
 
-                    <!-- Politikere -->
                     <div class="mb-4">
                         <div class="font-bold text-lg mb-3">Politikere i partiet</div>
                         <div class="space-y-3">
