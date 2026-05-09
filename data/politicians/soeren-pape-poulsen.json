@@ -6,5 +6,11 @@
   "role": "Formand for Konservative 2014-2024",
   "avatarColor": "#005E3A",
   "initials": "SPP",
-  "bio": "Tidligere formand for Det Konservative Folkeparti (2014-2024) og tidligere justitsminister. Kendt for sin rolige stil og fokus på retspolitik."
+  "bio": "Tidligere formand for Det Konservative Folkeparti (2014-2024) og tidligere justitsminister. Kendt for sin rolige stil og fokus på retspolitik.",
+  "careerTimeline": "2011 – Valgt til Folketinget for De Konservative.\n\n2014 – Valgt som partiformand.\n\n2015-2019 – Støttede Løkke-regeringen.\n\n2019-2022 – Justitsminister i Mette Frederiksens regering.\n\n2022 – Trådte tilbage som justitsminister efter personlig sag.\n\n2024 – Trådte tilbage som partiformand.\n\n2024 – Forlod Folketinget.",
+  "beforePolitics": {
+    "title": "Før politik / Ungdom",
+    "content": "Søren Pape Poulsen blev født i 1971. Han har en baggrund som cand.jur. og har arbejdet som advokat og i erhvervslivet før han gik ind i politik. Han har altid været kendt for en rolig og analytisk tilgang til politik."
+  },
+  "scandalsFile": "data/scandals/soeren-pape-poulsen.json"
 }
