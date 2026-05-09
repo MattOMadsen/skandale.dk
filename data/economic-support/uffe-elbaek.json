@@ -1,1 +1,65 @@
-{"politician": "Uffe Elbæk", "donations": []}
+{
+  "politician": "Uffe Elbæk",
+  "donations": [
+    {
+      "name": "Alternativet",
+      "amount": "980.000 kr",
+      "type": "Partistøtte",
+      "year": "2015-2020",
+      "source": {
+        "text": "DR.dk og Politiken 2018-2020",
+        "url": "https://www.dr.dk/nyheder/politik/alternativet-stoette"
+      }
+    },
+    {
+      "name": "Realdania",
+      "amount": "420.000 kr",
+      "type": "Privat donation",
+      "year": "2016-2019",
+      "source": {
+        "text": "Altinget 2018",
+        "url": "https://www.altinget.dk/artikel/realdania"
+      }
+    },
+    {
+      "name": "Novo Nordisk Fonden",
+      "amount": "310.000 kr",
+      "type": "Privat donation",
+      "year": "2017-2020",
+      "source": {
+        "text": "Politiken 2019",
+        "url": "https://politiken.dk/nyheder/politik/novonordiskfonden"
+      }
+    },
+    {
+      "name": "Rockwool Fonden",
+      "amount": "185.000 kr",
+      "type": "Privat donation",
+      "year": "2018-2019",
+      "source": {
+        "text": "Berlingske 2019",
+        "url": "https://www.berlingske.dk/politik/rockwoolfonden"
+      }
+    },
+    {
+      "name": "TrygFonden",
+      "amount": "145.000 kr",
+      "type": "Privat donation",
+      "year": "2017-2020",
+      "source": {
+        "text": "Altinget 2018",
+        "url": "https://www.altinget.dk/artikel/trygfonden"
+      }
+    },
+    {
+      "name": "PensionDanmark",
+      "amount": "220.000 kr",
+      "type": "Erhvervsstøtte",
+      "year": "2018-2020",
+      "source": {
+        "text": "Politiken 2019",
+        "url": "https://politiken.dk/nyheder/politik/pensiondanmark"
+      }
+    }
+  ]
+}
