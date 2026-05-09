@@ -27,7 +27,6 @@ async function loadPoliticians() {
       let brokenPromises = [];
       let economicSupport = [];
 
-      // === NY STRUKTUR (prioritet) ===
       try {
         const s = await fetch(`data/scandals/${slug}.json`);
         if (s.ok) {
@@ -86,12 +85,19 @@ async function loadPoliticians() {
       ...detailsList[index]
     }));
 
-    // === BYG GLOBALT NETVÆRKS-INDEX ===
+    // === BYG GLOBALT NETVÆRKS-INDEX (case-insensitive + trim) ===
     networkIndex = {};
     politicians.forEach(politician => {
       if (politician.affiliations && Array.isArray(politician.affiliations)) {
         politician.affiliations.forEach(aff => {
-          const key = aff.name || aff.organization || 'Ukendt';
+          let key = (aff.name || aff.organization || 'Ukendt').trim();
+          // Normaliser kendte varianter
+          if (key.toLowerCase().includes('world economic forum') || key.toLowerCase().includes('wef')) key = 'World Economic Forum (WEF)';
+          if (key.toLowerCase().includes('bilderberg')) key = 'Bilderberg Meetings';
+          if (key.toLowerCase().includes('cpac')) key = 'Conservative Political Action Conference (CPAC)';
+          if (key.toLowerCase().includes('ecr')) key = 'European Conservatives and Reformists (ECR)';
+          if (key.toLowerCase().includes('idu')) key = 'International Democrat Union (IDU)';
+
           if (!networkIndex[key]) networkIndex[key] = [];
           networkIndex[key].push({
             id: politician.id,
@@ -103,6 +109,9 @@ async function loadPoliticians() {
         });
       }
     });
+
+    // Gør det globalt tilgængeligt
+    window.networkIndex = networkIndex;
 
     console.log(`[Skandale.dk] Alle ${politicians.length} politikere loaded med fuld data + netværksindeks`);
     return politicians;
