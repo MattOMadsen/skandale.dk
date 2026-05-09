@@ -57,3 +57,6 @@ function renderPoliticians(filteredPoliticians = null) {
 
   grid.innerHTML = html;
 }
+
+// Gør renderPoliticians global så search.js kan kalde den
+window.renderPoliticians = renderPoliticians;
