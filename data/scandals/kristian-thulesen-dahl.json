@@ -1,0 +1,55 @@
+{
+  "scandals": [
+    {
+      "id": "df-stoette-2015",
+      "title": "DF's støtte til Løkke-regeringen 2015-2019",
+      "date": "2015-2019",
+      "description": "Kristian Thulesen Dahl førte DF ind i et tæt samarbejde med Venstre-regeringen. Mange kernevælgere følte, at DF svigtede sine udlændingepolitiske løfter, da regeringen ikke gennemførte de stramninger, DF havde krævet.",
+      "severity": "høj",
+      "sources": [
+        "https://www.dr.dk/nyheder/politik/df-og-loekke-regeringen",
+        "https://www.berlingske.dk/politik/2019/06/05/thulesen-dahl-og-df-krisen"
+      ],
+      "votes": {
+        "good": 0,
+        "bad": 0,
+        "neutral": 0
+      },
+      "comments": []
+    },
+    {
+      "id": "udlaendingepolitik-2018",
+      "title": "Udlændingestramninger vs. faktisk politik",
+      "date": "2015-2019",
+      "description": "DF lovede 'stram udlændingepolitik' og 'asylstop'. I praksis blev antallet af asylansøgere reduceret, men ikke stoppet, og flere love blev kritiseret for at være symbolpolitik uden reel effekt.",
+      "severity": "middel",
+      "sources": [
+        "https://www.uim.dk/nyheder/2018/udlaendingeloven",
+        "https://www.amnesty.dk/udlaendingepolitik"
+      ],
+      "votes": {
+        "good": 0,
+        "bad": 0,
+        "neutral": 0
+      },
+      "comments": []
+    },
+    {
+      "id": "personlig-oekonomi",
+      "title": "Personlig økonomi og formueforhold",
+      "date": "2018-2020",
+      "description": "Thulesen Dahl blev kritiseret for sin personlige formue og investeringer, mens han var partileder. Sagen blev undersøgt internt i DF, men skabte debat om politikerens troværdighed.",
+      "severity": "lav",
+      "sources": [
+        "https://www.dr.dk/nyheder/politik/thulesen-dahl-formue",
+        "https://www.berlingske.dk/politik/2019/01/10/thulesen-dahl"
+      ],
+      "votes": {
+        "good": 0,
+        "bad": 0,
+        "neutral": 0
+      },
+      "comments": []
+    }
+  ]
+}
