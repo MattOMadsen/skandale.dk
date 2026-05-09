@@ -1,3 +1,22 @@
 {
-  "affiliations": []
+  "affiliations": [
+    {
+      "name": "Young Global Leaders",
+      "organization": "World Economic Forum (WEF)",
+      "year": "2009",
+      "role": "Young Global Leader"
+    },
+    {
+      "name": "Global Shapers Hub",
+      "organization": "World Economic Forum (WEF)",
+      "year": "2011-2013",
+      "role": "Global Shaper"
+    },
+    {
+      "name": "Bilderberg-gruppen",
+      "organization": "Bilderberg Meetings",
+      "year": "2023",
+      "role": "Deltager"
+    }
+  ]
 }
