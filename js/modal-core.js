@@ -1,4 +1,4 @@
-// js/modal-core.js - Med affiliations sektion (gendannet)
+// js/modal-core.js - Robust loading af scandals + affiliations
 let currentPolitician = null;
 
 async function showPoliticianModal(politicianId) {
@@ -8,14 +8,22 @@ async function showPoliticianModal(politicianId) {
     return;
   }
 
-  // Hent scandals fra separat fil
+  // Hent scandals fra separat fil (robust)
   if (!politician.scandals && politician.scandalsFile) {
     try {
       const response = await fetch(politician.scandalsFile);
       const data = await response.json();
-      politician.scandals = data.scandals || [];
+      
+      // Håndter både {scandals: [...]} og {"politician": "...", "scandals": [...]}
+      if (data.scandals && Array.isArray(data.scandals)) {
+        politician.scandals = data.scandals;
+      } else if (Array.isArray(data)) {
+        politician.scandals = data;
+      } else {
+        politician.scandals = [];
+      }
     } catch (e) {
-      console.error('Kunne ikke hente skandaler:', e);
+      console.error('Kunne ikke hente skandaler for', politician.name, e);
       politician.scandals = [];
     }
   }
