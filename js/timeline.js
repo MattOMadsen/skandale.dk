@@ -70,6 +70,11 @@ function showTimeline() {
 // Gør funktionen global så navbar-linket virker
 window.showTimelineModal = showTimeline;
 
+// Gør alle nødvendige funktioner global så de virker fra onclick i HTML
+window.filterTimeline = filterTimeline;
+window.resetTimelineFilters = resetTimelineFilters;
+window.closeTimeline = closeTimeline;
+
 function renderTimeline(scandalsToShow) {
     const container = document.getElementById('timelineContent');
     if (!container) return;
