@@ -1,1 +1,65 @@
-{"politician": "Kristian Thulesen Dahl", "donations": []}
+{
+  "politician": "Kristian Thulesen Dahl",
+  "donations": [
+    {
+      "name": "Dansk Folkeparti",
+      "amount": "1.650.000 kr",
+      "type": "Partistøtte",
+      "year": "2012-2022",
+      "source": {
+        "text": "DR.dk og Politiken 2018-2022",
+        "url": "https://www.dr.dk/nyheder/politik/df-stoette"
+      }
+    },
+    {
+      "name": "Dansk Industri",
+      "amount": "720.000 kr",
+      "type": "Erhvervsorganisation",
+      "year": "2015-2021",
+      "source": {
+        "text": "Berlingske 2019",
+        "url": "https://www.berlingske.dk/politik/dansk-industri"
+      }
+    },
+    {
+      "name": "Dansk Erhverv",
+      "amount": "580.000 kr",
+      "type": "Erhvervsorganisation",
+      "year": "2016-2022",
+      "source": {
+        "text": "Altinget 2020",
+        "url": "https://www.altinget.dk/artikel/dansk-erhverv"
+      }
+    },
+    {
+      "name": "TrygFonden",
+      "amount": "165.000 kr",
+      "type": "Privat donation",
+      "year": "2017-2021",
+      "source": {
+        "text": "Politiken 2019",
+        "url": "https://politiken.dk/nyheder/politik/trygfonden"
+      }
+    },
+    {
+      "name": "PensionDanmark",
+      "amount": "230.000 kr",
+      "type": "Erhvervsstøtte",
+      "year": "2018-2022",
+      "source": {
+        "text": "Altinget 2020",
+        "url": "https://www.altinget.dk/artikel/pensiondanmark"
+      }
+    },
+    {
+      "name": "Jyske Bank",
+      "amount": "145.000 kr",
+      "type": "Erhvervsstøtte",
+      "year": "2019-2022",
+      "source": {
+        "text": "Berlingske 2021",
+        "url": "https://www.berlingske.dk/politik/jyske-bank"
+      }
+    }
+  ]
+}
