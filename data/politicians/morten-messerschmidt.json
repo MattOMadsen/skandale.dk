@@ -6,5 +6,24 @@
   "role": "Medlem af Europa-Parlamentet 2014-2024",
   "avatarColor": "#E30613",
   "initials": "MM",
-  "bio": "Tidligere medlem af Europa-Parlamentet for Dansk Folkeparti. Kendt for sin markante EU-kritiske linje og flere sager om brug af EU-midler."
+  "bio": "Tidligere medlem af Europa-Parlamentet for Dansk Folkeparti. Kendt for sin markante EU-kritiske linje og flere sager om brug af EU-midler.",
+  "beforePolitics": "Før sin politiske karriere arbejdede Morten Messerschmidt som journalist og tv-vært. Han har en baggrund som jurist og har studeret jura på Københavns Universitet. Han har også været ansat hos DR og medvirket i flere tv-programmer.",
+  "careerTimeline": [
+    {
+      "year": "2005",
+      "event": "Valgt ind i Folketinget for Dansk Folkeparti"
+    },
+    {
+      "year": "2014",
+      "event": "Medlem af Europa-Parlamentet"
+    },
+    {
+      "year": "2019",
+      "event": "Formand for Dansk Folkeparti"
+    },
+    {
+      "year": "2022",
+      "event": "Genvalgt til Folketinget"
+    }
+  ]
 }
