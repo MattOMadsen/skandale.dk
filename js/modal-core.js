@@ -125,6 +125,9 @@ async function showPoliticianModal(politicianId) {
               <span class="text-xs text-slate-500">(${politician.scandals ? politician.scandals.length : 0})</span>
             </div>
             <div id="scandalsContainer"></div>
+            ${(!politician.scandals || politician.scandals.length === 0) ? `
+              <div class="text-xs text-slate-400 mt-2">Hvis skandaler ikke vises, prøv at genindlæse siden (Ctrl+Shift+R)</div>
+            ` : ''}
           </div>
           
           <!-- Økonomisk støtte -->
@@ -155,7 +158,7 @@ async function showPoliticianModal(politicianId) {
         </div>
         
         <div class="px-8 py-4 border-t bg-slate-50 text-xs text-slate-400 text-center">
-          Data er baseret på offentligt tilgængelige kilder • v2.00.52
+          Data er baseret på offentligt tilgængelige kilder • v2.00.53
         </div>
       </div>
     </div>
@@ -164,11 +167,17 @@ async function showPoliticianModal(politicianId) {
   document.body.insertAdjacentHTML('beforeend', html);
 
   setTimeout(() => {
-    if (typeof loadScandals === 'function') loadScandals(politician);
-    if (typeof addBrokenPromisesSection === 'function') addBrokenPromisesSection(politician);
-    if (typeof addEconomicSupportSection === 'function') addEconomicSupportSection(politician);
-    if (typeof initShareButton === 'function') initShareButton(politician);
-  }, 100);
+    try {
+      if (typeof loadScandals === 'function') {
+        loadScandals(politician);
+      }
+      if (typeof addBrokenPromisesSection === 'function') addBrokenPromisesSection(politician);
+      if (typeof addEconomicSupportSection === 'function') addEconomicSupportSection(politician);
+      if (typeof initShareButton === 'function') initShareButton(politician);
+    } catch (e) {
+      console.error('Fejl ved indlæsning af sektioner i modal:', e);
+    }
+  }, 300);
 }
 
 function closePoliticianModal() {
