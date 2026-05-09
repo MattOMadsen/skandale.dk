@@ -1,1 +1,45 @@
-{"politician": "Kristian Thulesen Dahl", "brokenPromises": []}
+{
+  "politician": "Kristian Thulesen Dahl",
+  "brokenPromises": [
+    {
+      "id": 1,
+      "title": "Vi lover at få gennemført stramme udlændingestramninger",
+      "year": "2015",
+      "whatHappened": "Trods løfter blev mange af DF's ønskede stramninger ikke gennemført under Løkke-regeringen 2015-2019. Mange kernevælgere følte sig svigtet.",
+      "source": {
+        "text": "DR og Politiken 2015-2019",
+        "url": "https://www.dr.dk/nyheder/politik"
+      }
+    },
+    {
+      "id": 2,
+      "title": "Vi lover at være et parti med høj troværdighed",
+      "year": "2012",
+      "whatHappened": "Efter flere interne sager og dårlige meningsmålinger mistede mange tillid til Kristian Thulesen Dahl og Dansk Folkeparti.",
+      "source": {
+        "text": "DR og Politiken 2019-2022",
+        "url": "https://www.dr.dk/nyheder/politik"
+      }
+    },
+    {
+      "id": 3,
+      "title": "Vi lover at beskytte de svageste i samfundet",
+      "year": "2015",
+      "whatHappened": "Kritikere mente, at DF's støtte til Løkke-regeringen ramte de svageste hårdt på velfærdsområdet.",
+      "source": {
+        "text": "Rådet for Socialt Udsatte",
+        "url": "https://www.udsatte.dk/"
+      }
+    },
+    {
+      "id": 4,
+      "title": "Vi lover at stå ved vores kernevælgere",
+      "year": "2015",
+      "whatHappened": "Mange tidligere DF-vælgere følte, at partiet svigtede dem ved at støtte en regering, der ikke gennemførte de lovede stramninger.",
+      "source": {
+        "text": "DR og Altinget 2019",
+        "url": "https://www.altinget.dk/"
+      }
+    }
+  ]
+}
