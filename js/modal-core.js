@@ -38,7 +38,6 @@ function renderScandalsDirect(politician, container) {
 
     html += `
       <div class="border border-slate-200 rounded-2xl mb-4 overflow-hidden">
-        <!-- Header (klikbar) -->
         <div id="scandal-header-${index}" class="flex items-center justify-between p-4 bg-slate-50 cursor-pointer hover:bg-slate-100 transition-colors">
           <div class="flex-1">
             <div class="flex items-center gap-x-3">
@@ -53,7 +52,6 @@ function renderScandalsDirect(politician, container) {
           <i id="scandal-chevron-${index}" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
         </div>
 
-        <!-- Indhold (skjult som standard) -->
         <div id="scandal-content-${index}" class="hidden p-4 border-t">
           <div class="space-y-4">
             <div>
@@ -89,7 +87,6 @@ function renderScandalsDirect(politician, container) {
               </div>
             ` : ''}
 
-            <!-- Voting -->
             <div class="pt-4 border-t">
               <div class="font-semibold text-sm text-slate-500 mb-2">Hvad synes du?</div>
               <div class="flex gap-x-2">
@@ -106,7 +103,6 @@ function renderScandalsDirect(politician, container) {
               <div id="vote-result-${index}" class="mt-2 text-xs text-center text-slate-500"></div>
             </div>
 
-            <!-- Kommentarer -->
             <div class="pt-4 border-t">
               <div class="font-semibold text-sm text-slate-500 mb-2">Kommentarer</div>
               <div class="flex gap-x-2 mb-3">
@@ -125,7 +121,6 @@ function renderScandalsDirect(politician, container) {
 
   container.innerHTML = html;
 
-  // Tilføj click handlers for expand/collapse
   politician.scandals.forEach((scandal, index) => {
     const header = document.getElementById(`scandal-header-${index}`);
     if (header) {
@@ -139,6 +134,59 @@ function renderScandalsDirect(politician, container) {
       });
     }
   });
+}
+
+// === NY FUNKTION: Vis politikere der deler samme internationale netværk ===
+function showNetworkConnections(networkName) {
+  if (!window.networkIndex || !window.networkIndex[networkName]) {
+    alert('Ingen andre politikere fundet med dette netværk.');
+    return;
+  }
+
+  const connectedPoliticians = window.networkIndex[networkName];
+
+  let html = `
+    <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[200] flex items-center justify-center p-4" id="networkModal">
+      <div onclick="event.target.id === 'networkModal' && closeNetworkModal()" class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl">
+        <div class="px-8 pt-8 pb-6 border-b flex items-center justify-between">
+          <div>
+            <h3 class="text-2xl font-bold">${networkName}</h3>
+            <p class="text-slate-500">${connectedPoliticians.length} politikere har været tilknyttet dette netværk</p>
+          </div>
+          <button onclick="closeNetworkModal()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+        </div>
+        <div class="p-8 max-h-[70vh] overflow-y-auto">
+          <div class="space-y-3">
+  `;
+
+  connectedPoliticians.forEach(p => {
+    html += `
+      <div onclick="closeNetworkModal(); showPoliticianModal(${p.id})" class="flex justify-between items-center p-4 border border-slate-200 rounded-2xl hover:border-[#C8102E]/30 cursor-pointer">
+        <div>
+          <div class="font-semibold">${p.name}</div>
+          <div class="text-sm text-slate-500">${p.party}</div>
+        </div>
+        <div class="text-right text-sm">
+          <div class="font-medium">${p.year}</div>
+          <div class="text-xs text-slate-500">${p.role}</div>
+        </div>
+      </div>
+    `;
+  });
+
+  html += `
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.insertAdjacentHTML('beforeend', html);
+}
+
+function closeNetworkModal() {
+  const modal = document.getElementById('networkModal');
+  if (modal) modal.remove();
 }
 
 async function showPoliticianModal(politicianId) {
@@ -155,19 +203,6 @@ async function showPoliticianModal(politicianId) {
       politician.scandals = data.scandals || (Array.isArray(data) ? data : []);
     } catch (e) {
       politician.scandals = [];
-    }
-  }
-
-  if (!politician.affiliations && politician.id) {
-    try {
-      const affPath = `data/affiliations/${politician.name.toLowerCase().replace(/\s+/g, '-')}.json`;
-      const response = await fetch(affPath);
-      if (response.ok) {
-        const data = await response.json();
-        politician.affiliations = data.affiliations || [];
-      }
-    } catch (e) {
-      politician.affiliations = [];
     }
   }
 
@@ -256,13 +291,16 @@ async function showPoliticianModal(politicianId) {
                 <span class="font-bold text-lg">Internationale netværk & tilknytninger</span>
               </div>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                ${politician.affiliations.map(aff => `
-                  <div class="p-4 bg-slate-50 border border-slate-200 rounded-2xl">
-                    <div class="font-semibold">${aff.name}</div>
-                    <div class="text-xs text-slate-500">${aff.role || aff.organization || ''} • ${aff.year}</div>
-                    ${aff.description ? `<div class="text-sm text-slate-600 mt-1">${aff.description}</div>` : ''}
-                  </div>
-                `).join('')}
+                ${politician.affiliations.map(aff => {
+                  const networkName = aff.name || aff.organization || 'Ukendt';
+                  return `
+                    <div onclick="showNetworkConnections('${networkName}')" class="p-4 bg-slate-50 border border-slate-200 rounded-2xl hover:border-[#C8102E]/30 cursor-pointer transition-all">
+                      <div class="font-semibold text-[#C8102E]">${networkName}</div>
+                      <div class="text-xs text-slate-500">${aff.organization || ''} • ${aff.year || ''}</div>
+                      ${aff.role ? `<div class="text-sm text-slate-600 mt-1">${aff.role}</div>` : ''}
+                    </div>
+                  `;
+                }).join('')}
               </div>
             </div>
           ` : ''}
@@ -308,3 +346,4 @@ function toggleSection(sectionId) {
 }
 
 window.showPoliticianModal = showPoliticianModal;
+window.showNetworkConnections = showNetworkConnections;
