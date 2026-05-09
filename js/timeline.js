@@ -38,7 +38,12 @@ function showTimeline() {
         }
     });
 
-    allScandals.sort((a, b) => b.year.localeCompare(a.year));
+    // Sikker sortering (håndterer manglende year)
+    allScandals.sort((a, b) => {
+        const yearA = a.year || '0';
+        const yearB = b.year || '0';
+        return yearB.localeCompare(yearA);
+    });
     currentScandals = [...allScandals];
 
     const modal = document.getElementById('timelineModal');
