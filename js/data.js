@@ -1,5 +1,5 @@
 // js/data.js - Komplet fix: Henter fra alle dedikererede mapper + legacy fallback
-// Opdateret 9. maj 2026 – Prioriterer data/scandals/ men bevarer fuld bagudkompatibilitet med data/details/
+// Opdateret 9. maj 2026 – Nu med både scandals og affiliations fra nye mapper
 
 let politicians = [];
 
@@ -34,27 +34,25 @@ async function loadPoliticians() {
           const sData = await s.json();
           scandals = sData.scandals || (Array.isArray(sData) ? sData : []);
         }
-      } catch (e) {
-        // Ignorer fejl – vi falder tilbage til legacy
-      }
+      } catch (e) {}
+
+      // Hent affiliations fra dedikeret mappe (data/affiliations/)
+      try {
+        const a = await fetch(`data/affiliations/${slug}.json`);
+        if (a.ok) {
+          const aData = await a.json();
+          affiliations = aData.affiliations || aData || [];
+        }
+      } catch (e) {}
 
       // === LEGACY FALLBACK (data/details/) – beholdes uændret ===
-      if (scandals.length === 0) {
+      if (scandals.length === 0 || affiliations.length === 0) {
         try {
           const d = await fetch(`data/details/${slug}-details.json`);
           if (d.ok) {
             const details = await d.json();
-            scandals = details.scandals || [];
-            affiliations = details.affiliations || [];
-          }
-        } catch (e) {}
-      } else {
-        // Hvis nye skandaler blev fundet, hent stadig affiliations fra legacy (indtil det også migreres)
-        try {
-          const d = await fetch(`data/details/${slug}-details.json`);
-          if (d.ok) {
-            const details = await d.json();
-            affiliations = details.affiliations || [];
+            if (scandals.length === 0) scandals = details.scandals || [];
+            if (affiliations.length === 0) affiliations = details.affiliations || [];
           }
         } catch (e) {}
       }
