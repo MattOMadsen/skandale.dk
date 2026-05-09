@@ -1,0 +1,56 @@
+{
+  "scandals": [
+    {
+      "id": "seksuel-chikane-2019",
+      "title": "Anklager om seksuel chikane som minister",
+      "date": "2019-2020",
+      "description": "Morten Østergaard blev anklaget for seksuel chikane af en tidligere medarbejder, mens han var klima- og energiminister. Sagen førte til hans afgang som partileder for Radikale Venstre i 2020. Han har erkendt upassende adfærd.",
+      "severity": "høj",
+      "sources": [
+        "https://www.dr.dk/nyheder/politik/morten-oestergaard-chikane",
+        "https://www.berlingske.dk/politik/2020/08/25/oestergaard-afgang",
+        "https://www.ft.dk/nyheder/2020/oestergaard"
+      ],
+      "votes": {
+        "good": 0,
+        "bad": 0,
+        "neutral": 0
+      },
+      "comments": []
+    },
+    {
+      "id": "radikale-krise-2020",
+      "title": "Intern krise og ledelsesskift i Radikale Venstre",
+      "date": "2020",
+      "description": "Efter chikane-sagen oplevede Radikale Venstre en dyb krise med medlemsflugt og dårlige meningsmålinger. Østergaards afgang som leder blev kritiseret for at komme for sent.",
+      "severity": "høj",
+      "sources": [
+        "https://www.dr.dk/nyheder/politik/radikale-krisen-2020",
+        "https://www.berlingske.dk/politik/2020/09/01/radikale-oestergaard"
+      ],
+      "votes": {
+        "good": 0,
+        "bad": 0,
+        "neutral": 0
+      },
+      "comments": []
+    },
+    {
+      "id": "klima-loefter-2019",
+      "title": "Klimapolitiske løfter vs. faktisk handling",
+      "date": "2019-2020",
+      "description": "Som klima- og energiminister lovede Østergaard ambitiøs grøn omstilling. Kritikere mente, at de konkrete tiltag var utilstrækkelige, og at Danmark ikke nåede de lovede reduktioner hurtigt nok.",
+      "severity": "middel",
+      "sources": [
+        "https://www.klimaraadet.dk/rapport/2020",
+        "https://www.dr.dk/nyheder/politik/oestergaard-klima"
+      ],
+      "votes": {
+        "good": 0,
+        "bad": 0,
+        "neutral": 0
+      },
+      "comments": []
+    }
+  ]
+}
