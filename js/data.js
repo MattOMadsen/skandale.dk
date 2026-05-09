@@ -1,4 +1,5 @@
-// js/data.js - Komplet fix: Henter fra alle dedikerede mapper
+// js/data.js - Komplet fix: Henter fra alle dedikererede mapper + legacy fallback
+// Opdateret 9. maj 2026 – Prioriterer data/scandals/ men bevarer fuld bagudkompatibilitet med data/details/
 
 let politicians = [];
 
@@ -14,17 +15,49 @@ async function loadPoliticians() {
     const cores = await Promise.all(corePromises);
 
     const detailPromises = cores.map(async (core) => {
-      const slug = core.name.toLowerCase().replace(/æ/g, 'ae').replace(/ø/g, 'oe').replace(/å/g, 'aa').replace(/[^a-z0-9]+/g, '-');
+      const slug = core.name.toLowerCase()
+        .replace(/æ/g, 'ae')
+        .replace(/ø/g, 'oe')
+        .replace(/å/g, 'aa')
+        .replace(/[^a-z0-9]+/g, '-');
 
-      let details = {};
+      let scandals = [];
+      let affiliations = [];
       let brokenPromises = [];
       let economicSupport = [];
 
-      // Details (scandals + affiliations)
+      // === NY STRUKTUR (prioritet) ===
+      // Hent skandaler fra dedikeret mappe (data/scandals/)
       try {
-        const d = await fetch(`data/details/${slug}-details.json`);
-        if (d.ok) details = await d.json();
-      } catch (e) {}
+        const s = await fetch(`data/scandals/${slug}.json`);
+        if (s.ok) {
+          const sData = await s.json();
+          scandals = sData.scandals || (Array.isArray(sData) ? sData : []);
+        }
+      } catch (e) {
+        // Ignorer fejl – vi falder tilbage til legacy
+      }
+
+      // === LEGACY FALLBACK (data/details/) – beholdes uændret ===
+      if (scandals.length === 0) {
+        try {
+          const d = await fetch(`data/details/${slug}-details.json`);
+          if (d.ok) {
+            const details = await d.json();
+            scandals = details.scandals || [];
+            affiliations = details.affiliations || [];
+          }
+        } catch (e) {}
+      } else {
+        // Hvis nye skandaler blev fundet, hent stadig affiliations fra legacy (indtil det også migreres)
+        try {
+          const d = await fetch(`data/details/${slug}-details.json`);
+          if (d.ok) {
+            const details = await d.json();
+            affiliations = details.affiliations || [];
+          }
+        } catch (e) {}
+      }
 
       // Broken promises (dedikeret mappe)
       try {
@@ -45,10 +78,10 @@ async function loadPoliticians() {
       } catch (e) {}
 
       return {
-        scandals: details.scandals || [],
+        scandals: scandals,
+        affiliations: affiliations,
         economicSupport: economicSupport,
-        brokenPromises: brokenPromises,
-        affiliations: details.affiliations || []
+        brokenPromises: brokenPromises
       };
     });
 
@@ -59,7 +92,7 @@ async function loadPoliticians() {
       ...detailsList[index]
     }));
 
-    console.log(`[Skandale.dk] Alle ${politicians.length} politikere loaded med fuld data`);
+    console.log(`[Skandale.dk] Alle ${politicians.length} politikere loaded med fuld data (ny + legacy struktur)`);
     return politicians;
   } catch (error) {
     console.error('Fejl ved loading:', error);
