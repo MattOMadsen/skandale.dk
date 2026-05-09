@@ -1,4 +1,26 @@
 {
   "politician": "Anders Fogh Rasmussen",
-  "affiliations": []
+  "affiliations": [
+    {
+      "name": "NATO",
+      "type": "International organisation",
+      "year": "2009-2014",
+      "role": "Generalsekretær",
+      "description": "Anders Fogh Rasmussen var generalsekretær for NATO fra 2009 til 2014. Han spillede en central rolle i NATO's respons på Ruslands annektering af Krim i 2014.",
+      "source": {
+        "text": "NATO og DR.dk",
+        "url": "https://www.nato.int/"
+      }
+    },
+    {
+      "name": "Bilderberg Group",
+      "type": "Internationalt netværk",
+      "year": "2000'erne-2010'erne",
+      "description": "Anders Fogh Rasmussen har deltaget i flere Bilderberg-møder både som statsminister og senere som NATO-generalsekretær.",
+      "source": {
+        "text": "Information og Altinget",
+        "url": "https://www.information.dk/"
+      }
+    }
+  ]
 }
