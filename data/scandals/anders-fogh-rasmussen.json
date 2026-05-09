@@ -1,0 +1,55 @@
+{
+  "scandals": [
+    {
+      "id": "iraq-war-2003",
+      "title": "Irak-krigen og efterretningsgrundlaget",
+      "date": "2003",
+      "description": "Som statsminister støttede Anders Fogh Rasmussen den amerikansk-ledede invasion af Irak i 2003. Senere undersøgelser viste, at det danske efterretningsgrundlag var utilstrækkeligt, og at der ikke blev fundet masseødelæggelsesvåben. Kritikere mener, at regeringen vildledte Folketinget.",
+      "severity": "høj",
+      "sources": [
+        "https://www.dr.dk/nyheder/politik/fogh-og-irak-krigen",
+        "https://www.berlingske.dk/politik/2016/07/06/fogh-og-irak-rapporten"
+      ],
+      "votes": {
+        "good": 0,
+        "bad": 0,
+        "neutral": 0
+      },
+      "comments": []
+    },
+    {
+      "id": "skattepolitik-2007",
+      "title": "Skattereform og løfter om skattelettelser",
+      "date": "2007-2011",
+      "description": "Regeringen lovede store skattelettelser til alle danskere. I praksis blev lettelserne primært til de højeste indkomster, mens mellemindkomster oplevede begrænset gevinst. Flere økonomer kritiserede fordelingen.",
+      "severity": "middel",
+      "sources": [
+        "https://www.ft.dk/samling/20071/lovforslag/L1/index.htm",
+        "https://www.ae.dk/analyser/skattereformen-2007"
+      ],
+      "votes": {
+        "good": 0,
+        "bad": 0,
+        "neutral": 0
+      },
+      "comments": []
+    },
+    {
+      "id": "bankpakke-2008",
+      "title": "Bankpakken og statsgaranti til bankerne",
+      "date": "2008-2009",
+      "description": "Under finanskrisen indførte regeringen bankpakker med statsgaranti for bankernes gæld. Kritikere mente, at det var en redningspakke til bankerne på skatteydernes regning uden tilstrækkelig regulering af bankernes adfærd.",
+      "severity": "høj",
+      "sources": [
+        "https://www.dr.dk/nyheder/politik/bankpakken-2008",
+        "https://www.rigsrevisionen.dk/beretninger/2010/bankpakken"
+      ],
+      "votes": {
+        "good": 0,
+        "bad": 0,
+        "neutral": 0
+      },
+      "comments": []
+    }
+  ]
+}
