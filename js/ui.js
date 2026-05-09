@@ -21,9 +21,16 @@ function renderPoliticians(filteredPoliticians = null) {
     const scandalCount = politician.scandals ? politician.scandals.length : 0;
     const brokenCount = politician.brokenPromises ? politician.brokenPromises.length : 0;
     const donorCount = politician.economicSupport ? politician.economicSupport.length : 0;
-    const avgSeverity = politician.scandals && politician.scandals.length > 0 
-      ? (politician.scandals.reduce((sum, s) => sum + (s.severity || 3), 0) / politician.scandals.length).toFixed(1) 
-      : '0.0';
+
+    // === ROBUST ALVORLIGHEDSBEREGNING (fix NaN-bug) ===
+    let avgSeverityNum = 0;
+    if (politician.scandals && politician.scandals.length > 0) {
+      const sum = politician.scandals.reduce((sum, s) => {
+        return sum + (Number(s.severity) || 3);  // Sikrer at det altid er et tal
+      }, 0);
+      avgSeverityNum = sum / politician.scandals.length;
+    }
+    const avgSeverityDisplay = avgSeverityNum.toFixed(1);
 
     html += `
       <div onclick="window.openPoliticianModal(${politician.id})" 
@@ -56,10 +63,10 @@ function renderPoliticians(filteredPoliticians = null) {
           <div class="flex items-center gap-x-1">
             <div class="flex">
               ${Array.from({length: 5}, (_, i) => 
-                `<i class="fa-solid fa-star ${i < Math.round(avgSeverity) ? 'text-[#C8102E]' : 'text-slate-300'}"></i>`
+                `<i class="fa-solid fa-star ${i < Math.round(avgSeverityNum) ? 'text-[#C8102E]' : 'text-slate-300'}"></i>`
               ).join('')}
             </div>
-            <span class="text-slate-400 ml-1">${avgSeverity}</span>
+            <span class="text-slate-400 ml-1">${avgSeverityDisplay}</span>
           </div>
           <div class="text-[#C8102E] group-hover:underline">Se detaljer →</div>
         </div>
