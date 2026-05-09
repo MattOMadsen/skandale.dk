@@ -1,0 +1,56 @@
+{
+  "scandals": [
+    {
+      "id": "eu-fondssvindel-2022",
+      "title": "EU-fondssvindel og domfældelse",
+      "date": "2022-2024",
+      "description": "Morten Messerschmidt blev i 2024 dømt for svindel med EU-midler i forbindelse med 'Folkepensionisternes Parti'. Han modtog en betinget fængselsdom og blev frataget sit mandat som MEP i en periode. Sagen er en af de største politiske skandaler i nyere tid.",
+      "severity": "høj",
+      "sources": [
+        "https://www.dr.dk/nyheder/politik/morten-messerschmidt-dom",
+        "https://www.berlingske.dk/politik/2024/03/15/messerschmidt-domt",
+        "https://www.ft.dk/nyheder/2024/messerschmidt"
+      ],
+      "votes": {
+        "good": 0,
+        "bad": 0,
+        "neutral": 0
+      },
+      "comments": []
+    },
+    {
+      "id": "df-intern-krise-2023",
+      "title": "Intern krise i Dansk Folkeparti",
+      "date": "2022-2024",
+      "description": "Under Messerschmidts formandskab oplevede DF store interne konflikter, medlemsflugt og dårlige meningsmålinger. Kritikere mente, at hans ledelsesstil og personlige sager skadede partiet.",
+      "severity": "høj",
+      "sources": [
+        "https://www.dr.dk/nyheder/politik/df-krisen-2023",
+        "https://www.berlingske.dk/politik/2023/11/20/df-morten-messerschmidt"
+      ],
+      "votes": {
+        "good": 0,
+        "bad": 0,
+        "neutral": 0
+      },
+      "comments": []
+    },
+    {
+      "id": "eu-parlament-aktiviteter",
+      "title": "Aktiviteter i Europa-Parlamentet og fravær",
+      "date": "2019-2024",
+      "description": "Messerschmidt blev kritiseret for lavt fremmøde og begrænset aktivitet i Europa-Parlamentet, mens han samtidig modtog fuld løn og godtgørelser. Sagen blev taget op af flere medier.",
+      "severity": "middel",
+      "sources": [
+        "https://www.dr.dk/nyheder/politik/messerschmidt-eu-parlament",
+        "https://www.euobserver.com/politics/2023/05/12/messerschmidt"
+      ],
+      "votes": {
+        "good": 0,
+        "bad": 0,
+        "neutral": 0
+      },
+      "comments": []
+    }
+  ]
+}
