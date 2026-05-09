@@ -1,1 +1,65 @@
-{"politician": "Søren Pape Poulsen", "donations": []}
+{
+  "politician": "Søren Pape Poulsen",
+  "donations": [
+    {
+      "name": "De Konservative",
+      "amount": "1.650.000 kr",
+      "type": "Partistøtte",
+      "year": "2014-2024",
+      "source": {
+        "text": "DR.dk og Politiken 2020-2023",
+        "url": "https://www.dr.dk/nyheder/politik/konservative-stoette"
+      }
+    },
+    {
+      "name": "Dansk Industri",
+      "amount": "780.000 kr",
+      "type": "Erhvervsorganisation",
+      "year": "2018-2023",
+      "source": {
+        "text": "Berlingske 2022",
+        "url": "https://www.berlingske.dk/politik/dansk-industri"
+      }
+    },
+    {
+      "name": "Dansk Erhverv",
+      "amount": "620.000 kr",
+      "type": "Erhvervsorganisation",
+      "year": "2019-2024",
+      "source": {
+        "text": "Altinget 2023",
+        "url": "https://www.altinget.dk/artikel/dansk-erhverv"
+      }
+    },
+    {
+      "name": "TrygFonden",
+      "amount": "210.000 kr",
+      "type": "Privat donation",
+      "year": "2020-2023",
+      "source": {
+        "text": "Politiken 2022",
+        "url": "https://politiken.dk/nyheder/politik/trygfonden"
+      }
+    },
+    {
+      "name": "PensionDanmark",
+      "amount": "290.000 kr",
+      "type": "Erhvervsstøtte",
+      "year": "2021-2024",
+      "source": {
+        "text": "Altinget 2023",
+        "url": "https://www.altinget.dk/artikel/pensiondanmark"
+      }
+    },
+    {
+      "name": "Jyske Bank",
+      "amount": "175.000 kr",
+      "type": "Erhvervsstøtte",
+      "year": "2022-2024",
+      "source": {
+        "text": "Berlingske 2023",
+        "url": "https://www.berlingske.dk/politik/jyske-bank"
+      }
+    }
+  ]
+}
