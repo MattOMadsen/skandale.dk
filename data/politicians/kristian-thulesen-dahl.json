@@ -6,5 +6,11 @@
   "role": "Formand for Dansk Folkeparti 2012-2022",
   "avatarColor": "#E30613",
   "initials": "KTD",
-  "bio": "Tidligere formand for Dansk Folkeparti (2012-2022). Kendt for sin markante udlændingepolitik og stærke ledelse af partiet i en årrække."
+  "bio": "Tidligere formand for Dansk Folkeparti (2012-2022). Kendt for sin markante udlændingepolitik og stærke ledelse af partiet i en årrække.",
+  "careerTimeline": "2001 – Valgt til Folketinget for Dansk Folkeparti.\n\n2012 – Valgt som partiformand efter Pia Kjærsgaard.\n\n2015-2019 – Støttede Løkke-regeringen som parlamentarisk grundlag.\n\n2019 – Stort valgnederlag for DF.\n\n2022 – Trådte tilbage som formand.\n\n2022 – Forlod Folketinget.",
+  "beforePolitics": {
+    "title": "Før politik / Ungdom",
+    "content": "Kristian Thulesen Dahl blev født i 1972. Han har en baggrund som cand.jur. og har arbejdet som advokat før han gik ind i politik. Han har altid været kendt for en hård linje i udlændingepolitik og stærk organisatorisk evne."
+  },
+  "scandalsFile": "data/scandals/kristian-thulesen-dahl.json"
 }
