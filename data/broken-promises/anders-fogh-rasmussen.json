@@ -1,1 +1,35 @@
-{"politician": "Anders Fogh Rasmussen", "brokenPromises": []}
+{
+  "politician": "Anders Fogh Rasmussen",
+  "brokenPromises": [
+    {
+      "id": 1,
+      "title": "Vi lover at sænke skatten for alle danskere",
+      "year": "2001",
+      "whatHappened": "Skattetrykket steg faktisk i flere år under Fogh-regeringerne, og de største lettelser gik til de højeste indkomster.",
+      "source": {
+        "text": "CEP OS og Skatteministeriet 2005-2009",
+        "url": "https://www.skm.dk/"
+      }
+    },
+    {
+      "id": 2,
+      "title": "Vi lover at stoppe den stigende arbejdsløshed",
+      "year": "2001",
+      "whatHappened": "Arbejdsløsheden steg markant under finanskrisen i 2008-2009, og mange unge kom i langvarig ledighed.",
+      "source": {
+        "text": "Danmarks Statistik 2009-2010",
+        "url": "https://www.dst.dk/"
+      }
+    },
+    {
+      "id": 3,
+      "title": "Vi lover at holde Danmark ude af Irak-krigen",
+      "year": "2001",
+      "whatHappened": "Danmark deltog aktivt i Irak-krigen i 2003, og efterretningsgrundlaget viste sig at være utilstrækkeligt.",
+      "source": {
+        "text": "DR.dk og Politiken 2003-2010",
+        "url": "https://www.dr.dk/nyheder/politik/irak-krigen"
+      }
+    }
+  ]
+}
