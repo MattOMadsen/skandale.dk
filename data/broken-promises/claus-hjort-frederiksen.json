@@ -1,1 +1,45 @@
-{"politician": "Claus Hjort Frederiksen", "brokenPromises": []}
+{
+  "politician": "Claus Hjort Frederiksen",
+  "brokenPromises": [
+    {
+      "id": 1,
+      "title": "Vi lover at skabe et effektivt og retfærdigt skattesystem",
+      "year": "2010",
+      "whatHappened": "Under Claus Hjort Frederiksen som skatteminister opstod massive problemer med fejlagtige udbetalinger og svindel i Skat. Rigsrevisionen kritiserede ledelsen.",
+      "source": {
+        "text": "Rigsrevisionen 2015 og DR 2015-2016",
+        "url": "https://www.rigsrevisionen.dk/beretninger/2015/skattevaesenet"
+      }
+    },
+    {
+      "id": 2,
+      "title": "Vi lover at nå NATO-målet på 2% af BNP",
+      "year": "2015",
+      "whatHappened": "Som forsvarsminister lovede Claus Hjort Frederiksen at nå NATO-målet, men stigningen blev udskudt flere gange, og Danmark lå langt under målet i mange år.",
+      "source": {
+        "text": "NATO og DR 2018-2019",
+        "url": "https://www.nato.int/"
+      }
+    },
+    {
+      "id": 3,
+      "title": "Vi lover at beskytte Danmark mod trusler",
+      "year": "2015",
+      "whatHappened": "Kritikere mente, at forsvarsbudgetterne ikke var tilstrækkelige til at imødegå de stigende trusler fra Rusland og cyberangreb.",
+      "source": {
+        "text": "Forsvarsakademiet og DR 2018",
+        "url": "https://www.dr.dk/nyheder/politik"
+      }
+    },
+    {
+      "id": 4,
+      "title": "Vi lover at være et parti med høj troværdighed",
+      "year": "2015",
+      "whatHappened": "Claus Hjort Frederiksen blev kritiseret for sin personlige håndtering af en lejlighedssag og skatteforhold, hvilket skabte tvivl om hans troværdighed.",
+      "source": {
+        "text": "Berlingske 2016",
+        "url": "https://www.berlingske.dk/politik/2016/03/15/claus-hjort-og-lejligheden"
+      }
+    }
+  ]
+}
