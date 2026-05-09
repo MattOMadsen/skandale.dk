@@ -1,1 +1,45 @@
-{"politician": "Uffe Elbæk", "brokenPromises": []}
+{
+  "politician": "Uffe Elbæk",
+  "brokenPromises": [
+    {
+      "id": 1,
+      "title": "Vi lover en helt ny og anderledes politik",
+      "year": "2013",
+      "whatHappened": "Alternativet blev kritiseret for at blive mere traditionelt end lovet, og mange følte, at partiet ikke levede op til sine egne idealer om nytænkning.",
+      "source": {
+        "text": "DR og Politiken 2015-2019",
+        "url": "https://www.dr.dk/nyheder/politik"
+      }
+    },
+    {
+      "id": 2,
+      "title": "Vi lover at være et parti uden interne magtkampe",
+      "year": "2013",
+      "whatHappened": "Alternativet oplevede store interne konflikter og udmeldelser, især i 2019-2020.",
+      "source": {
+        "text": "DR og Politiken 2019-2020",
+        "url": "https://www.dr.dk/nyheder/politik"
+      }
+    },
+    {
+      "id": 3,
+      "title": "Vi lover at beskytte de svageste i samfundet",
+      "year": "2015",
+      "whatHappened": "Kritikere mente, at Alternativets fokus på grøn omstilling og nye ideer gik ud over de traditionelle velfærdsområder.",
+      "source": {
+        "text": "Rådet for Socialt Udsatte",
+        "url": "https://www.udsatte.dk/"
+      }
+    },
+    {
+      "id": 4,
+      "title": "Vi lover at være et parti for alle",
+      "year": "2013",
+      "whatHappened": "Mange følte, at Alternativet blev et parti for den veluddannede middelklasse snarere end for alle.",
+      "source": {
+        "text": "Politiken og Information 2015-2019",
+        "url": "https://www.information.dk/"
+      }
+    }
+  ]
+}
