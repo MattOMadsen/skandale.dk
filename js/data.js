@@ -1,7 +1,8 @@
-// js/data.js - Komplet fix: Henter fra alle dedikererede mapper + legacy fallback
+// js/data.js - Komplet fix: Henter fra alle dedikerede mapper + legacy fallback
 // Opdateret 9. maj 2026 – Nu med både scandals og affiliations fra nye mapper
 
 let politicians = [];
+let networkIndex = {}; // Globalt indeks: netværk -> liste af politikere
 
 async function loadPoliticians() {
   try {
@@ -27,7 +28,6 @@ async function loadPoliticians() {
       let economicSupport = [];
 
       // === NY STRUKTUR (prioritet) ===
-      // Hent skandaler fra dedikeret mappe (data/scandals/)
       try {
         const s = await fetch(`data/scandals/${slug}.json`);
         if (s.ok) {
@@ -36,7 +36,6 @@ async function loadPoliticians() {
         }
       } catch (e) {}
 
-      // Hent affiliations fra dedikeret mappe (data/affiliations/)
       try {
         const a = await fetch(`data/affiliations/${slug}.json`);
         if (a.ok) {
@@ -45,7 +44,6 @@ async function loadPoliticians() {
         }
       } catch (e) {}
 
-      // === LEGACY FALLBACK (data/details/) – beholdes uændret ===
       if (scandals.length === 0 || affiliations.length === 0) {
         try {
           const d = await fetch(`data/details/${slug}-details.json`);
@@ -57,7 +55,6 @@ async function loadPoliticians() {
         } catch (e) {}
       }
 
-      // Broken promises (dedikeret mappe)
       try {
         const b = await fetch(`data/broken-promises/${slug}.json`);
         if (b.ok) {
@@ -66,7 +63,6 @@ async function loadPoliticians() {
         }
       } catch (e) {}
 
-      // Economic support (dedikeret mappe)
       try {
         const e = await fetch(`data/economic-support/${slug}.json`);
         if (e.ok) {
@@ -90,7 +86,25 @@ async function loadPoliticians() {
       ...detailsList[index]
     }));
 
-    console.log(`[Skandale.dk] Alle ${politicians.length} politikere loaded med fuld data (ny + legacy struktur)`);
+    // === BYG GLOBALT NETVÆRKS-INDEX ===
+    networkIndex = {};
+    politicians.forEach(politician => {
+      if (politician.affiliations && Array.isArray(politician.affiliations)) {
+        politician.affiliations.forEach(aff => {
+          const key = aff.name || aff.organization || 'Ukendt';
+          if (!networkIndex[key]) networkIndex[key] = [];
+          networkIndex[key].push({
+            id: politician.id,
+            name: politician.name,
+            party: politician.party,
+            year: aff.year || '',
+            role: aff.role || ''
+          });
+        });
+      }
+    });
+
+    console.log(`[Skandale.dk] Alle ${politicians.length} politikere loaded med fuld data + netværksindeks`);
     return politicians;
   } catch (error) {
     console.error('Fejl ved loading:', error);
