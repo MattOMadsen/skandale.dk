@@ -97,8 +97,11 @@ function showPartyOverview() {
     document.body.insertAdjacentHTML('beforeend', html);
 }
 
-// Gør funktionen global så navbaren kan kalde den
+// Gør alle funktioner global så navbar og onclick virker
 window.showPartyModal = showPartyOverview;
+window.showPartyDetail = showPartyDetail;
+window.closePartyModal = closePartyModal;
+window.closePartyDetailModal = closePartyDetailModal;
 
 function showPartyDetail(partyName, partyColor) {
     closePartyModal(); // Luk oversigten
