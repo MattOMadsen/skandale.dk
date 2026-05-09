@@ -1,1 +1,45 @@
-{"politician": "Pia Kjærsgaard", "brokenPromises": []}
+{
+  "politician": "Pia Kjærsgaard",
+  "brokenPromises": [
+    {
+      "id": 1,
+      "title": "Vi lover at beskytte velfærden for de svageste",
+      "year": "2001",
+      "whatHappened": "Under DF's støtte til VK-regeringen blev der gennemført reformer, der blev kritiseret for at ramme de svageste hårdt (bl.a. kontanthjælpsloft og starthjælp).",
+      "source": {
+        "text": "Rådet for Socialt Udsatte og DR 2005-2011",
+        "url": "https://www.udsatte.dk/"
+      }
+    },
+    {
+      "id": 2,
+      "title": "Vi lover en streng og retfærdig udlændingepolitik",
+      "year": "2001",
+      "whatHappened": "Kritikere mente, at DF's udlændingepolitik var for streng og krænkede menneskerettigheder, mens andre mente, at den ikke var streng nok i praksis.",
+      "source": {
+        "text": "Amnesty International og Institut for Menneskerettigheder",
+        "url": "https://www.amnesty.dk/"
+      }
+    },
+    {
+      "id": 3,
+      "title": "Vi lover at bekæmpe kriminalitet og skabe tryghed",
+      "year": "2001",
+      "whatHappened": "Kriminaliteten steg i flere år under DF's indflydelse, og mange følte sig mindre trygge i deres lokalområder.",
+      "source": {
+        "text": "Justitsministeriet og DR 2005-2010",
+        "url": "https://www.dr.dk/nyheder/politik"
+      }
+    },
+    {
+      "id": 4,
+      "title": "Vi lover at beskytte dansk kultur og identitet",
+      "year": "2001",
+      "whatHappened": "Kritikere mente, at DF's retorik skabte unødvendig polarisering og mistillid mellem befolkningsgrupper.",
+      "source": {
+        "text": "Information og Politiken 2005-2015",
+        "url": "https://www.information.dk/"
+      }
+    }
+  ]
+}
