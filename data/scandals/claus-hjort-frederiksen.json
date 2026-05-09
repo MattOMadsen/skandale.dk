@@ -1,0 +1,55 @@
+{
+  "scandals": [
+    {
+      "id": "skat-administration-2010",
+      "title": "Skattevæsenets administration og fejludbetalinger",
+      "date": "2010-2015",
+      "description": "Som skatteminister var Claus Hjort Frederiksen ansvarlig for Skat. Der opstod massive problemer med fejlagtige udbetalinger, herunder til udlændinge og svindel med børnepenge. Rigsrevisionen kritiserede ledelsen.",
+      "severity": "høj",
+      "sources": [
+        "https://www.rigsrevisionen.dk/beretninger/2015/skattevaesenet",
+        "https://www.dr.dk/nyheder/politik/skatte-skandalen"
+      ],
+      "votes": {
+        "good": 0,
+        "bad": 0,
+        "neutral": 0
+      },
+      "comments": []
+    },
+    {
+      "id": "forsvarsbudget-2018",
+      "title": "Forsvarsforlig og løfter om 2% af BNP",
+      "date": "2018",
+      "description": "Som forsvarsminister lovede regeringen at nå NATO-målet på 2% af BNP. I praksis blev stigningen udskudt flere gange, og Danmark lå langt under målet i flere år.",
+      "severity": "middel",
+      "sources": [
+        "https://www.ft.dk/samling/20171/lovforslag/L1/index.htm",
+        "https://www.nato.int/cps/en/natohq/topics_49172.htm"
+      ],
+      "votes": {
+        "good": 0,
+        "bad": 0,
+        "neutral": 0
+      },
+      "comments": []
+    },
+    {
+      "id": "personlig-skatte-sag",
+      "title": "Personlig skattesag og lejlighed i København",
+      "date": "2014-2016",
+      "description": "Claus Hjort Frederiksen blev kritiseret for sin personlige håndtering af en lejlighedssag og skatteforhold. Sagen blev undersøgt, men han blev ikke dømt. Kritikere mente, at det skabte tvivl om ministerens troværdighed.",
+      "severity": "lav",
+      "sources": [
+        "https://www.berlingske.dk/politik/2016/03/15/claus-hjort-og-lejligheden",
+        "https://www.dr.dk/nyheder/politik/claus-hjort-frederiksen"
+      ],
+      "votes": {
+        "good": 0,
+        "bad": 0,
+        "neutral": 0
+      },
+      "comments": []
+    }
+  ]
+}
