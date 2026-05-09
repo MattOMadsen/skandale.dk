@@ -1,4 +1,4 @@
-// js/modal-scandal.js - Skandaler (med createStars defineret)
+// js/modal-scandal.js - Skandaler (med createStars defineret + legacy support)
 
 function createStars(severity) {
   if (!severity || severity < 1) severity = 1;
@@ -52,7 +52,31 @@ function loadScandals(politician) {
 }
 
 function buildScandalHTML(scandal, index, politician) {
-  const severityStars = createStars(scandal.severity);
+  // === LEGACY SUPPORT: Normaliser gamle data-formater (Helle, Anders Fogh, Mette m.fl.) ===
+  const s = { ...scandal }; // shallow clone
+
+  if (!s.severity || s.severity < 1) s.severity = 3;           // default alvorlighed
+  if (!s.year && s.date) s.year = s.date;                          // support "date" som fallback
+  if (!s.shortDesc && !s.longDesc && s.description) {
+    s.shortDesc = s.description;                                   // brug description som shortDesc
+  }
+
+  // Konverter legacy source/sources til mediaLinks
+  if (!s.mediaLinks) {
+    if (s.source && s.source.url) {
+      s.mediaLinks = [{
+        name: s.source.text || 'Kilde',
+        url: s.source.url
+      }];
+    } else if (s.sources && Array.isArray(s.sources)) {
+      s.mediaLinks = s.sources.map((url, i) => ({
+        name: `Kilde ${i + 1}`,
+        url: url
+      }));
+    }
+  }
+
+  const severityStars = createStars(s.severity);
   
   return `
     <div class="border border-slate-200 rounded-2xl mb-4 overflow-hidden">
@@ -60,12 +84,12 @@ function buildScandalHTML(scandal, index, politician) {
       <div id="scandal-header-${index}" class="flex items-center justify-between p-4 bg-slate-50 cursor-pointer hover:bg-slate-100 transition-colors">
         <div class="flex-1">
           <div class="flex items-center gap-x-3">
-            <div class="font-bold text-lg">${scandal.title}</div>
-            <div class="text-xs px-2 py-0.5 bg-slate-200 text-slate-600 rounded-full">${scandal.year}</div>
+            <div class="font-bold text-lg">${s.title}</div>
+            <div class="text-xs px-2 py-0.5 bg-slate-200 text-slate-600 rounded-full">${s.year || ''}</div>
           </div>
           <div class="flex items-center gap-x-2 mt-1">
             <div class="flex items-center text-amber-500">${severityStars}</div>
-            <div class="text-xs text-slate-500">Alvorlighed: ${scandal.severity}/5</div>
+            <div class="text-xs text-slate-500">Alvorlighed: ${s.severity}/5</div>
           </div>
         </div>
         <div class="flex items-center gap-x-2">
@@ -79,31 +103,31 @@ function buildScandalHTML(scandal, index, politician) {
           <!-- Hvad skete der? -->
           <div>
             <div class="font-semibold text-sm text-slate-500 mb-1">Hvad skete der?</div>
-            <div class="text-slate-700">${scandal.longDesc || scandal.shortDesc}</div>
+            <div class="text-slate-700">${s.longDesc || s.shortDesc || s.description || ''}</div>
           </div>
           
           <!-- Outcome -->
-          ${scandal.outcome ? `
+          ${s.outcome ? `
             <div>
               <div class="font-semibold text-sm text-slate-500 mb-1">Udvikling / Konsekvens</div>
-              <div class="text-slate-700">${scandal.outcome}</div>
+              <div class="text-slate-700">${s.outcome}</div>
             </div>
           ` : ''}
           
           <!-- Justice Analysis -->
-          ${scandal.justiceAnalysis ? `
+          ${s.justiceAnalysis ? `
             <div>
               <div class="font-semibold text-sm text-slate-500 mb-1">Juridisk vurdering</div>
-              <div class="text-slate-700">${scandal.justiceAnalysis}</div>
+              <div class="text-slate-700">${s.justiceAnalysis}</div>
             </div>
           ` : ''}
           
           <!-- Media Links -->
-          ${scandal.mediaLinks && scandal.mediaLinks.length > 0 ? `
+          ${s.mediaLinks && s.mediaLinks.length > 0 ? `
             <div>
               <div class="font-semibold text-sm text-slate-500 mb-2">Kilder & Medier</div>
               <div class="flex flex-wrap gap-2">
-                ${scandal.mediaLinks.map(link => `
+                ${s.mediaLinks.map(link => `
                   <a href="${link.url}" target="_blank" class="inline-flex items-center gap-x-1 px-3 py-1.5 bg-white border border-slate-200 rounded-xl text-xs hover:border-[#C8102E]/50 transition-colors">
                     <i class="fa-solid fa-external-link-alt text-[#C8102E]"></i>
                     <span>${link.name}</span>
