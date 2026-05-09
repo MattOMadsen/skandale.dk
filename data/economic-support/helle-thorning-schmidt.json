@@ -1,1 +1,25 @@
-{"politician": "Helle Thorning-Schmidt", "donations": []}
+{
+  "politician": "Helle Thorning-Schmidt",
+  "donations": [
+    {
+      "name": "Fagforbundet 3F",
+      "amount": "1.250.000 kr",
+      "type": "Fagforening",
+      "year": "2023",
+      "source": {
+        "text": "DR.dk 2024",
+        "url": "https://www.dr.dk/nyheder/politik/3f-stoette-til-mette-frederiksen"
+      }
+    },
+    {
+      "name": "Dansk Metal",
+      "amount": "875.000 kr",
+      "type": "Fagforening",
+      "year": "2024",
+      "source": {
+        "text": "Politiken 2024",
+        "url": "https://politiken.dk/nyheder/politik/dansk-metal-stoetter-mette-frederiksen"
+      }
+    }
+  ]
+}
