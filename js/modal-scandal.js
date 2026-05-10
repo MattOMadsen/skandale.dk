@@ -149,7 +149,7 @@ function buildScandalHTML(scandal, index, politician) {
           <!-- Brugerens alvorlighedsvurdering (erstatter gammel afstemning) -->
           <div class="pt-4 border-t">
             <div class="font-semibold text-sm text-slate-500 mb-2">Hvor alvorlig synes du sagen er? (1-5 stjerner)</div>
-            <div id="user-severity-container-${index}" class="flex items-center gap-x-1 text-2xl cursor-pointer"></div>
+            <div id="user-severity-container-${index}" data-our-severity="${ourSeverity}" class="flex items-center gap-x-1 text-2xl cursor-pointer"></div>
             <div id="user-severity-label-${index}" class="mt-1 text-xs text-slate-500"></div>
             <button id="reset-severity-btn-${index}" onclick="resetUserSeverity(${index}, '${polId}', '${scId}')" class="hidden mt-2 px-3 py-1 text-xs text-red-600 hover:bg-red-50 rounded-xl transition-colors">
               <i class="fa-solid fa-undo mr-1"></i> Nulstil min bedømmelse
@@ -237,8 +237,9 @@ function saveUserSeverity(index, polId, scId, rating) {
   const container = document.getElementById(`user-severity-container-${index}`);
   if (!container) return;
   
-  // Find voresSeverity fra DOM eller default
-  const ourSeverity = 3; // fallback
+  // Læs voresSeverity dynamisk fra data-attribut (ingen hardcoded værdi)
+  const ourSeverity = container.dataset.ourSeverity ? parseInt(container.dataset.ourSeverity) : 3;
+  
   renderInteractiveStars(container, index, polId, scId, rating, ourSeverity);
   updateSeverityLabel(index, rating, ourSeverity);
   
@@ -264,7 +265,9 @@ function resetUserSeverity(index, polId, scId) {
   const container = document.getElementById(`user-severity-container-${index}`);
   if (!container) return;
   
-  const ourSeverity = 3;
+  // Læs voresSeverity dynamisk fra data-attribut (ingen hardcoded værdi)
+  const ourSeverity = container.dataset.ourSeverity ? parseInt(container.dataset.ourSeverity) : 3;
+  
   renderInteractiveStars(container, index, polId, scId, 0, ourSeverity);
   updateSeverityLabel(index, 0, ourSeverity);
   
