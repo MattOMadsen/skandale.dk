@@ -6,7 +6,7 @@
       "date": "2015-2019",
       "description": "Kristian Thulesen Dahl førte DF ind i et tæt samarbejde med Venstre-regeringen. Mange kernevælgere følte, at DF svigtede sine udlændingepolitiske løfter, da regeringen ikke gennemførte de stramninger, DF havde krævet.",
       "ourSeverity": 4,
-      "severity": "høj",
+      "severity": "4",
       "sources": [
         "https://www.dr.dk/nyheder/politik/df-og-loekke-regeringen",
         "https://www.berlingske.dk/politik/2019/06/05/thulesen-dahl-og-df-krisen"
@@ -20,7 +20,7 @@
       "date": "2015-2019",
       "description": "DF lovede 'stram udlændingepolitik' og 'asylstop'. I praksis blev antallet af asylansøgere reduceret, men ikke stoppet, og flere love blev kritiseret for at være symbolpolitik uden reel effekt.",
       "ourSeverity": 3,
-      "severity": "middel",
+      "severity": "3",
       "sources": [
         "https://www.uim.dk/nyheder/2018/udlaendingeloven",
         "https://www.amnesty.dk/udlaendingepolitik"
@@ -34,7 +34,7 @@
       "date": "2018-2020",
       "description": "Thulesen Dahl blev kritiseret for sin personlige formue og investeringer, mens han var partileder. Sagen blev undersøgt internt i DF, men skabte debat om politikerens troværdighed.",
       "ourSeverity": 2,
-      "severity": "lav",
+      "severity": "2",
       "sources": [
         "https://www.dr.dk/nyheder/politik/thulesen-dahl-formue",
         "https://www.berlingske.dk/politik/2019/01/10/thulesen-dahl"
