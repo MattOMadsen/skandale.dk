@@ -6,12 +6,10 @@
       "title": "Skattesag (2014)",
       "year": "2014",
       "shortDesc": "Helle Thorning-Schmidt og hendes mand Stephen Kinnock blev anklaget for skattesnyd i forbindelse med deres bopæl i Schweiz. Sagen førte til massiv kritik og truede hendes position som statsminister.",
+      "ourSeverity": 4,
       "severity": 4,
       "mediaLinks": [
-        {
-          "name": "DR, Politiken og Ekstra Bladet 2014",
-          "url": "https://www.dr.dk/nyheder/politik/helle-thorning-schmidt-skattesag"
-        }
+        { "name": "DR, Politiken og Ekstra Bladet 2014", "url": "https://www.dr.dk/nyheder/politik/helle-thorning-schmidt-skattesag" }
       ]
     },
     {
@@ -19,12 +17,10 @@
       "title": "Kritik af velfærdsreformer og kontanthjælpsloft (2013-2015)",
       "year": "2013",
       "shortDesc": "Under Helle Thorning-Schmidts regering blev der gennemført reformer der blev kritiseret for at ramme de svageste og skære i velfærden (bl.a. kontanthjælpsloft og førtidspension).",
+      "ourSeverity": 3,
       "severity": 3,
       "mediaLinks": [
-        {
-          "name": "Rådet for Socialt Udsatte og DR 2013-2015",
-          "url": "https://www.udsatte.dk/"
-        }
+        { "name": "Rådet for Socialt Udsatte og DR 2013-2015", "url": "https://www.udsatte.dk/" }
       ]
     },
     {
@@ -32,12 +28,10 @@
       "title": "Bilderberg-møder og manglende åbenhed",
       "year": "2010'erne",
       "shortDesc": "Helle Thorning-Schmidt deltog gentagne gange i lukkede Bilderberg-møder uden fuld information til Folketinget. Kritik for manglende gennemsigtighed.",
+      "ourSeverity": 2,
       "severity": 3,
       "mediaLinks": [
-        {
-          "name": "Information og Altinget",
-          "url": "https://www.information.dk/"
-        }
+        { "name": "Information og Altinget", "url": "https://www.information.dk/" }
       ]
     },
     {
@@ -45,12 +39,10 @@
       "title": "Kritik af regeringens økonomiske politik under finanskrisen",
       "year": "2008-2015",
       "shortDesc": "Som statsminister og tidligere oppositionspolitiker blev Helle Thorning-Schmidt kritiseret for håndteringen af finanskrisen og de økonomiske reformer, der fulgte.",
+      "ourSeverity": 3,
       "severity": 3,
       "mediaLinks": [
-        {
-          "name": "DR, Politiken og Berlingske 2008-2015",
-          "url": "https://www.dr.dk/nyheder/politik"
-        }
+        { "name": "DR, Politiken og Berlingske 2008-2015", "url": "https://www.dr.dk/nyheder/politik" }
       ]
     }
   ]
