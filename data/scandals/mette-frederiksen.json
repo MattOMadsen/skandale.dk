@@ -10,61 +10,66 @@
       "source": {
         "text": "DR, Politiken og Rigsretten 2020-2022",
         "url": "https://www.dr.dk/nyheder/politik/minkskandalen"
+      },
+      "consequences": "Næse fra Folketinget, ministerfald, erstatningssager til minkavlere (over 20 mia. kr.), politisk pres for rigsretssag (nedstemt). Sagen er stadig aktiv i 2025-2026.",
+      "whatShouldHaveHappened": {
+        "title": "Uafhængig undersøgelse og ansvar",
+        "content": "Minkkommissionen fastslog, at beslutningen var \"klart ulovlig\" og hendes udtalelser \"groft vildledende\". I stedet for kun en politisk næse fra Folketinget burde der have været en uafhængig advokatundersøgelse med henblik på rigsretssag jf. Ministeransvarlighedsloven § 5. Forældelsesfristen på 5 år betyder, at muligheden udløber i efteråret 2025 – et demokratisk problem ifølge flere eksperter og partier."
       }
     },
     {
       "id": 2,
       "title": "Slettede SMS'er (2022)",
       "year": "2022",
-      "description": "Mette Frederiksen og hendes stab slettede tusindvis af SMS'er fra perioden omkring minkskandalen, hvilket blev kritiseret som forsøg på at skjule information.",
-      "ourSeverity": 4,
+      "description": "Statsministerens og rådgiveres SMS-beskeder fra de kritiske dage blev slettet og kan ikke genskabes. Kritikere mener, at det var et bevidst forsøg på at skjule information om beslutningsprocessen.",
+      "ourSeverity": 5,
       "source": {
-        "text": "DR.dk og Folketingets Ombudsmand 2022-2023",
-        "url": "https://www.dr.dk/nyheder/politik"
+        "text": "Berlingske 2025",
+        "url": "https://www.berlingske.dk"
       }
     },
     {
       "id": 3,
       "title": "Grønlandsk præventionsskandale (2025)",
       "year": "2025",
-      "description": "Afsløring af at tusindvis af grønlandske kvinder fik tvangssteriliseret eller fik spiral uden samtykke i 1960'erne-70'erne under dansk styre. Mette Frederiksen undskyldte sent og blev kritiseret for langsom reaktion.",
-      "ourSeverity": 3,
+      "description": "Mette Frederiksen undskyldte officielt for tvangssterilisation og præventionsskandale i Grønland i 1960'erne og 70'erne.",
+      "ourSeverity": 4,
       "source": {
-        "text": "DR.dk og Politiken 2025",
-        "url": "https://www.dr.dk/nyheder/politik"
+        "text": "BBC 2025",
+        "url": "https://www.bbc.com"
       }
     },
     {
       "id": 4,
       "title": "Nordic Waste-skandalen (2025)",
       "year": "2025",
-      "description": "Miljøskandale hvor giftigt affald løb ud i naturen. Kritik af regeringens håndtering og manglende kontrol med virksomheden.",
-      "ourSeverity": 4,
+      "description": "Mette Frederiksen talte om ansvar i forbindelse med Nordic Waste-skandalen, mens jord fra minkmassegrave skred mod Alling Å.",
+      "ourSeverity": 3,
       "source": {
-        "text": "DR.dk og Berlingske 2025",
-        "url": "https://www.dr.dk/nyheder/politik"
+        "text": "Effektivt Landbrug 2025",
+        "url": "https://effektivtlandbrug.landbrugnet.dk"
       }
     },
     {
       "id": 5,
       "title": "Bilderberg-møder og manglende åbenhed (2023-2024)",
-      "year": "2023",
-      "description": "Mette Frederiksen deltog i lukkede Bilderberg-møder uden at informere Folketinget fuldt ud. Kritik for manglende gennemsigtighed i udenrigspolitik.",
-      "ourSeverity": 2,
+      "year": "2023-2024",
+      "description": "Mette Frederiksen deltog i Bilderberg-møder uden tilstrækkelig offentlig åbenhed om dagsorden og deltagere.",
+      "ourSeverity": 3,
       "source": {
-        "text": "Information og Altinget 2024",
-        "url": "https://www.information.dk/"
+        "text": "Politiken 2024",
+        "url": "https://politiken.dk"
       }
     },
     {
       "id": 6,
       "title": "Minkskandalens genopblussen og mistanke om coverup (2025)",
       "year": "2025",
-      "description": "Nye afsløringer i efteråret 2025 om muligt coverup i regeringstoppen i forbindelse med minkskandalen. Et hemmeligt notat fra Center for Cybersikkerhed afslørede, at mulighederne for at genskabe de slettede SMS'er ikke var fuldt undersøgt. Kritik af magtfuldkommenhed og manglende åbenhed fra oppositionen.",
-      "ourSeverity": 4,
+      "description": "Nye dokumenter og krav om yderligere undersøgelser af slettede SMS'er og beslutningsprocessen i minkskandalen.",
+      "ourSeverity": 5,
       "source": {
-        "text": "Information.dk, Berlingske og B.T. 2025",
-        "url": "https://www.information.dk/indland/2025/10/minkspoegelset-hjemsoeger-gangene-paa-christiansborg"
+        "text": "Berlingske & DR 2025",
+        "url": "https://www.berlingske.dk"
       }
     }
   ]
