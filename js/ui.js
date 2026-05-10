@@ -64,18 +64,21 @@ function renderPoliticians(filteredPoliticians = null) {
     const starsHTML = createStars(Math.round(avgSeverity));
     const userStarsHTML = userRatedCount > 0 ? createStars(Math.round(userAvgSeverity)) : '';
 
-    // Avatar: billede hvis tilgængeligt, ellers initialer (ren og sikker fallback)
+    // Avatar: billede hvis tilgængeligt, ellers initialer (forbedret version med fast container)
     let avatarHTML = '';
+    const avatarColor = politician.avatarColor || politician.partyColor || '#C8102E';
+    const initials = politician.initials || politician.name.split(' ').map(n => n[0]).join('');
     if (politician.image) {
-      avatarHTML = `<img src="${politician.image}" alt="${politician.name}" class="w-14 h-14 rounded-2xl object-cover border border-slate-200" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`;
-      avatarHTML += `<div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-bold text-xl hidden" style="background-color: ${politician.avatarColor || politician.partyColor || '#C8102E'}">${politician.initials || politician.name.split(' ').map(n => n[0]).join('')}</div>`;
+      avatarHTML = `<div class="w-14 h-14 rounded-2xl overflow-hidden border border-slate-200 flex-shrink-0">
+        <img src="${politician.image}" alt="${politician.name}" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML = \`<div class='w-full h-full flex items-center justify-center text-white font-bold text-xl' style='background-color: ${avatarColor}'>\${initials}</div>\`;">
+      </div>`;
     } else {
-      avatarHTML = `<div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-bold text-xl" style="background-color: ${politician.avatarColor || politician.partyColor || '#C8102E'}">${politician.initials || politician.name.split(' ').map(n => n[0]).join('')}</div>`;
+      avatarHTML = `<div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-bold text-xl flex-shrink-0" style="background-color: ${avatarColor}">${initials}</div>`;
     }
 
     html += `
       <div onclick="window.openPoliticianModal(${politician.id})" 
-           class="politician-card bg-white border border-slate-200 rounded-3xl p-6 cursor-pointer hover:border-[#C8102E]/30 group" data-id="${politician.id}">
+           class="politician-card bg-white border border-slate-200 rounded-3xl p-6 cursor-pointer hover:border-[#C8102E]/30 shadow-sm hover:shadow-md transition-all group" data-id="${politician.id}">
         <div class="flex items-start justify-between mb-4">
           ${avatarHTML}
           <div class="text-right">
