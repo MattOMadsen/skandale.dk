@@ -1,4 +1,6 @@
 // js/modal-scandal.js - Skandaler (med createStars + interaktiv bruger-vurdering af alvorlighed)
+// Opdateret 10. maj 2026 – Fuldt kompatibel med MODAL-STRUKTUR.md v6.9.2
+// Understøtter nu "consequences" og "whatShouldHaveHappened" + legacy fallback
 
 function createStars(severity) {
   if (!severity || severity < 1) severity = 1;
@@ -50,7 +52,7 @@ function loadScandals(politician) {
     }
   });
 
-  // Init interaktiv bruger-vurdering af alvorlighed (ny feature)
+  // Init interaktiv bruger-vurdering af alvorlighed
   politician.scandals.forEach((scandal, index) => {
     initUserSeverityRating(index, politician, scandal);
   });
@@ -115,23 +117,45 @@ function buildScandalHTML(scandal, index, politician) {
             <div class="text-slate-700">${s.longDesc || s.shortDesc || s.description || ''}</div>
           </div>
           
-          <!-- Outcome -->
-          ${s.outcome ? `
+          <!-- Konsekvenser (NYT - grøn overskrift) -->
+          ${s.consequences ? `
+            <div>
+              <div class="font-semibold text-sm text-green-600 mb-1">Konsekvens:</div>
+              <div class="text-slate-700">${s.consequences}</div>
+            </div>
+          ` : ''}
+          
+          <!-- Hvad burde være sket? (NYT - fremhævet boks med ⚖️ og orange/rød border) -->
+          ${s.whatShouldHaveHappened ? `
+            <div class="pt-4 border-t">
+              <div class="font-semibold text-sm text-orange-600 mb-2 flex items-center gap-x-2">
+                <i class="fa-solid fa-balance-scale"></i> 
+                Hvad burde være sket?
+              </div>
+              <div class="bg-orange-50 border-l-4 border-orange-500 p-4 rounded-r-xl">
+                <div class="font-bold text-orange-700">${s.whatShouldHaveHappened.title}</div>
+                <div class="text-slate-700 mt-2">${s.whatShouldHaveHappened.content}</div>
+              </div>
+            </div>
+          ` : ''}
+          
+          <!-- Legacy fallback: Udvikling / Konsekvens (gamle data) -->
+          ${!s.consequences && s.outcome ? `
             <div>
               <div class="font-semibold text-sm text-slate-500 mb-1">Udvikling / Konsekvens</div>
               <div class="text-slate-700">${s.outcome}</div>
             </div>
           ` : ''}
           
-          <!-- Justice Analysis -->
-          ${s.justiceAnalysis ? `
+          <!-- Legacy fallback: Juridisk vurdering (gamle data) -->
+          ${!s.whatShouldHaveHappened && s.justiceAnalysis ? `
             <div>
               <div class="font-semibold text-sm text-slate-500 mb-1">Juridisk vurdering</div>
               <div class="text-slate-700">${s.justiceAnalysis}</div>
             </div>
           ` : ''}
           
-          <!-- Media Links -->
+          <!-- Media Links / Kilder -->
           ${s.mediaLinks && s.mediaLinks.length > 0 ? `
             <div>
               <div class="font-semibold text-sm text-slate-500 mb-2">Kilder & Medier</div>
@@ -146,7 +170,7 @@ function buildScandalHTML(scandal, index, politician) {
             </div>
           ` : ''}
           
-          <!-- Brugerens alvorlighedsvurdering (erstatter gammel afstemning) -->
+          <!-- Brugerens alvorlighedsvurdering (1-5 stjerner) -->
           <div class="pt-4 border-t">
             <div class="font-semibold text-sm text-slate-500 mb-2">Hvor alvorlig synes du sagen er? (1-5 stjerner)</div>
             <div id="user-severity-container-${index}" data-our-severity="${ourSeverity}" class="flex items-center gap-x-1 text-2xl cursor-pointer"></div>
@@ -156,7 +180,7 @@ function buildScandalHTML(scandal, index, politician) {
             </button>
           </div>
           
-          <!-- Comments -->
+          <!-- Kommentarer -->
           <div class="pt-4 border-t">
             <div class="font-semibold text-sm text-slate-500 mb-2">Kommentarer</div>
             <div class="flex gap-x-2 mb-3">
@@ -173,7 +197,7 @@ function buildScandalHTML(scandal, index, politician) {
   `;
 }
 
-// === NYE FUNKTIONER: Interaktiv bruger-vurdering af alvorlighed ===
+// === Interaktiv bruger-vurdering af alvorlighed (1-5 stjerner) ===
 
 function initUserSeverityRating(index, politician, scandal) {
   const container = document.getElementById(`user-severity-container-${index}`);
@@ -233,11 +257,9 @@ function saveUserSeverity(index, polId, scId, rating) {
   const storageKey = `userSeverity_${polId}_${scId}`;
   localStorage.setItem(storageKey, rating);
   
-  // Re-render
   const container = document.getElementById(`user-severity-container-${index}`);
   if (!container) return;
   
-  // Læs voresSeverity dynamisk fra data-attribut (ingen hardcoded værdi)
   const ourSeverity = container.dataset.ourSeverity ? parseInt(container.dataset.ourSeverity) : 3;
   
   renderInteractiveStars(container, index, polId, scId, rating, ourSeverity);
@@ -265,7 +287,6 @@ function resetUserSeverity(index, polId, scId) {
   const container = document.getElementById(`user-severity-container-${index}`);
   if (!container) return;
   
-  // Læs voresSeverity dynamisk fra data-attribut (ingen hardcoded værdi)
   const ourSeverity = container.dataset.ourSeverity ? parseInt(container.dataset.ourSeverity) : 3;
   
   renderInteractiveStars(container, index, polId, scId, 0, ourSeverity);
