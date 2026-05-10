@@ -55,6 +55,17 @@
         "text": "Information og Altinget 2024",
         "url": "https://www.information.dk/"
       }
+    },
+    {
+      "id": 6,
+      "title": "Minkskandalens genopblussen og mistanke om coverup (2025)",
+      "year": "2025",
+      "description": "Nye afsløringer i efteråret 2025 om muligt coverup i regeringstoppen i forbindelse med minkskandalen. Et hemmeligt notat fra Center for Cybersikkerhed afslørede, at mulighederne for at genskabe de slettede SMS'er ikke var fuldt undersøgt. Kritik af magtfuldkommenhed og manglende åbenhed fra oppositionen.",
+      "ourSeverity": 4,
+      "source": {
+        "text": "Information.dk, Berlingske og B.T. 2025",
+        "url": "https://www.information.dk/indland/2025/10/minkspoegelset-hjemsoeger-gangene-paa-christiansborg"
+      }
     }
   ]
 }
