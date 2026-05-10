@@ -6,16 +6,11 @@
       "title": "Irak-krigen og efterretningsgrundlaget",
       "year": "2003",
       "shortDesc": "Som statsminister støttede Anders Fogh Rasmussen den amerikansk-ledede invasion af Irak i 2003. Senere undersøgelser viste, at det danske efterretningsgrundlag var utilstrækkeligt, og at der ikke blev fundet masseødelæggelsesvåben. Kritikere mener, at regeringen vildledte Folketinget.",
+      "ourSeverity": 5,
       "severity": 5,
       "mediaLinks": [
-        {
-          "name": "DR.dk - Fogh og Irak-krigen",
-          "url": "https://www.dr.dk/nyheder/politik/fogh-og-irak-krigen"
-        },
-        {
-          "name": "Berlingske - Fogh-rapporten 2016",
-          "url": "https://www.berlingske.dk/politik/2016/07/06/fogh-og-irak-rapporten"
-        }
+        { "name": "DR.dk - Fogh og Irak-krigen", "url": "https://www.dr.dk/nyheder/politik/fogh-og-irak-krigen" },
+        { "name": "Berlingske - Fogh-rapporten 2016", "url": "https://www.berlingske.dk/politik/2016/07/06/fogh-og-irak-rapporten" }
       ]
     },
     {
@@ -23,16 +18,11 @@
       "title": "Skattereform og løfter om skattelettelser",
       "year": "2007-2011",
       "shortDesc": "Regeringen lovede store skattelettelser til alle danskere. I praksis blev lettelserne primært til de højeste indkomster, mens mellemindkomster oplevede begrænset gevinst. Flere økonomer kritiserede fordelingen.",
+      "ourSeverity": 3,
       "severity": 3,
       "mediaLinks": [
-        {
-          "name": "Folketinget - Lovforslag L1",
-          "url": "https://www.ft.dk/samling/20071/lovforslag/L1/index.htm"
-        },
-        {
-          "name": "AE - Skattereformen 2007",
-          "url": "https://www.ae.dk/analyser/skattereformen-2007"
-        }
+        { "name": "Folketinget - Lovforslag L1", "url": "https://www.ft.dk/samling/20071/lovforslag/L1/index.htm" },
+        { "name": "AE - Skattereformen 2007", "url": "https://www.ae.dk/analyser/skattereformen-2007" }
       ]
     },
     {
@@ -40,16 +30,11 @@
       "title": "Bankpakken og statsgaranti til bankerne",
       "year": "2008-2009",
       "shortDesc": "Under finanskrisen indførte regeringen bankpakker med statsgaranti for bankernes gæld. Kritikere mente, at det var en redningspakke til bankerne på skatteydernes regning uden tilstrækkelig regulering af bankernes adfærd.",
+      "ourSeverity": 5,
       "severity": 5,
       "mediaLinks": [
-        {
-          "name": "DR.dk - Bankpakken 2008",
-          "url": "https://www.dr.dk/nyheder/politik/bankpakken-2008"
-        },
-        {
-          "name": "Rigsrevisionen - Bankpakken",
-          "url": "https://www.rigsrevisionen.dk/beretninger/2010/bankpakken"
-        }
+        { "name": "DR.dk - Bankpakken 2008", "url": "https://www.dr.dk/nyheder/politik/bankpakken-2008" },
+        { "name": "Rigsrevisionen - Bankpakken", "url": "https://www.rigsrevisionen.dk/beretninger/2010/bankpakken" }
       ]
     }
   ]
