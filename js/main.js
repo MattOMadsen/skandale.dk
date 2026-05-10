@@ -2,7 +2,14 @@
 
 function initializeEverything() {
   loadPoliticians().then(() => {
-    renderPoliticians();
+    // Sikkerhed: Brug window. hvis funktionen ikke er direkte global
+    if (typeof renderPoliticians === 'function') {
+      renderPoliticians();
+    } else if (typeof window.renderPoliticians === 'function') {
+      window.renderPoliticians();
+    } else {
+      console.error('renderPoliticians er stadig ikke defineret – tjek script-rækkefølge i index.html');
+    }
     
     // ROBUST EVENT DELEGATION for politiker-kort på forsiden
     const grid = document.getElementById('politiciansGrid');
