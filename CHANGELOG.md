@@ -1,5 +1,11 @@
 # Skandale.dk Changelog
 
+## v2.00.59 (10. maj 2026)
+- Version consistency opdateret: APP_VERSION matcher nu changelog
+- Små UI tweaks og polish for bedre brugeroplevelse
+- Forberedelse til næste features (dark mode, PWA)
+- Klar til produktion og GitHub Pages deployment
+
 ## v2.00.58 (10. maj 2026)
 - PDF-eksport og sammenlign af to politikere fuldt integreret, testet og bekræftet som implementeret
 - Alle features fra den oprindelige todo-liste nu dækket (PDF, sammenlign, deling, statistik osv.)
