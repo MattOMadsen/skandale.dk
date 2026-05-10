@@ -6,7 +6,7 @@
       "date": "2022-2024",
       "description": "Morten Messerschmidt blev i 2024 dømt for svindel med EU-midler i forbindelse med 'Folkepensionisternes Parti'. Han modtog en betinget fængselsdom og blev frataget sit mandat som MEP i en periode. Sagen er en af de største politiske skandaler i nyere tid.",
       "ourSeverity": 5,
-      "severity": "høj",
+      "severity": "5",
       "sources": [
         "https://www.dr.dk/nyheder/politik/morten-messerschmidt-dom",
         "https://www.berlingske.dk/politik/2024/03/15/messerschmidt-domt",
@@ -21,7 +21,7 @@
       "date": "2022-2024",
       "description": "Under Messerschmidts formandskab oplevede DF store interne konflikter, medlemsflugt og dårlige meningsmålinger. Kritikere mente, at hans ledelsesstil og personlige sager skadede partiet.",
       "ourSeverity": 4,
-      "severity": "høj",
+      "severity": "4",
       "sources": [
         "https://www.dr.dk/nyheder/politik/df-krisen-2023",
         "https://www.berlingske.dk/politik/2023/11/20/df-morten-messerschmidt"
@@ -35,7 +35,7 @@
       "date": "2019-2024",
       "description": "Messerschmidt blev kritiseret for lavt fremmøde og begrænset aktivitet i Europa-Parlamentet, mens han samtidig modtog fuld løn og godtgørelser. Sagen blev taget op af flere medier.",
       "ourSeverity": 3,
-      "severity": "middel",
+      "severity": "3",
       "sources": [
         "https://www.dr.dk/nyheder/politik/messerschmidt-eu-parlament",
         "https://www.euobserver.com/politics/2023/05/12/messerschmidt"
