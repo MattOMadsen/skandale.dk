@@ -9,7 +9,7 @@ Hver politiker har følgende dedikerede JSON-filer:
 | Fil | Indhold | Bruges til i modalen |
 |-----|---------|------------------------|
 | `data/politicians/[navn].json` | Core data (id, name, party, bio, careerTimeline, beforePolitics, scandalsFile) | Om Politikeren, Før politik, Karriereoversigt |
-| `data/scandals/[navn].json` | Skandaler (title, year/shortDesc, severity, mediaLinks/source) | Skandaler sektionen (med voting + kommentarer) |
+| `data/scandals/[navn].json` | Skandaler (title, year/shortDesc, ourSeverity, mediaLinks/source) | Skandaler sektionen (med brugerens interaktive alvorlighedsvurdering + kommentarer) |
 | `data/affiliations/[navn].json` | Internationale netværk (NATO, Bilderberg, UNICEF, Europa-Parlamentet m.m.) | Internationale netværk & tilknytninger |
 | `data/economic-support/[navn].json` | Donorer (name, amount, type, year) | Økonomisk støtte tabel |
 | `data/broken-promises/[navn].json` | Brudte løfter (title, year, whatHappened, source) | Brudte valgløfter sektion |
@@ -47,8 +47,9 @@ Dette sikrer fuld gennemsigtighed og troværdighed.
 ### 5. Skandaler
 - **Overskrift:** "Skandaler"
 - Liste over skandaler (fra scandals JSON)
-- Alvorlighed med stjerner (1-5)
-- Klik for at åbne: beskrivelse + kilder + voting (Godt/Dårligt/Neutral) + kommentarer
+- Alvorlighed med statiske stjerner (voresSeverity) + "(Vores vurdering)"
+- Klik for at åbne: beskrivelse + kilder + **interaktiv bruger-vurdering af alvorlighed (1-5 stjerner, gemmes i localStorage)** + kommentarer
+- Reset-knap kun synlig efter brugeren har bedømt
 
 ### 6. Økonomisk støtte
 - **Overskrift:** "Økonomisk støtte"
@@ -73,5 +74,6 @@ Dette sikrer fuld gennemsigtighed og troværdighed.
 - Hver modal-*.js fil har én ansvar (1 fil = 1 funktion)
 - Data er JSON-baseret → nem at opdatere og udvide
 - Alle 12 politikere skal have identisk struktur for genkendelighed
+- Brugerens alvorlighedsvurdering gemmes i localStorage (nøgle: `userSeverity_${polId}_${scId}`) – klar til senere central database (Supabase)
 
-**Sidst opdateret:** 9. maj 2026 (v2.00.54) – Tilføjet krav om kilde links i alle sektioner + opdateret til aktuel mappe-struktur.
+**Sidst opdateret:** 10. maj 2026 (v6.9.1) – Tilføjet interaktiv bruger-vurdering af alvorlighed (erstattede gammel afstemning) + voresSeverity i alle JSON-filer.
