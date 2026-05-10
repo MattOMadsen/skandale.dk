@@ -112,6 +112,7 @@ async function loadPoliticians() {
 
     // Gør det globalt tilgængeligt
     window.networkIndex = networkIndex;
+    window.politicians = politicians;
 
     console.log(`[Skandale.dk] Alle ${politicians.length} politikere loaded med fuld data + netværksindeks`);
     return politicians;
