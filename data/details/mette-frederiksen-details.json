@@ -62,7 +62,7 @@
       "year": "2026",
       "severity": 3,
       "shortDesc": "Kritik af Mette Frederiksen for at føre 'hybridkrig mod egen befolkning' gennem alarmisme og kontrol.",
-      "longDesc": "I 2026 blev Mette Frederiksen kritiseret i flere medier for sin ledelsesstil og for at bruge alarmisme og kontrolmekanismer over for befolkningen. Kritikere mente, at hun brugte trusler om Rusland og andre ydre fjender til at skabe frygt og fastholde magt.",
+      "longDesc": "I 2026 blev Mette Frederiksen kritiseret i flere medier for sin ledelsesstil og for at bruge alarmisme og kontrolmekanismer over for befolkningen. Kritikere mener, at hun brugte trusler om Rusland og andre ydre fjender til at skabe frygt og fastholde magt.",
       "outcome": "Øget debat om hendes ledelsesstil og demokratisk legitimitet.",
       "justiceAnalysis": "Sagen rejser spørgsmål om, hvor grænsen går mellem nødvendig sikkerhedspolitik og politisk manipulation af befolkningen.",
       "mediaLinks": [
@@ -150,5 +150,6 @@
   "beforePolitics": {
     "title": "Før politik / Ungdom",
     "content": "Mette Frederiksen blev født i 1977 og begyndte sin politiske karriere meget tidligt. Hun var aktiv i Danmarks Socialdemokratiske Ungdom (DSU) som teenager og blev valgt til Folketinget allerede i 2001 som 24-årig. Hendes første ministerpost var som Beskæftigelsesminister i 2011-2014 under Helle Thorning-Schmidts regering. Der er ingen større skandaler fra hendes tidlige karriere, men hun har altid været kendt for en hård og pragmatisk ledelsesstil."
-  }
+  },
+  "careerTimeline": "1990'erne: Begyndte sin politiske karriere i Danmarks Socialdemokratiske Ungdom (DSU) som teenager og blev hurtigt anerkendt som et stort talent.\n\n2001: Valgt til Folketinget som 24-årig – en af de yngste nogensinde.\n\n2011–2014: Beskæftigelsesminister under Helle Thorning-Schmidt.\n\n2015: Valgt som formand for Socialdemokratiet.\n\n2019: Blev Danmarks yngste statsminister nogensinde.\n\n2022: Genvalgt som statsminister.\n\n2025: Officiel undskyldning for den grønlandske præventionsskandale.\n\n2026: Socialdemokratiet led sit dårligste valgresultat i over 100 år."
 }
