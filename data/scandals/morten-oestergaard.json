@@ -6,7 +6,7 @@
       "date": "2019-2020",
       "description": "Morten Østergaard blev anklaget for seksuel chikane af en tidligere medarbejder, mens han var klima- og energiminister. Sagen førte til hans afgang som partileder for Radikale Venstre i 2020. Han har erkendt upassende adfærd.",
       "ourSeverity": 5,
-      "severity": "høj",
+      "severity": "5",
       "sources": [
         "https://www.dr.dk/nyheder/politik/morten-oestergaard-chikane",
         "https://www.berlingske.dk/politik/2020/08/25/oestergaard-afgang",
@@ -21,7 +21,7 @@
       "date": "2020",
       "description": "Efter chikane-sagen oplevede Radikale Venstre en dyb krise med medlemsflugt og dårlige meningsmålinger. Østergaards afgang som leder blev kritiseret for at komme for sent.",
       "ourSeverity": 4,
-      "severity": "høj",
+      "severity": "4",
       "sources": [
         "https://www.dr.dk/nyheder/politik/radikale-krisen-2020",
         "https://www.berlingske.dk/politik/2020/09/01/radikale-oestergaard"
@@ -35,7 +35,7 @@
       "date": "2019-2020",
       "description": "Som klima- og energiminister lovede Østergaard ambitiøs grøn omstilling. Kritikere mente, at de konkrete tiltag var utilstrækkelige, og at Danmark ikke nåede de lovede reduktioner hurtigt nok.",
       "ourSeverity": 3,
-      "severity": "middel",
+      "severity": "3",
       "sources": [
         "https://www.klimaraadet.dk/rapport/2020",
         "https://www.dr.dk/nyheder/politik/oestergaard-klima"
