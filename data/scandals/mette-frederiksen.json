@@ -6,6 +6,7 @@
       "title": "Minkskandalen (2020)",
       "year": "2020",
       "description": "Regeringen beordrede aflivning af alle mink i Danmark uden lovhjemmel. Sagen førte til rigsretssag mod daværende minister og massiv kritik af Mette Frederiksen for at have givet ulovlig ordre.",
+      "ourSeverity": 5,
       "source": {
         "text": "DR, Politiken og Rigsretten 2020-2022",
         "url": "https://www.dr.dk/nyheder/politik/minkskandalen"
@@ -16,6 +17,7 @@
       "title": "Slettede SMS'er (2022)",
       "year": "2022",
       "description": "Mette Frederiksen og hendes stab slettede tusindvis af SMS'er fra perioden omkring minkskandalen, hvilket blev kritiseret som forsøg på at skjule information.",
+      "ourSeverity": 4,
       "source": {
         "text": "DR.dk og Folketingets Ombudsmand 2022-2023",
         "url": "https://www.dr.dk/nyheder/politik"
@@ -26,6 +28,7 @@
       "title": "Grønlandsk præventionsskandale (2025)",
       "year": "2025",
       "description": "Afsløring af at tusindvis af grønlandske kvinder fik tvangssteriliseret eller fik spiral uden samtykke i 1960'erne-70'erne under dansk styre. Mette Frederiksen undskyldte sent og blev kritiseret for langsom reaktion.",
+      "ourSeverity": 3,
       "source": {
         "text": "DR.dk og Politiken 2025",
         "url": "https://www.dr.dk/nyheder/politik"
@@ -36,6 +39,7 @@
       "title": "Nordic Waste-skandalen (2025)",
       "year": "2025",
       "description": "Miljøskandale hvor giftigt affald løb ud i naturen. Kritik af regeringens håndtering og manglende kontrol med virksomheden.",
+      "ourSeverity": 4,
       "source": {
         "text": "DR.dk og Berlingske 2025",
         "url": "https://www.dr.dk/nyheder/politik"
@@ -46,6 +50,7 @@
       "title": "Bilderberg-møder og manglende åbenhed (2023-2024)",
       "year": "2023",
       "description": "Mette Frederiksen deltog i lukkede Bilderberg-møder uden at informere Folketinget fuldt ud. Kritik for manglende gennemsigtighed i udenrigspolitik.",
+      "ourSeverity": 2,
       "source": {
         "text": "Information og Altinget 2024",
         "url": "https://www.information.dk/"
