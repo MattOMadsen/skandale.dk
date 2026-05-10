@@ -6,7 +6,7 @@
       "date": "2022",
       "description": "Søren Pape Poulsen blev stoppet af politiet for at køre bil med for højt promilleindhold. Sagen førte til stor medieomtale og kritik af hans dømmekraft som justitsminister og partileder for De Konservative.",
       "ourSeverity": 4,
-      "severity": "høj",
+      "severity": "4",
       "sources": [
         "https://www.dr.dk/nyheder/politik/pape-poulsen-alkohol",
         "https://www.berlingske.dk/politik/2022/11/15/pape-domt",
@@ -21,7 +21,7 @@
       "date": "2022-2023",
       "description": "Under Papes ledelse oplevede De Konservative interne konflikter, afgang af nøglepersoner og dårlige meningsmålinger. Kritikere mente, at hans ledelsesstil og personlige sager svækkede partiet.",
       "ourSeverity": 4,
-      "severity": "høj",
+      "severity": "4",
       "sources": [
         "https://www.dr.dk/nyheder/politik/konservative-krisen-2022",
         "https://www.berlingske.dk/politik/2023/01/10/pape-konservative"
@@ -35,7 +35,7 @@
       "date": "2019-2022",
       "description": "Som justitsminister lovede Pape Poulsen hårdere straffe og mere politi. Kritikere pegede på, at kriminalitetsstatistikkerne ikke viste markante forbedringer, og at flere love blev kritiseret for at være symbolpolitik.",
       "ourSeverity": 3,
-      "severity": "middel",
+      "severity": "3",
       "sources": [
         "https://www.justitsministeriet.dk/nyheder/2021/straffe",
         "https://www.dr.dk/nyheder/politik/pape-kriminalitet"
