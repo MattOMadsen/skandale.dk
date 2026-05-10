@@ -6,7 +6,7 @@
       "date": "2010-2015",
       "description": "Som skatteminister var Claus Hjort Frederiksen ansvarlig for Skat. Der opstod massive problemer med fejlagtige udbetalinger, herunder til udlændinge og svindel med børnepenge. Rigsrevisionen kritiserede ledelsen.",
       "ourSeverity": 4,
-      "severity": "høj",
+      "severity": "4",
       "sources": [
         "https://www.rigsrevisionen.dk/beretninger/2015/skattevaesenet",
         "https://www.dr.dk/nyheder/politik/skatte-skandalen"
@@ -20,7 +20,7 @@
       "date": "2018",
       "description": "Som forsvarsminister lovede regeringen at nå NATO-målet på 2% af BNP. I praksis blev stigningen udskudt flere gange, og Danmark lå langt under målet i flere år.",
       "ourSeverity": 3,
-      "severity": "middel",
+      "severity": "3",
       "sources": [
         "https://www.ft.dk/samling/20171/lovforslag/L1/index.htm",
         "https://www.nato.int/cps/en/natohq/topics_49172.htm"
@@ -34,7 +34,7 @@
       "date": "2014-2016",
       "description": "Claus Hjort Frederiksen blev kritiseret for sin personlige håndtering af en lejlighedssag og skatteforhold. Sagen blev undersøgt, men han blev ikke dømt. Kritikere mente, at det skabte tvivl om ministerens troværdighed.",
       "ourSeverity": 2,
-      "severity": "lav",
+      "severity": "2",
       "sources": [
         "https://www.berlingske.dk/politik/2016/03/15/claus-hjort-og-lejligheden",
         "https://www.dr.dk/nyheder/politik/claus-hjort-frederiksen"
