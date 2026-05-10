@@ -5,16 +5,13 @@
       "title": "Dansk Folkepartis fond og økonomiske forhold",
       "date": "2001-2012",
       "description": "Som partileder var Pia Kjærsgaard central i opbygningen af DF's økonomi, herunder fonden. Der var kritik af manglende gennemsigtighed i partiets økonomiske støtte og brug af midler.",
+      "ourSeverity": 3,
       "severity": "middel",
       "sources": [
         "https://www.dr.dk/nyheder/politik/df-fond-pia-kjaersgaard",
         "https://www.berlingske.dk/politik/2012/05/10/df-oekonomi"
       ],
-      "votes": {
-        "good": 0,
-        "bad": 0,
-        "neutral": 0
-      },
+      "votes": { "good": 0, "bad": 0, "neutral": 0 },
       "comments": []
     },
     {
@@ -22,16 +19,13 @@
       "title": "Udlændingepolitik og 'stramninger' 2001-2011",
       "date": "2001-2011",
       "description": "Pia Kjærsgaard førte DF ind i støtte til VK-regeringen og gennemførte stramme udlændingelove. Kritikere mente, at politikken var inhuman og skabte unødvendig polarisering i samfundet.",
+      "ourSeverity": 4,
       "severity": "høj",
       "sources": [
         "https://www.uim.dk/historik/udlaendingelove",
         "https://www.amnesty.dk/pia-kjaersgaard"
       ],
-      "votes": {
-        "good": 0,
-        "bad": 0,
-        "neutral": 0
-      },
+      "votes": { "good": 0, "bad": 0, "neutral": 0 },
       "comments": []
     },
     {
@@ -39,16 +33,13 @@
       "title": "Personlige udtalelser og kontroverser",
       "date": "2000-2015",
       "description": "Pia Kjærsgaard blev gentagne gange kritiseret for udtalelser om indvandrere, muslimer og politiske modstandere. Flere sager førte til debat om, hvorvidt hun overskred grænser for acceptabel politisk retorik.",
+      "ourSeverity": 3,
       "severity": "middel",
       "sources": [
         "https://www.dr.dk/nyheder/politik/pia-kjaersgaard-udtalelser",
         "https://www.berlingske.dk/politik/2010/03/15/pia-kjaersgaard"
       ],
-      "votes": {
-        "good": 0,
-        "bad": 0,
-        "neutral": 0
-      },
+      "votes": { "good": 0, "bad": 0, "neutral": 0 },
       "comments": []
     }
   ]
