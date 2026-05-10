@@ -1,6 +1,6 @@
 # Politiker Modal Struktur (Skandale.dk)
 
-**Mål:** Ensartet og professionel struktur i alle politikermodals, baseret på den aktuelle implementering (v6.9+).
+**Mål:** Ensartet og professionel struktur i alle politikermodals, baseret på den aktuelle implementering
 
 ## Aktuel mappe-struktur (vigtigt!)
 
