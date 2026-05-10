@@ -1,4 +1,4 @@
-// js/modal-scandal.js - Skandaler (med createStars defineret + legacy support)
+// js/modal-scandal.js - Skandaler (med createStars + interaktiv bruger-vurdering af alvorlighed)
 
 function createStars(severity) {
   if (!severity || severity < 1) severity = 1;
@@ -49,16 +49,21 @@ function loadScandals(politician) {
       });
     }
   });
+
+  // Init interaktiv bruger-vurdering af alvorlighed (ny feature)
+  politician.scandals.forEach((scandal, index) => {
+    initUserSeverityRating(index, politician, scandal);
+  });
 }
 
 function buildScandalHTML(scandal, index, politician) {
-  // === LEGACY SUPPORT: Normaliser gamle data-formater (Helle, Anders Fogh, Mette m.fl.) ===
-  const s = { ...scandal }; // shallow clone
+  // === LEGACY SUPPORT: Normaliser gamle data-formater ===
+  const s = { ...scandal };
 
-  if (!s.severity || s.severity < 1) s.severity = 3;           // default alvorlighed
-  if (!s.year && s.date) s.year = s.date;                          // support "date" som fallback
+  if (!s.ourSeverity || s.ourSeverity < 1) s.ourSeverity = 3;
+  if (!s.year && s.date) s.year = s.date;
   if (!s.shortDesc && !s.longDesc && s.description) {
-    s.shortDesc = s.description;                                   // brug description som shortDesc
+    s.shortDesc = s.description;
   }
 
   // Konverter legacy source/sources til mediaLinks
@@ -76,7 +81,11 @@ function buildScandalHTML(scandal, index, politician) {
     }
   }
 
-  const severityStars = createStars(s.severity);
+  const polId = politician.id || politician.name.replace(/\s+/g, '-').toLowerCase();
+  const scId = s.id || s.title.replace(/\s+/g, '-').toLowerCase();
+  const ourSeverity = s.ourSeverity;
+
+  const severityStars = createStars(ourSeverity);
   
   return `
     <div class="border border-slate-200 rounded-2xl mb-4 overflow-hidden">
@@ -89,7 +98,7 @@ function buildScandalHTML(scandal, index, politician) {
           </div>
           <div class="flex items-center gap-x-2 mt-1">
             <div class="flex items-center text-amber-500">${severityStars}</div>
-            <div class="text-xs text-slate-500">Alvorlighed: ${s.severity}/5</div>
+            <div class="text-xs text-slate-500">Alvorlighed: ${ourSeverity}/5 <span class="text-slate-400">(Vores vurdering)</span></div>
           </div>
         </div>
         <div class="flex items-center gap-x-2">
@@ -137,21 +146,14 @@ function buildScandalHTML(scandal, index, politician) {
             </div>
           ` : ''}
           
-          <!-- Voting -->
+          <!-- Brugerens alvorlighedsvurdering (erstatter gammel afstemning) -->
           <div class="pt-4 border-t">
-            <div class="font-semibold text-sm text-slate-500 mb-2">Hvad synes du?</div>
-            <div class="flex gap-x-2">
-              <button onclick="voteOnScandal(${index}, 'good')" class="flex-1 px-4 py-2 bg-green-50 hover:bg-green-100 text-green-700 rounded-xl text-sm font-medium transition-colors">
-                <i class="fa-solid fa-thumbs-up mr-1"></i> Godt
-              </button>
-              <button onclick="voteOnScandal(${index}, 'bad')" class="flex-1 px-4 py-2 bg-red-50 hover:bg-red-100 text-red-700 rounded-xl text-sm font-medium transition-colors">
-                <i class="fa-solid fa-thumbs-down mr-1"></i> Dårligt
-              </button>
-              <button onclick="voteOnScandal(${index}, 'neutral')" class="flex-1 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-sm font-medium transition-colors">
-                <i class="fa-solid fa-minus mr-1"></i> Neutral
-              </button>
-            </div>
-            <div id="vote-result-${index}" class="mt-2 text-xs text-center text-slate-500"></div>
+            <div class="font-semibold text-sm text-slate-500 mb-2">Hvor alvorlig synes du sagen er? (1-5 stjerner)</div>
+            <div id="user-severity-container-${index}" class="flex items-center gap-x-1 text-2xl cursor-pointer"></div>
+            <div id="user-severity-label-${index}" class="mt-1 text-xs text-slate-500"></div>
+            <button id="reset-severity-btn-${index}" onclick="resetUserSeverity(${index}, '${polId}', '${scId}')" class="hidden mt-2 px-3 py-1 text-xs text-red-600 hover:bg-red-50 rounded-xl transition-colors">
+              <i class="fa-solid fa-undo mr-1"></i> Nulstil min bedømmelse
+            </button>
           </div>
           
           <!-- Comments -->
@@ -169,4 +171,103 @@ function buildScandalHTML(scandal, index, politician) {
       </div>
     </div>
   `;
+}
+
+// === NYE FUNKTIONER: Interaktiv bruger-vurdering af alvorlighed ===
+
+function initUserSeverityRating(index, politician, scandal) {
+  const container = document.getElementById(`user-severity-container-${index}`);
+  if (!container) return;
+
+  const polId = politician.id || politician.name.replace(/\s+/g, '-').toLowerCase();
+  const scId = scandal.id || scandal.title.replace(/\s+/g, '-').toLowerCase();
+  const storageKey = `userSeverity_${polId}_${scId}`;
+  
+  let userRating = parseInt(localStorage.getItem(storageKey) || '0');
+  const ourSeverity = scandal.ourSeverity || 3;
+
+  renderInteractiveStars(container, index, polId, scId, userRating, ourSeverity);
+  updateSeverityLabel(index, userRating, ourSeverity);
+
+  const resetBtn = document.getElementById(`reset-severity-btn-${index}`);
+  if (resetBtn) {
+    resetBtn.classList.toggle('hidden', userRating === 0);
+  }
+}
+
+function renderInteractiveStars(container, index, polId, scId, currentRating, ourSeverity) {
+  container.innerHTML = '';
+  for (let i = 1; i <= 5; i++) {
+    const star = document.createElement('i');
+    const isFilled = i <= currentRating;
+    star.className = `fa-solid fa-star cursor-pointer transition-colors text-2xl ${isFilled ? 'text-[#C8102E]' : 'text-slate-300 hover:text-amber-400'}`;
+    
+    star.onclick = () => {
+      saveUserSeverity(index, polId, scId, i);
+    };
+    
+    star.onmouseenter = () => highlightStars(container, i, currentRating);
+    star.onmouseleave = () => highlightStars(container, currentRating, currentRating);
+    
+    container.appendChild(star);
+  }
+}
+
+function highlightStars(container, hoverRating, currentRating) {
+  const stars = container.querySelectorAll('i');
+  stars.forEach((star, idx) => {
+    const starNum = idx + 1;
+    if (starNum <= hoverRating) {
+      star.classList.add('text-[#C8102E]');
+      star.classList.remove('text-slate-300', 'hover:text-amber-400');
+    } else {
+      star.classList.remove('text-[#C8102E]');
+      if (starNum > currentRating) {
+        star.classList.add('text-slate-300');
+      }
+    }
+  });
+}
+
+function saveUserSeverity(index, polId, scId, rating) {
+  const storageKey = `userSeverity_${polId}_${scId}`;
+  localStorage.setItem(storageKey, rating);
+  
+  // Re-render
+  const container = document.getElementById(`user-severity-container-${index}`);
+  if (!container) return;
+  
+  // Find voresSeverity fra DOM eller default
+  const ourSeverity = 3; // fallback
+  renderInteractiveStars(container, index, polId, scId, rating, ourSeverity);
+  updateSeverityLabel(index, rating, ourSeverity);
+  
+  const resetBtn = document.getElementById(`reset-severity-btn-${index}`);
+  if (resetBtn) resetBtn.classList.remove('hidden');
+}
+
+function updateSeverityLabel(index, userRating, ourSeverity) {
+  const label = document.getElementById(`user-severity-label-${index}`);
+  if (!label) return;
+
+  if (userRating > 0) {
+    label.innerHTML = `<span class="font-medium text-[#C8102E]">Din bedømmelse: ${userRating}/5 stjerner</span>`;
+  } else {
+    label.innerHTML = `Vores vurdering: ${ourSeverity}/5 – klik på stjernerne for at give din egen`;
+  }
+}
+
+function resetUserSeverity(index, polId, scId) {
+  const storageKey = `userSeverity_${polId}_${scId}`;
+  localStorage.removeItem(storageKey);
+  
+  const container = document.getElementById(`user-severity-container-${index}`);
+  if (!container) return;
+  
+  const ourSeverity = 3;
+  renderInteractiveStars(container, index, polId, scId, 0, ourSeverity);
+  updateSeverityLabel(index, 0, ourSeverity);
+  
+  const resetBtn = document.getElementById(`reset-severity-btn-${index}`);
+  if (resetBtn) resetBtn.classList.add('hidden');
 }
