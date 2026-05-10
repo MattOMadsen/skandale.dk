@@ -5,16 +5,13 @@
       "title": "Alternativets økonomi og medlemsbidrag",
       "date": "2015-2018",
       "description": "Uffe Elbæk grundlagde Alternativet med fokus på 'ny politik'. Partiet oplevede økonomiske problemer og kritik af manglende gennemsigtighed i brugen af medlemsbidrag og støtte.",
+      "ourSeverity": 3,
       "severity": "middel",
       "sources": [
         "https://www.dr.dk/nyheder/politik/alternativet-oekonomi",
         "https://www.berlingske.dk/politik/2017/06/12/alternativet-elbaek"
       ],
-      "votes": {
-        "good": 0,
-        "bad": 0,
-        "neutral": 0
-      },
+      "votes": { "good": 0, "bad": 0, "neutral": 0 },
       "comments": []
     },
     {
@@ -22,16 +19,13 @@
       "title": "Intern krise og udmeldelser fra Alternativet",
       "date": "2019-2021",
       "description": "Efter folketingsvalget i 2019 oplevede Alternativet stor intern uro, flere udmeldelser og dårlige meningsmålinger. Elbæk trådte tilbage som leder i 2020. Kritikere mente, at partiet ikke levede op til sine egne idealer om åbenhed.",
+      "ourSeverity": 4,
       "severity": "høj",
       "sources": [
         "https://www.dr.dk/nyheder/politik/alternativet-krisen-2019",
         "https://www.berlingske.dk/politik/2020/08/25/elbaek-alternativet"
       ],
-      "votes": {
-        "good": 0,
-        "bad": 0,
-        "neutral": 0
-      },
+      "votes": { "good": 0, "bad": 0, "neutral": 0 },
       "comments": []
     },
     {
@@ -39,16 +33,13 @@
       "title": "Internationale netværk og WEF-tilknytning",
       "date": "2015-2022",
       "description": "Uffe Elbæk har været aktiv i internationale netværk som World Economic Forum. Kritikere fra venstrefløjen mente, at det var i modstrid med Alternativets anti-elitære profil.",
+      "ourSeverity": 2,
       "severity": "lav",
       "sources": [
         "https://www.weforum.org/people/uffe-elbaek",
         "https://www.dr.dk/nyheder/politik/elbaek-wef"
       ],
-      "votes": {
-        "good": 0,
-        "bad": 0,
-        "neutral": 0
-      },
+      "votes": { "good": 0, "bad": 0, "neutral": 0 },
       "comments": []
     }
   ]
