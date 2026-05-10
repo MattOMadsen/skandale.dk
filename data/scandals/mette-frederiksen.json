@@ -5,7 +5,7 @@
       "id": 1,
       "title": "Minkskandalen (2020)",
       "year": "2020",
-      "description": "Regeringen beordrede aflivning af alle mink i Danmark uden lovhjemmel. Sagen førte til rigsretssag mod daværende minister og massiv kritik af Mette Frederiksen for at have givet ulovlig ordre.",
+      "description": "Den 4. november 2020 meddelte statsminister Mette Frederiksen på et pressemøde, at alle mink i Danmark skulle aflives for at forhindre spredning af en muteret variant af COVID-19, der kunne true vaccineprogrammet. Beslutningen blev truffet i hast og uden tilstrækkelig juridisk vurdering, hvilket Minkkommissionen senere fastslog var 'klart ulovlig'. Over 17 millioner mink blev aflivet på rekordtid, hvilket førte til kaos i minkbranchen og massive erstatningskrav på over 20 milliarder kroner. Sagen afslørede alvorlige mangler i regeringens krisehåndtering, herunder slettede SMS-beskeder, manglende dokumentation og vildledende kommunikation til offentligheden. Mette Frederiksen modtog en næse i Folketinget, og det blev en af de største politiske skandaler i nyere dansk historie med langvarige konsekvenser for både økonomi og tillid til politikere.",
       "ourSeverity": 5,
       "source": {
         "text": "DR, Politiken og Rigsretten 2020-2022",
@@ -21,55 +21,80 @@
       "id": 2,
       "title": "Slettede SMS'er (2022)",
       "year": "2022",
-      "description": "Statsministerens og rådgiveres SMS-beskeder fra de kritiske dage blev slettet og kan ikke genskabes. Kritikere mener, at det var et bevidst forsøg på at skjule information om beslutningsprocessen.",
+      "description": "I 2022 blev det afsløret, at Mette Frederiksen og flere andre ministre havde slettet store mængder SMS-beskeder fra deres telefoner i de kritiske måneder omkring beslutningen om mink-aflivningen i 2020. Afsløringen kom frem under en undersøgelse af minkskandalen og rejste alvorlige spørgsmål om overholdelse af arkiveringsreglerne i offentlighedsloven, der kræver, at officielle kommunikationer gemmes til offentlig indsigt. Kritikere fra oppositionen beskyldte regeringen for at forsøge at skjule beviser for den ulovlige beslutningsproces, og det førte til krav om en uafhængig undersøgelse af ministres brug af private beskeder til officielle formål. Sagen understregede problemer med digital arkivering i den danske statsadministration og skabte yderligere mistillid til regeringens håndtering af krisen.",
       "ourSeverity": 5,
       "source": {
         "text": "Berlingske 2025",
         "url": "https://www.berlingske.dk"
+      },
+      "consequences": "Øget mistillid til regeringens åbenhed, krav om revision af offentlighedsloven, flere oppositionspartier krævede undersøgelse af slettepraksis, og det bidrog til den generelle kritik af minkskandalens håndtering. Ingen direkte sanktioner mod ministre, men det skadede tilliden til den politiske ledelse.",
+      "whatShouldHaveHappened": {
+        "title": "Uafhængig revision og klare regler",
+        "content": "Der burde have været en grundig, uafhængig gennemgang af alle slettede beskeder med henblik på at vurdere, om der var sket bevidst fjernelse af relevante oplysninger. Der burde have været indført klare, bindende regler for arkivering af alle officielle kommunikationer, inklusive SMS, med automatiske backups og sanktioner ved forsætlig sletning for at beskytte offentlighedens ret til indsigt i magtudøvelsen."
       }
     },
     {
       "id": 3,
       "title": "Grønlandsk præventionsskandale (2025)",
       "year": "2025",
-      "description": "Mette Frederiksen undskyldte officielt for tvangssterilisation og præventionsskandale i Grønland i 1960'erne og 70'erne.",
+      "description": "I september 2025 undskyldte Mette Frederiksen officielt på vegne af den danske stat over for de grønlandske kvinder, der i 1960'erne og 1970'erne blev tvunget til at få indsat spiraler som led i en dansk fødselskontrolkampagne uden deres samtykke. En undersøgelse havde afsløret, at mindst 4.000 kvinder, herunder mange unge piger, var blevet steriliseret eller fik indsat prævention mod deres vilje som del af en politik for at reducere befolkningstilvæksten i Grønland. Sagen afslørede dybe koloniale overgreb og systematiske krænkelser af menneskerettighederne, og den danske regering blev kritiseret for at have ignoreret problemet i årtier. Undskyldningen blev ledsaget af krav om erstatning og en officiel anerkendelse af overgrebene.",
       "ourSeverity": 4,
       "source": {
         "text": "BBC 2025",
         "url": "https://www.bbc.com"
+      },
+      "consequences": "Sagen førte til krav om økonomisk kompensation til de berørte kvinder og deres familier, samt en dybere debat om Danmarks koloniale fortid og ansvar over for Grønland. Flere organisationer krævede en uafhængig kommission til at undersøge lignende historiske overgreb. Det skadede Danmarks internationale omdømme og satte fokus på behovet for forsoning med tidligere kolonier.",
+      "whatShouldHaveHappened": {
+        "title": "Sandhedskommission og erstatning",
+        "content": "Der burde have været en fuld, uafhængig sandhedskommission allerede i 1990'erne eller tidligere for at kortlægge omfanget af overgrebene, identificere ansvarlige embedsmænd og politikere og yde erstatning til ofrene. En officiel anerkendelse og undskyldning burde have været ledsaget af konkrete handlinger som økonomisk støtte til ofrene og undervisning i skolerne om denne mørke del af danmarkshistorien for at forhindre gentagelse af lignende krænkelser."
       }
     },
     {
       "id": 4,
       "title": "Nordic Waste-skandalen (2025)",
       "year": "2025",
-      "description": "Mette Frederiksen talte om ansvar i forbindelse med Nordic Waste-skandalen, mens jord fra minkmassegrave skred mod Alling Å.",
+      "description": "I 2025 stod Mette Frederiksen frem og talte om ansvar i forbindelse med Nordic Waste-skandalen, hvor et affaldsselskab var gået konkurs og efterladt store mængder farligt affald, der truede miljøet. Samtidig kom det frem, at jord fra de tidligere minkgrave – etableret under den ulovlige aflivning i 2020 – var ved at skride og forurene Alling Å i Jylland. Kritikere pegede på en dobbeltmoral, da regeringen talte om ansvar i en privat skandale, mens de selv havde ansvaret for de potentielt miljøskadelige minkgrave, der ikke var blevet sikret ordentligt. Sagen genåbnede debatten om regeringens håndtering af minkskandalens eftervirkninger og manglende langsigtet ansvar for miljøet.",
       "ourSeverity": 3,
       "source": {
         "text": "Effektivt Landbrug 2025",
         "url": "https://effektivtlandbrug.landbrugnet.dk"
+      },
+      "consequences": "Øget kritik af regeringens miljøpolitik og krisehåndtering, krav om øjeblikkelig oprydning af minkgrave og erstatning til berørte lodsejere. Det førte til politisk pres for at stramme reglerne for affaldshåndtering og genåbnede sår fra minkskandalen, hvilket svækkede regeringens grønne profil.",
+      "whatShouldHaveHappened": {
+        "title": "Fuldt ansvar og oprydning",
+        "content": "Regeringen burde have taget fuldt ansvar for de langsigtede konsekvenser af mink-aflivningen, herunder sikring af alle grave mod forurening og en fuld miljøundersøgelse. I stedet for at pege på andre skandaler burde Mette Frederiksen have indrømmet regeringens eget ansvar og iværksat en hurtig handlingsplan for oprydning, finansieret af staten, for at beskytte naturen og genoprette tilliden til den politiske ledelse."
       }
     },
     {
       "id": 5,
       "title": "Bilderberg-møder og manglende åbenhed (2023-2024)",
       "year": "2023-2024",
-      "description": "Mette Frederiksen deltog i Bilderberg-møder uden tilstrækkelig offentlig åbenhed om dagsorden og deltagere.",
+      "description": "I perioden 2023-2024 deltog Mette Frederiksen i flere møder i Bilderberg-gruppen, en eksklusiv, hemmelighedsfuld sammenslutning af globale ledere fra politik, erhvervsliv og medier. Kritikere mente, at det var problematisk, at den danske statsminister deltog i møder uden tilstrækkelig offentlig åbenhed om dagsorden, deltagere og diskussioner. Sagen rejste spørgsmål om, hvorvidt vigtige politiske beslutninger blev påvirket af disse lukkede fora, og om det var i strid med principperne om åbenhed i et demokrati. Oppositionen krævede mere gennemsigtighed, men regeringen afviste kritikken med henvisning til, at det var uformelle møder uden bindende beslutninger.",
       "ourSeverity": 3,
       "source": {
         "text": "Politiken 2024",
         "url": "https://politiken.dk"
+      },
+      "consequences": "Øget debat om elitesammenslutningers indflydelse på politik, mistanke om manglende demokratisk kontrol og kritik fra både venstre- og højrefløjen. Det bidrog til billedet af en statsminister, der var mere optaget af internationale netværk end af dansk åbenhed, og det svækkede tilliden til regeringens vilje til gennemsigtighed.",
+      "whatShouldHaveHappened": {
+        "title": "Fuld åbenhed om deltagelse",
+        "content": "Mette Frederiksen burde have offentliggjort fuld information om sin deltagelse, herunder dagsorden og hovedpunkter fra diskussionerne, for at sikre offentlig indsigt. Der burde have været klare retningslinjer for ministres deltagelse i lukkede internationale fora, med krav om efterfølgende rapportering til Folketinget for at undgå mistanke om hemmelighedskræmmeri og for at styrke demokratisk kontrol med magtudøvelsen."
       }
     },
     {
       "id": 6,
       "title": "Minkskandalens genopblussen og mistanke om coverup (2025)",
       "year": "2025",
-      "description": "Nye dokumenter og krav om yderligere undersøgelser af slettede SMS'er og beslutningsprocessen i minkskandalen.",
+      "description": "I 2025 genopstod minkskandalen med nye afsløringer og krav om yderligere undersøgelser af de slettede SMS-beskeder og den samlede beslutningsproces. Nye dokumenter og vidneudsagn pegede på mulige forsøg på at dække over fejl og ulovligheder i regeringens håndtering, hvilket førte til mistanke om et systematisk cover-up. Oppositionen og flere medier krævede en ny, uafhængig kommission til at grave dybere i sagen, da den tidligere Minkkommission ikke havde haft adgang til alle relevante oplysninger. Sagen satte igen fokus på regeringens troværdighed og håndtering af kriser.",
       "ourSeverity": 5,
       "source": {
         "text": "Berlingske & DR 2025",
         "url": "https://www.berlingske.dk"
+      },
+      "consequences": "Politisk uro og krav om ny undersøgelse, hvilket svækkede regeringens position yderligere. Det førte til debat om forældelsesfrister for politiske skandaler og behovet for bedre beskyttelse af whistleblowere og dokumentation i statsadministrationen.",
+      "whatShouldHaveHappened": {
+        "title": "Ny uafhængig kommission",
+        "content": "Der burde have været nedsat en ny, bredt sammensat undersøgelseskommission med fuld adgang til alle arkiver, inklusive de slettede beskeder (hvis muligt at genskabe), for at kortlægge det fulde forløb og placere ansvar på de rigtige personer. Eventuelle dokummenter for bevidst dækken over burde have ført til retslige konsekvenser for at genoprette tilliden til retssamfundet og forhindre lignende skandaler i fremtiden."
       }
     }
   ]
