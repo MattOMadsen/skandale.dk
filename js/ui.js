@@ -67,7 +67,7 @@ function renderPoliticians(filteredPoliticians = null) {
     // Avatar: billede hvis tilgængeligt, ellers initialer
     let avatarHTML = '';
     if (politician.image) {
-      avatarHTML = `<img src="${politician.image}" alt="${politician.name}" class="w-14 h-14 rounded-2xl object-cover border border-slate-200" onerror="this.outerHTML = '<div class=\'w-14 h-14 rounded-2xl flex items-center justify-center text-white font-bold text-xl\' style=\'background-color: ${politician.avatarColor || politician.color || \'#C8102E\'}\'>${politician.initials || politician.name.split(' ').map(n => n[0]).join('')}</div>';">`;
+      avatarHTML = `<img src="${politician.image}" alt="${politician.name}" class="w-14 h-14 rounded-2xl object-cover border border-slate-200" onerror="this.outerHTML = '<div class=\\'w-14 h-14 rounded-2xl flex items-center justify-center text-white font-bold text-xl\\' style=\\'background-color: ${politician.avatarColor || politician.color || \\'#C8102E\\'}\\'>${politician.initials || politician.name.split(' ').map(n => n[0]).join('')}</div>';">`;
     } else {
       avatarHTML = `<div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-bold text-xl" 
                style="background-color: ${politician.avatarColor || politician.color || '#C8102E'}">
