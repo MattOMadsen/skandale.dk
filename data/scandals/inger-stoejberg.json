@@ -6,6 +6,7 @@
       "title": "Rigsretssagen (2020-2021)",
       "year": "2020",
       "description": "Inger Støjberg blev dømt i rigsretten for ulovlig adskillelse af asylpar (2016-beslutningen). Hun fik 60 dages fængsel (betinget) og mistede sin ministerpost.",
+      "ourSeverity": 5,
       "source": {
         "text": "Rigsretten, DR og Politiken 2020-2021",
         "url": "https://www.dr.dk/nyheder/politik/inger-stoejberg-doemt-i-rigsretten"
@@ -16,6 +17,7 @@
       "title": "Tønder-sagen (2010-2011)",
       "year": "2010",
       "description": "Som beskæftigelsesminister blev Inger Støjberg kritiseret for myndighedernes (og hendes) håndtering af den alvorlige børnemishandlingssag i Tønder.",
+      "ourSeverity": 4,
       "source": {
         "text": "DR og Politiken 2011",
         "url": "https://www.dr.dk/nyheder/indland/toender-sagen"
@@ -26,6 +28,7 @@
       "title": "Racistiske kommentarer på Facebook (2016)",
       "year": "2016",
       "description": "Inger Støjberg blev kritiseret for racistiske og nedladende kommentarer på Facebook om flygtninge og muslimer.",
+      "ourSeverity": 3,
       "source": {
         "text": "Politiken og Berlingske 2016-2017",
         "url": "https://politiken.dk/"
@@ -36,6 +39,7 @@
       "title": "Stram udlændingepolitik og menneskerettigheder (2015-2019)",
       "year": "2015",
       "description": "Inger Støjberg blev gentagne gange kritiseret af Amnesty International og Institut for Menneskerettigheder for at føre en politik der krænkede menneskerettigheder.",
+      "ourSeverity": 3,
       "source": {
         "text": "Amnesty International 2016-2019",
         "url": "https://www.amnesty.dk/"
@@ -46,6 +50,7 @@
       "title": "Forlod Venstre og stiftede nyt parti (2021)",
       "year": "2021",
       "description": "Efter at have været en central figur i Venstre i over 20 år forlod Inger Støjberg partiet og stiftede Danmarksdemokraterne. Kritikere kaldte det for et personligt magtspil.",
+      "ourSeverity": 2,
       "source": {
         "text": "DR.dk og Politiken 2021",
         "url": "https://www.dr.dk/nyheder/politik"
