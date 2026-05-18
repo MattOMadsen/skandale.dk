@@ -1,8 +1,8 @@
-// js/data.js - Komplet fix: Henter fra alle dedikerede mapper + legacy fallback
-// Opdateret 9. maj 2026 – Nu med både scandals og affiliations fra nye mapper
+// js/data.js - Opdateret til per-politiker mappe + manifest (v2.00.60+)
+// Støtter både ny granular struktur og gammel single-file som fallback
 
 let politicians = [];
-let networkIndex = {}; // Globalt indeks: netværk -> liste af politikere
+let networkIndex = {};
 
 async function loadPoliticians() {
   try {
@@ -27,14 +27,35 @@ async function loadPoliticians() {
       let brokenPromises = [];
       let economicSupport = [];
 
+      // === NY STRUKTUR: Prøv per-politiker mappe med manifest ===
       try {
-        const s = await fetch(`data/scandals/${slug}.json`);
-        if (s.ok) {
-          const sData = await s.json();
-          scandals = sData.scandals || (Array.isArray(sData) ? sData : []);
+        const manifestRes = await fetch(`data/scandals/${slug}/manifest.json`);
+        if (manifestRes.ok) {
+          const manifest = await manifestRes.json();
+          if (manifest.scandals && Array.isArray(manifest.scandals)) {
+            const scandalPromises = manifest.scandals.map(filename =>
+              fetch(`data/scandals/${slug}/${filename}`).then(r => r.ok ? r.json() : null)
+            );
+            const loadedScandals = await Promise.all(scandalPromises);
+            scandals = loadedScandals.filter(Boolean);
+          }
         }
-      } catch (e) {}
+      } catch (e) {
+        // manifest ikke fundet → fortsæt til fallback
+      }
 
+      // Fallback til gammel single-file struktur (hvis ingen manifest)
+      if (scandals.length === 0) {
+        try {
+          const s = await fetch(`data/scandals/${slug}.json`);
+          if (s.ok) {
+            const sData = await s.json();
+            scandals = sData.scandals || (Array.isArray(sData) ? sData : []);
+          }
+        } catch (e) {}
+      }
+
+      // Affiliations
       try {
         const a = await fetch(`data/affiliations/${slug}.json`);
         if (a.ok) {
@@ -71,10 +92,10 @@ async function loadPoliticians() {
       } catch (e) {}
 
       return {
-        scandals: scandals,
-        affiliations: affiliations,
-        economicSupport: economicSupport,
-        brokenPromises: brokenPromises
+        scandals,
+        affiliations,
+        economicSupport,
+        brokenPromises
       };
     });
 
@@ -85,13 +106,12 @@ async function loadPoliticians() {
       ...detailsList[index]
     }));
 
-    // === BYG GLOBALT NETVÆRKS-INDEX (case-insensitive + trim) ===
+    // Byg globalt netværks-index
     networkIndex = {};
     politicians.forEach(politician => {
       if (politician.affiliations && Array.isArray(politician.affiliations)) {
         politician.affiliations.forEach(aff => {
           let key = (aff.name || aff.organization || 'Ukendt').trim();
-          // Normaliser kendte varianter
           if (key.toLowerCase().includes('world economic forum') || key.toLowerCase().includes('wef')) key = 'World Economic Forum (WEF)';
           if (key.toLowerCase().includes('bilderberg')) key = 'Bilderberg Meetings';
           if (key.toLowerCase().includes('cpac')) key = 'Conservative Political Action Conference (CPAC)';
@@ -110,11 +130,10 @@ async function loadPoliticians() {
       }
     });
 
-    // Gør det globalt tilgængeligt
     window.networkIndex = networkIndex;
     window.politicians = politicians;
 
-    console.log(`[Skandale.dk] Alle ${politicians.length} politikere loaded med fuld data + netværksindeks`);
+    console.log(`[Skandale.dk] Alle ${politicians.length} politikere loaded med ny granular scandal-struktur + fallback`);
     return politicians;
   } catch (error) {
     console.error('Fejl ved loading:', error);
