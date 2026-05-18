@@ -1,5 +1,15 @@
 # Skandale.dk Changelog
 
+## v2.00.61 (18. maj 2026)
+- Fuldt migreret alle 12 politikere til ny **granulær scandal-struktur**
+  - Hver politiker har nu egen mappe: `data/scandals/[slug]/`
+  - `manifest.json` + én JSON-fil pr. skandale
+  - Meget nemmere at tilføje og vedligeholde skandaler fremover
+- Opdateret `data.js` med intelligent loader (prøver manifest først, fallback til gammel single-file)
+- Opdateret `MODAL-STRUKTUR.md` med ny datastruktur og vejledning
+- Beholdt kebab-case navngivning for konsistens med resten af projektet
+- Alt indhold bevaret – kun omstruktureret
+
 ## v2.00.59 (10. maj 2026)
 - Version consistency opdateret: APP_VERSION matcher nu changelog
 - Små UI tweaks og polish for bedre brugeroplevelse
