@@ -6,25 +6,33 @@
 
 Hver politiker har følgende dedikerede JSON-filer:
 
-| Fil | Indhold | Bruges til i modalen |
-|-----|---------|------------------------|
-| `data/politicians/[navn].json` | Core data (id, name, party, bio, careerTimeline, beforePolitics, scandalsFile) | Om Politikeren, Før politik, Karriereoversigt |
-| `data/scandals/[navn].json` | Skandaler (title, year/shortDesc, ourSeverity, mediaLinks/source, **consequences** (valgfri), **whatShouldHaveHappened** (valgfri objekt med title + content)) | Skandaler sektionen (med brugerens interaktive alvorlighedsvurdering + kommentarer + konsekvenser + anbefalet handling) |
-| `data/affiliations/[navn].json` | Internationale netværk (NATO, Bilderberg, UNICEF, Europa-Parlamentet m.m.) | Internationale netværk & tilknytninger |
-| `data/economic-support/[navn].json` | Donorer (name, amount, type, year) | Økonomisk støtte tabel |
-| `data/broken-promises/[navn].json` | Brudte løfter (title, year, whatHappened, source) | Brudte valgløfter sektion |
+| Fil / Mappe | Indhold | Bruges til i modalen |
+|-------------|---------|------------------------|
+| `data/politicians/[slug].json` | Core data (id, name, party, bio, careerTimeline, beforePolitics) | Om Politikeren, Før politik, Karriereoversigt |
+| `data/scandals/[slug]/` | **Ny granulær struktur**:<br>• `manifest.json` (liste over skandale-filer)<br>• `*.json` (én fil pr. skandale) | Skandaler sektionen |
+| `data/affiliations/[slug].json` | Internationale netværk | Internationale netværk & tilknytninger |
+| `data/economic-support/[slug].json` | Donorer | Økonomisk støtte tabel |
+| `data/broken-promises/[slug].json` | Brudte løfter | Brudte valgløfter sektion |
 
-> **Note:** `data/details/` er legacy og bruges ikke længere til aktiv rendering.
+> **Note:** Den gamle single-file `data/scandals/[slug].json` beholdes som fallback. Den nye loader i `data.js` prøver først manifest-strukturen.
+
+### Eksempel på ny scandal-struktur
+```
+data/scandals/mette-frederiksen/
+├─ manifest.json
+├─ minkskandalen-2020.json
+├─ slettede-sms-2022.json
+└─ ...
+```
 
 ## Kilde links (vigtigt for gennemsigtighed)
 
 **Alle sektioner skal have klikbare kilde links**, så brugeren kan læse mere om emnet og verificere informationen:
 
-- **Skandaler**: Hver skandale skal have `mediaLinks` eller `source` med klikbar(e) kilde(r). Konsekvenser og "Hvad burde være sket?" skal også have kilder hvor muligt.
+- **Skandaler**: Hver skandale skal have `mediaLinks` med klikbar(e) kilde(r)
 - **Brudte valgløfter**: Kilde link under hvert løfte
 - **Internationale netværk**: Kilde link på hvert netværk
 - **Økonomisk støtte**: Kilde link på hver donor (hvis tilgængelig)
-- **Om Politikeren / Karriereoversigt**: Eventuelle kilder skal være klikbare
 
 Dette sikrer fuld gennemsigtighed og troværdighed.
 
@@ -46,40 +54,39 @@ Dette sikrer fuld gennemsigtighed og troværdighed.
 
 ### 5. Skandaler
 - **Overskrift:** "Skandaler"
-- Liste over skandaler (fra scandals JSON)
-- Alvorlighed med statiske stjerner (voresSeverity) + "(Vores vurdering)"
-- Klik for at åbne: 
-  - Beskrivelse (fra JSON)
-  - Kilder (klikbare links)
-  - **Konsekvenser** (grøn overskrift + tekst, hvis "consequences" felt findes i JSON – f.eks. næse, ministerfald, erstatningssager)
-  - **Hvad burde være sket?** (fremhævet boks med orange/rød venstre border, ⚖️ ikon, titel og indhold fra "whatShouldHaveHappened" objekt i JSON – f.eks. henvisning til kommissionens konklusioner og anbefalet uafhængig undersøgelse)
-  - **Interaktiv bruger-vurdering af alvorlighed (1-5 stjerner, gemmes i localStorage)** + kommentarer
-- Reset-knap kun synlig efter brugeren har bedømt
+- Liste over skandaler (indlæses automatisk via `manifest.json`)
+- Alvorlighed med statiske stjerner (`ourSeverity`) + "(Vores vurdering)"
+- Klik for at åbne:
+  - Beskrivelse (`longDesc`)
+  - Kilder (`mediaLinks`)
+  - **Konsekvenser** (hvis feltet findes)
+  - **Hvad burde være sket?** (`whatShouldHaveHappened` objekt)
+  - Interaktiv bruger-vurdering af alvorlighed (1-5 stjerner)
+  - Kommentarer
 
 ### 6. Økonomisk støtte
-- **Overskrift:** "Økonomisk støtte"
-- Tabel med donorer
-- Klik på donor åbner alle de har støttet
+- Tabel med donorer (klik på donor åbner alle de har støttet)
 
 ### 7. Internationale netværk & tilknytninger
-- **Overskrift:** "Internationale netværk & tilknytninger"
-- Liste over netværk (fra affiliations JSON)
-- F.eks. NATO, Bilderberg, Save the Children, Europa-Parlamentet
+- Liste over netværk (klikbar → viser andre politikere med samme tilknytning)
 
 ### 8. Brudte valgløfter
-- **Overskrift:** "Brudte valgløfter"
-- Liste over brudte løfter (fra broken-promises JSON)
+- Liste over brudte løfter
 
 ### 9. Footer
 - "Data er baseret på offentligt tilgængelige kilder"
 - Delingsknapper + PDF-eksport
 
 ## Tekniske noter (vedligeholdelse)
-- Script-rækkefølge i index.html: `modal-scandal.js` før `modal-core.js`
-- Hver modal-*.js fil har én ansvar (1 fil = 1 funktion)
-- Data er JSON-baseret → nem at opdatere og udvide
-- Alle 12 politikere skal have identisk struktur for genkendelighed
-- Brugerens alvorlighedsvurdering gemmes i localStorage (nøgle: `userSeverity_${polId}_${scId}`) – klar til senere central database (Supabase)
-- Nye felter i scandals JSON: `consequences` (string) og `whatShouldHaveHappened` (object: {title: string, content: string}) – valgfri, men anbefales til vigtige skandaler for at fremhæve ansvar og læring
 
-**Sidst opdateret:** 10. maj 2026 (v6.9.2) – Tilføjet "Konsekvenser" og "Hvad burde være sket?" felter + rendering i skandale-detaljer (baseret på Minkkommissionens konklusioner som eksempel). Øget fokus på fakta, ansvar og anbefalet handling.
+- **Script-rækkefølge** i `index.html`: `modal-scandal.js` før `modal-core.js`
+- Hver `modal-*.js` fil har én ansvar (1 fil = 1 funktion)
+- Data er JSON-baseret → nem at opdatere og udvide
+- **Ny scandal-struktur**: Tilføj ny skandale ved at:
+  1. Oprette ny fil i `data/scandals/[slug]/`
+  2. Tilføje filnavnet til `manifest.json`
+- Alle 12 politikere har nu identisk granulær struktur
+- Brugerens alvorlighedsvurdering gemmes i `localStorage` (`userSeverity_${polId}_${scId}`)
+- Anbefalede felter i skandale-filer: `consequences` og `whatShouldHaveHappened`
+
+**Sidst opdateret:** 18. maj 2026 – Opdateret til ny granulær scandal-struktur (per-politiker mapper + manifest.json). Alle 12 politikere migreret.
