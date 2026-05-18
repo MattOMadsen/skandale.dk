@@ -1,0 +1,18 @@
+{
+  "id": "slettede-sms-2022",
+  "title": "Slettede SMS'er (2022)",
+  "year": "2022",
+  "ourSeverity": 5,
+  "shortDesc": "I 2022 blev det afsløret, at Mette Frederiksen og flere andre ministre havde slettet store mængder SMS-beskeder fra deres telefoner i de kritiske måneder omkring beslutningen om mink-aflivningen i 2020.",
+  "longDesc": "I 2022 blev det afsløret, at Mette Frederiksen og flere andre ministre havde slettet store mængder SMS-beskeder fra deres telefoner i de kritiske måneder omkring beslutningen om mink-aflivningen i 2020. Afsløringen kom frem under en undersøgelse af minkskandalen og rejste alvorlige spørgsmål om overholdelse af arkiveringsreglerne i offentlighedsloven.",
+  "outcome": "Øget mistillid til regeringens åbenhed, krav om revision af offentlighedsloven.",
+  "justiceAnalysis": "Der burde have været en grundig, uafhængig gennemgang af alle slettede beskeder.",
+  "mediaLinks": [
+    {"name": "Berlingske 2025", "url": "https://www.berlingske.dk"}
+  ],
+  "consequences": "Øget mistillid til regeringens åbenhed, krav om revision af offentlighedsloven, flere oppositionspartier krævede undersøgelse af slettepraksis.",
+  "whatShouldHaveHappened": {
+    "title": "Uafhængig revision og klare regler",
+    "content": "Der burde have været en grundig, uafhængig gennemgang af alle slettede beskeder med henblik på at vurdere, om der var sket bevidst fjernelse af relevante oplysninger."
+  }
+}

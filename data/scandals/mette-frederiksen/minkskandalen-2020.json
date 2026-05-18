@@ -1,0 +1,18 @@
+{
+  "id": "minkskandalen-2020",
+  "title": "Minkskandalen (2020)",
+  "year": "2020",
+  "ourSeverity": 5,
+  "shortDesc": "Den 4. november 2020 meddelte statsminister Mette Frederiksen på et pressemøde, at alle mink i Danmark skulle aflives for at forhindre spredning af en muteret variant af COVID-19.",
+  "longDesc": "Den 4. november 2020 meddelte statsminister Mette Frederiksen på et pressemøde, at alle mink i Danmark skulle aflives for at forhindre spredning af en muteret variant af COVID-19, der kunne true vaccineprogrammet. Beslutningen blev truffet i hast og uden tilstrækkelig juridisk vurdering, hvilket Minkkommissionen senere fastslog var 'klart ulovlig'. Over 17 millioner mink blev aflivet på rekordtid, hvilket førte til kaos i minkbranchen og massive erstatningskrav på over 20 milliarder kroner.",
+  "outcome": "Næse fra Folketinget, ministerfald, erstatningssager til minkavlere (over 20 mia. kr.), politisk pres for rigsretssag (nedstemt). Sagen er stadig aktiv i 2025-2026.",
+  "justiceAnalysis": "Minkkommissionen fastslog, at beslutningen var \"klart ulovlig\" og hendes udtalelser \"groft vildledende\".",
+  "mediaLinks": [
+    {"name": "DR, Politiken og Rigsretten", "url": "https://www.dr.dk/nyheder/politik/minkskandalen"}
+  ],
+  "consequences": "Næse fra Folketinget, ministerfald, erstatningssager til minkavlere (over 20 mia. kr.), politisk pres for rigsretssag (nedstemt). Sagen er stadig aktiv i 2025-2026.",
+  "whatShouldHaveHappened": {
+    "title": "Uafhængig undersøgelse og ansvar",
+    "content": "Minkkommissionen fastslog, at beslutningen var \"klart ulovlig\" og hendes udtalelser \"groft vildledende\". I stedet for kun en politisk næse fra Folketinget burde der have været en uafhængig advokatundersøgelse med henblik på rigsretssag jf. Ministeransvarlighedsloven § 5."
+  }
+}

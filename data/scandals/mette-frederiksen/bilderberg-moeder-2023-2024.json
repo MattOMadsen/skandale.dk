@@ -1,0 +1,18 @@
+{
+  "id": "bilderberg-moeder-2023-2024",
+  "title": "Bilderberg-møder og manglende åbenhed (2023-2024)",
+  "year": "2023-2024",
+  "ourSeverity": 3,
+  "shortDesc": "I perioden 2023-2024 deltog Mette Frederiksen i flere møder i Bilderberg-gruppen, en eksklusiv, hemmelighedsfuld sammenslutning af globale ledere.",
+  "longDesc": "I perioden 2023-2024 deltog Mette Frederiksen i flere møder i Bilderberg-gruppen, en eksklusiv, hemmelighedsfuld sammenslutning af globale ledere fra politik, erhvervsliv og medier. Kritikere mente, at det var problematisk, at den danske statsminister deltog i møder uden tilstrækkelig offentlig åbenhed.",
+  "outcome": "Øget debat om elitesammenslutningers indflydelse på politik.",
+  "justiceAnalysis": "Mette Frederiksen burde have offentliggjort fuld information om sin deltagelse.",
+  "mediaLinks": [
+    {"name": "Politiken 2024", "url": "https://politiken.dk"}
+  ],
+  "consequences": "Øget debat om elitesammenslutningers indflydelse på politik, mistanke om manglende demokratisk kontrol.",
+  "whatShouldHaveHappened": {
+    "title": "Fuld åbenhed om deltagelse",
+    "content": "Mette Frederiksen burde have offentliggjort fuld information om sin deltagelse, herunder dagsorden og hovedpunkter fra diskussionerne."
+  }
+}
