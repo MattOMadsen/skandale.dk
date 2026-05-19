@@ -1,4 +1,4 @@
-// js/data.js - Opdateret til per-politiker mappe + manifest for BOTH scandals og broken-promises (v2.00.63+)
+// js/data.js - Fuldt opdateret til granulær struktur for BÅDE scandals og broken-promises (v2.00.64+)
 // Støtter både ny granular struktur og gammel single-file som fallback
 // Læst MODAL-STRUKTUR.md før ændringer
 
@@ -156,7 +156,7 @@ async function loadPoliticians() {
     window.networkIndex = networkIndex;
     window.politicians = politicians;
 
-    console.log(`[Skandale.dk] Alle ${politicians.length} politikere loaded med ny granular struktur for scandals + broken-promises + fallback`);
+    console.log(`[Skandale.dk] Alle ${politicians.length} politikere loaded med fuld granulær struktur for scandals + broken-promises`);
     return politicians;
   } catch (error) {
     console.error('Fejl ved loading:', error);
