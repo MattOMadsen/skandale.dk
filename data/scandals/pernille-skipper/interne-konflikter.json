@@ -2,19 +2,18 @@
   "id": "interne-konflikter",
   "title": "Interne konflikter i Enhedslisten",
   "year": "2019-2020",
-  "whatHappened": "Enhedslisten oplevede betydelige interne konflikter og udmeldelser, hvilket skabte debat om partiets interne demokrati og ledelse.",
-  "longDesc": "I perioden 2019-2020 havde Enhedslisten flere interne stridigheder, herunder uenighed om ledelse og politisk retning. Flere medlemmer forlod partiet, og der opstod offentlig debat om partiets interne kultur.",
   "ourSeverity": 3,
-  "consequences": "Flere medlemmer forlod partiet, og der opstod offentlig debat om intern kultur og ledelse. Det svækkede midlertidigt partiets troværdighed hos nogle vælgere.",
-  "whatShouldHaveHappened": "Partiet burde have håndteret de interne uenigheder mere åbent og demokratisk, med klarere processer for konfliktløsning og medlemsinddragelse.",
+  "shortDesc": "Enhedslisten oplevede betydelige interne konflikter og udmeldelser.",
+  "longDesc": "I perioden 2019-2020 havde Enhedslisten flere interne stridigheder, herunder uenighed om ledelse og politisk retning. Flere medlemmer forlod partiet, og der opstod offentlig debat om partiets interne kultur.",
+  "outcome": "Flere medlemmer forlod partiet, og der opstod offentlig debat om intern kultur og ledelse.",
+  "justiceAnalysis": "Partiets interne håndtering af konflikter blev kritiseret for at mangle åbenhed og klare processer.",
   "mediaLinks": [
-    {
-      "text": "DR: Interne sager i Enhedslisten",
-      "url": "https://www.dr.dk/nyheder/politik"
-    },
-    {
-      "text": "Politiken: Enhedslisten i krise",
-      "url": "https://politiken.dk/"
-    }
-  ]
+    {"name": "DR", "url": "https://www.dr.dk/nyheder/politik"},
+    {"name": "Politiken", "url": "https://politiken.dk/"}
+  ],
+  "consequences": "Flere medlemmer forlod partiet, og der opstod offentlig debat om intern kultur og ledelse. Det svækkede midlertidigt partiets troværdighed hos nogle vælgere.",
+  "whatShouldHaveHappened": {
+    "title": "Bedre intern konfliktløsning",
+    "content": "Partiet burde have håndteret de interne uenigheder mere åbent og demokratisk, med klarere processer for konfliktløsning og medlemsinddragelse."
+  }
 }
