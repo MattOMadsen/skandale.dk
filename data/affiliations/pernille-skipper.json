@@ -1,10 +1,10 @@
 {
   "affiliations": [
     {
-      "name": "European Left",
-      "organization": "Party of the European Left",
+      "name": "Party of the European Left",
+      "organization": "European Left",
       "year": "2014-",
-      "role": "Aktiv deltager"
+      "role": "Aktiv deltager og netværksdeltager"
     },
     {
       "name": "Nordic Green Left Alliance",
@@ -13,16 +13,10 @@
       "role": "Deltager"
     },
     {
-      "name": "GUE/NGL",
+      "name": "GUE/NGL (European Parliament)",
       "organization": "European United Left – Nordic Green Left",
       "year": "2014-",
-      "role": "Tilknyttet europæisk venstrefløj"
-    },
-    {
-      "name": "European Left Forum",
-      "organization": "European Left",
-      "year": "2016-",
-      "role": "Deltager i konferencer og netværk"
+      "role": "Tilknyttet europæisk venstrefløj i Europa-Parlamentet"
     }
   ]
 }
