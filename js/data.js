@@ -1,4 +1,4 @@
-// js/data.js - Opdateret til per-politiker mappe + manifest for BOTH scandals og broken-promises (v2.00.61+)
+// js/data.js - Opdateret til per-politiker mappe + manifest for BOTH scandals og broken-promises (v2.00.63+)
 // Støtter både ny granular struktur og gammel single-file som fallback
 // Læst MODAL-STRUKTUR.md før ændringer
 
