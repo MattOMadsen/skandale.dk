@@ -8,5 +8,10 @@
   "mediaLinks": [
     {"name": "DR.dk", "url": "https://www.dr.dk/nyheder/politik/pia-kjaersgaard-udtalelser"},
     {"name": "Berlingske", "url": "https://www.berlingske.dk/politik/2010/03/15/pia-kjaersgaard"}
-  ]
+  ],
+  "consequences": "Debat om grænserne for acceptabel politisk retorik.",
+  "whatShouldHaveHappened": {
+    "title": "Mere respektfuld debat",
+    "content": "Der burde have været større fokus på respektfuld og faktabaseret debat i stedet for personlige og polariserende udtalelser."
+  }
 }
