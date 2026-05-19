@@ -1,21 +1,41 @@
-// js/data.js - Opdateret til bedre support af ny mappe-struktur + both severity/ourSeverity
-// Beholdt al gammel fallback-logik
+// js/data.js - Dynamisk loading via manifest.json + fallback
+// Opdateret til automatisk håndtering af nye politikere
 
 let politicians = [];
 let networkIndex = {};
 
 async function loadPoliticians() {
   try {
-    // === KERNE-LISTE (kan udvides med nye politikere) ===
-    const coreFiles = [
-      'mette-frederiksen', 'inger-stoejberg', 'morten-oestergaard', 'helle-thorning-schmidt',
-      'lars-loekke-rasmussen', 'pia-kjaersgaard', 'anders-fogh-rasmussen', 'morten-messerschmidt',
-      'kristian-thulesen-dahl', 'soeren-pape-poulsen', 'uffe-elbaek', 'claus-hjort-frederiksen',
-      'pernille-skipper'  // Tilføjet
-    ];
+    let politicianSlugs = [];
 
-    const corePromises = coreFiles.map(slug => fetch(`data/politicians/${slug}.json`).then(r => r.json()));
-    const cores = await Promise.all(corePromises);
+    // === Prøv at hente manifest (anbefalet måde) ===
+    try {
+      const manifestRes = await fetch('data/politicians/manifest.json');
+      if (manifestRes.ok) {
+        const manifest = await manifestRes.json();
+        if (manifest.politicians && Array.isArray(manifest.politicians)) {
+          politicianSlugs = manifest.politicians;
+          console.log('[data.js] Bruger manifest.json med', politicianSlugs.length, 'politikere');
+        }
+      }
+    } catch (e) {
+      console.warn('[data.js] Kunne ikke hente manifest.json, bruger fallback-liste');
+    }
+
+    // === Fallback til hardcoded liste (hvis manifest mangler) ===
+    if (politicianSlugs.length === 0) {
+      politicianSlugs = [
+        'mette-frederiksen', 'inger-stoejberg', 'morten-oestergaard', 'helle-thorning-schmidt',
+        'lars-loekke-rasmussen', 'pia-kjaersgaard', 'anders-fogh-rasmussen', 'morten-messerschmidt',
+        'kristian-thulesen-dahl', 'soeren-pape-poulsen', 'uffe-elbaek', 'claus-hjort-frederiksen',
+        'pernille-skipper'
+      ];
+    }
+
+    const corePromises = politicianSlugs.map(slug => 
+      fetch(`data/politicians/${slug}.json`).then(r => r.ok ? r.json() : null)
+    );
+    const cores = (await Promise.all(corePromises)).filter(Boolean);
 
     const detailPromises = cores.map(async (core) => {
       const slug = core.name.toLowerCase()
@@ -27,7 +47,7 @@ async function loadPoliticians() {
       let brokenPromises = [];
       let economicSupport = [];
 
-      // === NY GRANULAR STRUKTUR: Prøv mappe + manifest ===
+      // === NY GRANULAR STRUKTUR ===
       try {
         const manifestRes = await fetch(`data/scandals/${slug}/manifest.json`);
         if (manifestRes.ok) {
@@ -42,7 +62,7 @@ async function loadPoliticians() {
         }
       } catch (e) {}
 
-      // Fallback til gammel single-file
+      // Fallback single file
       if (scandals.length === 0) {
         try {
           const s = await fetch(`data/scandals/${slug}.json`);
@@ -53,7 +73,7 @@ async function loadPoliticians() {
         } catch (e) {}
       }
 
-      // Affiliations (mappe først)
+      // Affiliations
       try {
         const a = await fetch(`data/affiliations/${slug}.json`);
         if (a.ok) {
@@ -122,7 +142,7 @@ async function loadPoliticians() {
     window.networkIndex = networkIndex;
     window.politicians = politicians;
 
-    console.log(`[Skandale.dk] ${politicians.length} politikere loaded (inkl. Pernille Skipper + ny mappe-struktur)`);
+    console.log(`[Skandale.dk] ${politicians.length} politikere loaded dynamisk via manifest`);
     return politicians;
   } catch (error) {
     console.error('Fejl ved loading:', error);
