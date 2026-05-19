@@ -6,7 +6,6 @@ function showNetworkOverviewModal() {
         return;
     }
 
-    // Omdan networkIndex til en sorteret liste
     const networks = Object.entries(window.networkIndex)
         .map(([name, politicians]) => ({
             name: name,
@@ -33,8 +32,9 @@ function showNetworkOverviewModal() {
     `;
 
     networks.forEach(network => {
+        const safeName = network.name.replace(/'/g, "\\'");
         html += `
-            <div onclick="closeNetworkOverviewModal(); showNetworkConnections('${network.name.replace(/'/g, "\\'")}')" 
+            <div onclick="event.stopImmediatePropagation(); closeNetworkOverviewModal(); setTimeout(() => { showNetworkConnections('${safeName}'); }, 50)" 
                  class="flex items-center justify-between p-5 bg-slate-50 border border-slate-200 hover:border-[#C8102E]/40 rounded-2xl cursor-pointer transition-all">
                 
                 <div>
@@ -69,5 +69,4 @@ function closeNetworkOverviewModal() {
     if (modal) modal.remove();
 }
 
-// Gør funktionen global
 window.showNetworkOverviewModal = showNetworkOverviewModal;
