@@ -6,6 +6,11 @@
   "shortDesc": "Som klima- og energiminister lovede Østergaard ambitiøs grøn omstilling. Kritikere mente, at de konkrete tiltag var utilstrækkelige.",
   "longDesc": "Som klima- og energiminister lovede Østergaard ambitiøs grøn omstilling. Kritikere mente, at de konkrete tiltag var utilstrækkelige, og at Danmark ikke nåede de lovede reduktioner hurtigt nok.",
   "mediaLinks": [
-    {"name": "Klimarådet og DR 2020", "url": "https://www.klimaraadet.dk/rapport/2020"}
-  ]
+    {"name": "Klimarådet og DR", "url": "https://www.klimaraadet.dk/rapport/2020"}
+  ],
+  "consequences": "Kritik for utilstrækkelige konkrete tiltag i den grønne omstilling.",
+  "whatShouldHaveHappened": {
+    "title": "Mere ambitiøs og hurtig handling",
+    "content": "Der burde have været mere ambitiøse og hurtigere konkrete tiltag for at leve op til de grønne løfter."
+  }
 }

@@ -6,6 +6,12 @@
   "shortDesc": "Morten Østergaard blev anklaget for seksuel chikane af en tidligere medarbejder, mens han var klima- og energiminister. Sagen førte til hans afgang som partileder for Radikale Venstre i 2020.",
   "longDesc": "Morten Østergaard blev anklaget for seksuel chikane af en tidligere medarbejder, mens han var klima- og energiminister. Sagen førte til hans afgang som partileder for Radikale Venstre i 2020. Han har erkendt upassende adfærd.",
   "mediaLinks": [
-    {"name": "DR, Berlingske og Folketinget", "url": "https://www.dr.dk/nyheder/politik/morten-oestergaard-chikane"}
-  ]
+    {"name": "DR.dk", "url": "https://www.dr.dk/nyheder/politik/morten-oestergaard-chikane"},
+    {"name": "Berlingske", "url": "https://www.berlingske.dk/politik/2020/08/25/oestergaard-afgang"}
+  ],
+  "consequences": "Afgang som partileder og erkendelse af upassende adfærd.",
+  "whatShouldHaveHappened": {
+    "title": "Bedre kultur og ansvar",
+    "content": "Der burde have været større fokus på at skabe en sund arbejdskultur og hurtigere ansvarstagning fra ledelsen."
+  }
 }

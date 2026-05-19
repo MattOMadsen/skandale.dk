@@ -6,6 +6,11 @@
   "shortDesc": "Efter chikane-sagen oplevede Radikale Venstre en dyb krise med medlemsflugt og dårlige meningsmålinger. Østergaards afgang som leder blev kritiseret for at komme for sent.",
   "longDesc": "Efter chikane-sagen oplevede Radikale Venstre en dyb krise med medlemsflugt og dårlige meningsmålinger. Østergaards afgang som leder blev kritiseret for at komme for sent.",
   "mediaLinks": [
-    {"name": "DR og Berlingske 2020", "url": "https://www.dr.dk/nyheder/politik/radikale-krisen-2020"}
-  ]
+    {"name": "DR og Berlingske", "url": "https://www.dr.dk/nyheder/politik/radikale-krisen-2020"}
+  ],
+  "consequences": "Dyb intern krise og medlemsflugt i partiet.",
+  "whatShouldHaveHappened": {
+    "title": "Tidligere og klarere ledelsesskifte",
+    "content": "Der burde have været et tidligere og mere klart ledelsesskifte for at mindske skaden på partiet."
+  }
 }
