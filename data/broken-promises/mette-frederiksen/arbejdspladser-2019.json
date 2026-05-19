@@ -5,16 +5,16 @@
   "whatHappened": "Selvom arbejdsløsheden generelt er lav, er der stadig store udfordringer med langtidsledighed blandt unge og ikke-vestlige indvandrere.",
   "sources": [
     {
-      "text": "Danmarks Statistik - Ledighedstal 2023-2025",
-      "url": "https://www.dst.dk/da/Statistik/nyheder-analyser-publ/nyheder"
+      "text": "Danmarks Statistik - Ledighed",
+      "url": "https://www.dst.dk/da/Statistik/emner/arbejde-og-indkomst/ledighed"
     },
     {
-      "text": "Beskæftigelsesministeriet - Langtidsledighed",
-      "url": "https://www.bm.dk/nyheder/langtidsledighed"
+      "text": "Beskæftigelsesministeriet",
+      "url": "https://www.bm.dk/"
     },
     {
-      "text": "DR - Langtidsledighed blandt unge",
-      "url": "https://www.dr.dk/nyheder/politik/langtidsledighed-unge"
+      "text": "DR Nyheder - Arbejdsmarked",
+      "url": "https://www.dr.dk/nyheder/politik"
     }
   ]
 }

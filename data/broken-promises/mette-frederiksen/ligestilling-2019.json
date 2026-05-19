@@ -5,16 +5,16 @@
   "whatHappened": "Ligestillingsområdet har ikke fået de ressourcer, der var lovet, og uligheden er steget på flere områder.",
   "sources": [
     {
-      "text": "Ligestillingsministeriet - Status 2023-2025",
+      "text": "Ligestillingsministeriet",
       "url": "https://www.ligestilling.dk/"
     },
     {
-      "text": "Kvinderådet - Ligestillingsrapport 2024",
-      "url": "https://kvinderaadet.dk/rapport-2024"
+      "text": "Kvinderådet",
+      "url": "https://kvinderaadet.dk/"
     },
     {
-      "text": "DR - Ligestilling halter efter",
-      "url": "https://www.dr.dk/nyheder/politik/ligestilling-halter"
+      "text": "DR Nyheder - Ligestilling",
+      "url": "https://www.dr.dk/nyheder/politik"
     }
   ]
 }

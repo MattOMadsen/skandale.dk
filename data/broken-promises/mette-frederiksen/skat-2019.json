@@ -5,16 +5,16 @@
   "whatHappened": "Skattetrykket steg i flere år. Særligt mellemindkomster oplevede ingen reel skattelettelse, mens afgifter på energi og transport steg markant.",
   "sources": [
     {
-      "text": "Skatteministeriet - Skattepolitik 2023-2025",
-      "url": "https://www.skm.dk/aktuelt/nyheder/skattepolitik"
+      "text": "Skatteministeriet - Aktuelt",
+      "url": "https://www.skm.dk/aktuelt"
     },
     {
-      "text": "CEPOS - Skatteanalyse 2024",
-      "url": "https://cepos.dk/artikler/skatteanalyse-2024"
+      "text": "CEPOS - Analyser",
+      "url": "https://cepos.dk/analyser"
     },
     {
-      "text": "DR - Skattetrykket steg under regeringen",
-      "url": "https://www.dr.dk/nyheder/politik/skattetryk-steg"
+      "text": "DR Nyheder - Skat og økonomi",
+      "url": "https://www.dr.dk/nyheder/politik"
     }
   ]
 }

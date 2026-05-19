@@ -5,16 +5,16 @@
   "whatHappened": "I 2022–2025 gennemførte regeringen store besparelser på plejehjem, hjemmehjælp og sygehuspersonale i flere kommuner.",
   "sources": [
     {
-      "text": "DR Nyheder - Velfærdsreformer 2023-2025",
-      "url": "https://www.dr.dk/nyheder/politik/velfaerdsreformer"
+      "text": "DR Nyheder - Velfærd og besparelser",
+      "url": "https://www.dr.dk/nyheder/politik"
     },
     {
-      "text": "Politiken - Besparelser på plejehjem",
-      "url": "https://politiken.dk/indland/art9384723/Besparelser-paa-plejehjem-i-flere-kommuner"
+      "text": "Politiken - Indland",
+      "url": "https://politiken.dk/indland"
     },
     {
-      "text": "KL Økonomiske Redegørelser 2023-2025",
-      "url": "https://www.kl.dk/nyheder/2024/kl-oekonomiske-redegoerelser"
+      "text": "KL - Kommunernes Landsforening",
+      "url": "https://www.kl.dk/"
     }
   ]
 }

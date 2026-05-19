@@ -5,16 +5,16 @@
   "whatHappened": "Flere reformer har ramt de svageste hårdt, herunder kontanthjælpsloft og integrationsydelse.",
   "sources": [
     {
-      "text": "Rådet for Socialt Udsatte - Årsrapport 2023-2025",
+      "text": "Rådet for Socialt Udsatte",
       "url": "https://www.udsatte.dk/"
     },
     {
-      "text": "DR - Kontanthjælpsloft rammer hårdt",
-      "url": "https://www.dr.dk/nyheder/politik/kontanthjaelpsloft"
+      "text": "DR Nyheder - Socialpolitik",
+      "url": "https://www.dr.dk/nyheder/politik"
     },
     {
-      "text": "Politiken - Integrationsydelse kritik",
-      "url": "https://politiken.dk/indland/art9123456/Integrationsydelse-kritik"
+      "text": "Politiken - Indland",
+      "url": "https://politiken.dk/indland"
     }
   ]
 }

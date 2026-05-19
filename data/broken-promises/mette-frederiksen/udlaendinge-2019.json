@@ -5,16 +5,16 @@
   "whatHappened": "Udlændingepolitikken er blevet strammet markant, og kritikere mener, at den rammer uskyldige og skader Danmarks internationale omdømme.",
   "sources": [
     {
-      "text": "Amnesty International Danmark - Udlændingepolitik",
+      "text": "Amnesty International Danmark",
       "url": "https://www.amnesty.dk/"
     },
     {
-      "text": "Institut for Menneskerettigheder - Kritik 2024",
-      "url": "https://menneskerettigheder.dk/nyheder/kritik-af-udlaendingepolitik"
+      "text": "Institut for Menneskerettigheder",
+      "url": "https://menneskerettigheder.dk/"
     },
     {
-      "text": "DR - Stramninger i udlændingepolitikken",
-      "url": "https://www.dr.dk/nyheder/politik/udlaendingepolitik-stramninger"
+      "text": "DR Nyheder - Udlændinge",
+      "url": "https://www.dr.dk/nyheder/politik"
     }
   ]
 }
