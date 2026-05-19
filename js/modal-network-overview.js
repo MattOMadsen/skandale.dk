@@ -1,4 +1,4 @@
-// js/modal-network-overview.js - Oversigt over internationale netværk & overlap
+// js/modal-network-overview.js - Oversigt over internationale netværk & overlap (fixed v2)
 
 function showNetworkOverviewModal() {
     if (!window.networkIndex || Object.keys(window.networkIndex).length === 0) {
@@ -7,22 +7,21 @@ function showNetworkOverviewModal() {
     }
 
     const networks = Object.entries(window.networkIndex)
-        .map(([name, politicians]) => ({
-            name: name,
-            count: politicians.length,
-            politicians: politicians
+        .map(([name, pols]) => ({
+            name,
+            count: pols.length,
+            politicians: pols
         }))
         .sort((a, b) => b.count - a.count);
 
     let html = `
         <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[150] flex items-center justify-center p-4" id="networkOverviewModal">
-            <div onclick="event.target.id === 'networkOverviewModal' && closeNetworkOverviewModal()" 
-                 class="bg-white rounded-3xl max-w-4xl w-full max-h-[92vh] overflow-hidden shadow-2xl">
+            <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[92vh] overflow-hidden shadow-2xl">
                 
                 <div class="px-8 pt-8 pb-6 border-b flex items-center justify-between">
                     <div>
                         <h3 class="text-3xl font-bold tracking-tight">Internationale Netværk & Overlap</h3>
-                        <p class="text-slate-500 mt-1">Hvilke politikere har været tilknyttet de samme netværk?</p>
+                        <p class="text-slate-500 mt-1">Klik på et netværk for at se hvilke politikere der har været tilknyttet det</p>
                     </div>
                     <button onclick="closeNetworkOverviewModal()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
                 </div>
@@ -34,17 +33,16 @@ function showNetworkOverviewModal() {
     networks.forEach(network => {
         const safeName = network.name.replace(/'/g, "\\'");
         html += `
-            <div onclick="event.stopImmediatePropagation(); closeNetworkOverviewModal(); setTimeout(() => { showNetworkConnections('${safeName}'); }, 50)" 
+            <div onclick="event.stopImmediatePropagation(); showNetworkDetail('${safeName}')" 
                  class="flex items-center justify-between p-5 bg-slate-50 border border-slate-200 hover:border-[#C8102E]/40 rounded-2xl cursor-pointer transition-all">
                 
-                <div>
+                <div class="flex-1">
                     <div class="font-semibold text-lg">${network.name}</div>
-                    <div class="text-sm text-slate-500">${network.count} politikere har været tilknyttet dette netværk</div>
+                    <div class="text-sm text-slate-500">${network.count} politikere</div>
                 </div>
                 
-                <div class="text-right">
+                <div class="text-right pr-2">
                     <div class="text-2xl font-bold text-[#C8102E]">${network.count}</div>
-                    <div class="text-xs text-slate-400">Se overlap →</div>
                 </div>
             </div>
         `;
@@ -53,10 +51,6 @@ function showNetworkOverviewModal() {
     html += `
                     </div>
                 </div>
-                
-                <div class="px-8 py-4 border-t bg-slate-50 text-xs text-slate-400 text-center">
-                    Klik på et netværk for at se hvilke politikere der har været tilknyttet det
-                </div>
             </div>
         </div>
     `;
@@ -64,9 +58,53 @@ function showNetworkOverviewModal() {
     document.body.insertAdjacentHTML('beforeend', html);
 }
 
+function showNetworkDetail(networkName) {
+    const politiciansInNetwork = window.networkIndex[networkName] || [];
+
+    let listHTML = '';
+    if (politiciansInNetwork.length > 0) {
+        listHTML = politiciansInNetwork.map(p => `
+            <div onclick="closeNetworkDetailModal(); showPoliticianModal(${p.id})" 
+                 class="flex justify-between items-center p-4 border border-slate-200 rounded-2xl hover:border-[#C8102E]/30 cursor-pointer mb-2">
+                <div>
+                    <div class="font-semibold">${p.name}</div>
+                    <div class="text-sm text-slate-500">${p.party}</div>
+                </div>
+                <div class="text-xs text-slate-400">${p.year || ''} ${p.role ? '• ' + p.role : ''}</div>
+            </div>
+        `).join('');
+    } else {
+        listHTML = '<p class="text-slate-500">Ingen politikere fundet.</p>';
+    }
+
+    const detailHTML = `
+        <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[160] flex items-center justify-center p-4" id="networkDetailModal">
+            <div onclick="event.target.id === 'networkDetailModal' && closeNetworkDetailModal()" class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl">
+                <div class="px-8 pt-8 pb-6 border-b flex justify-between items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold">${networkName}</h3>
+                        <p class="text-sm text-slate-500">${politiciansInNetwork.length} politikere har været tilknyttet dette netværk</p>
+                    </div>
+                    <button onclick="closeNetworkDetailModal()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+                </div>
+                <div class="p-8 max-h-[60vh] overflow-y-auto">
+                    ${listHTML}
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', detailHTML);
+}
+
 function closeNetworkOverviewModal() {
-    const modal = document.getElementById('networkOverviewModal');
-    if (modal) modal.remove();
+    const m = document.getElementById('networkOverviewModal');
+    if (m) m.remove();
+}
+
+function closeNetworkDetailModal() {
+    const m = document.getElementById('networkDetailModal');
+    if (m) m.remove();
 }
 
 window.showNetworkOverviewModal = showNetworkOverviewModal;
