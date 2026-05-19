@@ -3,9 +3,14 @@
   "title": "Hustruens fyring og magtmisbrug (2018)",
   "year": "2018",
   "ourSeverity": 3,
-  "shortDesc": "Lars Løkke ledsagede sin hustru til et møde med skoleledelsen, hvor hun blev fyret. Kritikere beskyldte ham for magtmisbrug ved at bruge sin position som statsminister.",
+  "shortDesc": "Lars Løkke ledsagede sin hustru til et møde med skoleledelsen, hvor hun blev fyret. Kritikere beskyldte ham for magtmisbrug.",
   "longDesc": "Lars Løkke ledsagede sin hustru til et møde med skoleledelsen, hvor hun blev fyret. Kritikere beskyldte ham for magtmisbrug ved at bruge sin position som statsminister.",
   "mediaLinks": [
-    {"name": "Politiken og Berlingske 2018", "url": "https://politiken.dk/"}
-  ]
+    {"name": "Politiken og Berlingske", "url": "https://politiken.dk/"}
+  ],
+  "consequences": "Kritik for magtmisbrug og brug af sin position.",
+  "whatShouldHaveHappened": {
+    "title": "Klare grænser for magtudøvelse",
+    "content": "Der burde have været klarere regler og grænser for ministres brug af deres position i personlige sager."
+  }
 }

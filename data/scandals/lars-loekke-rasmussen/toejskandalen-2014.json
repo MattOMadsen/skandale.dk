@@ -6,6 +6,11 @@
   "shortDesc": "Lars Løkke brugte 152.000 kr på tøj og personlige udgifter på skatteydernes regning. Sagen førte til massiv kritik og truede hans position som partiformand.",
   "longDesc": "Lars Løkke brugte 152.000 kr på tøj og personlige udgifter på skatteydernes regning. Sagen førte til massiv kritik og truede hans position som partiformand.",
   "mediaLinks": [
-    {"name": "Ekstra Bladet, DR og Jyllands-Posten 2014", "url": "https://www.dr.dk/nyheder/politik/loekke-toej-sag"}
-  ]
+    {"name": "Ekstra Bladet, DR og Jyllands-Posten", "url": "https://www.dr.dk/nyheder/politik/loekke-toej-sag"}
+  ],
+  "consequences": "Massiv kritik og trussel mod positionen som partiformand.",
+  "whatShouldHaveHappened": {
+    "title": "Bedre økonomisk ansvarlighed",
+    "content": "Der burde have været større økonomisk ansvarlighed og klarere regler for ministres brug af offentlige midler."
+  }
 }
