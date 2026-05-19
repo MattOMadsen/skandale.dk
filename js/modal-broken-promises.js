@@ -1,4 +1,4 @@
-// js/modal-broken-promises.js - ABSOLUT SIMPLEST VERSION
+// js/modal-broken-promises.js - Opdateret til at understøtte flere kilde links (sources array) + backward compat med single source
 
 function addBrokenPromisesSection(politician) {
   const container = document.querySelector('#politicianModal .p-8');
@@ -14,9 +14,16 @@ function addBrokenPromisesSection(politician) {
     </div>`;
 
   politician.brokenPromises.forEach((p, i) => {
-    let kilde = p.source;
-    if (p.source && p.source.url) {
-      kilde = `<a href="${p.source.url}" target="_blank" class="text-[#C8102E] underline">${p.source.text || p.source.url}</a>`;
+    // Byg kilde HTML - understøtter både sources[] array og enkelt source
+    let kildeHTML = '';
+    if (p.sources && Array.isArray(p.sources) && p.sources.length > 0) {
+      kildeHTML = p.sources.map(s => 
+        `<a href="${s.url}" target="_blank" class="text-[#C8102E] underline hover:text-[#C8102E]/80">${s.text || s.url}</a>`
+      ).join(' • ');
+    } else if (p.source && p.source.url) {
+      kildeHTML = `<a href="${p.source.url}" target="_blank" class="text-[#C8102E] underline">${p.source.text || p.source.url}</a>`;
+    } else {
+      kildeHTML = 'Kilde ikke angivet';
     }
 
     html += `
@@ -24,7 +31,7 @@ function addBrokenPromisesSection(politician) {
         <div class="font-semibold text-base">${p.title}</div>
         <div class="text-xs text-slate-500">Lovet i ${p.year}</div>
         <div class="text-sm text-slate-700 my-2">${p.whatHappened}</div>
-        <div class="text-[10px] text-slate-400">Kilde: ${kilde}</div>
+        <div class="text-[10px] text-slate-400">Kilder: ${kildeHTML}</div>
         <div class="text-[10px] text-[#C8102E] mt-2">Klik for detaljer →</div>
       </div>
     `;
@@ -41,9 +48,14 @@ function addBrokenPromisesSection(politician) {
 }
 
 function showBrokenPromiseDetail(promise) {
-  let kilde = promise.source;
-  if (promise.source && promise.source.url) {
-    kilde = `<a href="${promise.source.url}" target="_blank" class="text-[#C8102E] underline">${promise.source.text || promise.source.url}</a>`;
+  // Byg kilde HTML til detalje modal
+  let kildeHTML = '';
+  if (promise.sources && Array.isArray(promise.sources) && promise.sources.length > 0) {
+    kildeHTML = promise.sources.map(s => 
+      `<a href="${s.url}" target="_blank" class="text-[#C8102E] underline hover:text-[#C8102E]/80 block mb-1">${s.text || s.url}</a>`
+    ).join('');
+  } else if (promise.source && promise.source.url) {
+    kildeHTML = `<a href="${promise.source.url}" target="_blank" class="text-[#C8102E] underline">${promise.source.text || promise.source.url}</a>`;
   }
 
   const html = `
@@ -61,7 +73,7 @@ function showBrokenPromiseDetail(promise) {
             <div class="font-semibold text-sm text-slate-500">Hvad skete der?</div>
             <div class="text-slate-700">${promise.whatHappened}</div>
           </div>
-          ${kilde ? `<div class="mt-6"><div class="font-semibold text-sm text-slate-500">Kilde</div><div class="text-sm">${kilde}</div></div>` : ''}
+          ${kildeHTML ? `<div class="mt-6"><div class="font-semibold text-sm text-slate-500 mb-1">Kilder</div><div class="text-sm">${kildeHTML}</div></div>` : ''}
         </div>
         <div class="px-8 py-4 border-t text-xs text-center text-slate-400">Data er baseret på offentligt tilgængelige kilder</div>
       </div>

@@ -3,8 +3,18 @@
   "title": "Vi lover at skabe flere arbejdspladser og stoppe arbejdsløsheden",
   "year": "2019",
   "whatHappened": "Selvom arbejdsløsheden generelt er lav, er der stadig store udfordringer med langtidsledighed blandt unge og ikke-vestlige indvandrere.",
-  "source": {
-    "text": "Danmarks Statistik og Beskæftigelsesministeriet 2023-2025",
-    "url": "https://www.dst.dk/da/Statistik/nyheder-analyser-publ/nyheder"
-  }
+  "sources": [
+    {
+      "text": "Danmarks Statistik - Ledighedstal 2023-2025",
+      "url": "https://www.dst.dk/da/Statistik/nyheder-analyser-publ/nyheder"
+    },
+    {
+      "text": "Beskæftigelsesministeriet - Langtidsledighed",
+      "url": "https://www.bm.dk/nyheder/langtidsledighed"
+    },
+    {
+      "text": "DR - Langtidsledighed blandt unge",
+      "url": "https://www.dr.dk/nyheder/politik/langtidsledighed-unge"
+    }
+  ]
 }

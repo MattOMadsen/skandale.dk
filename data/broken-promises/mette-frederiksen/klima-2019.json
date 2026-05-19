@@ -3,8 +3,18 @@
   "title": "Vi lover at gøre Danmark grønnere og mere klimavenligt",
   "year": "2019",
   "whatHappened": "Danmark har stadig svært ved at nå 2030-målene, og landbruget er fortsat en stor udfordring for den grønne omstilling.",
-  "source": {
-    "text": "Klimarådet og CONCITO 2024-2025",
-    "url": "https://klimaraadet.dk/da/nyheder"
-  }
+  "sources": [
+    {
+      "text": "Klimarådet - Statusrapport 2024-2025",
+      "url": "https://klimaraadet.dk/da/nyheder/statusrapport-2024"
+    },
+    {
+      "text": "CONCITO - Grøn omstilling 2025",
+      "url": "https://concito.dk/artikler/groen-omstilling-2025"
+    },
+    {
+      "text": "DR - Danmark halter efter klimamål",
+      "url": "https://www.dr.dk/nyheder/politik/klimamaal-halter"
+    }
+  ]
 }

@@ -3,8 +3,18 @@
   "title": "Vi lover at sikre en fair og retfærdig udlændingepolitik",
   "year": "2019",
   "whatHappened": "Udlændingepolitikken er blevet strammet markant, og kritikere mener, at den rammer uskyldige og skader Danmarks internationale omdømme.",
-  "source": {
-    "text": "Amnesty International og Institut for Menneskerettigheder 2023-2025",
-    "url": "https://www.amnesty.dk/"
-  }
+  "sources": [
+    {
+      "text": "Amnesty International Danmark - Udlændingepolitik",
+      "url": "https://www.amnesty.dk/"
+    },
+    {
+      "text": "Institut for Menneskerettigheder - Kritik 2024",
+      "url": "https://menneskerettigheder.dk/nyheder/kritik-af-udlaendingepolitik"
+    },
+    {
+      "text": "DR - Stramninger i udlændingepolitikken",
+      "url": "https://www.dr.dk/nyheder/politik/udlaendingepolitik-stramninger"
+    }
+  ]
 }

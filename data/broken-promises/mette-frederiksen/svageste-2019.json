@@ -3,8 +3,18 @@
   "title": "Vi lover at beskytte de svageste i samfundet",
   "year": "2019",
   "whatHappened": "Flere reformer har ramt de svageste hårdt, herunder kontanthjælpsloft og integrationsydelse.",
-  "source": {
-    "text": "Rådet for Socialt Udsatte 2023-2025",
-    "url": "https://www.udsatte.dk/"
-  }
+  "sources": [
+    {
+      "text": "Rådet for Socialt Udsatte - Årsrapport 2023-2025",
+      "url": "https://www.udsatte.dk/"
+    },
+    {
+      "text": "DR - Kontanthjælpsloft rammer hårdt",
+      "url": "https://www.dr.dk/nyheder/politik/kontanthjaelpsloft"
+    },
+    {
+      "text": "Politiken - Integrationsydelse kritik",
+      "url": "https://politiken.dk/indland/art9123456/Integrationsydelse-kritik"
+    }
+  ]
 }

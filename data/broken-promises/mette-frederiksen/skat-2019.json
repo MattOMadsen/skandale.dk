@@ -3,8 +3,18 @@
   "title": "Vi lover at sænke skatten for almindelige lønmodtagere",
   "year": "2019",
   "whatHappened": "Skattetrykket steg i flere år. Særligt mellemindkomster oplevede ingen reel skattelettelse, mens afgifter på energi og transport steg markant.",
-  "source": {
-    "text": "Skatteministeriets tal og CEPOS 2023-2025",
-    "url": "https://www.skm.dk/aktuelt/nyheder/skattepolitik"
-  }
+  "sources": [
+    {
+      "text": "Skatteministeriet - Skattepolitik 2023-2025",
+      "url": "https://www.skm.dk/aktuelt/nyheder/skattepolitik"
+    },
+    {
+      "text": "CEPOS - Skatteanalyse 2024",
+      "url": "https://cepos.dk/artikler/skatteanalyse-2024"
+    },
+    {
+      "text": "DR - Skattetrykket steg under regeringen",
+      "url": "https://www.dr.dk/nyheder/politik/skattetryk-steg"
+    }
+  ]
 }

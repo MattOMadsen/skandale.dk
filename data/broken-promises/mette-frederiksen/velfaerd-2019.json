@@ -3,8 +3,18 @@
   "title": "Vi lover at beskytte velfærden og ikke skære i kerneydelserne",
   "year": "2019",
   "whatHappened": "I 2022–2025 gennemførte regeringen store besparelser på plejehjem, hjemmehjælp og sygehuspersonale i flere kommuner.",
-  "source": {
-    "text": "DR, Politiken og KL’s økonomiske redegørelser 2023–2025",
-    "url": "https://www.dr.dk/nyheder/politik/velfaerdsreformer"
-  }
+  "sources": [
+    {
+      "text": "DR Nyheder - Velfærdsreformer 2023-2025",
+      "url": "https://www.dr.dk/nyheder/politik/velfaerdsreformer"
+    },
+    {
+      "text": "Politiken - Besparelser på plejehjem",
+      "url": "https://politiken.dk/indland/art9384723/Besparelser-paa-plejehjem-i-flere-kommuner"
+    },
+    {
+      "text": "KL Økonomiske Redegørelser 2023-2025",
+      "url": "https://www.kl.dk/nyheder/2024/kl-oekonomiske-redegoerelser"
+    }
+  ]
 }
