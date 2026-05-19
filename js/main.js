@@ -1,15 +1,8 @@
-// js/main.js - Hovedfil der starter alt
+// js/main.js - Hovedfil der starter alt + mobil menu
 
 function initializeEverything() {
   loadPoliticians().then(() => {
-    // Sikkerhed: Brug window. hvis funktionen ikke er direkte global
-    if (typeof renderPoliticians === 'function') {
-      renderPoliticians();
-    } else if (typeof window.renderPoliticians === 'function') {
-      window.renderPoliticians();
-    } else {
-      console.error('renderPoliticians er stadig ikke defineret – tjek script-rækkefølge i index.html');
-    }
+    renderPoliticians();
     
     // ROBUST EVENT DELEGATION for politiker-kort på forsiden
     const grid = document.getElementById('politiciansGrid');
@@ -27,8 +20,39 @@ function initializeEverything() {
       });
     }
     
+    initMobileMenu();
+    
     console.log(`%c[Skandale.dk ${APP_VERSION}] Split version klar!`, 'color:#10b981');
   });
 }
+
+function initMobileMenu() {
+  const btn = document.getElementById('mobile-menu-button');
+  const menu = document.getElementById('mobile-menu');
+  const closeBtn = document.getElementById('mobile-menu-close');
+
+  if (!btn || !menu || !closeBtn) return;
+
+  btn.addEventListener('click', () => {
+    menu.classList.remove('hidden');
+    menu.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  });
+
+  closeBtn.addEventListener('click', closeMobileMenu);
+
+  menu.addEventListener('click', (e) => {
+    if (e.target === menu) closeMobileMenu();
+  });
+}
+
+window.closeMobileMenu = function() {
+  const menu = document.getElementById('mobile-menu');
+  if (menu) {
+    menu.classList.add('hidden');
+    menu.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+};
 
 window.onload = initializeEverything;
