@@ -1,7 +1,12 @@
-// js/modal-stats.js - Statistik Dashboard
+// js/modal-stats.js - Statistik Dashboard (opdateret)
+// Håndterer både severity og ourSeverity + bedre fallback
 
 function showStatsModal() {
-    // Beregn statistikker
+    if (!window.politicians || window.politicians.length === 0) {
+        alert('Data er ikke loadet endnu. Prøv igen om et øjeblik.');
+        return;
+    }
+
     let totalScandals = 0;
     let totalSeverity = 0;
     const partyStats = {};
@@ -9,34 +14,35 @@ function showStatsModal() {
     const brokenPromisesRanking = [];
     const severeScandals = [];
 
-    politicians.forEach(politician => {
+    window.politicians.forEach(politician => {
         const scandals = politician.scandals || [];
         totalScandals += scandals.length;
 
         scandals.forEach(scandal => {
-            totalSeverity += scandal.severity || 0;
-            
-            // Top alvorlige skandaler
+            // Støt både severity og ourSeverity
+            const sev = scandal.severity || scandal.ourSeverity || 0;
+            totalSeverity += sev;
+
             severeScandals.push({
                 title: scandal.title,
                 politician: politician.name,
-                severity: scandal.severity,
-                year: scandal.year
+                severity: sev,
+                year: scandal.year || scandal.date || ''
             });
         });
 
         // Parti statistik
         if (!partyStats[politician.party]) {
-            partyStats[politician.party] = { count: 0, color: politician.partyColor };
+            partyStats[politician.party] = { count: 0, color: politician.partyColor || '#64748b' };
         }
         partyStats[politician.party].count += scandals.length;
 
         // Økonomisk støtte
-        if (politician.economicSupport) {
+        if (politician.economicSupport && politician.economicSupport.length > 0) {
             const totalSupport = politician.economicSupport.reduce((sum, s) => {
-                return sum + parseInt(s.amount.replace(/[^0-9]/g, '')) || 0;
+                return sum + parseInt(String(s.amount).replace(/[^0-9]/g, '')) || 0;
             }, 0);
-            
+
             supportRanking.push({
                 name: politician.name,
                 amount: totalSupport,
@@ -66,7 +72,6 @@ function showStatsModal() {
             <div onclick="event.target.id === 'statsModal' && closeStatsModal()" 
                  class="bg-white rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-hidden shadow-2xl">
                 
-                <!-- Header -->
                 <div class="px-8 pt-8 pb-6 border-b flex items-center justify-between">
                     <div>
                         <h3 class="text-3xl font-bold tracking-tight">Statistik Dashboard</h3>
@@ -77,7 +82,6 @@ function showStatsModal() {
                 
                 <div class="p-8 overflow-y-auto max-h-[calc(92vh-120px)]">
                     
-                    <!-- Hovedtal -->
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                         <div class="bg-slate-50 rounded-2xl p-6 text-center">
                             <div class="text-4xl font-bold text-[#C8102E]">${totalScandals}</div>
@@ -92,14 +96,13 @@ function showStatsModal() {
                             <div class="text-sm text-slate-500 mt-1">Partier repræsenteret</div>
                         </div>
                         <div class="bg-slate-50 rounded-2xl p-6 text-center">
-                            <div class="text-4xl font-bold text-[#C8102E]">${politicians.length}</div>
+                            <div class="text-4xl font-bold text-[#C8102E]">${window.politicians.length}</div>
                             <div class="text-sm text-slate-500 mt-1">Politikere</div>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         
-                        <!-- Flest skandaler per parti -->
                         <div class="border border-slate-200 rounded-3xl p-6">
                             <h4 class="font-bold text-lg mb-4">Flest skandaler per parti</h4>
                             <div class="space-y-3">
@@ -107,7 +110,7 @@ function showStatsModal() {
 
     Object.entries(partyStats)
         .sort((a, b) => b[1].count - a[1].count)
-        .slice(0, 6)
+        .slice(0, 8)
         .forEach(([party, data]) => {
             html += `
                 <div class="flex justify-between items-center">
@@ -124,13 +127,12 @@ function showStatsModal() {
                             </div>
                         </div>
 
-                        <!-- Top støttede politikere -->
                         <div class="border border-slate-200 rounded-3xl p-6">
                             <h4 class="font-bold text-lg mb-4">Mest økonomisk støttede</h4>
                             <div class="space-y-3">
     `;
 
-    supportRanking.slice(0, 5).forEach((p, index) => {
+    supportRanking.slice(0, 6).forEach(p => {
         html += `
             <div class="flex justify-between items-center">
                 <div>
@@ -146,13 +148,12 @@ function showStatsModal() {
                             </div>
                         </div>
 
-                        <!-- Mest brudte løfter -->
                         <div class="border border-slate-200 rounded-3xl p-6">
                             <h4 class="font-bold text-lg mb-4">Flest brudte valgløfter</h4>
                             <div class="space-y-3">
     `;
 
-    brokenPromisesRanking.slice(0, 5).forEach(p => {
+    brokenPromisesRanking.slice(0, 6).forEach(p => {
         if (p.count > 0) {
             html += `
                 <div class="flex justify-between items-center">
@@ -170,13 +171,12 @@ function showStatsModal() {
                             </div>
                         </div>
 
-                        <!-- Mest alvorlige skandaler -->
                         <div class="border border-slate-200 rounded-3xl p-6">
                             <h4 class="font-bold text-lg mb-4">Mest alvorlige skandaler</h4>
                             <div class="space-y-3 text-sm">
     `;
 
-    severeScandals.slice(0, 5).forEach((s, index) => {
+    severeScandals.slice(0, 6).forEach((s, index) => {
         html += `
             <div class="flex gap-3">
                 <div class="font-bold text-[#C8102E] w-5">${index + 1}.</div>

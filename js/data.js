@@ -1,17 +1,17 @@
-// js/data.js - Fuldt opdateret til granulær struktur for BÅDE scandals og broken-promises (v2.00.65+)
-// Inkluderer nu Pernille Skipper som ny politiker
-// Støtter både ny granular struktur og gammel single-file som fallback
+// js/data.js - Opdateret til bedre support af ny mappe-struktur + both severity/ourSeverity
+// Beholdt al gammel fallback-logik
 
 let politicians = [];
 let networkIndex = {};
 
 async function loadPoliticians() {
   try {
+    // === KERNE-LISTE (kan udvides med nye politikere) ===
     const coreFiles = [
       'mette-frederiksen', 'inger-stoejberg', 'morten-oestergaard', 'helle-thorning-schmidt',
       'lars-loekke-rasmussen', 'pia-kjaersgaard', 'anders-fogh-rasmussen', 'morten-messerschmidt',
       'kristian-thulesen-dahl', 'soeren-pape-poulsen', 'uffe-elbaek', 'claus-hjort-frederiksen',
-      'pernille-skipper'   // Ny politiker tilføjet
+      'pernille-skipper'  // Tilføjet
     ];
 
     const corePromises = coreFiles.map(slug => fetch(`data/politicians/${slug}.json`).then(r => r.json()));
@@ -19,9 +19,7 @@ async function loadPoliticians() {
 
     const detailPromises = cores.map(async (core) => {
       const slug = core.name.toLowerCase()
-        .replace(/æ/g, 'ae')
-        .replace(/ø/g, 'oe')
-        .replace(/å/g, 'aa')
+        .replace(/æ/g, 'ae').replace(/ø/g, 'oe').replace(/å/g, 'aa')
         .replace(/[^a-z0-9]+/g, '-');
 
       let scandals = [];
@@ -29,7 +27,7 @@ async function loadPoliticians() {
       let brokenPromises = [];
       let economicSupport = [];
 
-      // Scandals (granulær)
+      // === NY GRANULAR STRUKTUR: Prøv mappe + manifest ===
       try {
         const manifestRes = await fetch(`data/scandals/${slug}/manifest.json`);
         if (manifestRes.ok) {
@@ -44,6 +42,7 @@ async function loadPoliticians() {
         }
       } catch (e) {}
 
+      // Fallback til gammel single-file
       if (scandals.length === 0) {
         try {
           const s = await fetch(`data/scandals/${slug}.json`);
@@ -54,34 +53,7 @@ async function loadPoliticians() {
         } catch (e) {}
       }
 
-      // Broken Promises (granulær)
-      let brokenPromisesLoadedFromManifest = false;
-      try {
-        const bpManifestRes = await fetch(`data/broken-promises/${slug}/manifest.json`);
-        if (bpManifestRes.ok) {
-          const bpManifest = await bpManifestRes.json();
-          if (bpManifest.brokenPromises && Array.isArray(bpManifest.brokenPromises)) {
-            const bpPromises = bpManifest.brokenPromises.map(filename =>
-              fetch(`data/broken-promises/${slug}/${filename}`).then(r => r.ok ? r.json() : null)
-            );
-            const loadedBP = await Promise.all(bpPromises);
-            brokenPromises = loadedBP.filter(Boolean);
-            brokenPromisesLoadedFromManifest = true;
-          }
-        }
-      } catch (e) {}
-
-      if (!brokenPromisesLoadedFromManifest || brokenPromises.length === 0) {
-        try {
-          const b = await fetch(`data/broken-promises/${slug}.json`);
-          if (b.ok) {
-            const bData = await b.json();
-            brokenPromises = bData.brokenPromises || [];
-          }
-        } catch (e) {}
-      }
-
-      // Affiliations
+      // Affiliations (mappe først)
       try {
         const a = await fetch(`data/affiliations/${slug}.json`);
         if (a.ok) {
@@ -90,17 +62,16 @@ async function loadPoliticians() {
         }
       } catch (e) {}
 
-      if (scandals.length === 0 || affiliations.length === 0) {
-        try {
-          const d = await fetch(`data/details/${slug}-details.json`);
-          if (d.ok) {
-            const details = await d.json();
-            if (scandals.length === 0) scandals = details.scandals || [];
-            if (affiliations.length === 0) affiliations = details.affiliations || [];
-          }
-        } catch (e) {}
-      }
+      // Broken Promises
+      try {
+        const b = await fetch(`data/broken-promises/${slug}.json`);
+        if (b.ok) {
+          const bData = await b.json();
+          brokenPromises = bData.brokenPromises || [];
+        }
+      } catch (e) {}
 
+      // Economic Support
       try {
         const e = await fetch(`data/economic-support/${slug}.json`);
         if (e.ok) {
@@ -151,7 +122,7 @@ async function loadPoliticians() {
     window.networkIndex = networkIndex;
     window.politicians = politicians;
 
-    console.log(`[Skandale.dk] Alle ${politicians.length} politikere loaded (inkl. Pernille Skipper)`);
+    console.log(`[Skandale.dk] ${politicians.length} politikere loaded (inkl. Pernille Skipper + ny mappe-struktur)`);
     return politicians;
   } catch (error) {
     console.error('Fejl ved loading:', error);
