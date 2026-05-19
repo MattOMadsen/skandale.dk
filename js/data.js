@@ -1,6 +1,6 @@
-// js/data.js - Fuldt opdateret til granulær struktur for BÅDE scandals og broken-promises (v2.00.64+)
+// js/data.js - Fuldt opdateret til granulær struktur for BÅDE scandals og broken-promises (v2.00.65+)
+// Inkluderer nu Pernille Skipper som ny politiker
 // Støtter både ny granular struktur og gammel single-file som fallback
-// Læst MODAL-STRUKTUR.md før ændringer
 
 let politicians = [];
 let networkIndex = {};
@@ -10,7 +10,8 @@ async function loadPoliticians() {
     const coreFiles = [
       'mette-frederiksen', 'inger-stoejberg', 'morten-oestergaard', 'helle-thorning-schmidt',
       'lars-loekke-rasmussen', 'pia-kjaersgaard', 'anders-fogh-rasmussen', 'morten-messerschmidt',
-      'kristian-thulesen-dahl', 'soeren-pape-poulsen', 'uffe-elbaek', 'claus-hjort-frederiksen'
+      'kristian-thulesen-dahl', 'soeren-pape-poulsen', 'uffe-elbaek', 'claus-hjort-frederiksen',
+      'pernille-skipper'   // Ny politiker tilføjet
     ];
 
     const corePromises = coreFiles.map(slug => fetch(`data/politicians/${slug}.json`).then(r => r.json()));
@@ -28,7 +29,7 @@ async function loadPoliticians() {
       let brokenPromises = [];
       let economicSupport = [];
 
-      // === NY STRUKTUR: Prøv per-politiker mappe med manifest for SCANDALS ===
+      // Scandals (granulær)
       try {
         const manifestRes = await fetch(`data/scandals/${slug}/manifest.json`);
         if (manifestRes.ok) {
@@ -41,11 +42,8 @@ async function loadPoliticians() {
             scandals = loadedScandals.filter(Boolean);
           }
         }
-      } catch (e) {
-        // manifest ikke fundet → fortsæt til fallback
-      }
+      } catch (e) {}
 
-      // Fallback til gammel single-file struktur for scandals
       if (scandals.length === 0) {
         try {
           const s = await fetch(`data/scandals/${slug}.json`);
@@ -56,7 +54,7 @@ async function loadPoliticians() {
         } catch (e) {}
       }
 
-      // === NY STRUKTUR: Prøv per-politiker mappe med manifest for BROKEN-PROMISES ===
+      // Broken Promises (granulær)
       let brokenPromisesLoadedFromManifest = false;
       try {
         const bpManifestRes = await fetch(`data/broken-promises/${slug}/manifest.json`);
@@ -71,11 +69,8 @@ async function loadPoliticians() {
             brokenPromisesLoadedFromManifest = true;
           }
         }
-      } catch (e) {
-        // manifest ikke fundet → fortsæt til fallback
-      }
+      } catch (e) {}
 
-      // Fallback til gammel single-file struktur for broken-promises
       if (!brokenPromisesLoadedFromManifest || brokenPromises.length === 0) {
         try {
           const b = await fetch(`data/broken-promises/${slug}.json`);
@@ -156,7 +151,7 @@ async function loadPoliticians() {
     window.networkIndex = networkIndex;
     window.politicians = politicians;
 
-    console.log(`[Skandale.dk] Alle ${politicians.length} politikere loaded med fuld granulær struktur for scandals + broken-promises`);
+    console.log(`[Skandale.dk] Alle ${politicians.length} politikere loaded (inkl. Pernille Skipper)`);
     return politicians;
   } catch (error) {
     console.error('Fejl ved loading:', error);
