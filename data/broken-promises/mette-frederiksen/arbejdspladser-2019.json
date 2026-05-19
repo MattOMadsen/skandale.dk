@@ -5,7 +5,7 @@
   "whatHappened": "Selvom arbejdsløsheden generelt er lav, er der stadig store udfordringer med langtidsledighed blandt unge og ikke-vestlige indvandrere.",
   "sources": [
     {
-      "text": "Danmarks Statistik - Ledighed",
+      "text": "Danmarks Statistik – Ledighed og beskæftigelse",
       "url": "https://www.dst.dk/da/Statistik/emner/arbejde-og-indkomst/ledighed"
     },
     {
@@ -13,8 +13,8 @@
       "url": "https://www.bm.dk/"
     },
     {
-      "text": "DR Nyheder - Arbejdsmarked",
-      "url": "https://www.dr.dk/nyheder/politik"
+      "text": "Berlingske / AE – Nye job og reformer",
+      "url": "https://www.berlingske.dk/oekonomi"
     }
   ]
 }

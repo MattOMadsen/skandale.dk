@@ -5,16 +5,16 @@
   "whatHappened": "Danmark har stadig svært ved at nå 2030-målene, og landbruget er fortsat en stor udfordring for den grønne omstilling.",
   "sources": [
     {
-      "text": "Klimarådet - Rapporter",
+      "text": "DR: Her er de vigtigste grunde til, at Klimarådet ikke tror på klimamålet 2030",
+      "url": "https://www.dr.dk/nyheder/viden/klima/her-er-de-vigtigste-grunde-til-klimaraadet-ikke-tror-paa-klimamaalet-2030"
+    },
+    {
+      "text": "Klimarådet – Statusrapport 2025",
       "url": "https://klimaraadet.dk/da/rapporter"
     },
     {
-      "text": "CONCITO - Publikationer",
+      "text": "CONCITO – Grøn omstilling",
       "url": "https://concito.dk/publikationer"
-    },
-    {
-      "text": "DR Nyheder - Klima",
-      "url": "https://www.dr.dk/nyheder/klima"
     }
   ]
 }
