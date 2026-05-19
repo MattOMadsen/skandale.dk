@@ -29,6 +29,7 @@
             <a href="#" onclick="if (typeof window.showTimelineModal === 'function') { window.showTimelineModal(); } else { alert('Tidslinje kommer snart!'); }" class="text-slate-600 hover:text-[#C8102E] transition-colors">Tidslinje</a>
             <a href="#" onclick="if (typeof window.showCompareModal === 'function') { window.showCompareModal(); } else { alert('Sammenlign kommer snart!'); }" class="text-slate-600 hover:text-[#C8102E] transition-colors">Sammenlign</a>
             <a href="#" onclick="if (typeof window.showStatsModal === 'function') { window.showStatsModal(); } else { alert('Statistik kommer snart!'); }" class="text-slate-600 hover:text-[#C8102E] transition-colors">Statistik</a>
+            <a href="#" onclick="if (typeof window.showNetworkOverviewModal === 'function') { window.showNetworkOverviewModal(); } else { alert('Netværk kommer snart!'); }" class="text-slate-600 hover:text-[#C8102E] transition-colors font-medium">Netværk & Overlap</a>
             <a href="#" onclick="showPartyOverviewModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors font-medium">Parti oversigt</a>
             <a href="#" onclick="showAboutModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors">Om projektet</a>
         </div>
@@ -43,7 +44,7 @@
         <div class="hidden md:block px-3 py-1 bg-slate-100 rounded-full text-xs font-medium text-slate-500" id="navbar-version"></div>
     </div>
 
-    <!-- MOBILE MENU (fullscreen) -->
+    <!-- MOBILE MENU -->
     <div id="mobile-menu" class="hidden fixed inset-0 bg-white z-[200] flex flex-col md:hidden">
         <div class="px-6 py-4 border-b flex items-center justify-between">
             <div class="flex items-center gap-x-3">
@@ -60,6 +61,7 @@
             <a href="#" onclick="closeMobileMenu(); if (typeof window.showTimelineModal === 'function') { window.showTimelineModal(); } else { alert('Tidslinje kommer snart!'); }" class="py-3 border-b">Tidslinje</a>
             <a href="#" onclick="closeMobileMenu(); if (typeof window.showCompareModal === 'function') { window.showCompareModal(); } else { alert('Sammenlign kommer snart!'); }" class="py-3 border-b">Sammenlign</a>
             <a href="#" onclick="closeMobileMenu(); if (typeof window.showStatsModal === 'function') { window.showStatsModal(); } else { alert('Statistik kommer snart!'); }" class="py-3 border-b">Statistik</a>
+            <a href="#" onclick="closeMobileMenu(); if (typeof window.showNetworkOverviewModal === 'function') { window.showNetworkOverviewModal(); } else { alert('Netværk kommer snart!'); }" class="py-3 border-b">Netværk & Overlap</a>
             <a href="#" onclick="closeMobileMenu(); showPartyOverviewModal()" class="py-3 border-b">Parti oversigt</a>
             <a href="#" onclick="closeMobileMenu(); showAboutModal()" class="py-3">Om projektet</a>
         </div>
@@ -175,6 +177,7 @@
 <script src="js/modal-party.js"></script>
 <script src="js/modal-compare.js"></script>
 <script src="js/modal-stats.js"></script>
+<script src="js/modal-network-overview.js"></script>
 <script src="js/modal-pdf-export.js"></script>
 
 <!-- jsPDF CDN -->
