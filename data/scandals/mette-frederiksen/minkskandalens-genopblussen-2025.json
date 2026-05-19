@@ -6,13 +6,13 @@
   "shortDesc": "I 2025 genopstod minkskandalen med nye afsløringer og krav om yderligere undersøgelser af de slettede SMS-beskeder.",
   "longDesc": "I 2025 genopstod minkskandalen med nye afsløringer og krav om yderligere undersøgelser af de slettede SMS-beskeder og den samlede beslutningsproces. Nye dokumenter og vidneudsagn pegede på mulige forsøg på at dække over fejl og ulovligheder i regeringens håndtering.",
   "outcome": "Politisk uro og krav om ny undersøgelse, hvilket svækkede regeringens position yderligere.",
-  "justiceAnalysis": "Der burde have været nedsat en ny, bredt sammensat undersøgelseskommission med fuld adgang til alle arkiver.",
+  "justiceAnalysis": "Der burde have været nedsat en ny, uafhængig kommission med fuld adgang til alle arkiver.",
   "mediaLinks": [
-    {"name": "Berlingske & DR 2025", "url": "https://www.berlingske.dk"}
+    {"name": "Berlingske & DR", "url": "https://www.berlingske.dk"}
   ],
-  "consequences": "Politisk uro og krav om ny undersøgelse, hvilket svækkede regeringens position yderligere.",
+  "consequences": "Politisk uro og krav om ny undersøgelse.",
   "whatShouldHaveHappened": {
     "title": "Ny uafhængig kommission",
-    "content": "Der burde have været nedsat en ny, bredt sammensat undersøgelseskommission med fuld adgang til alle arkiver, inklusive de slettede beskeder."
+    "content": "Der burde have været nedsat en ny, bredt sammensat undersøgelseskommission med fuld adgang til alle arkiver for at kortlægge det fulde forløb og placere ansvar."
   }
 }

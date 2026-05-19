@@ -8,11 +8,12 @@
   "outcome": "Næse fra Folketinget, ministerfald, erstatningssager til minkavlere (over 20 mia. kr.), politisk pres for rigsretssag (nedstemt). Sagen er stadig aktiv i 2025-2026.",
   "justiceAnalysis": "Minkkommissionen fastslog, at beslutningen var \"klart ulovlig\" og hendes udtalelser \"groft vildledende\".",
   "mediaLinks": [
-    {"name": "DR, Politiken og Rigsretten", "url": "https://www.dr.dk/nyheder/politik/minkskandalen"}
+    {"name": "DR.dk", "url": "https://www.dr.dk/nyheder/politik/minkskandalen"},
+    {"name": "Berlingske - Minkkommissionen", "url": "https://www.berlingske.dk/politik/minkkommissionen-mette-frederiksen-vildledte-groft"}
   ],
   "consequences": "Næse fra Folketinget, ministerfald, erstatningssager til minkavlere (over 20 mia. kr.), politisk pres for rigsretssag (nedstemt). Sagen er stadig aktiv i 2025-2026.",
   "whatShouldHaveHappened": {
     "title": "Uafhængig undersøgelse og ansvar",
-    "content": "Minkkommissionen fastslog, at beslutningen var \"klart ulovlig\" og hendes udtalelser \"groft vildledende\". I stedet for kun en politisk næse fra Folketinget burde der have været en uafhængig advokatundersøgelse med henblik på rigsretssag jf. Ministeransvarlighedsloven § 5."
+    "content": "Minkkommissionen fastslog, at beslutningen var \"klart ulovlig\" og hendes udtalelser \"groft vildledende\". I stedet for kun en politisk næse fra Folketinget burde der have været en uafhængig advokatundersøgelse med henblik på rigsretssag jf. Ministeransvarlighedsloven § 5. Forældelsesfristen på 5 år betyder, at muligheden udløber i efteråret 2025."
   }
 }

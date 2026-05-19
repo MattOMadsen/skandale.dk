@@ -6,13 +6,13 @@
   "shortDesc": "I 2025 stod Mette Frederiksen frem og talte om ansvar i forbindelse med Nordic Waste-skandalen, mens jord fra de tidligere minkgrave var ved at skride og forurene Alling Å.",
   "longDesc": "I 2025 stod Mette Frederiksen frem og talte om ansvar i forbindelse med Nordic Waste-skandalen, hvor et affaldsselskab var gået konkurs og efterladt store mængder farligt affald. Samtidig kom det frem, at jord fra de tidligere minkgrave var ved at skride og forurene Alling Å i Jylland.",
   "outcome": "Øget kritik af regeringens miljøpolitik og krisehåndtering.",
-  "justiceAnalysis": "Regeringen burde have taget fuldt ansvar for de langsigtede konsekvenser af mink-aflivningen.",
+  "justiceAnalysis": "Regeringen burde have taget fuldt ansvar for de langsigtede konsekvenser af mink-aflivningen i stedet for at pege på andre.",
   "mediaLinks": [
-    {"name": "Effektivt Landbrug 2025", "url": "https://effektivtlandbrug.landbrugnet.dk"}
+    {"name": "Effektivt Landbrug", "url": "https://effektivtlandbrug.landbrugnet.dk"}
   ],
-  "consequences": "Øget kritik af regeringens miljøpolitik og krisehåndtering, krav om øjeblikkelig oprydning af minkgrave.",
+  "consequences": "Øget kritik af regeringens miljøpolitik og håndtering af minkgrave.",
   "whatShouldHaveHappened": {
     "title": "Fuldt ansvar og oprydning",
-    "content": "Regeringen burde have taget fuldt ansvar for de langsigtede konsekvenser af mink-aflivningen, herunder sikring af alle grave mod forurening."
+    "content": "Regeringen burde have taget fuldt ansvar for de langsigtede konsekvenser af mink-aflivningen og iværksat en hurtig handlingsplan for oprydning."
   }
 }
