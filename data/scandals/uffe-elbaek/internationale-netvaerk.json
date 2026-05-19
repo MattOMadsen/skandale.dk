@@ -3,9 +3,14 @@
   "title": "Internationale netværk og WEF-tilknytning",
   "year": "2015-2022",
   "ourSeverity": 2,
-  "shortDesc": "Uffe Elbæk har været aktiv i internationale netværk som World Economic Forum. Kritikere fra venstrefløjen mente, at det var i modstrid med Alternativets anti-elitære profil.",
+  "shortDesc": "Uffe Elbæk har været aktiv i internationale netværk som World Economic Forum.",
   "longDesc": "Uffe Elbæk har været aktiv i internationale netværk som World Economic Forum. Kritikere fra venstrefløjen mente, at det var i modstrid med Alternativets anti-elitære profil.",
   "mediaLinks": [
     {"name": "WEF og DR", "url": "https://www.weforum.org/people/uffe-elbaek"}
-  ]
+  ],
+  "consequences": "Kritik for modstrid med partiets anti-elitære profil.",
+  "whatShouldHaveHappened": {
+    "title": "Konsistens i profil",
+    "content": "Der burde have været større konsistens mellem partiets erklærede værdier og de netværk man deltager i."
+  }
 }

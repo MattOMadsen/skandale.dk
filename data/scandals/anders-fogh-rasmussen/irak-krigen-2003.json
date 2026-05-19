@@ -3,10 +3,15 @@
   "title": "Irak-krigen og efterretningsgrundlaget",
   "year": "2003",
   "ourSeverity": 5,
-  "shortDesc": "Som statsminister støttede Anders Fogh Rasmussen den amerikansk-ledede invasion af Irak i 2003. Senere undersøgelser viste, at det danske efterretningsgrundlag var utilstrækkeligt, og at der ikke blev fundet masseødelæggelsesvåben.",
+  "shortDesc": "Som statsminister støttede Anders Fogh Rasmussen den amerikansk-ledede invasion af Irak i 2003. Senere undersøgelser viste, at det danske efterretningsgrundlag var utilstrækkeligt.",
   "longDesc": "Som statsminister støttede Anders Fogh Rasmussen den amerikansk-ledede invasion af Irak i 2003. Senere undersøgelser viste, at det danske efterretningsgrundlag var utilstrækkeligt, og at der ikke blev fundet masseødelæggelsesvåben. Kritikere mener, at regeringen vildledte Folketinget.",
   "mediaLinks": [
-    {"name": "DR.dk - Fogh og Irak-krigen", "url": "https://www.dr.dk/nyheder/politik/fogh-og-irak-krigen"},
-    {"name": "Berlingske - Fogh-rapporten 2016", "url": "https://www.berlingske.dk/politik/2016/07/06/fogh-og-irak-rapporten"}
-  ]
+    {"name": "DR.dk", "url": "https://www.dr.dk/nyheder/politik/fogh-og-irak-krigen"},
+    {"name": "Berlingske - Fogh-rapporten", "url": "https://www.berlingske.dk/politik/2016/07/06/fogh-og-irak-rapporten"}
+  ],
+  "consequences": "Kritik for utilstrækkeligt efterretningsgrundlag og vildledning af Folketinget.",
+  "whatShouldHaveHappened": {
+    "title": "Bedre efterretningsgrundlag og åbenhed",
+    "content": "Der burde have været et mere solidt efterretningsgrundlag og større åbenhed over for Folketinget før sådan en alvorlig beslutning."
+  }
 }

@@ -3,9 +3,14 @@
   "title": "Intern krise i Dansk Folkeparti",
   "year": "2022-2024",
   "ourSeverity": 4,
-  "shortDesc": "Under Messerschmidts formandskab oplevede DF store interne konflikter, medlemsflugt og dårlige meningsmålinger. Kritikere mente, at hans ledelsesstil og personlige sager skadede partiet.",
+  "shortDesc": "Under Messerschmidts formandskab oplevede DF store interne konflikter, medlemsflugt og dårlige meningsmålinger.",
   "longDesc": "Under Messerschmidts formandskab oplevede DF store interne konflikter, medlemsflugt og dårlige meningsmålinger. Kritikere mente, at hans ledelsesstil og personlige sager skadede partiet.",
   "mediaLinks": [
-    {"name": "DR og Berlingske 2023", "url": "https://www.dr.dk/nyheder/politik/df-krisen-2023"}
-  ]
+    {"name": "DR og Berlingske", "url": "https://www.dr.dk/nyheder/politik/df-krisen-2023"}
+  ],
+  "consequences": "Stor intern krise og medlemsflugt i partiet.",
+  "whatShouldHaveHappened": {
+    "title": "Bedre ledelse og partikultur",
+    "content": "Der burde have været større fokus på at skabe en sund partikultur og undgå interne konflikter."
+  }
 }

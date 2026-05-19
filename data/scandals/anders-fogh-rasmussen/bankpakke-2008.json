@@ -3,10 +3,14 @@
   "title": "Bankpakken og statsgaranti til bankerne",
   "year": "2008-2009",
   "ourSeverity": 5,
-  "shortDesc": "Under finanskrisen indførte regeringen bankpakker med statsgaranti for bankernes gæld. Kritikere mente, at det var en redningspakke til bankerne på skatteydernes regning uden tilstrækkelig regulering.",
-  "longDesc": "Under finanskrisen indførte regeringen bankpakker med statsgaranti for bankernes gæld. Kritikere mente, at det var en redningspakke til bankerne på skatteydernes regning uden tilstrækkelig regulering af bankernes adfærd.",
+  "shortDesc": "Under finanskrisen indførte regeringen bankpakker med statsgaranti for bankernes gæld.",
+  "longDesc": "Under finanskrisen indførte regeringen bankpakker med statsgaranti for bankernes gæld. Kritikere mente, at det var en redningspakke til bankerne på skatteydernes regning uden tilstrækkelig regulering.",
   "mediaLinks": [
-    {"name": "DR.dk - Bankpakken 2008", "url": "https://www.dr.dk/nyheder/politik/bankpakken-2008"},
-    {"name": "Rigsrevisionen - Bankpakken", "url": "https://www.rigsrevisionen.dk/beretninger/2010/bankpakken"}
-  ]
+    {"name": "DR.dk og Rigsrevisionen", "url": "https://www.dr.dk/nyheder/politik/bankpakken-2008"}
+  ],
+  "consequences": "Kritik for redning af banker på skatteydernes regning.",
+  "whatShouldHaveHappened": {
+    "title": "Mere ansvar fra bankerne",
+    "content": "Der burde have været større krav til bankerne om regulering og ansvar i forbindelse med statsgarantien."
+  }
 }

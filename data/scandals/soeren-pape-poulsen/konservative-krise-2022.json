@@ -6,6 +6,11 @@
   "shortDesc": "Under Papes ledelse oplevede De Konservative interne konflikter, afgang af nøglepersoner og dårlige meningsmålinger.",
   "longDesc": "Under Papes ledelse oplevede De Konservative interne konflikter, afgang af nøglepersoner og dårlige meningsmålinger. Kritikere mente, at hans ledelsesstil og personlige sager svækkede partiet.",
   "mediaLinks": [
-    {"name": "DR og Berlingske 2023", "url": "https://www.dr.dk/nyheder/politik/konservative-krisen-2022"}
-  ]
+    {"name": "DR og Berlingske", "url": "https://www.dr.dk/nyheder/politik/konservative-krisen-2022"}
+  ],
+  "consequences": "Intern krise og svækkelse af partiet.",
+  "whatShouldHaveHappened": {
+    "title": "Bedre ledelse",
+    "content": "Der burde have været større fokus på at skabe stabilitet og undgå interne magtkampe."
+  }
 }

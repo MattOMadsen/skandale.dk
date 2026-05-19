@@ -3,9 +3,14 @@
   "title": "Skattevæsenets administration og fejludbetalinger",
   "year": "2010-2015",
   "ourSeverity": 4,
-  "shortDesc": "Som skatteminister var Claus Hjort Frederiksen ansvarlig for Skat. Der opstod massive problemer med fejlagtige udbetalinger, herunder til udlændinge og svindel med børnepenge.",
+  "shortDesc": "Som skatteminister var Claus Hjort Frederiksen ansvarlig for Skat. Der opstod massive problemer med fejlagtige udbetalinger.",
   "longDesc": "Som skatteminister var Claus Hjort Frederiksen ansvarlig for Skat. Der opstod massive problemer med fejlagtige udbetalinger, herunder til udlændinge og svindel med børnepenge. Rigsrevisionen kritiserede ledelsen.",
   "mediaLinks": [
     {"name": "Rigsrevisionen og DR", "url": "https://www.rigsrevisionen.dk/beretninger/2015/skattevaesenet"}
-  ]
+  ],
+  "consequences": "Kritik fra Rigsrevisionen for dårlig ledelse af Skat.",
+  "whatShouldHaveHappened": {
+    "title": "Bedre ledelse af Skat",
+    "content": "Der burde have været større fokus på at sikre en velfungerende og retfærdig skatteadministration."
+  }
 }

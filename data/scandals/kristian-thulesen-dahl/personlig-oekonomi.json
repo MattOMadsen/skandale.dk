@@ -3,9 +3,14 @@
   "title": "Personlig økonomi og formueforhold",
   "year": "2018-2020",
   "ourSeverity": 2,
-  "shortDesc": "Thulesen Dahl blev kritiseret for sin personlige formue og investeringer, mens han var partileder. Sagen blev undersøgt internt i DF.",
+  "shortDesc": "Thulesen Dahl blev kritiseret for sin personlige formue og investeringer, mens han var partileder.",
   "longDesc": "Thulesen Dahl blev kritiseret for sin personlige formue og investeringer, mens han var partileder. Sagen blev undersøgt internt i DF, men skabte debat om politikerens troværdighed.",
   "mediaLinks": [
-    {"name": "DR og Berlingske 2019", "url": "https://www.dr.dk/nyheder/politik/thulesen-dahl-formue"}
-  ]
+    {"name": "DR og Berlingske", "url": "https://www.dr.dk/nyheder/politik/thulesen-dahl-formue"}
+  ],
+  "consequences": "Debat om politikeres troværdighed og økonomiske forhold.",
+  "whatShouldHaveHappened": {
+    "title": "Større åbenhed",
+    "content": "Der burde have været større åbenhed om folkevalgtes økonomiske forhold for at undgå mistanke."
+  }
 }

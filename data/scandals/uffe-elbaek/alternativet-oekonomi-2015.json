@@ -3,9 +3,14 @@
   "title": "Alternativets økonomi og medlemsbidrag",
   "year": "2015-2018",
   "ourSeverity": 3,
-  "shortDesc": "Uffe Elbæk grundlagde Alternativet med fokus på 'ny politik'. Partiet oplevede økonomiske problemer og kritik af manglende gennemsigtighed i brugen af medlemsbidrag og støtte.",
+  "shortDesc": "Uffe Elbæk grundlagde Alternativet med fokus på 'ny politik'. Partiet oplevede økonomiske problemer og kritik af manglende gennemsigtighed.",
   "longDesc": "Uffe Elbæk grundlagde Alternativet med fokus på 'ny politik'. Partiet oplevede økonomiske problemer og kritik af manglende gennemsigtighed i brugen af medlemsbidrag og støtte.",
   "mediaLinks": [
-    {"name": "DR og Berlingske 2017", "url": "https://www.dr.dk/nyheder/politik/alternativet-oekonomi"}
-  ]
+    {"name": "DR og Berlingske", "url": "https://www.dr.dk/nyheder/politik/alternativet-oekonomi"}
+  ],
+  "consequences": "Kritik for manglende gennemsigtighed i partiets økonomi.",
+  "whatShouldHaveHappened": {
+    "title": "Større åbenhed",
+    "content": "Der burde have været større åbenhed om partiets økonomiske forhold og brug af midler."
+  }
 }

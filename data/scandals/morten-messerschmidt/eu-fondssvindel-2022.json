@@ -3,9 +3,14 @@
   "title": "EU-fondssvindel og domfældelse",
   "year": "2022-2024",
   "ourSeverity": 5,
-  "shortDesc": "Morten Messerschmidt blev i 2024 dømt for svindel med EU-midler i forbindelse med 'Folkepensionisternes Parti'. Han modtog en betinget fængselsdom og blev frataget sit mandat som MEP i en periode.",
-  "longDesc": "Morten Messerschmidt blev i 2024 dømt for svindel med EU-midler i forbindelse med 'Folkepensionisternes Parti'. Han modtog en betinget fængselsdom og blev frataget sit mandat som MEP i en periode. Sagen er en af de største politiske skandaler i nyere tid.",
+  "shortDesc": "Morten Messerschmidt blev i 2024 dømt for svindel med EU-midler i forbindelse med 'Folkepensionisternes Parti'.",
+  "longDesc": "Morten Messerschmidt blev i 2024 dømt for svindel med EU-midler i forbindelse med 'Folkepensionisternes Parti'. Han modtog en betinget fængselsdom og blev frataget sit mandat som MEP i en periode.",
   "mediaLinks": [
-    {"name": "DR, Berlingske og Folketinget", "url": "https://www.dr.dk/nyheder/politik/morten-messerschmidt-dom"}
-  ]
+    {"name": "DR.dk og Berlingske", "url": "https://www.dr.dk/nyheder/politik/morten-messerschmidt-dom"}
+  ],
+  "consequences": "Betinget fængselsdom og fratagelse af mandat som MEP.",
+  "whatShouldHaveHappened": {
+    "title": "Større etisk ansvarlighed",
+    "content": "Der burde have været større fokus på etisk ansvarlighed blandt folkevalgte i forhold til brug af offentlige midler."
+  }
 }

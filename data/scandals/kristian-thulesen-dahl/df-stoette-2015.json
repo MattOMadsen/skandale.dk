@@ -6,6 +6,11 @@
   "shortDesc": "Kristian Thulesen Dahl førte DF ind i et tæt samarbejde med Venstre-regeringen. Mange kernevælgere følte, at DF svigtede sine udlændingepolitiske løfter.",
   "longDesc": "Kristian Thulesen Dahl førte DF ind i et tæt samarbejde med Venstre-regeringen. Mange kernevælgere følte, at DF svigtede sine udlændingepolitiske løfter, da regeringen ikke gennemførte de stramninger, DF havde krævet.",
   "mediaLinks": [
-    {"name": "DR og Berlingske 2019", "url": "https://www.dr.dk/nyheder/politik/df-og-loekke-regeringen"}
-  ]
+    {"name": "DR og Berlingske", "url": "https://www.dr.dk/nyheder/politik/df-og-loekke-regeringen"}
+  ],
+  "consequences": "Kritik fra kernevælgere for at svigte udlændingepolitiske løfter.",
+  "whatShouldHaveHappened": {
+    "title": "Større konsekvens i politik",
+    "content": "Der burde have været større konsekvens mellem det man lover vælgerne og det man gennemfører i praksis."
+  }
 }
