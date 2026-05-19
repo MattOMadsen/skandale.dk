@@ -3,11 +3,16 @@
   "title": "Interne konflikter i Enhedslisten",
   "year": "2019-2020",
   "whatHappened": "Enhedslisten oplevede betydelige interne konflikter og udmeldelser, hvilket skabte debat om partiets interne demokrati og ledelse.",
+  "longDesc": "I perioden 2019-2020 havde Enhedslisten flere interne stridigheder, herunder uenighed om ledelse og politisk retning. Flere medlemmer forlod partiet, og der opstod offentlig debat om partiets interne kultur.",
   "ourSeverity": 3,
   "mediaLinks": [
     {
       "text": "DR: Interne sager i Enhedslisten",
       "url": "https://www.dr.dk/nyheder/politik"
+    },
+    {
+      "text": "Politiken: Enhedslisten i krise",
+      "url": "https://politiken.dk/"
     }
   ]
 }

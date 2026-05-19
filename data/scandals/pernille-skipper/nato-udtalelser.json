@@ -3,11 +3,16 @@
   "title": "Kritik af udtalelser om NATO og Ukraine",
   "year": "2022",
   "whatHappened": "Pernille Skipper og Enhedslisten blev kritiseret for deres holdning til NATO og Ukraine-krigen, som nogle mente var for blød eller tvetydig.",
+  "longDesc": "Efter Ruslands invasion af Ukraine i 2022 blev Enhedslisten og Pernille Skipper kritiseret for deres udtalelser om NATO og krigen. Kritikere mente, at partiet var for tøvende i sin støtte til Ukraine og for kritisk over for NATO.",
   "ourSeverity": 4,
   "mediaLinks": [
     {
       "text": "Politiken: Kritik af Enhedslisten",
       "url": "https://politiken.dk/"
+    },
+    {
+      "text": "DR: Enhedslisten og Ukraine",
+      "url": "https://www.dr.dk/nyheder/politik"
     }
   ]
 }
