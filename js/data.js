@@ -1,5 +1,6 @@
-// js/data.js - Opdateret til per-politiker mappe + manifest (v2.00.60+)
+// js/data.js - Opdateret til per-politiker mappe + manifest for BOTH scandals og broken-promises (v2.00.61+)
 // Støtter både ny granular struktur og gammel single-file som fallback
+// Læst MODAL-STRUKTUR.md før ændringer
 
 let politicians = [];
 let networkIndex = {};
@@ -27,7 +28,7 @@ async function loadPoliticians() {
       let brokenPromises = [];
       let economicSupport = [];
 
-      // === NY STRUKTUR: Prøv per-politiker mappe med manifest ===
+      // === NY STRUKTUR: Prøv per-politiker mappe med manifest for SCANDALS ===
       try {
         const manifestRes = await fetch(`data/scandals/${slug}/manifest.json`);
         if (manifestRes.ok) {
@@ -44,13 +45,43 @@ async function loadPoliticians() {
         // manifest ikke fundet → fortsæt til fallback
       }
 
-      // Fallback til gammel single-file struktur (hvis ingen manifest)
+      // Fallback til gammel single-file struktur for scandals
       if (scandals.length === 0) {
         try {
           const s = await fetch(`data/scandals/${slug}.json`);
           if (s.ok) {
             const sData = await s.json();
             scandals = sData.scandals || (Array.isArray(sData) ? sData : []);
+          }
+        } catch (e) {}
+      }
+
+      // === NY STRUKTUR: Prøv per-politiker mappe med manifest for BROKEN-PROMISES ===
+      let brokenPromisesLoadedFromManifest = false;
+      try {
+        const bpManifestRes = await fetch(`data/broken-promises/${slug}/manifest.json`);
+        if (bpManifestRes.ok) {
+          const bpManifest = await bpManifestRes.json();
+          if (bpManifest.brokenPromises && Array.isArray(bpManifest.brokenPromises)) {
+            const bpPromises = bpManifest.brokenPromises.map(filename =>
+              fetch(`data/broken-promises/${slug}/${filename}`).then(r => r.ok ? r.json() : null)
+            );
+            const loadedBP = await Promise.all(bpPromises);
+            brokenPromises = loadedBP.filter(Boolean);
+            brokenPromisesLoadedFromManifest = true;
+          }
+        }
+      } catch (e) {
+        // manifest ikke fundet → fortsæt til fallback
+      }
+
+      // Fallback til gammel single-file struktur for broken-promises
+      if (!brokenPromisesLoadedFromManifest || brokenPromises.length === 0) {
+        try {
+          const b = await fetch(`data/broken-promises/${slug}.json`);
+          if (b.ok) {
+            const bData = await b.json();
+            brokenPromises = bData.brokenPromises || [];
           }
         } catch (e) {}
       }
@@ -74,14 +105,6 @@ async function loadPoliticians() {
           }
         } catch (e) {}
       }
-
-      try {
-        const b = await fetch(`data/broken-promises/${slug}.json`);
-        if (b.ok) {
-          const bData = await b.json();
-          brokenPromises = bData.brokenPromises || [];
-        }
-      } catch (e) {}
 
       try {
         const e = await fetch(`data/economic-support/${slug}.json`);
@@ -133,7 +156,7 @@ async function loadPoliticians() {
     window.networkIndex = networkIndex;
     window.politicians = politicians;
 
-    console.log(`[Skandale.dk] Alle ${politicians.length} politikere loaded med ny granular scandal-struktur + fallback`);
+    console.log(`[Skandale.dk] Alle ${politicians.length} politikere loaded med ny granular struktur for scandals + broken-promises + fallback`);
     return politicians;
   } catch (error) {
     console.error('Fejl ved loading:', error);
