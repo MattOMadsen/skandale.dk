@@ -44,7 +44,7 @@ function renderPoliticians(filteredPoliticians = null) {
       const severities = politician.scandals.map(s => s.ourSeverity || s.severity || 3);
       avgSeverity = severities.reduce((a, b) => a + b, 0) / severities.length;
 
-      // Brugerens egne bedømmelser fra localStorage - påvirker den viste score!
+      // Brugerens egne bedømmelser fra localStorage
       const polId = politician.id || politician.name.replace(/\s+/g, '-').toLowerCase();
       let userSum = 0;
       politician.scandals.forEach(s => {
@@ -100,7 +100,7 @@ function renderPoliticians(filteredPoliticians = null) {
           </div>
         </div>
 
-        <!-- STJERNER PÅ FORSIDEN - vores + brugeres (påvirkes af dine stemmer i localStorage) -->
+        <!-- STJERNER PÅ FORSIDEN - Opdateret: Renere visning uden prompt-tekst -->
         <div class="mb-3">
           <div class="flex items-center gap-x-2 text-xs text-slate-500">
             <div class="flex items-center gap-x-1">
@@ -113,7 +113,7 @@ function renderPoliticians(filteredPoliticians = null) {
               <span class="font-medium">Dine stemmer:</span> 
               <span class="text-[#C8102E]">${userStarsHTML}</span>
               <span>${userAvgSeverity.toFixed(1)}/5</span>
-            </div>` : '<div class="text-[10px] text-slate-400">(Stem på skandaler for at se din score)</div>'}
+            </div>` : ''}
           </div>
         </div>
 
