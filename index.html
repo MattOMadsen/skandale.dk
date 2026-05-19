@@ -43,7 +43,7 @@
         <div class="hidden md:block px-3 py-1 bg-slate-100 rounded-full text-xs font-medium text-slate-500" id="navbar-version"></div>
     </div>
 
-    <!-- MOBILE MENU -->
+    <!-- MOBILE MENU (fullscreen) -->
     <div id="mobile-menu" class="hidden fixed inset-0 bg-white z-[200] flex flex-col md:hidden">
         <div class="px-6 py-4 border-b flex items-center justify-between">
             <div class="flex items-center gap-x-3">
@@ -142,6 +142,22 @@
     </div>
 </div>
 
+<!-- Parti Oversigt Modal -->
+<div id="partyOverviewModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[150] items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-hidden shadow-2xl flex flex-col">
+        <div class="px-8 pt-8 pb-6 border-b flex items-center justify-between flex-shrink-0">
+            <div>
+                <h3 class="text-3xl font-bold tracking-tight">Parti oversigt</h3>
+                <p class="text-slate-500 mt-1">Overblik over alle partier og deres skandaler</p>
+            </div>
+            <button onclick="closePartyOverviewModal()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+        </div>
+        <div id="partyOverviewContent" class="flex-1 overflow-y-auto p-8">
+            <!-- Indsættes dynamisk -->
+        </div>
+    </div>
+</div>
+
 <!-- Scripts -->
 <script src="js/version.js"></script>
 <script src="js/modal-core.js"></script>
@@ -178,7 +194,7 @@
         }
     }
 
-    // Parti Oversigt funktion (bevaret)
+    // Parti Oversigt funktion
     function showPartyOverviewModal() {
         const modal = document.getElementById('partyOverviewModal');
         const content = document.getElementById('partyOverviewContent');

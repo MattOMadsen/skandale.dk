@@ -22,7 +22,7 @@ function initializeEverything() {
     
     initMobileMenu();
     
-    console.log(`%c[Skandale.dk ${APP_VERSION}] Split version klar!`, 'color:#10b981');
+    console.log(`%c[Skandale.dk ${APP_VERSION}] Mobil menu klar!`, 'color:#10b981');
   });
 }
 
