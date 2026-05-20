@@ -7,6 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
+    <!-- PWA Support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#C8102E">
 </head>
 <body class="bg-slate-50 text-slate-900">
 
@@ -306,6 +309,19 @@
         if (modal) modal.remove();
     }
     
+    // PWA Service Worker Registration
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('[PWA] ServiceWorker registration successful');
+                })
+                .catch(err => {
+                    console.log('[PWA] ServiceWorker registration failed: ', err);
+                });
+        });
+    }
+
     window.onload = function() {
         if (typeof initializeEverything === 'function') {
             initializeEverything();
