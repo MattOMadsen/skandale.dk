@@ -20,13 +20,17 @@ https://mattomadsen.github.io/skandale.dk/
 - Statistik Dashboard
 - PDF-eksport
 
-## Sådan tilføjer du en ny politiker
+## Bidrag
 
+### Tilføj en ny politiker
 Se den detaljerede guide:
 
 **`TILFOEJ-NY-POLITIKER.md`**
 
-Med den nye manifest-løsning behøver du ikke at ændre JavaScript-kode. Alt opdateres automatisk (inkl. statistik).
+### Tilføj en ny skandale
+Se guiden her:
+
+**`TILFOEJ-SKANDALE.md`**
 
 ## Teknisk setup
 
