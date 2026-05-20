@@ -1,0 +1,27 @@
+{
+  "name": "Skandale.dk - Politisk gennemsigtighed",
+  "short_name": "Skandale.dk",
+  "description": "Alle skandaler. Én oversigt. Få overblik over politiske skandaler, økonomisk støtte, internationale netværk og brudte valgløfter i dansk politik.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#C8102E",
+  "orientation": "any",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["news", "politics", "education"],
+  "lang": "da"
+}
