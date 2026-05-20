@@ -26,32 +26,10 @@ async function showPoliticianModal(politicianId) {
     }
   }
 
-  // Load other data if missing
-  if (!politician.affiliations && politician.affiliationsFile) {
-    try {
-      const res = await fetch(politician.affiliationsFile);
-      if (res.ok) politician.affiliations = (await res.json()).affiliations || [];
-    } catch (e) {}
-  }
-  if (!politician.economicSupport && politician.economicSupportFile) {
-    try {
-      const res = await fetch(politician.economicSupportFile);
-      if (res.ok) politician.economicSupport = (await res.json()).donations || (await res.json()).economicSupport || [];
-    } catch (e) {}
-  }
-  if (!politician.brokenPromises && politician.brokenPromisesFile) {
-    try {
-      const res = await fetch(politician.brokenPromisesFile);
-      if (res.ok) politician.brokenPromises = (await res.json()).brokenPromises || [];
-    } catch (e) {}
-  }
-
   currentPolitician = politician;
 
   // Remove existing modals
   document.querySelectorAll('#politicianModal, #networkModal').forEach(m => m.remove());
-
-  const polId = politician.id || politician.name.replace(/\s+/g, '-').toLowerCase();
 
   const html = `
     <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4" id="politicianModal" data-current-politician-id="${politicianId}">
@@ -123,10 +101,17 @@ async function showPoliticianModal(politicianId) {
           
           <!-- Skandaler -->
           <div class="mb-8">
-            <div class="flex items-center gap-x-2 mb-4">
-              <i class="fa-solid fa-exclamation-triangle text-[#C8102E]"></i>
-              <span class="font-bold text-lg">Skandaler</span>
-              <span class="text-xs text-slate-500">(${politician.scandals ? politician.scandals.length : 0})</span>
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-x-2">
+                <i class="fa-solid fa-exclamation-triangle text-[#C8102E]"></i>
+                <span class="font-bold text-lg">Skandaler</span>
+                <span class="text-xs text-slate-500">(${politician.scandals ? politician.scandals.length : 0})</span>
+              </div>
+              <button onclick="window.showAddScandalModal(currentPolitician)" 
+                      class="px-4 py-1.5 text-sm bg-[#C8102E] text-white rounded-xl hover:bg-[#C8102E]/90 transition-colors flex items-center gap-x-2">
+                <i class="fa-solid fa-plus"></i>
+                <span>Tilføj ny</span>
+              </button>
             </div>
             <div id="scandalsContainer"></div>
           </div>
@@ -186,25 +171,6 @@ async function showPoliticianModal(politicianId) {
     }
     if (typeof initShareButton === 'function') {
       initShareButton(politician);
-    }
-
-    // Load saved comments
-    if (politician.scandals) {
-      politician.scandals.forEach((scandal, index) => {
-        const scId = scandal.id || scandal.title.replace(/\s+/g, '-').toLowerCase();
-        const commentsList = document.getElementById(`comments-list-${index}`);
-        if (commentsList) {
-          const key = `comments_${scId}`;
-          const savedComments = JSON.parse(localStorage.getItem(key) || '[]');
-          if (savedComments.length > 0) {
-            commentsList.innerHTML = savedComments.map(c => `
-              <div class="bg-slate-50 p-2 rounded-xl text-xs">
-                <span class="font-medium">${c.date}</span>: ${c.text}
-              </div>
-            `).join('');
-          }
-        }
-      });
     }
   }, 50);
 }
