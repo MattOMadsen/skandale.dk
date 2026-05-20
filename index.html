@@ -66,7 +66,7 @@
             <a href="#" onclick="closeMobileMenu(); if (typeof window.showStatsModal === 'function') { window.showStatsModal(); } else { alert('Statistik kommer snart!'); }" class="py-3 border-b">Statistik</a>
             <a href="#" onclick="closeMobileMenu(); if (typeof window.showNetworkOverviewModal === 'function') { window.showNetworkOverviewModal(); } else { alert('Netværk kommer snart!'); }" class="py-3 border-b">Netværk & Overlap</a>
             <a href="#" onclick="closeMobileMenu(); showPartyOverviewModal()" class="py-3 border-b">Parti oversigt</a>
-            <a href="#" onclick="closeMobileMenu(); showAboutModal()" class="py-3">Om projektet</a>
+            <a href="#" onclick="closeMobileMenu(); showAboutModal()" class="py-3">Øm projektet</a>
         </div>
         
         <div class="p-6 border-t text-center text-xs text-slate-400">
@@ -107,7 +107,8 @@
 <div class="max-w-7xl mx-auto px-6 py-16">
     <h2 class="text-4xl font-bold tracking-tight text-slate-900 mb-8">Kendte politikere</h2>
     <div id="politiciansGrid" 
-         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6
+">
         <!-- Politikerkort indsættes her via JavaScript -->
     </div>
 </div>
@@ -167,6 +168,7 @@
 <script src="js/version.js"></script>
 <script src="js/modal-core.js"></script>
 <script src="js/modal-scandal.js"></script>
+<script src="js/modal-add-scandal.js"></script>
 <script src="js/modal-voting.js"></script>
 <script src="js/modal-comments.js"></script>
 <script src="js/modal-donor.js"></script>
