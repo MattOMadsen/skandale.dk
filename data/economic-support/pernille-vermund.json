@@ -1,11 +1,11 @@
 {
-  "id": "pernille-vermund",
+  "politician": "Pernille Vermund",
   "donations": [
     {
-      "donor": "Private donorer og medlemmer",
+      "name": "Private donorer og medlemmer",
       "amount": "Ikke offentligt detaljeret",
-      "year": "2015-2023",
-      "description": "Nye Borgerlige har primært været finansieret gennem medlemskontingenter og private donationer. Specifikke større donorer er ikke offentligt fremhævet i samme grad som hos større partier."
+      "type": "Medlemskontingenter og private donationer",
+      "year": "2015-2023"
     }
   ]
 }
