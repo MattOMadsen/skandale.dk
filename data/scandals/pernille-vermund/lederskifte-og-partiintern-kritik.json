@@ -6,5 +6,13 @@
   "ourSeverity": 2,
   "description": "Pernille Vermund trådte tilbage som formand for Nye Borgerlige i 2023. Overgangen til ny ledelse blev ledsaget af intern kritik og spekulationer om årsagerne til skiftet. Nogle har peget på pres fra partiets base og ønske om en mere moderat profil.",
   "mediaLinks": [],
-  "comments": []
+  "comments": [],
+  "year": "2023",
+  "shortDesc": "Pernille Vermund trådte tilbage som partiformand i 2023 efter intern kritik.",
+  "longDesc": "Pernille Vermund trådte tilbage som formand for Nye Borgerlige i 2023. Overgangen til ny ledelse blev ledsaget af intern kritik og spekulationer om årsagerne til skiftet. Nogle har peget på pres fra partiets base og ønske om en mere moderat profil.",
+  "consequences": "Partiet skiftede ledelse og har siden forsøgt at justere sin profil.",
+  "whatShouldHaveHappened": {
+    "title": "Glidende overgang",
+    "content": "Der burde have været en mere planlagt og mindre konfliktfyldt overgang til ny ledelse."
+  }
 }
