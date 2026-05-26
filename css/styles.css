@@ -61,3 +61,25 @@ body {
     border-radius: 9999px;
     font-weight: 700;
 }
+
+/* ============================================
+   Parti Filter - Bedre mobil oplevelse
+   ============================================ */
+
+/* Skjul scrollbar men behold funktionalitet */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+/* Ekstra finpudsning af chips */
+.party-chip {
+  transition: all 0.2s ease;
+}
+
+.party-chip.active {
+  box-shadow: 0 2px 8px rgba(200, 16, 46, 0.3);
+}
