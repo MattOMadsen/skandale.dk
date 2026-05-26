@@ -20,6 +20,18 @@ https://mattomadsen.github.io/skandale.dk/
 - Statistik Dashboard
 - PDF-eksport
 
+## Aktuel status & Roadmap
+
+Se den fulde og opdaterede todo-liste her:
+
+**[`TODO.md`](TODO.md)**
+
+**Seneste tjek:** 26. maj 2026
+
+**Hovedstatus:**
+- Flere større features er implementeret (Sammenlign to politikere, PDF-eksport, Tilføj skandale direkte, PWA)
+- Dark mode og central database til delt afstemning/kommentar-moderation mangler stadig
+
 ## Bidrag
 
 ### Tilføj en ny politiker
