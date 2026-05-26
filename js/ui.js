@@ -132,7 +132,7 @@ window.renderPoliticians = renderPoliticians;
 
 
 // ============================================
-// MOBIL MENU (gendannet – har virket før)
+// MOBIL MENU (gendannet)
 // ============================================
 
 function initMobileMenu() {
@@ -142,20 +142,20 @@ function initMobileMenu() {
 
   if (!menuButton || !mobileMenu) return;
 
-  // Åbn menu når man klikker på hamburger-ikonet
+  // Åbn menu
   menuButton.addEventListener('click', () => {
     mobileMenu.classList.remove('hidden');
-    document.body.style.overflow = 'hidden'; // forhindrer baggrundsscroll
+    document.body.style.overflow = 'hidden';
   });
 
-  // Luk menu via X-knappen
+  // Luk via X-knap
   if (closeButton) {
     closeButton.addEventListener('click', () => {
       closeMobileMenu();
     });
   }
 
-  // Luk menu hvis man klikker på det mørke overlay udenfor menu-indholdet
+  // Luk hvis man klikker udenfor
   mobileMenu.addEventListener('click', (e) => {
     if (e.target === mobileMenu) {
       closeMobileMenu();
@@ -167,14 +167,14 @@ function closeMobileMenu() {
   const mobileMenu = document.getElementById('mobile-menu');
   if (mobileMenu) {
     mobileMenu.classList.add('hidden');
-    document.body.style.overflow = ''; // genaktiver scroll
+    document.body.style.overflow = '';
   }
 }
 
-// Gør closeMobileMenu global, så den kan kaldes fra onclick-attributter i HTML
+// Gør closeMobileMenu global
 window.closeMobileMenu = closeMobileMenu;
 
-// Initialiser mobil menuen når DOM er klar
+// Initialiser mobil menu
 document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
 });
