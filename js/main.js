@@ -1,4 +1,4 @@
-// js/main.js - Hovedfil der starter alt (med parti-filter + dynamisk count)
+// js/main.js - Hovedfil der starter alt (med parti-filter + dynamisk count + stats snapshot)
 
 let currentPartyFilter = '';
 
@@ -16,6 +16,11 @@ function initializeEverything() {
     initPartyFilterChips();
     setupPartyFilterListeners();
 
+    // Vis statistik snapshot på forsiden
+    if (typeof window.renderStatsSnapshot === 'function') {
+      window.renderStatsSnapshot();
+    }
+
     // Event delegation for politiker-kort
     const grid = document.getElementById('politiciansGrid');
     if (grid) {
@@ -30,7 +35,7 @@ function initializeEverything() {
       });
     }
 
-    console.log(`%c[Skandale.dk ${APP_VERSION}] Klar med forbedret parti-filter`, 'color:#10b981');
+    console.log(`%c[Skandale.dk ${APP_VERSION}] Klar med forbedret parti-filter + stats snapshot`, 'color:#10b981');
   });
 }
 
