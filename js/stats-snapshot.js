@@ -1,4 +1,4 @@
-// js/stats-snapshot.js - Mørk, klikbar statistik i hero (Partifordeling i Politikere-modal)
+// js/stats-snapshot.js - Mørk, klikbar statistik i hero (klikbar partifordeling)
 
 function renderStatsSnapshot() {
     const container = document.getElementById('stats-snapshot');
@@ -78,7 +78,7 @@ function renderStatsSnapshot() {
 }
 
 // ============================================
-// Forbedrede modals (inkl. Partifordeling)
+// Forbedrede modals (klikbar partifordeling)
 // ============================================
 
 function showStatsDetail(type) {
@@ -88,20 +88,20 @@ function showStatsDetail(type) {
     let html = '';
 
     if (type === 'politicians') {
-        // === PARTIFORDELING ===
+        // === PARTIFORDELING (klikbar) ===
         const partyCount = {};
         window.politicians.forEach(p => {
             if (!partyCount[p.party]) partyCount[p.party] = 0;
             partyCount[p.party]++;
         });
 
-        // Sorter efter antal (højest først)
         const sortedParties = Object.entries(partyCount).sort((a, b) => b[1] - a[1]);
 
         let list = '';
         sortedParties.forEach(([party, count]) => {
             list += `
-                <div class="flex justify-between items-center p-3 border border-slate-200 rounded-2xl mb-2">
+                <div onclick="filterByTopParty('${party}'); this.closest('.fixed').remove();" 
+                     class="flex justify-between items-center p-3 border border-slate-200 rounded-2xl mb-2 hover:border-[#C8102E]/30 cursor-pointer transition-colors">
                     <span class="font-medium">${party}</span>
                     <span class="text-sm font-bold text-[#C8102E]">${count} politikere</span>
                 </div>
