@@ -7,122 +7,313 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
-        :root {
-            --primary: #1e3a8a;
-        }
-        .politician-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .politician-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-        }
-    </style>
 </head>
-<body class="bg-gray-50 font-sans">
-    <!-- HEADER -->
-    <header class="bg-white border-b sticky top-0 z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-blue-900 rounded-2xl flex items-center justify-center text-white font-bold text-2xl">🇩🇰</div>
-                <div>
-                    <h1 class="text-2xl font-semibold tracking-tight">Skandale.dk</h1>
-                    <p class="text-xs text-gray-500 -mt-1">Gennemsigtighed i dansk politik</p>
-                </div>
+<body class="bg-slate-50 text-slate-900">
+
+<!-- Navbar -->
+<nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-x-3">
+            <div class="w-9 h-9 bg-[#C8102E] rounded-2xl flex items-center justify-center">
+                <i class="fa-solid fa-balance-scale text-white text-xl"></i>
             </div>
-            
-            <div class="flex items-center gap-4 text-sm">
-                <div id="version-info" class="flex items-center gap-2 text-gray-400 text-xs font-mono"></div>
-                <a href="#" onclick="exportAllReports()" class="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-2xl hover:bg-gray-50 text-gray-700">
-                    <i class="fas fa-file-export"></i>
-                    <span>Eksporter alle</span>
-                </a>
-                <button onclick="toggleDarkMode()" class="w-10 h-10 flex items-center justify-center text-gray-500 hover:text-gray-700">
-                    <i class="fas fa-moon"></i>
-                </button>
+            <div>
+                <div class="font-bold text-2xl tracking-tighter">Skandale.dk</div>
+                <div class="text-[10px] text-slate-400 -mt-1">Politisk gennemsigtighed</div>
             </div>
         </div>
-
-        <!-- SEARCH + PARTY FILTER -->
-        <div class="max-w-7xl mx-auto px-4 pb-4">
-            <div class="flex flex-col md:flex-row gap-4">
-                <!-- Search -->
-                <div class="flex-1 relative">
-                    <input 
-                        id="search-input"
-                        type="text" 
-                        placeholder="Søg efter politiker..." 
-                        onkeyup="if(event.key==='Enter') filterPoliticians()"
-                        class="w-full pl-12 pr-4 py-4 bg-white border border-gray-300 rounded-3xl focus:outline-none focus:border-blue-500 text-lg shadow-sm">
-                    <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                </div>
-                
-                <!-- Party Filter -->
-                <div id="party-filter" class="flex flex-wrap gap-2 items-center bg-white border border-gray-300 rounded-3xl p-2 shadow-sm"></div>
-            </div>
-        </div>
-    </header>
-
-    <main class="max-w-7xl mx-auto px-4 py-8">
-        <!-- HERO -->
-        <div class="text-center mb-12">
-            <h2 class="text-5xl font-bold tracking-tight text-gray-900 mb-2">Kendte politikere</h2>
-            <div id="politician-count" class="inline-flex items-center gap-2 bg-white px-6 py-2 rounded-3xl border text-sm font-medium text-gray-500">
-                <span id="count-number">15</span> politikere
-            </div>
+        
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
+            <a href="#" onclick="document.getElementById('politiciansGrid').scrollIntoView({ behavior: 'smooth' })" class="text-slate-600 hover:text-[#C8102E] transition-colors">Forside</a>
+            <a href="#" onclick="if (typeof window.showTimelineModal === 'function') { window.showTimelineModal(); } else { alert('Tidslinje kommer snart!'); }" class="text-slate-600 hover:text-[#C8102E] transition-colors">Tidslinje</a>
+            <a href="#" onclick="if (typeof window.showCompareModal === 'function') { window.showCompareModal(); } else { alert('Sammenlign kommer snart!'); }" class="text-slate-600 hover:text-[#C8102E] transition-colors">Sammenlign</a>
+            <a href="#" onclick="if (typeof window.showStatsModal === 'function') { window.showStatsModal(); } else { alert('Statistik kommer snart!'); }" class="text-slate-600 hover:text-[#C8102E] transition-colors">Statistik</a>
+            <a href="#" onclick="if (typeof window.showNetworkOverviewModal === 'function') { window.showNetworkOverviewModal(); } else { alert('Netværk kommer snart!'); }" class="text-slate-600 hover:text-[#C8102E] transition-colors font-medium">Netværk & Overlap</a>
+            <a href="#" onclick="showPartyOverviewModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors font-medium">Parti oversigt</a>
+            <a href="#" onclick="showAboutModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors">Om projektet</a>
         </div>
 
-        <!-- POLITICIANS GRID -->
-        <div id="politicians-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-            <!-- Populated by JS -->
+        <!-- Mobile menu button -->
+        <div class="md:hidden">
+            <button id="mobile-menu-button" class="text-slate-600 hover:text-slate-900 p-2">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
         </div>
-    </main>
 
-    <!-- MODAL -->
-    <div id="modal" onclick="if(event.target===this) closeModal()" class="hidden fixed inset-0 bg-black/70 z-[9999] flex items-center justify-center p-4">
-        <div onclick="event.stopImmediatePropagation()" id="modal-content" class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
-            <!-- Filled by modal-core.js -->
-        </div>
+        <div class="hidden md:block px-3 py-1 bg-slate-100 rounded-full text-xs font-medium text-slate-500" id="navbar-version"></div>
     </div>
 
-    <script src="js/data.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/ui.js"></script>
-    <script src="js/search.js"></script>
-    <script src="js/timeline.js"></script>
-    <script src="js/modal-core.js"></script>
-    <script src="js/modal-scandal.js"></script>
-    <script src="js/modal-donor.js"></script>
-    <script src="js/modal-affiliations.js"></script>
-    <script src="js/modal-broken-promises.js"></script>
-    <script src="js/modal-comments.js"></script>
-    <script src="js/modal-share.js"></script>
-    <script src="js/modal-pdf-export.js"></script>
-    <script src="js/version.js"></script>
-    
-    <script>
-        // Initialize everything
-        function init() {
-            renderPoliticians();
-            renderPartyFilter();
-            updateVersionInfo();
-        }
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu" class="hidden fixed inset-0 bg-white z-[200] flex flex-col md:hidden">
+        <div class="px-6 py-4 border-b flex items-center justify-between">
+            <div class="flex items-center gap-x-3">
+                <div class="w-9 h-9 bg-[#C8102E] rounded-2xl flex items-center justify-center">
+                    <i class="fa-solid fa-balance-scale text-white text-xl"></i>
+                </div>
+                <div class="font-bold text-2xl tracking-tighter">Skandale.dk</div>
+            </div>
+            <button id="mobile-menu-close" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+        </div>
         
-        // Render dynamic politician count
-        function updateVersionInfo() {
-            const versionEl = document.getElementById('version-info');
-            if (versionEl) {
-                versionEl.innerHTML = `
-                    <span class="font-medium">v2.00.80</span>
-                    <span class="text-gray-300">•</span>
-                    <span id="live-count" class="font-medium">${window.allPoliticians ? window.allPoliticians.length : 15} politikere</span>
-                `;
+        <div class="flex-1 flex flex-col p-6 space-y-6 text-lg font-medium">
+            <a href="#" onclick="closeMobileMenu(); document.getElementById('politiciansGrid').scrollIntoView({ behavior: 'smooth' })" class="py-3 border-b">Forside</a>
+            <a href="#" onclick="closeMobileMenu(); if (typeof window.showTimelineModal === 'function') { window.showTimelineModal(); } else { alert('Tidslinje kommer snart!'); }" class="py-3 border-b">Tidslinje</a>
+            <a href="#" onclick="closeMobileMenu(); if (typeof window.showCompareModal === 'function') { window.showCompareModal(); } else { alert('Sammenlign kommer snart!'); }" class="py-3 border-b">Sammenlign</a>
+            <a href="#" onclick="closeMobileMenu(); if (typeof window.showStatsModal === 'function') { window.showStatsModal(); } else { alert('Statistik kommer snart!'); }" class="py-3 border-b">Statistik</a>
+            <a href="#" onclick="closeMobileMenu(); if (typeof window.showNetworkOverviewModal === 'function') { window.showNetworkOverviewModal(); } else { alert('Netværk kommer snart!'); }" class="py-3 border-b">Netværk & Overlap</a>
+            <a href="#" onclick="closeMobileMenu(); showPartyOverviewModal()" class="py-3 border-b">Parti oversigt</a>
+            <a href="#" onclick="closeMobileMenu(); showAboutModal()" class="py-3">Om projektet</a>
+        </div>
+        
+        <div class="p-6 border-t text-center text-xs text-slate-400">
+            <span id="mobile-version"></span>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero med søgefelt -->
+<div class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+    <div class="max-w-5xl mx-auto px-6 pt-16 pb-20 text-center">
+        <div class="inline-flex items-center gap-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full mb-6 text-sm">
+            <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+            <span class="font-medium"><span id="app-version-hero"></span> • 12 politikere</span>
+        </div>
+        
+        <h1 class="text-5xl md:text-7xl font-bold tracking-tighter heading-font mb-6">
+            Alle skandaler.<br>Én oversigt.
+        </h1>
+        
+        <p class="max-w-2xl mx-auto text-xl text-slate-300 mb-10">
+            Søg på en politiker – se skandaler, støtte og hvad der burde være sket.
+        </p>
+
+        <!-- Søgefelt -->
+        <div class="max-w-xl mx-auto relative">
+            <input id="searchInput" 
+                   type="text" 
+                   placeholder="Søg efter politiker..." 
+                   class="search-input w-full bg-white text-slate-900 border border-white/20 focus:border-[#C8102E] px-6 py-4 pl-14 rounded-3xl text-lg shadow-xl outline-none"
+                   onkeyup="filterPoliticians()">
+            <i class="fa-solid fa-search absolute left-6 top-4.5 text-xl text-slate-400"></i>
+        </div>
+    </div>
+</div>
+
+<!-- Politikere grid -->
+<div class="max-w-7xl mx-auto px-6 py-16">
+    <h2 class="text-4xl font-bold tracking-tight text-slate-900 mb-8">Kendte politikere</h2>
+    <div id="politiciansGrid" 
+         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Politikerkort indsættes her via JavaScript -->
+    </div>
+</div>
+
+<!-- Timeline Modal -->
+<div id="timelineModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[150] items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-6xl w-full max-h-[92vh] overflow-hidden shadow-2xl flex flex-col">
+        <div class="px-8 pt-8 pb-6 border-b flex items-center justify-between flex-shrink-0">
+            <div>
+                <h3 class="text-3xl font-bold tracking-tight">Tidslinje over skandaler</h3>
+                <p class="text-slate-500 mt-1">Sorteret efter år – nyeste først</p>
+            </div>
+            <button onclick="closeTimeline()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+        </div>
+        <div class="px-8 py-6 border-b flex flex-wrap gap-4 items-end flex-shrink-0">
+            <div>
+                <label class="block text-xs font-medium text-slate-500 mb-1">Parti</label>
+                <select id="filterParty" onchange="filterTimeline()" class="border border-slate-300 rounded-2xl px-4 py-2 text-sm w-56">
+                    <option value="">Alle partier</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs font-medium text-slate-500 mb-1">Minimum alvorlighed</label>
+                <select id="filterSeverity" onchange="filterTimeline()" class="border border-slate-300 rounded-2xl px-4 py-2 text-sm w-48">
+                    <option value="">Alle</option>
+                    <option value="1">1+ stjerner</option>
+                    <option value="2">2+ stjerner</option>
+                    <option value="3">3+ stjerner</option>
+                    <option value="4">4+ stjerner</option>
+                    <option value="5">5 stjerner</option>
+                </select>
+            </div>
+            <button onclick="resetTimelineFilters()" class="px-5 py-2 text-sm border border-slate-300 rounded-2xl hover:bg-slate-100 transition-colors">Nulstil filtre</button>
+        </div>
+        <div id="timelineContent" class="flex-1 overflow-y-auto p-8 space-y-4">
+        </div>
+    </div>
+</div>
+
+<!-- Parti Oversigt Modal -->
+<div id="partyOverviewModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[150] items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-hidden shadow-2xl flex flex-col">
+        <div class="px-8 pt-8 pb-6 border-b flex items-center justify-between flex-shrink-0">
+            <div>
+                <h3 class="text-3xl font-bold tracking-tight">Parti oversigt</h3>
+                <p class="text-slate-500 mt-1">Overblik over alle partier og deres skandaler</p>
+            </div>
+            <button onclick="closePartyOverviewModal()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+        </div>
+        <div id="partyOverviewContent" class="flex-1 overflow-y-auto p-8">
+            <!-- Indsættes dynamisk -->
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="js/version.js"></script>
+<script src="js/modal-core.js"></script>
+<script src="js/modal-scandal.js"></script>
+<script src="js/modal-voting.js"></script>
+<script src="js/modal-comments.js"></script>
+<script src="js/modal-donor.js"></script>
+<script src="js/data.js"></script>
+<script src="js/search.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/timeline.js"></script>
+<script src="js/main.js"></script>
+<script src="js/modal-broken-promises.js"></script>
+<script src="js/modal-share.js"></script>
+<script src="js/modal-party.js"></script>
+<script src="js/modal-compare.js"></script>
+<script src="js/modal-stats.js"></script>
+<script src="js/modal-network-overview.js"></script>
+<script src="js/modal-pdf-export.js"></script>
+
+<!-- jsPDF CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+    function setVersion() {
+        if (typeof APP_VERSION !== 'undefined') {
+            const ids = ['app-version', 'app-version-hero', 'app-version-footer', 'mobile-version'];
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = APP_VERSION;
+            });
+            
+            const navbar = document.getElementById('navbar-version');
+            if (navbar) navbar.textContent = APP_VERSION;
+        }
+    }
+
+    // Parti Oversigt funktion
+    function showPartyOverviewModal() {
+        const modal = document.getElementById('partyOverviewModal');
+        const content = document.getElementById('partyOverviewContent');
+        if (!modal || !content || !window.politicians) return;
+
+        const partyGroups = {};
+        window.politicians.forEach(p => {
+            if (!partyGroups[p.party]) {
+                partyGroups[p.party] = { count: 0, scandals: 0, politicians: [] };
             }
+            partyGroups[p.party].count++;
+            partyGroups[p.party].scandals += (p.scandals ? p.scandals.length : 0);
+            partyGroups[p.party].politicians.push(p.name);
+        });
+
+        let html = '<div class="grid grid-cols-1 md:grid-cols-2 gap-6">';
+        Object.keys(partyGroups).sort().forEach(party => {
+            const g = partyGroups[party];
+            html += `
+                <div class="border border-slate-200 rounded-3xl p-6 hover:border-[#C8102E]/30 cursor-pointer" onclick="showPartyDetail('${party}')">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="font-bold text-xl">${party}</div>
+                            <div class="text-sm text-slate-500">${g.count} politikere</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-3xl font-bold text-[#C8102E]">${g.scandals}</div>
+                            <div class="text-xs text-slate-500">skandaler</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        html += '</div>';
+        content.innerHTML = html;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
+
+    function closePartyOverviewModal() {
+        const modal = document.getElementById('partyOverviewModal');
+        if (modal) {
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
         }
-        
-        window.onload = init;
-    </script>
+    }
+
+    function showPartyDetail(party) {
+        closePartyOverviewModal();
+        const politiciansInParty = window.politicians.filter(p => p.party === party);
+        let html = `<div class="mb-6"><h4 class="font-bold text-2xl">\( {party}</h4><p class="text-slate-500"> \){politiciansInParty.length} politikere</p></div>`;
+        html += '<div class="space-y-3">';
+        politiciansInParty.forEach(p => {
+            const scandalCount = p.scandals ? p.scandals.length : 0;
+            html += `
+                <div onclick="window.openPoliticianModal(${p.id}); closePartyDetailModal();" class="flex justify-between items-center p-4 border border-slate-200 rounded-2xl hover:border-[#C8102E]/30 cursor-pointer">
+                    <div class="font-medium">${p.name}</div>
+                    <div class="text-sm text-[#C8102E] font-bold">${scandalCount} skandaler</div>
+                </div>
+            `;
+        });
+        html += '</div>';
+
+        const detailModal = document.createElement('div');
+        detailModal.id = 'partyDetailModal';
+        detailModal.className = 'fixed inset-0 bg-black/70 backdrop-blur-sm z-[160] flex items-center justify-center p-4';
+        detailModal.innerHTML = `
+            <div class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl">
+                <div class="px-8 pt-8 pb-6 border-b flex justify-between">
+                    <h3 class="text-2xl font-bold">${party}</h3>
+                    <button onclick="closePartyDetailModal()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+                </div>
+                <div class="p-8">${html}</div>
+            </div>
+        `;
+        document.body.appendChild(detailModal);
+    }
+
+    function closePartyDetailModal() {
+        const modal = document.getElementById('partyDetailModal');
+        if (modal) modal.remove();
+    }
+
+    function showAboutModal() {
+        const modalHTML = `
+            <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[200] flex items-center justify-center p-4" id="aboutModal">
+                <div onclick="event.target.id === 'aboutModal' && closeAboutModal()" class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl">
+                    <div class="px-8 pt-8 pb-6 border-b flex items-center justify-between">
+                        <h3 class="text-3xl font-bold tracking-tight">Om Skandale.dk</h3>
+                        <button onclick="closeAboutModal()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+                    </div>
+                    <div class="p-8 text-slate-600 leading-relaxed">
+                        <p class="mb-4">Skandale.dk er et uafhængigt, non-profit projekt, der har til formål at skabe større gennemsigtighed i dansk politik.</p>
+                        <p class="mb-4">Vi samler offentligt tilgængelige oplysninger om politiske skandaler, økonomisk støtte, internationale netværk og brudte valgløfter – alt på én overskuelig platform.</p>
+                        <p class="mb-6">Projektet er stadig under udvikling. Har du forslag, fundet fejl eller vil du bidrage? Skriv gerne til os på <a href="mailto:kontakt@skandale.dk" class="text-[#C8102E] underline">kontakt@skandale.dk</a>.</p>
+                        <div class="text-xs text-slate-400">Data er baseret på offentligt tilgængelige kilder. Vi tager forbehold for fejl og mangler.</div>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+    }
+
+    function closeAboutModal() {
+        const modal = document.getElementById('aboutModal');
+        if (modal) modal.remove();
+    }
+    
+    window.onload = function() {
+        if (typeof initializeEverything === 'function') {
+            initializeEverything();
+        }
+        setVersion();
+        setTimeout(setVersion, 500);
+    };
+</script>
+
 </body>
 </html>
