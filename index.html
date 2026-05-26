@@ -22,7 +22,7 @@
                 <div class="text-[10px] text-slate-400 -mt-1">Politisk gennemsigtighed</div>
             </div>
         </div>
-        
+
         <!-- Desktop Menu -->
         <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
             <a href="#" onclick="document.getElementById('politiciansGrid').scrollIntoView({ behavior: 'smooth' })" class="text-slate-600 hover:text-[#C8102E] transition-colors">Forside</a>
@@ -55,7 +55,7 @@
             </div>
             <button id="mobile-menu-close" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
         </div>
-        
+
         <div class="flex-1 flex flex-col p-6 space-y-6 text-lg font-medium">
             <a href="#" onclick="closeMobileMenu(); document.getElementById('politiciansGrid').scrollIntoView({ behavior: 'smooth' })" class="py-3 border-b">Forside</a>
             <a href="#" onclick="closeMobileMenu(); if (typeof window.showTimelineModal === 'function') { window.showTimelineModal(); } else { alert('Tidslinje kommer snart!'); }" class="py-3 border-b">Tidslinje</a>
@@ -65,7 +65,7 @@
             <a href="#" onclick="closeMobileMenu(); showPartyOverviewModal()" class="py-3 border-b">Parti oversigt</a>
             <a href="#" onclick="closeMobileMenu(); showAboutModal()" class="py-3">Om projektet</a>
         </div>
-        
+
         <div class="p-6 border-t text-center text-xs text-slate-400">
             <span id="mobile-version"></span>
         </div>
@@ -77,13 +77,13 @@
     <div class="max-w-5xl mx-auto px-6 pt-16 pb-20 text-center">
         <div class="inline-flex items-center gap-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full mb-6 text-sm">
             <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-            <span class="font-medium"><span id="app-version-hero"></span> • 12 politikere</span>
+            <span class="font-medium"><span id="app-version-hero"></span> • <span id="politician-count">15 politikere</span></span>
         </div>
-        
+
         <h1 class="text-5xl md:text-7xl font-bold tracking-tighter heading-font mb-6">
             Alle skandaler.<br>Én oversigt.
         </h1>
-        
+
         <p class="max-w-2xl mx-auto text-xl text-slate-300 mb-10">
             Søg på en politiker – se skandaler, støtte og hvad der burde være sket.
         </p>
@@ -100,9 +100,21 @@
     </div>
 </div>
 
-<!-- Politikere grid -->
+<!-- Politikere sektion med Parti Filter -->
 <div class="max-w-7xl mx-auto px-6 py-16">
+
+    <!-- PARTI FILTER -->
+    <div class="mb-6">
+        <div class="flex items-center gap-x-2 mb-3">
+            <span class="text-sm font-medium text-slate-600">Filtrer efter parti:</span>
+        </div>
+        <div id="party-filter-chips" class="flex flex-wrap gap-2">
+            <!-- Genereres automatisk via JavaScript i main.js -->
+        </div>
+    </div>
+
     <h2 class="text-4xl font-bold tracking-tight text-slate-900 mb-8">Kendte politikere</h2>
+    
     <div id="politiciansGrid" 
          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- Politikerkort indsættes her via JavaScript -->
@@ -191,7 +203,7 @@
                 const el = document.getElementById(id);
                 if (el) el.textContent = APP_VERSION;
             });
-            
+
             const navbar = document.getElementById('navbar-version');
             if (navbar) navbar.textContent = APP_VERSION;
         }
@@ -248,7 +260,7 @@
     function showPartyDetail(party) {
         closePartyOverviewModal();
         const politiciansInParty = window.politicians.filter(p => p.party === party);
-        let html = `<div class="mb-6"><h4 class="font-bold text-2xl">\( {party}</h4><p class="text-slate-500"> \){politiciansInParty.length} politikere</p></div>`;
+        let html = `<div class="mb-6"><h4 class="font-bold text-2xl">${party}</h4><p class="text-slate-500">${politiciansInParty.length} politikere</p></div>`;
         html += '<div class="space-y-3">';
         politiciansInParty.forEach(p => {
             const scandalCount = p.scandals ? p.scandals.length : 0;
@@ -305,7 +317,7 @@
         const modal = document.getElementById('aboutModal');
         if (modal) modal.remove();
     }
-    
+
     window.onload = function() {
         if (typeof initializeEverything === 'function') {
             initializeEverything();
