@@ -129,3 +129,52 @@ function renderPoliticians(filteredPoliticians = null) {
 
 // Gør renderPoliticians global så search.js kan kalde den
 window.renderPoliticians = renderPoliticians;
+
+
+// ============================================
+// MOBIL MENU (gendannet – har virket før)
+// ============================================
+
+function initMobileMenu() {
+  const menuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const closeButton = document.getElementById('mobile-menu-close');
+
+  if (!menuButton || !mobileMenu) return;
+
+  // Åbn menu når man klikker på hamburger-ikonet
+  menuButton.addEventListener('click', () => {
+    mobileMenu.classList.remove('hidden');
+    document.body.style.overflow = 'hidden'; // forhindrer baggrundsscroll
+  });
+
+  // Luk menu via X-knappen
+  if (closeButton) {
+    closeButton.addEventListener('click', () => {
+      closeMobileMenu();
+    });
+  }
+
+  // Luk menu hvis man klikker på det mørke overlay udenfor menu-indholdet
+  mobileMenu.addEventListener('click', (e) => {
+    if (e.target === mobileMenu) {
+      closeMobileMenu();
+    }
+  });
+}
+
+function closeMobileMenu() {
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (mobileMenu) {
+    mobileMenu.classList.add('hidden');
+    document.body.style.overflow = ''; // genaktiver scroll
+  }
+}
+
+// Gør closeMobileMenu global, så den kan kaldes fra onclick-attributter i HTML
+window.closeMobileMenu = closeMobileMenu;
+
+// Initialiser mobil menuen når DOM er klar
+document.addEventListener('DOMContentLoaded', () => {
+  initMobileMenu();
+});
