@@ -1,1 +1,128 @@
-[UPDATED INDEX.HTML WITH PARTY FILTER]
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skandale.dk – Gennemsigtighed i dansk politik</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+        :root {
+            --primary: #1e3a8a;
+        }
+        .politician-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .politician-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- HEADER -->
+    <header class="bg-white border-b sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-blue-900 rounded-2xl flex items-center justify-center text-white font-bold text-2xl">🇩🇰</div>
+                <div>
+                    <h1 class="text-2xl font-semibold tracking-tight">Skandale.dk</h1>
+                    <p class="text-xs text-gray-500 -mt-1">Gennemsigtighed i dansk politik</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4 text-sm">
+                <div id="version-info" class="flex items-center gap-2 text-gray-400 text-xs font-mono"></div>
+                <a href="#" onclick="exportAllReports()" class="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-2xl hover:bg-gray-50 text-gray-700">
+                    <i class="fas fa-file-export"></i>
+                    <span>Eksporter alle</span>
+                </a>
+                <button onclick="toggleDarkMode()" class="w-10 h-10 flex items-center justify-center text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- SEARCH + PARTY FILTER -->
+        <div class="max-w-7xl mx-auto px-4 pb-4">
+            <div class="flex flex-col md:flex-row gap-4">
+                <!-- Search -->
+                <div class="flex-1 relative">
+                    <input 
+                        id="search-input"
+                        type="text" 
+                        placeholder="Søg efter politiker..." 
+                        onkeyup="if(event.key==='Enter') filterPoliticians()"
+                        class="w-full pl-12 pr-4 py-4 bg-white border border-gray-300 rounded-3xl focus:outline-none focus:border-blue-500 text-lg shadow-sm">
+                    <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                </div>
+                
+                <!-- Party Filter -->
+                <div id="party-filter" class="flex flex-wrap gap-2 items-center bg-white border border-gray-300 rounded-3xl p-2 shadow-sm"></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <!-- HERO -->
+        <div class="text-center mb-12">
+            <h2 class="text-5xl font-bold tracking-tight text-gray-900 mb-2">Kendte politikere</h2>
+            <div id="politician-count" class="inline-flex items-center gap-2 bg-white px-6 py-2 rounded-3xl border text-sm font-medium text-gray-500">
+                <span id="count-number">15</span> politikere
+            </div>
+        </div>
+
+        <!-- POLITICIANS GRID -->
+        <div id="politicians-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+            <!-- Populated by JS -->
+        </div>
+    </main>
+
+    <!-- MODAL -->
+    <div id="modal" onclick="if(event.target===this) closeModal()" class="hidden fixed inset-0 bg-black/70 z-[9999] flex items-center justify-center p-4">
+        <div onclick="event.stopImmediatePropagation()" id="modal-content" class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
+            <!-- Filled by modal-core.js -->
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/timeline.js"></script>
+    <script src="js/modal-core.js"></script>
+    <script src="js/modal-scandal.js"></script>
+    <script src="js/modal-donor.js"></script>
+    <script src="js/modal-affiliations.js"></script>
+    <script src="js/modal-broken-promises.js"></script>
+    <script src="js/modal-comments.js"></script>
+    <script src="js/modal-share.js"></script>
+    <script src="js/modal-pdf-export.js"></script>
+    <script src="js/version.js"></script>
+    
+    <script>
+        // Initialize everything
+        function init() {
+            renderPoliticians();
+            renderPartyFilter();
+            updateVersionInfo();
+        }
+        
+        // Render dynamic politician count
+        function updateVersionInfo() {
+            const versionEl = document.getElementById('version-info');
+            if (versionEl) {
+                versionEl.innerHTML = `
+                    <span class="font-medium">v2.00.80</span>
+                    <span class="text-gray-300">•</span>
+                    <span id="live-count" class="font-medium">${window.allPoliticians ? window.allPoliticians.length : 15} politikere</span>
+                `;
+            }
+        }
+        
+        window.onload = init;
+    </script>
+</body>
+</html>
