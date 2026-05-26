@@ -13,8 +13,8 @@ function initializeEverything() {
     }
 
     updatePoliticianCount();
-    initPartyFilterChips();           // ← Ny: Parti-filter
-    setupPartyFilterListeners();      // ← Ny: Klik-håndtering
+    initPartyFilterChips();
+    setupPartyFilterListeners();
 
     // Event delegation for politiker-kort
     const grid = document.getElementById('politiciansGrid');
@@ -30,7 +30,7 @@ function initializeEverything() {
       });
     }
 
-    console.log(`%c[Skandale.dk ${APP_VERSION}] Klar med parti-filter`, 'color:#10b981');
+    console.log(`%c[Skandale.dk ${APP_VERSION}] Klar med forbedret parti-filter`, 'color:#10b981');
   });
 }
 
@@ -42,30 +42,31 @@ function updatePoliticianCount() {
 }
 
 // ============================================
-// PARTI FILTER (chips)
+// PARTI FILTER - Forbedret version
 // ============================================
 
 function initPartyFilterChips() {
   const container = document.getElementById('party-filter-chips');
   if (!container || !window.politicians) return;
 
-  // Find unikke partier
   const parties = [...new Set(window.politicians.map(p => p.party))].sort();
 
   let html = `
-    <button class="party-chip active px-4 py-1.5 text-sm rounded-full border transition-all bg-[#C8102E] text-white border-[#C8102E]" data-party="">
-      Alle
-    </button>
+    <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory">
+      <button class="party-chip active shrink-0 snap-start px-5 py-2 text-sm font-medium rounded-full transition-all bg-[#C8102E] text-white shadow-sm" data-party="">
+        Alle
+      </button>
   `;
 
   parties.forEach(party => {
     html += `
-      <button class="party-chip px-4 py-1.5 text-sm rounded-full border transition-all hover:bg-slate-100 border-slate-300" data-party="${party}">
+      <button class="party-chip shrink-0 snap-start px-5 py-2 text-sm font-medium rounded-full border border-slate-300 text-slate-700 hover:bg-slate-100 active:bg-slate-200 transition-all whitespace-nowrap" data-party="${party}">
         ${party}
       </button>
     `;
   });
 
+  html += `</div>`;
   container.innerHTML = html;
 }
 
@@ -79,16 +80,15 @@ function setupPartyFilterListeners() {
 
     // Fjern active fra alle
     container.querySelectorAll('.party-chip').forEach(c => {
-      c.classList.remove('active', 'bg-[#C8102E]', 'text-white', 'border-[#C8102E]');
-      c.classList.add('border-slate-300', 'hover:bg-slate-100');
+      c.classList.remove('active', 'bg-[#C8102E]', 'text-white', 'shadow-sm');
+      c.classList.add('border-slate-300', 'text-slate-700', 'hover:bg-slate-100');
     });
 
-    // Tilføj active til valgt
-    chip.classList.add('active', 'bg-[#C8102E]', 'text-white', 'border-[#C8102E]');
-    chip.classList.remove('border-slate-300', 'hover:bg-slate-100');
+    // Aktivér valgt chip
+    chip.classList.add('active', 'bg-[#C8102E]', 'text-white', 'shadow-sm');
+    chip.classList.remove('border-slate-300', 'text-slate-700', 'hover:bg-slate-100');
 
     currentPartyFilter = chip.dataset.party || '';
-
     applyFilters();
   });
 }
@@ -103,29 +103,27 @@ function applyFilters() {
     filtered = filtered.filter(p => p.party === currentPartyFilter);
   }
 
-  // Søgning (hvis der er tekst i søgefeltet)
+  // Søgning
   const searchInput = document.getElementById('searchInput');
   if (searchInput && searchInput.value.trim() !== '') {
     const term = searchInput.value.trim().toLowerCase();
-    filtered = filtered.filter(p => 
-      p.name.toLowerCase().includes(term) || 
+    filtered = filtered.filter(p =>
+      p.name.toLowerCase().includes(term) ||
       p.party.toLowerCase().includes(term)
     );
   }
 
-  // Render
   if (typeof window.renderPoliticians === 'function') {
     window.renderPoliticians(filtered);
   }
 
-  // Opdater tæller midlertidigt til det filtrerede antal
+  // Opdater tæller til filtreret antal
   const countEl = document.getElementById('politician-count');
   if (countEl) {
     countEl.textContent = `${filtered.length} politikere`;
   }
 }
 
-// Gør applyFilters global hvis nødvendigt
 window.applyFilters = applyFilters;
 
 window.onload = initializeEverything;
