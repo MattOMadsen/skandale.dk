@@ -74,7 +74,7 @@
 
 <!-- Hero med søgefelt -->
 <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-    <div class="max-w-5xl mx-auto px-6 pt-16 pb-20 text-center">
+    <div class="max-w-5xl mx-auto px-6 pt-16 pb-12 text-center">
         <div class="inline-flex items-center gap-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full mb-6 text-sm">
             <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
             <span class="font-medium"><span id="app-version-hero"></span> • <span id="politician-count">15 politikere</span></span>
@@ -83,6 +83,11 @@
         <h1 class="text-5xl md:text-7xl font-bold tracking-tighter heading-font mb-6">
             Alle skandaler.<br>Én oversigt.
         </h1>
+
+        <!-- Statistik Snapshot inde i hero -->
+        <div id="stats-snapshot" class="max-w-4xl mx-auto mb-8">
+            <!-- Indhold genereres af js/stats-snapshot.js (mørk version) -->
+        </div>
 
         <p class="max-w-2xl mx-auto text-xl text-slate-300 mb-10">
             Søg på en politiker – se skandaler, støtte og hvad der burde være sket.
@@ -98,11 +103,6 @@
             <i class="fa-solid fa-search absolute left-6 top-4.5 text-xl text-slate-400"></i>
         </div>
     </div>
-</div>
-
-<!-- Statistik Snapshot -->
-<div id="stats-snapshot" class="max-w-7xl mx-auto px-6">
-    <!-- Indhold genereres automatisk af js/stats-snapshot.js -->
 </div>
 
 <!-- Politikere sektion -->
