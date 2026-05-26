@@ -1,4 +1,4 @@
-// js/stats-snapshot.js - Mørk, klikbar statistik i hero (forbedret modal)
+// js/stats-snapshot.js - Mørk, klikbar statistik i hero (Partifordeling i Politikere-modal)
 
 function renderStatsSnapshot() {
     const container = document.getElementById('stats-snapshot');
@@ -78,7 +78,7 @@ function renderStatsSnapshot() {
 }
 
 // ============================================
-// Forbedrede modals
+// Forbedrede modals (inkl. Partifordeling)
 // ============================================
 
 function showStatsDetail(type) {
@@ -88,24 +88,45 @@ function showStatsDetail(type) {
     let html = '';
 
     if (type === 'politicians') {
+        // === PARTIFORDELING ===
+        const partyCount = {};
+        window.politicians.forEach(p => {
+            if (!partyCount[p.party]) partyCount[p.party] = 0;
+            partyCount[p.party]++;
+        });
+
+        // Sorter efter antal (højest først)
+        const sortedParties = Object.entries(partyCount).sort((a, b) => b[1] - a[1]);
+
+        let list = '';
+        sortedParties.forEach(([party, count]) => {
+            list += `
+                <div class="flex justify-between items-center p-3 border border-slate-200 rounded-2xl mb-2">
+                    <span class="font-medium">${party}</span>
+                    <span class="text-sm font-bold text-[#C8102E]">${count} politikere</span>
+                </div>
+            `;
+        });
+
         html = `
             <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl">
                 <div class="px-6 pt-6 pb-4 border-b flex justify-between">
-                    <h3 class="text-xl font-bold">Politikere på platformen</h3>
+                    <h3 class="text-xl font-bold">Politikere fordelt på partier</h3>
                     <button onclick="this.closest('.fixed').remove()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
                 </div>
-                <div class="p-6">
-                    <p class="text-slate-600">Der er i øjeblikket <strong>${window.politicians.length}</strong> politikere med detaljeret data på Skandale.dk.</p>
+                <div class="p-6 max-h-[60vh] overflow-y-auto">
+                    ${list}
                 </div>
-                <div class="px-6 py-4 border-t flex justify-end gap-3">
-                    <button onclick="this.closest('.fixed').remove()" class="px-5 py-2 text-sm border border-slate-300 rounded-2xl">Luk</button>
+                <div class="px-6 py-4 border-t flex justify-end">
+                    <button onclick="this.closest('.fixed').remove()" class="px-5 py-2 text-sm bg-slate-900 text-white rounded-2xl hover:bg-black transition-colors">
+                        Luk
+                    </button>
                 </div>
             </div>
         `;
     }
 
     else if (type === 'scandals') {
-        // Top 5 politikere med flest skandaler
         const sorted = [...window.politicians].sort((a, b) => (b.scandals?.length || 0) - (a.scandals?.length || 0)).slice(0, 5);
 
         let list = '';
@@ -132,7 +153,6 @@ function showStatsDetail(type) {
     }
 
     else if (type === 'severity') {
-        // Top politikere efter gennemsnitlig alvorlighed
         const withAvg = window.politicians.map(p => {
             if (!p.scandals || p.scandals.length === 0) return { ...p, avg: 0 };
             const sum = p.scandals.reduce((s, sc) => s + (sc.ourSeverity || sc.severity || 0), 0);
