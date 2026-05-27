@@ -37,7 +37,7 @@ function initializeEverything() {
 
     // === BAGGRUNDSINDLÆSNING AF DETALJER ===
     // Loader fulde detaljer (scandals osv.) i baggrunden efter grid er vist.
-    // Dette gør at "Hurtig statistik" og grid-kortene får korrekte tal.
+    // Dette gør at "Hurtig statistik", grid-kortene og Netværk & Overlap får data.
     if (window.politicians && window.loadPoliticianDetails) {
       Promise.all(
         window.politicians.map(p => 
@@ -47,6 +47,25 @@ function initializeEverything() {
           })
         )
       ).then(() => {
+        // Byg networkIndex fra affiliations (til Netværk & Overlap modal)
+        window.networkIndex = {};
+        window.politicians.forEach(p => {
+          if (p.affiliations && Array.isArray(p.affiliations)) {
+            p.affiliations.forEach(aff => {
+              const netName = aff.name || aff.organization || aff;
+              if (typeof netName !== 'string') return;
+              if (!window.networkIndex[netName]) window.networkIndex[netName] = [];
+              window.networkIndex[netName].push({
+                id: p.id,
+                name: p.name,
+                party: p.party,
+                year: aff.year || '',
+                role: aff.role || ''
+              });
+            });
+          }
+        });
+
         // Opdater både statistik og grid med fulde data
         if (typeof window.renderStatsSnapshot === 'function') {
           window.renderStatsSnapshot();
@@ -54,7 +73,7 @@ function initializeEverything() {
         if (typeof window.renderPoliticians === 'function') {
           window.renderPoliticians();
         }
-        console.log('%c[Skandale.dk] Baggrundsdetaljer loaded – grid og statistik opdateret', 'color:#10b981');
+        console.log('%c[Skandale.dk] Baggrundsdetaljer + networkIndex loaded', 'color:#10b981');
       });
     }
 
