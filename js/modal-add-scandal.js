@@ -200,5 +200,6 @@ async function submitScandalForm(e) {
     }
 }
 
-// Gør funktionen global
+// Gør funktionerne globale
 window.showAddScandalModal = showAddScandalModal;
+window.submitScandalForm = submitScandalForm; // Fix: Gør submit funktionen global
