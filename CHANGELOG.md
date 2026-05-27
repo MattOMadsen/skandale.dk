@@ -1,3 +1,13 @@
+## [v2.00.83] - 2026-05-27
+### Refactor & Modularity
+- Kraftig oprydning af `index.html` – trukket så meget som muligt ud i separate filer
+- Ny fil: `js/about-modal.js` (Om Skandale.dk modal)
+- Ny fil: `js/mobile-menu.js` (mobil menu funktionalitet)
+- Ny fil: `js/skeleton-loader.js` (dynamisk skeleton loader til politiker-grid)
+- Tilføjet manglende `js/modal-networks.js` → "Internationale netværk & tilknytninger" klik virker igen (viser andre politikere i samme netværk)
+- Beholdt princippet: Hellere nye filer end at gøre eksisterende filer længere
+- `index.html` er nu markant kortere og renere
+
 ## [v2.00.82] - 2026-05-27
 ### Performance & Fixes (Frontpage)
 - Tilføjet `defer` på alle scripts for hurtigere initial rendering
