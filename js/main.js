@@ -37,7 +37,7 @@ function initializeEverything() {
 
     // === BAGGRUNDSINDLÆSNING AF DETALJER ===
     // Loader fulde detaljer (scandals osv.) i baggrunden efter grid er vist.
-    // Dette gør at "Hurtig statistik" får korrekte tal uden at forsinke den indledende sidevisning.
+    // Dette gør at "Hurtig statistik" og grid-kortene får korrekte tal.
     if (window.politicians && window.loadPoliticianDetails) {
       Promise.all(
         window.politicians.map(p => 
@@ -47,11 +47,14 @@ function initializeEverything() {
           })
         )
       ).then(() => {
-        // Opdater statistik snapshot med fulde data
+        // Opdater både statistik og grid med fulde data
         if (typeof window.renderStatsSnapshot === 'function') {
           window.renderStatsSnapshot();
         }
-        console.log('%c[Skandale.dk] Baggrundsdetaljer loaded – statistik opdateret', 'color:#10b981');
+        if (typeof window.renderPoliticians === 'function') {
+          window.renderPoliticians();
+        }
+        console.log('%c[Skandale.dk] Baggrundsdetaljer loaded – grid og statistik opdateret', 'color:#10b981');
       });
     }
 
