@@ -16,6 +16,12 @@
 - **"Før politik / Ungdom" og "Karriere oversigt" virker ikke i modal**  
   I politikermodalen vises sektionerne "Før politik / Ungdom" og "Karriere oversigt" ikke eller fungerer ikke som forventet.
 
+- **"Tilføj ny" i modal virker ikke**  
+  Muligheden for at tilføje ny skandale direkte fra politikermodalen virker ikke.
+
+- **Modal lukker hele politikeren når man interagerer inde i den**  
+  Når man åbner f.eks. en skandale, kommentar, eller andet inde i en politikers modal, og derefter lukker det, går man tilbage til forsiden i stedet for at vende tilbage til politikermodalen.
+
 ---
 
 ## ✅ Fuldført
