@@ -1,3 +1,16 @@
+## [v2.00.82] - 2026-05-27
+### Performance & Fixes (Frontpage)
+- Tilføjet `defer` på alle scripts for hurtigere initial rendering
+- Lazy loading af politician data (kun lette core-data loades på forsiden)
+- Baggrundsindlæsning af detaljer → korrekte tal i statistik og grid
+- Tilføjet skeleton loader på politiker-grid'et
+- Rettet at antal skandaler og brudte løfter ikke blev vist på forsiden
+- Rettet at "Netværk & Overlap" ikke viste data (networkIndex bygges nu fra affiliations)
+
+## [v2.00.81] - 2026-05-27
+### Fixed
+- Mindre justeringer og oprydning
+
 ## [v2.00.80] - 2026-05-26
 ### Fixed
 - Rettet index.html (genskabt fuld version med parti-filter og dynamisk politikerantal)
