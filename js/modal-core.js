@@ -12,7 +12,18 @@ async function showPoliticianModal(politicianId) {
     return;
   }
 
-  // Load scandals dynamically if needed (for split JSON structure)
+  // === NY: Lazy load detaljer hvis de ikke er loaded endnu (gør forside hurtig) ===
+  if (!politician._detailsLoaded || !politician.scandals || politician.scandals.length === 0) {
+    if (typeof window.loadPoliticianDetails === 'function') {
+      try {
+        await window.loadPoliticianDetails(politician);
+      } catch (e) {
+        console.warn('Kunne ikke loade detaljer for', politician.name, e);
+      }
+    }
+  }
+
+  // Load scandals dynamically if needed (for split JSON structure) - beholdt for kompatibilitet
   if (!politician.scandals && politician.scandalsFile) {
     try {
       const response = await fetch(politician.scandalsFile);

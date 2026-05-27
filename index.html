@@ -177,30 +177,30 @@
     </div>
 </div>
 
-<!-- Scripts -->
-<script src="js/version.js"></script>
-<script src="js/modal-core.js"></script>
-<script src="js/modal-scandal.js"></script>
-<script src="js/modal-voting.js"></script>
-<script src="js/modal-comments.js"></script>
-<script src="js/modal-donor.js"></script>
-<script src="js/data.js"></script>
-<script src="js/search.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/timeline.js"></script>
-<script src="js/main.js"></script>
-<script src="js/stats-snapshot.js"></script>
-<script src="js/modal-broken-promises.js"></script>
-<script src="js/modal-share.js"></script>
-<script src="js/modal-party.js"></script>
-<script src="js/modal-compare.js"></script>
-<script src="js/modal-stats.js"></script>
-<script src="js/modal-network-overview.js"></script>
-<script src="js/modal-pdf-export.js"></script>
-<script src="js/modal-admin.js"></script>
+<!-- Scripts - med defer for hurtigere initial rendering -->
+<script src="js/version.js" defer></script>
+<script src="js/modal-core.js" defer></script>
+<script src="js/modal-scandal.js" defer></script>
+<script src="js/modal-voting.js" defer></script>
+<script src="js/modal-comments.js" defer></script>
+<script src="js/modal-donor.js" defer></script>
+<script src="js/data.js" defer></script>
+<script src="js/search.js" defer></script>
+<script src="js/ui.js" defer></script>
+<script src="js/timeline.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/stats-snapshot.js" defer></script>
+<script src="js/modal-broken-promises.js" defer></script>
+<script src="js/modal-share.js" defer></script>
+<script src="js/modal-party.js" defer></script>
+<script src="js/modal-compare.js" defer></script>
+<script src="js/modal-stats.js" defer></script>
+<script src="js/modal-network-overview.js" defer></script>
+<script src="js/modal-pdf-export.js" defer></script>
+<script src="js/modal-admin.js" defer></script>
 
-<!-- jsPDF CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- jsPDF CDN - deferred da den kun bruges on-demand -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
 
 <script>
     function setVersion() {
@@ -315,8 +315,7 @@
                         
                         <!-- Diskret admin adgang -->
                         <div class="mt-6 pt-4 border-t text-xs">
-                            <span class="text-slate-400">Admin?</span> 
-                            <a href="#" onclick="event.preventDefault(); showAdminLogin();" class="text-[#C8102E] hover:underline">Log ind her</a>
+                            <span class="text-slate-400">Admin?</span> <a href="#" onclick="event.preventDefault(); showAdminLogin();" class="text-[#C8102E] hover:underline">Log ind her</a>
                         </div>
                     </div>
                 </div>
