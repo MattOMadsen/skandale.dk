@@ -2,12 +2,37 @@
 // 1 fil = 1 ansvarsområde
 
 function showNetworkConnections(networkName) {
-  if (!window.networkIndex || !window.networkIndex[networkName]) {
-    alert('Ingen andre politikere fundet med dette netværk.');
-    return;
+  let connectedPoliticians = [];
+
+  // Først: Prøv det globale networkIndex
+  if (window.networkIndex && window.networkIndex[networkName]) {
+    connectedPoliticians = window.networkIndex[networkName];
+  } 
+  
+  // Fallback: Søg i alle loaded politikere (robusthed)
+  if (connectedPoliticians.length === 0 && typeof politicians !== 'undefined') {
+    politicians.forEach(p => {
+      if (p.affiliations && Array.isArray(p.affiliations)) {
+        const hasNetwork = p.affiliations.some(aff => 
+          (aff.name || aff.organization || aff) === networkName
+        );
+        if (hasNetwork) {
+          connectedPoliticians.push({
+            id: p.id,
+            name: p.name,
+            party: p.party,
+            year: '',
+            role: ''
+          });
+        }
+      }
+    });
   }
 
-  const connectedPoliticians = window.networkIndex[networkName];
+  if (connectedPoliticians.length === 0) {
+    alert('Ingen andre politikere fundet med dette netværk: ' + networkName);
+    return;
+  }
 
   let html = `
     <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[200] flex items-center justify-center p-4" id="networkModal">
@@ -25,14 +50,14 @@ function showNetworkConnections(networkName) {
 
   connectedPoliticians.forEach(p => {
     html += `
-      <div onclick="closeNetworkModal(); showPoliticianModal(${p.id})" class="flex justify-between items-center p-4 border border-slate-200 rounded-2xl hover:border-[#C8102E]/30 cursor-pointer">
+      <div onclick="closeNetworkModal(); if (typeof window.showPoliticianModal === 'function') window.showPoliticianModal(${p.id});" class="flex justify-between items-center p-4 border border-slate-200 rounded-2xl hover:border-[#C8102E]/30 cursor-pointer">
         <div>
           <div class="font-semibold">${p.name}</div>
           <div class="text-sm text-slate-500">${p.party}</div>
         </div>
         <div class="text-right text-sm">
-          <div class="font-medium">${p.year}</div>
-          <div class="text-xs text-slate-500">${p.role}</div>
+          <div class="font-medium">${p.year || ''}</div>
+          <div class="text-xs text-slate-500">${p.role || ''}</div>
         </div>
       </div>
     `;
