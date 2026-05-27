@@ -70,7 +70,7 @@ function renderPoliticians(filteredPoliticians = null) {
     const initials = politician.initials || politician.name.split(' ').map(n => n[0]).join('');
     if (politician.image) {
       avatarHTML = `<div class="w-14 h-14 rounded-2xl overflow-hidden border border-slate-200 flex-shrink-0">
-        <img src="${politician.image}" alt="${politician.name}" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML = \`<div class='w-full h-full flex items-center justify-center text-white font-bold text-xl' style='background-color: ${avatarColor}'>${initials}</div>\`;">
+        <img src="${politician.image}" alt="${politician.name}" class="w-full h-full object-cover" loading="lazy" onerror="this.parentElement.innerHTML = \`<div class='w-full h-full flex items-center justify-center text-white font-bold text-xl' style='background-color: ${avatarColor}'>${initials}</div>\`;">
       </div>`;
     } else {
       avatarHTML = `<div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-bold text-xl flex-shrink-0" style="background-color: ${avatarColor}">${initials}</div>`;
