@@ -12,20 +12,19 @@ async function showPoliticianModal(politicianId) {
     return;
   }
 
-  // === NY: Lazy load detaljer hvis de ikke er loaded endnu (gør forside hurtig) ===
+  // === Lazy load detaljer ===
   if (!politician._detailsLoaded || !politician.scandals || politician.scandals.length === 0) {
     if (typeof window.loadPoliticianDetails === 'function') {
       try {
         await window.loadPoliticianDetails(politician);
 
-        // Opdater globalt networkIndex så klik på netværk virker med det samme
+        // Opdater networkIndex
         if (politician.affiliations && Array.isArray(politician.affiliations)) {
           if (!window.networkIndex) window.networkIndex = {};
           politician.affiliations.forEach(aff => {
             const netName = aff.name || aff.organization || aff;
             if (typeof netName !== 'string') return;
             if (!window.networkIndex[netName]) window.networkIndex[netName] = [];
-            // Undgå dubletter
             const alreadyExists = window.networkIndex[netName].some(p => p.id === politician.id);
             if (!alreadyExists) {
               window.networkIndex[netName].push({
@@ -44,7 +43,7 @@ async function showPoliticianModal(politicianId) {
     }
   }
 
-  // Load scandals dynamically if needed (for split JSON structure) - beholdt for kompatibilitet
+  // Load scandals dynamically if needed
   if (!politician.scandals && politician.scandalsFile) {
     try {
       const response = await fetch(politician.scandalsFile);
@@ -60,7 +59,6 @@ async function showPoliticianModal(politicianId) {
 
   currentPolitician = politician;
 
-  // Remove existing modals
   document.querySelectorAll('#politicianModal, #networkModal').forEach(m => m.remove());
 
   const html = `
@@ -105,7 +103,7 @@ async function showPoliticianModal(politicianId) {
             <div class="text-slate-700">${politician.bio || 'Ingen beskrivelse tilgængelig.'}</div>
           </div>
           
-          <!-- Før politik / Ungdom (collapsible) -->
+          <!-- Før politik / Ungdom -->
           ${politician.beforePolitics ? `
             <div class="mb-4 border border-slate-200 rounded-2xl overflow-hidden">
               <div onclick="toggleSection('beforePoliticsSection')" class="flex items-center justify-between p-4 bg-slate-50 cursor-pointer hover:bg-slate-100">
@@ -118,7 +116,7 @@ async function showPoliticianModal(politicianId) {
             </div>
           ` : ''}
           
-          <!-- Karriereoversigt (collapsible) -->
+          <!-- Karriereoversigt -->
           ${politician.careerTimeline ? `
             <div class="mb-4 border border-slate-200 rounded-2xl overflow-hidden">
               <div onclick="toggleSection('careerSection')" class="flex items-center justify-between p-4 bg-slate-50 cursor-pointer hover:bg-slate-100">
@@ -139,8 +137,7 @@ async function showPoliticianModal(politicianId) {
                 <span class="font-bold text-lg">Skandaler</span>
                 <span class="text-xs text-slate-500">(${politician.scandals ? politician.scandals.length : 0})</span>
               </div>
-              <button onclick="window.showAddScandalModal(currentPolitician)" 
-                      class="px-4 py-1.5 text-sm bg-[#C8102E] text-white rounded-xl hover:bg-[#C8102E]/90 transition-colors flex items-center gap-x-2">
+              <button onclick="window.showAddScandalModal(currentPolitician)" class="px-4 py-1.5 text-sm bg-[#C8102E] text-white rounded-xl hover:bg-[#C8102E]/90 transition-colors flex items-center gap-x-2">
                 <i class="fa-solid fa-plus"></i>
                 <span>Tilføj ny</span>
               </button>
@@ -148,21 +145,21 @@ async function showPoliticianModal(politicianId) {
             <div id="scandalsContainer"></div>
           </div>
           
-          <!-- Økonomisk støtte (injected by modal-donor.js) -->
+          <!-- Økonomisk støtte -->
           <div id="economicSupportSection"></div>
           
-          <!-- Internationale netværk & tilknytninger -->
+          <!-- Internationale netværk & tilknytninger (uden inline onclick - attaches nedenfor) -->
           ${politician.affiliations && politician.affiliations.length > 0 ? `
             <div class="mt-8 pt-6 border-t">
               <div class="flex items-center gap-x-2 mb-4">
                 <i class="fa-solid fa-globe text-[#C8102E]"></i>
                 <span class="font-bold text-lg">Internationale netværk & tilknytninger</span>
               </div>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                ${politician.affiliations.map(aff => {
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="networkAffiliationsContainer">
+                ${politician.affiliations.map((aff, index) => {
                   const networkName = aff.name || aff.organization || 'Ukendt';
                   return `
-                    <div onclick="showNetworkConnections('${networkName}')" class="p-4 bg-slate-50 border border-slate-200 rounded-2xl hover:border-[#C8102E]/30 cursor-pointer transition-all">
+                    <div class="network-affiliation-item p-4 bg-slate-50 border border-slate-200 rounded-2xl hover:border-[#C8102E]/30 cursor-pointer transition-all" data-network-name="${networkName.replace(/"/g, '"')}">
                       <div class="font-semibold text-[#C8102E]">${networkName}</div>
                       <div class="text-xs text-slate-500">${aff.organization || ''} • ${aff.year || ''}</div>
                       ${aff.role ? `<div class="text-sm text-slate-600 mt-1">${aff.role}</div>` : ''}
@@ -173,7 +170,7 @@ async function showPoliticianModal(politicianId) {
             </div>
           ` : ''}
           
-          <!-- Brudte valgløfter (injected by modal-broken-promises.js) -->
+          <!-- Brudte valgløfter -->
           <div id="brokenPromisesSection"></div>
           
         </div>
@@ -187,24 +184,36 @@ async function showPoliticianModal(politicianId) {
 
   document.body.insertAdjacentHTML('beforeend', html);
 
-  // Initialize scandals with the NEW render function (from modal-scandals.js)
+  // Initialize after DOM is ready
   setTimeout(() => {
     const scandalsContainer = document.getElementById('scandalsContainer');
     if (scandalsContainer) {
       renderScandalsDirect(politician, scandalsContainer);
     }
 
-    // Call helper functions from other modal-*.js files
-    if (typeof addEconomicSupportSection === 'function') {
-      addEconomicSupportSection(politician);
+    if (typeof addEconomicSupportSection === 'function') addEconomicSupportSection(politician);
+    if (typeof addBrokenPromisesSection === 'function') addBrokenPromisesSection(politician);
+    if (typeof initShareButton === 'function') initShareButton(politician);
+
+    // === NY: Attach click listeners på netværks-kort (robust) ===
+    const networkContainer = document.getElementById('networkAffiliationsContainer');
+    if (networkContainer) {
+      networkContainer.querySelectorAll('.network-affiliation-item').forEach(item => {
+        const networkName = item.dataset.networkName;
+        if (networkName) {
+          item.addEventListener('click', () => {
+            if (typeof window.showNetworkConnections === 'function') {
+              window.showNetworkConnections(networkName);
+            } else {
+              console.warn('showNetworkConnections ikke tilgængelig');
+            }
+          });
+        }
+      });
     }
-    if (typeof addBrokenPromisesSection === 'function') {
-      addBrokenPromisesSection(politician);
-    }
-    if (typeof initShareButton === 'function') {
-      initShareButton(politician);
-    }
-  }, 50);
+
+    console.log('%c[Skandale.dk] Modal initialiseret med robust netværks-håndtering', 'color:#10b981');
+  }, 60);
 }
 
 function closePoliticianModal() {
@@ -213,6 +222,5 @@ function closePoliticianModal() {
   currentPolitician = null;
 }
 
-// Make functions global
 window.showPoliticianModal = showPoliticianModal;
 window.closePoliticianModal = closePoliticianModal;
