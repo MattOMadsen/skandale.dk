@@ -5,6 +5,19 @@
 
 ---
 
+## 🐞 Kendte bugs (skal fixes)
+
+- **Tidslinje virker ikke fra menuen**  
+  Når man klikker på "Tidslinje" i både desktop og mobil menu, sker der intet (eller funktionen findes ikke).
+
+- **Sammenlign virker ikke ordentligt**  
+  Funktionen åbner, men viser ikke politikerne korrekt / kan ikke vælge politikere ordentligt.
+
+- **"Før politik / Ungdom" og "Karriere oversigt" virker ikke i modal**  
+  I politikermodalen vises sektionerne "Før politik / Ungdom" og "Karriere oversigt" ikke eller fungerer ikke som forventet.
+
+---
+
 ## ✅ Fuldført
 
 - **Sammenlign to politikere**  
