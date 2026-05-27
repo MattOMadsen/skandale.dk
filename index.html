@@ -10,6 +10,7 @@
     <link rel="manifest" href="manifest.json">
 </head>
 <body class="bg-slate-50 text-slate-900">
+
     <!-- Navbar -->
     <nav class="bg-white border-b sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -23,20 +24,49 @@
                 </div>
             </div>
 
-            <!-- Desktop menu -->
-            <div class="hidden md:flex items-center gap-x-8 text-sm">
-                <a href="#" onclick="document.getElementById('politicians-section').scrollIntoView({ behavior: 'smooth' })" class="hover:text-[#C8102E]">Politikere</a>
-                <a href="#" onclick="if (typeof window.showTimelineModal === 'function') window.showTimelineModal(); else alert('Tidslinje ikke klar endnu')" class="hover:text-[#C8102E]">Tidslinje</a>
-                <a href="#" onclick="if (typeof window.showCompareModal === 'function') window.showCompareModal()" class="hover:text-[#C8102E]">Sammenlign</a>
-                <a href="#" onclick="if (typeof window.showStatsModal === 'function') window.showStatsModal()" class="hover:text-[#C8102E]">Statistik</a>
-                <a href="#" onclick="if (typeof window.showNetworkOverviewModal === 'function') window.showNetworkOverviewModal()" class="hover:text-[#C8102E]">Netværk & Overlap</a>
-                <a href="#" onclick="if (typeof window.showPartyModal === 'function') window.showPartyModal()" class="hover:text-[#C8102E]">Parti oversigt</a>
-                <a href="#" onclick="if (typeof window.showAboutModal === 'function') window.showAboutModal()" class="hover:text-[#C8102E]">Om projektet</a>
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
+                <a href="#" onclick="document.getElementById('politicians-section').scrollIntoView({ behavior: 'smooth' })" class="text-slate-600 hover:text-[#C8102E] transition-colors">Politikere</a>
+                <a href="#" onclick="if (typeof window.showTimelineModal === 'function') window.showTimelineModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors">Tidslinje</a>
+                <a href="#" onclick="if (typeof window.showCompareModal === 'function') window.showCompareModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors">Sammenlign</a>
+                <a href="#" onclick="if (typeof window.showStatsModal === 'function') window.showStatsModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors">Statistik</a>
+                <a href="#" onclick="if (typeof window.showNetworkOverviewModal === 'function') window.showNetworkOverviewModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors">Netværk & Overlap</a>
+                <a href="#" onclick="if (typeof window.showPartyModal === 'function') window.showPartyModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors">Parti oversigt</a>
+                <a href="#" onclick="if (typeof window.showAboutModal === 'function') window.showAboutModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors">Om projektet</a>
             </div>
 
             <div class="flex items-center gap-x-3">
-                <div id="navbar-version" class="text-xs px-3 py-1 bg-slate-100 rounded-full text-slate-500 font-mono"></div>
-                <button onclick="toggleMobileMenu()" class="md:hidden w-10 h-10 flex items-center justify-center text-xl">☰</button>
+                <div id="navbar-version" class="hidden md:block text-xs px-3 py-1 bg-slate-100 rounded-full text-slate-500 font-mono"></div>
+                <button id="mobile-menu-button" class="md:hidden w-10 h-10 flex items-center justify-center text-2xl text-slate-600 hover:text-slate-900">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- MOBILE MENU -->
+        <div id="mobile-menu" class="hidden fixed inset-0 bg-white z-[200] flex flex-col md:hidden">
+            <div class="px-6 py-4 border-b flex items-center justify-between">
+                <div class="flex items-center gap-x-3">
+                    <div class="w-9 h-9 bg-[#C8102E] rounded-2xl flex items-center justify-center">
+                        <i class="fa-solid fa-balance-scale text-white text-xl"></i>
+                    </div>
+                    <div class="font-bold text-2xl tracking-tighter">Skandale.dk</div>
+                </div>
+                <button id="mobile-menu-close" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+            </div>
+
+            <div class="flex-1 flex flex-col p-6 space-y-2 text-lg">
+                <a href="#" onclick="closeMobileMenu(); document.getElementById('politicians-section').scrollIntoView({ behavior: 'smooth' })" class="py-3 border-b">Politikere</a>
+                <a href="#" onclick="closeMobileMenu(); if (typeof window.showTimelineModal === 'function') window.showTimelineModal()" class="py-3 border-b">Tidslinje</a>
+                <a href="#" onclick="closeMobileMenu(); if (typeof window.showCompareModal === 'function') window.showCompareModal()" class="py-3 border-b">Sammenlign</a>
+                <a href="#" onclick="closeMobileMenu(); if (typeof window.showStatsModal === 'function') window.showStatsModal()" class="py-3 border-b">Statistik</a>
+                <a href="#" onclick="closeMobileMenu(); if (typeof window.showNetworkOverviewModal === 'function') window.showNetworkOverviewModal()" class="py-3 border-b">Netværk & Overlap</a>
+                <a href="#" onclick="closeMobileMenu(); if (typeof window.showPartyModal === 'function') window.showPartyModal()" class="py-3 border-b">Parti oversigt</a>
+                <a href="#" onclick="closeMobileMenu(); if (typeof window.showAboutModal === 'function') window.showAboutModal()" class="py-3">Om projektet</a>
+            </div>
+
+            <div class="p-6 border-t text-center text-xs text-slate-500">
+                <span id="mobile-version"></span>
             </div>
         </div>
     </nav>
@@ -48,10 +78,17 @@
                 <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
                 <span>Opdateret maj 2026</span>
             </div>
-            <h1 class="text-5xl md:text-6xl font-bold tracking-tighter mb-4">Gennemsigtighed i dansk politik</h1>
-            <p class="text-xl text-slate-300 max-w-2xl mx-auto">Én samlet platform til skandaler, støtte, netværk og brudte løfter.</p>
 
-            <div class="mt-8 max-w-md mx-auto">
+            <h1 class="text-5xl md:text-6xl font-bold tracking-tighter mb-4">Gennemsigtighed i dansk politik</h1>
+            <p class="text-xl text-slate-300 max-w-2xl mx-auto mb-8">Én samlet platform til skandaler, støtte, netværk og brudte løfter.</p>
+
+            <!-- Hurtig statistik -->
+            <div id="stats-snapshot" class="max-w-4xl mx-auto mb-10">
+                <!-- Indhold genereres af js/stats-snapshot.js -->
+            </div>
+
+            <!-- Søgefelt -->
+            <div class="max-w-md mx-auto">
                 <div class="relative">
                     <input id="searchInput" type="text" placeholder="Søg efter politiker..." 
                            onkeyup="if (typeof filterPoliticians === 'function') filterPoliticians()"
@@ -72,21 +109,19 @@
             <div id="politician-count" class="text-sm text-slate-500 font-medium"></div>
         </div>
 
-        <!-- Parti filtre -->
         <div id="party-filter-chips" class="flex flex-wrap gap-2 mb-6"></div>
 
-        <!-- Grid (skeletons genereres af js/skeleton-loader.js) -->
         <div id="politiciansGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            <!-- Skeletons indsættes dynamisk via JavaScript -->
+            <!-- Skeletons genereres af js/skeleton-loader.js -->
         </div>
     </div>
 
-    <!-- Timeline Modal structure -->
+    <!-- Timeline Modal -->
     <div id="timelineModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[150] flex items-center justify-center p-4">
-        <!-- Content managed by timeline.js -->
+        <!-- Indhold styres af timeline.js -->
     </div>
 
-    <!-- Party Overview Modal structure -->
+    <!-- Party Overview Modal -->
     <div id="partyOverviewModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[150] flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl">
             <div class="px-8 pt-8 pb-6 border-b flex justify-between">
@@ -128,7 +163,6 @@
     <script src="js/modal-admin.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
 
-    <!-- Minimal inline init -->
     <script>
         function setVersion() {
             if (typeof APP_VERSION !== 'undefined') {
@@ -151,5 +185,6 @@
             setTimeout(setVersion, 600);
         };
     </script>
+
 </body>
 </html>
