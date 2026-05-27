@@ -38,6 +38,15 @@ function showTimeline() {
         }
     });
 
+    // Sikkerheds-tjek: Hvis ingen skandaler blev fundet, vent kort og prøv igen
+    if (allScandals.length === 0) {
+        console.warn('[Skandale.dk] Ingen skandaler fundet i første forsøg. Prøver igen om 300ms...');
+        setTimeout(() => {
+            showTimeline();
+        }, 300);
+        return;
+    }
+
     allScandals.sort((a, b) => {
         const yearA = a.year || '0';
         const yearB = b.year || '0';
