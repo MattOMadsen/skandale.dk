@@ -17,6 +17,27 @@ async function showPoliticianModal(politicianId) {
     if (typeof window.loadPoliticianDetails === 'function') {
       try {
         await window.loadPoliticianDetails(politician);
+
+        // Opdater globalt networkIndex så klik på netværk virker med det samme
+        if (politician.affiliations && Array.isArray(politician.affiliations)) {
+          if (!window.networkIndex) window.networkIndex = {};
+          politician.affiliations.forEach(aff => {
+            const netName = aff.name || aff.organization || aff;
+            if (typeof netName !== 'string') return;
+            if (!window.networkIndex[netName]) window.networkIndex[netName] = [];
+            // Undgå dubletter
+            const alreadyExists = window.networkIndex[netName].some(p => p.id === politician.id);
+            if (!alreadyExists) {
+              window.networkIndex[netName].push({
+                id: politician.id,
+                name: politician.name,
+                party: politician.party,
+                year: aff.year || '',
+                role: aff.role || ''
+              });
+            }
+          });
+        }
       } catch (e) {
         console.warn('Kunne ikke loade detaljer for', politician.name, e);
       }
@@ -158,7 +179,7 @@ async function showPoliticianModal(politicianId) {
         </div>
         
         <div class="px-8 py-4 border-t bg-slate-50 text-xs text-slate-400 text-center">
-          Data er baseret på offentligt tilgængelige kilder • v2.00.59
+          Data er baseret på offentligt tilgængelige kilder • v2.00.82
         </div>
       </div>
     </div>
