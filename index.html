@@ -197,6 +197,7 @@
 <script src="js/modal-stats.js"></script>
 <script src="js/modal-network-overview.js"></script>
 <script src="js/modal-pdf-export.js"></script>
+<script src="js/modal-admin.js"></script>
 
 <!-- jsPDF CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -310,7 +311,13 @@
                         <p class="mb-4">Skandale.dk er et uafhængigt, non-profit projekt, der har til formål at skabe større gennemsigtighed i dansk politik.</p>
                         <p class="mb-4">Vi samler offentligt tilgængelige oplysninger om politiske skandaler, økonomisk støtte, internationale netværk og brudte valgløfter – alt på én overskuelig platform.</p>
                         <p class="mb-6">Projektet er stadig under udvikling. Har du forslag, fundet fejl eller vil du bidrage? Skriv gerne til os på <a href="mailto:kontakt@skandale.dk" class="text-[#C8102E] underline">kontakt@skandale.dk</a>.</p>
-                        <div class="text-xs text-slate-400">Data er baseret på offentligt tilgængelige kilder. Vi tager forbehold for fejl og mangler.</div>
+                        <div class="text-xs text-slate-400 mt-4">Data er baseret på offentligt tilgængelige kilder. Vi tager forbehold for fejl og mangler.</div>
+                        
+                        <!-- Diskret admin adgang -->
+                        <div class="mt-6 pt-4 border-t text-xs">
+                            <span class="text-slate-400">Admin?</span> 
+                            <a href="#" onclick="event.preventDefault(); showAdminLogin();" class="text-[#C8102E] hover:underline">Log ind her</a>
+                        </div>
                     </div>
                 </div>
             </div>
