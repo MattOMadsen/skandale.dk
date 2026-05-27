@@ -1,0 +1,38 @@
+{
+  "scandals": [
+    {
+      "id": "ida-auken-nitrogen-policy",
+      "title": "Kritik af kvælstofpolitik som miljøminister",
+      "year": "2011-2014",
+      "description": "Som miljøminister blev Ida Auken kritiseret af landbruget og dele af oppositionen for den førte kvælstof- og miljøpolitik, som ifølge kritikerne var for restriktiv og skadede dansk landbrug.",
+      "ourSeverity": 2,
+      "mediaLinks": [
+        {
+          "title": "Kritik fra landbruget",
+          "url": "https://www.dr.dk/nyheder/politik"
+        }
+      ]
+    },
+    {
+      "id": "ida-auken-wef-globalist-criticism",
+      "title": "Kritik for tætte bånd til World Economic Forum",
+      "year": "2010'erne - 2020'erne",
+      "description": "Ida Auken har været genstand for kritik fra dele af den politiske højrefløj for sin rolle som Young Global Leader i World Economic Forum og for opfattede globale netværk.",
+      "ourSeverity": 3,
+      "mediaLinks": [
+        {
+          "title": "Debat om globale netværk",
+          "url": "https://www.bt.dk/politik"
+        }
+      ]
+    },
+    {
+      "id": "ida-auken-environmental-legacy",
+      "title": "Kritik af miljøpolitikkens resultater",
+      "year": "2011-2014",
+      "description": "Flere miljøorganisationer og senere politikere har kritiseret, at hendes tid som miljøminister ikke førte til tilstrækkelige fremskridt på flere områder, herunder biodiversitet og havmiljø.",
+      "ourSeverity": 2,
+      "mediaLinks": []
+    }
+  ]
+}
