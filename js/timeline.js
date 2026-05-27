@@ -1,7 +1,9 @@
-// js/timeline.js - Tidslinje (v2.00.51 - fuld filter-support + createStars + sikkerhed)
+// js/timeline.js - Tidslinje (robust version)
 
 let allScandals = [];
 let currentScandals = [];
+let timelineLoadAttempts = 0;
+const MAX_TIMELINE_ATTEMPTS = 5;
 
 function createStars(severity) {
     let html = '';
@@ -17,15 +19,39 @@ function createStars(severity) {
 }
 
 function showTimeline() {
-    allScandals = [];
-    
-    if (typeof politicians === 'undefined' || !politicians.length) {
-        console.error('[Skandale.dk] politicians er ikke loaded endnu');
+    const modal = document.getElementById('timelineModal');
+    if (!modal) {
+        console.error('[Skandale.dk] #timelineModal findes ikke i DOM!');
         return;
     }
 
+    // Vis modal med loading-tilstand
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+
+    const contentContainer = document.getElementById('timelineContent');
+    if (contentContainer) {
+        contentContainer.innerHTML = `
+            <div class="flex items-center justify-center py-12">
+                <div class="text-center">
+                    <i class="fa-solid fa-spinner fa-spin text-3xl text-[#C8102E] mb-4"></i>
+                    <p class="text-slate-500">Indlæser tidslinje...</p>
+                </div>
+            </div>
+        `;
+    }
+
+    allScandals = [];
+
+    if (typeof politicians === 'undefined' || !politicians.length) {
+        console.warn('[Skandale.dk] politicians ikke loaded endnu. Prøver igen...');
+        retryShowTimeline();
+        return;
+    }
+
+    // Saml skandaler fra alle politikere
     politicians.forEach(politician => {
-        if (politician.scandals && politician.scandals.length) {
+        if (politician.scandals && Array.isArray(politician.scandals) && politician.scandals.length > 0) {
             politician.scandals.forEach(scandal => {
                 allScandals.push({
                     ...scandal,
@@ -38,32 +64,44 @@ function showTimeline() {
         }
     });
 
-    // Sikkerheds-tjek: Hvis ingen skandaler blev fundet, vent kort og prøv igen
+    // Hvis vi stadig ikke har skandaler efter flere forsøg
     if (allScandals.length === 0) {
-        console.warn('[Skandale.dk] Ingen skandaler fundet i første forsøg. Prøver igen om 300ms...');
-        setTimeout(() => {
-            showTimeline();
-        }, 300);
-        return;
+        timelineLoadAttempts++;
+
+        if (timelineLoadAttempts < MAX_TIMELINE_ATTEMPTS) {
+            console.warn(`[Skandale.dk] Ingen skandaler fundet (forsøg ${timelineLoadAttempts}/${MAX_TIMELINE_ATTEMPTS}). Prøver igen...`);
+            setTimeout(() => {
+                showTimeline();
+            }, 400 * timelineLoadAttempts); // Øget ventetid
+            return;
+        } else {
+            // Maks forsøg nået
+            if (contentContainer) {
+                contentContainer.innerHTML = `
+                    <div class="text-center py-12">
+                        <p class="text-slate-500 mb-2">Kunne ikke indlæse tidslinjen.</p>
+                        <p class="text-xs text-slate-400">Prøv at genindlæse siden eller kontakt udvikler.</p>
+                    </div>
+                `;
+            }
+            timelineLoadAttempts = 0;
+            return;
+        }
     }
 
+    // Nulstil forsøg
+    timelineLoadAttempts = 0;
+
+    // Sorter nyeste først
     allScandals.sort((a, b) => {
         const yearA = a.year || '0';
         const yearB = b.year || '0';
         return yearB.localeCompare(yearA);
     });
+
     currentScandals = [...allScandals];
 
-    const modal = document.getElementById('timelineModal');
-    if (!modal) {
-        console.error('[Skandale.dk] #timelineModal findes ikke i DOM!');
-        alert('Tidslinje-modalen mangler i index.html. Kontakt udvikler.');
-        return;
-    }
-
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-
+    // Fylder parti-filter
     const partySelect = document.getElementById('filterParty');
     if (partySelect) {
         partySelect.innerHTML = '<option value="">Alle partier</option>';
@@ -77,6 +115,21 @@ function showTimeline() {
     }
 
     renderTimeline(allScandals);
+}
+
+function retryShowTimeline() {
+    timelineLoadAttempts++;
+    if (timelineLoadAttempts < MAX_TIMELINE_ATTEMPTS) {
+        setTimeout(() => {
+            showTimeline();
+        }, 350);
+    } else {
+        const contentContainer = document.getElementById('timelineContent');
+        if (contentContainer) {
+            contentContainer.innerHTML = '<p class="text-slate-500 text-center py-8">Kunne ikke indlæse data til tidslinjen.</p>';
+        }
+        timelineLoadAttempts = 0;
+    }
 }
 
 window.showTimelineModal = showTimeline;
@@ -160,4 +213,5 @@ function closeTimeline() {
         modal.classList.remove('flex');
         modal.classList.add('hidden');
     }
+    timelineLoadAttempts = 0;
 }
