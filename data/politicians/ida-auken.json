@@ -1,0 +1,23 @@
+{
+  "id": 16,
+  "name": "Ida Auken",
+  "party": "Radikale Venstre",
+  "partyColor": "#E30613",
+  "role": "Medlem af Folketinget",
+  "avatarColor": "#E30613",
+  "initials": "IA",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Ida_Auken_2019.jpg/440px-Ida_Auken_2019.jpg",
+  "bio": "Tidligere miljøminister og medlem af Radikale Venstre. Har været Young Global Leader hos World Economic Forum.",
+  "beforePolitics": {
+    "title": "Baggrund",
+    "content": "Ida Auken har en baggrund som teolog og har været aktiv i politik siden 2000'erne."
+  },
+  "careerTimeline": "Valgt til Folketinget i 2007. Miljøminister 2011-2014. Har været Young Global Leader i World Economic Forum og deltaget i internationale netværk.",
+  "affiliations": [
+    {
+      "name": "World Economic Forum - Young Global Leaders",
+      "year": "2010'erne",
+      "role": "Young Global Leader"
+    }
+  ]
+}
