@@ -77,6 +77,11 @@ function initializeEverything() {
       });
     }
 
+    // Vis version nummer (sikrer at det vises selvom inline script bliver overskrevet)
+    if (typeof setVersion === 'function') {
+      setVersion();
+    }
+
     console.log(`%c[Skandale.dk ${APP_VERSION}] Klar med forbedret parti-filter + stats snapshot`, 'color:#10b981');
   });
 }
@@ -170,5 +175,3 @@ function applyFilters() {
   }
 
 window.applyFilters = applyFilters;
-
-window.onload = initializeEverything;
