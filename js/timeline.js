@@ -1,4 +1,4 @@
-// js/timeline.js - Tidslinje (robust + proaktiv data loading)
+// js/timeline.js - Tidslinje (robust + proaktiv data loading + selvforsynende modal-struktur)
 
 let allScandals = [];
 let currentScandals = [];
@@ -25,6 +25,67 @@ async function showTimeline() {
         return;
     }
 
+    // === NY ROBUSTHED: Dynamisk opbygning af indre struktur hvis #timelineContent mangler ===
+    // Dette gør timeline.js selvforsynende og løser den tomme/gennemsigtige boks
+    if (!document.getElementById('timelineContent')) {
+        modal.innerHTML = `
+            <div class="bg-white rounded-3xl max-w-5xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+                <!-- Header -->
+                <div class="flex items-center justify-between px-6 py-5 border-b">
+                    <div>
+                        <h2 class="text-2xl font-bold tracking-tight">Tidslinje over politiske skandaler</h2>
+                        <p class="text-sm text-slate-500 mt-0.5">Filtrer efter parti og alvorlighed – klik på en sag for at se detaljer</p>
+                    </div>
+                    <button onclick="closeTimeline()" 
+                            class="w-10 h-10 flex items-center justify-center text-3xl text-slate-400 hover:text-slate-600 transition-colors">
+                        &times;
+                    </button>
+                </div>
+
+                <!-- Filtre -->
+                <div class="px-6 py-4 border-b bg-slate-50 flex flex-wrap items-end gap-4">
+                    <div class="flex-1 min-w-[180px]">
+                        <label class="block text-xs font-medium text-slate-500 mb-1.5">Parti</label>
+                        <select id="filterParty" onchange="filterTimeline()" 
+                                class="w-full border border-slate-300 rounded-2xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#C8102E]/30">
+                            <option value="">Alle partier</option>
+                        </select>
+                    </div>
+                    <div class="flex-1 min-w-[180px]">
+                        <label class="block text-xs font-medium text-slate-500 mb-1.5">Minimum alvorlighed</label>
+                        <select id="filterSeverity" onchange="filterTimeline()" 
+                                class="w-full border border-slate-300 rounded-2xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#C8102E]/30">
+                            <option value="">Alle niveauer</option>
+                            <option value="1">1+ stjerner</option>
+                            <option value="2">2+ stjerner</option>
+                            <option value="3">3+ stjerner</option>
+                            <option value="4">4+ stjerner</option>
+                            <option value="5">5 stjerner</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button onclick="resetTimelineFilters()" 
+                                class="px-5 py-2.5 text-sm font-medium border border-slate-300 hover:bg-white rounded-2xl transition-colors">
+                            Nulstil filtre
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Indhold -->
+                <div id="timelineContent" class="flex-1 overflow-auto p-6 space-y-3 bg-white">
+                    <!-- Indhold indsættes dynamisk af renderTimeline() -->
+                </div>
+
+                <!-- Footer -->
+                <div class="px-6 py-4 border-t text-xs text-slate-400 flex items-center justify-between">
+                    <div>Klik på en sag for at åbne politikeren</div>
+                    <div class="font-mono">Skandale.dk</div>
+                </div>
+            </div>
+        `;
+        console.log('%c[Skandale.dk] Dynamisk timeline-modal-struktur opbygget', 'color:#10b981');
+    }
+
     modal.classList.remove('hidden');
     modal.classList.add('flex');
 
@@ -44,9 +105,14 @@ async function showTimeline() {
     timelineLoadAttempts = 0;
 
     if (typeof politicians === 'undefined' || !politicians.length) {
-        console.warn('[Skandale.dk] politicians ikke loaded endnu');
-        if (contentContainer) contentContainer.innerHTML = '<p class="text-slate-500 text-center py-8">Data ikke klar endnu. Prøv igen om lidt.</p>';
-        return;
+        // Fallback til window.politicians for kompatibilitet
+        if (typeof window.politicians !== 'undefined' && window.politicians.length) {
+            window.politicians.forEach(p => { /* midlertidig reference */ });
+        } else {
+            console.warn('[Skandale.dk] politicians ikke loaded endnu');
+            if (contentContainer) contentContainer.innerHTML = '<p class="text-slate-500 text-center py-8">Data ikke klar endnu. Prøv igen om lidt.</p>';
+            return;
+        }
     }
 
     // Først: Prøv at samle eksisterende data
@@ -56,7 +122,7 @@ async function showTimeline() {
     if (allScandals.length === 0) {
         console.log('[Skandale.dk] Ingen skandaler fundet - loader detaljer for alle politikere...');
         
-        const loadPromises = politicians.map(async (p) => {
+        const loadPromises = (typeof politicians !== 'undefined' ? politicians : window.politicians || []).map(async (p) => {
             if (!p._detailsLoaded && typeof window.loadPoliticianDetails === 'function') {
                 try {
                     await window.loadPoliticianDetails(p);
@@ -112,7 +178,8 @@ async function showTimeline() {
 
 function collectScandalsFromPoliticians() {
     allScandals = [];
-    politicians.forEach(politician => {
+    const pols = (typeof politicians !== 'undefined' && politicians.length) ? politicians : (window.politicians || []);
+    pols.forEach(politician => {
         if (politician.scandals && Array.isArray(politician.scandals) && politician.scandals.length > 0) {
             politician.scandals.forEach(scandal => {
                 allScandals.push({
