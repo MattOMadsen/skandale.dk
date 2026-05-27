@@ -80,6 +80,22 @@
 - Tilføje flere politikere (strukturen er allerede klar).
 - Mulighed for at slette/redigere skandaler i Admin Dashboard (fremtidig forbedring).
 
+**Nye punkter tilføjet 27. maj 2026 (fra arkitektur & UX gennemgang):**
+- **Modal-arkitektur inkonsistent**  
+  Nogle modals bygges 100% dynamisk i JS (f.eks. via `modal-core.js`), mens timeline bruger en statisk tom shell i `index.html`. Dette har direkte forårsaget den tomme/gennemsigtige boks i menuen. Anbefaling: Gør `timeline.js` selvforsynende og dynamisk for robusthed.
+
+- **Forbedre fejlhåndtering og loading-states yderligere**  
+  `timeline.js` har allerede en god spinner + proaktiv data-loading – brug dette mønster konsekvent andre steder i appen for ensartet brugeroplevelse.
+
+- **Automatisk/konsekvent dokumentationsopdatering**  
+  Opdater `TODO.md` og `CHANGELOG.md` systematisk efter større fixes (gerne som en del af udviklingsprocessen).
+
+- **Test af mobil-menu + modals integration**  
+  Sørg for at alle menu-links (inkl. Tidslinje) virker problemfrit på både mobil og desktop, og at der ikke opstår z-index- eller lukke-problemer mellem modals.
+
+- **Gør timeline.js mere robust**  
+  Lad `timeline.js` dynamisk opbygge manglende indre HTML-struktur i `#timelineModal`, så den ikke er afhængig af specifikke elementer i `index.html`. (Dette er nu implementeret som en del af fixet.)
+
 ---
 
 **Næste prioritet?**  
