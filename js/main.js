@@ -16,7 +16,7 @@ function initializeEverything() {
     initPartyFilterChips();
     setupPartyFilterListeners();
 
-    // Vis statistik snapshot på forsiden
+    // Vis statistik snapshot på forsiden (initialt med core-data)
     if (typeof window.renderStatsSnapshot === 'function') {
       window.renderStatsSnapshot();
     }
@@ -32,6 +32,26 @@ function initializeEverything() {
             window.showPoliticianModal(id);
           }
         }
+      });
+    }
+
+    // === BAGGRUNDSINDLÆSNING AF DETALJER ===
+    // Loader fulde detaljer (scandals osv.) i baggrunden efter grid er vist.
+    // Dette gør at "Hurtig statistik" får korrekte tal uden at forsinke den indledende sidevisning.
+    if (window.politicians && window.loadPoliticianDetails) {
+      Promise.all(
+        window.politicians.map(p => 
+          window.loadPoliticianDetails(p).catch(err => {
+            console.warn('Kunne ikke loade detaljer for', p.name, err);
+            return p;
+          })
+        )
+      ).then(() => {
+        // Opdater statistik snapshot med fulde data
+        if (typeof window.renderStatsSnapshot === 'function') {
+          window.renderStatsSnapshot();
+        }
+        console.log('%c[Skandale.dk] Baggrundsdetaljer loaded – statistik opdateret', 'color:#10b981');
       });
     }
 
@@ -124,10 +144,8 @@ function applyFilters() {
 
   // Opdater tæller til filtreret antal
   const countEl = document.getElementById('politician-count');
-  if (countEl) {
-    countEl.textContent = `${filtered.length} politikere`;
+  if (countEl) countEl.textContent = `${filtered.length} politikere`;
   }
-}
 
 window.applyFilters = applyFilters;
 
