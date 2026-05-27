@@ -1,241 +1,336 @@
-// js/modal-admin.js - Password-beskyttet Admin Dashboard (v1)
+// js/modal-admin.js
+// Admin Dashboard v2 - Password-beskyttet + forbedret UX
+// Uploadet 27. maj 2026
 
-const ADMIN_PASSWORD = 'skandale2026'; // Kan ændres senere
+const ADMIN_PASSWORD = "skandale2026";
 
-let adminDashboardModal = null;
+let pendingNotes = JSON.parse(localStorage.getItem('adminPendingNotes') || '[]');
 
 function showAdminLogin() {
-    const existing = document.getElementById('adminLoginModal');
-    if (existing) existing.remove();
+    const modal = document.getElementById('adminLoginModal') || createAdminLoginModal();
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+}
 
-    const html = `
-        <div id="adminLoginModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[300] flex items-center justify-center p-4">
-            <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl">
-                <div class="px-8 pt-8 pb-6 border-b">
-                    <h3 class="text-2xl font-bold">Admin Adgang</h3>
-                    <p class="text-sm text-slate-500 mt-1">Indtast adgangskode for at åbne admin-dashboardet</p>
+function createAdminLoginModal() {
+    const modalHTML = `
+        <div id="adminLoginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white rounded-xl p-8 w-full max-w-md mx-4">
+                <h2 class="text-2xl font-bold mb-6 text-gray-900">Admin Login</h2>
+                
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Adgangskode</label>
+                    <input type="password" id="adminPassword" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500" placeholder="Indtast adgangskode">
                 </div>
                 
-                <div class="p-8">
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-slate-600 mb-2">Adgangskode</label>
-                        <input type="password" id="adminPasswordInput" 
-                               class="w-full border border-slate-300 rounded-2xl px-4 py-3 text-lg"
-                               placeholder="Indtast kode..."
-                               onkeyup="if (event.key === 'Enter') verifyAdminPassword()">
-                    </div>
-                    
-                    <div class="flex gap-x-3">
-                        <button onclick="closeAdminLogin()" 
-                                class="flex-1 px-6 py-3 border border-slate-300 rounded-2xl font-medium hover:bg-slate-50">
-                            Annuller
-                        </button>
-                        <button onclick="verifyAdminPassword()" 
-                                class="flex-1 px-6 py-3 bg-[#C8102E] text-white rounded-2xl font-medium hover:bg-[#C8102E]/90">
-                            Log ind
-                        </button>
-                    </div>
+                <div id="adminLoginError" class="hidden text-red-600 text-sm mb-4"></div>
+                
+                <div class="flex gap-3">
+                    <button onclick="attemptAdminLogin()" 
+                            class="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-lg transition">
+                        Log ind
+                    </button>
+                    <button onclick="closeAdminLoginModal()" 
+                            class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 rounded-lg transition">
+                        Annuller
+                    </button>
                 </div>
             </div>
         </div>
     `;
-
-    document.body.insertAdjacentHTML('beforeend', html);
-    setTimeout(() => {
-        const input = document.getElementById('adminPasswordInput');
-        if (input) input.focus();
-    }, 100);
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    return document.getElementById('adminLoginModal');
 }
 
-function verifyAdminPassword() {
-    const input = document.getElementById('adminPasswordInput');
-    if (!input) return;
-
-    if (input.value === ADMIN_PASSWORD) {
-        closeAdminLogin();
+function attemptAdminLogin() {
+    const passwordInput = document.getElementById('adminPassword');
+    const errorDiv = document.getElementById('adminLoginError');
+    
+    if (passwordInput.value === ADMIN_PASSWORD) {
+        closeAdminLoginModal();
         showAdminDashboard();
     } else {
-        alert('Forkert adgangskode');
-        input.value = '';
-        input.focus();
+        errorDiv.textContent = "Forkert adgangskode";
+        errorDiv.classList.remove('hidden');
+        passwordInput.value = '';
     }
 }
 
-function closeAdminLogin() {
+function closeAdminLoginModal() {
     const modal = document.getElementById('adminLoginModal');
-    if (modal) modal.remove();
+    if (modal) modal.classList.add('hidden');
 }
 
 function showAdminDashboard() {
-    const existing = document.getElementById('adminDashboardModal');
-    if (existing) existing.remove();
+    const modal = document.getElementById('adminDashboardModal') || createAdminDashboardModal();
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    
+    // Genopfrisk pending notes
+    loadPendingNotes();
+}
 
-    const html = `
-        <div id="adminDashboardModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[250] flex items-center justify-center p-4">
-            <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[92vh] overflow-hidden shadow-2xl flex flex-col">
-                
+function createAdminDashboardModal() {
+    const modalHTML = `
+        <div id="adminDashboardModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white rounded-2xl w-full max-w-3xl mx-4 max-h-[90vh] overflow-hidden flex flex-col">
                 <!-- Header -->
-                <div class="px-8 pt-8 pb-6 border-b flex items-center justify-between flex-shrink-0">
+                <div class="px-8 py-6 border-b flex justify-between items-center bg-gray-50">
                     <div>
-                        <h3 class="text-3xl font-bold tracking-tight">Admin Dashboard</h3>
-                        <p class="text-sm text-slate-500">Godkendelse af indsendte skandaler (Formspree)</p>
+                        <h2 class="text-2xl font-bold text-gray-900">Admin Dashboard</h2>
+                        <p class="text-sm text-gray-500">Godkend og tilføj skandaler manuelt</p>
                     </div>
-                    <button onclick="closeAdminDashboard()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+                    <button onclick="closeAdminDashboard()" class="text-gray-400 hover:text-gray-600 text-3xl leading-none">&times;</button>
                 </div>
 
-                <div class="flex-1 overflow-y-auto p-8">
+                <div class="p-8 overflow-y-auto flex-1 space-y-8">
                     
-                    <!-- Info -->
-                    <div class="mb-8 p-4 bg-slate-50 rounded-2xl border border-slate-200">
-                        <p class="text-sm text-slate-600">
-                            <strong>Sådan bruger du dashboardet:</strong><br>
-                            1. Du modtager en mail fra Formspree når nogen indsender en skandale.<br>
-                            2. Brug formularen nedenfor til at tilføje den godkendte skandale manuelt.<br>
-                            3. Data bliver midlertidigt tilføjet til siden (genindlæs for at nulstille).
-                        </p>
-                    </div>
-
-                    <!-- Manuel tilføjelse af skandale -->
-                    <h4 class="font-bold text-xl mb-4">Tilføj godkendt skandale manuelt</h4>
-                    
-                    <form id="adminAddScandalForm" onsubmit="submitAdminScandal(event)">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Tilføj ny skandale -->
+                    <div>
+                        <h3 class="font-semibold text-lg mb-4 text-gray-800">Tilføj godkendt skandale</h3>
+                        
+                        <form id="adminScandalForm" onsubmit="submitAdminScandalForm(event)" class="space-y-4">
                             
-                            <!-- Politiker -->
                             <div>
-                                <label class="block text-sm font-semibold text-slate-600 mb-1">Politiker ID eller navn</label>
-                                <input type="text" id="adminPoliticianId" class="w-full border border-slate-300 rounded-2xl px-4 py-3" 
-                                       placeholder="F.eks. 1 eller navn på ny politiker" required>
-                                <p class="text-xs text-slate-500 mt-1">Brug ID fra eksisterende politiker eller skriv navn hvis ny</p>
-                            </div>
-
-                            <div>
-                                <label class="block text-sm font-semibold text-slate-600 mb-1">Parti (hvis ny politiker)</label>
-                                <input type="text" id="adminParty" class="w-full border border-slate-300 rounded-2xl px-4 py-3" placeholder="f.eks. Socialdemokratiet">
-                            </div>
-
-                            <!-- Skandale felter -->
-                            <div class="md:col-span-2">
-                                <label class="block text-sm font-semibold text-slate-600 mb-1">Titel på skandalen *</label>
-                                <input type="text" id="adminTitle" class="w-full border border-slate-300 rounded-2xl px-4 py-3" required>
-                            </div>
-
-                            <div>
-                                <label class="block text-sm font-semibold text-slate-600 mb-1">År</label>
-                                <input type="text" id="adminYear" class="w-full border border-slate-300 rounded-2xl px-4 py-3" placeholder="2023-2024">
-                            </div>
-
-                            <div>
-                                <label class="block text-sm font-semibold text-slate-600 mb-1">Alvorlighed (1-5)</label>
-                                <select id="adminSeverity" class="w-full border border-slate-300 rounded-2xl px-4 py-3">
-                                    <option value="1">1 - Lav</option>
-                                    <option value="2">2</option>
-                                    <option value="3" selected>3 - Medium</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5 - Meget alvorlig</option>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Vælg politiker</label>
+                                <select id="adminPoliticianSelect" class="w-full px-4 py-3 border border-gray-300 rounded-lg" required>
+                                    <option value="">-- Vælg politiker --</option>
                                 </select>
                             </div>
 
-                            <div class="md:col-span-2">
-                                <label class="block text-sm font-semibold text-slate-600 mb-1">Kort beskrivelse *</label>
-                                <textarea id="adminShortDesc" rows="2" class="w-full border border-slate-300 rounded-2xl px-4 py-3" required></textarea>
+                            <div id="newPoliticianFields" class="hidden space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Nyt politiker navn</label>
+                                    <input type="text" id="newPoliticianName" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Nyt politiker ID (f.eks. mette-frederiksen)</label>
+                                    <input type="text" id="newPoliticianId" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                                </div>
                             </div>
 
-                            <div class="md:col-span-2">
-                                <label class="block text-sm font-semibold text-slate-600 mb-1">Kilder (en pr. linje)</label>
-                                <textarea id="adminSources" rows="2" class="w-full border border-slate-300 rounded-2xl px-4 py-3" placeholder="https://...\nhttps://..."></textarea>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Titel på skandalen</label>
+                                <input type="text" id="adminScandalTitle" class="w-full px-4 py-3 border border-gray-300 rounded-lg" required>
                             </div>
-                        </div>
 
-                        <div class="mt-8 flex gap-x-3">
-                            <button type="button" onclick="closeAdminDashboard()" 
-                                    class="flex-1 px-6 py-3 border border-slate-300 rounded-2xl font-medium hover:bg-slate-50">
-                                Luk
-                            </button>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Beskrivelse</label>
+                                <textarea id="adminScandalDescription" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg" required></textarea>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Alvorlighed</label>
+                                    <select id="adminSeverity" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                                        <option value="lav">Lav</option>
+                                        <option value="medium" selected>Medium</option>
+                                        <option value="høj">Høj</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Dato</label>
+                                    <input type="date" id="adminScandalDate" class="w-full px-4 py-3 border border-gray-300 rounded-lg" value="${new Date().toISOString().split('T')[0]}">
+                                </div>
+                            </div>
+
                             <button type="submit" 
-                                    class="flex-1 px-6 py-3 bg-[#C8102E] text-white rounded-2xl font-medium hover:bg-[#C8102E]/90">
-                                Godkend og tilføj midlertidigt
+                                    class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3.5 rounded-xl transition">
+                                Tilføj skandale til siden
                             </button>
-                        </div>
-                    </form>
-                </div>
+                        </form>
+                    </div>
 
-                <div class="px-8 py-4 border-t bg-slate-50 text-xs text-slate-500 flex-shrink-0">
-                    Dette er en midlertidig løsning. Data forsvinder ved genindlæsning af siden.
+                    <!-- Pending noter -->
+                    <div>
+                        <h3 class="font-semibold text-lg mb-3 text-gray-800">Pending indsendelser (fra Formspree)</h3>
+                        <textarea id="pendingNotes" rows="4" 
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg text-sm"
+                                  placeholder="Skriv noter om indsendte skandaler her..."></textarea>
+                        <button onclick="savePendingNotes()" 
+                                class="mt-2 text-sm px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg">
+                            Gem noter
+                        </button>
+                    </div>
+
+                    <!-- JSON Export -->
+                    <div id="jsonExportSection" class="hidden">
+                        <h3 class="font-semibold text-lg mb-3 text-gray-800">JSON til data-fil</h3>
+                        <pre id="jsonExport" class="bg-gray-900 text-green-400 p-4 rounded-lg text-xs overflow-x-auto max-h-48"></pre>
+                        <button onclick="copyJSONExport()" 
+                                class="mt-2 text-sm px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg">
+                            Kopier JSON
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     `;
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    
+    // Populér dropdown
+    populatePoliticianDropdown();
+    
+    return document.getElementById('adminDashboardModal');
+}
 
-    document.body.insertAdjacentHTML('beforeend', html);
+function populatePoliticianDropdown() {
+    const select = document.getElementById('adminPoliticianSelect');
+    if (!select || !window.politicians) return;
+
+    // Ryd gamle options (undtagen den første)
+    while (select.options.length > 1) select.remove(1);
+
+    window.politicians.forEach(p => {
+        const option = document.createElement('option');
+        option.value = p.id;
+        option.textContent = p.name;
+        select.appendChild(option);
+    });
+
+    // Tilføj "Ny politiker" mulighed
+    const newOpt = document.createElement('option');
+    newOpt.value = "__new__";
+    newOpt.textContent = "+ Tilføj ny politiker";
+    select.appendChild(newOpt);
+
+    select.onchange = function() {
+        const newFields = document.getElementById('newPoliticianFields');
+        if (this.value === "__new__") {
+            newFields.classList.remove('hidden');
+        } else {
+            newFields.classList.add('hidden');
+        }
+    };
+}
+
+function loadPendingNotes() {
+    const textarea = document.getElementById('pendingNotes');
+    if (textarea) {
+        textarea.value = pendingNotes.join('\n');
+    }
+}
+
+function savePendingNotes() {
+    const textarea = document.getElementById('pendingNotes');
+    if (!textarea) return;
+
+    pendingNotes = textarea.value.split('\n').filter(line => line.trim() !== '');
+    localStorage.setItem('adminPendingNotes', JSON.stringify(pendingNotes));
+    alert("Noter gemt!");
+}
+
+function submitAdminScandalForm(e) {
+    e.preventDefault();
+
+    const select = document.getElementById('adminPoliticianSelect');
+    const title = document.getElementById('adminScandalTitle').value.trim();
+    const description = document.getElementById('adminScandalDescription').value.trim();
+    const severity = document.getElementById('adminSeverity').value;
+    const date = document.getElementById('adminScandalDate').value;
+
+    if (!select.value || !title || !description) {
+        alert("Udfyld venligst alle påkrævede felter.");
+        return;
+    }
+
+    let politicianId = select.value;
+    let politicianName = "";
+
+    // Håndter ny politiker
+    if (politicianId === "__new__") {
+        const newName = document.getElementById('newPoliticianName').value.trim();
+        const newId = document.getElementById('newPoliticianId').value.trim().toLowerCase().replace(/\s+/g, '-');
+        
+        if (!newName || !newId) {
+            alert("Udfyld navn og ID for den nye politiker.");
+            return;
+        }
+        politicianId = newId;
+        politicianName = newName;
+
+        // Tilføj ny politiker til window.politicians (midlertidigt)
+        if (window.politicians) {
+            window.politicians.push({
+                id: newId,
+                name: newName,
+                scandals: []
+            });
+        }
+    } else {
+        const found = window.politicians?.find(p => p.id === politicianId);
+        politicianName = found ? found.name : politicianId;
+    }
+
+    // Opret ny skandale objekt
+    const newScandal = {
+        id: Date.now(),
+        title: title,
+        description: description,
+        severity: severity,
+        date: date,
+        addedByAdmin: true,
+        addedDate: new Date().toISOString()
+    };
+
+    // Tilføj til den valgte politiker (hvis den findes i hukommelsen)
+    if (window.politicians) {
+        const politician = window.politicians.find(p => p.id === politicianId);
+        if (politician) {
+            if (!politician.scandals) politician.scandals = [];
+            politician.scandals.unshift(newScandal);
+        }
+    }
+
+    // Vis JSON eksport
+    showJSONExport(newScandal, politicianId, politicianName);
+
+    // Genindlæs hovedvisningen hvis muligt
+    if (typeof filterPoliticians === 'function') {
+        setTimeout(() => {
+            filterPoliticians();
+        }, 300);
+    }
+
+    alert(`Skandale tilføjet til ${politicianName}!`);
+    
+    // Ryd form
+    e.target.reset();
+    document.getElementById('newPoliticianFields').classList.add('hidden');
+}
+
+function showJSONExport(scandal, politicianId, politicianName) {
+    const section = document.getElementById('jsonExportSection');
+    const pre = document.getElementById('jsonExport');
+    
+    if (!section || !pre) return;
+
+    const jsonString = JSON.stringify(scandal, null, 2);
+    
+    pre.textContent = `// Tilføj dette til data/${politicianId}.json under "scandals"\n` +
+                      `// Politiker: ${politicianName}\n\n` +
+                      jsonString;
+    
+    section.classList.remove('hidden');
+}
+
+function copyJSONExport() {
+    const pre = document.getElementById('jsonExport');
+    if (!pre) return;
+    
+    navigator.clipboard.writeText(pre.textContent).then(() => {
+        const originalText = pre.textContent;
+        pre.textContent = "✅ JSON kopieret til udklipsholder!";
+        setTimeout(() => {
+            pre.textContent = originalText;
+        }, 2000);
+    });
 }
 
 function closeAdminDashboard() {
     const modal = document.getElementById('adminDashboardModal');
-    if (modal) modal.remove();
+    if (modal) modal.classList.add('hidden');
 }
 
-// Håndterer indsendelse fra admin-formularen
-function submitAdminScandal(e) {
-    e.preventDefault();
-
-    if (!window.politicians) {
-        alert('Data er ikke indlæst endnu. Prøv igen om et øjeblik.');
-        return;
-    }
-
-    const title = document.getElementById('adminTitle').value.trim();
-    const shortDesc = document.getElementById('adminShortDesc').value.trim();
-    const year = document.getElementById('adminYear').value.trim();
-    const severity = parseInt(document.getElementById('adminSeverity').value);
-    const sources = document.getElementById('adminSources').value.split('\n').filter(Boolean);
-
-    const politicianInput = document.getElementById('adminPoliticianId').value.trim();
-    const party = document.getElementById('adminParty').value.trim();
-
-    // Find eller opret politiker
-    let politician = window.politicians.find(p => 
-        p.id == politicianInput || p.name.toLowerCase() === politicianInput.toLowerCase()
-    );
-
-    if (!politician) {
-        // Opret ny midlertidig politiker
-        const newId = Math.max(0, ...window.politicians.map(p => p.id || 0)) + 1;
-        politician = {
-            id: newId,
-            name: politicianInput,
-            party: party || 'Ukendt parti',
-            role: '',
-            scandals: []
-        };
-        window.politicians.push(politician);
-    }
-
-    // Tilføj skandalen
-    if (!politician.scandals) politician.scandals = [];
-
-    const newScandal = {
-        id: Date.now(),
-        title: title,
-        year: year || new Date().getFullYear().toString(),
-        severity: severity,
-        shortDesc: shortDesc,
-        longDesc: shortDesc,
-        sources: sources,
-        status: 'godkendt'
-    };
-
-    politician.scandals.push(newScandal);
-
-    alert('Skandalen er midlertidigt tilføjet! Genindlæs siden for at se den i listen.');
-    closeAdminDashboard();
-
-    // Genopfrisk visningen hvis muligt
-    if (typeof filterPoliticians === 'function') {
-        filterPoliticians();
-    }
-}
-
-// Gør funktionerne globale
+// Gør funktioner globale
 window.showAdminLogin = showAdminLogin;
-window.showAdminDashboard = showAdminDashboard;
