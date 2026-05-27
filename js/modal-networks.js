@@ -1,22 +1,24 @@
 // js/modal-networks.js - Internationale netværk & tilknytninger
-// 1 fil = 1 ansvarsområde
+// Meget robust version med flere fallbacks
 
 function showNetworkConnections(networkName) {
   let connectedPoliticians = [];
 
-  // Først: Prøv det globale networkIndex
-  if (window.networkIndex && window.networkIndex[networkName]) {
+  // 1. Prøv globale networkIndex
+  if (window.networkIndex && Array.isArray(window.networkIndex[networkName])) {
     connectedPoliticians = window.networkIndex[networkName];
-  } 
-  
-  // Fallback: Søg i alle loaded politikere (robusthed)
-  if (connectedPoliticians.length === 0 && typeof politicians !== 'undefined') {
-    politicians.forEach(p => {
+  }
+
+  // 2. Fallback: Søg i window.politicians (case-insensitive)
+  if (connectedPoliticians.length === 0 && window.politicians && Array.isArray(window.politicians)) {
+    const searchName = networkName.toLowerCase();
+    window.politicians.forEach(p => {
       if (p.affiliations && Array.isArray(p.affiliations)) {
-        const hasNetwork = p.affiliations.some(aff => 
-          (aff.name || aff.organization || aff) === networkName
-        );
-        if (hasNetwork) {
+        const hasMatch = p.affiliations.some(aff => {
+          const name = (aff.name || aff.organization || aff || '').toString().toLowerCase();
+          return name === searchName;
+        });
+        if (hasMatch) {
           connectedPoliticians.push({
             id: p.id,
             name: p.name,
@@ -30,7 +32,7 @@ function showNetworkConnections(networkName) {
   }
 
   if (connectedPoliticians.length === 0) {
-    alert('Ingen andre politikere fundet med dette netværk: ' + networkName);
+    alert('Ingen andre politikere fundet med netværket: ' + networkName);
     return;
   }
 
@@ -70,6 +72,9 @@ function showNetworkConnections(networkName) {
     </div>
   `;
 
+  const old = document.getElementById('networkModal');
+  if (old) old.remove();
+
   document.body.insertAdjacentHTML('beforeend', html);
 }
 
@@ -78,6 +83,5 @@ function closeNetworkModal() {
   if (modal) modal.remove();
 }
 
-// Gør globalt tilgængeligt
 window.showNetworkConnections = showNetworkConnections;
 window.closeNetworkModal = closeNetworkModal;
