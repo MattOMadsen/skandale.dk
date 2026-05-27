@@ -75,13 +75,9 @@
         <!-- Parti filtre -->
         <div id="party-filter-chips" class="flex flex-wrap gap-2 mb-6"></div>
 
-        <!-- Grid -->
+        <!-- Grid (skeletons genereres af js/skeleton-loader.js) -->
         <div id="politiciansGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            <!-- Skeleton loader (erstattes af JS) -->
-            <div class="politician-card animate-pulse bg-white border border-slate-200 rounded-3xl p-5 h-48"></div>
-            <div class="politician-card animate-pulse bg-white border border-slate-200 rounded-3xl p-5 h-48"></div>
-            <div class="politician-card animate-pulse bg-white border border-slate-200 rounded-3xl p-5 h-48"></div>
-            <div class="politician-card animate-pulse bg-white border border-slate-200 rounded-3xl p-5 h-48"></div>
+            <!-- Skeletons indsættes dynamisk via JavaScript -->
         </div>
     </div>
 
@@ -115,6 +111,7 @@
     <script src="js/modal-networks.js" defer></script>
     <script src="js/about-modal.js" defer></script>
     <script src="js/mobile-menu.js" defer></script>
+    <script src="js/skeleton-loader.js" defer></script>
     <script src="js/data.js" defer></script>
     <script src="js/search.js" defer></script>
     <script src="js/ui.js" defer></script>
@@ -146,6 +143,9 @@
         window.onload = function() {
             if (typeof initializeEverything === 'function') {
                 initializeEverything();
+            }
+            if (typeof renderPoliticianSkeletons === 'function') {
+                renderPoliticianSkeletons(8);
             }
             setVersion();
             setTimeout(setVersion, 600);
