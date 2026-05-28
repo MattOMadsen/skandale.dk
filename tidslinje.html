@@ -25,72 +25,56 @@
                     </div>
                 </a>
             </div>
-
-            <div class="flex items-center gap-x-4">
-                <a href="index.html" class="text-sm font-medium text-slate-600 hover:text-[#C8102E] transition-colors flex items-center gap-x-2">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <span>Tilbage til forsiden</span>
-                </a>
-            </div>
+            <a href="index.html" class="text-sm font-medium text-slate-600 hover:text-[#C8102E] flex items-center gap-x-2">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Tilbage til forsiden</span>
+            </a>
         </div>
     </nav>
 
-    <!-- Header -->
-    <div class="max-w-7xl mx-auto px-6 pt-10 pb-4">
+    <div class="max-w-7xl mx-auto px-6 pt-8 pb-4">
         <h1 class="text-4xl font-bold tracking-tight">Tidslinje over politiske skandaler</h1>
-        <p class="text-lg text-slate-600 mt-2">Oversigt over skandaler sorteret efter år – nyeste først</p>
+        <p class="mt-2 text-slate-600">Filtrer, søg og se skandaler grupperet efter år</p>
     </div>
 
-    <!-- Søgning + Filtre -->
+    <!-- Controls -->
     <div class="max-w-7xl mx-auto px-6 pb-6">
         <div class="bg-white border border-slate-200 rounded-3xl p-6 space-y-4">
-            
-            <!-- Søgefelt -->
             <div>
-                <label class="block text-xs font-medium text-slate-500 mb-1.5">Søg i skandaler</label>
-                <div class="relative">
-                    <input id="searchInput" type="text" placeholder="Søg efter titel eller beskrivelse..." 
-                           onkeyup="filterAndRenderTimeline()"
-                           class="w-full border border-slate-300 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#C8102E]/30">
-                    <i class="fa-solid fa-search absolute right-4 top-3.5 text-slate-400"></i>
-                </div>
+                <label class="text-xs font-medium text-slate-500 block mb-1">Søg</label>
+                <input id="searchInput" type="text" placeholder="Søg i titel eller beskrivelse..." 
+                       onkeyup="filterTimeline()" 
+                       class="w-full border border-slate-300 rounded-2xl px-4 py-2.5 text-sm">
             </div>
 
-            <!-- Filtre -->
-            <div class="flex flex-wrap gap-4 items-end">
-                <div class="flex-1 min-w-[180px]">
-                    <label class="block text-xs font-medium text-slate-500 mb-1.5">Parti</label>
-                    <select id="filterParty" onchange="filterAndRenderTimeline()" 
-                            class="w-full border border-slate-300 rounded-2xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#C8102E]/30">
+            <div class="flex flex-wrap gap-4">
+                <div class="flex-1 min-w-[160px]">
+                    <label class="text-xs font-medium text-slate-500 block mb-1">Parti</label>
+                    <select id="filterParty" onchange="filterTimeline()" class="w-full border border-slate-300 rounded-2xl px-4 py-2 text-sm">
                         <option value="">Alle partier</option>
                     </select>
                 </div>
-                <div class="flex-1 min-w-[180px]">
-                    <label class="block text-xs font-medium text-slate-500 mb-1.5">Minimum alvorlighed</label>
-                    <select id="filterSeverity" onchange="filterAndRenderTimeline()" 
-                            class="w-full border border-slate-300 rounded-2xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#C8102E]/30">
-                        <option value="">Alle niveauer</option>
+                <div class="flex-1 min-w-[160px]">
+                    <label class="text-xs font-medium text-slate-500 block mb-1">Minimum alvorlighed</label>
+                    <select id="filterSeverity" onchange="filterTimeline()" class="w-full border border-slate-300 rounded-2xl px-4 py-2 text-sm">
+                        <option value="">Alle</option>
                         <option value="1">1+ stjerner</option>
-                        <option value="2">2+ stjerner</option>
-                        <option value="3">3+ stjerner</option>
-                        <option value="4">4+ stjerner</option>
+                        <option value="2">2+</option>
+                        <option value="3">3+</option>
+                        <option value="4">4+</option>
                         <option value="5">5 stjerner</option>
                     </select>
                 </div>
-                <div>
-                    <button onclick="resetAllFilters()" 
-                            class="px-6 py-2.5 text-sm font-medium border border-slate-300 hover:bg-slate-100 rounded-2xl transition-colors">
-                        Nulstil alle filtre
-                    </button>
+                <div class="pt-6">
+                    <button onclick="resetFilters()" class="px-5 py-2 text-sm border rounded-2xl hover:bg-slate-100">Nulstil</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Timeline Content -->
-    <div class="max-w-7xl mx-auto px-6 pb-16">
+    <div class="max-w-7xl mx-auto px-6 pb-12">
         <div id="timelineContent" class="space-y-8">
-            <!-- Indhold indlæses dynamisk med år-gruppering -->
+            <div class="text-center py-10 text-slate-500">Indlæser tidslinje...</div>
         </div>
     </div>
 
@@ -99,184 +83,141 @@
 
     <script>
         let allScandals = [];
-        let currentFiltered = [];
 
         function createStars(severity) {
             let html = '';
             const num = parseInt(severity) || 0;
             for (let i = 1; i <= 5; i++) {
-                if (i <= num) {
-                    html += '<i class="fa-solid fa-star text-yellow-400"></i>';
-                } else {
-                    html += '<i class="fa-regular fa-star text-slate-300"></i>';
-                }
+                html += i <= num 
+                    ? '<i class="fa-solid fa-star text-yellow-400"></i>' 
+                    : '<i class="fa-regular fa-star text-slate-300"></i>';
             }
             return html;
         }
 
-        async function initTimelinePage() {
+        function filterTimeline() {
+            const q = (document.getElementById('searchInput')?.value || '').toLowerCase();
+            const party = document.getElementById('filterParty')?.value || '';
+            const minSev = parseInt(document.getElementById('filterSeverity')?.value) || 0;
+
+            let filtered = allScandals.filter(s => {
+                const matchSearch = !q || (s.title && s.title.toLowerCase().includes(q)) || (s.shortDesc && s.shortDesc.toLowerCase().includes(q));
+                const matchParty = !party || s.party === party;
+                const matchSev = !minSev || (s.severity || 0) >= minSev;
+                return matchSearch && matchParty && matchSev;
+            });
+
+            renderTimeline(filtered);
+        }
+
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('filterParty').value = '';
+            document.getElementById('filterSeverity').value = '';
+            renderTimeline(allScandals);
+        }
+
+        function renderTimeline(list) {
             const container = document.getElementById('timelineContent');
-            
+            if (!container) return;
+            container.innerHTML = '';
+
+            if (!list || list.length === 0) {
+                container.innerHTML = '<p class="text-center text-slate-500 py-8">Ingen resultater.</p>';
+                return;
+            }
+
+            // Group by year
+            const byYear = {};
+            list.forEach(item => {
+                const y = item.year || 'Ukendt';
+                if (!byYear[y]) byYear[y] = [];
+                byYear[y].push(item);
+            });
+
+            Object.keys(byYear).sort((a,b) => b.localeCompare(a)).forEach(year => {
+                const section = document.createElement('div');
+                section.innerHTML = `
+                    <div class="flex items-baseline gap-x-3 mb-3">
+                        <span class="text-2xl font-semibold text-[#C8102E]">${year}</span>
+                        <span class="text-sm text-slate-500">${byYear[year].length} skandaler</span>
+                    </div>
+                `;
+
+                const grid = document.createElement('div');
+                grid.className = 'space-y-3';
+
+                byYear[year].forEach(s => {
+                    const el = document.createElement('div');
+                    el.className = 'p-5 border border-slate-200 rounded-2xl hover:border-[#C8102E]/30 cursor-pointer flex gap-4';
+                    el.onclick = () => {
+                        if (window.showPoliticianModal) window.showPoliticianModal(s.politicianId);
+                    };
+                    el.innerHTML = `
+                        <div class="w-14 text-center">
+                            <div class="font-bold text-[#C8102E]">${s.year}</div>
+                            <div>${createStars(s.severity)}</div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-semibold group-hover:text-[#C8102E]">${s.title}</div>
+                            <div class="text-sm text-slate-600 line-clamp-2 mt-0.5">${s.shortDesc || ''}</div>
+                            <span class="inline-block mt-2 text-xs px-2 py-0.5 rounded-full" style="background:${s.partyColor}20; color:${s.partyColor}">${s.politicianName} • ${s.party}</span>
+                        </div>
+                    `;
+                    grid.appendChild(el);
+                });
+
+                section.appendChild(grid);
+                container.appendChild(section);
+            });
+        }
+
+        async function loadData() {
             try {
-                await loadPoliticians();
-                
+                // Wait for data.js to populate window.politicians
+                if (typeof loadPoliticians === 'function') {
+                    await loadPoliticians();
+                }
+
                 const pols = window.politicians || [];
                 allScandals = [];
 
-                pols.forEach(politician => {
-                    if (politician.scandals && Array.isArray(politician.scandals)) {
-                        politician.scandals.forEach(scandal => {
+                pols.forEach(p => {
+                    if (p.scandals && Array.isArray(p.scandals)) {
+                        p.scandals.forEach(sc => {
                             allScandals.push({
-                                ...scandal,
-                                politicianName: politician.name,
-                                politicianId: politician.id,
-                                party: politician.party,
-                                partyColor: politician.partyColor || '#64748b'
+                                ...sc,
+                                politicianName: p.name,
+                                politicianId: p.id,
+                                party: p.party,
+                                partyColor: p.partyColor || '#64748b'
                             });
                         });
                     }
                 });
 
-                // Sorter nyeste først
-                allScandals.sort((a, b) => (b.year || '0').localeCompare(a.year || '0'));
-                currentFiltered = [...allScandals];
+                allScandals.sort((a, b) => (b.year || '').localeCompare(a.year || ''));
 
-                // Byg parti-filter
-                buildPartyFilter();
-
-                renderGroupedTimeline(currentFiltered);
-
-            } catch (e) {
-                console.error(e);
-                container.innerHTML = '<p class="text-red-500 text-center py-8">Der opstod en fejl ved indlæsning af tidslinjen.</p>';
-            }
-        }
-
-        function buildPartyFilter() {
-            const select = document.getElementById('filterParty');
-            if (!select) return;
-
-            const parties = [...new Set(allScandals.map(s => s.party))].sort();
-            select.innerHTML = '<option value="">Alle partier</option>';
-            parties.forEach(party => {
-                const opt = document.createElement('option');
-                opt.value = party;
-                opt.textContent = party;
-                select.appendChild(opt);
-            });
-        }
-
-        function filterAndRenderTimeline() {
-            const searchTerm = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
-            const party = document.getElementById('filterParty')?.value || '';
-            const minSeverity = parseInt(document.getElementById('filterSeverity')?.value) || 0;
-
-            let filtered = allScandals;
-
-            if (searchTerm) {
-                filtered = filtered.filter(s => 
-                    (s.title && s.title.toLowerCase().includes(searchTerm)) || 
-                    (s.shortDesc && s.shortDesc.toLowerCase().includes(searchTerm))
-                );
-            }
-
-            if (party) {
-                filtered = filtered.filter(s => s.party === party);
-            }
-
-            if (minSeverity > 0) {
-                filtered = filtered.filter(s => (s.severity || 0) >= minSeverity);
-            }
-
-            currentFiltered = filtered;
-            renderGroupedTimeline(filtered);
-        }
-
-        function resetAllFilters() {
-            const search = document.getElementById('searchInput');
-            const party = document.getElementById('filterParty');
-            const severity = document.getElementById('filterSeverity');
-
-            if (search) search.value = '';
-            if (party) party.value = '';
-            if (severity) severity.value = '';
-
-            currentFiltered = [...allScandals];
-            renderGroupedTimeline(allScandals);
-        }
-
-        function renderGroupedTimeline(scandals) {
-            const container = document.getElementById('timelineContent');
-            if (!container) return;
-
-            container.innerHTML = '';
-
-            if (!scandals || scandals.length === 0) {
-                container.innerHTML = '<p class="text-slate-500 text-center py-8">Ingen skandaler matcher dine filtre.</p>';
-                return;
-            }
-
-            // Grupper efter år
-            const grouped = {};
-            scandals.forEach(s => {
-                const year = s.year || 'Ukendt år';
-                if (!grouped[year]) grouped[year] = [];
-                grouped[year].push(s);
-            });
-
-            // Render grupper (nyeste først)
-            const sortedYears = Object.keys(grouped).sort((a, b) => b.localeCompare(a));
-
-            sortedYears.forEach(year => {
-                const yearSection = document.createElement('div');
-                yearSection.innerHTML = `
-                    <div class="flex items-center gap-x-3 mb-4">
-                        <div class="text-2xl font-bold text-[#C8102E]">${year}</div>
-                        <div class="flex-1 h-px bg-slate-200"></div>
-                        <div class="text-sm text-slate-500">${grouped[year].length} skandaler</div>
-                    </div>
-                `;
-
-                const list = document.createElement('div');
-                list.className = 'space-y-3 mb-8';
-
-                grouped[year].forEach(scandal => {
-                    const card = document.createElement('div');
-                    card.className = 'flex gap-4 p-5 border border-slate-200 rounded-2xl hover:border-[#C8102E]/30 cursor-pointer group transition-all bg-white';
-                    card.onclick = () => {
-                        if (typeof window.showPoliticianModal === 'function') {
-                            window.showPoliticianModal(scandal.politicianId);
-                        }
-                    };
-
-                    card.innerHTML = `
-                        <div class="w-16 text-center flex-shrink-0">
-                            <div class="text-xl font-bold text-[#C8102E]">${scandal.year}</div>
-                            <div class="flex justify-center mt-1">${createStars(scandal.severity)}</div>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <div class="flex items-center gap-x-3 flex-wrap">
-                                <span class="font-bold text-lg group-hover:text-[#C8102E]">${scandal.title}</span>
-                                <span class="text-xs px-2.5 py-0.5 rounded-full" style="background-color: ${scandal.partyColor}20; color: ${scandal.partyColor}">
-                                    ${scandal.politicianName}
-                                </span>
-                            </div>
-                            <div class="text-sm text-slate-600 mt-1 line-clamp-2">${scandal.shortDesc || ''}</div>
-                        </div>
-                        <div class="flex items-center text-slate-400 group-hover:text-[#C8102E]">
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </div>
-                    `;
-                    list.appendChild(card);
+                // Build party filter
+                const partySelect = document.getElementById('filterParty');
+                const uniqueParties = [...new Set(allScandals.map(s => s.party))].sort();
+                uniqueParties.forEach(p => {
+                    const opt = document.createElement('option');
+                    opt.value = p;
+                    opt.textContent = p;
+                    partySelect.appendChild(opt);
                 });
 
-                yearSection.appendChild(list);
-                container.appendChild(yearSection);
-            });
+                renderTimeline(allScandals);
+
+            } catch (err) {
+                console.error(err);
+                document.getElementById('timelineContent').innerHTML = 
+                    '<p class="text-center text-red-500 py-8">Kunne ikke indlæse data. Prøv at genindlæse siden.</p>';
+            }
         }
 
-        // Start
-        document.addEventListener('DOMContentLoaded', initTimelinePage);
+        document.addEventListener('DOMContentLoaded', loadData);
     </script>
 
 </body>
