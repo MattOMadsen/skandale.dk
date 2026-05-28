@@ -1,3 +1,16 @@
+## [v2.00.84] - 2026-05-28
+### Timeline Feature Overhaul
+- Oprettet dedikeret `tidslinje.html` som fuld side (bedre mobiloplevelse)
+- Tilføjet real-time søgning i skandaler på tidslinjesiden
+- Tilføjet gruppering efter år med overskrifter
+- Kombinerede filtre (søgning + parti + alvorlighed) på den nye side
+- Opdateret menu så "Tidslinje" linker direkte til den nye dedikerede side
+- Forbedret visuel visning af alvorlighed og parti-farver
+
+### Fixes
+- Rettet at politikere ikke blev vist på forsiden efter tidligere ændringer (tilføjet sikkerhedsnet + genoprettet ren index.html)
+- Timeline modal gjort robust og genskabt historisk design
+
 ## [v2.00.83] - 2026-05-27
 ### Refactor & Modularity
 - Kraftig oprydning af `index.html` – trukket så meget som muligt ud i separate filer
@@ -20,12 +33,3 @@
 ## [v2.00.81] - 2026-05-27
 ### Fixed
 - Mindre justeringer og oprydning
-
-## [v2.00.80] - 2026-05-26
-### Fixed
-- Rettet index.html (genskabt fuld version med parti-filter og dynamisk politikerantal)
-
-## [v2.00.79] - 2026-05-26
-### Added
-- Parti-filter på forsiden
-- Dynamisk antal politikere (15)
