@@ -139,5 +139,20 @@
     <script src="js/modal-share.js"></script>
     <script src="js/modal-helpers.js"></script>
 
+    <!-- Sikkerhedsnet: Tving rendering af politikere hvis main.js ikke gjorde det -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                if (typeof window.renderPoliticians === 'function') {
+                    if (typeof window.politicians !== 'undefined' && window.politicians.length > 0) {
+                        window.renderPoliticians();
+                    } else if (typeof initializeEverything === 'function') {
+                        initializeEverything();
+                    }
+                }
+            }, 600);
+        });
+    </script>
+
 </body>
 </html>
