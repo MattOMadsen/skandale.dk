@@ -27,7 +27,7 @@
             <!-- Desktop Menu -->
             <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
                 <a href="#" onclick="document.getElementById('politicians-section').scrollIntoView({ behavior: 'smooth' })" class="text-slate-600 hover:text-[#C8102E] transition-colors">Politikere</a>
-                <a href="#" onclick="if (typeof window.showTimelineModal === 'function') window.showTimelineModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors">Tidslinje</a>
+                <a href="tidslinje.html" class="text-slate-600 hover:text-[#C8102E] transition-colors">Tidslinje</a>
                 <a href="#" onclick="if (typeof window.showCompareModal === 'function') window.showCompareModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors">Sammenlign</a>
                 <a href="#" onclick="if (typeof window.showStatsModal === 'function') window.showStatsModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors">Statistik</a>
                 <a href="#" onclick="if (typeof window.showNetworkOverviewModal === 'function') window.showNetworkOverviewModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors">Netværk & Overlap</a>
@@ -57,7 +57,7 @@
 
             <div class="flex-1 flex flex-col p-6 space-y-2 text-lg">
                 <a href="#" onclick="closeMobileMenu(); document.getElementById('politicians-section').scrollIntoView({ behavior: 'smooth' })" class="py-3 border-b">Politikere</a>
-                <a href="#" onclick="closeMobileMenu(); if (typeof window.showTimelineModal === 'function') window.showTimelineModal()" class="py-3 border-b">Tidslinje</a>
+                <a href="tidslinje.html" onclick="closeMobileMenu()" class="py-3 border-b">Tidslinje</a>
                 <a href="#" onclick="closeMobileMenu(); if (typeof window.showCompareModal === 'function') window.showCompareModal()" class="py-3 border-b">Sammenlign</a>
                 <a href="#" onclick="closeMobileMenu(); if (typeof window.showStatsModal === 'function') window.showStatsModal()" class="py-3 border-b">Statistik</a>
                 <a href="#" onclick="closeMobileMenu(); if (typeof window.showNetworkOverviewModal === 'function') window.showNetworkOverviewModal()" class="py-3 border-b">Netværk & Overlap</a>
@@ -104,87 +104,40 @@
         <div class="flex items-end justify-between mb-6">
             <div>
                 <h2 class="text-3xl font-bold tracking-tight">Politikere</h2>
-                <p class="text-slate-500">Klik på et kort for at se detaljer</p>
+                <p class="text-slate-600">Klik på en politiker for at se detaljer, skandaler og vurderinger</p>
             </div>
-            <div id="politician-count" class="text-sm text-slate-500 font-medium"></div>
         </div>
 
-        <div id="party-filter-chips" class="flex flex-wrap gap-2 mb-6"></div>
-
-        <div id="politiciansGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            <!-- Skeletons genereres af js/skeleton-loader.js -->
+        <div id="politiciansGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Politikere indsættes dynamisk via js/ui.js -->
         </div>
     </div>
 
-    <!-- Timeline Modal -->
-    <div id="timelineModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[150] flex items-center justify-center p-4">
-        <!-- Indhold styres af timeline.js -->
-    </div>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/version.js"></script>
+    <script src="js/stats-snapshot.js"></script>
 
-    <!-- Party Overview Modal -->
-    <div id="partyOverviewModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[150] flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl">
-            <div class="px-8 pt-8 pb-6 border-b flex justify-between">
-                <h3 class="text-3xl font-bold">Parti-oversigt</h3>
-                <button onclick="closePartyOverviewModal()" class="text-3xl">×</button>
-            </div>
-            <div id="partyOverviewContent" class="p-8"></div>
-        </div>
-    </div>
-
-    <footer class="border-t py-8 text-center text-sm text-slate-500">
-        Skandale.dk • Data fra offentlige kilder • <span id="app-version-footer" class="font-mono"></span>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="js/version.js" defer></script>
-    <script src="js/modal-core.js" defer></script>
-    <script src="js/modal-scandal.js" defer></script>
-    <script src="js/modal-voting.js" defer></script>
-    <script src="js/modal-comments.js" defer></script>
-    <script src="js/modal-donor.js" defer></script>
-    <script src="js/modal-networks.js" defer></script>
-    <script src="js/about-modal.js" defer></script>
-    <script src="js/mobile-menu.js" defer></script>
-    <script src="js/skeleton-loader.js" defer></script>
-    <script src="js/data.js" defer></script>
-    <script src="js/search.js" defer></script>
-    <script src="js/ui.js" defer></script>
-    <script src="js/timeline.js" defer></script>
-    <script src="js/main.js" defer></script>
-    <script src="js/stats-snapshot.js" defer></script>
-    <script src="js/modal-broken-promises.js" defer></script>
-    <script src="js/modal-share.js" defer></script>
-    <script src="js/modal-party.js" defer></script>
-    <script src="js/modal-compare.js" defer></script>
-    <script src="js/modal-stats.js" defer></script>
-    <script src="js/modal-network-overview.js" defer></script>
-    <script src="js/modal-pdf-export.js" defer></script>
-    <script src="js/modal-admin.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
-
-    <script>
-        function setVersion() {
-            if (typeof APP_VERSION !== 'undefined') {
-                const ids = ['app-version', 'app-version-hero', 'app-version-footer', 'mobile-version', 'navbar-version'];
-                ids.forEach(id => {
-                    const el = document.getElementById(id);
-                    if (el) el.textContent = APP_VERSION;
-                });
-            }
-        }
-
-        window.onload = function() {
-            if (typeof initializeEverything === 'function') {
-                initializeEverything();
-            }
-            if (typeof renderPoliticianSkeletons === 'function') {
-                renderPoliticianSkeletons(8);
-            }
-            setVersion();
-            setTimeout(setVersion, 600);
-        };
-    </script>
+    <!-- Modal scripts -->
+    <script src="js/modal-core.js"></script>
+    <script src="js/modal-scandal.js"></script>
+    <script src="js/modal-comments.js"></script>
+    <script src="js/modal-donor.js"></script>
+    <script src="js/modal-affiliations.js"></script>
+    <script src="js/modal-broken-promises.js"></script>
+    <script src="js/modal-compare.js"></script>
+    <script src="js/modal-stats.js"></script>
+    <script src="js/modal-networks.js"></script>
+    <script src="js/modal-network-overview.js"></script>
+    <script src="js/modal-party.js"></script>
+    <script src="js/modal-admin.js"></script>
+    <script src="js/modal-add-scandal.js"></script>
+    <script src="js/modal-pdf-export.js"></script>
+    <script src="js/modal-voting.js"></script>
+    <script src="js/modal-share.js"></script>
+    <script src="js/modal-helpers.js"></script>
 
 </body>
 </html>
