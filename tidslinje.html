@@ -78,7 +78,21 @@
         </div>
     </div>
 
+    <!-- Core data -->
     <script src="js/data.js"></script>
+
+    <!-- Modal scripts (nødvendige for at åbne politikermodal fra tidslinjen) -->
+    <script src="js/modal-helpers.js"></script>
+    <script src="js/modal-scandal.js"></script>
+    <script src="js/modal-core.js"></script>
+    <script src="js/modal-donor.js"></script>
+    <script src="js/modal-broken-promises.js"></script>
+    <script src="js/modal-share.js"></script>
+    <script src="js/modal-networks.js"></script>
+    <script src="js/modal-pdf-export.js"></script>
+    <script src="js/modal-add-scandal.js"></script>
+
+    <!-- Timeline logic -->
     <script src="js/timeline.js"></script>
 
     <script>
@@ -177,6 +191,11 @@
                 // Wait for data.js to populate window.politicians
                 if (typeof loadPoliticians === 'function') {
                     await loadPoliticians();
+                }
+
+                // === SOLID LØSNING: Proaktiv load af alle detaljer (inkl. skandaler) ===
+                if (typeof loadAllPoliticianDetails === 'function') {
+                    await loadAllPoliticianDetails();
                 }
 
                 const pols = window.politicians || [];

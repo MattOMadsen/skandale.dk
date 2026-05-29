@@ -148,3 +148,56 @@ async function loadPoliticianDetails(politician) {
 
 // Gør funktionen globalt tilgængelig
 window.loadPoliticianDetails = loadPoliticianDetails;
+
+/**
+ * SOLID & ROBUST: Proaktiv loader af fulde detaljer for ALLE politikere.
+ * 
+ * Denne funktion er designet til dedikerede sider (tidslinje.html) og
+ * til at gøre timeline-modalen mere pålidelig.
+ * 
+ * - Bruger Promise.allSettled så én fejlet politiker ikke stopper resten
+ * - Har per-politiker error handling og god logging
+ * - Genbrugelig og centraliseret (let at vedligeholde)
+ */
+async function loadAllPoliticianDetails() {
+  const pols = (typeof politicians !== 'undefined' && politicians.length) 
+    ? politicians 
+    : (window.politicians || []);
+
+  if (!pols.length) {
+    console.warn('[data.js] Ingen politikere at loade detaljer for');
+    return;
+  }
+
+  console.log(`[data.js] Starter proaktiv load af detaljer for ${pols.length} politikere...`);
+
+  const results = await Promise.allSettled(
+    pols.map(async (p) => {
+      if (p._detailsLoaded) {
+        return { name: p.name, status: 'already-loaded' };
+      }
+      if (typeof loadPoliticianDetails === 'function') {
+        try {
+          await loadPoliticianDetails(p);
+          return { name: p.name, status: 'loaded' };
+        } catch (err) {
+          console.warn(`[data.js] Fejl ved load af detaljer for ${p.name}:`, err);
+          return { name: p.name, status: 'error', error: err.message };
+        }
+      }
+      return { name: p.name, status: 'no-loader-available' };
+    })
+  );
+
+  const loadedCount = results.filter(r => 
+    r.status === 'fulfilled' && r.value.status === 'loaded'
+  ).length;
+
+  const alreadyLoaded = results.filter(r => 
+    r.status === 'fulfilled' && r.value.status === 'already-loaded'
+  ).length;
+
+  console.log(`[data.js] Proaktiv load færdig. ${loadedCount} nye + ${alreadyLoaded} allerede loaded.`);
+}
+
+window.loadAllPoliticianDetails = loadAllPoliticianDetails;
