@@ -73,10 +73,8 @@
         </div>
     </div>
 
+    <!-- Kun data.js og timeline.js - ingen modal scripts -->
     <script src="js/data.js"></script>
-    <script src="js/modal-helpers.js"></script>
-    <script src="js/modal-scandal.js"></script>
-    <script src="js/modal-core.js"></script>
     <script src="js/timeline.js"></script>
 
     <script>
@@ -133,7 +131,7 @@
                 byYear[year].forEach(s => {
                     const el = document.createElement('div');
                     el.className = 'p-5 border border-slate-200 rounded-2xl hover:border-[#C8102E]/30 cursor-pointer flex gap-4';
-                    el.onclick = () => { if (window.showPoliticianModal) window.showPoliticianModal(s.politicianId); };
+                    el.onclick = () => alert('Modal åbnes fra forsiden. Denne dedikerede side er under reparation.');
                     el.innerHTML = `<div class="w-14 text-center"><div class="font-bold text-[#C8102E]">${s.year}</div><div>${createStars(s.severity)}</div></div><div class="flex-1"><div class="font-semibold">${s.title}</div><div class="text-sm text-slate-600 line-clamp-2 mt-0.5">${s.shortDesc || ''}</div><span class="inline-block mt-2 text-xs px-2 py-0.5 rounded-full" style="background:${s.partyColor}20; color:${s.partyColor}">${s.politicianName} • ${s.party}</span></div>`;
                     grid.appendChild(el);
                 });
@@ -151,7 +149,7 @@
                     await loadPoliticians();
                 }
 
-                if (container) container.innerHTML = '<div class="text-center py-10 text-slate-500">Henter skandaler fra alle politikere...</div>';
+                if (container) container.innerHTML = '<div class="text-center py-10 text-slate-500">Henter skandaler...</div>';
 
                 if (typeof loadAllPoliticianDetails === 'function') {
                     await loadAllPoliticianDetails();
@@ -167,6 +165,8 @@
                         });
                     }
                 });
+
+                console.log('Antal skandaler fundet:', allScandals.length);
 
                 allScandals.sort((a, b) => (b.year || '').localeCompare(a.year || ''));
 
@@ -184,9 +184,9 @@
                 renderTimeline(allScandals);
 
             } catch (err) {
-                console.error('Fejl i tidslinje loadData:', err);
+                console.error('Fejl:', err);
                 if (container) {
-                    container.innerHTML = `<div class="text-center py-10"><p class="text-red-500">Der opstod en fejl under indlæsning.</p><p class="text-xs text-slate-400 mt-2">${err.message}</p></div>`;
+                    container.innerHTML = `<div class="text-center py-10 text-red-500">Fejl: ${err.message}</div>`;
                 }
             }
         }
