@@ -116,7 +116,7 @@
             if (!container) return;
             container.innerHTML = '';
             if (!list || list.length === 0) {
-                container.innerHTML = '<p class="text-center text-slate-500 py-8">Ingen resultater.</p>';
+                container.innerHTML = '<p class="text-center text-slate-500 py-8">Ingen skandaler fundet.</p>';
                 return;
             }
             const byYear = {};
@@ -145,17 +145,16 @@
         async function loadData() {
             const container = document.getElementById('timelineContent');
             try {
-                console.log('%c[tidslinje] loadData startet', 'color:#64748b');
+                if (container) container.innerHTML = '<div class="text-center py-10 text-slate-500">Indlæser politikere...</div>';
 
                 if (typeof loadPoliticians === 'function') {
                     await loadPoliticians();
                 }
-                console.log('%c[tidslinje] Politikere core loaded', 'color:#64748b');
+
+                if (container) container.innerHTML = '<div class="text-center py-10 text-slate-500">Henter skandaler fra alle politikere...</div>';
 
                 if (typeof loadAllPoliticianDetails === 'function') {
-                    console.log('%c[tidslinje] Starter proaktiv loadAllPoliticianDetails...', 'color:#f59e0b');
                     await loadAllPoliticianDetails();
-                    console.log('%c[tidslinje] Proaktiv load færdig', 'color:#10b981');
                 }
 
                 const pols = window.politicians || [];
@@ -168,8 +167,6 @@
                         });
                     }
                 });
-
-                console.log('%c[tidslinje] Antal skandaler fundet:', 'color:#10b981', allScandals.length);
 
                 allScandals.sort((a, b) => (b.year || '').localeCompare(a.year || ''));
 
@@ -187,9 +184,9 @@
                 renderTimeline(allScandals);
 
             } catch (err) {
-                console.error('%c[tidslinje] FEJL i loadData:', 'color:#ef4444', err);
+                console.error('Fejl i tidslinje loadData:', err);
                 if (container) {
-                    container.innerHTML = `<p class="text-center text-red-500 py-8">Der opstod en fejl under indlæsning.<br><span class="text-xs text-slate-400">${err.message}</span></p>`;
+                    container.innerHTML = `<div class="text-center py-10"><p class="text-red-500">Der opstod en fejl under indlæsning.</p><p class="text-xs text-slate-400 mt-2">${err.message}</p></div>`;
                 }
             }
         }
