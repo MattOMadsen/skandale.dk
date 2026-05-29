@@ -184,17 +184,14 @@
         let selectedPolitician1 = null;
         let selectedPolitician2 = null;
 
-        // Initialiser Tailwind
         function initTailwind() {
             document.documentElement.style.setProperty('--accent', '#C8102E');
         }
 
-        // Indlæs og populér selects
         async function initComparisonPage() {
             initTailwind();
             initMobileMenu();
 
-            // Indlæs politikere
             if (typeof loadPoliticians === 'function') {
                 await loadPoliticians();
             }
@@ -207,7 +204,6 @@
                 return;
             }
 
-            // Populér begge selects
             window.politicians.forEach(p => {
                 const option1 = new Option(p.name, p.id);
                 const option2 = new Option(p.name, p.id);
@@ -215,11 +211,9 @@
                 select2.appendChild(option2);
             });
 
-            // Event listeners
             select1.addEventListener('change', () => handlePoliticianSelect(1, select1.value));
             select2.addEventListener('change', () => handlePoliticianSelect(2, select2.value));
 
-            // Tjek URL parametre
             checkUrlParams();
         }
 
@@ -229,7 +223,6 @@
             const politician = window.politicians.find(p => p.id == politicianId);
             if (!politician) return;
 
-            // Undgå at vælge samme politiker i begge felter
             if (slot === 1 && selectedPolitician2 && selectedPolitician2.id == politicianId) {
                 alert('Du kan ikke vælge den samme politiker to gange.');
                 document.getElementById('politician1-select').value = '';
@@ -241,7 +234,6 @@
                 return;
             }
 
-            // Load detaljer hvis nødvendigt
             let loadedPolitician = politician;
             if (!politician._detailsLoaded && typeof loadPoliticianDetails === 'function') {
                 try {
@@ -259,7 +251,6 @@
                 updateSelectedDisplay(2, loadedPolitician);
             }
 
-            // Opdater sammenligning hvis begge er valgt
             if (selectedPolitician1 && selectedPolitician2) {
                 await showComparisonResult();
             }
@@ -301,10 +292,6 @@
             const totalSupport = support.reduce((sum, s) => {
                 const amount = parseInt((s.amount || '0').replace(/[^0-9]/g, '')) || 0;
                 return sum + amount;
-            }, 0);
-
-            const otherTotalSupport = (otherPolitician.economicSupport || []).reduce((sum, s) => {
-                return sum + (parseInt((s.amount || '0').replace(/[^0-9]/g, '')) || 0);
             }, 0);
 
             const broken = politician.brokenPromises ? politician.brokenPromises.length : 0;
@@ -351,7 +338,9 @@
                 </div>
 
                 <div class="mt-8 pt-6 border-t">
-                    <a href="index.html" class="text-sm text-[#C8102E] hover:underline flex items-center gap-x-1">
+                    <a href="index.html" 
+                       onclick="localStorage.setItem('openPoliticianOnLoad', '${politician.id}');"
+                       class="text-sm text-[#C8102E] hover:underline flex items-center gap-x-1">
                         <span>Se fuld profil og skandaler</span>
                         <i class="fa-solid fa-arrow-right text-xs"></i>
                     </a>
@@ -366,11 +355,9 @@
             selectedPolitician1 = selectedPolitician2;
             selectedPolitician2 = temp;
 
-            // Opdater selects
             document.getElementById('politician1-select').value = selectedPolitician1.id;
             document.getElementById('politician2-select').value = selectedPolitician2.id;
 
-            // Opdater visning
             updateSelectedDisplay(1, selectedPolitician1);
             updateSelectedDisplay(2, selectedPolitician2);
 
@@ -425,7 +412,6 @@
             });
         }
 
-        // Start siden
         document.addEventListener('DOMContentLoaded', initComparisonPage);
     </script>
 

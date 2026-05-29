@@ -121,14 +121,6 @@
     <script src="js/stats-snapshot.js"></script>
 
     <!-- Modal scripts -->
-    <script src="js/data.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/ui.js"></script>
-    <script src="js/search.js"></script>
-    <script src="js/version.js"></script>
-    <script src="js/stats-snapshot.js"></script>
-
-    <!-- Modal scripts -->
     <script src="js/modal-core.js"></script>
     <script src="js/modal-scandal.js"></script>
     <script src="js/modal-comments.js"></script>
@@ -147,7 +139,7 @@
     <script src="js/modal-share.js"></script>
     <script src="js/modal-helpers.js"></script>
 
-    <!-- Sikkerhedsnet: Tving rendering af politikere hvis main.js ikke gjorde det -->
+    <!-- Sikkerhedsnet + Auto-open politician fra sammenlign side -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(function() {
@@ -158,7 +150,14 @@
                         initializeEverything();
                     }
                 }
-            }, 600);
+
+                // Tjek om vi skal åbne en bestemt politiker (fra sammenlign.html)
+                const politicianId = localStorage.getItem('openPoliticianOnLoad');
+                if (politicianId && typeof window.openPoliticianModal === 'function') {
+                    window.openPoliticianModal(politicianId);
+                    localStorage.removeItem('openPoliticianOnLoad');
+                }
+            }, 800);
         });
     </script>
 
