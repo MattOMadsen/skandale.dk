@@ -139,9 +139,41 @@
     <script src="js/modal-share.js"></script>
     <script src="js/modal-helpers.js"></script>
 
-    <!-- Sikkerhedsnet + Auto-open politician fra sammenlign side -->
+    <!-- Sikkerhedsnet + Robust auto-open fra sammenlign.html -->
     <script>
+        function tryOpenPoliticianFromStorage(attempt = 1) {
+            const maxAttempts = 6;
+            const politicianId = localStorage.getItem('openPoliticianOnLoad');
+
+            if (!politicianId) return;
+
+            const hasData = typeof window.politicians !== 'undefined' && window.politicians.length > 0;
+            const hasModalFn = typeof window.openPoliticianModal === 'function';
+
+            if (hasData && hasModalFn) {
+                try {
+                    window.openPoliticianModal(politicianId);
+                    localStorage.removeItem('openPoliticianOnLoad');
+                    console.log('%c[Skandale.dk] Auto-åbnede politiker fra sammenlign: ' + politicianId, 'color:#10b981');
+                } catch (e) {
+                    console.warn('Fejl ved auto-open af politiker:', e);
+                    localStorage.removeItem('openPoliticianOnLoad');
+                }
+                return;
+            }
+
+            if (attempt < maxAttempts) {
+                const delay = 300 * attempt; // 300ms, 600ms, 900ms ...
+                setTimeout(() => tryOpenPoliticianFromStorage(attempt + 1), delay);
+            } else {
+                // Giver op efter flere forsøg
+                localStorage.removeItem('openPoliticianOnLoad');
+                console.warn('Kunne ikke auto-åbne politiker efter flere forsøg. Prøv at genindlæse.');
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
+            // Først: Render politikere hvis nødvendigt
             setTimeout(function() {
                 if (typeof window.renderPoliticians === 'function') {
                     if (typeof window.politicians !== 'undefined' && window.politicians.length > 0) {
@@ -151,13 +183,9 @@
                     }
                 }
 
-                // Tjek om vi skal åbne en bestemt politiker (fra sammenlign.html)
-                const politicianId = localStorage.getItem('openPoliticianOnLoad');
-                if (politicianId && typeof window.openPoliticianModal === 'function') {
-                    window.openPoliticianModal(politicianId);
-                    localStorage.removeItem('openPoliticianOnLoad');
-                }
-            }, 800);
+                // Derefter: Prøv at åbne politiker fra sammenlign-siden (med retry)
+                tryOpenPoliticianFromStorage();
+            }, 600);
         });
     </script>
 
