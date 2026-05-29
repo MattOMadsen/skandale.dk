@@ -139,41 +139,42 @@
     <script src="js/modal-share.js"></script>
     <script src="js/modal-helpers.js"></script>
 
-    <!-- Sikkerhedsnet + Robust auto-open fra sammenlign.html -->
+    <!-- Sikkerhedsnet + Robust auto-open fra sammenlign.html (med fallback) -->
     <script>
         function tryOpenPoliticianFromStorage(attempt = 1) {
-            const maxAttempts = 6;
+            const maxAttempts = 8;
             const politicianId = localStorage.getItem('openPoliticianOnLoad');
 
             if (!politicianId) return;
 
-            const hasData = typeof window.politicians !== 'undefined' && window.politicians.length > 0;
-            const hasModalFn = typeof window.openPoliticianModal === 'function';
+            const hasData = typeof window.politicians !== 'undefined' && Array.isArray(window.politicians) && window.politicians.length > 0;
 
-            if (hasData && hasModalFn) {
+            // Prøv både openPoliticianModal og showPoliticianModal
+            const openFn = window.openPoliticianModal || window.showPoliticianModal;
+
+            if (hasData && typeof openFn === 'function') {
                 try {
-                    window.openPoliticianModal(politicianId);
+                    openFn(politicianId);
                     localStorage.removeItem('openPoliticianOnLoad');
-                    console.log('%c[Skandale.dk] Auto-åbnede politiker fra sammenlign: ' + politicianId, 'color:#10b981');
+                    console.log('%c[Skandale.dk] Auto-åbnede politiker: ' + politicianId, 'color:#10b981');
+                    return;
                 } catch (e) {
-                    console.warn('Fejl ved auto-open af politiker:', e);
-                    localStorage.removeItem('openPoliticianOnLoad');
+                    console.error('Fejl ved kald af open/showPoliticianModal:', e);
                 }
-                return;
             }
 
             if (attempt < maxAttempts) {
-                const delay = 300 * attempt; // 300ms, 600ms, 900ms ...
+                const delay = 250 * attempt;
                 setTimeout(() => tryOpenPoliticianFromStorage(attempt + 1), delay);
             } else {
-                // Giver op efter flere forsøg
                 localStorage.removeItem('openPoliticianOnLoad');
-                console.warn('Kunne ikke auto-åbne politiker efter flere forsøg. Prøv at genindlæse.');
+                console.warn('Kunne ikke auto-åbne politiker efter ' + maxAttempts + ' forsøg.');
+                // Valgfri fallback besked til brugeren
+                // alert('Kunne ikke åbne politikeren automatisk. Prøv at klikke på politiker-kortet på forsiden.');
             }
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Først: Render politikere hvis nødvendigt
             setTimeout(function() {
                 if (typeof window.renderPoliticians === 'function') {
                     if (typeof window.politicians !== 'undefined' && window.politicians.length > 0) {
@@ -183,9 +184,8 @@
                     }
                 }
 
-                // Derefter: Prøv at åbne politiker fra sammenlign-siden (med retry)
                 tryOpenPoliticianFromStorage();
-            }, 600);
+            }, 500);
         });
     </script>
 
