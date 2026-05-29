@@ -1,7 +1,6 @@
 # TODO-liste for Skandale.dk
 
 ## Kendte bugs (skal fixes)
-- Tidslinje virker ikke fra menuen
 - Sammenlign virker ikke ordentligt
 - "Før politik / Ungdom" og "Karriere oversigt" virker ikke i modal
 - "Tilføj ny" i modal virker ikke
