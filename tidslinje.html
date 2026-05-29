@@ -73,7 +73,11 @@
         </div>
     </div>
 
+    <!-- Data + nødvendige modal scripts -->
     <script src="js/data.js"></script>
+    <script src="js/modal-helpers.js"></script>
+    <script src="js/modal-scandal.js"></script>
+    <script src="js/modal-core.js"></script>
 
     <script>
         let allScandals = [];
@@ -172,7 +176,6 @@
 
                 allScandals.sort((a, b) => (b.year || '').localeCompare(a.year || ''));
 
-                // Byg parti-filter
                 const partySelect = document.getElementById('filterParty');
                 if (partySelect) {
                     const unique = [...new Set(allScandals.map(s => s.party))].sort();
