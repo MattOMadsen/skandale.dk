@@ -1,102 +1,76 @@
-# TODO & Roadmap – Skandale.dk
+# TODO-liste for Skandale.dk
 
-**Sidst tjekket:** 27. maj 2026  
-**Baseret på gennemgang af:** `index.html`, `js/`, `manifest.json`, `sw.js`, `data/` mappen og dokumentationsfiler.
+## Kendte bugs (skal fixes)
+- Tidslinje virker ikke fra menuen
+- Sammenlign virker ikke ordentligt
+- "Før politik / Ungdom" og "Karriere oversigt" virker ikke i modal
+- "Tilføj ny" i modal virker ikke
+- Modal lukker hele politikeren når man interagerer inde i den
 
----
+## Fuldført
+- Sammenlign to politikere (`js/modal-compare.js` + menu-link)
+- PDF-eksport af en politikers rapport (`js/modal-pdf-export.js` + jsPDF)
+- Mulighed for at tilføje nye skandaler direkte på siden (`js/modal-add-scandal.js` med Formspree)
+- PWA (kan installeres på telefon) (`manifest.json`, `sw.js`, ikoner)
+- Password-beskyttet Admin Dashboard (`js/modal-admin.js` v2)
 
-## 🐞 Kendte bugs (skal fixes)
+## Delvist implementeret / I gang
+- Kommentar-moderation og sikkerhed (`js/modal-comments.js` – mangler moderation, admin-godkendelse, backend-sikkerhed)
+- Delt afstemning (central database) (`js/modal-voting.js` – mangler central database, pt. client-side)
 
-- **Tidslinje virker ikke fra menuen**  
-  Når man klikker på "Tidslinje" i både desktop og mobil menu, sker der intet (eller funktionen findes ikke).
+## Ikke startet endnu
+- Dark mode
+- Central database til delt afstemning + moderation (kræver backend-løsning som Supabase)
 
-- **Sammenlign virker ikke ordentligt**  
-  Funktionen åbner, men viser ikke politikerne korrekt / kan ikke vælge politikere ordentligt.
+## Nye større features (planlagt)
 
-- **"Før politik / Ungdom" og "Karriere oversigt" virker ikke i modal**  
-  I politikermodalen vises sektionerne "Før politik / Ungdom" og "Karriere oversigt" ikke eller fungerer ikke som forventet.
+### Dedikeret Sammenlign-side (`sammenlign.html`)
+**Mål:** Lav en rigtig dedikeret side til sammenligning af to politikere (i stedet for kun modal). Dette giver bedre plads, bedre mobil-oplevelse og mulighed for deling.
 
-- **"Tilføj ny" i modal virker ikke**  
-  Muligheden for at tilføje ny skandale direkte fra politikermodalen virker ikke.
+**Plan i faser:**
 
-- **Modal lukker hele politikeren når man interagerer inde i den**  
-  Når man åbner f.eks. en skandale, kommentar, eller andet inde i en politikers modal, og derefter lukker det, går man tilbage til forsiden i stedet for at vende tilbage til politikermodalen.
+**Fase 1 – Forberedelse**
+- Fix den kendte bug i `modal-compare.js`
+- Gennemgå nuværende sammenligningslogik
 
----
+**Fase 2 – Opret dedikeret side**
+- Opret `sammenlign.html` (selvstændig side ligesom `tidslinje.html`)
+- Genbrug `loadPoliticians()` + `loadAllPoliticianDetails()`
+- To søgbare felter til at vælge politikere
+- Side-by-side layout på desktop, stablet på mobil
 
-## ✅ Fuldført
+**Fase 3 – Udvidet sammenligningsindhold**
+- Antal skandaler + gennemsnitlig alvorlighed
+- Økonomisk støtte + top donorer
+- Brudte løfter
+- Internationale netværk
+- Top 3-5 skandaler pr. politiker (med alvorlighed)
+- Visuel sammenligning og highlights
 
-- **Sammenlign to politikere**  
-  `js/modal-compare.js` + menu-link i både desktop og mobil.
+**Fase 4 – Avancerede features**
+- Deling via URL (`?p1=mette-frederiksen&p2=inger-stoejberg`)
+- "Byt om"-knap
+- PDF-eksport af sammenligningen
 
-- **PDF-eksport af en politikers rapport**  
-  `js/modal-pdf-export.js` + jsPDF CDN er fuldt integreret.
+**Fase 5 – Integration**
+- Tilføj "Sammenlign" i hovedmenuen (desktop + mobil)
+- Tilføj "Sammenlign med..." knap inde i politikermodalen
 
-- **Mulighed for at tilføje nye skandaler direkte på siden**  
-  `js/modal-add-scandal.js` (med Formspree-integration og mulighed for at tilføje ny politiker samtidig).  
-  *Opdatering 27/5:* Submit-knappen virker nu korrekt (global funktion eksponeret).
-
-- **PWA (kan installeres på telefon)**  
-  `manifest.json` + `sw.js` + ikoner i `icons/` mappen er på plads. Siden kan installeres som standalone app.
-
-- **Password-beskyttet Admin Dashboard**  
-  `js/modal-admin.js` (v2)  
-  - Mulighed for at tilføje godkendte skandaler manuelt via et simpelt password-beskyttet interface.  
-  - Politiker-dropdown + mulighed for ny politiker.  
-  - Pending-noter med localStorage.  
-  - JSON-eksport efter tilføjelse (klar til at kopiere ind i data-filer).  
-  - Bedre validering, feedback og auto-opdatering af hovedvisningen.
-
----
-
-## ⚠️ Delvist implementeret / I gang
-
-- **Kommentar-moderation og sikkerhed**  
-  `js/modal-comments.js` findes og viser kommentarer.  
-  *Mangler:* Rigtig moderation, admin-godkendelse og backend-sikkerhed (statisk site).
-
-- **Delt afstemning (central database)**  
-  `js/modal-voting.js` findes.  
-  *Mangler:* Central database (Supabase, Firebase eller lignende). Alt er pt. client-side.
-
----
-
-## ❌ Ikke startet endnu
-
-- **Dark mode**  
-  Ingen dark mode toggle eller `dark:`-klasser implementeret endnu.
-
-- **Central database til delt afstemning + moderation**  
-  Kræver backend-løsning (f.eks. Supabase) for at gøre afstemning og kommentarer rigtigt delte og modererede.
-
----
+**Status:** Ikke startet  
+**Prioritet:** Medium  
+**Oprettet:** 29. maj 2026
 
 ## Andre forbedringsforslag
+- Erstat Tailwind Play CDN med lokal, optimeret `tailwind.css`
+- Gør antallet af politikere dynamisk i hero-badge
+- Rydde op i ubrugte ID'er (f.eks. `politician-count`)
+- Forbedre mobil-UX
+- Tilføje flere politikere
+- Mulighed for at slette/redigere skandaler i Admin Dashboard
 
-- **Erstat Tailwind Play CDN** med en lokal, optimeret/purged `tailwind.css` fil (større performance forbedring på første load).
-- Gøre antallet af politikere **dynamisk** i hero-badge (i stedet for hardcoded).
-- Rydde op i ubrugte ID'er (f.eks. `politician-count`).
-- Forbedre mobil-UX yderligere.
-- Tilføje flere politikere (strukturen er allerede klar).
-- Mulighed for at slette/redigere skandaler i Admin Dashboard (fremtidig forbedring).
-
-**Nye punkter tilføjet 27. maj 2026 (fra arkitektur & UX gennemgang):**
-- **Modal-arkitektur inkonsistent**  
-  Nogle modals bygges 100% dynamisk i JS (f.eks. via `modal-core.js`), mens timeline bruger en statisk tom shell i `index.html`. Dette har direkte forårsaget den tomme/gennemsigtige boks i menuen. Anbefaling: Gør `timeline.js` selvforsynende og dynamisk for robusthed.
-
-- **Forbedre fejlhåndtering og loading-states yderligere**  
-  `timeline.js` har allerede en god spinner + proaktiv data-loading – brug dette mønster konsekvent andre steder i appen for ensartet brugeroplevelse.
-
-- **Automatisk/konsekvent dokumentationsopdatering**  
-  Opdater `TODO.md` og `CHANGELOG.md` systematisk efter større fixes (gerne som en del af udviklingsprocessen).
-
-- **Test af mobil-menu + modals integration**  
-  Sørg for at alle menu-links (inkl. Tidslinje) virker problemfrit på både mobil og desktop, og at der ikke opstår z-index- eller lukke-problemer mellem modals.
-
-- **Gør timeline.js mere robust**  
-  Lad `timeline.js` dynamisk opbygge manglende indre HTML-struktur i `#timelineModal`, så den ikke er afhængig af specifikke elementer i `index.html`. (Dette er nu implementeret som en del af fixet.)
-
----
-
-**Næste prioritet?**  
-Sig gerne hvilket punkt du vil have hjælp til først.
+## Nye punkter tilføjet 27. maj 2026
+- Modal-arkitektur inkonsistent
+- Forbedre fejlhåndtering og loading-states
+- Automatisk/konsekvent dokumentationsopdatering
+- Test af mobil-menu + modals integration
+- Gør `timeline.js` mere robust
