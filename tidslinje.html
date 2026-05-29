@@ -74,7 +74,6 @@
     </div>
 
     <script src="js/data.js"></script>
-    <script src="js/timeline.js"></script>
 
     <script>
         let allScandals = [];
@@ -148,7 +147,7 @@
                     await loadPoliticians();
                 }
 
-                if (container) container.innerHTML = '<div class="text-center py-10 text-slate-500">Henter detaljer og skandaler...</div>';
+                if (container) container.innerHTML = '<div class="text-center py-10 text-slate-500">Henter skandaler...</div>';
 
                 if (typeof loadAllPoliticianDetails === 'function') {
                     await loadAllPoliticianDetails();
@@ -173,6 +172,7 @@
 
                 allScandals.sort((a, b) => (b.year || '').localeCompare(a.year || ''));
 
+                // Byg parti-filter
                 const partySelect = document.getElementById('filterParty');
                 if (partySelect) {
                     const unique = [...new Set(allScandals.map(s => s.party))].sort();
@@ -187,9 +187,9 @@
                 renderTimeline(allScandals);
 
             } catch (err) {
-                console.error(err);
+                console.error('Fejl i loadData:', err);
                 if (container) {
-                    container.innerHTML = `<div class="text-center py-10 text-red-500">Fejl under indlæsning: ${err.message}</div>`;
+                    container.innerHTML = `<div class="text-center py-10"><p class="text-red-500">Der opstod en fejl.</p><p class="text-xs text-slate-400 mt-1">${err.message}</p></div>`;
                 }
             }
         }
