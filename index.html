@@ -28,7 +28,7 @@
             <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
                 <a href="#" onclick="document.getElementById('politicians-section').scrollIntoView({ behavior: 'smooth' })" class="text-slate-600 hover:text-[#C8102E] transition-colors">Politikere</a>
                 <a href="tidslinje.html" class="text-slate-600 hover:text-[#C8102E] transition-colors">Tidslinje</a>
-                <a href="#" onclick="if (typeof window.showCompareModal === 'function') window.showCompareModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors">Sammenlign</a>
+                <a href="sammenlign.html" class="text-slate-600 hover:text-[#C8102E] transition-colors">Sammenlign</a>
                 <a href="#" onclick="if (typeof window.showStatsModal === 'function') window.showStatsModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors">Statistik</a>
                 <a href="#" onclick="if (typeof window.showNetworkOverviewModal === 'function') window.showNetworkOverviewModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors">Netværk & Overlap</a>
                 <a href="#" onclick="if (typeof window.showPartyModal === 'function') window.showPartyModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors">Parti oversigt</a>
@@ -58,11 +58,11 @@
             <div class="flex-1 flex flex-col p-6 space-y-2 text-lg">
                 <a href="#" onclick="closeMobileMenu(); document.getElementById('politicians-section').scrollIntoView({ behavior: 'smooth' })" class="py-3 border-b">Politikere</a>
                 <a href="tidslinje.html" onclick="closeMobileMenu()" class="py-3 border-b">Tidslinje</a>
-                <a href="#" onclick="closeMobileMenu(); if (typeof window.showCompareModal === 'function') window.showCompareModal()" class="py-3 border-b">Sammenlign</a>
+                <a href="sammenlign.html" onclick="closeMobileMenu()" class="py-3 border-b">Sammenlign</a>
                 <a href="#" onclick="closeMobileMenu(); if (typeof window.showStatsModal === 'function') window.showStatsModal()" class="py-3 border-b">Statistik</a>
                 <a href="#" onclick="closeMobileMenu(); if (typeof window.showNetworkOverviewModal === 'function') window.showNetworkOverviewModal()" class="py-3 border-b">Netværk & Overlap</a>
                 <a href="#" onclick="closeMobileMenu(); if (typeof window.showPartyModal === 'function') window.showPartyModal()" class="py-3 border-b">Parti oversigt</a>
-                <a href="#" onclick="closeMobileMenu(); if (typeof window.showAboutModal === 'function') window.showAboutModal()" class="py-3">Om projektet</a>
+                <a href="#" onclick="closeMobileMenu(); if (typeof window.showAboutModal === 'function') window.showAboutModal()" class="py-3">Øm projektet</a>
             </div>
 
             <div class="p-6 border-t text-center text-xs text-slate-500">
@@ -113,6 +113,14 @@
         </div>
     </div>
 
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/version.js"></script>
+    <script src="js/stats-snapshot.js"></script>
+
+    <!-- Modal scripts -->
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
     <script src="js/ui.js"></script>
