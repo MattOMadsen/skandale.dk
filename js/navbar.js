@@ -23,8 +23,7 @@ function loadNavbar() {
                     <a href="tidslinje.html" class="nav-link text-slate-600 hover:text-[#C8102E] transition-colors">Tidslinje</a>
                     <a href="sammenlign.html" class="nav-link text-slate-600 hover:text-[#C8102E] transition-colors">Sammenlign</a>
                     <a href="stats.html" class="nav-link text-slate-600 hover:text-[#C8102E] transition-colors">Statistik</a>
-                    <a href="#" onclick="if (typeof window.showNetworkOverviewModal === 'function') window.showNetworkOverviewModal()" 
-                       class="nav-link text-slate-600 hover:text-[#C8102E] transition-colors">Netværk</a>
+                    <a href="netvaerk.html" class="nav-link text-slate-600 hover:text-[#C8102E] transition-colors">Netværk</a>
                     <a href="#" onclick="if (typeof window.showAboutModal === 'function') window.showAboutModal()" 
                        class="nav-link text-slate-600 hover:text-[#C8102E] transition-colors">Om</a>
                 </div>
@@ -64,8 +63,7 @@ function loadNavbar() {
                         <a href="tidslinje.html" class="block px-4 py-3 rounded-xl hover:bg-slate-100">Tidslinje</a>
                         <a href="sammenlign.html" class="block px-4 py-3 rounded-xl hover:bg-slate-100">Sammenlign</a>
                         <a href="stats.html" class="block px-4 py-3 rounded-xl hover:bg-slate-100">Statistik</a>
-                        <a href="#" onclick="closeMobileMenu(); if (typeof window.showNetworkOverviewModal === 'function') window.showNetworkOverviewModal()" 
-                           class="block px-4 py-3 rounded-xl hover:bg-slate-100">Netværk & Overlap</a>
+                        <a href="netvaerk.html" class="block px-4 py-3 rounded-xl hover:bg-slate-100">Netværk</a>
                         <a href="#" onclick="closeMobileMenu(); if (typeof window.showAboutModal === 'function') window.showAboutModal()" 
                            class="block px-4 py-3 rounded-xl hover:bg-slate-100">Om projektet</a>
                     </div>
