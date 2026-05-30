@@ -5,7 +5,11 @@ let currentPolitician = null;
 
 async function showPoliticianModal(politicianId) {
   // FIX: Bruger det globale politicians-array (samme som ui.js)
-  let politician = typeof politicians !== 'undefined' ? politicians.find(p => p.id === politicianId) : null;
+  // Bruger loose equality (==) i stedet for strict (===) fordi:
+  // - p.id fra JSON/data er altid et number (f.eks. 1)
+  // - politicianId fra localStorage (via sammenlign.html) er altid en string ("1")
+  // Dette sikrer at auto-open fra Sammenlign-siden virker.
+  let politician = typeof politicians !== 'undefined' ? politicians.find(p => p.id == politicianId) : null;
   if (!politician) {
     console.error('Politiker ikke fundet:', politicianId);
     alert('Kunne ikke finde politikeren. Prøv at genindlæse siden.');
