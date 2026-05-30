@@ -11,64 +11,7 @@
 </head>
 <body class="bg-slate-50 text-slate-900">
 
-    <!-- Navbar -->
-    <nav class="bg-white border-b sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-x-3">
-                <div class="w-10 h-10 bg-[#C8102E] rounded-2xl flex items-center justify-center">
-                    <i class="fa-solid fa-balance-scale text-white text-2xl"></i>
-                </div>
-                <div>
-                    <div class="font-bold text-2xl tracking-tight">Skandale.dk</div>
-                    <div class="text-[10px] text-slate-500 -mt-1">Politisk gennemsigtighed</div>
-                </div>
-            </div>
-
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
-                <a href="#" onclick="document.getElementById('politicians-section').scrollIntoView({ behavior: 'smooth' })" class="text-slate-600 hover:text-[#C8102E] transition-colors">Politikere</a>
-                <a href="tidslinje.html" class="text-slate-600 hover:text-[#C8102E] transition-colors">Tidslinje</a>
-                <a href="sammenlign.html" class="text-slate-600 hover:text-[#C8102E] transition-colors">Sammenlign</a>
-                <a href="#" onclick="if (typeof window.showStatsModal === 'function') window.showStatsModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors">Statistik</a>
-                <a href="#" onclick="if (typeof window.showNetworkOverviewModal === 'function') window.showNetworkOverviewModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors">Netværk & Overlap</a>
-                <a href="#" onclick="if (typeof window.showPartyModal === 'function') window.showPartyModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors">Parti oversigt</a>
-                <a href="#" onclick="if (typeof window.showAboutModal === 'function') window.showAboutModal()" class="text-slate-600 hover:text-[#C8102E] transition-colors">Om projektet</a>
-            </div>
-
-            <div class="flex items-center gap-x-3">
-                <div id="navbar-version" class="hidden md:block text-xs px-3 py-1 bg-slate-100 rounded-full text-slate-500 font-mono"></div>
-                <button id="mobile-menu-button" class="md:hidden w-10 h-10 flex items-center justify-center text-2xl text-slate-600 hover:text-slate-900">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- MOBILE MENU -->
-        <div id="mobile-menu" class="hidden fixed inset-0 bg-white z-[200] flex flex-col md:hidden">
-            <div class="px-6 py-4 border-b flex items-center justify-between">
-                <div class="flex items-center gap-x-3">
-                    <div class="w-9 h-9 bg-[#C8102E] rounded-2xl flex items-center justify-center">
-                        <i class="fa-solid fa-balance-scale text-white text-xl"></i>
-                    </div>
-                    <div class="font-bold text-2xl tracking-tighter">Skandale.dk</div>
-                    <button id="mobile-menu-close" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
-                </div>
-
-            <div class="flex-1 flex flex-col p-6 space-y-2 text-lg">
-                <a href="#" onclick="closeMobileMenu(); document.getElementById('politicians-section').scrollIntoView({ behavior: 'smooth' })" class="py-3 border-b">Politikere</a>
-                <a href="tidslinje.html" onclick="closeMobileMenu()" class="py-3 border-b">Tidslinje</a>
-                <a href="sammenlign.html" onclick="closeMobileMenu()" class="py-3 border-b">Sammenlign</a>
-                <a href="#" onclick="closeMobileMenu(); if (typeof window.showStatsModal === 'function') window.showStatsModal()" class="py-3 border-b">Statistik</a>
-                <a href="#" onclick="closeMobileMenu(); if (typeof window.showNetworkOverviewModal === 'function') window.showNetworkOverviewModal()" class="py-3 border-b">Netværk & Overlap</a>
-                <a href="#" onclick="closeMobileMenu(); if (typeof window.showPartyModal === 'function') window.showPartyModal()" class="py-3 border-b">Parti oversigt</a>
-                <a href="#" onclick="closeMobileMenu(); if (typeof window.showAboutModal === 'function') window.showAboutModal()" class="py-3">Øm projektet</a>
-            </div>
-
-            <div class="p-6 border-t text-center text-xs text-slate-500">
-                <span id="mobile-version"></span>
-            </div>
-        </div>
-    </nav>
+    <!-- Navbar bliver nu indlæst dynamisk via js/navbar.js -->
 
     <!-- Hero -->
     <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white py-16">
@@ -138,7 +81,7 @@
     <script src="js/modal-share.js"></script>
     <script src="js/modal-helpers.js"></script>
 
-    <!-- Sikkerhedsnet + Robust auto-open fra sammenlign.html (med fallback) -->
+    <!-- Sikkerhedsnet + Robust auto-open fra sammenlign.html -->
     <script>
         function tryOpenPoliticianFromStorage(attempt = 1) {
             const maxAttempts = 8;
@@ -146,13 +89,9 @@
 
             if (!politicianIdRaw) return;
 
-            // Robust fix: Konvertér ID fra localStorage (string) til number
-            // Dette sikrer at p.id === politicianId matcher, da p.id i JSON altid er number
             const politicianId = parseInt(politicianIdRaw, 10);
 
             const hasData = typeof window.politicians !== 'undefined' && Array.isArray(window.politicians) && window.politicians.length > 0;
-
-            // Prøv både openPoliticianModal og showPoliticianModal
             const openFn = window.openPoliticianModal || window.showPoliticianModal;
 
             if (hasData && typeof openFn === 'function') {
@@ -172,8 +111,6 @@
             } else {
                 localStorage.removeItem('openPoliticianOnLoad');
                 console.warn('Kunne ikke auto-åbne politiker efter ' + maxAttempts + ' forsøg.');
-                // Valgfri fallback besked til brugeren
-                // alert('Kunne ikke åbne politikeren automatisk. Prøv at klikke på politiker-kortet på forsiden.');
             }
         }
 
@@ -186,11 +123,13 @@
                         initializeEverything();
                     }
                 }
-
                 tryOpenPoliticianFromStorage();
             }, 500);
         });
     </script>
+
+    <!-- Ny central navbar -->
+    <script src="js/navbar.js"></script>
 
 </body>
 </html>
