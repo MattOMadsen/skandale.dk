@@ -78,37 +78,25 @@
                     (p.affiliations || []).forEach(aff => {
                         const name = String(aff.name || aff.organization || '').trim();
                         if (!name) return;
-
-                        if (!map.has(name)) {
-                            map.set(name, { name, politicians: [] });
-                        }
+                        if (!map.has(name)) map.set(name, { name, politicians: [] });
                         const entry = map.get(name);
-
                         if (!entry.politicians.some(x => x.id === p.id)) {
-                            entry.politicians.push({
-                                id: p.id, name: p.name, party: p.party || '',
-                                year: aff.year || '', role: aff.role || ''
-                            });
+                            entry.politicians.push({ id: p.id, name: p.name, party: p.party || '', year: aff.year || '', role: aff.role || '' });
                         }
                     });
                 });
 
                 allNetworks = Array.from(map.values()).sort((a,b) => b.politicians.length - a.politicians.length);
 
-                // Byg global networkIndex så den gamle modal også virker
+                // Byg global networkIndex
                 window.networkIndex = {};
-                allNetworks.forEach(net => {
-                    window.networkIndex[net.name] = net.politicians;
-                });
+                allNetworks.forEach(net => { window.networkIndex[net.name] = net.politicians; });
 
                 renderCards();
                 document.getElementById('loadingState').classList.add('hidden');
                 document.getElementById('networksGrid').classList.remove('hidden');
 
-            } catch(e) {
-                console.error(e);
-                document.getElementById('loadingState').innerHTML = 'Fejl ved indlæsning.';
-            }
+            } catch(e) { console.error(e); }
         }
 
         function renderCards(filtered = null) {
@@ -116,10 +104,10 @@
             grid.innerHTML = '';
             const list = filtered || allNetworks;
 
-            list.forEach(net => {
+            list.forEach((net, index) => {
                 const card = document.createElement('div');
                 card.className = 'bg-white border rounded-3xl p-6 cursor-pointer active:bg-red-50';
-                card.dataset.name = net.name;
+                card.dataset.index = index;   // Brug index i stedet for navn
 
                 card.innerHTML = `
                     <div class="flex justify-between items-start">
@@ -131,9 +119,12 @@
                     </div>
                 `;
 
-                // Direkte listener (mere robust)
                 card.addEventListener('click', () => {
-                    showDetail(net, card);
+                    const idx = parseInt(card.dataset.index);
+                    const network = allNetworks[idx];
+                    if (network) {
+                        showDetail(network, card);
+                    }
                 });
 
                 grid.appendChild(card);
@@ -147,7 +138,7 @@
         }
 
         function showDetail(network, card) {
-            document.querySelectorAll('[data-name]').forEach(c => c.classList.remove('border-[#C8102E]'));
+            document.querySelectorAll('[data-index]').forEach(c => c.classList.remove('border-[#C8102E]'));
             if (card) card.classList.add('border-[#C8102E]');
 
             document.getElementById('networkDetail').classList.remove('hidden');
@@ -165,7 +156,7 @@
                 row.innerHTML = `
                     <div class="flex gap-x-3">
                         <div class="w-10 h-10 bg-slate-200 rounded-2xl flex items-center justify-center text-sm font-semibold">
-                            ${p.name.split(' ').map(n => n[0]).join('').slice(0,2)}
+                            ${p.name.split(' ').map(n=>n[0]).join('').slice(0,2)}
                         </div>
                         <div>
                             <div class="font-semibold">${p.name}</div>
@@ -177,8 +168,6 @@
                 row.addEventListener('click', () => {
                     if (typeof window.showPoliticianModal === 'function') {
                         window.showPoliticianModal(p.id);
-                    } else {
-                        alert('showPoliticianModal ikke fundet');
                     }
                 });
 
@@ -188,21 +177,19 @@
 
         function closeDetail() {
             document.getElementById('networkDetail').classList.add('hidden');
-            document.querySelectorAll('[data-name]').forEach(c => c.classList.remove('border-[#C8102E]'));
+            document.querySelectorAll('[data-index]').forEach(c => c.classList.remove('border-[#C8102E]'));
         }
 
         function resetView() {
             document.getElementById('searchInput').value = '';
             document.getElementById('networkDetail').classList.add('hidden');
-            document.querySelectorAll('[data-name]').forEach(c => c.classList.remove('border-[#C8102E]'));
+            document.querySelectorAll('[data-index]').forEach(c => c.classList.remove('border-[#C8102E]'));
             renderCards();
         }
 
         function showClassicOverview() {
             if (typeof window.showNetworkOverviewModal === 'function') {
                 window.showNetworkOverviewModal();
-            } else {
-                alert('Modal funktion ikke tilgængelig');
             }
         }
 
