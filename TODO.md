@@ -1,75 +1,61 @@
-# TODO-liste for Skandale.dk
+# TODO-liste for Skandale.dk (Opdateret 30. maj 2026)
 
-## Kendte bugs (skal fixes)
-- Sammenlign virker ikke ordentligt
-- "Før politik / Ungdom" og "Karriere oversigt" virker ikke i modal
-- "Tilføj ny" i modal virker ikke
-- Modal lukker hele politikeren når man interagerer inde i den
+## Kendte bugs / Issues der skal testes
+> **Note:** Flere af de tidligere kendte bugs ser ud til at være løst gennem refaktoreringen. De skal dog testes i praksis.
 
-## Fuldført
-- Sammenlign to politikere (`js/modal-compare.js` + menu-link)
-- PDF-eksport af en politikers rapport (`js/modal-pdf-export.js` + jsPDF)
-- Mulighed for at tilføje nye skandaler direkte på siden (`js/modal-add-scandal.js` med Formspree)
-- PWA (kan installeres på telefon) (`manifest.json`, `sw.js`, ikoner)
-- Password-beskyttet Admin Dashboard (`js/modal-admin.js` v2)
+- [ ] Sammenlign-funktionen (modal + dedikeret side) – test om den virker stabilt
+- [ ] "Før politik / Ungdom" og "Karriere oversigt" i modal – virker de nu?
+- [ ] "Tilføj ny" i modal – virker det?
+- [ ] Modal-lukning når man klikker inde i modalen
 
-## Delvist implementeret / I gang
-- Kommentar-moderation og sikkerhed (`js/modal-comments.js` – mangler moderation, admin-godkendelse, backend-sikkerhed)
-- Delt afstemning (central database) (`js/modal-voting.js` – mangler central database, pt. client-side)
+## Fuldførte features
 
-## Ikke startet endnu
-- Dark mode
-- Central database til delt afstemning + moderation (kræver backend-løsning som Supabase)
+- [x] PWA (manifest.json + sw.js + ikoner) – fuldt implementeret
+- [x] PDF-eksport af en politikers rapport
+- [x] Tilføj ny skandale direkte på siden (Formspree)
+- [x] Password-beskyttet Admin Dashboard
+- [x] Dedikeret tidslinje-side (`tidslinje.html`) med avancerede filtre og year-grouping
+- [x] Modular JS-arkitektur (mange små, vedligeholdelsesvenlige filer i `js/`)
+- [x] Grundlæggende dedikeret sammenlign-side (`sammenlign.html`) med side-by-side metrics + swap-funktion
+- [x] Stats-dashboard (`stats.html`)
 
-## Nye større features (planlagt)
+## Delvist implementeret / Igangværende
 
-### Dedikeret Sammenlign-side (`sammenlign.html`)
-**Mål:** Lav en rigtig dedikeret side til sammenligning af to politikere (i stedet for kun modal). Dette giver bedre plads, bedre mobil-oplevelse og mulighed for deling.
+- [ ] Kommentar-system + voting  
+  JS-filer findes (`modal-comments.js`, `modal-voting.js`), men mangler fuld moderation, admin-godkendelse og central database.
 
-**Plan i faser:**
+- [ ] Dedikeret sammenlign-side (`sammenlign.html`)  
+  Grundlæggende funktionalitet er på plads, men mangler:
+  - Detaljeret visning af skandaler, donorer og brudte løfter
+  - Søgning i udvælgelsesfelterne
+  - URL-deling (`?p1=...&p2=...`)
+  - PDF-eksport af sammenligningen
+  - Fuld menu- og modal-integration
 
-**Fase 1 – Forberedelse**
-- Fix den kendte bug i `modal-compare.js`
-- Gennemgå nuværende sammenligningslogik
+## Ikke startet endnu (Prioriteret)
 
-**Fase 2 – Opret dedikeret side**
-- Opret `sammenlign.html` (selvstændig side ligesom `tidslinje.html`)
-- Genbrug `loadPoliticians()` + `loadAllPoliticianDetails()`
-- To søgbare felter til at vælge politikere
-- Side-by-side layout på desktop, stablet på mobil
+1. **Dark mode** (professionel og troværdig dark variant)
+2. **Central database** (f.eks. Supabase) til delt afstemning + kommentar-moderation
+3. Færdiggørelse af dedikeret sammenlign-side (avancerede features)
 
-**Fase 3 – Udvidet sammenligningsindhold**
-- Antal skandaler + gennemsnitlig alvorlighed
-- Økonomisk støtte + top donorer
-- Brudte løfter
-- Internationale netværk
-- Top 3-5 skandaler pr. politiker (med alvorlighed)
-- Visuel sammenligning og highlights
+## Oprydning & Teknisk gæld
 
-**Fase 4 – Avancerede features**
-- Deling via URL (`?p1=mette-frederiksen&p2=inger-stoejberg`)
-- "Byt om"-knap
-- PDF-eksport af sammenligningen
-
-**Fase 5 – Integration**
-- Tilføj "Sammenlign" i hovedmenuen (desktop + mobil)
-- Tilføj "Sammenlign med..." knap inde i politikermodalen
-
-**Status:** Ikke startet  
-**Prioritet:** Medium  
-**Oprettet:** 29. maj 2026
+- [ ] Fjern `modal-compare.js` fra `index.html` (legacy – erstattet af dedikeret `sammenlign.html`)
+- [ ] Ryd op i andre potentielle legacy script-referencer efter overgangen til dedikerede sider
+- [ ] Erstat Tailwind Play CDN med lokal, optimeret `tailwind.css`
+- [ ] Gør antallet af politikere dynamisk i hero-badge
+- [ ] Ryd op i ubrugte ID'er og gammel kode
+- [ ] Forbedre fejlhåndtering og loading-states
 
 ## Andre forbedringsforslag
-- Erstat Tailwind Play CDN med lokal, optimeret `tailwind.css`
-- Gør antallet af politikere dynamisk i hero-badge
-- Rydde op i ubrugte ID'er (f.eks. `politician-count`)
-- Forbedre mobil-UX
-- Tilføje flere politikere
-- Mulighed for at slette/redigere skandaler i Admin Dashboard
 
-## Nye punkter tilføjet 27. maj 2026
-- Modal-arkitektur inkonsistent
-- Forbedre fejlhåndtering og loading-states
-- Automatisk/konsekvent dokumentationsopdatering
-- Test af mobil-menu + modals integration
-- Gør `timeline.js` mere robust
+- Forbedre mobil-UX yderligere på tværs af alle sider
+- Tilføj flere politikere
+- Mulighed for at slette/redigere skandaler direkte i Admin Dashboard
+- Konsistent dokumentationsopdatering (CHANGELOG.md + TODO.md)
+- Gør `timeline.js` og modal-systemet endnu mere robust
+
+## Fremtidige større features (lavere prioritet)
+
+- Delt afstemning med central database
+- Kommentar-moderation med admin-flow
