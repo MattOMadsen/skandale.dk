@@ -8,23 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="manifest" href="manifest.json">
-    <style>
-        .network-card {
-            transition: all 0.2s ease;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .network-card:active {
-            transform: scale(0.985);
-            background-color: #fef2f2;
-        }
-        .politician-row:active {
-            background-color: #f1f5f9;
-        }
-    </style>
 </head>
 <body class="bg-slate-50">
 
-    <!-- Header -->
     <div class="max-w-7xl mx-auto px-6 pt-10 pb-6">
         <div class="flex items-center gap-x-3 mb-2">
             <div class="w-12 h-12 bg-[#C8102E] rounded-2xl flex items-center justify-center">
@@ -37,70 +23,40 @@
         </div>
     </div>
 
-    <!-- Controls -->
     <div class="max-w-7xl mx-auto px-6 pb-6">
-        <div class="flex flex-col sm:flex-row gap-3 items-center justify-between">
-            <div class="relative w-full sm:w-80">
+        <div class="flex flex-col sm:flex-row gap-3">
+            <div class="relative flex-1 max-w-md">
                 <i class="fa-solid fa-search absolute left-4 top-3 text-slate-400"></i>
-                <input id="searchInput" type="text" placeholder="Søg efter netværk..." 
-                       class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:border-[#C8102E]"
-                       oninput="filterNetworks()">
+                <input id="searchInput" type="text" placeholder="Søg efter netværk..." class="w-full pl-10 py-3 border rounded-2xl text-sm" oninput="filterNetworks()">
             </div>
-            <div class="flex gap-2 w-full sm:w-auto">
-                <button onclick="showClassicOverview()" 
-                        class="flex-1 sm:flex-none px-4 py-2.5 text-sm border border-slate-200 rounded-2xl flex items-center justify-center gap-x-2">
-                    <i class="fa-solid fa-list-ul"></i>
-                    <span>Klassisk oversigt</span>
-                </button>
-                <button onclick="resetView()" 
-                        class="flex-1 sm:flex-none px-4 py-2.5 text-sm border border-slate-200 rounded-2xl flex items-center justify-center gap-x-2">
-                    <i class="fa-solid fa-undo"></i>
-                    <span>Nulstil</span>
-                </button>
+            <div class="flex gap-2">
+                <button onclick="showClassicOverview()" class="px-4 py-2.5 text-sm border rounded-2xl">Klassisk oversigt</button>
+                <button onclick="resetView()" class="px-4 py-2.5 text-sm border rounded-2xl">Nulstil</button>
             </div>
         </div>
     </div>
 
     <div class="max-w-7xl mx-auto px-6 pb-12">
-        
-        <!-- Loading -->
-        <div id="loadingState" class="py-10 flex justify-center">
-            <div class="flex items-center gap-x-2 text-slate-500">
-                <i class="fa-solid fa-spinner fa-spin"></i>
-                <span>Indlæser netværksdata...</span>
-            </div>
+        <div id="loadingState" class="py-8 text-center text-slate-500">
+            Indlæser netværksdata...
         </div>
 
-        <!-- Grid -->
-        <div id="networksGrid" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <!-- JS injected cards -->
-        </div>
+        <div id="networksGrid" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
 
-        <!-- Detail view -->
-        <div id="networkDetail" class="hidden mt-8 bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
-            <div class="px-6 py-5 border-b flex justify-between items-center bg-slate-50">
+        <div id="networkDetail" class="hidden mt-8 bg-white rounded-3xl border shadow-sm">
+            <div class="px-6 py-5 border-b flex justify-between items-center">
                 <div>
                     <h2 id="detailTitle" class="text-2xl font-bold"></h2>
                     <p id="detailSubtitle" class="text-sm text-slate-500"></p>
                 </div>
-                <button onclick="closeDetail()" class="text-3xl text-slate-400 hover:text-slate-600">&times;</button>
+                <button onclick="closeDetail()" class="text-3xl">&times;</button>
             </div>
-
             <div class="p-6">
-                <div class="flex justify-between items-center mb-3">
-                    <div class="font-semibold">Politikere</div>
-                    <div id="politicianCountBadge" class="text-xs px-3 py-1 bg-slate-100 rounded-full text-slate-600"></div>
-                </div>
-
-                <div id="politiciansList" class="space-y-2 max-h-[420px] overflow-auto">
-                    <!-- Populated dynamically -->
-                </div>
+                <div id="politiciansList" class="space-y-2 max-h-[420px] overflow-auto"></div>
             </div>
         </div>
-
     </div>
 
-    <!-- Scripts -->
     <script src="js/data.js"></script>
     <script src="js/modal-core.js"></script>
     <script src="js/modal-scandal.js"></script>
@@ -121,74 +77,65 @@
                 const map = new Map();
 
                 pols.forEach(p => {
-                    if (!p.affiliations || !Array.isArray(p.affiliations)) return;
-                    p.affiliations.forEach(aff => {
-                        const name = (aff.name || aff.organization || '').trim();
+                    (p.affiliations || []).forEach(aff => {
+                        const name = String(aff.name || aff.organization || '').trim();
                         if (!name) return;
-
-                        if (!map.has(name)) map.set(name, { name, politicians: [] });
-
+                        if (!map.has(name)) map.set(name, {name, politicians: []});
                         const entry = map.get(name);
                         if (!entry.politicians.some(x => x.id === p.id)) {
-                            entry.politicians.push({
-                                id: p.id,
-                                name: p.name,
-                                party: p.party || '',
-                                year: aff.year || '',
-                                role: aff.role || ''
-                            });
+                            entry.politicians.push({id: p.id, name: p.name, party: p.party || '', year: aff.year || '', role: aff.role || ''});
                         }
                     });
                 });
 
                 allNetworks = Array.from(map.values()).sort((a,b) => b.politicians.length - a.politicians.length);
 
-                renderNetworkCards();
+                renderCards();
                 document.getElementById('loadingState').classList.add('hidden');
                 document.getElementById('networksGrid').classList.remove('hidden');
-
-            } catch (err) {
-                console.error(err);
-                document.getElementById('loadingState').innerHTML = 
-                    '<div class="text-center text-red-600">Kunne ikke indlæse data. Prøv at genindlæse siden.</div>';
+            } catch(e) {
+                document.getElementById('loadingState').innerHTML = 'Fejl ved indlæsning af data.';
             }
         }
 
-        function renderNetworkCards(filteredNetworks = null) {
-            const container = document.getElementById('networksGrid');
-            container.innerHTML = '';
+        function renderCards(filtered = null) {
+            const grid = document.getElementById('networksGrid');
+            grid.innerHTML = '';
+            const list = filtered || allNetworks;
 
-            const list = filteredNetworks || allNetworks;
-
-            list.forEach(network => {
+            list.forEach(net => {
                 const card = document.createElement('div');
-                card.className = 'network-card bg-white border border-slate-200 rounded-3xl p-6 cursor-pointer active:bg-red-50';
-                card.dataset.networkName = network.name;
-
+                card.className = 'bg-white border rounded-3xl p-6 cursor-pointer active:bg-red-50';
+                card.dataset.name = net.name;
                 card.innerHTML = `
-                    <div class="flex justify-between">
+                    <div class="flex justify-between items-start">
                         <div>
-                            <div class="font-semibold text-xl tracking-tight">${network.name}</div>
-                            <div class="mt-2 inline-block px-3 py-0.5 text-xs bg-slate-100 text-slate-600 rounded-full">
-                                ${network.politicians.length} politikere
-                            </div>
+                            <div class="font-semibold text-xl">${net.name}</div>
+                            <div class="text-xs mt-2 px-3 py-1 inline-block bg-slate-100 rounded-full">${net.politicians.length} politikere</div>
                         </div>
-                        <div class="text-5xl font-bold text-[#C8102E]">${network.politicians.length}</div>
+                        <div class="text-5xl font-bold text-[#C8102E]">${net.politicians.length}</div>
                     </div>
                 `;
-
-                container.appendChild(card);
+                grid.appendChild(card);
             });
 
-            // Event delegation - robust på mobil og desktop
-            container.onclick = function(e) {
-                const card = e.target.closest('.network-card');
+            // Event delegation
+            grid.onclick = (e) => {
+                const card = e.target.closest('[data-name]');
                 if (!card) return;
 
-                const networkName = card.dataset.networkName;
-                const network = allNetworks.find(n => n.name === networkName);
+                const name = card.dataset.name;
+                // Robust lookup
+                let network = allNetworks.find(n => n.name === name);
+                if (!network) {
+                    // Fallback: case insensitive
+                    network = allNetworks.find(n => n.name.toLowerCase() === name.toLowerCase());
+                }
+
                 if (network) {
-                    showNetworkDetail(network, card);
+                    showDetail(network, card);
+                } else {
+                    alert('Kunne ikke finde netværket: ' + name);
                 }
             };
         }
@@ -196,79 +143,65 @@
         function filterNetworks() {
             const term = document.getElementById('searchInput').value.toLowerCase().trim();
             const filtered = allNetworks.filter(n => n.name.toLowerCase().includes(term));
-            renderNetworkCards(filtered);
+            renderCards(filtered);
         }
 
-        function showNetworkDetail(network, activeCard) {
-            // Reset active states
-            document.querySelectorAll('.network-card').forEach(c => c.classList.remove('active', 'border-[#C8102E]'));
-            if (activeCard) {
-                activeCard.classList.add('active', 'border-[#C8102E]');
-            }
+        function showDetail(network, card) {
+            document.querySelectorAll('[data-name]').forEach(c => c.classList.remove('border-[#C8102E]'));
+            if (card) card.classList.add('border-[#C8102E]');
 
-            const detail = document.getElementById('networkDetail');
-            detail.classList.remove('hidden');
-
+            document.getElementById('networkDetail').classList.remove('hidden');
             document.getElementById('detailTitle').textContent = network.name;
-            document.getElementById('detailSubtitle').textContent = `${network.politicians.length} politikere har været tilknyttet`;
-            document.getElementById('politicianCountBadge').textContent = `${network.politicians.length} politikere`;
+            document.getElementById('detailSubtitle').textContent = network.politicians.length + ' politikere har været tilknyttet';
 
-            const listContainer = document.getElementById('politiciansList');
-            listContainer.innerHTML = '';
+            const list = document.getElementById('politiciansList');
+            list.innerHTML = '';
 
             network.politicians.forEach(p => {
                 const row = document.createElement('div');
-                row.className = 'politician-row flex items-center justify-between p-4 border border-slate-100 rounded-2xl cursor-pointer';
-                row.dataset.politicianId = p.id;
+                row.className = 'flex items-center justify-between p-4 border rounded-2xl cursor-pointer active:bg-slate-100';
+                row.dataset.id = p.id;
 
                 row.innerHTML = `
-                    <div class="flex items-center gap-x-4">
-                        <div class="w-10 h-10 rounded-2xl bg-slate-200 flex items-center justify-center font-semibold text-sm">
-                            ${p.name.split(' ').map(n=>n[0]).join('').slice(0,2)}
-                        </div>
+                    <div class="flex gap-x-4">
+                        <div class="w-10 h-10 bg-slate-200 rounded-2xl flex items-center justify-center font-semibold text-sm">${p.name.split(' ').map(n=>n[0]).join('').slice(0,2)}</div>
                         <div>
                             <div class="font-semibold">${p.name}</div>
                             <div class="text-sm text-slate-500">${p.party}</div>
                         </div>
                     </div>
-                    <div class="text-right text-sm text-slate-500">
-                        ${p.year || ''}
-                    </div>
                 `;
 
-                listContainer.appendChild(row);
+                list.appendChild(row);
             });
 
-            // Event delegation for politicians
-            listContainer.onclick = function(e) {
-                const row = e.target.closest('.politician-row');
+            // Politiker klik
+            list.onclick = (e) => {
+                const row = e.target.closest('[data-id]');
                 if (!row) return;
-
-                const id = parseInt(row.dataset.politicianId);
+                const id = parseInt(row.dataset.id);
                 if (id && typeof window.showPoliticianModal === 'function') {
                     window.showPoliticianModal(id);
                 } else {
-                    alert('Kunne ikke åbne politikerens profil. Prøv at genindlæse siden.');
+                    alert('showPoliticianModal ikke tilgængelig');
                 }
             };
         }
 
         function closeDetail() {
             document.getElementById('networkDetail').classList.add('hidden');
-            document.querySelectorAll('.network-card').forEach(c => c.classList.remove('active', 'border-[#C8102E]'));
+            document.querySelectorAll('[data-name]').forEach(c => c.classList.remove('border-[#C8102E]'));
         }
 
         function resetView() {
             document.getElementById('searchInput').value = '';
             document.getElementById('networkDetail').classList.add('hidden');
-            document.querySelectorAll('.network-card').forEach(c => c.classList.remove('active', 'border-[#C8102E]'));
-            renderNetworkCards();
+            document.querySelectorAll('[data-name]').forEach(c => c.classList.remove('border-[#C8102E]'));
+            renderCards();
         }
 
         function showClassicOverview() {
-            if (typeof window.showNetworkOverviewModal === 'function') {
-                window.showNetworkOverviewModal();
-            }
+            if (typeof window.showNetworkOverviewModal === 'function') window.showNetworkOverviewModal();
         }
 
         document.addEventListener('DOMContentLoaded', loadNetworkData);
