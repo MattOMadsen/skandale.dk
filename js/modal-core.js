@@ -159,7 +159,7 @@ async function showPoliticianModal(politicianId) {
                 ${politician.affiliations.map((aff, index) => {
                   const networkName = aff.name || aff.organization || 'Ukendt';
                   return `
-                    <div class="network-affiliation-item p-4 bg-slate-50 border border-slate-200 rounded-2xl hover:border-[#C8102E]/30 cursor-pointer transition-all" data-network-name="${networkName.replace(/"/g, '"')}">
+                    <div class="network-affiliation-item p-4 bg-slate-50 border border-slate-200 rounded-2xl hover:border-[#C8102E]/30 cursor-pointer transition-all" data-network-name="${networkName.replace(/"/g, '\"')}">
                       <div class="font-semibold text-[#C8102E]">${networkName}</div>
                       <div class="text-xs text-slate-500">${aff.organization || ''} • ${aff.year || ''}</div>
                       ${aff.role ? `<div class="text-sm text-slate-600 mt-1">${aff.role}</div>` : ''}
@@ -176,7 +176,7 @@ async function showPoliticianModal(politicianId) {
         </div>
         
         <div class="px-8 py-4 border-t bg-slate-50 text-xs text-slate-400 text-center">
-          Data er baseret på offentligt tilgængelige kilder • v2.00.82
+          Data er baseret på offentligt tilgængelige kilder • v2.00.85
         </div>
       </div>
     </div>
