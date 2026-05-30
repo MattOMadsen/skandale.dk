@@ -11,43 +11,7 @@
 </head>
 <body class="bg-slate-50 text-slate-900">
 
-    <!-- Navbar med menu -->
-    <nav class="bg-white border-b sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-x-3">
-                <a href="index.html" class="flex items-center gap-x-3">
-                    <div class="w-10 h-10 bg-[#C8102E] rounded-2xl flex items-center justify-center">
-                        <i class="fa-solid fa-balance-scale text-white text-2xl"></i>
-                    </div>
-                    <div>
-                        <div class="font-bold text-2xl tracking-tight">Skandale.dk</div>
-                        <div class="text-[10px] text-slate-500 -mt-1">Politisk gennemsigtighed</div>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Desktop menu -->
-            <div class="hidden md:flex items-center gap-x-6 text-sm">
-                <a href="index.html" class="text-slate-600 hover:text-[#C8102E] transition-colors">Forside</a>
-                <a href="tidslinje.html" class="text-[#C8102E] font-medium">Tidslinje</a>
-                <a href="index.html#politikere" class="text-slate-600 hover:text-[#C8102E] transition-colors">Politikere</a>
-            </div>
-
-            <!-- Mobile menu button -->
-            <button id="mobileMenuBtn" class="md:hidden w-10 h-10 flex items-center justify-center text-slate-600 hover:text-[#C8102E]">
-                <i class="fa-solid fa-bars text-xl"></i>
-            </button>
-        </div>
-
-        <!-- Mobile menu dropdown -->
-        <div id="mobileMenu" class="hidden md:hidden border-t bg-white">
-            <div class="px-6 py-4 flex flex-col gap-y-3 text-sm">
-                <a href="index.html" class="py-1 text-slate-600 hover:text-[#C8102E]">Forside</a>
-                <a href="tidslinje.html" class="py-1 text-[#C8102E] font-medium">Tidslinje</a>
-                <a href="index.html#politikere" class="py-1 text-slate-600 hover:text-[#C8102E]">Politikere</a>
-            </div>
-        </div>
-    </nav>
+    <!-- Navbar loaded dynamically via js/navbar.js for consistent menu across all pages -->
 
     <div class="max-w-7xl mx-auto px-6 pt-8 pb-4">
         <h1 class="text-4xl font-bold tracking-tight">Tidslinje over politiske skandaler</h1>
@@ -91,27 +55,13 @@
         </div>
     </div>
 
+    <script src="js/navbar.js"></script>
     <script src="js/data.js"></script>
     <script src="js/modal-helpers.js"></script>
     <script src="js/modal-scandal.js"></script>
     <script src="js/modal-core.js"></script>
 
     <script>
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        if (mobileMenuBtn && mobileMenu) {
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-                const icon = mobileMenuBtn.querySelector('i');
-                if (icon) {
-                    icon.classList.toggle('fa-bars');
-                    icon.classList.toggle('fa-times');
-                }
-            });
-        }
-
         let allScandals = [];
 
         function createStars(severity) {
