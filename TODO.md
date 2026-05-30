@@ -59,3 +59,48 @@
 
 - Delt afstemning med central database
 - Kommentar-moderation med admin-flow
+
+## Nye forslag til forbedringer (30. maj 2026)
+
+### 1. Kilde-kvalitetsindikatorer
+Tilføj en lille, visuel indikator ved hver kilde i en skandale (f.eks. farvede prikker eller badges).
+- Grøn = officiel kilde (Rigsrevisionen, domstol, ministerium)
+- Gul = seriøs medie
+- Rød = socialt medie / anonym kilde
+
+**Formål:** Øger troværdigheden og hjælper brugeren med hurtigt at vurdere, hvor solid en påstand er.
+
+### 2. "Senest opdateret" + versionshistorik på skandaler
+Vis tydeligt hvornår en skandale sidst blev opdateret, og gerne en lille "Se ændringer"-knap, der viser, hvad der er blevet tilføjet/rettet.
+
+**Formål:** Viser, at siden bliver vedligeholdt aktivt, og skaber tillid til, at informationen ikke er forældet.
+
+### 3. Forbedret intern søgning (Scandal Search)
+Udvid søgefunktionen, så man også kan søge direkte i skandale-titler og beskrivelser på tværs af alle politikere – ikke kun politikernavne.
+
+**Formål:** Gør det meget nemmere at finde specifikke sager (f.eks. "mink" eller "cancergaranti").
+
+### 4. Politiker-sammenligning direkte fra modal
+Tilføj en hurtig "Sammenlign med..." knap inde i en politikers modal, som åbner den dedikerede sammenlign-side med den aktuelle politiker allerede valgt.
+
+**Formål:** Gør det mere naturligt at gå fra enkeltvisning til sammenligning uden at skulle starte forfra.
+
+### 5. "Relaterede skandaler" sektion
+Inde i en skandale-modal vises 2–4 relaterede skandaler (baseret på samme parti, samme tema, eller samme donorer/netværk).
+
+**Formål:** Øger engagementet og hjælper brugeren med at se sammenhænge.
+
+### 6. Forbedret deling af specifikke skandaler
+Mulighed for at dele et direkte link til en specifik skandale inde i en modal (f.eks. via en "Del denne skandale"-knap), der åbner politikeren + åbner den pågældende skandale automatisk.
+
+**Formål:** Gør det nemmere at dele konkrete sager på sociale medier eller i debatter.
+
+### 7. Visuel oversigt over alvorlighedsfordeling
+På forsiden eller i en statistik-sektion: Et simpelt, interaktivt diagram (f.eks. donut eller bar), der viser fordelingen af skandaler på tværs af alvorlighedsniveauer for hele siden eller pr. parti.
+
+**Formål:** Giver et hurtigt overblik over det samlede billede uden at skulle klikke sig ind på enkeltpersoner.
+
+### 8. "Bidrag med viden"-sektion
+En tydelig, men diskret sektion (måske i bunden eller i Admin-modalen), der forklarer, hvordan man kan bidrage med nye kilder eller korrigere information – kombineret med et simpelt formular-link.
+
+**Formål:** Gør siden mere levende og inviterende uden at åbne for spam.
