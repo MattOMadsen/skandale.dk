@@ -51,9 +51,8 @@
                         <i class="fa-solid fa-balance-scale text-white text-xl"></i>
                     </div>
                     <div class="font-bold text-2xl tracking-tighter">Skandale.dk</div>
+                    <button id="mobile-menu-close" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
                 </div>
-                <button id="mobile-menu-close" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
-            </div>
 
             <div class="flex-1 flex flex-col p-6 space-y-2 text-lg">
                 <a href="#" onclick="closeMobileMenu(); document.getElementById('politicians-section').scrollIntoView({ behavior: 'smooth' })" class="py-3 border-b">Politikere</a>
@@ -143,9 +142,13 @@
     <script>
         function tryOpenPoliticianFromStorage(attempt = 1) {
             const maxAttempts = 8;
-            const politicianId = localStorage.getItem('openPoliticianOnLoad');
+            const politicianIdRaw = localStorage.getItem('openPoliticianOnLoad');
 
-            if (!politicianId) return;
+            if (!politicianIdRaw) return;
+
+            // Robust fix: Konvertér ID fra localStorage (string) til number
+            // Dette sikrer at p.id === politicianId matcher, da p.id i JSON altid er number
+            const politicianId = parseInt(politicianIdRaw, 10);
 
             const hasData = typeof window.politicians !== 'undefined' && Array.isArray(window.politicians) && window.politicians.length > 0;
 
