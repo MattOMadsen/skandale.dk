@@ -1,9 +1,16 @@
 // js/modal-core.js - Hovedmodalen (showPoliticianModal + close + skeleton)
 // 1 fil = 1 ansvarsområde (kun hovedlogik + HTML skeleton)
+//
+// ÆNDRINGER (additive only):
+// - showPoliticianModal accepterer nu valgfri targetScandalId som 2. parameter
+// - Efter render: auto-expand + highlight af specifik skandale ved deep link
+// - Ny helper: expandSpecificScandal()
+// - Ny initDeepLink() der kører ved load og håndterer ?politician=...&scandal=...
+// INGEN eksisterende funktioner, kode eller logik er slettet eller ændret.
 
 let currentPolitician = null;
 
-async function showPoliticianModal(politicianId) {
+async function showPoliticianModal(politicianId, targetScandalId = null) {
   // FIX: Bruger det globale politicians-array (samme som ui.js)
   // Bruger loose equality (==) i stedet for strict (===) fordi:
   // - p.id fra JSON/data er altid et number (f.eks. 1)
@@ -216,6 +223,15 @@ async function showPoliticianModal(politicianId) {
       });
     }
 
+    // === NY: Hvis der er targetScandalId (fra deep link), så udfold + highlight ===
+    if (targetScandalId) {
+      setTimeout(() => {
+        if (typeof expandSpecificScandal === 'function') {
+          expandSpecificScandal(targetScandalId);
+        }
+      }, 350);
+    }
+
     console.log('%c[Skandale.dk] Modal initialiseret med robust netværks-håndtering', 'color:#10b981');
   }, 60);
 }
@@ -226,5 +242,77 @@ function closePoliticianModal() {
   currentPolitician = null;
 }
 
+// === NY HELPER: Udvid og highlight en specifik skandale (til deep linking) ===
+function expandSpecificScandal(scandalId) {
+  const container = document.getElementById('scandalsContainer');
+  if (!container) return;
+
+  // Find elementet med data-sc-id (tilføjet i modal-scandal.js)
+  const target = container.querySelector(`[data-sc-id="${scandalId}"]`);
+  if (!target) {
+    console.log('Specifik skandale ikke fundet til expand:', scandalId);
+    return;
+  }
+
+  // Find header og content inden i
+  const header = target.querySelector('[id^="scandal-header-"]');
+  const content = target.querySelector('[id^="scandal-content-"]');
+  const chevron = target.querySelector('[id^="scandal-chevron-"]');
+
+  if (content && content.classList.contains('hidden')) {
+    content.classList.remove('hidden');
+    if (chevron) chevron.classList.add('rotate-180');
+  }
+
+  // Midlertidig highlight for god UX
+  target.classList.add('ring-2', 'ring-[#C8102E]/40', 'ring-offset-2', 'rounded-2xl');
+  setTimeout(() => {
+    target.classList.remove('ring-2', 'ring-[#C8102E]/40', 'ring-offset-2', 'rounded-2xl');
+  }, 2800);
+
+  // Scroll til den
+  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// === NY: Deep link support - håndterer ?politician=xxx&scandal=yyy ved side-load ===
+function initDeepLink() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const polSlug = params.get('politician');
+    const scandalId = params.get('scandal');
+
+    if (!polSlug) return;
+
+    if (typeof politicians === 'undefined' || !Array.isArray(politicians)) {
+      console.log('politicians array ikke klar endnu til deep link');
+      return;
+    }
+
+    const pol = politicians.find(p => {
+      const slug = p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      return slug === polSlug;
+    });
+
+    if (pol) {
+      // Åbn modal med valgfri scandalId
+      setTimeout(() => {
+        if (typeof window.showPoliticianModal === 'function') {
+          window.showPoliticianModal(pol.id || pol.name, scandalId);
+        }
+      }, 650);
+    }
+  } catch (e) {
+    console.warn('Deep link init fejlede:', e);
+  }
+}
+
+// Start deep link check
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initDeepLink);
+} else {
+  initDeepLink();
+}
+
 window.showPoliticianModal = showPoliticianModal;
 window.closePoliticianModal = closePoliticianModal;
+window.expandSpecificScandal = expandSpecificScandal;
