@@ -24,7 +24,7 @@ function showShareModal(politician, scandal = null) {
         const scIdForUrl = encodeURIComponent(scandal.id);
         shareUrl += `&scandal=${scIdForUrl}`;
         const scTitle = scandal.title || 'skandalen';
-        shareText = `Se detaljer om "${scTitle}" for ${politician.name} på Skandale.dk`;
+        shareText = `Se detaljer om "${scTitle}" hos ${politician.name} på Skandale.dk`;
         modalTitle = `Del skandale`;
         modalSubtitle = scTitle;
     }
