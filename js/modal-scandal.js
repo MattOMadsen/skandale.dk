@@ -1,5 +1,8 @@
 // js/modal-scandals.js - Skandale rendering, stjerner, bruger- og fællesbedømmelse
 // 1 fil = 1 ansvarsområde (alt relateret til skandaler og interaktiv vurdering)
+//
+// ÆNDRING: Tilføjet data-sc-id på ydre div + delingsknap i header + ny funktion shareSpecificScandal()
+// INGEN eksisterende kode eller funktioner er slettet. Kun additive ændringer.
 
 function renderScandalsDirect(politician, container) {
   if (!container || !politician.scandals || politician.scandals.length === 0) {
@@ -29,7 +32,7 @@ function renderScandalsDirect(politician, container) {
     const scId = s.id || s.title.replace(/\s+/g, '-').toLowerCase();
 
     html += `
-      <div class="border border-slate-200 rounded-2xl mb-4 overflow-hidden">
+      <div class="border border-slate-200 rounded-2xl mb-4 overflow-hidden" data-sc-id="${scId}">
         <!-- Header -->
         <div id="scandal-header-${index}" class="flex items-center justify-between p-4 bg-slate-50 cursor-pointer hover:bg-slate-100 transition-colors">
           <div class="flex-1">
@@ -42,7 +45,17 @@ function renderScandalsDirect(politician, container) {
               <div class="text-xs text-slate-500">Vores vurdering: ${ourSeverity}/5</div>
             </div>
           </div>
-          <i id="scandal-chevron-${index}" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+          
+          <!-- NY: Del-knap til specifik skandale (additiv) -->
+          <div class="flex items-center gap-x-1">
+            <button 
+              onclick="shareSpecificScandal('${polId}', '${scId}', '${s.title.replace(/'/g, "\\'")}', event)" 
+              class="p-2 text-slate-400 hover:text-[#C8102E] hover:bg-white rounded-xl transition-colors"
+              title="Del denne skandale">
+              <i class="fa-solid fa-share-alt"></i>
+            </button>
+            <i id="scandal-chevron-${index}" class="fa-solid fa-chevron-down text-slate-400 transition-transform ml-1"></i>
+          </div>
         </div>
 
         <!-- Content -->
@@ -282,8 +295,50 @@ function resetUserSeverityAndCommunity(index, polId, scId) {
   if (resetBtn) resetBtn.classList.add('hidden');
 }
 
+// === NY FUNKTION: Del specifik skandale (additiv - sletter/erstatter intet) ===
+function shareSpecificScandal(polId, scId, title, event) {
+  if (event) {
+    event.stopImmediatePropagation();
+    event.preventDefault();
+  }
+
+  let politician = null;
+
+  // Prøv currentPolitician først (fra modal-core)
+  if (typeof currentPolitician !== 'undefined' && currentPolitician) {
+    const currentPolId = currentPolitician.id || currentPolitician.name.toLowerCase().replace(/\s+/g, '-');
+    if (currentPolId == polId || currentPolitician.name.toLowerCase().replace(/\s+/g, '-') === polId) {
+      politician = currentPolitician;
+    }
+  }
+
+  // Fallback til globale politicians array
+  if (!politician && typeof politicians !== 'undefined') {
+    politician = politicians.find(p => {
+      const pId = p.id || p.name.toLowerCase().replace(/\s+/g, '-');
+      return pId == polId || p.name.toLowerCase().replace(/\s+/g, '-') === polId;
+    });
+  }
+
+  if (!politician) {
+    console.warn('Kunne ikke finde politiker til deling af skandale', polId);
+    return;
+  }
+
+  const scandalForShare = { id: scId, title: title };
+
+  if (typeof window.showShareModal === 'function') {
+    window.showShareModal(politician, scandalForShare);
+  } else if (typeof showShareModal === 'function') {
+    showShareModal(politician, scandalForShare);
+  } else {
+    console.warn('showShareModal funktion ikke tilgængelig');
+  }
+}
+
 // Gør funktionerne globalt tilgængelige
 window.renderScandalsDirect = renderScandalsDirect;
 window.initUserSeverityWithCommunity = initUserSeverityWithCommunity;
 window.saveUserSeverityAndUpdateCommunity = saveUserSeverityAndUpdateCommunity;
 window.resetUserSeverityAndCommunity = resetUserSeverityAndCommunity;
+window.shareSpecificScandal = shareSpecificScandal;
