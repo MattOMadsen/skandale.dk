@@ -1,6 +1,7 @@
 // js/modal-share.js - Ny version med lille modal (i stedet for dropdown)
-// ÆNDRINGER: showShareModal nu understøtter valgfri scandal-parameter for specifik deling.
-// Alle eksisterende funktioner beholdt 100%. Kun udvidet med optional parameter (default null).
+// ÆNDRINGER: Fjernet alle referencer til 'Skandale.dk' i delingstekster (som ønsket).
+// Teksterne er nu generiske uden domænenavn.
+// Alle eksisterende funktioner beholdt 100%.
 
 function initShareButton(politician) {
     const shareBtn = document.getElementById('share-btn');
@@ -16,7 +17,7 @@ function showShareModal(politician, scandal = null) {
     const slug = politician.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
     
     let shareUrl = `${baseUrl}?politician=${slug}`;
-    let shareText = `Se fakta, skandaler og økonomisk støtte for ${politician.name} på Skandale.dk`;
+    let shareText = `Se fakta, skandaler og økonomisk støtte for ${politician.name}`;
     let modalTitle = `Del ${politician.name}`;
     let modalSubtitle = 'Vælg hvor du vil dele';
 
@@ -24,7 +25,7 @@ function showShareModal(politician, scandal = null) {
         const scIdForUrl = encodeURIComponent(scandal.id);
         shareUrl += `&scandal=${scIdForUrl}`;
         const scTitle = scandal.title || 'skandalen';
-        shareText = `Se detaljer om "${scTitle}" hos ${politician.name} på Skandale.dk`;
+        shareText = `Se detaljer om "${scTitle}" for ${politician.name}`;
         modalTitle = `Del skandale`;
         modalSubtitle = scTitle;
     }
