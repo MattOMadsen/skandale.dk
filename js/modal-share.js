@@ -1,4 +1,6 @@
 // js/modal-share.js - Ny version med lille modal (i stedet for dropdown)
+// ÆNDRINGER: showShareModal nu understøtter valgfri scandal-parameter for specifik deling.
+// Alle eksisterende funktioner beholdt 100%. Kun udvidet med optional parameter (default null).
 
 function initShareButton(politician) {
     const shareBtn = document.getElementById('share-btn');
@@ -9,12 +11,24 @@ function initShareButton(politician) {
     };
 }
 
-function showShareModal(politician) {
+function showShareModal(politician, scandal = null) {
     const baseUrl = window.location.origin + window.location.pathname;
     const slug = politician.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-    const shareUrl = `${baseUrl}?politician=${slug}`;
     
-    const shareText = `Se fakta, skandaler og økonomisk støtte for ${politician.name} på Skandale.dk`;
+    let shareUrl = `${baseUrl}?politician=${slug}`;
+    let shareText = `Se fakta, skandaler og økonomisk støtte for ${politician.name} på Skandale.dk`;
+    let modalTitle = `Del ${politician.name}`;
+    let modalSubtitle = 'Vælg hvor du vil dele';
+
+    if (scandal && scandal.id) {
+        const scIdForUrl = encodeURIComponent(scandal.id);
+        shareUrl += `&scandal=${scIdForUrl}`;
+        const scTitle = scandal.title || 'skandalen';
+        shareText = `Se detaljer om "${scTitle}" for ${politician.name} på Skandale.dk`;
+        modalTitle = `Del skandale`;
+        modalSubtitle = scTitle;
+    }
+    
     const encodedText = encodeURIComponent(shareText);
     const encodedUrl = encodeURIComponent(shareUrl);
 
@@ -26,8 +40,8 @@ function showShareModal(politician) {
                 <!-- Header -->
                 <div class="px-6 pt-6 pb-4 border-b flex items-center justify-between">
                     <div>
-                        <h3 class="text-xl font-bold">Del ${politician.name}</h3>
-                        <p class="text-sm text-slate-500">Vælg hvor du vil dele</p>
+                        <h3 class="text-xl font-bold">${modalTitle}</h3>
+                        <p class="text-sm text-slate-500">${modalSubtitle}</p>
                     </div>
                     <button onclick="closeShareModal()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
                 </div>
@@ -112,7 +126,7 @@ function shareToWhatsApp(text, url) {
 
 function showToast(message) {
     const toast = document.createElement('div');
-    toast.className = 'fixed bottom-6 left-1/2 -translate-x/2 bg-slate-900 text-white px-6 py-3 rounded-2xl shadow-xl flex items-center gap-x-3 z-[999]';
+    toast.className = 'fixed bottom-6 left/2 -translate-x/2 bg-slate-900 text-white px-6 py-3 rounded-2xl shadow-xl flex items-center gap-x-3 z-[999]';
     toast.innerHTML = `<i class="fa-solid fa-check-circle text-emerald-400"></i> <span>${message}</span>`;
     document.body.appendChild(toast);
     
@@ -122,3 +136,6 @@ function showToast(message) {
         setTimeout(() => toast.remove(), 300);
     }, 2200);
 }
+
+// Gør showShareModal globalt tilgængelig for per-skandale deling
+window.showShareModal = showShareModal;
