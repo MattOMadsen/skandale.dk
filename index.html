@@ -51,10 +51,10 @@
         </div>
 
         <div id="politiciansGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Politikere indsættes dynamisk via js/ui.js -->
+            <!-- Skeleton cards vises her automatisk via js/ui.js -->
         </div>
 
-        <!-- Infinite Scroll Loader (ny) -->
+        <!-- Infinite Scroll Loader -->
         <div id="infinite-scroll-loader" class="hidden justify-center items-center py-8">
             <div class="flex items-center gap-x-3 text-slate-500">
                 <i class="fa-solid fa-spinner fa-spin text-[#C8102E]"></i>
@@ -90,7 +90,7 @@
     <script src="js/modal-admin.js"></script>
     <script src="js/modal-add-scandal.js"></script>
 
-    <!-- jsPDF bibliotek (tilføjet så PDF-eksport virker) -->
+    <!-- jsPDF bibliotek -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="js/modal-pdf-export.js"></script>
 
@@ -98,7 +98,7 @@
     <script src="js/modal-share.js"></script>
     <script src="js/modal-helpers.js"></script>
 
-    <!-- Sikkerhedsnet + Robust auto-open fra sammenlign.html -->
+    <!-- Sikkerhedsnet + Robust auto-open -->
     <script>
         function tryOpenPoliticianFromStorage(attempt = 1) {
             const maxAttempts = 8;

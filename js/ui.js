@@ -1,7 +1,7 @@
 // js/ui.js - Render politikere på forsiden (med global open funktion + stjerner + billed-avatar + bruger-påvirket score)
 
 // ============================================
-// INFINITE SCROLL STATE (tilføjet juni 2026 - godkendt plan)
+// INFINITE SCROLL STATE (tilføjet juni 2026)
 // ============================================
 let visibleCount = 8;
 let isLoadingMore = false;
@@ -31,6 +31,55 @@ window.openPoliticianModal = function(id) {
     alert('Der opstod en fejl. Prøv at genindlæse siden (Ctrl + Shift + R).');
   }
 };
+
+/**
+ * Viser skeleton cards med det samme for bedre oplevet performance
+ * Kaldes automatisk på index.html
+ */
+function showSkeletonCards(count = 8) {
+  const grid = document.getElementById('politiciansGrid');
+  if (!grid) return;
+
+  let html = '';
+
+  for (let i = 0; i < count; i++) {
+    html += `
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 animate-pulse">
+        <div class="flex items-start justify-between mb-4">
+          <!-- Avatar skeleton -->
+          <div class="w-14 h-14 bg-slate-200 rounded-2xl flex-shrink-0"></div>
+          
+          <div class="text-right space-y-1.5">
+            <div class="h-3 w-16 bg-slate-200 rounded ml-auto"></div>
+            <div class="h-2.5 w-12 bg-slate-200 rounded ml-auto"></div>
+          </div>
+        </div>
+
+        <!-- Navn skeleton -->
+        <div class="h-6 w-3/4 bg-slate-200 rounded mb-3"></div>
+
+        <!-- Stats skeleton -->
+        <div class="flex items-center gap-x-4 mb-3">
+          <div class="h-3 w-20 bg-slate-200 rounded"></div>
+          <div class="h-3 w-16 bg-slate-200 rounded"></div>
+        </div>
+
+        <!-- Stjerner skeleton -->
+        <div class="flex items-center gap-x-2 mb-4">
+          <div class="h-3 w-24 bg-slate-200 rounded"></div>
+        </div>
+
+        <!-- Link skeleton -->
+        <div class="h-3 w-20 bg-slate-200 rounded"></div>
+      </div>
+    `;
+  }
+
+  grid.innerHTML = html;
+}
+
+// Gør skeleton funktion global (kan kaldes manuelt hvis nødvendigt)
+window.showSkeletonCards = showSkeletonCards;
 
 function renderPoliticians(filteredPoliticians = null) {
   const grid = document.getElementById('politiciansGrid');
@@ -153,7 +202,7 @@ window.renderPoliticians = renderPoliticians;
 
 
 // ============================================
-// INFINITE SCROLL FUNKTIONER (ny funktionalitet)
+// INFINITE SCROLL FUNKTIONER
 // ============================================
 
 function updateAllShownMessage() {
@@ -196,18 +245,16 @@ function loadMorePoliticians() {
   isLoadingMore = true;
   showInfiniteLoader(true);
 
-  // Simuler kort delay for bedre UX (kan fjernes hvis ønsket)
   setTimeout(() => {
     visibleCount = Math.min(visibleCount + 8, total);
     
     if (typeof window.renderPoliticians === 'function') {
-      window.renderPoliticians(); // uden argument = normal visning
+      window.renderPoliticians();
     }
 
     showInfiniteLoader(false);
     isLoadingMore = false;
 
-    // Tjek igen om vi har vist alle
     if (visibleCount >= total) {
       updateAllShownMessage();
     }
@@ -216,7 +263,6 @@ function loadMorePoliticians() {
 
 /**
  * Nulstiller til start-tilstand (8 politikere)
- * Kaldes fra search.js når søgning ryddes
  */
 function resetVisibleCount() {
   visibleCount = 8;
@@ -225,7 +271,7 @@ function resetVisibleCount() {
   if (shownEl) shownEl.classList.add('hidden');
 }
 
-// Gør funktionerne globale så search.js og andre kan bruge dem
+// Gør funktionerne globale
 window.resetVisibleCount = resetVisibleCount;
 window.loadMorePoliticians = loadMorePoliticians;
 
@@ -241,12 +287,10 @@ function setupInfiniteScroll() {
     const total = (window.politicians || []).length;
     if (visibleCount >= total) return;
 
-    // Tjek om vi er tæt på bunden (ca. 200px)
     const scrollPosition = window.innerHeight + window.scrollY;
     const documentHeight = document.documentElement.scrollHeight;
 
     if (scrollPosition >= documentHeight - 220) {
-      // Debounce for at undgå for mange kald
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
         if (!isLoadingMore && visibleCount < total) {
@@ -259,10 +303,14 @@ function setupInfiniteScroll() {
   console.log('%c[ui.js] Infinite Scroll aktiveret (visibleCount starter på 8)', 'color: #10b981; font-size: 10px');
 }
 
-// Initialiser infinite scroll når DOM er klar
+// Initialiser skeleton + infinite scroll
  document.addEventListener('DOMContentLoaded', () => {
-  // Start infinite scroll (kun på index.html hvor politiciansGrid findes)
-  if (document.getElementById('politiciansGrid')) {
+  const grid = document.getElementById('politiciansGrid');
+  if (grid) {
+    // Vis skeleton med det samme for bedre oplevet hastighed
+    showSkeletonCards(8);
+    
+    // Start infinite scroll
     setupInfiniteScroll();
   }
 });
@@ -279,20 +327,17 @@ function initMobileMenu() {
 
   if (!menuButton || !mobileMenu) return;
 
-  // Åbn menu
   menuButton.addEventListener('click', () => {
     mobileMenu.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
   });
 
-  // Luk via X-knap
   if (closeButton) {
     closeButton.addEventListener('click', () => {
       closeMobileMenu();
     });
   }
 
-  // Luk hvis man klikker udenfor
   mobileMenu.addEventListener('click', (e) => {
     if (e.target === mobileMenu) {
       closeMobileMenu();
@@ -308,10 +353,8 @@ function closeMobileMenu() {
   }
 }
 
-// Gør closeMobileMenu global
 window.closeMobileMenu = closeMobileMenu;
 
-// Initialiser mobil menu
 document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
 });
