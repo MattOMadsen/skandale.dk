@@ -1,5 +1,6 @@
 // js/modal-pdf-export.js - PDF Eksport (Opdateret version)
-// Forbedret brokenPromises + Kilder tilbage (som ønsket)
+// Bedre løsning: Bruger korrekte felter (whatHappened + sources)
+// Inkluderer fuld tekst til brudte valgløfter + kilder
 // Fuld version med longDesc, consequences, whatShouldHaveHappened + Kilder
 
 function exportPoliticianToPDF(politician) {
@@ -98,7 +99,7 @@ function exportPoliticianToPDF(politician) {
                 y += whatLines.length * 5 + 8;
             }
 
-            // === KILDER (tilbage som ønsket) ===
+            // Kilder
             let mediaLinks = scandal.mediaLinks;
             if (!mediaLinks && scandal.sources) {
                 mediaLinks = Array.isArray(scandal.sources) 
@@ -143,7 +144,7 @@ function exportPoliticianToPDF(politician) {
         y += 6;
     }
 
-    // === BRUDTE VALGLØFTER (FORBEDRET MED FALLBACK) ===
+    // === BRUDTE VALGLØFTER (KORREKT FELT + KILDER) ===
     if (politician.brokenPromises && politician.brokenPromises.length > 0) {
         if (y > 230) { doc.addPage(); y = 20; }
 
@@ -166,16 +167,33 @@ function exportPoliticianToPDF(politician) {
 
             doc.setFont(undefined, 'normal');
 
-            if (p.description) {
-                const descLines = doc.splitTextToSize(p.description, pageWidth - 30);
+            // Brug det korrekte felt: whatHappened
+            const description = p.whatHappened || p.description || '';
+            if (description) {
+                const descLines = doc.splitTextToSize(description, pageWidth - 30);
                 doc.text(descLines, 18, y);
                 y += descLines.length * 5 + 6;
-            } else {
-                // Fallback-tekst
-                doc.setTextColor(128, 128, 128);
-                doc.text("Ingen yderligere beskrivelse tilgængelig.", 18, y);
-                doc.setTextColor(0, 0, 0);
-                y += 6;
+            }
+
+            // Kilder til brudte valgløfter
+            let sources = p.sources;
+            if (!sources && p.source) {
+                sources = Array.isArray(p.source) ? p.source : [p.source];
+            }
+
+            if (sources && sources.length > 0) {
+                if (y > 240) { doc.addPage(); y = 20; }
+                doc.setFont(undefined, 'bold');
+                doc.text("Kilder:", 18, y);
+                y += 5;
+                doc.setFont(undefined, 'normal');
+                sources.forEach(source => {
+                    if (y > 240) { doc.addPage(); y = 20; }
+                    const sourceText = source.text || source.url || 'Kilde';
+                    doc.text(`• ${sourceText}`, 18, y);
+                    y += 5;
+                });
+                y += 4;
             }
         });
         y += 6;
