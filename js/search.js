@@ -82,6 +82,9 @@ function updateSearchUI(count, total, hasTerm) {
       const input = document.getElementById('searchInput');
       if (input) {
         input.value = '';
+        if (typeof window.resetVisibleCount === 'function') {
+          window.resetVisibleCount();
+        }
         filterPoliticians();
       }
     };
@@ -113,6 +116,16 @@ function filterPoliticians() {
 
     scored.sort((a, b) => b.score - a.score);
     filtered = scored.map(item => item.politician);
+
+    // Nulstil visibleCount så alle matchende vises
+    if (typeof window.resetVisibleCount === 'function') {
+      window.resetVisibleCount();
+    }
+  } else {
+    // Søgning ryddet → gå tilbage til infinite scroll start
+    if (typeof window.resetVisibleCount === 'function') {
+      window.resetVisibleCount();
+    }
   }
 
   // Render de filtrerede politikere
@@ -135,6 +148,9 @@ window.filterPoliticians = filterPoliticians;
     const input = document.getElementById('searchInput');
     if (input && input.value) {
       input.value = '';
+      if (typeof window.resetVisibleCount === 'function') {
+        window.resetVisibleCount();
+      }
       filterPoliticians();
     }
   }
