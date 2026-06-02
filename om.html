@@ -1,1 +1,239 @@
-FULL ORIGINAL OM.HTML + TAILWIND CONFIG + DARK MODE SCRIPT
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Om projektet | Skandale.dk</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="manifest" href="manifest.json">
+    <script src="js/dark-mode.js"></script>
+    <style>
+        .prose-custom { max-width: 65ch; }
+        .section-anchor { scroll-margin-top: 80px; }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-gray-950 text-slate-900 dark:text-slate-100">
+
+    <!-- Navbar indlæses via js/navbar.js -->
+
+    <div class="max-w-7xl mx-auto px-6 pt-10 pb-20">
+        
+        <!-- Hero / Header -->
+        <div class="flex flex-col md:flex-row md:items-center gap-x-6 mb-12">
+            <div class="w-16 h-16 bg-[#C8102E] dark:bg-red-700 rounded-2xl flex items-center justify-center flex-shrink-0 mb-4 md:mb-0">
+                <i class="fa-solid fa-balance-scale text-white text-4xl"></i>
+            </div>
+            <div class="flex-1">
+                <h1 class="text-4xl md:text-5xl font-bold tracking-tight">Om Skandale.dk</h1>
+                <p class="text-xl text-slate-600 dark:text-slate-400 mt-2">Et uafhængigt projekt for større gennemsigtighed i dansk politik</p>
+                
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-slate-200 dark:bg-gray-800 text-slate-700 dark:text-slate-300">
+                        <i class="fa-solid fa-users mr-1.5"></i> 12 politikere
+                    </span>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400">
+                        <i class="fa-solid fa-sync-alt mr-1.5"></i> Opdateret løbende
+                    </span>
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400">
+                        <i class="fa-solid fa-balance-scale mr-1.5"></i> Fakta-baseret
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kort intro + anker-navigation -->
+        <div class="prose prose-slate dark:prose-invert max-w-none mb-10 prose-custom">
+            <p class="text-lg text-slate-700 dark:text-slate-300">
+                Skandale.dk samler offentligt tilgængelige oplysninger om politiske skandaler, økonomisk støtte, 
+                internationale netværk og brudte valgløfter – alt på ét sted. Målet er at give danskerne et bedre 
+                grundlag for at forstå magtforhold og ansvar i dansk politik.
+            </p>
+        </div>
+
+        <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm mb-12 border-b border-slate-200 dark:border-gray-800 pb-6">
+            <a href="#hvad-er" class="text-[#C8102E] dark:text-red-400 hover:underline">Hvad er Skandale.dk?</a>
+            <a href="#hvorfor" class="text-[#C8102E] dark:text-red-400 hover:underline">Hvorfor findes siden?</a>
+            <a href="#metodik" class="text-[#C8102E] dark:text-red-400 hover:underline">Hvordan indsamles data?</a>
+            <a href="#kilder" class="text-[#C8102E] dark:text-red-400 hover:underline">Kilder & troværdighed</a>
+            <a href="#fremtid" class="text-[#C8102E] dark:text-red-400 hover:underline">Fremtidsplaner</a>
+            <a href="#bidrag" class="text-[#C8102E] dark:text-red-400 hover:underline">Sådan kan du bidrage</a>
+            <a href="#udvikler" class="text-[#C8102E] dark:text-red-400 hover:underline">Om udvikleren</a>
+        </div>
+
+        <!-- Hvad er Skandale.dk? -->
+        <section id="hvad-er" class="section-anchor mb-14">
+            <h2 class="text-3xl font-semibold tracking-tight mb-4 flex items-center gap-x-3">
+                <i class="fa-solid fa-info-circle text-[#C8102E] dark:text-red-500"></i> 
+                Hvad er Skandale.dk?
+            </h2>
+            <div class="prose prose-slate dark:prose-invert max-w-none prose-custom text-slate-700 dark:text-slate-300">
+                <p>
+                    Skandale.dk er et uafhængigt, nonprofit projekt, der har til formål at skabe større gennemsigtighed 
+                    i dansk politik. Siden samler og præsenterer offentligt tilgængelige oplysninger om politiske skandaler, 
+                    økonomisk støtte fra interesseorganisationer, internationale netværk (f.eks. WEF, Young Global Leaders) 
+                    og brudte valgløfter – alt samlet på ét overskueligt sted.
+                </p>
+                <p>
+                    Projektet er bygget som en statisk hjemmeside med ren HTML, Tailwind CSS og vanilla JavaScript. 
+                    Alle data ligger i åbne JSON-filer, så alle kan se, hvordan informationen er struktureret.
+                </p>
+            </div>
+        </section>
+
+        <!-- Hvorfor findes siden? -->
+        <section id="hvorfor" class="section-anchor mb-14">
+            <h2 class="text-3xl font-semibold tracking-tight mb-4 flex items-center gap-x-3">
+                <i class="fa-solid fa-question-circle text-[#C8102E] dark:text-red-500"></i> 
+                Hvorfor findes siden?
+            </h2>
+            <div class="prose prose-slate dark:prose-invert max-w-none prose-custom text-slate-700 dark:text-slate-300">
+                <p>
+                    Dansk politik lider under manglende gennemsigtighed. Mange vælgere oplever, at løfter bliver brudt, 
+                    og at information om magtforhold, donationer og netværk er spredt ud over mange forskellige kilder – 
+                    eller slet ikke tilgængelig på en overskuelig måde.
+                </p>
+                <p>
+                    Skandale.dk er et forsøg på at samle denne information og gøre den let tilgængelig for alle. 
+                    Målet er ikke at dømme eller tage politisk stilling, men at give folk et bedre faktabaseret grundlag 
+                    for at forstå, hvem der har magten, hvem der støtter hvem, og hvilke løfter der bliver holdt – eller ikke holdt.
+                </p>
+            </div>
+        </section>
+
+        <!-- Hvordan indsamles data? (Metodik) -->
+        <section id="metodik" class="section-anchor mb-14">
+            <h2 class="text-3xl font-semibold tracking-tight mb-4 flex items-center gap-x-3">
+                <i class="fa-solid fa-database text-[#C8102E] dark:text-red-500"></i> 
+                Hvordan indsamles data?
+            </h2>
+            <div class="prose prose-slate dark:prose-invert max-w-none prose-custom text-slate-700 dark:text-slate-300">
+                <p>
+                    Dataen vedligeholdes manuelt i separate JSON-filer – én fil pr. politiker. Dette giver fuld kontrol 
+                    og gør det nemt at versionere og verificere informationen.
+                </p>
+                <p>
+                    Kilder stammer primært fra:
+                </p>
+                <ul class="list-disc pl-6">
+                    <li>Offentlige medier og undersøgende journalistik</li>
+                    <li>Rigsrevisionen og andre officielle kontrolorganer</li>
+                    <li>Folketingets åbne data og dokumenter</li>
+                    <li>Domme og officielle afgørelser</li>
+                    <li>Partiernes egne hjemmesider og pressemeddelelser</li>
+                </ul>
+                <p class="mt-4">
+                    Der tilføjes kun skandaler og oplysninger, der kan dokumenteres med konkrete, offentligt tilgængelige kilder. 
+                    Spekulationer og upålidelige rygter udelades.
+                </p>
+            </div>
+        </section>
+
+        <!-- Kilder & troværdighed + Alvorlighed -->
+        <section id="kilder" class="section-anchor mb-14">
+            <h2 class="text-3xl font-semibold tracking-tight mb-4 flex items-center gap-x-3">
+                <i class="fa-solid fa-shield-alt text-[#C8102E] dark:text-red-500"></i> 
+                Kilder & troværdighed
+            </h2>
+            <div class="prose prose-slate dark:prose-invert max-w-none prose-custom text-slate-700 dark:text-slate-300">
+                <p>
+                    Hver skandale indeholder kildehenvisninger direkte i modalen. Vi vurderer alvorligheden på en 
+                    skala (lav / middel / høj / kritisk) baseret på:
+                </p>
+                <ul class="list-disc pl-6">
+                    <li>Økonomisk omfang og konsekvenser for samfundet</li>
+                    <li>Brud på tillid mellem vælgere og politikere</li>
+                    <li>Om der er tale om systematiske eller gentagne forhold</li>
+                    <li>Officiel dokumentation (domme, Rigsrevisionens rapporter mv.)</li>
+                </ul>
+                <p class="mt-4">
+                    Vi bestræber os på neutralitet og undgår at tage politisk stilling. Formålet er transparens – 
+                    ikke fordømmelse. Bias i kilder forsøges udlignet ved at krydstjekke flere uafhængige kilder, 
+                    hvor det er muligt.
+                </p>
+            </div>
+        </section>
+
+        <!-- Fremtidsplaner -->
+        <section id="fremtid" class="section-anchor mb-14">
+            <h2 class="text-3xl font-semibold tracking-tight mb-4 flex items-center gap-x-3">
+                <i class="fa-solid fa-rocket text-[#C8102E] dark:text-red-500"></i> 
+                Fremtidsplaner
+            </h2>
+            <div class="prose prose-slate dark:prose-invert max-w-none prose-custom text-slate-700 dark:text-slate-300">
+                <p>
+                    Projektet er under løbende udvikling. Her er de vigtigste planer (se den fulde og opdaterede liste i 
+                    <a href="TODO.md" class="text-[#C8102E] dark:text-red-400 hover:underline">TODO.md</a>):
+                </p>
+                <ul class="list-disc pl-6">
+                    <li>Kommentar-system med voting og moderation</li>
+                    <li>Delt afstemning om skandaler (central database, f.eks. Supabase)</li>
+                    <li>Flere politikere og udvidelse af datagrundlaget</li>
+                    <li>Forbedret PDF-eksport af politikeres rapporter</li>
+                    <li>Yderligere PWA-forbedringer (offline-funktion, bedre installation)</li>
+                    <li>Mulighed for at tilføje nye skandaler direkte via admin-dashboard</li>
+                </ul>
+                <p class="mt-4 text-sm text-slate-500 dark:text-slate-400">
+                    Sidst opdateret i TODO.md: 2. juni 2026
+                </p>
+            </div>
+        </section>
+
+        <!-- Sådan kan du bidrage -->
+        <section id="bidrag" class="section-anchor mb-14">
+            <h2 class="text-3xl font-semibold tracking-tight mb-4 flex items-center gap-x-3">
+                <i class="fa-solid fa-hands-helping text-[#C8102E] dark:text-red-500"></i> 
+                Sådan kan du bidrage
+            </h2>
+            <div class="prose prose-slate dark:prose-invert max-w-none prose-custom text-slate-700 dark:text-slate-300">
+                <p>
+                    Projektet drives af én person med begrænsede ressourcer. Du kan hjælpe på flere måder:
+                </p>
+                <ul class="list-disc pl-6">
+                    <li><strong>Send tips:</strong> Har du kilder til manglende skandaler, fejl eller opdateringer? 
+                        Brug formularen på siden eller kontakt os direkte.</li>
+                    <li><strong>Politikere & journalister:</strong> Der findes et password-beskyttet admin-dashboard, 
+                        hvor godkendte brugere kan foreslå ændringer og nye skandaler.</li>
+                    <li><strong>Del siden:</strong> Jo flere der kender til projektet, jo større gennemsigtighed skaber vi sammen.</li>
+                </ul>
+                <p class="mt-4">
+                    Mere information om bidragsmuligheder kommer, når de tekniske rammer er på plads.
+                </p>
+            </div>
+        </section>
+
+        <!-- Om udvikleren -->
+        <section id="udvikler" class="section-anchor mb-16">
+            <h2 class="text-3xl font-semibold tracking-tight mb-4 flex items-center gap-x-3">
+                <i class="fa-solid fa-user text-[#C8102E] dark:text-red-500"></i> 
+                Om udvikleren
+            </h2>
+            <div class="prose prose-slate dark:prose-invert max-w-none prose-custom text-slate-700 dark:text-slate-300">
+                <p>
+                    Skandale.dk drives af Matt Madsen som et personligt, uafhængigt initiativ uden tilknytning til 
+                    politiske partier, interesseorganisationer eller kommercielle interesser.
+                </p>
+                <p>
+                    Projektet er startet ud fra en overbevisning om, at borgerne har ret til at kunne gennemskue 
+                    de beslutninger, der bliver truffet på deres vegne – og at transparens er en forudsætning for 
+                    et velfungerende demokrati.
+                </p>
+            </div>
+        </section>
+
+        <!-- Senest opdateret + kontakt -->
+        <div class="border-t border-slate-200 dark:border-gray-800 pt-8 text-sm text-slate-500 dark:text-slate-400">
+            <p>
+                <strong>Senest opdateret:</strong> 2. juni 2026
+            </p>
+            <p class="mt-2">
+                Har du spørgsmål eller feedback til projektet? Kontaktmuligheder udvikles løbende.
+            </p>
+        </div>
+
+    </div>
+
+    <script src="js/navbar.js"></script>
+</body>
+</html>
