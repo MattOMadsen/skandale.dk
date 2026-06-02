@@ -6,6 +6,7 @@
     <title>Statistik • Skandale.dk</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap');
         
@@ -154,10 +155,21 @@
                     <span class="text-sm text-gray-500 dark:text-gray-400">Opdateret juni 2026</span>
                 </div>
                 
-                <h1 class="text-5xl font-bold tracking-tighter">Statistik & Overblik</h1>
-                <p class="mt-4 text-xl text-gray-600 dark:text-gray-300 max-w-2xl">
-                    Et hurtigt og overskueligt overblik over skandaler, brudte løfter, økonomisk støtte og netværk på tværs af danske politikere.
-                </p>
+                <div class="flex items-start justify-between">
+                    <div>
+                        <h1 class="text-5xl font-bold tracking-tighter">Statistik & Overblik</h1>
+                        <p class="mt-4 text-xl text-gray-600 dark:text-gray-300 max-w-2xl">
+                            Et hurtigt og overskueligt overblik over skandaler, brudte løfter, økonomisk støtte og netværk på tværs af danske politikere.
+                        </p>
+                    </div>
+                    
+                    <!-- PDF Export Button -->
+                    <button onclick="exportToPDF()" 
+                            class="hidden md:flex items-center gap-x-2 px-5 py-2.5 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-semibold rounded-2xl transition-all active:scale-[0.985]">
+                        <i class="fa-solid fa-file-pdf text-red-600"></i>
+                        <span>Eksporter til PDF</span>
+                    </button>
+                </div>
                 
                 <div class="mt-6 flex items-center gap-x-4 text-sm">
                     <div class="flex items-center gap-x-2 text-gray-500 dark:text-gray-400">
@@ -276,7 +288,7 @@
             </div>
         </div>
 
-        <!-- NY: Økonomisk støtte oversigt (Fase 4+ udvidelse) -->
+        <!-- Økonomisk støtte oversigt -->
         <div class="mb-8">
             <div class="flex items-center justify-between mb-6">
                 <div>
@@ -289,8 +301,6 @@
             </div>
 
             <div class="grid lg:grid-cols-5 gap-6">
-                
-                <!-- Donationer pr. parti -->
                 <div class="lg:col-span-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-7">
                     <h3 class="font-semibold text-lg mb-5 flex items-center gap-x-2">
                         <i class="fa-solid fa-chart-pie text-emerald-600"></i>
@@ -299,8 +309,6 @@
                     <div id="donationsPartyDistribution" class="space-y-3"></div>
                     <p class="text-xs text-gray-500 dark:text-gray-400 mt-6">Antal donationer pr. parti</p>
                 </div>
-                
-                <!-- Top 5 med flest donationer -->
                 <div class="lg:col-span-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-7">
                     <h3 class="font-semibold text-lg mb-5 flex items-center gap-x-2">
                         <i class="fa-solid fa-trophy text-emerald-600"></i>
@@ -308,10 +316,8 @@
                     </h3>
                     <div id="topDonationsPoliticians" class="space-y-3"></div>
                 </div>
-
             </div>
 
-            <!-- Samlet total donationer -->
             <div class="mt-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-7">
                 <div class="flex items-center justify-between">
                     <div>
@@ -428,7 +434,6 @@
                     const promiseData = promiseResults[index];
                     const donationData = donationResults[index];
 
-                    // Skandaler
                     let scandalCount = 0;
                     let totalSeverity = 0;
                     let severityCounts = {1:0, 2:0, 3:0, 4:0, 5:0};
@@ -442,13 +447,11 @@
                         });
                     }
 
-                    // Brudte løfter
                     let brokenPromiseCount = 0;
                     if (promiseData && promiseData.brokenPromises) {
                         brokenPromiseCount = promiseData.brokenPromises.length;
                     }
 
-                    // Økonomisk støtte (nye)
                     let donationCount = 0;
                     if (donationData && donationData.donations) {
                         donationCount = donationData.donations.length;
@@ -742,7 +745,6 @@
             document.getElementById('totalBrokenPromises').textContent = total;
         }
 
-        // === NY: Økonomisk støtte ===
         function renderDonationsPartyDistribution() {
             const container = document.getElementById('donationsPartyDistribution');
             container.innerHTML = '';
@@ -811,6 +813,116 @@
             document.getElementById('totalDonations').textContent = total;
         }
 
+        // === PDF Export (Fase 4+ feature) ===
+        function exportToPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            const pageWidth = doc.internal.pageSize.getWidth();
+            let y = 20;
+
+            // Header
+            doc.setFontSize(22);
+            doc.setTextColor(200, 16, 46); // Red
+            doc.text("Skandale.dk - Statistik", pageWidth / 2, y, { align: 'center' });
+            
+            y += 8;
+            doc.setFontSize(11);
+            doc.setTextColor(100);
+            doc.text(`Genereret: ${new Date().toLocaleDateString('da-DK')} | Live data fra /data/`, pageWidth / 2, y, { align: 'center' });
+
+            y += 15;
+            doc.setDrawColor(200, 16, 46);
+            doc.line(20, y, pageWidth - 20, y);
+
+            y += 12;
+            doc.setFontSize(14);
+            doc.setTextColor(0);
+            doc.text("Nøgletal", 20, y);
+
+            y += 10;
+            doc.setFontSize(11);
+            doc.setTextColor(60);
+
+            let filteredData = politiciansData;
+            if (currentPartyFilter) {
+                filteredData = politiciansData.filter(p => p.party === currentPartyFilter);
+            }
+
+            const totalScandals = filteredData.reduce((sum, p) => sum + p.scandalCount, 0);
+            const totalBroken = filteredData.reduce((sum, p) => sum + p.brokenPromiseCount, 0);
+            const totalDonations = filteredData.reduce((sum, p) => sum + p.donationCount, 0);
+            const avgSeverity = filteredData.length > 0 
+                ? (filteredData.reduce((sum, p) => sum + parseFloat(p.avgSeverity || 0), 0) / filteredData.length).toFixed(1) 
+                : '0.0';
+
+            const metricsText = [
+                `Politikere: ${filteredData.length}${currentPartyFilter ? ` (${currentPartyFilter})` : ''}`,
+                `Totale skandaler: ${totalScandals}`,
+                `Gennemsnitlig alvorlighed: ${avgSeverity} / 5`,
+                `Brudte løfter: ${totalBroken}`,
+                `Donationer: ${totalDonations}`
+            ];
+
+            metricsText.forEach(line => {
+                doc.text(line, 25, y);
+                y += 7;
+            });
+
+            // Top 5 Skandaler
+            y += 8;
+            doc.setFontSize(14);
+            doc.setTextColor(0);
+            doc.text("Top 5 mest skandale-ramte", 20, y);
+            y += 8;
+            doc.setFontSize(10);
+            doc.setTextColor(60);
+
+            let topScandals = [...filteredData].sort((a,b) => b.scandalCount - a.scandalCount).slice(0,5);
+            topScandals.forEach((p, i) => {
+                doc.text(`${i+1}. ${p.name} (${p.partyShort}) — ${p.scandalCount} skandaler (${p.avgSeverity} gns)`, 25, y);
+                y += 6;
+            });
+
+            // Top 5 Brudte løfter
+            y += 6;
+            doc.setFontSize(14);
+            doc.setTextColor(0);
+            doc.text("Top 5 med flest brudte løfter", 20, y);
+            y += 8;
+            doc.setFontSize(10);
+            doc.setTextColor(60);
+
+            let topBroken = [...filteredData].sort((a,b) => b.brokenPromiseCount - a.brokenPromiseCount).slice(0,5);
+            topBroken.forEach((p, i) => {
+                doc.text(`${i+1}. ${p.name} (${p.partyShort}) — ${p.brokenPromiseCount} brudte løfter`, 25, y);
+                y += 6;
+            });
+
+            // Top 5 Donationer
+            y += 6;
+            doc.setFontSize(14);
+            doc.setTextColor(0);
+            doc.text("Top 5 med flest donationer", 20, y);
+            y += 8;
+            doc.setFontSize(10);
+            doc.setTextColor(60);
+
+            let topDonations = [...filteredData].sort((a,b) => b.donationCount - a.donationCount).slice(0,5);
+            topDonations.forEach((p, i) => {
+                doc.text(`${i+1}. ${p.name} (${p.partyShort}) — ${p.donationCount} donationer`, 25, y);
+                y += 6;
+            });
+
+            // Footer
+            y = doc.internal.pageSize.getHeight() - 15;
+            doc.setFontSize(9);
+            doc.setTextColor(120);
+            doc.text("Skandale.dk — Mere gennemsigtighed i dansk politik | https://skandale.dk", pageWidth / 2, y, { align: 'center' });
+
+            doc.save(`skandale-dk-statistik-${new Date().toISOString().slice(0,10)}.pdf`);
+        }
+
         async function refreshData() {
             const btns = document.querySelectorAll('button[onclick="refreshData()"]');
             btns.forEach(b => {
@@ -828,7 +940,7 @@
 
             const toast = document.createElement('div');
             toast.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-sm px-5 py-2.5 rounded-3xl shadow-xl flex items-center gap-x-2';
-            toast.innerHTML = `<i class="fa-solid fa-check"></i> <span>Live data opdateret (inkl. økonomisk støtte)</span>`;
+            toast.innerHTML = `<i class="fa-solid fa-check"></i> <span>Live data opdateret</span>`;
             document.body.appendChild(toast);
             setTimeout(() => toast.remove(), 2200);
         }
@@ -847,7 +959,7 @@
                 }
             });
 
-            console.log('%c[Skandale.dk] Økonomisk støtte oversigt tilføjet', 'color:#16a34a');
+            console.log('%c[Skandale.dk] PDF-eksport tilføjet', 'color:#16a34a');
         }
 
         window.onload = initStatsPage;
