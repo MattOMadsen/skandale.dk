@@ -68,21 +68,13 @@
             transition: background-color 0.2s ease;
         }
         
-        .donor-item:hover, .network-item:hover {
+        .donor-item:hover, .network-item:hover, .scandal-item:hover {
             background-color: #f1f5f9;
             cursor: pointer;
         }
         
-        .dark .donor-item:hover, .dark .network-item:hover {
+        .dark .donor-item:hover, .dark .network-item:hover, .dark .scandal-item:hover {
             background-color: #374151;
-        }
-
-        .scandal-item:hover {
-            background-color: #f8fafc;
-        }
-        
-        .dark .scandal-item:hover {
-            background-color: #1f2937;
         }
 
         .nav-active {
@@ -152,7 +144,6 @@
             animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
 
-        /* Modal styles */
         .modal {
             animation: modalPopIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
@@ -454,11 +445,11 @@
             </div>
 
             <div class="mt-6 text-center text-xs text-gray-500 dark:text-gray-400 no-print">
-                Data hentes automatisk fra de officielle JSON-filer. Klik på en donor eller et netværk for at se andre politikere med samme tilknytning.
+                Data hentes automatisk fra de officielle JSON-filer. Klik på en skandale for at læse mere, eller på en donor/netværk for at se andre politikere.
             </div>
         </div>
         
-        <!-- Empty state / instructions -->
+        <!-- Empty state -->
         <div id="empty-state" class="text-center py-12 px-6 bg-white dark:bg-gray-900 rounded-3xl border border-gray-200 dark:border-gray-800">
             <div class="mx-auto w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center mb-4">
                 <i class="fas fa-balance-scale text-3xl text-gray-400"></i>
@@ -491,12 +482,9 @@
 
     <!-- Related Politicians Modal -->
     <div id="related-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
-        <!-- Backdrop -->
         <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="hideRelatedModal()"></div>
         
-        <!-- Modal Content -->
         <div class="modal relative bg-white dark:bg-gray-900 rounded-3xl shadow-2xl max-w-lg w-full max-h-[80vh] overflow-hidden border border-gray-200 dark:border-gray-700">
-            <!-- Header -->
             <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700">
                 <h3 id="related-modal-title" class="font-semibold text-lg pr-8"></h3>
                 <button onclick="hideRelatedModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
@@ -504,40 +492,56 @@
                 </button>
             </div>
             
-            <!-- Content -->
             <div class="p-6 overflow-y-auto max-h-[60vh]" id="related-modal-content">
                 <!-- Populated by JS -->
             </div>
             
-            <!-- Footer -->
             <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-950 text-xs text-gray-500 dark:text-gray-400">
-                Klik på en politiker for at se deres fulde profil (kommer snart).
+                Klik på en politiker for at erstatte den i sammenligningen.
+            </div>
+        </div>
+    </div>
+
+    <!-- Scandal Detail Modal -->
+    <div id="scandal-modal" class="hidden fixed inset-0 z-[110] flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="hideScandalModal()"></div>
+        
+        <div class="modal relative bg-white dark:bg-gray-900 rounded-3xl shadow-2xl max-w-2xl w-full max-h-[85vh] overflow-hidden border border-gray-200 dark:border-gray-700">
+            <!-- Header -->
+            <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-950">
+                <div>
+                    <h3 id="scandal-modal-title" class="font-semibold text-xl"></h3>
+                    <div id="scandal-modal-severity" class="mt-1"></div>
+                </div>
+                <button onclick="hideScandalModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- Content -->
+            <div class="p-6 overflow-y-auto max-h-[65vh] space-y-6" id="scandal-modal-content">
+                <!-- Populated dynamically -->
+            </div>
+            
+            <!-- Footer -->
+            <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-950 flex justify-end">
+                <button onclick="hideScandalModal()" 
+                        class="px-5 py-2 text-sm font-medium rounded-2xl border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    Luk
+                </button>
             </div>
         </div>
     </div>
 
     <script>
-        // Tailwind script
         function initializeTailwind() {
             document.documentElement.style.setProperty('--accent', '#1e40af');
-            
-            tailwind.config = {
-                darkMode: 'class',
-                theme: {
-                    extend: {
-                        fontFamily: {
-                            'serif-custom': ['Playfair Display', 'Georgia', 'serif']
-                        }
-                    }
-                }
-            };
+            tailwind.config = { darkMode: 'class' };
         }
 
-        // Dark mode
         function initializeDarkMode() {
             const savedTheme = localStorage.getItem('theme');
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            
             if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
                 document.documentElement.classList.add('dark');
             }
@@ -554,13 +558,10 @@
             }
         }
 
-        // Mobile menu
         function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
+            document.getElementById('mobile-menu').classList.toggle('hidden');
         }
 
-        // Base politician data
         const POLITICIANS = [
             { slug: "mette-frederiksen", name: "Mette Frederiksen", party: "Socialdemokratiet", partyShort: "S", color: "#E30613", initials: "MF", role: "Statsminister", scandalCount: 6, avgSeverity: 4.2, brokenPromises: 7, donorCount: 14, networkCount: 5 },
             { slug: "inger-stoejberg", name: "Inger Støjberg", party: "Danmarksdemokraterne", partyShort: "DD", color: "#00A651", initials: "IS", role: "Formand & MF", scandalCount: 7, avgSeverity: 4.1, brokenPromises: 3, donorCount: 9, networkCount: 2 },
@@ -578,8 +579,6 @@
 
         let selectedPoliticians = { 1: null, 2: null };
         const loadedDataCache = {};
-
-        // Index for clickable donors and networks
         let donorToPoliticians = {};
         let networkToPoliticians = {};
 
@@ -589,13 +588,10 @@
                 if (supportData && supportData.donations) {
                     supportData.donations.forEach(d => {
                         if (!donorToPoliticians[d.name]) donorToPoliticians[d.name] = [];
-                        if (!donorToPoliticians[d.name].includes(pol.name)) {
-                            donorToPoliticians[d.name].push(pol.name);
-                        }
+                        if (!donorToPoliticians[d.name].includes(pol.name)) donorToPoliticians[d.name].push(pol.name);
                     });
                 }
             }
-
             for (const pol of POLITICIANS) {
                 const affData = await fetchJSON(`data/affiliations/${pol.slug}.json`);
                 if (affData && affData.affiliations) {
@@ -603,14 +599,11 @@
                         const key = a.name || a.organization;
                         if (key) {
                             if (!networkToPoliticians[key]) networkToPoliticians[key] = [];
-                            if (!networkToPoliticians[key].includes(pol.name)) {
-                                networkToPoliticians[key].push(pol.name);
-                            }
+                            if (!networkToPoliticians[key].includes(pol.name)) networkToPoliticians[key].push(pol.name);
                         }
                     });
                 }
             }
-            console.log('%c[CrossRef] Donor and network index built.', 'color:#64748b');
         }
 
         function initializePoliticianLists() {
@@ -621,48 +614,33 @@
         function renderPoliticianList(side) {
             const container = document.getElementById(`politician-list-${side}`);
             container.innerHTML = '';
-            
-            POLITICIANS.forEach(politician => {
+            POLITICIANS.forEach(p => {
                 const div = document.createElement('div');
                 div.className = `politician-option flex items-center gap-x-3 px-3 py-2.5 rounded-xl cursor-pointer text-sm`;
                 div.innerHTML = `
-                    <div class="w-8 h-8 rounded-xl flex-shrink-0 flex items-center justify-center text-white text-xs font-bold shadow-sm" style="background-color: ${politician.color}">
-                        ${politician.initials}
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="font-medium">${politician.name}</div>
-                        <div class="text-xs text-gray-500 dark:text-gray-400">${politician.party}</div>
-                    </div>
+                    <div class="w-8 h-8 rounded-xl flex-shrink-0 flex items-center justify-center text-white text-xs font-bold shadow-sm" style="background-color: ${p.color}">${p.initials}</div>
+                    <div class="flex-1 min-w-0"><div class="font-medium">${p.name}</div><div class="text-xs text-gray-500 dark:text-gray-400">${p.party}</div></div>
                 `;
-                div.onclick = () => selectPolitician(side, politician.slug);
+                div.onclick = () => selectPolitician(side, p.slug);
                 container.appendChild(div);
             });
         }
 
         function filterPoliticians(side) {
-            const searchInput = document.getElementById(`search${side}`).value.toLowerCase().trim();
+            const q = document.getElementById(`search${side}`).value.toLowerCase().trim();
             const container = document.getElementById(`politician-list-${side}`);
-            const options = container.children;
-            
-            for (let i = 0; i < options.length; i++) {
-                const option = options[i];
-                const text = option.textContent.toLowerCase();
-                if (text.includes(searchInput)) {
-                    option.style.display = '';
-                } else {
-                    option.style.display = 'none';
-                }
-            }
+            Array.from(container.children).forEach(opt => {
+                opt.style.display = opt.textContent.toLowerCase().includes(q) ? '' : 'none';
+            });
         }
 
         function selectPolitician(side, slug) {
-            const politician = POLITICIANS.find(p => p.slug === slug);
-            if (!politician) return;
-
-            selectedPoliticians[side] = politician;
+            const pol = POLITICIANS.find(p => p.slug === slug);
+            if (!pol) return;
+            selectedPoliticians[side] = pol;
             
             const badge = document.getElementById(`p${side}-selected-badge`);
-            document.getElementById(`p${side}-selected-name`).textContent = politician.name;
+            document.getElementById(`p${side}-selected-name`).textContent = pol.name;
             badge.classList.remove('hidden');
             badge.classList.add('flex');
             
@@ -678,19 +656,16 @@
 
         function highlightSelectedInList(side, slug) {
             const container = document.getElementById(`politician-list-${side}`);
-            Array.from(container.children).forEach(option => {
-                option.classList.remove('selected-politician', 'ring-2', 'ring-offset-2', 'ring-blue-500', 'dark:ring-blue-400');
-                if (option.textContent.includes(POLITICIANS.find(p => p.slug === slug).name)) {
-                    option.classList.add('selected-politician', 'ring-2', 'ring-offset-2', 'ring-blue-500', 'dark:ring-blue-400');
+            Array.from(container.children).forEach(opt => {
+                opt.classList.remove('selected-politician', 'ring-2', 'ring-offset-2', 'ring-blue-500', 'dark:ring-blue-400');
+                if (opt.textContent.includes(POLITICIANS.find(p => p.slug === slug).name)) {
+                    opt.classList.add('selected-politician', 'ring-2', 'ring-offset-2', 'ring-blue-500', 'dark:ring-blue-400');
                 }
             });
         }
 
         function swapPoliticians() {
-            const temp = selectedPoliticians[1];
-            selectedPoliticians[1] = selectedPoliticians[2];
-            selectedPoliticians[2] = temp;
-
+            [selectedPoliticians[1], selectedPoliticians[2]] = [selectedPoliticians[2], selectedPoliticians[1]];
             if (selectedPoliticians[1]) {
                 document.getElementById('p1-selected-name').textContent = selectedPoliticians[1].name;
                 document.getElementById('p1-selected-badge').classList.remove('hidden');
@@ -701,34 +676,24 @@
                 document.getElementById('p2-selected-badge').classList.remove('hidden');
                 document.getElementById('p2-selected-badge').classList.add('flex');
             }
-
-            if (selectedPoliticians[1] && selectedPoliticians[2]) {
-                showComparison();
-            }
+            if (selectedPoliticians[1] && selectedPoliticians[2]) showComparison();
         }
 
         async function showComparison() {
             const area = document.getElementById('comparison-area');
             const empty = document.getElementById('empty-state');
-            
             area.classList.remove('hidden');
             empty.classList.add('hidden');
-            
+
             const p1 = selectedPoliticians[1];
             const p2 = selectedPoliticians[2];
-            
             document.getElementById('comparison-subtitle').textContent = `${p1.name} vs ${p2.name}`;
-            
+
             renderPoliticianCard(1, p1);
             renderPoliticianCard(2, p2);
-            
             updateURL();
-            
-            await Promise.all([
-                loadAndRenderDetails(1, p1),
-                loadAndRenderDetails(2, p2)
-            ]);
-            
+
+            await Promise.all([loadAndRenderDetails(1, p1), loadAndRenderDetails(2, p2)]);
             area.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
@@ -736,7 +701,6 @@
             const avatar = document.getElementById(`p${side}-avatar`);
             avatar.innerHTML = politician.initials;
             avatar.style.backgroundColor = politician.color;
-            
             document.getElementById(`p${side}-name`).textContent = politician.name;
             
             const partyBadge = document.getElementById(`p${side}-party-badge`);
@@ -745,46 +709,25 @@
             partyBadge.style.color = politician.color;
             
             document.getElementById(`p${side}-role`).textContent = politician.role || '';
-            
             renderMetrics(side, politician);
             resetTabs(side);
         }
 
         function renderMetrics(side, politician) {
-            const container = document.getElementById(`p${side}-metrics`);
-            container.innerHTML = `
-                <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-3 text-center border border-gray-100 dark:border-gray-800">
-                    <div class="text-2xl font-semibold">${politician.scandalCount}</div>
-                    <div class="text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">SKANDALER</div>
-                </div>
-                <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-3 text-center border border-gray-100 dark:border-gray-800">
-                    <div class="text-2xl font-semibold flex items-center justify-center gap-x-0.5">
-                        ${politician.avgSeverity} <span class="text-amber-500 text-lg">★</span>
-                    </div>
-                    <div class="text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">ALVORLIGHED</div>
-                </div>
-                <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-3 text-center border border-gray-100 dark:border-gray-800">
-                    <div class="text-2xl font-semibold">${politician.brokenPromises}</div>
-                    <div class="text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">BRUDTE LØFTER</div>
-                </div>
-                <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-3 text-center border border-gray-100 dark:border-gray-800">
-                    <div class="text-2xl font-semibold">${politician.donorCount}</div>
-                    <div class="text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">DONORER</div>
-                </div>
-                <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-3 text-center border border-gray-100 dark:border-gray-800">
-                    <div class="text-2xl font-semibold">${politician.networkCount}</div>
-                    <div class="text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">NETVÆRK</div>
-                </div>
+            const c = document.getElementById(`p${side}-metrics`);
+            c.innerHTML = `
+                <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-3 text-center border border-gray-100 dark:border-gray-800"><div class="text-2xl font-semibold">${politician.scandalCount}</div><div class="text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">SKANDALER</div></div>
+                <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-3 text-center border border-gray-100 dark:border-gray-800"><div class="text-2xl font-semibold flex items-center justify-center gap-x-0.5">${politician.avgSeverity} <span class="text-amber-500 text-lg">★</span></div><div class="text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">ALVORLIGHED</div></div>
+                <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-3 text-center border border-gray-100 dark:border-gray-800"><div class="text-2xl font-semibold">${politician.brokenPromises}</div><div class="text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">BRUDTE LØFTER</div></div>
+                <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-3 text-center border border-gray-100 dark:border-gray-800"><div class="text-2xl font-semibold">${politician.donorCount}</div><div class="text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">DONORER</div></div>
+                <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-3 text-center border border-gray-100 dark:border-gray-800"><div class="text-2xl font-semibold">${politician.networkCount}</div><div class="text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">NETVÆRK</div></div>
             `;
         }
 
         function resetTabs(side) {
-            const buttons = document.querySelectorAll(`[data-tab$="-${side}"]`);
-            buttons.forEach(btn => btn.classList.remove('active'));
-            
-            const scandalsBtn = document.querySelector(`[data-tab="scandals-${side}"]`);
-            if (scandalsBtn) scandalsBtn.classList.add('active');
-            
+            document.querySelectorAll(`[data-tab$="-${side}"]`).forEach(b => b.classList.remove('active'));
+            const btn = document.querySelector(`[data-tab="scandals-${side}"]`);
+            if (btn) btn.classList.add('active');
             document.getElementById(`p${side}-scandals`).classList.remove('hidden');
             document.getElementById(`p${side}-support`).classList.add('hidden');
             document.getElementById(`p${side}-promises`).classList.add('hidden');
@@ -792,59 +735,46 @@
         }
 
         function switchTab(side, tab) {
-            const politician = selectedPoliticians[side];
-            if (!politician) return;
-            
+            const pol = selectedPoliticians[side];
+            if (!pol) return;
             document.getElementById(`p${side}-scandals`).classList.add('hidden');
             document.getElementById(`p${side}-support`).classList.add('hidden');
             document.getElementById(`p${side}-promises`).classList.add('hidden');
             document.getElementById(`p${side}-networks`).classList.add('hidden');
-            
-            const buttons = document.querySelectorAll(`[data-tab$="-${side}"]`);
-            buttons.forEach(btn => btn.classList.remove('active'));
-            
+            document.querySelectorAll(`[data-tab$="-${side}"]`).forEach(b => b.classList.remove('active'));
             const activeBtn = document.querySelector(`[data-tab="${tab}-${side}"]`);
             if (activeBtn) activeBtn.classList.add('active');
-            
-            const contentEl = document.getElementById(`p${side}-${tab}`);
-            contentEl.classList.remove('hidden');
+            document.getElementById(`p${side}-${tab}`).classList.remove('hidden');
         }
-
-        // ==================== AUTOMATIC DATA LOADER + MODAL ====================
 
         async function fetchJSON(path) {
             try {
                 const res = await fetch(path);
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 return await res.json();
-            } catch (e) {
-                console.warn(`Kunne ikke hente ${path}:`, e);
-                return null;
-            }
+            } catch (e) { return null; }
         }
 
         async function loadScandals(slug) {
             const manifest = await fetchJSON(`data/scandals/${slug}/manifest.json`);
-            if (!manifest || !manifest.scandals) return [];
-            
-            const items = await Promise.all(
-                manifest.scandals.map(filename => fetchJSON(`data/scandals/${slug}/${filename}`))
-            );
+            if (!manifest?.scandals) return [];
+            const items = await Promise.all(manifest.scandals.map(f => fetchJSON(`data/scandals/${slug}/${f}`)));
             return items.filter(Boolean).map(item => ({
+                id: item.id,
                 title: item.title || item.id,
                 severity: item.ourSeverity || 3,
-                desc: item.shortDesc || item.longDesc || '',
-                sources: (item.mediaLinks || []).map(l => l.name || l.url || 'Kilde')
+                shortDesc: item.shortDesc || '',
+                longDesc: item.longDesc || '',
+                sources: item.mediaLinks || [],
+                consequences: item.consequences || '',
+                whatShouldHaveHappened: item.whatShouldHaveHappened || null
             }));
         }
 
         async function loadBrokenPromises(slug) {
             const manifest = await fetchJSON(`data/broken-promises/${slug}/manifest.json`);
-            if (!manifest || !manifest.brokenPromises) return [];
-            
-            const items = await Promise.all(
-                manifest.brokenPromises.map(filename => fetchJSON(`data/broken-promises/${slug}/${filename}`))
-            );
+            if (!manifest?.brokenPromises) return [];
+            const items = await Promise.all(manifest.brokenPromises.map(f => fetchJSON(`data/broken-promises/${slug}/${f}`)));
             return items.filter(Boolean).map(item => ({
                 title: item.title || 'Brudt løfte',
                 status: item.status || 'Brudt',
@@ -854,12 +784,7 @@
 
         async function loadEconomicSupport(slug) {
             const data = await fetchJSON(`data/economic-support/${slug}.json`);
-            if (!data || !data.donations) return [];
-            return data.donations.map(d => ({
-                name: d.name,
-                year: d.year || '',
-                amount: d.amount || ''
-            }));
+            return (data?.donations || []).map(d => ({ name: d.name, year: d.year || '', amount: d.amount || '' }));
         }
 
         async function loadAffiliations(slug) {
@@ -867,48 +792,30 @@
             if (!data) return [];
             if (Array.isArray(data)) return data;
             if (data.affiliations) return data.affiliations;
-            if (data.networks) return data.networks;
             return [];
         }
 
         async function loadDetailedData(slug) {
             if (loadedDataCache[slug]) return loadedDataCache[slug];
-
             const [scandals, promises, support, networks] = await Promise.all([
-                loadScandals(slug),
-                loadBrokenPromises(slug),
-                loadEconomicSupport(slug),
-                loadAffiliations(slug)
+                loadScandals(slug), loadBrokenPromises(slug), loadEconomicSupport(slug), loadAffiliations(slug)
             ]);
-
             const result = { scandals, promises, support, networks };
             loadedDataCache[slug] = result;
             return result;
         }
 
         async function loadAndRenderDetails(side, politician) {
-            const scandalsContainer = document.getElementById(`p${side}-scandals`);
-            const supportContainer = document.getElementById(`p${side}-support`);
-            const promisesContainer = document.getElementById(`p${side}-promises`);
-            const networksContainer = document.getElementById(`p${side}-networks`);
+            document.getElementById(`p${side}-scandals`).innerHTML = `<div class="loading-placeholder text-sm text-gray-400 py-4">Indlæser skandaler...</div>`;
+            document.getElementById(`p${side}-support`).innerHTML = `<div class="loading-placeholder text-sm text-gray-400 py-4">Indlæser støtte...</div>`;
+            document.getElementById(`p${side}-promises`).innerHTML = `<div class="loading-placeholder text-sm text-gray-400 py-4">Indlæser løfter...</div>`;
+            document.getElementById(`p${side}-networks`).innerHTML = `<div class="loading-placeholder text-sm text-gray-400 py-4">Indlæser netværk...</div>`;
 
-            scandalsContainer.innerHTML = `<div class="loading-placeholder text-sm text-gray-400 py-4">Indlæser skandaler...</div>`;
-            supportContainer.innerHTML = `<div class="loading-placeholder text-sm text-gray-400 py-4">Indlæser støtte...</div>`;
-            promisesContainer.innerHTML = `<div class="loading-placeholder text-sm text-gray-400 py-4">Indlæser løfter...</div>`;
-            networksContainer.innerHTML = `<div class="loading-placeholder text-sm text-gray-400 py-4">Indlæser netværk...</div>`;
-
-            try {
-                const data = await loadDetailedData(politician.slug);
-                
-                renderTabContentWithData(side, 'scandals', data.scandals);
-                renderTabContentWithData(side, 'support', data.support);
-                renderTabContentWithData(side, 'promises', data.promises);
-                renderTabContentWithData(side, 'networks', data.networks);
-
-            } catch (e) {
-                console.error('Fejl ved indlæsning af data for', politician.slug, e);
-                scandalsContainer.innerHTML = `<p class="text-sm text-red-500 italic py-4">Kunne ikke hente data.</p>`;
-            }
+            const data = await loadDetailedData(politician.slug);
+            renderTabContentWithData(side, 'scandals', data.scandals);
+            renderTabContentWithData(side, 'support', data.support);
+            renderTabContentWithData(side, 'promises', data.promises);
+            renderTabContentWithData(side, 'networks', data.networks);
         }
 
         function renderTabContentWithData(side, tab, items) {
@@ -916,34 +823,30 @@
             container.innerHTML = '';
 
             if (!items || items.length === 0) {
-                container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400 italic py-4">Ingen data fundet for denne kategori.</p>`;
+                container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400 italic py-4">Ingen data fundet.</p>`;
                 return;
             }
 
             if (tab === 'scandals') {
-                items.forEach(item => {
+                items.forEach((item, index) => {
                     const div = document.createElement('div');
                     div.className = `scandal-item mb-4 last:mb-0 p-4 rounded-2xl border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-950`;
                     div.innerHTML = `
                         <div class="flex justify-between items-start gap-x-3">
                             <div class="font-semibold">${item.title}</div>
-                            <div class="flex-shrink-0 text-right">${createSeverityStars(item.severity || 3)}</div>
+                            <div>${createSeverityStars(item.severity)}</div>
                         </div>
-                        <p class="text-sm mt-2 text-gray-600 dark:text-gray-300">${item.desc || ''}</p>
-                        <div class="mt-3 flex flex-wrap gap-x-2 text-xs">
-                            ${(item.sources || []).map(s => `<span class="inline-block px-2.5 py-0.5 bg-white dark:bg-gray-900 rounded-full border border-gray-200 dark:border-gray-700">${s}</span>`).join('')}
-                        </div>
+                        <p class="text-sm mt-2 text-gray-600 dark:text-gray-300 line-clamp-2">${item.shortDesc}</p>
+                        <div class="mt-2 text-xs text-blue-600 dark:text-blue-400">Klik for at læse mere →</div>
                     `;
+                    div.onclick = () => showScandalModal(item);
                     container.appendChild(div);
                 });
             } else if (tab === 'support') {
                 items.forEach(item => {
                     const div = document.createElement('div');
                     div.className = `donor-item mb-3 last:mb-0 p-3 rounded-xl border border-gray-100 dark:border-gray-800`;
-                    div.innerHTML = `
-                        <div class="font-medium">${item.name}</div>
-                        <div class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">${item.year || ''} • ${item.amount || ''}</div>
-                    `;
+                    div.innerHTML = `<div class="font-medium">${item.name}</div><div class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">${item.year} • ${item.amount}</div>`;
                     div.onclick = () => showRelatedModal('donor', item.name);
                     container.appendChild(div);
                 });
@@ -953,8 +856,8 @@
                     div.className = `promise-item mb-3 last:mb-0 p-3 rounded-xl border border-gray-100 dark:border-gray-800`;
                     div.innerHTML = `
                         <div class="font-medium">${item.title}</div>
-                        <div class="text-xs mt-1"><span class="px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-400 text-[10px]">${item.status || 'Brudt'}</span></div>
-                        <p class="text-sm mt-2 text-gray-600 dark:text-gray-300">${item.desc || ''}</p>
+                        <div class="text-xs mt-1"><span class="px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-400 text-[10px]">${item.status}</span></div>
+                        <p class="text-sm mt-2 text-gray-600 dark:text-gray-300">${item.desc}</p>
                     `;
                     container.appendChild(div);
                 });
@@ -962,22 +865,13 @@
                 items.forEach(item => {
                     const div = document.createElement('div');
                     div.className = `network-item mb-3 last:mb-0 p-3 rounded-xl border border-gray-100 dark:border-gray-800`;
-                    
                     const name = item.name || 'Netværk';
                     const org = item.organization || '';
                     const year = item.year || '';
                     const role = item.role || '';
-                    
-                    div.innerHTML = `
-                        <div class="font-medium">${name}</div>
-                        <div class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-                            ${org} ${year ? '• ' + year : ''} ${role ? '• ' + role : ''}
-                        </div>
-                    `;
+                    div.innerHTML = `<div class="font-medium">${name}</div><div class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">${org} ${year ? '• '+year : ''} ${role ? '• '+role : ''}</div>`;
                     const key = name || org;
-                    if (key) {
-                        div.onclick = () => showRelatedModal('network', key);
-                    }
+                    if (key) div.onclick = () => showRelatedModal('network', key);
                     container.appendChild(div);
                 });
             }
@@ -986,20 +880,46 @@
         function createSeverityStars(rating) {
             let html = '<div class="flex text-amber-500">';
             for (let i = 1; i <= 5; i++) {
-                if (i <= rating) {
-                    html += '<i class="fas fa-star text-sm"></i>';
-                } else if (i - 0.5 <= rating) {
-                    html += '<i class="fas fa-star-half-alt text-sm"></i>';
-                } else {
-                    html += '<i class="far fa-star text-sm text-gray-300 dark:text-gray-600"></i>';
-                }
+                html += i <= rating ? '<i class="fas fa-star text-sm"></i>' : '<i class="far fa-star text-sm text-gray-300 dark:text-gray-600"></i>';
             }
-            html += '</div>';
-            return html;
+            return html + '</div>';
         }
 
-        // ==================== MODAL FOR RELATED POLITICIANS ====================
+        // ==================== SCANDAL MODAL ====================
+        function showScandalModal(scandal) {
+            const modal = document.getElementById('scandal-modal');
+            document.getElementById('scandal-modal-title').textContent = scandal.title;
+            
+            const severityEl = document.getElementById('scandal-modal-severity');
+            severityEl.innerHTML = createSeverityStars(scandal.severity);
 
+            const content = document.getElementById('scandal-modal-content');
+            content.innerHTML = `
+                <div>
+                    <p class="text-gray-700 dark:text-gray-300">${scandal.longDesc || scandal.shortDesc}</p>
+                </div>
+                ${scandal.consequences ? `<div><h4 class="font-semibold mb-1">Konsekvenser</h4><p class="text-sm text-gray-600 dark:text-gray-300">${scandal.consequences}</p></div>` : ''}
+                ${scandal.whatShouldHaveHappened ? `<div><h4 class="font-semibold mb-1">Hvad burde være sket</h4><p class="text-sm text-gray-600 dark:text-gray-300">${scandal.whatShouldHaveHappened.content || ''}</p></div>` : ''}
+                <div>
+                    <h4 class="font-semibold mb-2">Kilder</h4>
+                    <div class="space-y-1">
+                        ${(scandal.sources || []).map(s => 
+                            `<a href="${s.url}" target="_blank" class="block text-sm text-blue-600 dark:text-blue-400 hover:underline">${s.name} →</a>`
+                        ).join('') || '<p class="text-sm text-gray-500">Ingen kilder angivet.</p>'}
+                    </div>
+                </div>
+            `;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function hideScandalModal() {
+            const modal = document.getElementById('scandal-modal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        // ==================== RELATED MODAL (with clickable politicians) ====================
         function showRelatedModal(type, value) {
             const modal = document.getElementById('related-modal');
             const titleEl = document.getElementById('related-modal-title');
@@ -1011,35 +931,48 @@
             if (type === 'donor') {
                 related = donorToPoliticians[value] || [];
                 label = `Andre politikere der har modtaget støtte fra <strong>${value}</strong>`;
-            } else if (type === 'network') {
+            } else {
                 related = networkToPoliticians[value] || [];
                 label = `Andre politikere der har været i <strong>${value}</strong>`;
             }
 
-            // Remove current politicians
-            const currentNames = [
-                selectedPoliticians[1] ? selectedPoliticians[1].name : '',
-                selectedPoliticians[2] ? selectedPoliticians[2].name : ''
-            ].filter(Boolean);
-
+            const currentNames = [selectedPoliticians[1]?.name, selectedPoliticians[2]?.name].filter(Boolean);
             related = related.filter(name => !currentNames.includes(name));
 
             if (related.length === 0) {
-                contentEl.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400">Ingen andre politikere fundet med denne tilknytning.</p>`;
+                contentEl.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400">Ingen andre politikere fundet.</p>`;
             } else {
-                contentEl.innerHTML = related.map(name => 
-                    `<div class="flex items-center gap-x-3 p-3 mb-2 bg-gray-50 dark:bg-gray-800 rounded-2xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-                        <div class="w-8 h-8 rounded-xl bg-gray-300 dark:bg-gray-600 flex items-center justify-center text-sm font-bold text-white">
-                            ${name.split(' ').map(n => n[0]).join('').slice(0,2)}
-                        </div>
-                        <div class="font-medium">${name}</div>
-                    </div>`
-                ).join('');
+                contentEl.innerHTML = related.map(name => {
+                    const pol = POLITICIANS.find(p => p.name === name);
+                    return `
+                        <div onclick="selectPoliticianFromRelated('${pol ? pol.slug : ''}')" 
+                             class="flex items-center gap-x-3 p-3 mb-2 bg-gray-50 dark:bg-gray-800 rounded-2xl hover:bg-blue-50 dark:hover:bg-gray-700 cursor-pointer transition-colors">
+                            <div class="w-8 h-8 rounded-xl flex items-center justify-center text-white text-sm font-bold" style="background-color: ${pol ? pol.color : '#64748b'}">
+                                ${name.split(' ').map(n => n[0]).join('').slice(0,2)}
+                            </div>
+                            <div class="font-medium">${name}</div>
+                        </div>`;
+                }).join('');
             }
 
             titleEl.innerHTML = label;
             modal.classList.remove('hidden');
             modal.classList.add('flex');
+        }
+
+        function selectPoliticianFromRelated(slug) {
+            hideRelatedModal();
+            if (!slug) return;
+            
+            // Replace the second politician
+            const pol = POLITICIANS.find(p => p.slug === slug);
+            if (pol) {
+                selectedPoliticians[2] = pol;
+                document.getElementById('p2-selected-name').textContent = pol.name;
+                document.getElementById('p2-selected-badge').classList.remove('hidden');
+                document.getElementById('p2-selected-badge').classList.add('flex');
+                showComparison();
+            }
         }
 
         function hideRelatedModal() {
@@ -1058,89 +991,61 @@
 
         function loadFromURL() {
             const params = new URLSearchParams(window.location.search);
-            const p1Slug = params.get('p1');
-            const p2Slug = params.get('p2');
-            
-            if (p1Slug && p2Slug) {
-                const p1 = POLITICIANS.find(p => p.slug === p1Slug);
-                const p2 = POLITICIANS.find(p => p.slug === p2Slug);
-                if (p1 && p2) {
-                    selectedPoliticians[1] = p1;
-                    selectedPoliticians[2] = p2;
-
-                    document.getElementById('p1-selected-name').textContent = p1.name;
-                    document.getElementById('p1-selected-badge').classList.remove('hidden');
-                    document.getElementById('p1-selected-badge').classList.add('flex');
-
-                    document.getElementById('p2-selected-name').textContent = p2.name;
-                    document.getElementById('p2-selected-badge').classList.remove('hidden');
-                    document.getElementById('p2-selected-badge').classList.add('flex');
-
-                    showComparison();
-                }
+            const p1 = POLITICIANS.find(p => p.slug === params.get('p1'));
+            const p2 = POLITICIANS.find(p => p.slug === params.get('p2'));
+            if (p1 && p2) {
+                selectedPoliticians[1] = p1;
+                selectedPoliticians[2] = p2;
+                document.getElementById('p1-selected-name').textContent = p1.name;
+                document.getElementById('p1-selected-badge').classList.remove('hidden');
+                document.getElementById('p1-selected-badge').classList.add('flex');
+                document.getElementById('p2-selected-name').textContent = p2.name;
+                document.getElementById('p2-selected-badge').classList.remove('hidden');
+                document.getElementById('p2-selected-badge').classList.add('flex');
+                showComparison();
             }
         }
 
         function shareComparison() {
             if (!selectedPoliticians[1] || !selectedPoliticians[2]) return;
-            const url = window.location.href;
-            navigator.clipboard.writeText(url).then(() => {
+            navigator.clipboard.writeText(window.location.href).then(() => {
                 const toast = document.createElement('div');
-                toast.className = `fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-5 py-2.5 rounded-2xl text-sm shadow-xl flex items-center gap-x-2`;
-                toast.innerHTML = `<i class="fas fa-check mr-2"></i> Link kopieret til udklipsholder`;
+                toast.className = `fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-900 text-white px-5 py-2.5 rounded-2xl text-sm flex items-center gap-x-2`;
+                toast.innerHTML = `<i class="fas fa-check mr-2"></i> Link kopieret`;
                 document.body.appendChild(toast);
-                setTimeout(() => { toast.style.transition = 'all 0.3s ease'; toast.style.opacity = '0'; setTimeout(() => toast.remove(), 200); }, 2200);
-            }).catch(() => prompt('Kopier dette link:', url));
+                setTimeout(() => { toast.style.transition = 'all 0.3s'; toast.style.opacity = '0'; setTimeout(() => toast.remove(), 200); }, 1800);
+            });
         }
 
-        function exportToPDF() {
-            if (!selectedPoliticians[1] || !selectedPoliticians[2]) return;
-            window.print();
-        }
+        function exportToPDF() { window.print(); }
 
         function resetComparison() {
-            selectedPoliticians = { 1: null, 2: null };
+            selectedPoliticians = {1:null, 2:null};
             loadedDataCache = {};
-
             document.getElementById('comparison-area').classList.add('hidden');
             document.getElementById('empty-state').classList.remove('hidden');
-
             document.getElementById('p1-selected-badge').classList.add('hidden');
-            document.getElementById('p1-selected-badge').classList.remove('flex');
             document.getElementById('p2-selected-badge').classList.add('hidden');
-            document.getElementById('p2-selected-badge').classList.remove('flex');
-
-            document.querySelectorAll('.selected-politician').forEach(el => el.classList.remove('selected-politician', 'ring-2', 'ring-offset-2', 'ring-blue-500', 'dark:ring-blue-400'));
-
+            document.querySelectorAll('.selected-politician').forEach(el => el.classList.remove('selected-politician','ring-2'));
             document.getElementById('search1').value = '';
             document.getElementById('search2').value = '';
-            filterPoliticians(1);
-            filterPoliticians(2);
-
+            filterPoliticians(1); filterPoliticians(2);
             window.history.replaceState({}, '', window.location.pathname);
             hideRelatedModal();
+            hideScandalModal();
         }
 
         function setupKeyboardSupport() {
-            document.addEventListener('keydown', function(e) {
-                if (e.key === '/' && document.activeElement.tagName === 'BODY') {
-                    e.preventDefault();
-                    document.getElementById('search1').focus();
-                }
-                if (e.key.toLowerCase() === 'r' && (e.metaKey || e.ctrlKey) && selectedPoliticians[1] && selectedPoliticians[2]) {
-                    e.preventDefault();
-                    resetComparison();
-                }
-
+            document.addEventListener('keydown', e => {
+                if (e.key === '/' && document.activeElement.tagName === 'BODY') { e.preventDefault(); document.getElementById('search1').focus(); }
+                if (e.key.toLowerCase() === 'r' && (e.metaKey || e.ctrlKey) && selectedPoliticians[1] && selectedPoliticians[2]) { e.preventDefault(); resetComparison(); }
                 if (e.key === 'Escape') {
-                    const modal = document.getElementById('related-modal');
-                    if (!modal.classList.contains('hidden')) {
-                        hideRelatedModal();
-                    }
+                    if (!document.getElementById('scandal-modal').classList.contains('hidden')) hideScandalModal();
+                    else if (!document.getElementById('related-modal').classList.contains('hidden')) hideRelatedModal();
                 }
             });
-            const search1 = document.getElementById('search1');
-            if (search1) search1.placeholder = 'Søg... (tryk / for at fokusere)';
+            const s1 = document.getElementById('search1');
+            if (s1) s1.placeholder = 'Søg... (tryk / for at fokusere)';
         }
 
         async function initializeComparisonPage() {
@@ -1148,12 +1053,9 @@
             initializeDarkMode();
             initializePoliticianLists();
             setupKeyboardSupport();
-            
             await buildCrossReferenceIndex();
-            
             loadFromURL();
-            
-            console.log('%c[Sammenlign] Modal version with clickable donors/networks loaded.', 'color:#64748b');
+            console.log('%c[Sammenlign] Full version with scandal modal + clickable related politicians loaded.', 'color:#64748b');
         }
 
         window.onload = initializeComparisonPage;
