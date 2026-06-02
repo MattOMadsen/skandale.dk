@@ -7,6 +7,8 @@
     <meta name="description" content="Sammenlign danske politikere side om side på skandaler, økonomisk støtte, internationale netværk og brudte valgløfter. Få et faktabaseret overblik.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- jsPDF for bedre PDF-eksport -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap');
         
@@ -337,7 +339,7 @@
                         Del link
                     </button>
                     
-                    <button onclick="exportToPDF()" 
+                    <button onclick="exportComparisonToPDF()" 
                             class="flex items-center gap-x-2 px-4 py-2 text-sm font-medium rounded-2xl bg-blue-700 hover:bg-blue-800 text-white transition-colors">
                         <i class="fas fa-file-pdf mr-2"></i>
                         Eksporter til PDF
@@ -1013,35 +1015,182 @@
             });
         }
 
-        function exportToPDF() { window.print(); }
+        // ==================== BEDRE PDF EKSPORT (jsPDF) ====================
+        function exportComparisonToPDF() {
+            if (!selectedPoliticians[1] || !selectedPoliticians[2]) {
+                alert('Vælg to politikere først');
+                return;
+            }
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({
+                orientation: 'portrait',
+                unit: 'mm',
+                format: 'a4'
+            });
+
+            const pageWidth = doc.internal.pageSize.getWidth();
+            let y = 20;
+
+            const p1 = selectedPoliticians[1];
+            const p2 = selectedPoliticians[2];
+
+            // Header
+            doc.setFillColor(30, 64, 175); // blue-700
+            doc.rect(0, 0, pageWidth, 22, 'F');
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(18);
+            doc.text('Sammenligningsrapport', 15, 14);
+            doc.setFontSize(11);
+            doc.text(`${p1.name} vs ${p2.name}`, 15, 20);
+
+            y = 30;
+
+            // Metrics side by side
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(12);
+            doc.text('Nøgletal', 15, y);
+            y += 8;
+
+            // Simple metrics table
+            doc.setFontSize(10);
+            doc.text(`${p1.name}: ${p1.scandalCount} skandaler | ${p1.avgSeverity} alvorlighed | ${p1.brokenPromises} brudte løfter`, 15, y);
+            y += 6;
+            doc.text(`${p2.name}: ${p2.scandalCount} skandaler | ${p2.avgSeverity} alvorlighed | ${p2.brokenPromises} brudte løfter`, 15, y);
+            y += 12;
+
+            // Skandaler for begge
+            doc.setFontSize(13);
+            doc.setTextColor(200, 16, 46);
+            doc.text('Skandaler', 15, y);
+            y += 7;
+
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(10);
+
+            // P1 scandals
+            if (p1.loadedScandals && p1.loadedScandals.length > 0) {
+                doc.setFont(undefined, 'bold');
+                doc.text(p1.name + ':', 15, y);
+                y += 6;
+                doc.setFont(undefined, 'normal');
+                p1.loadedScandals.slice(0, 4).forEach(s => {
+                    if (y > 260) { doc.addPage(); y = 20; }
+                    doc.text(`• ${s.title}`, 18, y);
+                    y += 6;
+                });
+            }
+
+            // P2 scandals
+            if (p2.loadedScandals && p2.loadedScandals.length > 0) {
+                if (y > 250) { doc.addPage(); y = 20; }
+                doc.setFont(undefined, 'bold');
+                doc.text(p2.name + ':', 15, y);
+                y += 6;
+                doc.setFont(undefined, 'normal');
+                p2.loadedScandals.slice(0, 4).forEach(s => {
+                    if (y > 260) { doc.addPage(); y = 20; }
+                    doc.text(`• ${s.title}`, 18, y);
+                    y += 6;
+                });
+            }
+
+            y += 8;
+
+            // Brudte løfter
+            if (y > 240) { doc.addPage(); y = 20; }
+            doc.setFontSize(13);
+            doc.setTextColor(200, 16, 46);
+            doc.text('Brudte valgløfter', 15, y);
+            y += 7;
+
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(10);
+
+            if (p1.loadedPromises && p1.loadedPromises.length > 0) {
+                doc.setFont(undefined, 'bold');
+                doc.text(p1.name + ':', 15, y);
+                y += 6;
+                doc.setFont(undefined, 'normal');
+                p1.loadedPromises.slice(0, 3).forEach(pr => {
+                    if (y > 260) { doc.addPage(); y = 20; }
+                    const desc = (pr.desc || '').substring(0, 120);
+                    doc.text(`• ${pr.title} — ${desc}...`, 18, y);
+                    y += 6;
+                });
+            }
+
+            if (p2.loadedPromises && p2.loadedPromises.length > 0) {
+                if (y > 250) { doc.addPage(); y = 20; }
+                doc.setFont(undefined, 'bold');
+                doc.text(p2.name + ':', 15, y);
+                y += 6;
+                doc.setFont(undefined, 'normal');
+                p2.loadedPromises.slice(0, 3).forEach(pr => {
+                    if (y > 260) { doc.addPage(); y = 20; }
+                    const desc = (pr.desc || '').substring(0, 120);
+                    doc.text(`• ${pr.title} — ${desc}...`, 18, y);
+                    y += 6;
+                });
+            }
+
+            // Footer
+            if (y > 250) { doc.addPage(); y = 20; }
+            doc.setDrawColor(200, 16, 46);
+            doc.line(15, 265, pageWidth - 15, 265);
+
+            doc.setFontSize(9);
+            doc.setTextColor(100, 100, 100);
+            const today = new Date().toLocaleDateString('da-DK');
+            doc.text(`Genereret ${today} fra Skandale.dk`, 15, 272);
+            doc.text('Denne rapport er et hjælpeværktøj – læs altid de fulde kilder.', 15, 278);
+
+            const fileName = `Sammenligning_${p1.name.replace(/ /g, '_')}_vs_${p2.name.replace(/ /g, '_')}.pdf`;
+            doc.save(fileName);
+        }
+
+        function exportToPDF() {
+            exportComparisonToPDF();
+        }
 
         function resetComparison() {
-            selectedPoliticians = {1:null, 2:null};
+            selectedPoliticians = { 1: null, 2: null };
             loadedDataCache = {};
             document.getElementById('comparison-area').classList.add('hidden');
             document.getElementById('empty-state').classList.remove('hidden');
             document.getElementById('p1-selected-badge').classList.add('hidden');
+            document.getElementById('p1-selected-badge').classList.remove('flex');
             document.getElementById('p2-selected-badge').classList.add('hidden');
-            document.querySelectorAll('.selected-politician').forEach(el => el.classList.remove('selected-politician','ring-2'));
+            document.getElementById('p2-selected-badge').classList.remove('flex');
+            document.querySelectorAll('.selected-politician').forEach(el => el.classList.remove('selected-politician', 'ring-2', 'ring-offset-2', 'ring-blue-500', 'dark:ring-blue-400'));
             document.getElementById('search1').value = '';
             document.getElementById('search2').value = '';
-            filterPoliticians(1); filterPoliticians(2);
+            filterPoliticians(1);
+            filterPoliticians(2);
             window.history.replaceState({}, '', window.location.pathname);
             hideRelatedModal();
             hideScandalModal();
         }
 
         function setupKeyboardSupport() {
-            document.addEventListener('keydown', e => {
-                if (e.key === '/' && document.activeElement.tagName === 'BODY') { e.preventDefault(); document.getElementById('search1').focus(); }
-                if (e.key.toLowerCase() === 'r' && (e.metaKey || e.ctrlKey) && selectedPoliticians[1] && selectedPoliticians[2]) { e.preventDefault(); resetComparison(); }
+            document.addEventListener('keydown', function(e) {
+                if (e.key === '/' && document.activeElement.tagName === 'BODY') {
+                    e.preventDefault();
+                    document.getElementById('search1').focus();
+                }
+                if (e.key.toLowerCase() === 'r' && (e.metaKey || e.ctrlKey) && selectedPoliticians[1] && selectedPoliticians[2]) {
+                    e.preventDefault();
+                    resetComparison();
+                }
                 if (e.key === 'Escape') {
-                    if (!document.getElementById('scandal-modal').classList.contains('hidden')) hideScandalModal();
-                    else if (!document.getElementById('related-modal').classList.contains('hidden')) hideRelatedModal();
+                    const r = document.getElementById('related-modal');
+                    const s = document.getElementById('scandal-modal');
+                    if (!r.classList.contains('hidden')) hideRelatedModal();
+                    else if (!s.classList.contains('hidden')) hideScandalModal();
                 }
             });
-            const s1 = document.getElementById('search1');
-            if (s1) s1.placeholder = 'Søg... (tryk / for at fokusere)';
+            const search1 = document.getElementById('search1');
+            if (search1) search1.placeholder = 'Søg... (tryk / for at fokusere)';
         }
 
         async function initializeComparisonPage() {
@@ -1051,7 +1200,7 @@
             setupKeyboardSupport();
             await buildCrossReferenceIndex();
             loadFromURL();
-            console.log('%c[Sammenlign] Full version with scandal modal + clickable related politicians loaded.', 'color:#64748b');
+            console.log('%c[Sammenlign] PDF export opgraderet til jsPDF version.', 'color:#64748b');
         }
 
         window.onload = initializeComparisonPage;
