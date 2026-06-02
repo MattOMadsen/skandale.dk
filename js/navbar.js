@@ -25,6 +25,7 @@ function loadNavbar() {
                     <a href="stats.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-[#C8102E] dark:hover:text-[#C8102E] transition-colors">Statistik</a>
                     <a href="netvaerk.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-[#C8102E] dark:hover:text-[#C8102E] transition-colors">Netværk</a>
                     <a href="om.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-[#C8102E] dark:hover:text-[#C8102E] transition-colors">Om</a>
+                    <a href="kontakt.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-[#C8102E] dark:hover:text-[#C8102E] transition-colors">Kontakt</a>
                 </div>
 
                 <!-- Right side -->
@@ -71,6 +72,7 @@ function loadNavbar() {
                         <a href="stats.html" class="block px-4 py-3 rounded-xl text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700">Statistik</a>
                         <a href="netvaerk.html" class="block px-4 py-3 rounded-xl text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700">Netværk</a>
                         <a href="om.html" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-xl text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700">Om projektet</a>
+                        <a href="kontakt.html" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-xl text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700">Kontakt</a>
                     </div>
                 </div>
             </div>
