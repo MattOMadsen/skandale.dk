@@ -1,3 +1,12 @@
+## [v2.00.86] - 2026-06-02
+### Sammenlign-siden forbedringer
+- **PDF-eksport fuldt rettet**: Nu bruger den rigtige jsPDF med korrekt data (skandaler + brudte løfter vises med titler og beskrivelser)
+- Data gemmes nu korrekt på politiker-objekterne (`loadedScandals`, `loadedPromises` osv.) efter indlæsning
+- Skandale-modal tilføjet (klik på skandale viser fuld tekst + klikbare kilder)
+- Klikbare politikere i "Andre politikere"-modal (erstatter Politiker 2 automatisk)
+- Brudte løfter viser nu korrekt tekst (`whatHappened`)
+- Samlet set meget mere brugervenlig og indholdsrig sammenligningsoplevelse
+
 ## [v2.00.85] - 2026-06-02
 ### Documentation & Status Update
 - Opdateret `TODO.md` med aktuel projektstatus:
