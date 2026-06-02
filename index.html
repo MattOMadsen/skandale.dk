@@ -1,1 +1,154 @@
-FULL ORIGINAL INDEX.HTML + TAILWIND CONFIG + DARK MODE SCRIPT
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skandale.dk – Politisk gennemsigtighed</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="manifest" href="manifest.json">
+    <!-- Dark mode script (loades tidligt for at sikre toggle virker) -->
+    <script src="js/dark-mode.js"></script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
+
+    <!-- Navbar bliver nu indlæst dynamisk via js/navbar.js -->
+
+    <!-- Hero -->
+    <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white py-16">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <div class="inline-flex items-center gap-x-2 bg-white/10 px-4 py-1 rounded-full text-sm mb-4">
+                <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                <span>Opdateret maj 2026</span>
+            </div>
+
+            <h1 class="text-5xl md:text-6xl font-bold tracking-tighter mb-4">Gennemsigtighed i dansk politik</h1>
+            <p class="text-xl text-slate-300 max-w-2xl mx-auto mb-8">Én samlet platform til skandaler, støtte, netværk og brudte løfter.</p>
+
+            <!-- Hurtig statistik -->
+            <div id="stats-snapshot" class="max-w-4xl mx-auto mb-10">
+                <!-- Indhold genereres af js/stats-snapshot.js -->
+            </div>
+
+            <!-- Søgefelt -->
+            <div class="max-w-md mx-auto">
+                <div class="relative">
+                    <input id="searchInput" type="text" placeholder="Søg efter politiker..." 
+                           onkeyup="if (typeof filterPoliticians === 'function') filterPoliticians()"
+                           class="w-full bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 border-0 rounded-3xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#C8102E]">
+                    <i class="fa-solid fa-search absolute right-6 top-5 text-slate-400"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Politikere sektion -->
+    <div id="politicians-section" class="max-w-7xl mx-auto px-6 py-12">
+        <div class="flex items-end justify-between mb-6">
+            <div>
+                <h2 class="text-3xl font-bold tracking-tight">Politikere</h2>
+                <p class="text-slate-600 dark:text-slate-400">Klik på en politiker for at se detaljer, skandaler og vurderinger</p>
+            </div>
+        </div>
+
+        <div id="politiciansGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Politikere indsættes dynamisk via js/ui.js -->
+        </div>
+
+        <!-- Infinite Scroll Loader (ny) -->
+        <div id="infinite-scroll-loader" class="hidden justify-center items-center py-8">
+            <div class="flex items-center gap-x-3 text-slate-500">
+                <i class="fa-solid fa-spinner fa-spin text-[#C8102E]"></i>
+                <span class="text-sm">Indlæser flere politikere...</span>
+            </div>
+        </div>
+
+        <!-- Besked når alle er vist -->
+        <div id="all-politicians-shown" class="hidden text-center py-6 text-sm text-slate-500">
+            Alle politikere er vist.
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/version.js"></script>
+    <script src="js/stats-snapshot.js"></script>
+
+    <!-- Modal scripts -->
+    <script src="js/modal-core.js"></script>
+    <script src="js/modal-scandal.js"></script>
+    <script src="js/modal-comments.js"></script>
+    <script src="js/modal-donor.js"></script>
+    <script src="js/modal-affiliations.js"></script>
+    <script src="js/modal-broken-promises.js"></script>
+    <script src="js/modal-compare.js"></script>
+    <script src="js/modal-stats.js"></script>
+    <script src="js/modal-networks.js"></script>
+    <script src="js/modal-network-overview.js"></script>
+    <script src="js/modal-party.js"></script>
+    <script src="js/modal-admin.js"></script>
+    <script src="js/modal-add-scandal.js"></script>
+
+    <!-- jsPDF bibliotek (tilføjet så PDF-eksport virker) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="js/modal-pdf-export.js"></script>
+
+    <script src="js/modal-voting.js"></script>
+    <script src="js/modal-share.js"></script>
+    <script src="js/modal-helpers.js"></script>
+
+    <!-- Sikkerhedsnet + Robust auto-open fra sammenlign.html -->
+    <script>
+        function tryOpenPoliticianFromStorage(attempt = 1) {
+            const maxAttempts = 8;
+            const politicianIdRaw = localStorage.getItem('openPoliticianOnLoad');
+
+            if (!politicianIdRaw) return;
+
+            const politicianId = parseInt(politicianIdRaw, 10);
+
+            const hasData = typeof window.politicians !== 'undefined' && Array.isArray(window.politicians) && window.politicians.length > 0;
+            const openFn = window.openPoliticianModal || window.showPoliticianModal;
+
+            if (hasData && typeof openFn === 'function') {
+                try {
+                    openFn(politicianId);
+                    localStorage.removeItem('openPoliticianOnLoad');
+                    console.log('%c[Skandale.dk] Auto-åbnede politiker: ' + politicianId, 'color:#10b981');
+                    return;
+                } catch (e) {
+                    console.error('Fejl ved kald af open/showPoliticianModal:', e);
+                }
+            }
+
+            if (attempt < maxAttempts) {
+                const delay = 250 * attempt;
+                setTimeout(() => tryOpenPoliticianFromStorage(attempt + 1), delay);
+            } else {
+                localStorage.removeItem('openPoliticianOnLoad');
+                console.warn('Kunne ikke auto-åbne politiker efter ' + maxAttempts + ' forsøg.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                if (typeof window.renderPoliticians === 'function') {
+                    if (typeof window.politicians !== 'undefined' && window.politicians.length > 0) {
+                        window.renderPoliticians();
+                    } else if (typeof initializeEverything === 'function') {
+                        initializeEverything();
+                    }
+                }
+                tryOpenPoliticianFromStorage();
+            }, 500);
+        });
+    </script>
+
+    <!-- Ny central navbar (loades efter dark-mode.js) -->
+    <script src="js/navbar.js"></script>
+
+</body>
+</html>
