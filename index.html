@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="manifest" href="manifest.json">
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
 
     <!-- Navbar bliver nu indlæst dynamisk via js/navbar.js -->
 
@@ -34,7 +34,7 @@
                 <div class="relative">
                     <input id="searchInput" type="text" placeholder="Søg efter politiker..." 
                            onkeyup="if (typeof filterPoliticians === 'function') filterPoliticians()"
-                           class="w-full bg-white text-slate-900 placeholder-slate-400 border-0 rounded-3xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#C8102E]">
+                           class="w-full bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 border-0 rounded-3xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#C8102E]">
                     <i class="fa-solid fa-search absolute right-6 top-5 text-slate-400"></i>
                 </div>
             </div>
@@ -46,7 +46,7 @@
         <div class="flex items-end justify-between mb-6">
             <div>
                 <h2 class="text-3xl font-bold tracking-tight">Politikere</h2>
-                <p class="text-slate-600">Klik på en politiker for at se detaljer, skandaler og vurderinger</p>
+                <p class="text-slate-600 dark:text-slate-400">Klik på en politiker for at se detaljer, skandaler og vurderinger</p>
             </div>
         </div>
 
