@@ -1,3 +1,12 @@
+## [v2.00.85] - 2026-06-02
+### Documentation & Status Update
+- Opdateret `TODO.md` med aktuel projektstatus:
+  - Infinite scroll på forsiden tilføjet til Fuldførte features
+  - Dark mode flyttet til "Igangværende" (startet)
+  - Sammenlign-side præciseret som delvist implementeret
+  - Tilføjet oprydningsnote om legacy `modal-compare.js`
+- Begyndt implementering af Dark mode
+
 ## [v2.00.84] - 2026-05-28
 ### Timeline Feature Overhaul
 - Oprettet dedikeret `tidslinje.html` som fuld side (bedre mobiloplevelse)
