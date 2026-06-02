@@ -152,8 +152,20 @@
             animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
 
-        .related-box {
-            animation: fadeIn 0.2s ease forwards;
+        /* Modal styles */
+        .modal {
+            animation: modalPopIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes modalPopIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
     </style>
 </head>
@@ -440,17 +452,6 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Related politicians box (appears when clicking donor or network) -->
-            <div id="related-box" class="hidden mt-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-3xl p-6">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 id="related-title" class="font-semibold text-lg"></h3>
-                    <button onclick="hideRelatedBox()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                        <i class="fas fa-times text-xl"></i>
-                    </button>
-                </div>
-                <div id="related-content" class="text-sm"></div>
-            </div>
 
             <div class="mt-6 text-center text-xs text-gray-500 dark:text-gray-400 no-print">
                 Data hentes automatisk fra de officielle JSON-filer. Klik på en donor eller et netværk for at se andre politikere med samme tilknytning.
@@ -487,6 +488,33 @@
             </div>
         </div>
     </footer>
+
+    <!-- Related Politicians Modal -->
+    <div id="related-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="hideRelatedModal()"></div>
+        
+        <!-- Modal Content -->
+        <div class="modal relative bg-white dark:bg-gray-900 rounded-3xl shadow-2xl max-w-lg w-full max-h-[80vh] overflow-hidden border border-gray-200 dark:border-gray-700">
+            <!-- Header -->
+            <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                <h3 id="related-modal-title" class="font-semibold text-lg pr-8"></h3>
+                <button onclick="hideRelatedModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- Content -->
+            <div class="p-6 overflow-y-auto max-h-[60vh]" id="related-modal-content">
+                <!-- Populated by JS -->
+            </div>
+            
+            <!-- Footer -->
+            <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-950 text-xs text-gray-500 dark:text-gray-400">
+                Klik på en politiker for at se deres fulde profil (kommer snart).
+            </div>
+        </div>
+    </div>
 
     <script>
         // Tailwind script
@@ -556,7 +584,6 @@
         let networkToPoliticians = {};
 
         async function buildCrossReferenceIndex() {
-            // Build donor index
             for (const pol of POLITICIANS) {
                 const supportData = await fetchJSON(`data/economic-support/${pol.slug}.json`);
                 if (supportData && supportData.donations) {
@@ -569,7 +596,6 @@
                 }
             }
 
-            // Build network index
             for (const pol of POLITICIANS) {
                 const affData = await fetchJSON(`data/affiliations/${pol.slug}.json`);
                 if (affData && affData.affiliations) {
@@ -784,7 +810,7 @@
             contentEl.classList.remove('hidden');
         }
 
-        // ==================== AUTOMATIC DATA LOADER + CLICKABLE FEATURES ====================
+        // ==================== AUTOMATIC DATA LOADER + MODAL ====================
 
         async function fetchJSON(path) {
             try {
@@ -875,9 +901,9 @@
                 const data = await loadDetailedData(politician.slug);
                 
                 renderTabContentWithData(side, 'scandals', data.scandals);
-                renderTabContentWithData(side, 'support', data.support, politician.slug);
+                renderTabContentWithData(side, 'support', data.support);
                 renderTabContentWithData(side, 'promises', data.promises);
-                renderTabContentWithData(side, 'networks', data.networks, politician.slug);
+                renderTabContentWithData(side, 'networks', data.networks);
 
             } catch (e) {
                 console.error('Fejl ved indlæsning af data for', politician.slug, e);
@@ -885,7 +911,7 @@
             }
         }
 
-        function renderTabContentWithData(side, tab, items, politicianSlug) {
+        function renderTabContentWithData(side, tab, items) {
             const container = document.getElementById(`p${side}-${tab}`);
             container.innerHTML = '';
 
@@ -918,8 +944,7 @@
                         <div class="font-medium">${item.name}</div>
                         <div class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">${item.year || ''} • ${item.amount || ''}</div>
                     `;
-                    // Make clickable
-                    div.onclick = () => showRelatedPoliticians('donor', item.name);
+                    div.onclick = () => showRelatedModal('donor', item.name);
                     container.appendChild(div);
                 });
             } else if (tab === 'promises') {
@@ -949,10 +974,9 @@
                             ${org} ${year ? '• ' + year : ''} ${role ? '• ' + role : ''}
                         </div>
                     `;
-                    // Make clickable
                     const key = name || org;
                     if (key) {
-                        div.onclick = () => showRelatedPoliticians('network', key);
+                        div.onclick = () => showRelatedModal('network', key);
                     }
                     container.appendChild(div);
                 });
@@ -974,11 +998,12 @@
             return html;
         }
 
-        // Show related politicians when clicking donor or network
-        function showRelatedPoliticians(type, value) {
-            const box = document.getElementById('related-box');
-            const titleEl = document.getElementById('related-title');
-            const contentEl = document.getElementById('related-content');
+        // ==================== MODAL FOR RELATED POLITICIANS ====================
+
+        function showRelatedModal(type, value) {
+            const modal = document.getElementById('related-modal');
+            const titleEl = document.getElementById('related-modal-title');
+            const contentEl = document.getElementById('related-modal-content');
 
             let related = [];
             let label = '';
@@ -991,7 +1016,7 @@
                 label = `Andre politikere der har været i <strong>${value}</strong>`;
             }
 
-            // Remove current politician from list
+            // Remove current politicians
             const currentNames = [
                 selectedPoliticians[1] ? selectedPoliticians[1].name : '',
                 selectedPoliticians[2] ? selectedPoliticians[2].name : ''
@@ -1000,20 +1025,27 @@
             related = related.filter(name => !currentNames.includes(name));
 
             if (related.length === 0) {
-                contentEl.innerHTML = `<p class="text-sm text-gray-500">Ingen andre politikere fundet med denne tilknytning.</p>`;
+                contentEl.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400">Ingen andre politikere fundet med denne tilknytning.</p>`;
             } else {
                 contentEl.innerHTML = related.map(name => 
-                    `<span class="inline-block mr-2 mb-2 px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-sm">${name}</span>`
+                    `<div class="flex items-center gap-x-3 p-3 mb-2 bg-gray-50 dark:bg-gray-800 rounded-2xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                        <div class="w-8 h-8 rounded-xl bg-gray-300 dark:bg-gray-600 flex items-center justify-center text-sm font-bold text-white">
+                            ${name.split(' ').map(n => n[0]).join('').slice(0,2)}
+                        </div>
+                        <div class="font-medium">${name}</div>
+                    </div>`
                 ).join('');
             }
 
             titleEl.innerHTML = label;
-            box.classList.remove('hidden');
-            box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
         }
 
-        function hideRelatedBox() {
-            document.getElementById('related-box').classList.add('hidden');
+        function hideRelatedModal() {
+            const modal = document.getElementById('related-modal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
         }
 
         function updateURL() {
@@ -1086,7 +1118,7 @@
             filterPoliticians(2);
 
             window.history.replaceState({}, '', window.location.pathname);
-            hideRelatedBox();
+            hideRelatedModal();
         }
 
         function setupKeyboardSupport() {
@@ -1099,6 +1131,13 @@
                     e.preventDefault();
                     resetComparison();
                 }
+
+                if (e.key === 'Escape') {
+                    const modal = document.getElementById('related-modal');
+                    if (!modal.classList.contains('hidden')) {
+                        hideRelatedModal();
+                    }
+                }
             });
             const search1 = document.getElementById('search1');
             if (search1) search1.placeholder = 'Søg... (tryk / for at fokusere)';
@@ -1110,12 +1149,11 @@
             initializePoliticianLists();
             setupKeyboardSupport();
             
-            // Build cross-reference index for clickable donors/networks
             await buildCrossReferenceIndex();
             
             loadFromURL();
             
-            console.log('%c[Sammenlign] Full version with clickable donors/networks + promise descriptions loaded.', 'color:#64748b');
+            console.log('%c[Sammenlign] Modal version with clickable donors/networks loaded.', 'color:#64748b');
         }
 
         window.onload = initializeComparisonPage;
