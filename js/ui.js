@@ -16,7 +16,7 @@ function createStars(severity) {
     if (i <= severity) {
       html += '<i class="fa-solid fa-star text-[#C8102E]"></i>';
     } else {
-      html += '<i class="fa-solid fa-star text-slate-300"></i>';
+      html += '<i class="fa-solid fa-star text-slate-300 dark:text-slate-600"></i>';
     }
   }
   return html;
@@ -87,7 +87,7 @@ function renderPoliticians(filteredPoliticians = null) {
     const avatarColor = politician.avatarColor || politician.partyColor || '#C8102E';
     const initials = politician.initials || politician.name.split(' ').map(n => n[0]).join('');
     if (politician.image) {
-      avatarHTML = `<div class="w-14 h-14 rounded-2xl overflow-hidden border border-slate-200 flex-shrink-0">
+      avatarHTML = `<div class="w-14 h-14 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 flex-shrink-0">
         <img src="${politician.image}" alt="${politician.name}" class="w-full h-full object-cover" loading="lazy" onerror="this.parentElement.innerHTML = \`<div class='w-full h-full flex items-center justify-center text-white font-bold text-xl' style='background-color: ${avatarColor}'>${initials}</div>\`;">
       </div>`;
     } else {
@@ -96,18 +96,18 @@ function renderPoliticians(filteredPoliticians = null) {
 
     html += `
       <div onclick="window.openPoliticianModal(${politician.id})" 
-           class="politician-card bg-white border border-slate-200 rounded-3xl p-6 cursor-pointer hover:border-[#C8102E]/30 shadow-sm hover:shadow-md transition-all group" data-id="${politician.id}">
+           class="politician-card bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 cursor-pointer hover:border-[#C8102E]/30 dark:hover:border-[#C8102E]/50 shadow-sm hover:shadow-md transition-all group" data-id="${politician.id}">
         <div class="flex items-start justify-between mb-4">
           ${avatarHTML}
           <div class="text-right">
-            <div class="text-xs text-slate-400">${politician.party}</div>
-            <div class="text-[10px] text-slate-400">${politician.role || ''}</div>
+            <div class="text-xs text-slate-400 dark:text-slate-500">${politician.party}</div>
+            <div class="text-[10px] text-slate-400 dark:text-slate-500">${politician.role || ''}</div>
           </div>
         </div>
         
         <div class="font-bold text-xl mb-1 group-hover:text-[#C8102E] transition-colors">${politician.name}</div>
         
-        <div class="flex items-center gap-x-3 text-xs text-slate-500 mb-2">
+        <div class="flex items-center gap-x-3 text-xs text-slate-500 dark:text-slate-400 mb-2">
           <div class="flex items-center gap-x-1">
             <i class="fa-solid fa-exclamation-triangle text-[#C8102E]"></i>
             <span>${scandalCount} skandaler</span>
@@ -120,14 +120,14 @@ function renderPoliticians(filteredPoliticians = null) {
 
         <!-- STJERNER PÅ FORSIDEN - Opdateret: Renere visning uden prompt-tekst -->
         <div class="mb-3">
-          <div class="flex items-center gap-x-2 text-xs text-slate-500">
+          <div class="flex items-center gap-x-2 text-xs text-slate-500 dark:text-slate-400">
             <div class="flex items-center gap-x-1">
               <span class="font-medium">Vores vurdering:</span> 
               <span class="text-amber-500">${starsHTML}</span>
               <span>${avgSeverity.toFixed(1)}/5</span>
             </div>
             ${userRatedCount > 0 ? `
-            <div class="flex items-center gap-x-1 border-l pl-2">
+            <div class="flex items-center gap-x-1 border-l pl-2 border-slate-200 dark:border-slate-700">
               <span class="font-medium">Dine stemmer:</span> 
               <span class="text-[#C8102E]">${userStarsHTML}</span>
               <span>${userAvgSeverity.toFixed(1)}/5</span>
