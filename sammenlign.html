@@ -1,1 +1,1241 @@
-FULL ORIGINAL SAMMENLIGN.HTML + TAILWIND CONFIG + DARK MODE SCRIPT
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sammenlign to politikere | Skandale.dk – Politisk gennemsigtighed</title>
+    <meta name="description" content="Sammenlign danske politikere side om side på skandaler, økonomisk støtte, internationale netværk og brudte valgløfter. Få et faktabaseret overblik.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap');
+        
+        :root {
+            --primary: #1e40af;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .heading-serif {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 700;
+        }
+
+        .politician-card {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .metric-box {
+            transition: transform 0.2s ease;
+        }
+        
+        .metric-box:hover {
+            transform: translateY(-2px);
+        }
+
+        .severity-star {
+            color: #f59e0b;
+        }
+
+        .party-badge {
+            font-size: 0.75rem;
+            padding: 0.125rem 0.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+        .tab-btn {
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .tab-btn.active {
+            border-bottom-color: #1e40af;
+            color: #1e40af;
+            font-weight: 600;
+        }
+        
+        .dark .tab-btn.active {
+            border-bottom-color: #60a5fa;
+            color: #60a5fa;
+        }
+
+        .scandal-item, .donor-item, .promise-item, .network-item {
+            transition: background-color 0.2s ease;
+        }
+        
+        .scandal-item:hover {
+            background-color: #f8fafc;
+        }
+        
+        .dark .scandal-item:hover {
+            background-color: #1f2937;
+        }
+
+        .nav-active {
+            color: #1e40af;
+            font-weight: 600;
+        }
+        
+        .dark .nav-active {
+            color: #60a5fa;
+        }
+
+        .comparison-header {
+            background: linear-gradient(to right, #f8fafc, white);
+        }
+        
+        .dark .comparison-header {
+            background: linear-gradient(to right, #1f2937, #111827);
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            
+            .print-only {
+                display: block !important;
+            }
+            
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            
+            .politician-card {
+                box-shadow: none !important;
+                border: 1px solid #e5e7eb !important;
+            }
+            
+            .tab-content {
+                display: block !important;
+            }
+        }
+        
+        .politician-option {
+            transition: all 0.1s ease;
+        }
+        
+        .politician-option:hover {
+            background-color: #f1f5f9;
+        }
+        
+        .dark .politician-option:hover {
+            background-color: #374151;
+        }
+        
+        .selected-politician {
+            border-color: #1e40af;
+            background-color: #eff6ff;
+        }
+        
+        .dark .selected-politician {
+            background-color: #1e3a8a;
+            border-color: #60a5fa;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center gap-x-3">
+                    <div class="w-9 h-9 bg-blue-700 rounded-xl flex items-center justify-center">
+                        <span class="text-white font-bold text-2xl tracking-tighter">S</span>
+                    </div>
+                    <div>
+                        <span class="font-bold text-2xl tracking-tight">Skandale.dk</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
+                    <a href="index.html" class="hover:text-blue-700 dark:hover:text-blue-400 transition-colors">Forside</a>
+                    <a href="tidslinje.html" class="hover:text-blue-700 dark:hover:text-blue-400 transition-colors">Tidslinje</a>
+                    <a href="sammenlign.html" class="nav-active">Sammenlign</a>
+                    <a href="stats.html" class="hover:text-blue-700 dark:hover:text-blue-400 transition-colors">Statistik</a>
+                    <a href="netvaerk.html" class="hover:text-blue-700 dark:hover:text-blue-400 transition-colors">Netværk</a>
+                    <a href="om.html" class="hover:text-blue-700 dark:hover:text-blue-400 transition-colors">Om projektet</a>
+                </div>
+
+                <!-- Right side actions -->
+                <div class="flex items-center gap-x-3">
+                    <!-- Dark mode toggle -->
+                    <button onclick="toggleDarkMode()" 
+                            class="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                            aria-label="Skift mellem lys og mørkt tema">
+                        <i class="fas fa-moon text-gray-600 dark:text-gray-400 dark:hidden"></i>
+                        <i class="fas fa-sun text-yellow-500 hidden dark:block"></i>
+                    </button>
+
+                    <!-- Mobile menu button -->
+                    <button class="md:hidden w-9 h-9 flex items-center justify-center rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800"
+                            onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars text-gray-600 dark:text-gray-400"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
+            <div class="px-4 py-3 space-y-1 text-sm">
+                <a href="index.html" class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">Forside</a>
+                <a href="tidslinje.html" class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">Tidslinje</a>
+                <a href="sammenlign.html" class="block px-3 py-2 rounded-lg bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-400 font-medium">Sammenlign</a>
+                <a href="stats.html" class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">Statistik</a>
+                <a href="netvaerk.html" class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">Netværk</a>
+                <a href="om.html" class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">Om projektet</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="max-w-3xl">
+                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter heading-serif">Sammenlign to politikere</h1>
+                <p class="mt-3 text-xl text-gray-600 dark:text-gray-400">
+                    Få et faktabaseret, side-om-side overblik over skandaler, økonomisk støtte, internationale netværk og brudte valgløfter.
+                </p>
+                <div class="mt-4 flex items-center gap-x-4 text-sm">
+                    <div class="flex items-center gap-x-2 text-green-600 dark:text-green-400">
+                        <i class="fas fa-check-circle"></i>
+                        <span>12 politikere</span>
+                    </div>
+                    <div class="flex items-center gap-x-2 text-gray-500 dark:text-gray-400">
+                        <i class="fas fa-sync-alt"></i>
+                        <span>Opdateret løbende</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Selection Area -->
+        <div class="mb-8 no-print">
+            <div class="flex items-end justify-between mb-4">
+                <div>
+                    <h2 class="text-2xl font-semibold tracking-tight">Vælg to politikere</h2>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm mt-1">Søg og klik for at vælge. Du kan bytte om når som helst.</p>
+                </div>
+                <button onclick="resetComparison()" 
+                        class="hidden md:flex items-center gap-x-2 px-4 py-2 text-sm font-medium rounded-xl border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <i class="fas fa-undo mr-2"></i>
+                    Nulstil
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Politician 1 -->
+                <div class="bg-white dark:bg-gray-900 rounded-3xl border border-gray-200 dark:border-gray-800 p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="font-semibold flex items-center gap-x-2">
+                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-400 text-xs font-bold">1</span>
+                            <span>Politiker 1</span>
+                        </div>
+                        <div id="p1-selected-badge" class="hidden text-xs px-3 py-1 bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-400 rounded-full font-medium items-center gap-x-1">
+                            <i class="fas fa-check text-xs"></i> <span id="p1-selected-name"></span>
+                        </div>
+                    </div>
+                    
+                    <!-- Search input for p1 -->
+                    <div class="relative mb-3">
+                        <input type="text" id="search1" 
+                               class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-gray-950 border border-gray-300 dark:border-gray-700 rounded-2xl text-sm focus:outline-none focus:border-blue-500 dark:focus:border-blue-400"
+                               placeholder="Søg efter navn eller parti..." 
+                               oninput="filterPoliticians(1)">
+                        <i class="fas fa-search absolute left-4 top-3.5 text-gray-400"></i>
+                    </div>
+                    
+                    <!-- Politician list for p1 -->
+                    <div id="politician-list-1" 
+                         class="max-h-[220px] overflow-y-auto border border-gray-200 dark:border-gray-700 rounded-2xl bg-white dark:bg-gray-950 p-1 custom-scroll">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Politician 2 -->
+                <div class="bg-white dark:bg-gray-900 rounded-3xl border border-gray-200 dark:border-gray-800 p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="font-semibold flex items-center gap-x-2">
+                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 text-xs font-bold">2</span>
+                            <span>Politiker 2</span>
+                        </div>
+                        <div id="p2-selected-badge" class="hidden text-xs px-3 py-1 bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 rounded-full font-medium items-center gap-x-1">
+                            <i class="fas fa-check text-xs"></i> <span id="p2-selected-name"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="relative mb-3">
+                        <input type="text" id="search2" 
+                               class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-gray-950 border border-gray-300 dark:border-gray-700 rounded-2xl text-sm focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-400"
+                               placeholder="Søg efter navn eller parti..." 
+                               oninput="filterPoliticians(2)">
+                        <i class="fas fa-search absolute left-4 top-3.5 text-gray-400"></i>
+                    </div>
+                    
+                    <div id="politician-list-2" 
+                         class="max-h-[220px] overflow-y-auto border border-gray-200 dark:border-gray-700 rounded-2xl bg-white dark:bg-gray-950 p-1 custom-scroll">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Swap button -->
+            <div class="flex justify-center mt-4">
+                <button onclick="swapPoliticians()" 
+                        class="flex items-center gap-x-2 px-5 py-2.5 text-sm font-medium rounded-2xl bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all active:scale-[0.985]">
+                    <i class="fas fa-exchange-alt mr-2"></i>
+                    Byt om på de to politikere
+                </button>
+            </div>
+        </div>
+
+        <!-- Comparison Results Area -->
+        <div id="comparison-area" class="hidden">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-y-3 mb-5 no-print">
+                <div>
+                    <h2 class="text-2xl font-semibold tracking-tight">Sammenligning</h2>
+                    <p class="text-sm text-gray-500 dark:text-gray-400" id="comparison-subtitle"></p>
+                </div>
+                
+                <div class="flex items-center gap-x-2">
+                    <button onclick="shareComparison()" 
+                            class="flex items-center gap-x-2 px-4 py-2 text-sm font-medium rounded-2xl border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                        <i class="fas fa-link mr-2"></i>
+                        Del link
+                    </button>
+                    
+                    <button onclick="exportToPDF()" 
+                            class="flex items-center gap-x-2 px-4 py-2 text-sm font-medium rounded-2xl bg-blue-700 hover:bg-blue-800 text-white transition-colors">
+                        <i class="fas fa-file-pdf mr-2"></i>
+                        Eksporter til PDF
+                    </button>
+                    
+                    <button onclick="resetComparison()" 
+                            class="flex items-center gap-x-2 px-4 py-2 text-sm font-medium rounded-2xl border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors md:hidden">
+                        <i class="fas fa-undo mr-2"></i>
+                        Nulstil
+                    </button>
+                </div>
+            </div>
+
+            <!-- Two politician comparison cards -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Politician 1 Card -->
+                <div id="p1-card" class="politician-card bg-white dark:bg-gray-900 rounded-3xl border border-gray-200 dark:border-gray-800 overflow-hidden">
+                    <div class="comparison-header px-6 pt-6 pb-4 border-b border-gray-100 dark:border-gray-800">
+                        <div class="flex items-start gap-x-4">
+                            <div id="p1-avatar" 
+                                 class="w-14 h-14 rounded-2xl flex-shrink-0 flex items-center justify-center text-white text-2xl font-bold shadow-inner">
+                                <!-- JS populated -->
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-x-2">
+                                    <h3 id="p1-name" class="text-2xl font-semibold tracking-tight"></h3>
+                                </div>
+                                <div class="flex items-center gap-x-2 mt-1">
+                                    <span id="p1-party-badge" class="party-badge"></span>
+                                    <span id="p1-role" class="text-sm text-gray-500 dark:text-gray-400"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Metrics -->
+                    <div class="px-6 pt-5 pb-4">
+                        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3" id="p1-metrics">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    
+                    <!-- Tabs -->
+                    <div class="px-6">
+                        <div class="flex border-b border-gray-200 dark:border-gray-700 text-sm">
+                            <button onclick="switchTab(1, 'scandals')" class="tab-btn active flex-1 text-center" data-tab="scandals-1">Skandaler</button>
+                            <button onclick="switchTab(1, 'support')" class="tab-btn flex-1 text-center" data-tab="support-1">Støtte</button>
+                            <button onclick="switchTab(1, 'promises')" class="tab-btn flex-1 text-center" data-tab="promises-1">Løfter</button>
+                            <button onclick="switchTab(1, 'networks')" class="tab-btn flex-1 text-center" data-tab="networks-1">Netværk</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Tab contents -->
+                    <div class="p-6">
+                        <div id="p1-scandals" class="tab-content"></div>
+                        <div id="p1-support" class="tab-content hidden"></div>
+                        <div id="p1-promises" class="tab-content hidden"></div>
+                        <div id="p1-networks" class="tab-content hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Politician 2 Card -->
+                <div id="p2-card" class="politician-card bg-white dark:bg-gray-900 rounded-3xl border border-gray-200 dark:border-gray-800 overflow-hidden">
+                    <div class="comparison-header px-6 pt-6 pb-4 border-b border-gray-100 dark:border-gray-800">
+                        <div class="flex items-start gap-x-4">
+                            <div id="p2-avatar" 
+                                 class="w-14 h-14 rounded-2xl flex-shrink-0 flex items-center justify-center text-white text-2xl font-bold shadow-inner">
+                                <!-- JS populated -->
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-x-2">
+                                    <h3 id="p2-name" class="text-2xl font-semibold tracking-tight"></h3>
+                                </div>
+                                <div class="flex items-center gap-x-2 mt-1">
+                                    <span id="p2-party-badge" class="party-badge"></span>
+                                    <span id="p2-role" class="text-sm text-gray-500 dark:text-gray-400"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="px-6 pt-5 pb-4">
+                        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3" id="p2-metrics">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    
+                    <div class="px-6">
+                        <div class="flex border-b border-gray-200 dark:border-gray-700 text-sm">
+                            <button onclick="switchTab(2, 'scandals')" class="tab-btn active flex-1 text-center" data-tab="scandals-2">Skandaler</button>
+                            <button onclick="switchTab(2, 'support')" class="tab-btn flex-1 text-center" data-tab="support-2">Støtte</button>
+                            <button onclick="switchTab(2, 'promises')" class="tab-btn flex-1 text-center" data-tab="promises-2">Løfter</button>
+                            <button onclick="switchTab(2, 'networks')" class="tab-btn flex-1 text-center" data-tab="networks-2">Netværk</button>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div id="p2-scandals" class="tab-content"></div>
+                        <div id="p2-support" class="tab-content hidden"></div>
+                        <div id="p2-promises" class="tab-content hidden"></div>
+                        <div id="p2-networks" class="tab-content hidden"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-6 text-center text-xs text-gray-500 dark:text-gray-400 no-print">
+                Data er baseret på offentligt tilgængelige kilder. Sammenligningen er et hjælpeværktøj – læs altid de fulde kilder.
+            </div>
+        </div>
+        
+        <!-- Empty state / instructions -->
+        <div id="empty-state" class="text-center py-12 px-6 bg-white dark:bg-gray-900 rounded-3xl border border-gray-200 dark:border-gray-800">
+            <div class="mx-auto w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center mb-4">
+                <i class="fas fa-balance-scale text-3xl text-gray-400"></i>
+            </div>
+            <h3 class="font-semibold text-lg">Vælg to politikere ovenfor</h3>
+            <p class="text-gray-500 dark:text-gray-400 mt-2 max-w-md mx-auto">
+                Brug søgefeltene til at finde politikere, klik på dem for at vælge, og se en detaljeret sammenligning.
+            </p>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 mt-12 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-sm text-gray-500 dark:text-gray-400">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-y-4">
+                <div>
+                    Skandale.dk — Uafhængig gennemsigtighed i dansk politik. 
+                    <span class="hidden md:inline">•</span> 
+                    <a href="om.html" class="hover:underline">Læs mere om projektet</a>
+                </div>
+                <div class="flex items-center gap-x-4">
+                    <a href="#" class="hover:text-gray-700 dark:hover:text-gray-300">Kilder & metodik</a>
+                    <span>•</span>
+                    <a href="#" class="hover:text-gray-700 dark:hover:text-gray-300">Bidrag med viden</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tailwind script
+        function initializeTailwind() {
+            document.documentElement.style.setProperty('--accent', '#1e40af');
+            
+            tailwind.config = {
+                darkMode: 'class',
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            'serif-custom': ['Playfair Display', 'Georgia', 'serif']
+                        }
+                    }
+                }
+            };
+        }
+
+        // Dark mode
+        function initializeDarkMode() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                document.documentElement.classList.add('dark');
+            }
+        }
+
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Mobile menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Politicians data (full 12 + sample detailed data)
+        // In production this should be loaded from data/politicians.json + granular scandal/support files
+        const POLITICIANS = [
+            {
+                slug: "mette-frederiksen",
+                name: "Mette Frederiksen",
+                party: "Socialdemokratiet",
+                partyShort: "S",
+                color: "#E30613",
+                initials: "MF",
+                role: "Statsminister",
+                scandalCount: 9,
+                avgSeverity: 3.4,
+                brokenPromises: 6,
+                donorCount: 14,
+                networkCount: 5,
+                scandals: [
+                    { title: "Mink-sagen", severity: 5, desc: "Beslutning om aflivning af mink uden lovhjemmel. Kritiseret af Rigsrevisionen.", sources: ["Rigsrevisionen 2022", "Folketingets Ombudsmand"] },
+                    { title: "Høje bøder til minkavlere", severity: 3, desc: "Uklar kommunikation om kompensation og timing af beslutninger.", sources: ["Politiken", "Berlingske"] },
+                    { title: "Statsministerens rolle i FE-sagen", severity: 4, desc: "Kritik af håndtering af efterretningstjeneste-sagen.", sources: ["DR", "Berlingske"] }
+                ],
+                support: [
+                    { name: "Novo Nordisk Fonden", year: "2022-2024", amount: "Støtte til sundhedsinitiativer" },
+                    { name: "Dansk Industri", year: "Flere år", amount: "Politisk samarbejde" }
+                ],
+                promises: [
+                    { title: "Cancergaranti", status: "Delvist brudt", desc: "Løfte om hurtigere kræftbehandling ikke fuldt indfriet ifølge kritikere." },
+                    { title: "Grøn omstilling", status: "Igangværende", desc: "Flere mål er nået, men tempo kritiseres." }
+                ],
+                networks: [
+                    { name: "WEF Young Global Leaders", type: "Medlem", source: "WEF officielle liste" },
+                    { name: "Socialdemokratisk international", type: "Aktiv", source: "Partiets egne oplysninger" }
+                ]
+            },
+            {
+                slug: "inger-stoejberg",
+                name: "Inger Støjberg",
+                party: "Danmarksdemokraterne",
+                partyShort: "DD",
+                color: "#00A651",
+                initials: "IS",
+                role: "Formand & MF",
+                scandalCount: 7,
+                avgSeverity: 4.1,
+                brokenPromises: 3,
+                donorCount: 9,
+                networkCount: 2,
+                scandals: [
+                    { title: "Instrukssagen", severity: 5, desc: "Dømt for at give ulovlig instruks om adskillelse af asylpar. Fængselsdom.", sources: ["Rigsretten dom 2021", "Folketinget"] },
+                    { title: "Udmeldelse af Venstre", severity: 2, desc: "Intern konflikt førte til nyt parti.", sources: ["DR", "Politiken"] }
+                ],
+                support: [
+                    { name: "Private donorer (DF-tid)", year: "2015-2021", amount: "Flere større bidrag" }
+                ],
+                promises: [
+                    { title: "Stram udlændingepolitik", status: "Delvist opfyldt", desc: "Mange stramninger gennemført som udlændinge- og integrationsminister." }
+                ],
+                networks: [
+                    { name: "Dansk Folkeparti (tidligere)", type: "Nær alliance", source: "Historisk samarbejde" }
+                ]
+            },
+            {
+                slug: "morten-oestergaard",
+                name: "Morten Østergaard",
+                party: "Radikale Venstre",
+                partyShort: "RV",
+                color: "#7B2D8E",
+                initials: "MØ",
+                role: "Tidligere politisk leder",
+                scandalCount: 4,
+                avgSeverity: 3.0,
+                brokenPromises: 2,
+                donorCount: 7,
+                networkCount: 4,
+                scandals: [
+                    { title: "Seksuel chikane-sag", severity: 4, desc: "Trak sig som leder efter anklager om grænseoverskridende adfærd.", sources: ["DR", "Politiken"] }
+                ],
+                support: [],
+                promises: [],
+                networks: [
+                    { name: "WEF Young Global Leaders", type: "Alumni", source: "WEF" }
+                ]
+            },
+            {
+                slug: "helle-thorning-schmidt",
+                name: "Helle Thorning-Schmidt",
+                party: "Socialdemokratiet",
+                partyShort: "S",
+                color: "#E30613",
+                initials: "HTS",
+                role: "Tidligere statsminister",
+                scandalCount: 5,
+                avgSeverity: 2.8,
+                brokenPromises: 4,
+                donorCount: 11,
+                networkCount: 6,
+                scandals: [
+                    { title: "Skattesag (Thorning-sagen)", severity: 3, desc: "Skattesag om udlandsophold og skatteforhold.", sources: ["SKAT", "Berlingske"] }
+                ],
+                support: [
+                    { name: "Fagbevægelsen", year: "Løbende", amount: "Traditionel støtte" }
+                ],
+                promises: [],
+                networks: [
+                    { name: "WEF Young Global Leaders", type: "Medlem", source: "WEF" },
+                    { name: "Bilderberg", type: "Deltager", source: "Offentlige lister" }
+                ]
+            },
+            {
+                slug: "lars-loekke-rasmussen",
+                name: "Lars Løkke Rasmussen",
+                party: "Moderaterne",
+                partyShort: "M",
+                color: "#00A0DC",
+                initials: "LLR",
+                role: "Tidligere statsminister, MF",
+                scandalCount: 6,
+                avgSeverity: 3.2,
+                brokenPromises: 5,
+                donorCount: 13,
+                networkCount: 7,
+                scandals: [
+                    { title: "Bilagssag / Rejseudgifter", severity: 3, desc: "Kritik af brug af offentlige midler til private formål.", sources: ["DR", "Ekstra Bladet"] }
+                ],
+                support: [],
+                promises: [],
+                networks: [
+                    { name: "WEF", type: "Deltager", source: "WEF" }
+                ]
+            },
+            {
+                slug: "pia-kjaersgaard",
+                name: "Pia Kjærsgaard",
+                party: "Dansk Folkeparti",
+                partyShort: "DF",
+                color: "#F7B32B",
+                initials: "PK",
+                role: "MF, tidligere formand",
+                scandalCount: 3,
+                avgSeverity: 2.5,
+                brokenPromises: 2,
+                donorCount: 8,
+                networkCount: 3,
+                scandals: [],
+                support: [],
+                promises: [],
+                networks: []
+            },
+            {
+                slug: "anders-fogh-rasmussen",
+                name: "Anders Fogh Rasmussen",
+                party: "Venstre",
+                partyShort: "V",
+                color: "#0066B3",
+                initials: "AFR",
+                role: "Tidligere statsminister, NATO-generalsekretær",
+                scandalCount: 4,
+                avgSeverity: 2.9,
+                brokenPromises: 3,
+                donorCount: 10,
+                networkCount: 8,
+                scandals: [],
+                support: [],
+                promises: [],
+                networks: [
+                    { name: "WEF", type: "Strategic Partner", source: "WEF" },
+                    { name: "Bilderberg", type: "Steering Committee", source: "Offentlige kilder" }
+                ]
+            },
+            {
+                slug: "morten-messerschmidt",
+                name: "Morten Messerschmidt",
+                party: "Dansk Folkeparti",
+                partyShort: "DF",
+                color: "#F7B32B",
+                initials: "MM",
+                role: "MF, tidligere næstformand",
+                scandalCount: 5,
+                avgSeverity: 3.6,
+                brokenPromises: 2,
+                donorCount: 6,
+                networkCount: 2,
+                scandals: [
+                    { title: "EU-parlamentssag", severity: 4, desc: "Kritik af brug af EU-midler og ansættelsesforhold.", sources: ["DR", "Politiken"] }
+                ],
+                support: [],
+                promises: [],
+                networks: []
+            },
+            {
+                slug: "kristian-thulesen-dahl",
+                name: "Kristian Thulesen Dahl",
+                party: "Dansk Folkeparti",
+                partyShort: "DF",
+                color: "#F7B32B",
+                initials: "KTD",
+                role: "MF, tidligere formand",
+                scandalCount: 2,
+                avgSeverity: 2.2,
+                brokenPromises: 1,
+                donorCount: 5,
+                networkCount: 1,
+                scandals: [],
+                support: [],
+                promises: [],
+                networks: []
+            },
+            {
+                slug: "soeren-pape-poulsen",
+                name: "Søren Pape Poulsen",
+                party: "Det Konservative Folkeparti",
+                partyShort: "K",
+                color: "#006633",
+                initials: "SPP",
+                role: "MF, tidligere formand",
+                scandalCount: 3,
+                avgSeverity: 2.7,
+                brokenPromises: 2,
+                donorCount: 7,
+                networkCount: 3,
+                scandals: [],
+                support: [],
+                promises: [],
+                networks: []
+            },
+            {
+                slug: "uffe-elbaek",
+                name: "Uffe Elbæk",
+                party: "Alternativet / Uafhængig",
+                partyShort: "Å",
+                color: "#00A99D",
+                initials: "UE",
+                role: "MF, tidligere kulturminister",
+                scandalCount: 2,
+                avgSeverity: 2.0,
+                brokenPromises: 3,
+                donorCount: 4,
+                networkCount: 5,
+                scandals: [],
+                support: [],
+                promises: [],
+                networks: []
+            },
+            {
+                slug: "claus-hjort-frederiksen",
+                name: "Claus Hjort Frederiksen",
+                party: "Venstre",
+                partyShort: "V",
+                color: "#0066B3",
+                initials: "CHF",
+                role: "MF, tidligere minister",
+                scandalCount: 3,
+                avgSeverity: 2.8,
+                brokenPromises: 2,
+                donorCount: 6,
+                networkCount: 4,
+                scandals: [],
+                support: [],
+                promises: [],
+                networks: []
+            }
+        ];
+
+        let selectedPoliticians = {
+            1: null,
+            2: null
+        };
+
+        // Initialize politician lists
+        function initializePoliticianLists() {
+            renderPoliticianList(1);
+            renderPoliticianList(2);
+        }
+
+        function renderPoliticianList(side) {
+            const container = document.getElementById(`politician-list-${side}`);
+            container.innerHTML = '';
+            
+            POLITICIANS.forEach(politician => {
+                const div = document.createElement('div');
+                div.className = `politician-option flex items-center gap-x-3 px-3 py-2.5 rounded-xl cursor-pointer text-sm`;
+                div.innerHTML = `
+                    <div class="w-8 h-8 rounded-xl flex-shrink-0 flex items-center justify-center text-white text-xs font-bold shadow-sm" 
+                         style="background-color: ${politician.color}">
+                        ${politician.initials}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="font-medium">${politician.name}</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-400">${politician.party}</div>
+                    </div>
+                `;
+                
+                div.onclick = () => selectPolitician(side, politician.slug);
+                container.appendChild(div);
+            });
+        }
+
+        function filterPoliticians(side) {
+            const searchInput = document.getElementById(`search${side}`).value.toLowerCase().trim();
+            const container = document.getElementById(`politician-list-${side}`);
+            const options = container.children;
+            
+            for (let i = 0; i < options.length; i++) {
+                const option = options[i];
+                const text = option.textContent.toLowerCase();
+                if (text.includes(searchInput)) {
+                    option.style.display = '';
+                } else {
+                    option.style.display = 'none';
+                }
+            }
+        }
+
+        function selectPolitician(side, slug) {
+            const politician = POLITICIANS.find(p => p.slug === slug);
+            if (!politician) return;
+
+            selectedPoliticians[side] = politician;
+            
+            // Update badge
+            const badge = document.getElementById(`p${side}-selected-badge`);
+            const nameSpan = document.getElementById(`p${side}-selected-name`);
+            nameSpan.textContent = politician.name;
+            badge.classList.remove('hidden');
+            badge.classList.add('flex');
+            
+            // Highlight in list
+            highlightSelectedInList(side, slug);
+            
+            // If both selected, show comparison
+            if (selectedPoliticians[1] && selectedPoliticians[2]) {
+                showComparison();
+            } else {
+                // Hide comparison if only one selected
+                document.getElementById('comparison-area').classList.add('hidden');
+                document.getElementById('empty-state').classList.remove('hidden');
+            }
+        }
+
+        function highlightSelectedInList(side, slug) {
+            const container = document.getElementById(`politician-list-${side}`);
+            const options = container.children;
+            
+            for (let i = 0; i < options.length; i++) {
+                const option = options[i];
+                option.classList.remove('selected-politician', 'ring-2', 'ring-offset-2', 'ring-blue-500', 'dark:ring-blue-400');
+                
+                if (option.textContent.includes(POLITICIANS.find(p => p.slug === slug).name)) {
+                    option.classList.add('selected-politician', 'ring-2', 'ring-offset-2', 'ring-blue-500', 'dark:ring-blue-400');
+                }
+            }
+        }
+
+        function swapPoliticians() {
+            const temp = selectedPoliticians[1];
+            selectedPoliticians[1] = selectedPoliticians[2];
+            selectedPoliticians[2] = temp;
+            
+            // Re-render badges and lists highlights
+            if (selectedPoliticians[1]) {
+                const badge1 = document.getElementById('p1-selected-badge');
+                document.getElementById('p1-selected-name').textContent = selectedPoliticians[1].name;
+                badge1.classList.remove('hidden');
+                badge1.classList.add('flex');
+            }
+            
+            if (selectedPoliticians[2]) {
+                const badge2 = document.getElementById('p2-selected-badge');
+                document.getElementById('p2-selected-name').textContent = selectedPoliticians[2].name;
+                badge2.classList.remove('hidden');
+                badge2.classList.add('flex');
+            }
+            
+            if (selectedPoliticians[1] && selectedPoliticians[2]) {
+                showComparison();
+            }
+        }
+
+        function showComparison() {
+            const area = document.getElementById('comparison-area');
+            const empty = document.getElementById('empty-state');
+            
+            area.classList.remove('hidden');
+            empty.classList.add('hidden');
+            
+            const p1 = selectedPoliticians[1];
+            const p2 = selectedPoliticians[2];
+            
+            // Update subtitle
+            document.getElementById('comparison-subtitle').textContent = `${p1.name} vs ${p2.name}`;
+            
+            // Render left card (p1)
+            renderPoliticianCard(1, p1);
+            
+            // Render right card (p2)
+            renderPoliticianCard(2, p2);
+            
+            // Update URL
+            updateURL();
+            
+            // Scroll into view
+            area.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function renderPoliticianCard(side, politician) {
+            // Avatar
+            const avatar = document.getElementById(`p${side}-avatar`);
+            avatar.innerHTML = politician.initials;
+            avatar.style.backgroundColor = politician.color;
+            
+            // Name and party
+            document.getElementById(`p${side}-name`).textContent = politician.name;
+            
+            const partyBadge = document.getElementById(`p${side}-party-badge`);
+            partyBadge.textContent = `${politician.partyShort} • ${politician.party}`;
+            partyBadge.style.backgroundColor = politician.color + '20';
+            partyBadge.style.color = politician.color;
+            
+            document.getElementById(`p${side}-role`).textContent = politician.role || '';
+            
+            // Metrics
+            renderMetrics(side, politician);
+            
+            // Initial tab content (scandals)
+            renderTabContent(side, 'scandals', politician);
+            
+            // Make sure scandals tab is active
+            resetTabs(side);
+        }
+
+        function renderMetrics(side, politician) {
+            const container = document.getElementById(`p${side}-metrics`);
+            container.innerHTML = `
+                <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-3 text-center border border-gray-100 dark:border-gray-800">
+                    <div class="text-2xl font-semibold">${politician.scandalCount}</div>
+                    <div class="text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">SKANDALER</div>
+                </div>
+                <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-3 text-center border border-gray-100 dark:border-gray-800">
+                    <div class="text-2xl font-semibold flex items-center justify-center gap-x-0.5">
+                        ${politician.avgSeverity} 
+                        <span class="text-amber-500 text-lg">★</span>
+                    </div>
+                    <div class="text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">ALVORLIGHED</div>
+                </div>
+                <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-3 text-center border border-gray-100 dark:border-gray-800">
+                    <div class="text-2xl font-semibold">${politician.brokenPromises}</div>
+                    <div class="text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">BRUDTE LØFTER</div>
+                </div>
+                <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-3 text-center border border-gray-100 dark:border-gray-800">
+                    <div class="text-2xl font-semibold">${politician.donorCount}</div>
+                    <div class="text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">DONORER</div>
+                </div>
+                <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-3 text-center border border-gray-100 dark:border-gray-800">
+                    <div class="text-2xl font-semibold">${politician.networkCount}</div>
+                    <div class="text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">NETVÆRK</div>
+                </div>
+            `;
+        }
+
+        function resetTabs(side) {
+            // Deactivate all tab buttons for this side
+            const buttons = document.querySelectorAll(`[data-tab$="-${side}"]`);
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Activate scandals tab
+            const scandalsBtn = document.querySelector(`[data-tab="scandals-${side}"]`);
+            if (scandalsBtn) scandalsBtn.classList.add('active');
+            
+            // Show only scandals content
+            document.getElementById(`p${side}-scandals`).classList.remove('hidden');
+            document.getElementById(`p${side}-support`).classList.add('hidden');
+            document.getElementById(`p${side}-promises`).classList.add('hidden');
+            document.getElementById(`p${side}-networks`).classList.add('hidden');
+        }
+
+        function switchTab(side, tab) {
+            const politician = selectedPoliticians[side];
+            if (!politician) return;
+            
+            // Hide all tab contents for this side
+            document.getElementById(`p${side}-scandals`).classList.add('hidden');
+            document.getElementById(`p${side}-support`).classList.add('hidden');
+            document.getElementById(`p${side}-promises`).classList.add('hidden');
+            document.getElementById(`p${side}-networks`).classList.add('hidden');
+            
+            // Deactivate all buttons
+            const buttons = document.querySelectorAll(`[data-tab$="-${side}"]`);
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Activate correct button and show content
+            const activeBtn = document.querySelector(`[data-tab="${tab}-${side}"]`);
+            if (activeBtn) activeBtn.classList.add('active');
+            
+            const contentEl = document.getElementById(`p${side}-${tab}`);
+            contentEl.classList.remove('hidden');
+            
+            // Render content if not already rendered
+            if (contentEl.innerHTML.trim() === '') {
+                renderTabContent(side, tab, politician);
+            }
+        }
+
+        function renderTabContent(side, tab, politician) {
+            const container = document.getElementById(`p${side}-${tab}`);
+            container.innerHTML = '';
+            
+            if (tab === 'scandals') {
+                if (!politician.scandals || politician.scandals.length === 0) {
+                    container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400 italic py-4">Ingen registrerede skandaler i databasen for denne politiker.</p>`;
+                    return;
+                }
+                
+                politician.scandals.forEach(scandal => {
+                    const div = document.createElement('div');
+                    div.className = `scandal-item mb-4 last:mb-0 p-4 rounded-2xl border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-950`;
+                    div.innerHTML = `
+                        <div class="flex justify-between items-start gap-x-3">
+                            <div class="font-semibold">${scandal.title}</div>
+                            <div class="flex-shrink-0 text-right">
+                                ${createSeverityStars(scandal.severity)}
+                            </div>
+                        </div>
+                        <p class="text-sm mt-2 text-gray-600 dark:text-gray-300">${scandal.desc}</p>
+                        <div class="mt-3 flex flex-wrap gap-x-2 text-xs">
+                            ${scandal.sources.map(s => `<span class="inline-block px-2.5 py-0.5 bg-white dark:bg-gray-900 rounded-full border border-gray-200 dark:border-gray-700">${s}</span>`).join('')}
+                        </div>
+                    `;
+                    container.appendChild(div);
+                });
+            } 
+            else if (tab === 'support') {
+                if (!politician.support || politician.support.length === 0) {
+                    container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400 italic py-4">Ingen registrerede økonomiske støtter i databasen.</p>`;
+                    return;
+                }
+                
+                politician.support.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = `donor-item mb-3 last:mb-0 p-3 rounded-xl border border-gray-100 dark:border-gray-800`;
+                    div.innerHTML = `
+                        <div class="font-medium">${item.name}</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">${item.year} • ${item.amount}</div>
+                    `;
+                    container.appendChild(div);
+                });
+            } 
+            else if (tab === 'promises') {
+                if (!politician.promises || politician.promises.length === 0) {
+                    container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400 italic py-4">Ingen brudte valgløfter registreret.</p>`;
+                    return;
+                }
+                
+                politician.promises.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = `promise-item mb-3 last:mb-0 p-3 rounded-xl border border-gray-100 dark:border-gray-800`;
+                    div.innerHTML = `
+                        <div class="font-medium">${item.title}</div>
+                        <div class="text-xs mt-1"><span class="px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-400 text-[10px]">${item.status}</span></div>
+                        <p class="text-sm mt-2 text-gray-600 dark:text-gray-300">${item.desc}</p>
+                    `;
+                    container.appendChild(div);
+                });
+            } 
+            else if (tab === 'networks') {
+                if (!politician.networks || politician.networks.length === 0) {
+                    container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400 italic py-4">Ingen registrerede internationale netværk.</p>`;
+                    return;
+                }
+                
+                politician.networks.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = `network-item mb-3 last:mb-0 p-3 rounded-xl border border-gray-100 dark:border-gray-800`;
+                    div.innerHTML = `
+                        <div class="font-medium">${item.name}</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-400">${item.type} • ${item.source}</div>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+        }
+
+        function createSeverityStars(rating) {
+            let html = '<div class="flex text-amber-500">';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= rating) {
+                    html += '<i class="fas fa-star text-sm"></i>';
+                } else if (i - 0.5 <= rating) {
+                    html += '<i class="fas fa-star-half-alt text-sm"></i>';
+                } else {
+                    html += '<i class="far fa-star text-sm text-gray-300 dark:text-gray-600"></i>';
+                }
+            }
+            html += '</div>';
+            return html;
+        }
+
+        function updateURL() {
+            if (!selectedPoliticians[1] || !selectedPoliticians[2]) return;
+            
+            const params = new URLSearchParams();
+            params.set('p1', selectedPoliticians[1].slug);
+            params.set('p2', selectedPoliticians[2].slug);
+            
+            const newURL = `${window.location.pathname}?${params.toString()}`;
+            window.history.replaceState({}, '', newURL);
+        }
+
+        function loadFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            const p1Slug = params.get('p1');
+            const p2Slug = params.get('p2');
+            
+            if (p1Slug && p2Slug) {
+                const p1 = POLITICIANS.find(p => p.slug === p1Slug);
+                const p2 = POLITICIANS.find(p => p.slug === p2Slug);
+                
+                if (p1 && p2) {
+                    selectedPoliticians[1] = p1;
+                    selectedPoliticians[2] = p2;
+                    
+                    // Update badges
+                    document.getElementById('p1-selected-name').textContent = p1.name;
+                    document.getElementById('p1-selected-badge').classList.remove('hidden');
+                    document.getElementById('p1-selected-badge').classList.add('flex');
+                    
+                    document.getElementById('p2-selected-name').textContent = p2.name;
+                    document.getElementById('p2-selected-badge').classList.remove('hidden');
+                    document.getElementById('p2-selected-badge').classList.add('flex');
+                    
+                    showComparison();
+                }
+            }
+        }
+
+        function shareComparison() {
+            if (!selectedPoliticians[1] || !selectedPoliticians[2]) return;
+            
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                const toast = document.createElement('div');
+                toast.className = `fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-5 py-2.5 rounded-2xl text-sm shadow-xl flex items-center gap-x-2`;
+                toast.innerHTML = `<i class="fas fa-check mr-2"></i> Link kopieret til udklipsholder`;
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.style.transition = 'all 0.3s ease';
+                    toast.style.opacity = '0';
+                    setTimeout(() => toast.remove(), 200);
+                }, 2200);
+            }).catch(() => {
+                prompt('Kopier dette link:', url);
+            });
+        }
+
+        function exportToPDF() {
+            if (!selectedPoliticians[1] || !selectedPoliticians[2]) return;
+            
+            const p1 = selectedPoliticians[1];
+            const p2 = selectedPoliticians[2];
+            
+            if (typeof window.jspdf !== 'undefined' || window.jspdf) {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                doc.setFontSize(18);
+                doc.text('Sammenligning på Skandale.dk', 20, 20);
+                doc.setFontSize(12);
+                doc.text(`${p1.name} vs ${p2.name}`, 20, 30);
+                
+                doc.setFontSize(11);
+                doc.text(`Skandaler: ${p1.scandalCount} vs ${p2.scandalCount}`, 20, 45);
+                doc.text(`Gennemsnitlig alvorlighed: ${p1.avgSeverity} vs ${p2.avgSeverity}`, 20, 52);
+                doc.text(`Brudte løfter: ${p1.brokenPromises} vs ${p2.brokenPromises}`, 20, 59);
+                
+                doc.save(`sammenligning-${p1.slug}-vs-${p2.slug}.pdf`);
+            } else {
+                window.print();
+            }
+        }
+
+        function resetComparison() {
+            selectedPoliticians = { 1: null, 2: null };
+            
+            document.getElementById('comparison-area').classList.add('hidden');
+            document.getElementById('empty-state').classList.remove('hidden');
+            
+            document.getElementById('p1-selected-badge').classList.add('hidden');
+            document.getElementById('p1-selected-badge').classList.remove('flex');
+            document.getElementById('p2-selected-badge').classList.add('hidden');
+            document.getElementById('p2-selected-badge').classList.remove('flex');
+            
+            document.querySelectorAll('.selected-politician').forEach(el => {
+                el.classList.remove('selected-politician', 'ring-2', 'ring-offset-2', 'ring-blue-500', 'dark:ring-blue-400');
+            });
+            
+            document.getElementById('search1').value = '';
+            document.getElementById('search2').value = '';
+            filterPoliticians(1);
+            filterPoliticians(2);
+            
+            window.history.replaceState({}, '', window.location.pathname);
+        }
+
+        function setupKeyboardSupport() {
+            document.addEventListener('keydown', function(e) {
+                if (e.key === '/' && document.activeElement.tagName === 'BODY') {
+                    e.preventDefault();
+                    document.getElementById('search1').focus();
+                }
+                
+                if (e.key.toLowerCase() === 'r' && (e.metaKey || e.ctrlKey) && selectedPoliticians[1] && selectedPoliticians[2]) {
+                    e.preventDefault();
+                    resetComparison();
+                }
+            });
+            
+            const search1 = document.getElementById('search1');
+            if (search1) search1.placeholder = 'Søg... (tryk / for at fokusere)';
+        }
+
+        function initializeComparisonPage() {
+            initializeTailwind();
+            initializeDarkMode();
+            initializePoliticianLists();
+            setupKeyboardSupport();
+            
+            loadFromURL();
+            
+            console.log('%c[Sammenlign] Restaureret og forbedret version initialiseret.', 'color:#64748b');
+        }
+
+        window.onload = initializeComparisonPage;
+    </script>
+</body>
+</html>
