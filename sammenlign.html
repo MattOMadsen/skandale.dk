@@ -507,7 +507,6 @@
         <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="hideScandalModal()"></div>
         
         <div class="modal relative bg-white dark:bg-gray-900 rounded-3xl shadow-2xl max-w-2xl w-full max-h-[85vh] overflow-hidden border border-gray-200 dark:border-gray-700">
-            <!-- Header -->
             <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-950">
                 <div>
                     <h3 id="scandal-modal-title" class="font-semibold text-xl"></h3>
@@ -518,12 +517,10 @@
                 </button>
             </div>
             
-            <!-- Content -->
             <div class="p-6 overflow-y-auto max-h-[65vh] space-y-6" id="scandal-modal-content">
                 <!-- Populated dynamically -->
             </div>
             
-            <!-- Footer -->
             <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-950 flex justify-end">
                 <button onclick="hideScandalModal()" 
                         class="px-5 py-2 text-sm font-medium rounded-2xl border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
@@ -778,7 +775,7 @@
             return items.filter(Boolean).map(item => ({
                 title: item.title || 'Brudt løfte',
                 status: item.status || 'Brudt',
-                desc: item.description || item.shortDesc || item.longDesc || ''
+                desc: item.whatHappened || item.description || item.shortDesc || item.longDesc || ''
             }));
         }
 
@@ -828,7 +825,7 @@
             }
 
             if (tab === 'scandals') {
-                items.forEach((item, index) => {
+                items.forEach(item => {
                     const div = document.createElement('div');
                     div.className = `scandal-item mb-4 last:mb-0 p-4 rounded-2xl border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-950`;
                     div.innerHTML = `
@@ -964,7 +961,6 @@
             hideRelatedModal();
             if (!slug) return;
             
-            // Replace the second politician
             const pol = POLITICIANS.find(p => p.slug === slug);
             if (pol) {
                 selectedPoliticians[2] = pol;
