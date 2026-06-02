@@ -1,3 +1,12 @@
+## [v2.00.87] - 2026-06-02
+### netvaerk.html – Fuld genopbygning & forbedringer
+- Gendannet fuld working version efter trunkering under dark-mode arbejde
+- Integreret `js/dark-mode.js` + Tailwind `darkMode: 'class'` (localStorage + system preference + dynamisk navbar-toggle)
+- Tilføjet live filtre (minimum antal politikere), sortering (antal / navn A-Å) og stats-bar med total netværk + politikere dækket
+- Forbedret card-visning med parti-farvede politik-preview (første 3 politikere + "+N") og "STOR" badge til netværk med 5+ politikere
+- Bedre tom-tilstand, fejlhåndtering og robust modal-kald (`showNetworkConnections` med fallback)
+- Fuldt dark mode kompatibel, mobilvenlig og konsistent med resten af projektet
+
 ## [v2.00.86] - 2026-06-02
 ### Sammenlign-siden forbedringer
 - **PDF-eksport fuldt rettet**: Nu bruger den rigtige jsPDF med korrekt data (skandaler + brudte løfter vises med titler og beskrivelser)

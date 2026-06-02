@@ -20,6 +20,8 @@
 - [x] Grundlæggende dedikeret sammenlign-side (`sammenlign.html`) med side-by-side metrics + swap-funktion + **klikbar støtte/netværk + skandale-modal + PDF-eksport**
 - [x] Stats-dashboard (`stats.html`)
 - [x] Infinite scroll på forsiden (tilføjet 1. juni 2026)
+- [x] **Dedikeret netvaerk.html** – fuld genopbygning med filtre, sortering, stats-bar, parti-farvede politik-preview, "STOR" badge, dark mode (via js/dark-mode.js) og robust modal-integration (juni 2026)
+- [x] Dark mode – fuldt integreret på netvaerk.html med `js/dark-mode.js`, Tailwind `darkMode: 'class'`, localStorage + system preference
 
 ## Delvist implementeret / Igangværende
 
@@ -34,8 +36,6 @@
   - Mere polish på mobil (søgefelt, modal-størrelse)
   - Eventuelt "Sammenlign direkte fra politikermodal"-knap
   - Finpudsning af loading states og fejlhåndtering
-
-- [ ] **Dark mode** – Startet (plan + dark-mode.js forberedt; toggle og auto-detect implementeres næste)
 
 ## Ikke startet endnu (Prioriteret)
 
