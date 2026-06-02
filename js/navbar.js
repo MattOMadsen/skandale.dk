@@ -31,6 +31,13 @@ function loadNavbar() {
                 <div class="flex items-center gap-x-3">
                     <div id="navbar-version" class="hidden md:block text-xs px-3 py-1 bg-slate-100 rounded-full text-slate-500 font-mono"></div>
                     
+                    <!-- Dark mode toggle -->
+                    <button id="theme-toggle" 
+                            class="w-10 h-10 flex items-center justify-center text-xl text-slate-600 hover:text-slate-900 transition-colors"
+                            aria-label="Skift mellem lyst og mørkt tema">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    
                     <!-- Mobile menu button -->
                     <button id="mobile-menu-button" 
                             class="md:hidden w-10 h-10 flex items-center justify-center text-2xl text-slate-600 hover:text-slate-900 transition-colors"
