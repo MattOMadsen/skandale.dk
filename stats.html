@@ -969,7 +969,7 @@
             await loadAllStatsData();
 
             document.addEventListener('keydown', (e) => {
-                if (e.metaKey && e.key === "/");
+                if (e.metaKey && e.key === "/") {
                     e.preventDefault();
                     document.getElementById('darkModeToggle').click();
                 }
