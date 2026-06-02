@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netværk & Overlap | Skandale.dk</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class' };
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="manifest" href="manifest.json">
 </head>
-<body class="bg-slate-50">
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
 
     <div class="max-w-7xl mx-auto px-6 pt-10 pb-6">
         <div class="flex items-center gap-x-3 mb-2">
@@ -18,7 +21,7 @@
             </div>
             <div>
                 <h1 class="text-4xl font-bold tracking-tight">Internationale Netværk & Overlap</h1>
-                <p class="text-slate-600 mt-1">Klik på et netværk for at se tilknyttede politikere</p>
+                <p class="text-slate-600 dark:text-slate-400 mt-1">Klik på et netværk for at se hvilke politikere der deler de samme internationale tilknytninger. Skab gennemsigtighed om WEF, Bilderberg, Young Global Leaders og andre netværk.</p>
             </div>
         </div>
     </div>
@@ -26,17 +29,20 @@
     <div class="max-w-7xl mx-auto px-6 pb-6">
         <div class="flex flex-col sm:flex-row gap-3">
             <div class="relative flex-1 max-w-md">
-                <i class="fa-solid fa-search absolute left-4 top-3 text-slate-400"></i>
-                <input id="searchInput" type="text" placeholder="Søg efter netværk..." class="w-full pl-10 py-3 border rounded-2xl text-sm" oninput="filterNetworks()">
+                <i class="fa-solid fa-search absolute left-4 top-3 text-slate-400 dark:text-slate-500"></i>
+                <input id="searchInput" type="text" placeholder="Søg efter netværk..." 
+                       class="w-full pl-10 py-3 border border-slate-200 dark:border-slate-700 rounded-2xl text-sm bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#C8102E] transition-colors" 
+                       oninput="filterNetworks()">
             </div>
             <div class="flex gap-2">
-                <button onclick="resetView()" class="px-4 py-2.5 text-sm border rounded-2xl">Nulstil</button>
+                <button onclick="resetView()" 
+                        class="px-4 py-2.5 text-sm border border-slate-200 dark:border-slate-700 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Nulstil</button>
             </div>
         </div>
     </div>
 
     <div class="max-w-7xl mx-auto px-6 pb-12">
-        <div id="loadingState" class="py-8 text-center text-slate-500">Indlæser netværksdata...</div>
+        <div id="loadingState" class="py-8 text-center text-slate-500 dark:text-slate-400">Indlæser netværksdata...</div>
 
         <div id="networksGrid" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
     </div>
@@ -49,6 +55,7 @@
     <script src="js/about-modal.js"></script>
     <script src="js/modal-networks.js"></script>
     <script src="js/navbar.js"></script>
+    <script src="js/dark-mode.js"></script>
 
     <script>
         let allNetworks = [];
@@ -97,13 +104,13 @@
 
             list.forEach(net => {
                 const card = document.createElement('div');
-                card.className = 'bg-white border rounded-3xl p-6 cursor-pointer active:bg-red-50';
+                card.className = 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 cursor-pointer active:bg-red-50 dark:active:bg-slate-700 transition-colors hover:shadow-md';
 
                 card.innerHTML = `
                     <div class="flex justify-between items-start">
                         <div>
-                            <div class="font-semibold text-xl">${net.name}</div>
-                            <div class="text-xs mt-2 px-3 py-1 inline-block bg-slate-100 rounded-full">${net.politicians.length} politikere</div>
+                            <div class="font-semibold text-xl text-slate-900 dark:text-white">${net.name}</div>
+                            <div class="text-xs mt-2 px-3 py-1 inline-block bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded-full">${net.politicians.length} politikere</div>
                         </div>
                         <div class="text-5xl font-bold text-[#C8102E]">${net.politicians.length}</div>
                     </div>
