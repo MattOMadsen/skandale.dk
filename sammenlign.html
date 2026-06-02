@@ -138,6 +138,10 @@
             background-color: #1e3a8a;
             border-color: #60a5fa;
         }
+
+        .loading-placeholder {
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
     </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100">
@@ -425,7 +429,7 @@
             </div>
             
             <div class="mt-6 text-center text-xs text-gray-500 dark:text-gray-400 no-print">
-                Data er baseret på offentligt tilgængelige kilder. Sammenligningen er et hjælpeværktøj – læs altid de fulde kilder.
+                Data hentes automatisk fra de officielle JSON-filer i repoet. Sammenligningen er et hjælpeværktøj – læs altid de fulde kilder.
             </div>
         </div>
         
@@ -504,283 +508,25 @@
             menu.classList.toggle('hidden');
         }
 
-        // Politicians data - udvidet med flere sample data for alle 12
+        // Base politician data (only static info + counts for metrics)
         const POLITICIANS = [
-            {
-                slug: "mette-frederiksen",
-                name: "Mette Frederiksen",
-                party: "Socialdemokratiet",
-                partyShort: "S",
-                color: "#E30613",
-                initials: "MF",
-                role: "Statsminister",
-                scandalCount: 9,
-                avgSeverity: 3.4,
-                brokenPromises: 6,
-                donorCount: 14,
-                networkCount: 5,
-                scandals: [
-                    { title: "Mink-sagen", severity: 5, desc: "Beslutning om aflivning af mink uden lovhjemmel. Kritiseret af Rigsrevisionen.", sources: ["Rigsrevisionen 2022", "Folketingets Ombudsmand"] },
-                    { title: "Høje bøder til minkavlere", severity: 3, desc: "Uklar kommunikation om kompensation og timing af beslutninger.", sources: ["Politiken", "Berlingske"] },
-                    { title: "Statsministerens rolle i FE-sagen", severity: 4, desc: "Kritik af håndtering af efterretningstjeneste-sagen.", sources: ["DR", "Berlingske"] }
-                ],
-                support: [
-                    { name: "Novo Nordisk Fonden", year: "2022-2024", amount: "Støtte til sundhedsinitiativer" },
-                    { name: "Dansk Industri", year: "Flere år", amount: "Politisk samarbejde" }
-                ],
-                promises: [
-                    { title: "Cancergaranti", status: "Delvist brudt", desc: "Løfte om hurtigere kræftbehandling ikke fuldt indfriet ifølge kritikere." },
-                    { title: "Grøn omstilling", status: "Igangværende", desc: "Flere mål er nået, men tempo kritiseres." }
-                ],
-                networks: [
-                    { name: "WEF Young Global Leaders", type: "Medlem", source: "WEF officielle liste" },
-                    { name: "Socialdemokratisk international", type: "Aktiv", source: "Partiets egne oplysninger" }
-                ]
-            },
-            {
-                slug: "inger-stoejberg",
-                name: "Inger Støjberg",
-                party: "Danmarksdemokraterne",
-                partyShort: "DD",
-                color: "#00A651",
-                initials: "IS",
-                role: "Formand & MF",
-                scandalCount: 7,
-                avgSeverity: 4.1,
-                brokenPromises: 3,
-                donorCount: 9,
-                networkCount: 2,
-                scandals: [
-                    { title: "Instrukssagen", severity: 5, desc: "Dømt for at give ulovlig instruks om adskillelse af asylpar. Fængselsdom.", sources: ["Rigsretten dom 2021", "Folketinget"] },
-                    { title: "Udmeldelse af Venstre", severity: 2, desc: "Intern konflikt førte til nyt parti.", sources: ["DR", "Politiken"] }
-                ],
-                support: [
-                    { name: "Private donorer (DF-tid)", year: "2015-2021", amount: "Flere større bidrag" }
-                ],
-                promises: [
-                    { title: "Stram udlændingepolitik", status: "Delvist opfyldt", desc: "Mange stramninger gennemført som udlændinge- og integrationsminister." }
-                ],
-                networks: [
-                    { name: "Dansk Folkeparti (tidligere)", type: "Nær alliance", source: "Historisk samarbejde" }
-                ]
-            },
-            {
-                slug: "morten-oestergaard",
-                name: "Morten Østergaard",
-                party: "Radikale Venstre",
-                partyShort: "RV",
-                color: "#7B2D8E",
-                initials: "MØ",
-                role: "Tidligere politisk leder",
-                scandalCount: 4,
-                avgSeverity: 3.0,
-                brokenPromises: 2,
-                donorCount: 7,
-                networkCount: 4,
-                scandals: [
-                    { title: "Seksuel chikane-sag", severity: 4, desc: "Trak sig som leder efter anklager om grænseoverskridende adfærd.", sources: ["DR", "Politiken"] }
-                ],
-                support: [],
-                promises: [],
-                networks: [
-                    { name: "WEF Young Global Leaders", type: "Alumni", source: "WEF" }
-                ]
-            },
-            {
-                slug: "helle-thorning-schmidt",
-                name: "Helle Thorning-Schmidt",
-                party: "Socialdemokratiet",
-                partyShort: "S",
-                color: "#E30613",
-                initials: "HTS",
-                role: "Tidligere statsminister",
-                scandalCount: 5,
-                avgSeverity: 2.8,
-                brokenPromises: 4,
-                donorCount: 11,
-                networkCount: 6,
-                scandals: [
-                    { title: "Skattesag (Thorning-sagen)", severity: 3, desc: "Skattesag om udlandsophold og skatteforhold.", sources: ["SKAT", "Berlingske"] }
-                ],
-                support: [
-                    { name: "Fagbevægelsen", year: "Løbende", amount: "Traditionel støtte" }
-                ],
-                promises: [],
-                networks: [
-                    { name: "WEF Young Global Leaders", type: "Medlem", source: "WEF" },
-                    { name: "Bilderberg", type: "Deltager", source: "Offentlige lister" }
-                ]
-            },
-            {
-                slug: "lars-loekke-rasmussen",
-                name: "Lars Løkke Rasmussen",
-                party: "Moderaterne",
-                partyShort: "M",
-                color: "#00A0DC",
-                initials: "LLR",
-                role: "Tidligere statsminister, MF",
-                scandalCount: 6,
-                avgSeverity: 3.2,
-                brokenPromises: 5,
-                donorCount: 13,
-                networkCount: 7,
-                scandals: [
-                    { title: "Bilagssag / Rejseudgifter", severity: 3, desc: "Kritik af brug af offentlige midler til private formål.", sources: ["DR", "Ekstra Bladet"] }
-                ],
-                support: [],
-                promises: [],
-                networks: [
-                    { name: "WEF", type: "Deltager", source: "WEF" }
-                ]
-            },
-            {
-                slug: "pia-kjaersgaard",
-                name: "Pia Kjærsgaard",
-                party: "Dansk Folkeparti",
-                partyShort: "DF",
-                color: "#F7B32B",
-                initials: "PK",
-                role: "MF, tidligere formand",
-                scandalCount: 4,
-                avgSeverity: 2.8,
-                brokenPromises: 3,
-                donorCount: 8,
-                networkCount: 3,
-                scandals: [
-                    { title: "DF-fond i 2000'erne", severity: 3, desc: "Kritik af økonomisk håndtering og fondstrukturer i Dansk Folkeparti.", sources: ["DR", "Politiken"] },
-                    { title: "Udlændingepolitik 2001", severity: 4, desc: "Kontroversielle udtalelser og politik omkring udlændinge.", sources: ["Berlingske", "Jyllands-Posten"] }
-                ],
-                support: [
-                    { name: "Private donorer (DF-periode)", year: "2000-2012", amount: "Flere større bidrag til partiet" }
-                ],
-                promises: [
-                    { title: "Stram udlændingepolitik", status: "Delvist opfyldt", desc: "Mange stramninger gennemført, men kritik af tempo og konsekvenser." }
-                ],
-                networks: []
-            },
-            {
-                slug: "anders-fogh-rasmussen",
-                name: "Anders Fogh Rasmussen",
-                party: "Venstre",
-                partyShort: "V",
-                color: "#0066B3",
-                initials: "AFR",
-                role: "Tidligere statsminister, NATO-generalsekretær",
-                scandalCount: 4,
-                avgSeverity: 2.9,
-                brokenPromises: 3,
-                donorCount: 10,
-                networkCount: 8,
-                scandals: [],
-                support: [],
-                promises: [],
-                networks: [
-                    { name: "WEF", type: "Strategic Partner", source: "WEF" },
-                    { name: "Bilderberg", type: "Steering Committee", source: "Offentlige kilder" }
-                ]
-            },
-            {
-                slug: "morten-messerschmidt",
-                name: "Morten Messerschmidt",
-                party: "Dansk Folkeparti",
-                partyShort: "DF",
-                color: "#F7B32B",
-                initials: "MM",
-                role: "MF, tidligere næstformand",
-                scandalCount: 5,
-                avgSeverity: 3.6,
-                brokenPromises: 2,
-                donorCount: 6,
-                networkCount: 2,
-                scandals: [
-                    { title: "EU-parlamentssag", severity: 4, desc: "Kritik af brug af EU-midler og ansættelsesforhold.", sources: ["DR", "Politiken"] }
-                ],
-                support: [],
-                promises: [],
-                networks: []
-            },
-            {
-                slug: "kristian-thulesen-dahl",
-                name: "Kristian Thulesen Dahl",
-                party: "Dansk Folkeparti",
-                partyShort: "DF",
-                color: "#F7B32B",
-                initials: "KTD",
-                role: "MF, tidligere formand",
-                scandalCount: 3,
-                avgSeverity: 2.5,
-                brokenPromises: 2,
-                donorCount: 5,
-                networkCount: 1,
-                scandals: [
-                    { title: "Intern DF-konflikt", severity: 3, desc: "Stridigheder internt i partiet omkring ledelse og retning.", sources: ["DR", "Politiken"] }
-                ],
-                support: [],
-                promises: [],
-                networks: []
-            },
-            {
-                slug: "soeren-pape-poulsen",
-                name: "Søren Pape Poulsen",
-                party: "Det Konservative Folkeparti",
-                partyShort: "K",
-                color: "#006633",
-                initials: "SPP",
-                role: "MF, tidligere formand",
-                scandalCount: 3,
-                avgSeverity: 2.7,
-                brokenPromises: 2,
-                donorCount: 7,
-                networkCount: 3,
-                scandals: [],
-                support: [],
-                promises: [],
-                networks: []
-            },
-            {
-                slug: "uffe-elbaek",
-                name: "Uffe Elbæk",
-                party: "Alternativet / Uafhængig",
-                partyShort: "Å",
-                color: "#00A99D",
-                initials: "UE",
-                role: "MF, tidligere kulturminister",
-                scandalCount: 2,
-                avgSeverity: 2.0,
-                brokenPromises: 3,
-                donorCount: 4,
-                networkCount: 5,
-                scandals: [],
-                support: [],
-                promises: [],
-                networks: []
-            },
-            {
-                slug: "claus-hjort-frederiksen",
-                name: "Claus Hjort Frederiksen",
-                party: "Venstre",
-                partyShort: "V",
-                color: "#0066B3",
-                initials: "CHF",
-                role: "MF, tidligere minister",
-                scandalCount: 3,
-                avgSeverity: 2.8,
-                brokenPromises: 2,
-                donorCount: 6,
-                networkCount: 4,
-                scandals: [],
-                support: [],
-                promises: [],
-                networks: []
-            }
+            { slug: "mette-frederiksen", name: "Mette Frederiksen", party: "Socialdemokratiet", partyShort: "S", color: "#E30613", initials: "MF", role: "Statsminister", scandalCount: 6, avgSeverity: 4.2, brokenPromises: 7, donorCount: 14, networkCount: 5 },
+            { slug: "inger-stoejberg", name: "Inger Støjberg", party: "Danmarksdemokraterne", partyShort: "DD", color: "#00A651", initials: "IS", role: "Formand & MF", scandalCount: 7, avgSeverity: 4.1, brokenPromises: 3, donorCount: 9, networkCount: 2 },
+            { slug: "morten-oestergaard", name: "Morten Østergaard", party: "Radikale Venstre", partyShort: "RV", color: "#7B2D8E", initials: "MØ", role: "Tidligere politisk leder", scandalCount: 4, avgSeverity: 3.0, brokenPromises: 2, donorCount: 7, networkCount: 4 },
+            { slug: "helle-thorning-schmidt", name: "Helle Thorning-Schmidt", party: "Socialdemokratiet", partyShort: "S", color: "#E30613", initials: "HTS", role: "Tidligere statsminister", scandalCount: 5, avgSeverity: 2.8, brokenPromises: 4, donorCount: 11, networkCount: 6 },
+            { slug: "lars-loekke-rasmussen", name: "Lars Løkke Rasmussen", party: "Moderaterne", partyShort: "M", color: "#00A0DC", initials: "LLR", role: "Tidligere statsminister, MF", scandalCount: 6, avgSeverity: 3.2, brokenPromises: 5, donorCount: 13, networkCount: 7 },
+            { slug: "pia-kjaersgaard", name: "Pia Kjærsgaard", party: "Dansk Folkeparti", partyShort: "DF", color: "#F7B32B", initials: "PK", role: "MF, tidligere formand", scandalCount: 4, avgSeverity: 2.8, brokenPromises: 3, donorCount: 8, networkCount: 3 },
+            { slug: "anders-fogh-rasmussen", name: "Anders Fogh Rasmussen", party: "Venstre", partyShort: "V", color: "#0066B3", initials: "AFR", role: "Tidligere statsminister, NATO-generalsekretær", scandalCount: 4, avgSeverity: 2.9, brokenPromises: 3, donorCount: 10, networkCount: 8 },
+            { slug: "morten-messerschmidt", name: "Morten Messerschmidt", party: "Dansk Folkeparti", partyShort: "DF", color: "#F7B32B", initials: "MM", role: "MF, tidligere næstformand", scandalCount: 5, avgSeverity: 3.6, brokenPromises: 2, donorCount: 6, networkCount: 2 },
+            { slug: "kristian-thulesen-dahl", name: "Kristian Thulesen Dahl", party: "Dansk Folkeparti", partyShort: "DF", color: "#F7B32B", initials: "KTD", role: "MF, tidligere formand", scandalCount: 3, avgSeverity: 2.5, brokenPromises: 2, donorCount: 5, networkCount: 1 },
+            { slug: "soeren-pape-poulsen", name: "Søren Pape Poulsen", party: "Det Konservative Folkeparti", partyShort: "K", color: "#006633", initials: "SPP", role: "MF, tidligere formand", scandalCount: 3, avgSeverity: 2.7, brokenPromises: 2, donorCount: 7, networkCount: 3 },
+            { slug: "uffe-elbaek", name: "Uffe Elbæk", party: "Alternativet / Uafhængig", partyShort: "Å", color: "#00A99D", initials: "UE", role: "MF, tidligere kulturminister", scandalCount: 2, avgSeverity: 2.0, brokenPromises: 3, donorCount: 4, networkCount: 5 },
+            { slug: "claus-hjort-frederiksen", name: "Claus Hjort Frederiksen", party: "Venstre", partyShort: "V", color: "#0066B3", initials: "CHF", role: "MF, tidligere minister", scandalCount: 3, avgSeverity: 2.8, brokenPromises: 2, donorCount: 6, networkCount: 4 }
         ];
 
-        let selectedPoliticians = {
-            1: null,
-            2: null
-        };
+        let selectedPoliticians = { 1: null, 2: null };
+        const loadedDataCache = {}; // Cache for loaded detailed data
 
-        // Initialize politician lists
         function initializePoliticianLists() {
             renderPoliticianList(1);
             renderPoliticianList(2);
@@ -794,8 +540,7 @@
                 const div = document.createElement('div');
                 div.className = `politician-option flex items-center gap-x-3 px-3 py-2.5 rounded-xl cursor-pointer text-sm`;
                 div.innerHTML = `
-                    <div class="w-8 h-8 rounded-xl flex-shrink-0 flex items-center justify-center text-white text-xs font-bold shadow-sm" 
-                         style="background-color: ${politician.color}">
+                    <div class="w-8 h-8 rounded-xl flex-shrink-0 flex items-center justify-center text-white text-xs font-bold shadow-sm" style="background-color: ${politician.color}">
                         ${politician.initials}
                     </div>
                     <div class="flex-1 min-w-0">
@@ -803,7 +548,6 @@
                         <div class="text-xs text-gray-500 dark:text-gray-400">${politician.party}</div>
                     </div>
                 `;
-                
                 div.onclick = () => selectPolitician(side, politician.slug);
                 container.appendChild(div);
             });
@@ -831,17 +575,13 @@
 
             selectedPoliticians[side] = politician;
             
-            // Update badge
             const badge = document.getElementById(`p${side}-selected-badge`);
-            const nameSpan = document.getElementById(`p${side}-selected-name`);
-            nameSpan.textContent = politician.name;
+            document.getElementById(`p${side}-selected-name`).textContent = politician.name;
             badge.classList.remove('hidden');
             badge.classList.add('flex');
             
-            // Highlight in list
             highlightSelectedInList(side, slug);
             
-            // If both selected, show comparison
             if (selectedPoliticians[1] && selectedPoliticians[2]) {
                 showComparison();
             } else {
@@ -852,44 +592,36 @@
 
         function highlightSelectedInList(side, slug) {
             const container = document.getElementById(`politician-list-${side}`);
-            const options = container.children;
-            
-            for (let i = 0; i < options.length; i++) {
-                const option = options[i];
+            Array.from(container.children).forEach(option => {
                 option.classList.remove('selected-politician', 'ring-2', 'ring-offset-2', 'ring-blue-500', 'dark:ring-blue-400');
-                
                 if (option.textContent.includes(POLITICIANS.find(p => p.slug === slug).name)) {
                     option.classList.add('selected-politician', 'ring-2', 'ring-offset-2', 'ring-blue-500', 'dark:ring-blue-400');
                 }
-            }
+            });
         }
 
         function swapPoliticians() {
             const temp = selectedPoliticians[1];
             selectedPoliticians[1] = selectedPoliticians[2];
             selectedPoliticians[2] = temp;
-            
-            // Re-render badges and lists highlights
+
             if (selectedPoliticians[1]) {
-                const badge1 = document.getElementById('p1-selected-badge');
                 document.getElementById('p1-selected-name').textContent = selectedPoliticians[1].name;
-                badge1.classList.remove('hidden');
-                badge1.classList.add('flex');
+                document.getElementById('p1-selected-badge').classList.remove('hidden');
+                document.getElementById('p1-selected-badge').classList.add('flex');
             }
-            
             if (selectedPoliticians[2]) {
-                const badge2 = document.getElementById('p2-selected-badge');
                 document.getElementById('p2-selected-name').textContent = selectedPoliticians[2].name;
-                badge2.classList.remove('hidden');
-                badge2.classList.add('flex');
+                document.getElementById('p2-selected-badge').classList.remove('hidden');
+                document.getElementById('p2-selected-badge').classList.add('flex');
             }
-            
+
             if (selectedPoliticians[1] && selectedPoliticians[2]) {
                 showComparison();
             }
         }
 
-        function showComparison() {
+        async function showComparison() {
             const area = document.getElementById('comparison-area');
             const empty = document.getElementById('empty-state');
             
@@ -899,29 +631,27 @@
             const p1 = selectedPoliticians[1];
             const p2 = selectedPoliticians[2];
             
-            // Update subtitle
             document.getElementById('comparison-subtitle').textContent = `${p1.name} vs ${p2.name}`;
             
-            // Render left card (p1)
             renderPoliticianCard(1, p1);
-            
-            // Render right card (p2)
             renderPoliticianCard(2, p2);
             
-            // Update URL
             updateURL();
             
-            // Scroll into view
+            // Load real data for both
+            await Promise.all([
+                loadAndRenderDetails(1, p1),
+                loadAndRenderDetails(2, p2)
+            ]);
+            
             area.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function renderPoliticianCard(side, politician) {
-            // Avatar
             const avatar = document.getElementById(`p${side}-avatar`);
             avatar.innerHTML = politician.initials;
             avatar.style.backgroundColor = politician.color;
             
-            // Name and party
             document.getElementById(`p${side}-name`).textContent = politician.name;
             
             const partyBadge = document.getElementById(`p${side}-party-badge`);
@@ -931,13 +661,7 @@
             
             document.getElementById(`p${side}-role`).textContent = politician.role || '';
             
-            // Metrics
             renderMetrics(side, politician);
-            
-            // Initial tab content (scandals)
-            renderTabContent(side, 'scandals', politician);
-            
-            // Make sure scandals tab is active
             resetTabs(side);
         }
 
@@ -950,8 +674,7 @@
                 </div>
                 <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-3 text-center border border-gray-100 dark:border-gray-800">
                     <div class="text-2xl font-semibold flex items-center justify-center gap-x-0.5">
-                        ${politician.avgSeverity} 
-                        <span class="text-amber-500 text-lg">★</span>
+                        ${politician.avgSeverity} <span class="text-amber-500 text-lg">★</span>
                     </div>
                     <div class="text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">ALVORLIGHED</div>
                 </div>
@@ -971,15 +694,12 @@
         }
 
         function resetTabs(side) {
-            // Deactivate all tab buttons for this side
             const buttons = document.querySelectorAll(`[data-tab$="-${side}"]`);
             buttons.forEach(btn => btn.classList.remove('active'));
             
-            // Activate scandals tab
             const scandalsBtn = document.querySelector(`[data-tab="scandals-${side}"]`);
             if (scandalsBtn) scandalsBtn.classList.add('active');
             
-            // Show only scandals content
             document.getElementById(`p${side}-scandals`).classList.remove('hidden');
             document.getElementById(`p${side}-support`).classList.add('hidden');
             document.getElementById(`p${side}-promises`).classList.add('hidden');
@@ -990,102 +710,184 @@
             const politician = selectedPoliticians[side];
             if (!politician) return;
             
-            // Hide all tab contents for this side
             document.getElementById(`p${side}-scandals`).classList.add('hidden');
             document.getElementById(`p${side}-support`).classList.add('hidden');
             document.getElementById(`p${side}-promises`).classList.add('hidden');
             document.getElementById(`p${side}-networks`).classList.add('hidden');
             
-            // Deactivate all buttons
             const buttons = document.querySelectorAll(`[data-tab$="-${side}"]`);
             buttons.forEach(btn => btn.classList.remove('active'));
             
-            // Activate correct button and show content
             const activeBtn = document.querySelector(`[data-tab="${tab}-${side}"]`);
             if (activeBtn) activeBtn.classList.add('active');
             
             const contentEl = document.getElementById(`p${side}-${tab}`);
             contentEl.classList.remove('hidden');
-            
-            // Render content if not already rendered
-            if (contentEl.innerHTML.trim() === '') {
-                renderTabContent(side, tab, politician);
+        }
+
+        // ==================== AUTOMATIC DATA LOADER ====================
+
+        async function fetchJSON(path) {
+            try {
+                const res = await fetch(path);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                return await res.json();
+            } catch (e) {
+                console.warn(`Kunne ikke hente ${path}:`, e);
+                return null;
             }
         }
 
-        function renderTabContent(side, tab, politician) {
+        async function loadScandals(slug) {
+            const manifest = await fetchJSON(`data/scandals/${slug}/manifest.json`);
+            if (!manifest || !manifest.scandals) return [];
+            
+            const items = await Promise.all(
+                manifest.scandals.map(filename => 
+                    fetchJSON(`data/scandals/${slug}/${filename}`)
+                )
+            );
+            return items.filter(Boolean).map(item => ({
+                title: item.title || item.id,
+                severity: item.ourSeverity || 3,
+                desc: item.shortDesc || item.longDesc || '',
+                sources: (item.mediaLinks || []).map(l => l.name || l.url || 'Kilde')
+            }));
+        }
+
+        async function loadBrokenPromises(slug) {
+            const manifest = await fetchJSON(`data/broken-promises/${slug}/manifest.json`);
+            if (!manifest || !manifest.brokenPromises) return [];
+            
+            const items = await Promise.all(
+                manifest.brokenPromises.map(filename => 
+                    fetchJSON(`data/broken-promises/${slug}/${filename}`)
+                )
+            );
+            return items.filter(Boolean).map(item => ({
+                title: item.title || 'Brudt løfte',
+                status: item.status || 'Brudt',
+                desc: item.description || item.shortDesc || ''
+            }));
+        }
+
+        async function loadEconomicSupport(slug) {
+            const data = await fetchJSON(`data/economic-support/${slug}.json`);
+            if (!data || !data.donations) return [];
+            return data.donations.map(d => ({
+                name: d.name,
+                year: d.year || '',
+                amount: d.amount || ''
+            }));
+        }
+
+        async function loadAffiliations(slug) {
+            const data = await fetchJSON(`data/affiliations/${slug}.json`);
+            if (!data) return [];
+            // Support both array and object formats
+            if (Array.isArray(data)) return data;
+            if (data.networks) return data.networks;
+            return [];
+        }
+
+        async function loadDetailedData(slug) {
+            if (loadedDataCache[slug]) return loadedDataCache[slug];
+
+            const [scandals, promises, support, networks] = await Promise.all([
+                loadScandals(slug),
+                loadBrokenPromises(slug),
+                loadEconomicSupport(slug),
+                loadAffiliations(slug)
+            ]);
+
+            const result = { scandals, promises, support, networks };
+            loadedDataCache[slug] = result;
+            return result;
+        }
+
+        async function loadAndRenderDetails(side, politician) {
+            const scandalsContainer = document.getElementById(`p${side}-scandals`);
+            const supportContainer = document.getElementById(`p${side}-support`);
+            const promisesContainer = document.getElementById(`p${side}-promises`);
+            const networksContainer = document.getElementById(`p${side}-networks`);
+
+            // Show loading state
+            scandalsContainer.innerHTML = `<div class="loading-placeholder text-sm text-gray-400 py-4">Indlæser skandaler...</div>`;
+            supportContainer.innerHTML = `<div class="loading-placeholder text-sm text-gray-400 py-4">Indlæser støtte...</div>`;
+            promisesContainer.innerHTML = `<div class="loading-placeholder text-sm text-gray-400 py-4">Indlæser løfter...</div>`;
+            networksContainer.innerHTML = `<div class="loading-placeholder text-sm text-gray-400 py-4">Indlæser netværk...</div>`;
+
+            try {
+                const data = await loadDetailedData(politician.slug);
+                
+                // Update containers with real data
+                renderTabContentWithData(side, 'scandals', data.scandals);
+                renderTabContentWithData(side, 'support', data.support);
+                renderTabContentWithData(side, 'promises', data.promises);
+                renderTabContentWithData(side, 'networks', data.networks);
+
+            } catch (e) {
+                console.error('Fejl ved indlæsning af data for', politician.slug, e);
+                scandalsContainer.innerHTML = `<p class="text-sm text-red-500 italic py-4">Kunne ikke hente data.</p>`;
+            }
+        }
+
+        function renderTabContentWithData(side, tab, items) {
             const container = document.getElementById(`p${side}-${tab}`);
             container.innerHTML = '';
-            
+
+            if (!items || items.length === 0) {
+                container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400 italic py-4">Ingen data fundet for denne kategori.</p>`;
+                return;
+            }
+
             if (tab === 'scandals') {
-                if (!politician.scandals || politician.scandals.length === 0) {
-                    container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400 italic py-4">Ingen registrerede skandaler i sample-dataen for denne politiker. (Rigtig data kommer fra JSON-filer)</p>`;
-                    return;
-                }
-                
-                politician.scandals.forEach(scandal => {
+                items.forEach(item => {
                     const div = document.createElement('div');
                     div.className = `scandal-item mb-4 last:mb-0 p-4 rounded-2xl border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-950`;
                     div.innerHTML = `
                         <div class="flex justify-between items-start gap-x-3">
-                            <div class="font-semibold">${scandal.title}</div>
-                            <div class="flex-shrink-0 text-right">
-                                ${createSeverityStars(scandal.severity)}
-                            </div>
+                            <div class="font-semibold">${item.title}</div>
+                            <div class="flex-shrink-0 text-right">${createSeverityStars(item.severity || 3)}</div>
                         </div>
-                        <p class="text-sm mt-2 text-gray-600 dark:text-gray-300">${scandal.desc}</p>
+                        <p class="text-sm mt-2 text-gray-600 dark:text-gray-300">${item.desc || ''}</p>
                         <div class="mt-3 flex flex-wrap gap-x-2 text-xs">
-                            ${scandal.sources.map(s => `<span class="inline-block px-2.5 py-0.5 bg-white dark:bg-gray-900 rounded-full border border-gray-200 dark:border-gray-700">${s}</span>`).join('')}
+                            ${(item.sources || []).map(s => `<span class="inline-block px-2.5 py-0.5 bg-white dark:bg-gray-900 rounded-full border border-gray-200 dark:border-gray-700">${s}</span>`).join('')}
                         </div>
                     `;
                     container.appendChild(div);
                 });
-            } 
-            else if (tab === 'support') {
-                if (!politician.support || politician.support.length === 0) {
-                    container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400 italic py-4">Ingen registrerede økonomiske støtter i sample-dataen.</p>`;
-                    return;
-                }
-                
-                politician.support.forEach(item => {
+            } else if (tab === 'support') {
+                items.forEach(item => {
                     const div = document.createElement('div');
                     div.className = `donor-item mb-3 last:mb-0 p-3 rounded-xl border border-gray-100 dark:border-gray-800`;
                     div.innerHTML = `
                         <div class="font-medium">${item.name}</div>
-                        <div class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">${item.year} • ${item.amount}</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">${item.year || ''} • ${item.amount || ''}</div>
                     `;
                     container.appendChild(div);
                 });
-            } 
-            else if (tab === 'promises') {
-                if (!politician.promises || politician.promises.length === 0) {
-                    container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400 italic py-4">Ingen brudte valgløfter registreret i sample-dataen.</p>`;
-                    return;
-                }
-                
-                politician.promises.forEach(item => {
+            } else if (tab === 'promises') {
+                items.forEach(item => {
                     const div = document.createElement('div');
                     div.className = `promise-item mb-3 last:mb-0 p-3 rounded-xl border border-gray-100 dark:border-gray-800`;
                     div.innerHTML = `
                         <div class="font-medium">${item.title}</div>
-                        <div class="text-xs mt-1"><span class="px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-400 text-[10px]">${item.status}</span></div>
-                        <p class="text-sm mt-2 text-gray-600 dark:text-gray-300">${item.desc}</p>
+                        <div class="text-xs mt-1"><span class="px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-400 text-[10px]">${item.status || 'Brudt'}</span></div>
+                        <p class="text-sm mt-2 text-gray-600 dark:text-gray-300">${item.desc || ''}</p>
                     `;
                     container.appendChild(div);
                 });
-            } 
-            else if (tab === 'networks') {
-                if (!politician.networks || politician.networks.length === 0) {
-                    container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400 italic py-4">Ingen registrerede internationale netværk.</p>`;
-                    return;
-                }
-                
-                politician.networks.forEach(item => {
+            } else if (tab === 'networks') {
+                items.forEach(item => {
                     const div = document.createElement('div');
                     div.className = `network-item mb-3 last:mb-0 p-3 rounded-xl border border-gray-100 dark:border-gray-800`;
+                    const name = item.name || item;
+                    const type = item.type || '';
+                    const source = item.source || '';
                     div.innerHTML = `
-                        <div class="font-medium">${item.name}</div>
-                        <div class="text-xs text-gray-500 dark:text-gray-400">${item.type} • ${item.source}</div>
+                        <div class="font-medium">${name}</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-400">${type} ${source ? '• ' + source : ''}</div>
                     `;
                     container.appendChild(div);
                 });
@@ -1109,13 +911,10 @@
 
         function updateURL() {
             if (!selectedPoliticians[1] || !selectedPoliticians[2]) return;
-            
             const params = new URLSearchParams();
             params.set('p1', selectedPoliticians[1].slug);
             params.set('p2', selectedPoliticians[2].slug);
-            
-            const newURL = `${window.location.pathname}?${params.toString()}`;
-            window.history.replaceState({}, '', newURL);
+            window.history.replaceState({}, '', `${window.location.pathname}?${params.toString()}`);
         }
 
         function loadFromURL() {
@@ -1126,20 +925,18 @@
             if (p1Slug && p2Slug) {
                 const p1 = POLITICIANS.find(p => p.slug === p1Slug);
                 const p2 = POLITICIANS.find(p => p.slug === p2Slug);
-                
                 if (p1 && p2) {
                     selectedPoliticians[1] = p1;
                     selectedPoliticians[2] = p2;
-                    
-                    // Update badges
+
                     document.getElementById('p1-selected-name').textContent = p1.name;
                     document.getElementById('p1-selected-badge').classList.remove('hidden');
                     document.getElementById('p1-selected-badge').classList.add('flex');
-                    
+
                     document.getElementById('p2-selected-name').textContent = p2.name;
                     document.getElementById('p2-selected-badge').classList.remove('hidden');
                     document.getElementById('p2-selected-badge').classList.add('flex');
-                    
+
                     showComparison();
                 }
             }
@@ -1147,70 +944,40 @@
 
         function shareComparison() {
             if (!selectedPoliticians[1] || !selectedPoliticians[2]) return;
-            
             const url = window.location.href;
             navigator.clipboard.writeText(url).then(() => {
                 const toast = document.createElement('div');
                 toast.className = `fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-5 py-2.5 rounded-2xl text-sm shadow-xl flex items-center gap-x-2`;
                 toast.innerHTML = `<i class="fas fa-check mr-2"></i> Link kopieret til udklipsholder`;
                 document.body.appendChild(toast);
-                
-                setTimeout(() => {
-                    toast.style.transition = 'all 0.3s ease';
-                    toast.style.opacity = '0';
-                    setTimeout(() => toast.remove(), 200);
-                }, 2200);
-            }).catch(() => {
-                prompt('Kopier dette link:', url);
-            });
+                setTimeout(() => { toast.style.transition = 'all 0.3s ease'; toast.style.opacity = '0'; setTimeout(() => toast.remove(), 200); }, 2200);
+            }).catch(() => prompt('Kopier dette link:', url));
         }
 
         function exportToPDF() {
             if (!selectedPoliticians[1] || !selectedPoliticians[2]) return;
-            
-            const p1 = selectedPoliticians[1];
-            const p2 = selectedPoliticians[2];
-            
-            if (typeof window.jspdf !== 'undefined' || window.jspdf) {
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF();
-                
-                doc.setFontSize(18);
-                doc.text('Sammenligning på Skandale.dk', 20, 20);
-                doc.setFontSize(12);
-                doc.text(`${p1.name} vs ${p2.name}`, 20, 30);
-                
-                doc.setFontSize(11);
-                doc.text(`Skandaler: ${p1.scandalCount} vs ${p2.scandalCount}`, 20, 45);
-                doc.text(`Gennemsnitlig alvorlighed: ${p1.avgSeverity} vs ${p2.avgSeverity}`, 20, 52);
-                doc.text(`Brudte løfter: ${p1.brokenPromises} vs ${p2.brokenPromises}`, 20, 59);
-                
-                doc.save(`sammenligning-${p1.slug}-vs-${p2.slug}.pdf`);
-            } else {
-                window.print();
-            }
+            window.print(); // Simple fallback - can be improved with jsPDF later
         }
 
         function resetComparison() {
             selectedPoliticians = { 1: null, 2: null };
-            
+            loadedDataCache = {};
+
             document.getElementById('comparison-area').classList.add('hidden');
             document.getElementById('empty-state').classList.remove('hidden');
-            
+
             document.getElementById('p1-selected-badge').classList.add('hidden');
             document.getElementById('p1-selected-badge').classList.remove('flex');
             document.getElementById('p2-selected-badge').classList.add('hidden');
             document.getElementById('p2-selected-badge').classList.remove('flex');
-            
-            document.querySelectorAll('.selected-politician').forEach(el => {
-                el.classList.remove('selected-politician', 'ring-2', 'ring-offset-2', 'ring-blue-500', 'dark:ring-blue-400');
-            });
-            
+
+            document.querySelectorAll('.selected-politician').forEach(el => el.classList.remove('selected-politician', 'ring-2', 'ring-offset-2', 'ring-blue-500', 'dark:ring-blue-400'));
+
             document.getElementById('search1').value = '';
             document.getElementById('search2').value = '';
             filterPoliticians(1);
             filterPoliticians(2);
-            
+
             window.history.replaceState({}, '', window.location.pathname);
         }
 
@@ -1220,13 +987,11 @@
                     e.preventDefault();
                     document.getElementById('search1').focus();
                 }
-                
                 if (e.key.toLowerCase() === 'r' && (e.metaKey || e.ctrlKey) && selectedPoliticians[1] && selectedPoliticians[2]) {
                     e.preventDefault();
                     resetComparison();
                 }
             });
-            
             const search1 = document.getElementById('search1');
             if (search1) search1.placeholder = 'Søg... (tryk / for at fokusere)';
         }
@@ -1236,10 +1001,8 @@
             initializeDarkMode();
             initializePoliticianLists();
             setupKeyboardSupport();
-            
             loadFromURL();
-            
-            console.log('%c[Sammenlign] Opdateret med mere data for alle politikere.', 'color:#64748b');
+            console.log('%c[Sammenlign] Automatisk JSON-loader initialiseret.', 'color:#64748b');
         }
 
         window.onload = initializeComparisonPage;
