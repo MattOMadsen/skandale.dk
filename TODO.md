@@ -1,6 +1,7 @@
-# TODO-liste for Skandale.dk (Opdateret 30. maj 2026)
+# TODO-liste for Skandale.dk (Opdateret 1. juni 2026)
 
 ## Kendte bugs / Issues der skal testes
+
 > **Note:** Flere af de tidligere kendte bugs ser ud til at være løst gennem refaktoreringen. De skal dog testes i praksis.
 
 - [ ] Sammenlign-funktionen (modal + dedikeret side) – test om den virker stabilt
@@ -18,6 +19,7 @@
 - [x] Modular JS-arkitektur (mange små, vedligeholdelsesvenlige filer i `js/`)
 - [x] Grundlæggende dedikeret sammenlign-side (`sammenlign.html`) med side-by-side metrics + swap-funktion
 - [x] Stats-dashboard (`stats.html`)
+- [x] Infinite scroll på forsiden (tilføjet 1. juni 2026)
 
 ## Delvist implementeret / Igangværende
 
@@ -32,15 +34,16 @@
   - PDF-eksport af sammenligningen
   - Fuld menu- og modal-integration
 
+- [ ] **Dark mode** – Startet (plan + dark-mode.js forberedt; toggle og auto-detect implementeres næste)
+
 ## Ikke startet endnu (Prioriteret)
 
-1. **Dark mode** (professionel og troværdig dark variant)
-2. **Central database** (f.eks. Supabase) til delt afstemning + kommentar-moderation
-3. Færdiggørelse af dedikeret sammenlign-side (avancerede features)
+1. **Central database** (f.eks. Supabase) til delt afstemning + kommentar-moderation
+2. Færdiggørelse af dedikeret sammenlign-side (avancerede features)
 
 ## Oprydning & Teknisk gæld
 
-- [ ] Fjern `modal-compare.js` fra `index.html` (legacy – erstattet af dedikeret `sammenlign.html`)
+- [ ] Fjern `modal-compare.js` fra `index.html` (legacy – erstattet af dedikeret `sammenlign.html`) når den dedikerede side er færdig
 - [ ] Ryd op i andre potentielle legacy script-referencer efter overgangen til dedikerede sider
 - [ ] Erstat Tailwind Play CDN med lokal, optimeret `tailwind.css`
 - [ ] Gør antallet af politikere dynamisk i hero-badge
