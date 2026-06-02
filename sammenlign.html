@@ -525,7 +525,7 @@
         ];
 
         let selectedPoliticians = { 1: null, 2: null };
-        const loadedDataCache = {}; // Cache for loaded detailed data
+        const loadedDataCache = {};
 
         function initializePoliticianLists() {
             renderPoliticianList(1);
@@ -638,7 +638,6 @@
             
             updateURL();
             
-            // Load real data for both
             await Promise.all([
                 loadAndRenderDetails(1, p1),
                 loadAndRenderDetails(2, p2)
@@ -743,9 +742,7 @@
             if (!manifest || !manifest.scandals) return [];
             
             const items = await Promise.all(
-                manifest.scandals.map(filename => 
-                    fetchJSON(`data/scandals/${slug}/${filename}`)
-                )
+                manifest.scandals.map(filename => fetchJSON(`data/scandals/${slug}/${filename}`))
             );
             return items.filter(Boolean).map(item => ({
                 title: item.title || item.id,
@@ -760,9 +757,7 @@
             if (!manifest || !manifest.brokenPromises) return [];
             
             const items = await Promise.all(
-                manifest.brokenPromises.map(filename => 
-                    fetchJSON(`data/broken-promises/${slug}/${filename}`)
-                )
+                manifest.brokenPromises.map(filename => fetchJSON(`data/broken-promises/${slug}/${filename}`))
             );
             return items.filter(Boolean).map(item => ({
                 title: item.title || 'Brudt løfte',
@@ -784,8 +779,8 @@
         async function loadAffiliations(slug) {
             const data = await fetchJSON(`data/affiliations/${slug}.json`);
             if (!data) return [];
-            // Support both array and object formats
             if (Array.isArray(data)) return data;
+            if (data.affiliations) return data.affiliations;   // <-- FIXED: correct key
             if (data.networks) return data.networks;
             return [];
         }
@@ -811,7 +806,6 @@
             const promisesContainer = document.getElementById(`p${side}-promises`);
             const networksContainer = document.getElementById(`p${side}-networks`);
 
-            // Show loading state
             scandalsContainer.innerHTML = `<div class="loading-placeholder text-sm text-gray-400 py-4">Indlæser skandaler...</div>`;
             supportContainer.innerHTML = `<div class="loading-placeholder text-sm text-gray-400 py-4">Indlæser støtte...</div>`;
             promisesContainer.innerHTML = `<div class="loading-placeholder text-sm text-gray-400 py-4">Indlæser løfter...</div>`;
@@ -820,7 +814,6 @@
             try {
                 const data = await loadDetailedData(politician.slug);
                 
-                // Update containers with real data
                 renderTabContentWithData(side, 'scandals', data.scandals);
                 renderTabContentWithData(side, 'support', data.support);
                 renderTabContentWithData(side, 'promises', data.promises);
@@ -882,12 +875,17 @@
                 items.forEach(item => {
                     const div = document.createElement('div');
                     div.className = `network-item mb-3 last:mb-0 p-3 rounded-xl border border-gray-100 dark:border-gray-800`;
-                    const name = item.name || item;
-                    const type = item.type || '';
-                    const source = item.source || '';
+                    
+                    const name = item.name || 'Netværk';
+                    const org = item.organization || '';
+                    const year = item.year || '';
+                    const role = item.role || '';
+                    
                     div.innerHTML = `
                         <div class="font-medium">${name}</div>
-                        <div class="text-xs text-gray-500 dark:text-gray-400">${type} ${source ? '• ' + source : ''}</div>
+                        <div class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                            ${org} ${year ? '• ' + year : ''} ${role ? '• ' + role : ''}
+                        </div>
                     `;
                     container.appendChild(div);
                 });
@@ -956,7 +954,7 @@
 
         function exportToPDF() {
             if (!selectedPoliticians[1] || !selectedPoliticians[2]) return;
-            window.print(); // Simple fallback - can be improved with jsPDF later
+            window.print();
         }
 
         function resetComparison() {
@@ -1002,7 +1000,7 @@
             initializePoliticianLists();
             setupKeyboardSupport();
             loadFromURL();
-            console.log('%c[Sammenlign] Automatisk JSON-loader initialiseret.', 'color:#64748b');
+            console.log('%c[Sammenlign] Automatisk JSON-loader (Netværk fixed).', 'color:#64748b');
         }
 
         window.onload = initializeComparisonPage;
