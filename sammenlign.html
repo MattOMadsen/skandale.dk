@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sammenlign two politikere | Skandale.dk – Politisk gennemsigtighed</title>
+    <title>Sammenlign to politikere | Skandale.dk – Politisk gennemsigtighed</title>
     <meta name="description" content="Sammenlign danske politikere side om side på skandaler, økonomisk støtte, internationale netværk og brudte valgløfter. Få et faktabaseret overblik.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -223,7 +223,7 @@
     <div class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 no-print">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="max-w-3xl">
-                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter heading-serif">Sammenlign two politikere</h1>
+                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter heading-serif">Sammenlign to politikere</h1>
                 <p class="mt-3 text-xl text-gray-600 dark:text-gray-400">
                     Få et faktabaseret, side-om-side overblik over skandaler, økonomisk støtte, internationale netværk og brudte valgløfter.
                 </p>
@@ -340,6 +340,7 @@
                     </button>
                     
                     <button onclick="exportComparisonToPDF()" 
+                            id="export-pdf-btn"
                             class="flex items-center gap-x-2 px-4 py-2 text-sm font-medium rounded-2xl bg-blue-700 hover:bg-blue-800 text-white transition-colors">
                         <i class="fas fa-file-pdf mr-2"></i>
                         Eksporter til PDF
@@ -693,6 +694,11 @@
             updateURL();
 
             await Promise.all([loadAndRenderDetails(1, p1), loadAndRenderDetails(2, p2)]);
+            
+            // Enable PDF button after data is loaded
+            const exportBtn = document.getElementById('export-pdf-btn');
+            if (exportBtn) exportBtn.disabled = false;
+            
             area.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
@@ -1022,11 +1028,39 @@
             });
         }
 
-        // ==================== BEDRE PDF EKSPORT (jsPDF) - FIXED ====================
-        function exportComparisonToPDF() {
+        // ==================== BEDRE PDF EKSPORT (jsPDF) - ROBUST VERSION ====================
+        async function exportComparisonToPDF() {
             if (!selectedPoliticians[1] || !selectedPoliticians[2]) {
                 alert('Vælg to politikere først');
                 return;
+            }
+
+            const p1 = selectedPoliticians[1];
+            const p2 = selectedPoliticians[2];
+
+            // If data not loaded yet, load it now
+            if (!p1.loadedScandals || !p2.loadedScandals) {
+                const exportBtn = document.getElementById('export-pdf-btn');
+                if (exportBtn) {
+                    exportBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Indlæser data...';
+                    exportBtn.disabled = true;
+                }
+                
+                await Promise.all([
+                    loadDetailedData(p1.slug).then(data => {
+                        p1.loadedScandals = data.scandals || [];
+                        p1.loadedPromises = data.promises || [];
+                    }),
+                    loadDetailedData(p2.slug).then(data => {
+                        p2.loadedScandals = data.scandals || [];
+                        p2.loadedPromises = data.promises || [];
+                    })
+                ]);
+                
+                if (exportBtn) {
+                    exportBtn.innerHTML = '<i class="fas fa-file-pdf mr-2"></i> Eksporter til PDF';
+                    exportBtn.disabled = false;
+                }
             }
 
             const { jsPDF } = window.jspdf;
@@ -1038,9 +1072,6 @@
 
             const pageWidth = doc.internal.pageSize.getWidth();
             let y = 20;
-
-            const p1 = selectedPoliticians[1];
-            const p2 = selectedPoliticians[2];
 
             // Header
             doc.setFillColor(30, 64, 175);
@@ -1188,6 +1219,12 @@
             window.history.replaceState({}, '', window.location.pathname);
             hideRelatedModal();
             hideScandalModal();
+            
+            const exportBtn = document.getElementById('export-pdf-btn');
+            if (exportBtn) {
+                exportBtn.disabled = false;
+                exportBtn.innerHTML = '<i class="fas fa-file-pdf mr-2"></i> Eksporter til PDF';
+            }
         }
 
         function setupKeyboardSupport() {
@@ -1217,8 +1254,13 @@
             initializePoliticianLists();
             setupKeyboardSupport();
             await buildCrossReferenceIndex();
+            
+            // Disable PDF button until data is loaded
+            const exportBtn = document.getElementById('export-pdf-btn');
+            if (exportBtn) exportBtn.disabled = true;
+            
             loadFromURL();
-            console.log('%c[Sammenlign] PDF export fixed - data now stored and used in export.', 'color:#64748b');
+            console.log('%c[Sammenlign] PDF export robust version active.', 'color:#64748b');
         }
 
         window.onload = initializeComparisonPage;
