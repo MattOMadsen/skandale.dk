@@ -1,4 +1,4 @@
-# TODO-liste for Skandale.dk (Opdateret 1. juni 2026)
+# TODO-liste for Skandale.dk (Opdateret 2. juni 2026)
 
 ## Kendte bugs / Issues der skal testes
 
@@ -17,7 +17,7 @@
 - [x] Password-beskyttet Admin Dashboard
 - [x] Dedikeret tidslinje-side (`tidslinje.html`) med avancerede filtre og year-grouping
 - [x] Modular JS-arkitektur (mange små, vedligeholdelsesvenlige filer i `js/`)
-- [x] Grundlæggende dedikeret sammenlign-side (`sammenlign.html`) med side-by-side metrics + swap-funktion
+- [x] Grundlæggende dedikeret sammenlign-side (`sammenlign.html`) med side-by-side metrics + swap-funktion + **klikbar støtte/netværk + skandale-modal + PDF-eksport**
 - [x] Stats-dashboard (`stats.html`)
 - [x] Infinite scroll på forsiden (tilføjet 1. juni 2026)
 
@@ -27,19 +27,20 @@
   JS-filer findes (`modal-comments.js`, `modal-voting.js`), men mangler fuld moderation, admin-godkendelse og central database.
 
 - [ ] Dedikeret sammenlign-side (`sammenlign.html`)  
-  Grundlæggende funktionalitet er på plads, men mangler:
-  - Detaljeret visning af skandaler, donorer og brudte løfter
-  - Søgning i udvælgelsesfelterne
-  - URL-deling (`?p1=...&p2=...`)
-  - PDF-eksport af sammenligningen
-  - Fuld menu- og modal-integration
+  **Kernefunktionalitet er nu på plads** (data loader, modaler, klikbar støtte/netværk, PDF-eksport, URL-deling, detaljeret visning).
+  
+  **Små ting der stadig mangler / kan forbedres:**
+  - PDF-eksport kan gøres endnu rigere (flere detaljer, bedre layout, fulde beskrivelser + kilder)
+  - Mere polish på mobil (søgefelt, modal-størrelse)
+  - Eventuelt "Sammenlign direkte fra politikermodal"-knap
+  - Finpudsning af loading states og fejlhåndtering
 
 - [ ] **Dark mode** – Startet (plan + dark-mode.js forberedt; toggle og auto-detect implementeres næste)
 
 ## Ikke startet endnu (Prioriteret)
 
 1. **Central database** (f.eks. Supabase) til delt afstemning + kommentar-moderation
-2. Færdiggørelse af dedikeret sammenlign-side (avancerede features)
+2. Færdiggørelse af dedikeret sammenlign-side (sidste små finpudsninger)
 
 ## Oprydning & Teknisk gæld
 
