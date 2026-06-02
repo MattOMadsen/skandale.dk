@@ -5,150 +5,142 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skandale.dk – Politisk gennemsigtighed</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        };
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="manifest" href="manifest.json">
-    <!-- Dark mode script (loades tidligt for at sikre toggle virker) -->
     <script src="js/dark-mode.js"></script>
 </head>
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
 
-    <!-- Navbar bliver nu indlæst dynamisk via js/navbar.js -->
+    <!-- Navbar loaded dynamically via js/navbar.js for consistent menu across all pages -->
 
-    <!-- Hero -->
-    <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white py-16">
-        <div class="max-w-5xl mx-auto px-6 text-center">
-            <div class="inline-flex items-center gap-x-2 bg-white/10 px-4 py-1 rounded-full text-sm mb-4">
-                <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                <span>Opdateret maj 2026</span>
-            </div>
-
-            <h1 class="text-5xl md:text-6xl font-bold tracking-tighter mb-4">Gennemsigtighed i dansk politik</h1>
-            <p class="text-xl text-slate-300 max-w-2xl mx-auto mb-8">Én samlet platform til skandaler, støtte, netværk og brudte løfter.</p>
-
-            <!-- Hurtig statistik -->
-            <div id="stats-snapshot" class="max-w-4xl mx-auto mb-10">
-                <!-- Indhold genereres af js/stats-snapshot.js -->
-            </div>
-
-            <!-- Søgefelt -->
-            <div class="max-w-md mx-auto">
-                <div class="relative">
-                    <input id="searchInput" type="text" placeholder="Søg efter politiker..." 
-                           onkeyup="if (typeof filterPoliticians === 'function') filterPoliticians()"
-                           class="w-full bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 border-0 rounded-3xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#C8102E]">
-                    <i class="fa-solid fa-search absolute right-6 top-5 text-slate-400"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Politikere sektion -->
-    <div id="politicians-section" class="max-w-7xl mx-auto px-6 py-12">
-        <div class="flex items-end justify-between mb-6">
+    <div class="max-w-7xl mx-auto px-6 pt-8 pb-4">
+        <div class="flex items-center justify-between">
             <div>
-                <h2 class="text-3xl font-bold tracking-tight">Politikere</h2>
-                <p class="text-slate-600 dark:text-slate-400">Klik på en politiker for at se detaljer, skandaler og vurderinger</p>
+                <h1 class="text-4xl font-bold tracking-tight">Skandale.dk</h1>
+                <p class="text-slate-600 mt-1">Politisk gennemsigtighed – skandaler, støtte, netværk og brudte løfter</p>
             </div>
-        </div>
-
-        <div id="politiciansGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Politikere indsættes dynamisk via js/ui.js -->
-        </div>
-
-        <!-- Infinite Scroll Loader (ny) -->
-        <div id="infinite-scroll-loader" class="hidden justify-center items-center py-8">
-            <div class="flex items-center gap-x-3 text-slate-500">
-                <i class="fa-solid fa-spinner fa-spin text-[#C8102E]"></i>
-                <span class="text-sm">Indlæser flere politikere...</span>
+            <div class="hidden md:block text-sm text-slate-500">
+                <span id="politician-count">12</span> politikere
             </div>
-        </div>
-
-        <!-- Besked når alle er vist -->
-        <div id="all-politicians-shown" class="hidden text-center py-6 text-sm text-slate-500">
-            Alle politikere er vist.
         </div>
     </div>
 
+    <!-- Search -->
+    <div class="max-w-7xl mx-auto px-6 pb-6">
+        <div class="relative">
+            <i class="fa-solid fa-search absolute left-6 top-4 text-slate-400"></i>
+            <input id="searchInput" type="text" placeholder="Søg efter politiker..." 
+                   onkeyup="if (typeof filterPoliticians === 'function') filterPoliticians()"
+                   class="w-full bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 border-0 rounded-3xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#C8102E]">
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 pb-12">
+        <div id="politicians-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Populated by JS -->
+        </div>
+    </div>
+
+    <script src="js/navbar.js"></script>
     <script src="js/data.js"></script>
-    <script src="js/main.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/search.js"></script>
-    <script src="js/version.js"></script>
-    <script src="js/stats-snapshot.js"></script>
+    <script src="js/skeleton-loader.js"></script>
 
-    <!-- Modal scripts -->
-    <script src="js/modal-core.js"></script>
-    <script src="js/modal-scandal.js"></script>
-    <script src="js/modal-comments.js"></script>
-    <script src="js/modal-donor.js"></script>
-    <script src="js/modal-affiliations.js"></script>
-    <script src="js/modal-broken-promises.js"></script>
-    <script src="js/modal-compare.js"></script>
-    <script src="js/modal-stats.js"></script>
-    <script src="js/modal-networks.js"></script>
-    <script src="js/modal-network-overview.js"></script>
-    <script src="js/modal-party.js"></script>
-    <script src="js/modal-admin.js"></script>
-    <script src="js/modal-add-scandal.js"></script>
-
-    <!-- jsPDF bibliotek (tilføjet så PDF-eksport virker) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="js/modal-pdf-export.js"></script>
-
-    <script src="js/modal-voting.js"></script>
-    <script src="js/modal-share.js"></script>
-    <script src="js/modal-helpers.js"></script>
-
-    <!-- Sikkerhedsnet + Robust auto-open fra sammenlign.html -->
     <script>
-        function tryOpenPoliticianFromStorage(attempt = 1) {
-            const maxAttempts = 8;
-            const politicianIdRaw = localStorage.getItem('openPoliticianOnLoad');
+        // Infinite scroll state
+        let visibleCount = 8;
+        let allPoliticians = [];
+        let filteredPoliticians = [];
 
-            if (!politicianIdRaw) return;
-
-            const politicianId = parseInt(politicianIdRaw, 10);
-
-            const hasData = typeof window.politicians !== 'undefined' && Array.isArray(window.politicians) && window.politicians.length > 0;
-            const openFn = window.openPoliticianModal || window.showPoliticianModal;
-
-            if (hasData && typeof openFn === 'function') {
-                try {
-                    openFn(politicianId);
-                    localStorage.removeItem('openPoliticianOnLoad');
-                    console.log('%c[Skandale.dk] Auto-åbnede politiker: ' + politicianId, 'color:#10b981');
-                    return;
-                } catch (e) {
-                    console.error('Fejl ved kald af open/showPoliticianModal:', e);
-                }
+        async function initHomepage() {
+            if (typeof loadPoliticians === 'function') {
+                await loadPoliticians();
             }
 
-            if (attempt < maxAttempts) {
-                const delay = 250 * attempt;
-                setTimeout(() => tryOpenPoliticianFromStorage(attempt + 1), delay);
-            } else {
-                localStorage.removeItem('openPoliticianOnLoad');
-                console.warn('Kunne ikke auto-åbne politiker efter ' + maxAttempts + ' forsøg.');
-            }
-        }
+            allPoliticians = window.politicians || [];
+            filteredPoliticians = [...allPoliticians];
 
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(function() {
-                if (typeof window.renderPoliticians === 'function') {
-                    if (typeof window.politicians !== 'undefined' && window.politicians.length > 0) {
-                        window.renderPoliticians();
-                    } else if (typeof initializeEverything === 'function') {
-                        initializeEverything();
+            renderPoliticians();
+
+            // Update count
+            const countEl = document.getElementById('politician-count');
+            if (countEl) countEl.textContent = allPoliticians.length;
+
+            // Infinite scroll
+            window.addEventListener('scroll', () => {
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 300) {
+                    if (visibleCount < filteredPoliticians.length) {
+                        visibleCount += 4;
+                        renderPoliticians();
                     }
                 }
-                tryOpenPoliticianFromStorage();
-            }, 500);
-        });
+            });
+        }
+
+        function renderPoliticians() {
+            const grid = document.getElementById('politicians-grid');
+            if (!grid) return;
+
+            grid.innerHTML = '';
+
+            const toShow = filteredPoliticians.slice(0, visibleCount);
+
+            toShow.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'politician-card bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 cursor-pointer hover:border-[#C8102E]/40 transition-all';
+                card.onclick = () => {
+                    if (typeof window.showPoliticianModal === 'function') {
+                        window.showPoliticianModal(p.id);
+                    }
+                };
+
+                const avatarColor = p.avatarColor || p.partyColor || '#C8102E';
+                const initials = p.initials || p.name.split(' ').map(n => n[0]).join('');
+
+                card.innerHTML = `
+                    <div class="flex items-start gap-x-4">
+                        <div class="w-14 h-14 rounded-2xl flex-shrink-0 flex items-center justify-center text-white text-2xl font-bold shadow-sm" style="background-color: ${avatarColor}">
+                            ${initials}
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="font-semibold text-xl">${p.name}</div>
+                            <div class="text-xs text-slate-400 dark:text-slate-500">${p.party}</div>
+                            
+                            <div class="mt-3 flex items-center gap-x-2">
+                                <span class="text-xs px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">${p.scandals ? p.scandals.length : 0} skandaler</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            });
+        }
+
+        function filterPoliticians() {
+            const q = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+            
+            if (!q) {
+                filteredPoliticians = [...allPoliticians];
+            } else {
+                filteredPoliticians = allPoliticians.filter(p => 
+                    p.name.toLowerCase().includes(q) || 
+                    (p.party && p.party.toLowerCase().includes(q))
+                );
+            }
+
+            visibleCount = 8;
+            renderPoliticians();
+        }
+
+        document.addEventListener('DOMContentLoaded', initHomepage);
     </script>
-
-    <!-- Ny central navbar (loades efter dark-mode.js) -->
-    <script src="js/navbar.js"></script>
-
 </body>
 </html>
