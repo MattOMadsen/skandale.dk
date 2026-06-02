@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sammenlign to politikere | Skandale.dk – Politisk gennemsigtighed</title>
+    <title>Sammenlign two politikere | Skandale.dk – Politisk gennemsigtighed</title>
     <meta name="description" content="Sammenlign danske politikere side om side på skandaler, økonomisk støtte, internationale netværk og brudte valgløfter. Få et faktabaseret overblik.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -223,7 +223,7 @@
     <div class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 no-print">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="max-w-3xl">
-                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter heading-serif">Sammenlign to politikere</h1>
+                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter heading-serif">Sammenlign two politikere</h1>
                 <p class="mt-3 text-xl text-gray-600 dark:text-gray-400">
                     Få et faktabaseret, side-om-side overblik over skandaler, økonomisk støtte, internationale netværk og brudte valgløfter.
                 </p>
@@ -247,7 +247,7 @@
         <div class="mb-8 no-print">
             <div class="flex items-end justify-between mb-4">
                 <div>
-                    <h2 class="text-2xl font-semibold tracking-tight">Vælg to politikere</h2>
+                    <h2 class="text-2xl font-semibold tracking-tight">Vælg two politikere</h2>
                     <p class="text-gray-600 dark:text-gray-400 text-sm mt-1">Søg og klik for at vælge. Du kan bytte om når som helst.</p>
                 </div>
                 <button onclick="resetComparison()" 
@@ -319,7 +319,7 @@
                 <button onclick="swapPoliticians()" 
                         class="flex items-center gap-x-2 px-5 py-2.5 text-sm font-medium rounded-2xl bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all active:scale-[0.985]">
                     <i class="fas fa-exchange-alt mr-2"></i>
-                    Byt om på de to politikere
+                    Byt om på de two politikere
                 </button>
             </div>
         </div>
@@ -456,7 +456,7 @@
             <div class="mx-auto w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center mb-4">
                 <i class="fas fa-balance-scale text-3xl text-gray-400"></i>
             </div>
-            <h3 class="font-semibold text-lg">Vælg to politikere ovenfor</h3>
+            <h3 class="font-semibold text-lg">Vælg two politikere ovenfor</h3>
             <p class="text-gray-500 dark:text-gray-400 mt-2 max-w-md mx-auto">
                 Brug søgefeltene til at finde politikere, klik på dem for at vælge, og se en detaljeret sammenligning.
             </p>
@@ -811,6 +811,13 @@
             document.getElementById(`p${side}-networks`).innerHTML = `<div class="loading-placeholder text-sm text-gray-400 py-4">Indlæser netværk...</div>`;
 
             const data = await loadDetailedData(politician.slug);
+            
+            // Store data on the politician object for PDF export
+            politician.loadedScandals = data.scandals || [];
+            politician.loadedPromises = data.promises || [];
+            politician.loadedSupport = data.support || [];
+            politician.loadedNetworks = data.networks || [];
+            
             renderTabContentWithData(side, 'scandals', data.scandals);
             renderTabContentWithData(side, 'support', data.support);
             renderTabContentWithData(side, 'promises', data.promises);
@@ -1015,7 +1022,7 @@
             });
         }
 
-        // ==================== BEDRE PDF EKSPORT (jsPDF) ====================
+        // ==================== BEDRE PDF EKSPORT (jsPDF) - FIXED ====================
         function exportComparisonToPDF() {
             if (!selectedPoliticians[1] || !selectedPoliticians[2]) {
                 alert('Vælg to politikere først');
@@ -1036,7 +1043,7 @@
             const p2 = selectedPoliticians[2];
 
             // Header
-            doc.setFillColor(30, 64, 175); // blue-700
+            doc.setFillColor(30, 64, 175);
             doc.rect(0, 0, pageWidth, 22, 'F');
             doc.setTextColor(255, 255, 255);
             doc.setFontSize(18);
@@ -1046,20 +1053,19 @@
 
             y = 30;
 
-            // Metrics side by side
+            // Metrics
             doc.setTextColor(0, 0, 0);
             doc.setFontSize(12);
             doc.text('Nøgletal', 15, y);
             y += 8;
 
-            // Simple metrics table
             doc.setFontSize(10);
             doc.text(`${p1.name}: ${p1.scandalCount} skandaler | ${p1.avgSeverity} alvorlighed | ${p1.brokenPromises} brudte løfter`, 15, y);
             y += 6;
             doc.text(`${p2.name}: ${p2.scandalCount} skandaler | ${p2.avgSeverity} alvorlighed | ${p2.brokenPromises} brudte løfter`, 15, y);
             y += 12;
 
-            // Skandaler for begge
+            // Skandaler
             doc.setFontSize(13);
             doc.setTextColor(200, 16, 46);
             doc.text('Skandaler', 15, y);
@@ -1068,28 +1074,29 @@
             doc.setTextColor(0, 0, 0);
             doc.setFontSize(10);
 
-            // P1 scandals
             if (p1.loadedScandals && p1.loadedScandals.length > 0) {
                 doc.setFont(undefined, 'bold');
                 doc.text(p1.name + ':', 15, y);
                 y += 6;
                 doc.setFont(undefined, 'normal');
-                p1.loadedScandals.slice(0, 4).forEach(s => {
-                    if (y > 260) { doc.addPage(); y = 20; }
+                p1.loadedScandals.slice(0, 5).forEach(s => {
+                    if (y > 255) { doc.addPage(); y = 20; }
                     doc.text(`• ${s.title}`, 18, y);
                     y += 6;
                 });
+            } else {
+                doc.text('Ingen skandaler fundet for ' + p1.name, 15, y);
+                y += 6;
             }
 
-            // P2 scandals
             if (p2.loadedScandals && p2.loadedScandals.length > 0) {
                 if (y > 250) { doc.addPage(); y = 20; }
                 doc.setFont(undefined, 'bold');
                 doc.text(p2.name + ':', 15, y);
                 y += 6;
                 doc.setFont(undefined, 'normal');
-                p2.loadedScandals.slice(0, 4).forEach(s => {
-                    if (y > 260) { doc.addPage(); y = 20; }
+                p2.loadedScandals.slice(0, 5).forEach(s => {
+                    if (y > 255) { doc.addPage(); y = 20; }
                     doc.text(`• ${s.title}`, 18, y);
                     y += 6;
                 });
@@ -1112,12 +1119,19 @@
                 doc.text(p1.name + ':', 15, y);
                 y += 6;
                 doc.setFont(undefined, 'normal');
-                p1.loadedPromises.slice(0, 3).forEach(pr => {
-                    if (y > 260) { doc.addPage(); y = 20; }
-                    const desc = (pr.desc || '').substring(0, 120);
-                    doc.text(`• ${pr.title} — ${desc}...`, 18, y);
-                    y += 6;
+                p1.loadedPromises.slice(0, 4).forEach(pr => {
+                    if (y > 255) { doc.addPage(); y = 20; }
+                    doc.text(`• ${pr.title}`, 18, y);
+                    y += 5;
+                    if (pr.desc) {
+                        const descLines = doc.splitTextToSize(pr.desc.substring(0, 150), pageWidth - 40);
+                        doc.text(descLines, 20, y);
+                        y += descLines.length * 5 + 3;
+                    }
                 });
+            } else {
+                doc.text('Ingen brudte løfter fundet for ' + p1.name, 15, y);
+                y += 6;
             }
 
             if (p2.loadedPromises && p2.loadedPromises.length > 0) {
@@ -1126,11 +1140,15 @@
                 doc.text(p2.name + ':', 15, y);
                 y += 6;
                 doc.setFont(undefined, 'normal');
-                p2.loadedPromises.slice(0, 3).forEach(pr => {
-                    if (y > 260) { doc.addPage(); y = 20; }
-                    const desc = (pr.desc || '').substring(0, 120);
-                    doc.text(`• ${pr.title} — ${desc}...`, 18, y);
-                    y += 6;
+                p2.loadedPromises.slice(0, 4).forEach(pr => {
+                    if (y > 255) { doc.addPage(); y = 20; }
+                    doc.text(`• ${pr.title}`, 18, y);
+                    y += 5;
+                    if (pr.desc) {
+                        const descLines = doc.splitTextToSize(pr.desc.substring(0, 150), pageWidth - 40);
+                        doc.text(descLines, 20, y);
+                        y += descLines.length * 5 + 3;
+                    }
                 });
             }
 
@@ -1200,7 +1218,7 @@
             setupKeyboardSupport();
             await buildCrossReferenceIndex();
             loadFromURL();
-            console.log('%c[Sammenlign] PDF export opgraderet til jsPDF version.', 'color:#64748b');
+            console.log('%c[Sammenlign] PDF export fixed - data now stored and used in export.', 'color:#64748b');
         }
 
         window.onload = initializeComparisonPage;
