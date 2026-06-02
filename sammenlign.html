@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="manifest" href="manifest.json">
+    <script src="js/dark-mode.js"></script>
     <style>
         .comparison-card {
             transition: all 0.2s ease;
@@ -241,7 +242,7 @@
             const support = politician.economicSupport || [];
             const totalSupport = support.reduce((sum, s) => {
                 const amount = parseInt((s.amount || '0').replace(/[^0-9]/g, '')) || 0;
-                return sum + amount;
+                totalSupport += amount;
             }, 0);
 
             const broken = politician.brokenPromises ? politician.brokenPromises.length : 0;

@@ -30,10 +30,9 @@
         const current = html.classList.contains('dark') ? 'dark' : 'light';
         const newTheme = current === 'dark' ? 'light' : 'dark';
         setTheme(newTheme);
-        updateIcon(); // opdater ikon med det samme
+        updateIcon();
     }
 
-    // Opdater kun ikonet inde i knappen (bevarer alle navbar-klasser)
     function updateIcon() {
         const toggleBtn = document.getElementById('theme-toggle') || document.querySelector('[data-theme-toggle]');
         if (!toggleBtn) return;
@@ -56,7 +55,6 @@
         const toggleBtn = document.getElementById('theme-toggle') || document.querySelector('[data-theme-toggle]');
         if (!toggleBtn) return false;
 
-        // Tilføj click listener (hvis den ikke allerede er der)
         if (!toggleBtn.dataset.themeListenerAttached) {
             toggleBtn.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -67,7 +65,6 @@
 
         updateIcon();
 
-        // Lyt på html class-ændringer for at holde ikon synkroniseret
         const observer = new MutationObserver(updateIcon);
         observer.observe(html, { attributes: true, attributeFilter: ['class'] });
 
@@ -78,7 +75,6 @@
         const preferred = getPreferredTheme();
         setTheme(preferred);
 
-        // System preference lytter (kun hvis ingen manuel valg)
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
             if (!localStorage.getItem(storageKey)) {
                 setTheme(e.matches ? 'dark' : 'light');
@@ -86,10 +82,8 @@
             }
         });
 
-        // Forsøg at sætte toggle op med det samme
         const attached = setupToggleButton();
 
-        // Hvis knappen ikke var der endnu (injektion fra navbar.js), brug observer + timeouts
         if (!attached) {
             const observer = new MutationObserver(() => {
                 if (setupToggleButton()) {
@@ -101,17 +95,14 @@
                 subtree: true
             });
 
-            // Fallback timeouts
             setTimeout(setupToggleButton, 300);
             setTimeout(setupToggleButton, 800);
             setTimeout(setupToggleButton, 1500);
         }
 
-        // Global helper (til debug/test)
         window.toggleTheme = toggleTheme;
     }
 
-    // Start når DOM er klar
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initDarkMode);
     } else {

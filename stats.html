@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="manifest" href="manifest.json">
+    <script src="js/dark-mode.js"></script>
 </head>
 <body class="bg-slate-50 text-slate-900">
 
@@ -96,7 +97,6 @@
                     await loadPoliticians();
                 }
 
-                // Load detailed data (scandals, economicSupport, brokenPromises etc.)
                 if (typeof loadAllPoliticianDetails === 'function') {
                     await loadAllPoliticianDetails();
                 }
@@ -231,7 +231,7 @@
                     count: (p.brokenPromises || []).length
                 }))
                 .filter(x => x.count > 0)
-                .sort((a, b) => b.count - a.count);
+                .sort((a, b) => b.count - a.count));
 
             let html = '';
             ranking.slice(0, 8).forEach((item, i) => {
