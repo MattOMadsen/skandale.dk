@@ -64,7 +64,7 @@
         }
         
         .bar {
-            transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease;
+            transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), background-color: 0.3s ease;
         }
         
         .skeleton {
@@ -365,11 +365,25 @@
             const btn = document.getElementById('mobileMenuBtn');
             const menu = document.getElementById('mobileMenu');
             
+            if (!btn || !menu) return;
+
             btn.addEventListener('click', () => {
                 menu.classList.toggle('hidden');
                 const icon = btn.querySelector('i');
                 icon.classList.toggle('fa-bars');
                 icon.classList.toggle('fa-times');
+            });
+
+            // Luk mobilmenu når man klikker på et link (bedre UX + undgår duplikering oplevelse)
+            menu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                    const icon = btn.querySelector('i');
+                    if (icon) {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
             });
         }
 
@@ -537,13 +551,15 @@
                 const card = document.createElement('div');
                 card.className = 'stat-card bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-6';
                 card.innerHTML = `
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <div class="text-sm font-medium text-gray-500 dark:text-gray-400">${m.label}</div>
-                            <div class="metric-value text-gray-900 dark:text-white">${m.value}</div>
-                            ${m.suffix ? `<div class="text-xs text-gray-500">${m.suffix}</div>` : ''}
+                    <div class="flex items-start justify-between gap-3">
+                        <div class="flex-1 min-w-0">
+                            <div class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">${m.label}</div>
+                            <div class="flex items-baseline gap-1.5">
+                                <div class="metric-value text-gray-900 dark:text-white text-3xl md:text-[2.1rem] leading-none">${m.value}</div>
+                                ${m.suffix ? `<div class="text-sm md:text-base text-gray-500 dark:text-gray-400 font-medium">${m.suffix}</div>` : ''}
+                            </div>
                         </div>
-                        <div class="w-12 h-12 bg-${m.color}-100 dark:bg-${m.color}-950 rounded-2xl flex items-center justify-center">
+                        <div class="w-11 h-11 md:w-12 md:h-12 flex-shrink-0 bg-${m.color}-100 dark:bg-${m.color}-950 rounded-2xl flex items-center justify-center mt-1">
                             <i class="fa-solid ${m.icon} text-${m.color}-600 dark:text-${m.color}-400 text-2xl"></i>
                         </div>
                     </div>
@@ -609,7 +625,7 @@
                         <div class="bar h-3 rounded-full" style="width: ${percentage}%; background-color: ${d.color}"></div>
                     </div>
                     <div class="w-10 text-right font-mono text-sm font-semibold">${d.count}</div>
-                `;
+                </div>
                 container.appendChild(row);
             });
         }
@@ -672,7 +688,7 @@
                         <div class="bar h-4 rounded-full bg-${colors[i]}-500" style="width: ${percentage}%;"></div>
                     </div>
                     <div class="w-10 text-right font-mono text-sm font-semibold">${count}</div>
-                `;
+                </div>
                 container.appendChild(row);
             });
         }
@@ -704,7 +720,7 @@
                         <div class="bar h-3 rounded-full" style="width: ${percentage}%; background-color: ${d.color}"></div>
                     </div>
                     <div class="w-10 text-right font-mono text-sm font-semibold">${d.count}</div>
-                `;
+                </div>
                 container.appendChild(row);
             });
         }
@@ -772,7 +788,7 @@
                         <div class="bar h-3 rounded-full" style="width: ${percentage}%; background-color: ${d.color}"></div>
                     </div>
                     <div class="w-10 text-right font-mono text-sm font-semibold">${d.count}</div>
-                `;
+                </div>
                 container.appendChild(row);
             });
         }
@@ -953,7 +969,7 @@
             await loadAllStatsData();
 
             document.addEventListener('keydown', (e) => {
-                if (e.metaKey && e.key === "/") {
+                if (e.metaKey && e.key === "/");
                     e.preventDefault();
                     document.getElementById('darkModeToggle').click();
                 }
