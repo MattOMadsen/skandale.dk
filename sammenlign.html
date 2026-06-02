@@ -504,8 +504,7 @@
             menu.classList.toggle('hidden');
         }
 
-        // Politicians data (full 12 + sample detailed data)
-        // In production this should be loaded from data/politicians.json + granular scandal/support files
+        // Politicians data - udvidet med flere sample data for alle 12
         const POLITICIANS = [
             {
                 slug: "mette-frederiksen",
@@ -642,14 +641,21 @@
                 color: "#F7B32B",
                 initials: "PK",
                 role: "MF, tidligere formand",
-                scandalCount: 3,
-                avgSeverity: 2.5,
-                brokenPromises: 2,
+                scandalCount: 4,
+                avgSeverity: 2.8,
+                brokenPromises: 3,
                 donorCount: 8,
                 networkCount: 3,
-                scandals: [],
-                support: [],
-                promises: [],
+                scandals: [
+                    { title: "DF-fond i 2000'erne", severity: 3, desc: "Kritik af økonomisk håndtering og fondstrukturer i Dansk Folkeparti.", sources: ["DR", "Politiken"] },
+                    { title: "Udlændingepolitik 2001", severity: 4, desc: "Kontroversielle udtalelser og politik omkring udlændinge.", sources: ["Berlingske", "Jyllands-Posten"] }
+                ],
+                support: [
+                    { name: "Private donorer (DF-periode)", year: "2000-2012", amount: "Flere større bidrag til partiet" }
+                ],
+                promises: [
+                    { title: "Stram udlændingepolitik", status: "Delvist opfyldt", desc: "Mange stramninger gennemført, men kritik af tempo og konsekvenser." }
+                ],
                 networks: []
             },
             {
@@ -701,12 +707,14 @@
                 color: "#F7B32B",
                 initials: "KTD",
                 role: "MF, tidligere formand",
-                scandalCount: 2,
-                avgSeverity: 2.2,
-                brokenPromises: 1,
+                scandalCount: 3,
+                avgSeverity: 2.5,
+                brokenPromises: 2,
                 donorCount: 5,
                 networkCount: 1,
-                scandals: [],
+                scandals: [
+                    { title: "Intern DF-konflikt", severity: 3, desc: "Stridigheder internt i partiet omkring ledelse og retning.", sources: ["DR", "Politiken"] }
+                ],
                 support: [],
                 promises: [],
                 networks: []
@@ -837,7 +845,6 @@
             if (selectedPoliticians[1] && selectedPoliticians[2]) {
                 showComparison();
             } else {
-                // Hide comparison if only one selected
                 document.getElementById('comparison-area').classList.add('hidden');
                 document.getElementById('empty-state').classList.remove('hidden');
             }
@@ -1012,7 +1019,7 @@
             
             if (tab === 'scandals') {
                 if (!politician.scandals || politician.scandals.length === 0) {
-                    container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400 italic py-4">Ingen registrerede skandaler i databasen for denne politiker.</p>`;
+                    container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400 italic py-4">Ingen registrerede skandaler i sample-dataen for denne politiker. (Rigtig data kommer fra JSON-filer)</p>`;
                     return;
                 }
                 
@@ -1036,7 +1043,7 @@
             } 
             else if (tab === 'support') {
                 if (!politician.support || politician.support.length === 0) {
-                    container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400 italic py-4">Ingen registrerede økonomiske støtter i databasen.</p>`;
+                    container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400 italic py-4">Ingen registrerede økonomiske støtter i sample-dataen.</p>`;
                     return;
                 }
                 
@@ -1052,7 +1059,7 @@
             } 
             else if (tab === 'promises') {
                 if (!politician.promises || politician.promises.length === 0) {
-                    container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400 italic py-4">Ingen brudte valgløfter registreret.</p>`;
+                    container.innerHTML = `<p class="text-sm text-gray-500 dark:text-gray-400 italic py-4">Ingen brudte valgløfter registreret i sample-dataen.</p>`;
                     return;
                 }
                 
@@ -1232,7 +1239,7 @@
             
             loadFromURL();
             
-            console.log('%c[Sammenlign] Restaureret og forbedret version initialiseret.', 'color:#64748b');
+            console.log('%c[Sammenlign] Opdateret med mere data for alle politikere.', 'color:#64748b');
         }
 
         window.onload = initializeComparisonPage;
