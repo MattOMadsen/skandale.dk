@@ -4,7 +4,7 @@
 function loadNavbar() {
     const navbarHTML = `
         <!-- Desktop + Tablet Navbar -->
-        <nav class="bg-white border-b sticky top-0 z-50">
+        <nav class="bg-white dark:bg-slate-900 border-b sticky top-0 z-50">
             <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
                 <!-- Logo -->
                 <div class="flex items-center gap-x-3">
@@ -13,34 +13,34 @@ function loadNavbar() {
                     </div>
                     <div>
                         <div class="font-bold text-2xl tracking-tight">Skandale.dk</div>
-                        <div class="text-[10px] text-slate-500 -mt-1">Politisk gennemsigtighed</div>
+                        <div class="text-[10px] text-slate-500 dark:text-slate-400 -mt-1">Politisk gennemsigtighed</div>
                     </div>
                 </div>
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
-                    <a href="index.html" class="nav-link text-slate-600 hover:text-[#C8102E] transition-colors">Politikere</a>
-                    <a href="tidslinje.html" class="nav-link text-slate-600 hover:text-[#C8102E] transition-colors">Tidslinje</a>
-                    <a href="sammenlign.html" class="nav-link text-slate-600 hover:text-[#C8102E] transition-colors">Sammenlign</a>
-                    <a href="stats.html" class="nav-link text-slate-600 hover:text-[#C8102E] transition-colors">Statistik</a>
-                    <a href="netvaerk.html" class="nav-link text-slate-600 hover:text-[#C8102E] transition-colors">Netværk</a>
-                    <a href="om.html" class="nav-link text-slate-600 hover:text-[#C8102E] transition-colors">Om</a>
+                    <a href="index.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-[#C8102E] dark:hover:text-[#C8102E] transition-colors">Politikere</a>
+                    <a href="tidslinje.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-[#C8102E] dark:hover:text-[#C8102E] transition-colors">Tidslinje</a>
+                    <a href="sammenlign.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-[#C8102E] dark:hover:text-[#C8102E] transition-colors">Sammenlign</a>
+                    <a href="stats.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-[#C8102E] dark:hover:text-[#C8102E] transition-colors">Statistik</a>
+                    <a href="netvaerk.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-[#C8102E] dark:hover:text-[#C8102E] transition-colors">Netværk</a>
+                    <a href="om.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-[#C8102E] dark:hover:text-[#C8102E] transition-colors">Om</a>
                 </div>
 
                 <!-- Right side -->
                 <div class="flex items-center gap-x-3">
-                    <div id="navbar-version" class="hidden md:block text-xs px-3 py-1 bg-slate-100 rounded-full text-slate-500 font-mono"></div>
+                    <div id="navbar-version" class="hidden md:block text-xs px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-500 dark:text-slate-400 font-mono"></div>
                     
                     <!-- Dark mode toggle -->
                     <button id="theme-toggle" 
-                            class="w-10 h-10 flex items-center justify-center text-xl text-slate-600 hover:text-slate-900 transition-colors"
+                            class="w-10 h-10 flex items-center justify-center text-xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
                             aria-label="Skift mellem lyst og mørkt tema">
                         <i class="fas fa-moon"></i>
                     </button>
                     
                     <!-- Mobile menu button -->
                     <button id="mobile-menu-button" 
-                            class="md:hidden w-10 h-10 flex items-center justify-center text-2xl text-slate-600 hover:text-slate-900 transition-colors"
+                            class="md:hidden w-10 h-10 flex items-center justify-center text-2xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
                             aria-label="Åbn menu">
                         <i class="fa-solid fa-bars"></i>
                     </button>
@@ -50,27 +50,27 @@ function loadNavbar() {
 
         <!-- Mobile Menu Overlay -->
         <div id="mobile-menu" class="hidden fixed inset-0 bg-black/60 z-[200] md:hidden">
-            <div class="bg-white w-4/5 max-w-xs h-full shadow-xl flex flex-col" onclick="event.target.closest('#mobile-menu-content') || closeMobileMenu()">
+            <div class="bg-white dark:bg-slate-800 w-4/5 max-w-xs h-full shadow-xl flex flex-col" onclick="event.target.closest('#mobile-menu-content') || closeMobileMenu()">
                 <div id="mobile-menu-content" class="flex flex-col h-full">
                     <!-- Header -->
-                    <div class="px-6 py-5 border-b flex items-center justify-between">
+                    <div class="px-6 py-5 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
                         <div class="flex items-center gap-x-3">
                             <div class="w-9 h-9 bg-[#C8102E] rounded-2xl flex items-center justify-center">
                                 <i class="fa-solid fa-balance-scale text-white text-xl"></i>
                             </div>
                             <div class="font-bold text-xl">Skandale.dk</div>
                         </div>
-                        <button onclick="closeMobileMenu()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+                        <button onclick="closeMobileMenu()" class="text-3xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">×</button>
                     </div>
 
                     <!-- Links -->
                     <div class="flex-1 px-2 py-4 text-lg">
-                        <a href="index.html" class="block px-4 py-3 rounded-xl hover:bg-slate-100">Politikere</a>
-                        <a href="tidslinje.html" class="block px-4 py-3 rounded-xl hover:bg-slate-100">Tidslinje</a>
-                        <a href="sammenlign.html" class="block px-4 py-3 rounded-xl hover:bg-slate-100">Sammenlign</a>
-                        <a href="stats.html" class="block px-4 py-3 rounded-xl hover:bg-slate-100">Statistik</a>
-                        <a href="netvaerk.html" class="block px-4 py-3 rounded-xl hover:bg-slate-100">Netværk</a>
-                        <a href="om.html" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-xl hover:bg-slate-100">Om projektet</a>
+                        <a href="index.html" class="block px-4 py-3 rounded-xl text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700">Politikere</a>
+                        <a href="tidslinje.html" class="block px-4 py-3 rounded-xl text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700">Tidslinje</a>
+                        <a href="sammenlign.html" class="block px-4 py-3 rounded-xl text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700">Sammenlign</a>
+                        <a href="stats.html" class="block px-4 py-3 rounded-xl text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700">Statistik</a>
+                        <a href="netvaerk.html" class="block px-4 py-3 rounded-xl text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700">Netværk</a>
+                        <a href="om.html" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-xl text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700">Om projektet</a>
                     </div>
                 </div>
             </div>
