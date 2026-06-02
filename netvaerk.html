@@ -26,18 +26,40 @@
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-6 pb-6">
+    <div class="max-w-7xl mx-auto px-6 pb-4">
         <div class="flex flex-col sm:flex-row gap-3">
             <div class="relative flex-1 max-w-md">
                 <i class="fa-solid fa-search absolute left-4 top-3 text-slate-400 dark:text-slate-500"></i>
                 <input id="searchInput" type="text" placeholder="Søg efter netværk..." 
                        class="w-full pl-10 py-3 border border-slate-200 dark:border-slate-700 rounded-2xl text-sm bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#C8102E] transition-colors" 
-                       oninput="filterNetworks()">
+                       oninput="applyFilters()">
             </div>
             <div class="flex gap-2">
                 <button onclick="resetView()" 
                         class="px-4 py-2.5 text-sm border border-slate-200 dark:border-slate-700 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Nulstil</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Fase 2: Filtre og sortering + stats -->
+    <div class="max-w-7xl mx-auto px-6 pb-4 flex flex-col sm:flex-row items-start sm:items-center gap-3 text-sm">
+        <div id="statsBar" class="text-slate-600 dark:text-slate-400 font-medium"></div>
+        <div class="flex-1"></div>
+        <div class="flex flex-wrap gap-2">
+            <select id="minCountFilter" 
+                    class="px-3 py-1.5 text-sm border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-1 focus:ring-[#C8102E]" 
+                    onchange="applyFilters()">
+                <option value="0">Alle netværk</option>
+                <option value="3">Mindst 3 politikere</option>
+                <option value="5">Mindst 5 politikere</option>
+            </select>
+            <select id="sortMode" 
+                    class="px-3 py-1.5 text-sm border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-1 focus:ring-[#C8102E]" 
+                    onchange="applyFilters()">
+                <option value="count-desc">Flest politikere først</option>
+                <option value="name-asc">Navn A-Å</option>
+                <option value="name-desc">Navn Å-A</option>
+            </select>
         </div>
     </div>
 
@@ -59,6 +81,49 @@
 
     <script>
         let allNetworks = [];
+
+        function updateStats(shownCount) {
+            const bar = document.getElementById('statsBar');
+            if (!bar) return;
+            const totalNetworks = allNetworks.length;
+            const totalPoliticians = new Set();
+            allNetworks.forEach(net => net.politicians.forEach(p => totalPoliticians.add(p.id)));
+            bar.innerHTML = `
+                <span class="font-semibold">${totalNetworks}</span> unikke netværk • 
+                <span class="font-semibold">${totalPoliticians.size}</span> politikere dækket
+                ${shownCount !== undefined && shownCount !== totalNetworks ? ` <span class="text-[#C8102E]">(${shownCount} vist)</span>` : ''}
+            `;
+        }
+
+        function applyFilters() {
+            let filtered = [...allNetworks];
+
+            // Søgning
+            const term = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
+            if (term) {
+                filtered = filtered.filter(n => n.name.toLowerCase().includes(term));
+            }
+
+            // Minimum antal politikere
+            const min = parseInt(document.getElementById('minCountFilter')?.value || '0');
+            if (min > 0) {
+                filtered = filtered.filter(n => n.politicians.length >= min);
+            }
+
+            // Sortering
+            const sortMode = document.getElementById('sortMode')?.value || 'count-desc';
+            if (sortMode === 'name-asc') {
+                filtered.sort((a, b) => a.name.localeCompare(b.name, 'da'));
+            } else if (sortMode === 'name-desc') {
+                filtered.sort((a, b) => b.name.localeCompare(a.name, 'da'));
+            } else {
+                // count-desc (standard)
+                filtered.sort((a, b) => b.politicians.length - a.politicians.length);
+            }
+
+            renderCards(filtered);
+            updateStats(filtered.length);
+        }
 
         async function loadNetworkData() {
             try {
@@ -88,12 +153,18 @@
                     window.networkIndex[net.name] = net.politicians;
                 });
 
-                renderCards();
+                // Initial visning
+                const grid = document.getElementById('networksGrid');
                 document.getElementById('loadingState').classList.add('hidden');
-                document.getElementById('networksGrid').classList.remove('hidden');
+                grid.classList.remove('hidden');
+
+                applyFilters(); // bruger standard filtre + sorter
+                updateStats(allNetworks.length);
 
             } catch(e) {
                 console.error(e);
+                const loading = document.getElementById('loadingState');
+                if (loading) loading.innerHTML = 'Fejl ved indlæsning af data. Prøv at genindlæse siden.';
             }
         }
 
@@ -102,9 +173,20 @@
             grid.innerHTML = '';
             const list = filtered || allNetworks;
 
+            if (list.length === 0) {
+                const empty = document.createElement('div');
+                empty.className = 'col-span-full text-center py-12 text-slate-500 dark:text-slate-400';
+                empty.innerHTML = `
+                    <i class="fa-solid fa-search text-4xl mb-4 opacity-50"></i>
+                    <p>Ingen netværk matcher dine filtre.</p>
+                `;
+                grid.appendChild(empty);
+                return;
+            }
+
             list.forEach(net => {
                 const card = document.createElement('div');
-                card.className = 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 cursor-pointer active:bg-red-50 dark:active:bg-slate-700 transition-colors hover:shadow-md';
+                card.className = 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 cursor-pointer active:bg-red-50 dark:active:bg-slate-700 transition-all hover:shadow-md';
 
                 card.innerHTML = `
                     <div class="flex justify-between items-start">
@@ -116,9 +198,10 @@
                     </div>
                 `;
 
-                // Genbrug den eksisterende modal-funktion
                 card.addEventListener('click', () => {
-                    if (typeof window.showNetworkDetail === 'function') {
+                    if (typeof window.showNetworkConnections === 'function') {
+                        window.showNetworkConnections(net.name);
+                    } else if (typeof window.showNetworkDetail === 'function') {
                         window.showNetworkDetail(net.name);
                     } else {
                         alert('Kunne ikke åbne detaljevisning');
@@ -129,15 +212,11 @@
             });
         }
 
-        function filterNetworks() {
-            const term = document.getElementById('searchInput').value.toLowerCase().trim();
-            const filtered = allNetworks.filter(n => n.name.toLowerCase().includes(term));
-            renderCards(filtered);
-        }
-
         function resetView() {
             document.getElementById('searchInput').value = '';
-            renderCards();
+            document.getElementById('minCountFilter').value = '0';
+            document.getElementById('sortMode').value = 'count-desc';
+            applyFilters();
         }
 
         function showClassicOverview() {
