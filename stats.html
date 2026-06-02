@@ -192,7 +192,7 @@
             </div>
         </div>
 
-        <!-- Filter bar (Fase 4) -->
+        <!-- Filter bar -->
         <div class="mb-6 flex flex-wrap items-center gap-3">
             <div class="text-sm font-medium text-gray-500 dark:text-gray-400 mr-2">Filtrer efter parti:</div>
             <div id="partyFilterBar" class="flex flex-wrap gap-2"></div>
@@ -226,14 +226,14 @@
             
         </div>
 
-        <!-- Alvorlighedsfordeling med bar charts (Fase 4) -->
+        <!-- Alvorlighedsfordeling med bar charts -->
         <div class="mb-8 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-7">
             <h3 class="font-semibold text-lg mb-5">Alvorlighedsfordeling (skandaler)</h3>
             <div id="severityDistribution" class="space-y-4"></div>
-            <p class="text-[10px] text-center text-gray-400 mt-4">Baseret på ourSeverity i scandals JSON (1 = mindst alvorlig, 5 = mest alvorlig)</p>
+            <p class="text-[10px] text-center text-gray-400 mt-4">Baseret på ourSeverity i scandals JSON</p>
         </div>
 
-        <!-- FASE 3 + 4: Brudte løfter statistik -->
+        <!-- Brudte løfter statistik -->
         <div class="mb-8">
             <div class="flex items-center justify-between mb-6">
                 <div>
@@ -246,8 +246,6 @@
             </div>
 
             <div class="grid lg:grid-cols-5 gap-6">
-                
-                <!-- Brudte løfter pr. parti med bar chart -->
                 <div class="lg:col-span-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-7">
                     <h3 class="font-semibold text-lg mb-5 flex items-center gap-x-2">
                         <i class="fa-solid fa-chart-pie text-purple-600"></i>
@@ -256,8 +254,6 @@
                     <div id="brokenPromisesPartyDistribution" class="space-y-3"></div>
                     <p class="text-xs text-gray-500 dark:text-gray-400 mt-6">Antal brudte løfter pr. parti</p>
                 </div>
-                
-                <!-- Top 5 brudte løfter -->
                 <div class="lg:col-span-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-7">
                     <h3 class="font-semibold text-lg mb-5 flex items-center gap-x-2">
                         <i class="fa-solid fa-list-ol text-purple-600"></i>
@@ -265,10 +261,8 @@
                     </h3>
                     <div id="topBrokenPromisesPoliticians" class="space-y-3"></div>
                 </div>
-
             </div>
 
-            <!-- Samlet total brudte løfter -->
             <div class="mt-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-7">
                 <div class="flex items-center justify-between">
                     <div>
@@ -282,11 +276,60 @@
             </div>
         </div>
 
+        <!-- NY: Økonomisk støtte oversigt (Fase 4+ udvidelse) -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h2 class="section-title flex items-center gap-x-3">
+                        <i class="fa-solid fa-hand-holding-usd text-emerald-600"></i>
+                        <span>Økonomisk støtte oversigt</span>
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-1">Oversigt over donationer og støtte (live fra data/economic-support/)</p>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-5 gap-6">
+                
+                <!-- Donationer pr. parti -->
+                <div class="lg:col-span-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-7">
+                    <h3 class="font-semibold text-lg mb-5 flex items-center gap-x-2">
+                        <i class="fa-solid fa-chart-pie text-emerald-600"></i>
+                        <span>Donationer pr. parti</span>
+                    </h3>
+                    <div id="donationsPartyDistribution" class="space-y-3"></div>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-6">Antal donationer pr. parti</p>
+                </div>
+                
+                <!-- Top 5 med flest donationer -->
+                <div class="lg:col-span-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-7">
+                    <h3 class="font-semibold text-lg mb-5 flex items-center gap-x-2">
+                        <i class="fa-solid fa-trophy text-emerald-600"></i>
+                        <span>Top 5 med flest donationer</span>
+                    </h3>
+                    <div id="topDonationsPoliticians" class="space-y-3"></div>
+                </div>
+
+            </div>
+
+            <!-- Samlet total donationer -->
+            <div class="mt-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-7">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Samlet antal donationer (alle politikere)</div>
+                        <div class="text-5xl font-bold text-emerald-600 mt-1" id="totalDonations">0</div>
+                    </div>
+                    <div class="text-right">
+                        <i class="fa-solid fa-hand-holding-usd text-6xl text-emerald-200 dark:text-emerald-900"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <footer class="border-t border-gray-200 dark:border-gray-700 mt-12 py-8">
         <div class="max-w-7xl mx-auto px-4 text-center text-sm text-gray-500 dark:text-gray-400">
-            Data er aggregeret live fra JSON-filerne i <code class="bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">/data/</code> (scandals + broken-promises). 
+            Data er aggregeret live fra JSON-filerne i <code class="bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">/data/</code> (scandals, broken-promises, economic-support). 
             Tallene opdateres automatisk når nye data tilføjes.
             <a href="https://github.com/MattOMadsen/skandale.dk" class="underline hover:text-red-600">Se kildekode på GitHub</a>
         </div>
@@ -371,17 +414,21 @@
 
                 const scandalPromises = slugs.map(slug => fetchJSON(`data/scandals/${slug}.json`));
                 const promisePromises = slugs.map(slug => fetchJSON(`data/broken-promises/${slug}.json`));
+                const donationPromises = slugs.map(slug => fetchJSON(`data/economic-support/${slug}.json`));
 
-                const [scandalResults, promiseResults] = await Promise.all([
+                const [scandalResults, promiseResults, donationResults] = await Promise.all([
                     Promise.all(scandalPromises),
-                    Promise.all(promisePromises)
+                    Promise.all(promisePromises),
+                    Promise.all(donationPromises)
                 ]);
 
                 politiciansData = slugs.map((slug, index) => {
                     const meta = POLITICIAN_META[slug] || { name: slug, party: 'Ukendt', partyShort: '?', color: '#6B7280' };
                     const scandalData = scandalResults[index];
                     const promiseData = promiseResults[index];
+                    const donationData = donationResults[index];
 
+                    // Skandaler
                     let scandalCount = 0;
                     let totalSeverity = 0;
                     let severityCounts = {1:0, 2:0, 3:0, 4:0, 5:0};
@@ -395,9 +442,16 @@
                         });
                     }
 
+                    // Brudte løfter
                     let brokenPromiseCount = 0;
                     if (promiseData && promiseData.brokenPromises) {
                         brokenPromiseCount = promiseData.brokenPromises.length;
+                    }
+
+                    // Økonomisk støtte (nye)
+                    let donationCount = 0;
+                    if (donationData && donationData.donations) {
+                        donationCount = donationData.donations.length;
                     }
 
                     return {
@@ -409,7 +463,8 @@
                         scandalCount,
                         avgSeverity: scandalCount > 0 ? (totalSeverity / scandalCount).toFixed(1) : '0.0',
                         severityCounts,
-                        brokenPromiseCount
+                        brokenPromiseCount,
+                        donationCount
                     };
                 });
 
@@ -417,7 +472,7 @@
 
             } catch (error) {
                 console.error('Fejl ved indlæsning:', error);
-                metricsGrid.innerHTML = '<div class="col-span-full text-red-500 p-4">Fejl ved indlæsning af data. Prøv at opdatere.</div>';
+                metricsGrid.innerHTML = '<div class="col-span-full text-red-500 p-4">Fejl ved indlæsning af data.</div>';
             } finally {
                 metricsGrid.classList.remove('loading');
             }
@@ -446,6 +501,9 @@
             renderBrokenPromisesPartyDistribution();
             renderTopBrokenPromises();
             renderTotalBrokenPromises();
+            renderDonationsPartyDistribution();
+            renderTopDonations();
+            renderTotalDonations();
         }
 
         function renderKeyMetrics() {
@@ -459,16 +517,17 @@
 
             const totalScandals = filteredData.reduce((sum, p) => sum + p.scandalCount, 0);
             const totalBroken = filteredData.reduce((sum, p) => sum + p.brokenPromiseCount, 0);
+            const totalDonations = filteredData.reduce((sum, p) => sum + p.donationCount, 0);
             const avgSeverityAll = filteredData.length > 0 
                 ? (filteredData.reduce((sum, p) => sum + parseFloat(p.avgSeverity || 0), 0) / filteredData.length).toFixed(1) 
                 : '0.0';
 
             const metrics = [
-                { label: currentPartyFilter ? `${currentPartyFilter} - Politikere` : 'Politikere', value: filteredData.length, icon: 'fa-users', color: 'blue' },
+                { label: currentPartyFilter ? `${currentPartyFilter.split(' ')[0]} - Politikere` : 'Politikere', value: filteredData.length, icon: 'fa-users', color: 'blue' },
                 { label: 'Totale skandaler', value: totalScandals, icon: 'fa-exclamation-triangle', color: 'red' },
                 { label: 'Gns. alvorlighed', value: avgSeverityAll, icon: 'fa-balance-scale', color: 'amber', suffix: ' / 5' },
-                { label: 'Brudte løfter (total)', value: totalBroken, icon: 'fa-handshake-slash', color: 'purple' },
-                { label: 'Gns. pr. politiker', value: (totalScandals / Math.max(filteredData.length, 1)).toFixed(1), icon: 'fa-chart-bar', color: 'emerald' }
+                { label: 'Brudte løfter', value: totalBroken, icon: 'fa-handshake-slash', color: 'purple' },
+                { label: 'Donationer (total)', value: totalDonations, icon: 'fa-hand-holding-usd', color: 'emerald' }
             ];
 
             metrics.forEach(m => {
@@ -525,9 +584,7 @@
             container.innerHTML = '';
 
             let dataToShow = politiciansData;
-            if (currentPartyFilter) {
-                dataToShow = politiciansData.filter(p => p.party === currentPartyFilter);
-            }
+            if (currentPartyFilter) dataToShow = politiciansData.filter(p => p.party === currentPartyFilter);
 
             const partyMap = {};
             dataToShow.forEach(p => {
@@ -559,9 +616,7 @@
             container.innerHTML = '';
 
             let filtered = politiciansData;
-            if (currentPartyFilter) {
-                filtered = politiciansData.filter(p => p.party === currentPartyFilter);
-            }
+            if (currentPartyFilter) filtered = politiciansData.filter(p => p.party === currentPartyFilter);
 
             const sorted = [...filtered].sort((a, b) => b.scandalCount - a.scandalCount).slice(0, 5);
 
@@ -590,9 +645,7 @@
             container.innerHTML = '';
 
             let dataToShow = politiciansData;
-            if (currentPartyFilter) {
-                dataToShow = politiciansData.filter(p => p.party === currentPartyFilter);
-            }
+            if (currentPartyFilter) dataToShow = politiciansData.filter(p => p.party === currentPartyFilter);
 
             const totalCounts = {1:0, 2:0, 3:0, 4:0, 5:0};
             dataToShow.forEach(p => {
@@ -626,9 +679,7 @@
             container.innerHTML = '';
 
             let dataToShow = politiciansData;
-            if (currentPartyFilter) {
-                dataToShow = politiciansData.filter(p => p.party === currentPartyFilter);
-            }
+            if (currentPartyFilter) dataToShow = politiciansData.filter(p => p.party === currentPartyFilter);
 
             const partyMap = {};
             dataToShow.forEach(p => {
@@ -660,9 +711,7 @@
             container.innerHTML = '';
 
             let filtered = politiciansData;
-            if (currentPartyFilter) {
-                filtered = politiciansData.filter(p => p.party === currentPartyFilter);
-            }
+            if (currentPartyFilter) filtered = politiciansData.filter(p => p.party === currentPartyFilter);
 
             const sorted = [...filtered].sort((a, b) => b.brokenPromiseCount - a.brokenPromiseCount).slice(0, 5);
 
@@ -688,11 +737,78 @@
 
         function renderTotalBrokenPromises() {
             let filtered = politiciansData;
-            if (currentPartyFilter) {
-                filtered = politiciansData.filter(p => p.party === currentPartyFilter);
-            }
+            if (currentPartyFilter) filtered = politiciansData.filter(p => p.party === currentPartyFilter);
             const total = filtered.reduce((sum, p) => sum + p.brokenPromiseCount, 0);
             document.getElementById('totalBrokenPromises').textContent = total;
+        }
+
+        // === NY: Økonomisk støtte ===
+        function renderDonationsPartyDistribution() {
+            const container = document.getElementById('donationsPartyDistribution');
+            container.innerHTML = '';
+
+            let dataToShow = politiciansData;
+            if (currentPartyFilter) dataToShow = politiciansData.filter(p => p.party === currentPartyFilter);
+
+            const partyMap = {};
+            dataToShow.forEach(p => {
+                if (!partyMap[p.party]) partyMap[p.party] = { count: 0, color: p.color, short: p.partyShort };
+                partyMap[p.party].count += p.donationCount;
+            });
+
+            const maxCount = Math.max(...Object.values(partyMap).map(v => v.count), 1);
+
+            Object.keys(partyMap).sort((a,b) => partyMap[b].count - partyMap[a].count).forEach(party => {
+                const d = partyMap[party];
+                const percentage = Math.round((d.count / maxCount) * 100);
+
+                const row = document.createElement('div');
+                row.className = 'flex items-center gap-x-3';
+                row.innerHTML = `
+                    <div class="w-14 text-sm font-semibold" style="color: ${d.color}">${d.short}</div>
+                    <div class="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                        <div class="bar h-3 rounded-full" style="width: ${percentage}%; background-color: ${d.color}"></div>
+                    </div>
+                    <div class="w-10 text-right font-mono text-sm font-semibold">${d.count}</div>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        function renderTopDonations() {
+            const container = document.getElementById('topDonationsPoliticians');
+            container.innerHTML = '';
+
+            let filtered = politiciansData;
+            if (currentPartyFilter) filtered = politiciansData.filter(p => p.party === currentPartyFilter);
+
+            const sorted = [...filtered].sort((a, b) => b.donationCount - a.donationCount).slice(0, 5);
+
+            sorted.forEach(p => {
+                const div = document.createElement('div');
+                div.className = 'flex items-center justify-between p-3 rounded-2xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors';
+                div.innerHTML = `
+                    <div class="flex items-center gap-x-3">
+                        <div class="w-8 h-8 rounded-2xl flex items-center justify-center text-xs font-bold text-white" style="background-color: ${p.color}">${p.partyShort}</div>
+                        <div>
+                            <div class="font-medium">${p.name}</div>
+                            <div class="text-xs text-gray-500">${p.party}</div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-mono text-lg font-semibold">${p.donationCount}</div>
+                        <div class="text-[10px] text-gray-400 -mt-1">donationer</div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function renderTotalDonations() {
+            let filtered = politiciansData;
+            if (currentPartyFilter) filtered = politiciansData.filter(p => p.party === currentPartyFilter);
+            const total = filtered.reduce((sum, p) => sum + p.donationCount, 0);
+            document.getElementById('totalDonations').textContent = total;
         }
 
         async function refreshData() {
@@ -712,7 +828,7 @@
 
             const toast = document.createElement('div');
             toast.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-sm px-5 py-2.5 rounded-3xl shadow-xl flex items-center gap-x-2';
-            toast.innerHTML = `<i class="fa-solid fa-check"></i> <span>Live data opdateret</span>`;
+            toast.innerHTML = `<i class="fa-solid fa-check"></i> <span>Live data opdateret (inkl. økonomisk støtte)</span>`;
             document.body.appendChild(toast);
             setTimeout(() => toast.remove(), 2200);
         }
@@ -731,7 +847,7 @@
                 }
             });
 
-            console.log('%c[Skandale.dk] Fase 4 stats.html initialiseret (filtre + bar charts + polish)', 'color:#16a34a');
+            console.log('%c[Skandale.dk] Økonomisk støtte oversigt tilføjet', 'color:#16a34a');
         }
 
         window.onload = initStatsPage;
