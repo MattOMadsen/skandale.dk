@@ -131,8 +131,16 @@ function renderAll() {
 
 // Expose to window so other modules can call it
 window.renderAll = renderAll;
+
 window.showPoliticianModal = function(slug) {
-    // Will be connected to modal-stats.js later if needed
-    console.log('Vis modal for:', slug);
-    alert('Politiker-modal for ' + slug + ' (skal kobles til modal-stats.js)');
+    // Prøv først den rigtige globale modal hvis den er tilgængelig (fra modal-core.js)
+    if (typeof window.showPoliticianModal === 'function' && 
+        window.showPoliticianModal.toString().indexOf('alert') === -1 && 
+        window.showPoliticianModal.toString().indexOf('Politiker-modal for') === -1) {
+        window.showPoliticianModal(slug);
+        return;
+    }
+    
+    // Ellers: Åbn hoved-siden med politikeren – modal åbnes automatisk via deep-link
+    window.location.href = `index.html?politiker=${slug}`;
 };
