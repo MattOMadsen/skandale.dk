@@ -129,20 +129,26 @@ function renderAll() {
 
 window.renderAll = renderAll;
 
-// Sikker version: Overskriv kun hvis der ikke allerede findes en rigtig modal-funktion
-window.showPoliticianModal = function(slug) {
-    // Tjek om der allerede findes en rigtig implementering (fra modal-core.js)
-    const currentImpl = window.showPoliticianModal && window.showPoliticianModal.toString();
-    
-    if (currentImpl && 
-        !currentImpl.includes('fallback') && 
-        !currentImpl.includes('alert') && 
-        !currentImpl.includes('Politiker-modal for')) {
-        // Brug den rigtige globale funktion (åbner modal på samme side)
-        window.showPoliticianModal(slug);
-    } else {
-        // Kun fallback hvis modal-systemet ikke er indlæst
-        console.warn('Modal-system ikke indlæst på stats-siden – åbner hovedside som fallback');
-        window.location.href = `index.html?politiker=${slug}`;
-    }
-};
+// =====================================================
+// ROBUST showPoliticianModal - åbner på samme side
+// =====================================================
+(function() {
+    // Gem den rigtige funktion fra modal-core.js (hvis den findes)
+    const realShowPoliticianModal = window.showPoliticianModal;
+
+    window.showPoliticianModal = function(slug) {
+        console.log('[stats] showPoliticianModal kaldt med slug:', slug);
+
+        // Tjek om vi har en rigtig modal-funktion fra modal-core.js
+        if (typeof realShowPoliticianModal === 'function' && 
+            realShowPoliticianModal.toString().indexOf('Politiker-modal for') === -1 &&
+            realShowPoliticianModal.toString().indexOf('fallback') === -1) {
+            
+            console.log('[stats] Bruger rigtig modal fra modal-core.js');
+            realShowPoliticianModal(slug);
+        } else {
+            console.warn('[stats] Ingen rigtig modal fundet – redirecter til index.html');
+            window.location.href = `index.html?politiker=${slug}`;
+        }
+    };
+})();
