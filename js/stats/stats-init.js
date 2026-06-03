@@ -64,10 +64,11 @@ function initStatsPage() {
     initMobileMenu();
 
     // Load data and render
-    if (typeof loadAllStatsData === 'function') {
+    if (typeof loadAllStatsData === 'function' && typeof loadPoliticians === 'function') {
         loadAllStatsData();
+        loadPoliticians();                    // ← VIGTIG: Loader det globale politicians-array til modalen
     } else {
-        console.error('stats-data.js not loaded correctly');
+        console.error('stats-data.js or data.js not loaded correctly');
     }
 
     // Set initial last updated if not set by data loader
