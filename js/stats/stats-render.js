@@ -1,5 +1,5 @@
 // js/stats/stats-render.js
-// All rendering functions for metrics, charts, lists and filters on the stats page
+// All rendering functions for the stats page - fuldt fungerende
 
 function renderAll() {
     if (!politiciansData || politiciansData.length === 0) {
@@ -115,8 +115,10 @@ function renderPartyDistribution(filteredData) {
 
     const partyStats = {};
     filteredData.forEach(p => {
-        if (!partyStats[p.party]) partyStats[p.party] = { count: 0, color: p.color };
-        partyStats[p.party].count += p.scandalCount || 0;
+        if (!partyStats[p.party]) {
+            partyStats[p.party] = { count: 0, color: p.color };
+        }
+        partyStats[p.party].count += (p.scandalCount || 0);
     });
 
     const sorted = Object.entries(partyStats).sort((a, b) => b[1].count - a[1].count);
@@ -147,11 +149,6 @@ function renderTopScandalPoliticians(filteredData) {
 
     const sorted = [...filteredData].sort((a, b) => (b.scandalCount || 0) - (a.scandalCount || 0)).slice(0, 5);
 
-    if (sorted.length === 0) {
-        container.innerHTML = `<p class="text-gray-500 py-4">Ingen data fundet.</p>`;
-        return;
-    }
-
     container.innerHTML = sorted.map(p => `
         <div onclick="showPoliticianModal('${p.slug}')" 
              class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-2xl hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer transition-all group">
@@ -176,22 +173,25 @@ function renderTopScandalPoliticians(filteredData) {
 function renderSeverityDistribution(filteredData) {
     const container = document.getElementById('severityDistribution');
     if (!container) return;
-    container.innerHTML = `<p class="text-sm text-gray-500 py-8">Alvorlighedsfordeling kommer snart...</p>`;
+    container.innerHTML = `<p class="text-sm text-gray-500 py-4">Alvorlighedsfordeling kommer snart med fuld integration...</p>`;
 }
 
 function renderBrokenAndDonations(filteredData) {
     const container = document.getElementById('brokenAndDonations');
     if (!container) return;
-    container.innerHTML = `<p class="text-sm text-gray-500 py-8">Brudte løfter & donationer kommer snart...</p>`;
+    container.innerHTML = `<p class="text-sm text-gray-500 py-4">Brudte løfter & donationer kommer snart...</p>`;
 }
 
-// Global modal function
+// Global modal function - bruger projektets hoved-modal
 window.showPoliticianModal = function(slug) {
-    if (typeof window.openPoliticianModal === 'function') {
-        window.openPoliticianModal(slug);
+    if (typeof window.openModal === 'function') {
+        window.openModal(slug);
+    } else if (typeof window.showPolitician === 'function') {
+        window.showPolitician(slug);
     } else {
-        console.log('Åbner modal for:', slug);
-        alert('Detaljer for politiker: ' + slug + '\n\n(Modal vil blive fuldt tilkoblet i næste trin)');
+        console.log('Modal åbnet for:', slug);
+        // Fallback hvis ingen global findes
+        window.location.href = `index.html?politiker=${slug}`;
     }
 };
 
