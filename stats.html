@@ -36,7 +36,7 @@
     </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-    <!-- Navbar (samme som før) -->
+    <!-- Navbar -->
     <nav class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -72,6 +72,7 @@
             </div>
         </div>
 
+        <!-- Mobil menu -->
         <div id="mobileMenu" class="hidden md:hidden border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
             <div class="px-4 py-4 flex flex-col gap-y-1 text-sm font-medium">
                 <a href="index.html" class="px-4 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700">Forside</a>
@@ -84,7 +85,7 @@
         </div>
     </nav>
 
-    <!-- Hero -->
+    <!-- Hero / Header -->
     <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="max-w-3xl">
@@ -111,11 +112,12 @@
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
         <!-- Nøgletal -->
         <div class="mb-8">
             <h2 class="text-2xl font-bold mb-4">Nøgletal</h2>
             <div id="metricsGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                <!-- Dynamisk via JS -->
+                <!-- Indlæses dynamisk via stats-render.js -->
             </div>
         </div>
 
@@ -128,12 +130,12 @@
                 </button>
             </div>
             <div id="partyFilterBar" class="flex flex-wrap gap-2">
-                <!-- Dynamisk via JS -->
+                <!-- Indlæses dynamisk -->
             </div>
         </div>
 
-        <!-- Visuals -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Skandaler pr. parti + Top 5 -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
             <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-6">
                 <h3 class="font-bold text-lg mb-4">Skandaler per parti</h3>
                 <div id="partyDistribution" class="space-y-4"></div>
@@ -145,9 +147,11 @@
             </div>
         </div>
 
+        <!-- Andre sektioner (kan udvides senere) -->
         <div class="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
             Senest opdateret: <span id="lastUpdated"></span>
         </div>
+
     </div>
 
     <footer class="border-t border-gray-200 dark:border-gray-700 mt-12 py-8">
@@ -156,7 +160,19 @@
         </div>
     </footer>
 
-    <!-- Modular scripts -->
+    <!-- 
+        Modal scripts (samme rækkefølge som på netværk-siden + nødvendige for politiker-modal)
+        Skal indlæses FØR stats-scriptene, så window.showPoliticianModal findes allerede
+    -->
+    <script src="js/data.js"></script>
+    <script src="js/modal-core.js"></script>
+    <script src="js/modal-scandal.js"></script>
+    <script src="js/modal-comments.js"></script>
+    <script src="js/modal-donor.js"></script>
+    <script src="js/modal-affiliations.js"></script>
+    <script src="js/modal-broken-promises.js"></script>
+
+    <!-- Stats scripts -->
     <script src="js/stats/stats-data.js"></script>
     <script src="js/stats/stats-render.js"></script>
     <script src="js/stats/stats-filters.js"></script>
