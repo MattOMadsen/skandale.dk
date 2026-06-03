@@ -35,14 +35,18 @@ Se den fulde og opdaterede todo-liste her:
 ## Bidrag
 
 ### Tilføj en ny politiker
-Se den detaljerede guide:
 
-**`TILFOEJ-NY-POLITIKER.md`**
+**Hurtig start (anbefales):**
+Brug [`TILFOEJ-NY-POLITIKER-CHECKLISTE.md`](TILFOEJ-NY-POLITIKER-CHECKLISTE.md) som tjekliste.
+
+**Detaljeret vejledning:**
+- [`TILFOEJ-NY-POLITIKER.md`](TILFOEJ-NY-POLITIKER.md)
+- [`MODAL-STRUKTUR.md`](MODAL-STRUKTUR.md) – teknisk struktur og krav til modalen
 
 ### Tilføj en ny skandale
 Se guiden her:
 
-**`TILFOEJ-SKANDALE.md`**
+**[`TILFOEJ-SKANDALE.md`](TILFOEJ-SKANDALE.md)**
 
 ## Teknisk setup
 
@@ -57,10 +61,3 @@ Se guiden her:
 git clone https://github.com/MattOMadsen/skandale.dk.git
 cd skandale.dk
 # Åbn index.html i browseren
-```
-
-## Bidrag
-
-Projektet er open source under MIT-licens. Bidrag er velkomne!
-
-Se `CHANGELOG.md` for historik over ændringer.
