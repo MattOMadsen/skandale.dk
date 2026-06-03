@@ -25,7 +25,7 @@ function renderKeyMetrics(filteredData) {
     if (!container) return;
 
     const totalPoliticians = filteredData.length;
-    const totalScandals = filteredData.reduce((sum, p) => sum + (p.scandalCount || 0), 0);
+    const totalScandals = filteredData.reduce((sum, p) => sum + (p.scandals ? p.scandals.length : 0), 0);
     const totalBroken = filteredData.reduce((sum, p) => sum + (p.brokenPromiseCount || 0), 0);
     const totalDonations = filteredData.reduce((sum, p) => sum + (p.donationCount || 0), 0);
     const avgSeverity = totalScandals > 0 
@@ -118,7 +118,7 @@ function renderPartyDistribution(filteredData) {
         if (!partyStats[p.party]) {
             partyStats[p.party] = { count: 0, color: p.color };
         }
-        partyStats[p.party].count += (p.scandalCount || 0);
+        partyStats[p.party].count += (p.scandals ? p.scandals.length : 0);
     });
 
     const sorted = Object.entries(partyStats).sort((a, b) => b[1].count - a[1].count);
@@ -147,9 +147,27 @@ function renderTopScandalPoliticians(filteredData) {
     const container = document.getElementById('topScandalPoliticians');
     if (!container) return;
 
-    const sorted = [...filteredData].sort((a, b) => (b.scandalCount || 0) - (a.scandalCount || 0)).slice(0, 5);
+    // Beregn scandalCount dynamisk ud fra scandals-array (ingen sletning af gammel logik)
+    const sorted = [...filteredData]
+        .map(p => ({
+            ...p,
+            scandalCount: p.scandals ? p.scandals.length : 0
+        }))
+        .sort((a, b) => b.scandalCount - a.scandalCount)
+        .slice(0, 5);
 
-    container.innerHTML = sorted.map(p => `
+    if (sorted.length === 0) {
+        container.innerHTML = `
+            <div class="p-8 text-center text-gray-500 dark:text-gray-400">
+                <i class="fa-solid fa-triangle-exclamation text-4xl mb-3 opacity-50"></i>
+                <p>Ingen skandaler registreret endnu.</p>
+                <p class="text-sm mt-1">Tilføj data til JSON-filerne for at se top 5.</p>
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = sorted.map((p, index) => `
         <div onclick="showPoliticianModal('${p.slug}')" 
              class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-2xl hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer transition-all group">
             <div class="flex items-center gap-x-3">
@@ -162,9 +180,14 @@ function renderTopScandalPoliticians(filteredData) {
                     <div class="text-xs text-gray-500 dark:text-gray-400">${p.party}</div>
                 </div>
             </div>
-            <div class="text-right">
-                <div class="font-bold text-xl text-red-600">${p.scandalCount}</div>
-                <div class="text-[10px] text-gray-500 -mt-1">skandaler</div>
+            <div class="flex items-center gap-x-4">
+                <div class="text-right">
+                    <div class="font-bold text-xl text-red-600">${p.scandalCount}</div>
+                    <div class="text-[10px] text-gray-500 -mt-1">skandaler</div>
+                </div>
+                <div class="w-6 h-6 bg-red-100 dark:bg-red-900 text-red-600 rounded-xl flex items-center justify-center text-xs font-bold">
+                    ${index + 1}
+                </div>
             </div>
         </div>
     `).join('');
