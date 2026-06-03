@@ -108,3 +108,7 @@ På forsiden eller i en statistik-sektion: Et simpelt, interaktivt diagram (f.ek
 En tydelig, men diskret sektion (måske i bunden eller i Admin-modalen), der forklarer, hvordan man kan bidrage med nye kilder eller korrigere information – kombineret med et simpelt formular-link.
 
 **Formål:** Gør siden mere levende og inviterende uden at åbne for spam.
+
+// stats siden vil ikke åbne politikere når man trykker på dem under top 5, de skal åbnes på samme side.
+og under Skandaler per parti kan man ikke trykke på noget for at få informationer.
+og under Skandaler per parti kan man ikke trykke på noget for at få informationer.
