@@ -1,11 +1,116 @@
 // js/stats/stats-render.js
-// All rendering functions for the stats page - fuldt fungerende
+// All rendering functions for stats page (metrics, charts, lists etc.)
+
+function renderKeyMetrics(data) {
+    const grid = document.getElementById('metricsGrid');
+    if (!grid) return;
+
+    const totalPoliticians = data.length;
+    const totalScandals = data.reduce((sum, p) => sum + p.scandalCount, 0);
+    const totalBrokenPromises = data.reduce((sum, p) => sum + p.brokenPromiseCount, 0);
+    const avgSeverity = data.reduce((sum, p) => sum + parseFloat(p.avgSeverity || 0), 0) / (data.length || 1);
+
+    grid.innerHTML = `
+        <div class="stat-card bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-6">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Politikere</p>
+                    <p class="text-4xl font-bold text-gray-900 dark:text-white">${totalPoliticians}</p>
+                </div>
+                <i class="fa-solid fa-users text-4xl text-blue-500"></i>
+            </div>
+        </div>
+        <div class="stat-card bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-6">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Skandaler i alt</p>
+                    <p class="text-4xl font-bold text-red-600">${totalScandals}</p>
+                </div>
+                <i class="fa-solid fa-exclamation-triangle text-4xl text-red-500"></i>
+            </div>
+        </div>
+        <div class="stat-card bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-6">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Brudte løfter</p>
+                    <p class="text-4xl font-bold text-amber-600">${totalBrokenPromises}</p>
+                </div>
+                <i class="fa-solid fa-handshake-slash text-4xl text-amber-500"></i>
+            </div>
+        </div>
+        <div class="stat-card bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-6">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Gennemsnitlig alvor</p>
+                    <p class="text-4xl font-bold text-gray-900 dark:text-white">${avgSeverity.toFixed(1)}</p>
+                </div>
+                <i class="fa-solid fa-scale-balanced text-4xl text-purple-500"></i>
+            </div>
+        </div>
+    `;
+}
+
+function renderPartyDistribution(data) {
+    const container = document.getElementById('partyDistribution');
+    if (!container) return;
+
+    const byParty = {};
+    data.forEach(p => {
+        if (!byParty[p.party]) byParty[p.party] = { count: 0, color: p.color };
+        byParty[p.party].count++;
+    });
+
+    let html = '';
+    Object.keys(byParty).forEach(party => {
+        const pct = Math.round((byParty[party].count / data.length) * 100) || 0;
+        html += `
+            <div class="mb-4">
+                <div class="flex justify-between text-sm mb-1">
+                    <span>${party}</span>
+                    <span class="font-medium">${byParty[party].count}</span>
+                </div>
+                <div class="h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                    <div class="h-full rounded-full" style="width: ${pct}%; background-color: ${byParty[party].color}"></div>
+                </div>
+            </div>
+        `;
+    });
+
+    container.innerHTML = html;
+}
+
+function renderTop5Scandals(data) {
+    const container = document.getElementById('topScandals');
+    if (!container) return;
+
+    const sorted = [...data].sort((a,b) => b.scandalCount - a.scandalCount).slice(0, 5);
+
+    let html = '';
+    sorted.forEach(p => {
+        html += `
+            <div onclick="showPoliticianModal('${p.slug}')" class="flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-2xl cursor-pointer transition-colors">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl flex items-center justify-center text-white font-bold" style="background-color: ${p.color}">
+                        ${p.partyShort}
+                    </div>
+                    <div>
+                        <p class="font-semibold">${p.name}</p>
+                        <p class="text-sm text-gray-500">${p.party}</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="text-2xl font-bold text-red-600">${p.scandalCount}</p>
+                    <p class="text-xs text-gray-400">skandaler</p>
+                </div>
+            </div>
+        `;
+    });
+
+    container.innerHTML = html;
+}
 
 function renderAll() {
-    if (!politiciansData || politiciansData.length === 0) {
-        console.warn('Ingen politikere-data tilgængelig endnu');
-        return;
-    }
+    if (!politiciansData || politiciansData.length === 0) return;
 
     let filteredData = politiciansData;
     if (currentPartyFilter) {
@@ -13,210 +118,21 @@ function renderAll() {
     }
 
     renderKeyMetrics(filteredData);
-    renderPartyFilterBar();
     renderPartyDistribution(filteredData);
-    renderTopScandalPoliticians(filteredData);
-    renderSeverityDistribution(filteredData);
-    renderBrokenAndDonations(filteredData);
-}
+    renderTop5Scandals(filteredData);
 
-function renderKeyMetrics(filteredData) {
-    const container = document.getElementById('metricsGrid');
-    if (!container) return;
-
-    const totalPoliticians = filteredData.length;
-    const totalScandals = filteredData.reduce((sum, p) => sum + (p.scandals ? p.scandals.length : 0), 0);
-    const totalBroken = filteredData.reduce((sum, p) => sum + (p.brokenPromiseCount || 0), 0);
-    const totalDonations = filteredData.reduce((sum, p) => sum + (p.donationCount || 0), 0);
-    const avgSeverity = totalScandals > 0 
-        ? (filteredData.reduce((sum, p) => sum + parseFloat(p.avgSeverity || 0), 0) / totalPoliticians).toFixed(1) 
-        : '0.0';
-
-    container.innerHTML = `
-        <div class="stat-card bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <div class="text-sm text-gray-500 dark:text-gray-400">Politikere</div>
-                    <div class="metric-value text-red-600">${totalPoliticians}</div>
-                </div>
-                <div class="w-12 h-12 bg-red-100 dark:bg-red-950 text-red-600 rounded-2xl flex items-center justify-center">
-                    <i class="fa-solid fa-users text-2xl"></i>
-                </div>
-            </div>
-        </div>
-        <div class="stat-card bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <div class="text-sm text-gray-500 dark:text-gray-400">Skandaler i alt</div>
-                    <div class="metric-value text-red-600">${totalScandals}</div>
-                </div>
-                <div class="w-12 h-12 bg-red-100 dark:bg-red-950 text-red-600 rounded-2xl flex items-center justify-center">
-                    <i class="fa-solid fa-exclamation-triangle text-2xl"></i>
-                </div>
-            </div>
-        </div>
-        <div class="stat-card bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <div class="text-sm text-gray-500 dark:text-gray-400">Gns. alvorlighed</div>
-                    <div class="metric-value text-red-600">${avgSeverity}</div>
-                </div>
-                <div class="w-12 h-12 bg-red-100 dark:bg-red-950 text-red-600 rounded-2xl flex items-center justify-center">
-                    <i class="fa-solid fa-chart-line text-2xl"></i>
-                </div>
-            </div>
-        </div>
-        <div class="stat-card bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <div class="text-sm text-gray-500 dark:text-gray-400">Brudte løfter</div>
-                    <div class="metric-value text-red-600">${totalBroken}</div>
-                </div>
-                <div class="w-12 h-12 bg-red-100 dark:bg-red-950 text-red-600 rounded-2xl flex items-center justify-center">
-                    <i class="fa-solid fa-handshake text-2xl"></i>
-                </div>
-            </div>
-        </div>
-        <div class="stat-card bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <div class="text-sm text-gray-500 dark:text-gray-400">Donationer</div>
-                    <div class="metric-value text-red-600">${totalDonations}</div>
-                </div>
-                <div class="w-12 h-12 bg-red-100 dark:bg-red-950 text-red-600 rounded-2xl flex items-center justify-center">
-                    <i class="fa-solid fa-coins text-2xl"></i>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-function renderPartyFilterBar() {
-    const container = document.getElementById('partyFilterBar');
-    if (!container) return;
-
-    const parties = [...new Set(politiciansData.map(p => p.party))].sort();
-
-    container.innerHTML = parties.map(party => {
-        const isActive = currentPartyFilter === party;
-        const count = politiciansData.filter(p => p.party === party).length;
-        return `
-            <button onclick="filterByParty('${party}')"
-                    class="party-badge px-4 py-2 rounded-2xl text-sm font-medium transition-all ${isActive ? 'active bg-red-600 text-white shadow-md' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'}">
-                ${party} <span class="opacity-70">(${count})</span>
-            </button>
-        `;
-    }).join('');
-}
-
-function renderPartyDistribution(filteredData) {
-    const container = document.getElementById('partyDistribution');
-    if (!container) return;
-
-    const partyStats = {};
-    filteredData.forEach(p => {
-        if (!partyStats[p.party]) {
-            partyStats[p.party] = { count: 0, color: p.color };
-        }
-        partyStats[p.party].count += (p.scandals ? p.scandals.length : 0);
-    });
-
-    const sorted = Object.entries(partyStats).sort((a, b) => b[1].count - a[1].count);
-
-    container.innerHTML = sorted.map(([party, data]) => {
-        const maxCount = Math.max(...sorted.map(s => s[1].count));
-        const width = maxCount > 0 ? Math.round((data.count / maxCount) * 100) : 0;
-        return `
-            <div class="flex items-center gap-x-3">
-                <div class="w-3 h-3 rounded-full flex-shrink-0" style="background-color: ${data.color}"></div>
-                <div class="flex-1">
-                    <div class="flex justify-between text-sm mb-1">
-                        <span class="font-medium">${party}</span>
-                        <span class="font-bold">${data.count}</span>
-                    </div>
-                    <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                        <div class="bar h-2 rounded-full" style="width: ${width}%; background-color: ${data.color}"></div>
-                    </div>
-                </div>
-            </div>
-        `;
-    }).join('');
-}
-
-function renderTopScandalPoliticians(filteredData) {
-    const container = document.getElementById('topScandalPoliticians');
-    if (!container) return;
-
-    // Beregn scandalCount dynamisk ud fra scandals-array (ingen sletning af gammel logik)
-    const sorted = [...filteredData]
-        .map(p => ({
-            ...p,
-            scandalCount: p.scandals ? p.scandals.length : 0
-        }))
-        .sort((a, b) => b.scandalCount - a.scandalCount)
-        .slice(0, 5);
-
-    if (sorted.length === 0) {
-        container.innerHTML = `
-            <div class="p-8 text-center text-gray-500 dark:text-gray-400">
-                <i class="fa-solid fa-triangle-exclamation text-4xl mb-3 opacity-50"></i>
-                <p>Ingen skandaler registreret endnu.</p>
-                <p class="text-sm mt-1">Tilføj data til JSON-filerne for at se top 5.</p>
-            </div>
-        `;
-        return;
+    // Render severity distribution (simple)
+    const severityContainer = document.getElementById('severityDistribution');
+    if (severityContainer) {
+        // Placeholder for now - can be expanded
+        severityContainer.innerHTML = '<p class="text-sm text-gray-500">Alvorlighedsfordeling kommer snart...</p>';
     }
-
-    container.innerHTML = sorted.map((p, index) => `
-        <div onclick="showPoliticianModal('${p.slug}')" 
-             class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-2xl hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer transition-all group">
-            <div class="flex items-center gap-x-3">
-                <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold transition-transform group-hover:scale-110" 
-                     style="background-color: ${p.color}">
-                    ${p.partyShort}
-                </div>
-                <div>
-                    <div class="font-semibold group-hover:text-red-600 transition-colors">${p.name}</div>
-                    <div class="text-xs text-gray-500 dark:text-gray-400">${p.party}</div>
-                </div>
-            </div>
-            <div class="flex items-center gap-x-4">
-                <div class="text-right">
-                    <div class="font-bold text-xl text-red-600">${p.scandalCount}</div>
-                    <div class="text-[10px] text-gray-500 -mt-1">skandaler</div>
-                </div>
-                <div class="w-6 h-6 bg-red-100 dark:bg-red-900 text-red-600 rounded-xl flex items-center justify-center text-xs font-bold">
-                    ${index + 1}
-                </div>
-            </div>
-        </div>
-    `).join('');
 }
 
-function renderSeverityDistribution(filteredData) {
-    const container = document.getElementById('severityDistribution');
-    if (!container) return;
-    container.innerHTML = `<p class="text-sm text-gray-500 py-4">Alvorlighedsfordeling kommer snart med fuld integration...</p>`;
-}
-
-function renderBrokenAndDonations(filteredData) {
-    const container = document.getElementById('brokenAndDonations');
-    if (!container) return;
-    container.innerHTML = `<p class="text-sm text-gray-500 py-4">Brudte løfter & donationer kommer snart...</p>`;
-}
-
-// Global modal function - bruger projektets hoved-modal
-window.showPoliticianModal = function(slug) {
-    if (typeof window.openModal === 'function') {
-        window.openModal(slug);
-    } else if (typeof window.showPolitician === 'function') {
-        window.showPolitician(slug);
-    } else {
-        console.log('Modal åbnet for:', slug);
-        // Fallback hvis ingen global findes
-        window.location.href = `index.html?politiker=${slug}`;
-    }
-};
-
-// Make renderAll available globally
+// Expose to window so other modules can call it
 window.renderAll = renderAll;
+window.showPoliticianModal = function(slug) {
+    // Will be connected to modal-stats.js later if needed
+    console.log('Vis modal for:', slug);
+    alert('Politiker-modal for ' + slug + ' (skal kobles til modal-stats.js)');
+};
