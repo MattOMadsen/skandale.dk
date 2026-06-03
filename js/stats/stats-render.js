@@ -130,25 +130,46 @@ function renderAll() {
 window.renderAll = renderAll;
 
 // =====================================================
-// ROBUST showPoliticianModal - åbner på samme side
+// ROBUST + TÅLMODIG showPoliticianModal (samme side)
 // =====================================================
 (function() {
-    // Gem den rigtige funktion fra modal-core.js (hvis den findes)
-    const realShowPoliticianModal = window.showPoliticianModal;
+    const realModalFn = window.showPoliticianModal; // Gem den rigtige fra modal-core.js
 
-    window.showPoliticianModal = function(slug) {
-        console.log('[stats] showPoliticianModal kaldt med slug:', slug);
+    window.showPoliticianModal = async function(slug) {
+        console.log('[stats] Åbner modal for:', slug);
 
-        // Tjek om vi har en rigtig modal-funktion fra modal-core.js
-        if (typeof realShowPoliticianModal === 'function' && 
-            realShowPoliticianModal.toString().indexOf('Politiker-modal for') === -1 &&
-            realShowPoliticianModal.toString().indexOf('fallback') === -1) {
+        // 1. Hvis den rigtige modal-funktion findes og politicians-arrayet er fyldt
+        if (typeof realModalFn === 'function' && 
+            Array.isArray(window.politicians) && 
+            window.politicians.length > 0) {
             
-            console.log('[stats] Bruger rigtig modal fra modal-core.js');
-            realShowPoliticianModal(slug);
-        } else {
-            console.warn('[stats] Ingen rigtig modal fundet – redirecter til index.html');
-            window.location.href = `index.html?politiker=${slug}`;
+            console.log('[stats] Bruger rigtig modal (politicians er klar)');
+            realModalFn(slug);
+            return;
         }
+
+        // 2. Prøv at loade data hvis det mangler
+        if (typeof loadPoliticians === 'function' && (!window.politicians || window.politicians.length === 0)) {
+            console.log('[stats] Loader politicians data...');
+            try {
+                await loadPoliticians();
+            } catch (e) {
+                console.error('[stats] Fejl ved loadPoliticians:', e);
+            }
+        }
+
+        // 3. Vent kort tid og prøv igen
+        setTimeout(() => {
+            if (typeof realModalFn === 'function' && 
+                Array.isArray(window.politicians) && 
+                window.politicians.length > 0) {
+                
+                console.log('[stats] Modal åbnes efter ventetid');
+                realModalFn(slug);
+            } else {
+                console.warn('[stats] Kunne stadig ikke finde politikeren – redirecter som fallback');
+                window.location.href = `index.html?politiker=${slug}`;
+            }
+        }, 400);
     };
 })();
