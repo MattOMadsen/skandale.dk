@@ -142,7 +142,7 @@ window.renderAll = renderAll;
         if (typeof realModalFn === 'function' && 
             Array.isArray(window.politicians) && 
             window.politicians.length > 0) {
-            
+
             console.log('[stats] Bruger rigtig modal (politicians er klar)');
             realModalFn(slug);
             return;
@@ -158,18 +158,18 @@ window.renderAll = renderAll;
             }
         }
 
-        // 3. Vent kort tid og prøv igen
+        // 3. Vent lidt længere og prøv igen (mere tålmodig)
         setTimeout(() => {
             if (typeof realModalFn === 'function' && 
                 Array.isArray(window.politicians) && 
                 window.politicians.length > 0) {
-                
+
                 console.log('[stats] Modal åbnes efter ventetid');
                 realModalFn(slug);
             } else {
                 console.warn('[stats] Kunne stadig ikke finde politikeren – redirecter som fallback');
                 window.location.href = `index.html?politiker=${slug}`;
             }
-        }, 400);
+        }, 600);
     };
 })();
