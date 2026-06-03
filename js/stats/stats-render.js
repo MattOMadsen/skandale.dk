@@ -121,26 +121,28 @@ function renderAll() {
     renderPartyDistribution(filteredData);
     renderTop5Scandals(filteredData);
 
-    // Render severity distribution (simple)
     const severityContainer = document.getElementById('severityDistribution');
     if (severityContainer) {
-        // Placeholder for now - can be expanded
         severityContainer.innerHTML = '<p class="text-sm text-gray-500">Alvorlighedsfordeling kommer snart...</p>';
     }
 }
 
-// Expose to window so other modules can call it
 window.renderAll = renderAll;
 
+// Sikker version: Overskriv kun hvis der ikke allerede findes en rigtig modal-funktion
 window.showPoliticianModal = function(slug) {
-    // Prøv først den rigtige globale modal hvis den er tilgængelig (fra modal-core.js)
-    if (typeof window.showPoliticianModal === 'function' && 
-        window.showPoliticianModal.toString().indexOf('alert') === -1 && 
-        window.showPoliticianModal.toString().indexOf('Politiker-modal for') === -1) {
-        window.showPoliticianModal(slug);
-        return;
-    }
+    // Tjek om der allerede findes en rigtig implementering (fra modal-core.js)
+    const currentImpl = window.showPoliticianModal && window.showPoliticianModal.toString();
     
-    // Ellers: Åbn hoved-siden med politikeren – modal åbnes automatisk via deep-link
-    window.location.href = `index.html?politiker=${slug}`;
+    if (currentImpl && 
+        !currentImpl.includes('fallback') && 
+        !currentImpl.includes('alert') && 
+        !currentImpl.includes('Politiker-modal for')) {
+        // Brug den rigtige globale funktion (åbner modal på samme side)
+        window.showPoliticianModal(slug);
+    } else {
+        // Kun fallback hvis modal-systemet ikke er indlæst
+        console.warn('Modal-system ikke indlæst på stats-siden – åbner hovedside som fallback');
+        window.location.href = `index.html?politiker=${slug}`;
+    }
 };
