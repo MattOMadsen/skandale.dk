@@ -1,4 +1,4 @@
-# TODO-liste for Skandale.dk (Opdateret 2. juni 2026)
+# TODO-liste for Skandale.dk (Opdateret 3. juni 2026)
 
 ## Kendte bugs / Issues der skal testes
 
@@ -22,6 +22,8 @@
 - [x] Infinite scroll på forsiden (tilføjet 1. juni 2026)
 - [x] **Dedikeret netvaerk.html** – fuld genopbygning med filtre, sortering, stats-bar, parti-farvede politik-preview, "STOR" badge, dark mode (via js/dark-mode.js) og robust modal-integration (juni 2026)
 - [x] Dark mode – fuldt integreret på netvaerk.html med `js/dark-mode.js`, Tailwind `darkMode: 'class'`, localStorage + system preference
+- [x] Gør antallet af politikere dynamisk i hero-badge (via `js/stats-snapshot.js` + `#stats-snapshot`)
+- [x] Fjernet legacy `modal-compare.js` fra `index.html` (erstattet af dedikeret `sammenlign.html`)
 
 ## Delvist implementeret / Igangværende
 
@@ -44,10 +46,8 @@
 
 ## Oprydning & Teknisk gæld
 
-- [ ] Fjern `modal-compare.js` fra `index.html` (legacy – erstattet af dedikeret `sammenlign.html`) når den dedikerede side er færdig
 - [ ] Ryd op i andre potentielle legacy script-referencer efter overgangen til dedikerede sider
 - [ ] Erstat Tailwind Play CDN med lokal, optimeret `tailwind.css`
-- [ ] Gør antallet af politikere dynamisk i hero-badge
 - [ ] Ryd op i ubrugte ID'er og gammel kode
 - [ ] Forbedre fejlhåndtering og loading-states
 
@@ -108,7 +108,3 @@ På forsiden eller i en statistik-sektion: Et simpelt, interaktivt diagram (f.ek
 En tydelig, men diskret sektion (måske i bunden eller i Admin-modalen), der forklarer, hvordan man kan bidrage med nye kilder eller korrigere information – kombineret med et simpelt formular-link.
 
 **Formål:** Gør siden mere levende og inviterende uden at åbne for spam.
-
-// stats siden vil ikke åbne politikere når man trykker på dem under top 5, de skal åbnes på samme side.
-og under Skandaler per parti kan man ikke trykke på noget for at få informationer.
-og under Skandaler per parti kan man ikke trykke på noget for at få informationer.
