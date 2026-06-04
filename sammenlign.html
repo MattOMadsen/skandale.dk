@@ -11,10 +11,6 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap');
         
-        :root {
-            --primary: #1e40af;
-        }
-        
         body {
             font-family: 'Inter', system_ui, sans-serif;
         }
@@ -44,14 +40,14 @@
         }
         
         .tab-btn.active {
-            border-bottom-color: #1e40af;
-            color: #1e40af;
+            border-bottom-color: #c8102e;
+            color: #c8102e;
             font-weight: 600;
         }
         
         .dark .tab-btn.active {
-            border-bottom-color: #60a5fa;
-            color: #60a5fa;
+            border-bottom-color: #f87171;
+            color: #f87171;
         }
 
         .scandal-item, .donor-item, .promise-item, .network-item {
@@ -68,12 +64,12 @@
         }
 
         .nav-active {
-            color: #1e40af;
+            color: #c8102e;
             font-weight: 600;
         }
         
         .dark .nav-active {
-            color: #60a5fa;
+            color: #f87171;
         }
 
         .comparison-header {
@@ -85,40 +81,21 @@
         }
 
         @media print {
-            .no-print {
-                display: none !important;
-            }
-            
-            .politician-card {
-                box-shadow: none !important;
-                border: 1px solid #e5e7eb !important;
-            }
-            
-            .tab-content {
-                display: block !important;
-            }
+            .no-print { display: none !important; }
+            .politician-card { box-shadow: none !important; border: 1px solid #e5e7eb !important; }
         }
         
-        .politician-option {
-            transition: all 0.1s ease;
-        }
-        
-        .politician-option:hover {
-            background-color: #f1f5f9;
-        }
-        
-        .dark .politician-option:hover {
-            background-color: #374151;
-        }
+        .politician-option:hover { background-color: #f1f5f9; }
+        .dark .politician-option:hover { background-color: #374151; }
         
         .selected-politician {
-            border-color: #1e40af;
-            background-color: #eff6ff;
+            border-color: #c8102e;
+            background-color: #fef2f2;
         }
         
         .dark .selected-politician {
-            background-color: #1e3a8a;
-            border-color: #60a5fa;
+            background-color: #450a0a;
+            border-color: #f87171;
         }
 
         .loading-placeholder {
@@ -130,14 +107,8 @@
         }
 
         @keyframes modalPopIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8) translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
+            from { opacity: 0; transform: scale(0.8) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
     </style>
 </head>
@@ -147,7 +118,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center gap-x-3">
-                    <div class="w-9 h-9 bg-blue-700 rounded-xl flex items-center justify-center">
+                    <div class="w-9 h-9 bg-red-600 rounded-xl flex items-center justify-center">
                         <span class="text-white font-bold text-2xl tracking-tighter">S</span>
                     </div>
                     <div>
@@ -156,12 +127,12 @@
                 </div>
 
                 <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
-                    <a href="index.html" class="hover:text-blue-700 dark:hover:text-blue-400 transition-colors">Forside</a>
-                    <a href="tidslinje.html" class="hover:text-blue-700 dark:hover:text-blue-400 transition-colors">Tidslinje</a>
+                    <a href="index.html" class="hover:text-red-600 dark:hover:text-red-400 transition-colors">Forside</a>
+                    <a href="tidslinje.html" class="hover:text-red-600 dark:hover:text-red-400 transition-colors">Tidslinje</a>
                     <a href="sammenlign.html" class="nav-active">Sammenlign</a>
-                    <a href="stats.html" class="hover:text-blue-700 dark:hover:text-blue-400 transition-colors">Statistik</a>
-                    <a href="netvaerk.html" class="hover:text-blue-700 dark:hover:text-blue-400 transition-colors">Netværk</a>
-                    <a href="om.html" class="hover:text-blue-700 dark:hover:text-blue-400 transition-colors">Om projektet</a>
+                    <a href="stats.html" class="hover:text-red-600 dark:hover:text-red-400 transition-colors">Statistik</a>
+                    <a href="netvaerk.html" class="hover:text-red-600 dark:hover:text-red-400 transition-colors">Netværk</a>
+                    <a href="om.html" class="hover:text-red-600 dark:hover:text-red-400 transition-colors">Om projektet</a>
                 </div>
 
                 <div class="flex items-center gap-x-3">
@@ -180,12 +151,11 @@
             </div>
         </div>
         
-        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
             <div class="px-4 py-3 space-y-1 text-sm">
                 <a href="index.html" class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">Forside</a>
                 <a href="tidslinje.html" class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">Tidslinje</a>
-                <a href="sammenlign.html" class="block px-3 py-2 rounded-lg bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-400 font-medium">Sammenlign</a>
+                <a href="sammenlign.html" class="block px-3 py-2 rounded-lg bg-red-50 dark:bg-red-950 text-red-600 dark:text-red-400 font-medium">Sammenlign</a>
                 <a href="stats.html" class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">Statistik</a>
                 <a href="netvaerk.html" class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">Netværk</a>
                 <a href="om.html" class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">Om projektet</a>
@@ -237,17 +207,17 @@
                 <div class="bg-white dark:bg-gray-900 rounded-3xl border border-gray-200 dark:border-gray-800 p-5">
                     <div class="flex items-center justify-between mb-3">
                         <div class="font-semibold flex items-center gap-x-2">
-                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-400 text-xs font-bold">1</span>
+                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 dark:bg-red-950 text-red-600 dark:text-red-400 text-xs font-bold">1</span>
                             <span>Politiker 1</span>
                         </div>
-                        <div id="p1-selected-badge" class="hidden text-xs px-3 py-1 bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-400 rounded-full font-medium items-center gap-x-1">
+                        <div id="p1-selected-badge" class="hidden text-xs px-3 py-1 bg-red-100 dark:bg-red-950 text-red-600 dark:text-red-400 rounded-full font-medium items-center gap-x-1">
                             <i class="fas fa-check text-xs"></i> <span id="p1-selected-name"></span>
                         </div>
                     </div>
                     
                     <div class="relative mb-3">
                         <input type="text" id="search1" 
-                               class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-gray-950 border border-gray-300 dark:border-gray-700 rounded-2xl text-sm focus:outline-none focus:border-blue-500 dark:focus:border-blue-400"
+                               class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-gray-950 border border-gray-300 dark:border-gray-700 rounded-2xl text-sm focus:outline-none focus:border-red-500 dark:focus:border-red-400"
                                placeholder="Søg efter navn eller parti..." 
                                oninput="filterPoliticians(1)">
                         <i class="fas fa-search absolute left-4 top-3.5 text-gray-400"></i>
@@ -262,17 +232,17 @@
                 <div class="bg-white dark:bg-gray-900 rounded-3xl border border-gray-200 dark:border-gray-800 p-5">
                     <div class="flex items-center justify-between mb-3">
                         <div class="font-semibold flex items-center gap-x-2">
-                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 text-xs font-bold">2</span>
+                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 dark:bg-red-950 text-red-600 dark:text-red-400 text-xs font-bold">2</span>
                             <span>Politiker 2</span>
                         </div>
-                        <div id="p2-selected-badge" class="hidden text-xs px-3 py-1 bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 rounded-full font-medium items-center gap-x-1">
+                        <div id="p2-selected-badge" class="hidden text-xs px-3 py-1 bg-red-100 dark:bg-red-950 text-red-600 dark:text-red-400 rounded-full font-medium items-center gap-x-1">
                             <i class="fas fa-check text-xs"></i> <span id="p2-selected-name"></span>
                         </div>
                     </div>
                     
                     <div class="relative mb-3">
                         <input type="text" id="search2" 
-                               class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-gray-950 border border-gray-300 dark:border-gray-700 rounded-2xl text-sm focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-400"
+                               class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-gray-950 border border-gray-300 dark:border-gray-700 rounded-2xl text-sm focus:outline-none focus:border-red-500 dark:focus:border-red-400"
                                placeholder="Søg efter navn eller parti..." 
                                oninput="filterPoliticians(2)">
                         <i class="fas fa-search absolute left-4 top-3.5 text-gray-400"></i>
@@ -310,7 +280,7 @@
                     
                     <button onclick="exportComparisonToPDF()" 
                             id="export-pdf-btn"
-                            class="flex items-center gap-x-2 px-4 py-2 text-sm font-medium rounded-2xl bg-blue-700 hover:bg-blue-800 text-white transition-colors">
+                            class="flex items-center gap-x-2 px-4 py-2 text-sm font-medium rounded-2xl bg-red-600 hover:bg-red-700 text-white transition-colors">
                         <i class="fas fa-file-pdf mr-2"></i>
                         Eksporter til PDF
                     </button>
@@ -442,7 +412,7 @@
         </div>
     </footer>
 
-    <!-- Related Politicians Modal -->
+    <!-- Related Modal -->
     <div id="related-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="SammenlignModals.hideRelatedModal()"></div>
         
@@ -454,8 +424,7 @@
                 </button>
             </div>
             
-            <div class="p-6 overflow-y-auto max-h-[60vh]" id="related-modal-content">
-            </div>
+            <div class="p-6 overflow-y-auto max-h-[60vh]" id="related-modal-content"></div>
             
             <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-950 text-xs text-gray-500 dark:text-gray-400">
                 Klik på en politiker for at erstatte den i sammenligningen.
@@ -463,7 +432,7 @@
         </div>
     </div>
 
-    <!-- Scandal Detail Modal -->
+    <!-- Scandal Modal -->
     <div id="scandal-modal" class="hidden fixed inset-0 z-[110] flex items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="SammenlignModals.hideScandalModal()"></div>
         
@@ -478,8 +447,7 @@
                 </button>
             </div>
             
-            <div class="p-6 overflow-y-auto max-h-[65vh] space-y-6" id="scandal-modal-content">
-            </div>
+            <div class="p-6 overflow-y-auto max-h-[65vh] space-y-6" id="scandal-modal-content"></div>
             
             <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-950 flex justify-end">
                 <button onclick="SammenlignModals.hideScandalModal()" 
@@ -497,7 +465,6 @@
     <script src="js/sammenlign/sammenlign-modals.js"></script>
     <script src="js/sammenlign/sammenlign-init.js"></script>
 
-    <!-- Init -->
     <script>
         window.onload = () => SammenlignInit.init();
     </script>
