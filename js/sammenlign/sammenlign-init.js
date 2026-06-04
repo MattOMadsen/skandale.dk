@@ -7,6 +7,7 @@ const SammenlignInit = {
         this.initializeDarkMode();
         this.initializePoliticianLists();
         this.setupKeyboardSupport();
+        this.updatePoliticianCount();
 
         SammenlignData.buildCrossReferenceIndex().then(() => {
             const exportBtn = document.getElementById('export-pdf-btn');
@@ -17,8 +18,15 @@ const SammenlignInit = {
         console.log('%c[Sammenlign] Init færdig – slank version aktiv.', 'color:#64748b');
     },
 
+    updatePoliticianCount() {
+        const countEl = document.getElementById('politician-count');
+        if (countEl && window.SammenlignData) {
+            countEl.textContent = SammenlignData.POLITICIANS.length;
+        }
+    },
+
     initializeTailwind() {
-        document.documentElement.style.setProperty('--accent', '#1e40af');
+        document.documentElement.style.setProperty('--accent', '#c8102e');
         tailwind.config = { darkMode: 'class' };
     },
 
@@ -28,6 +36,22 @@ const SammenlignInit = {
         if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
             document.documentElement.classList.add('dark');
         }
+    },
+
+    toggleDarkMode() {
+        const html = document.documentElement;
+        if (html.classList.contains('dark')) {
+            html.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+        } else {
+            html.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+        }
+    },
+
+    toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        if (menu) menu.classList.toggle('hidden');
     },
 
     initializePoliticianLists() {
@@ -91,7 +115,7 @@ const SammenlignInit = {
         const prefixes = ['scandals', 'support', 'promises', 'networks'];
         prefixes.forEach(tab => {
             const el = document.getElementById(`p${side}-${tab}`);
-            if (el) el.innerHTML = `<div class="loading-placeholder text-sm text-gray-400 py-4">Indlæser ${tab}...</div>`;
+            if (el) el.innerHTML = `<div class=\"loading-placeholder text-sm text-gray-400 py-4\">Indlæser ${tab}...</div>`;
         });
 
         const data = await SammenlignData.loadDetailedData(politician.slug);
@@ -140,7 +164,7 @@ const SammenlignInit = {
         document.getElementById('p2-selected-badge').classList.remove('flex');
 
         document.querySelectorAll('.selected-politician').forEach(el =>
-            el.classList.remove('selected-politician', 'ring-2', 'ring-offset-2', 'ring-blue-500', 'dark:ring-blue-400')
+            el.classList.remove('selected-politician', 'ring-2', 'ring-offset-2', 'ring-red-500', 'dark:ring-red-400')
         );
 
         const s1 = document.getElementById('search1');
@@ -212,6 +236,8 @@ const SammenlignInit = {
 };
 
 window.SammenlignInit = SammenlignInit;
+window.toggleDarkMode = () => SammenlignInit.toggleDarkMode();
+window.toggleMobileMenu = () => SammenlignInit.toggleMobileMenu();
 window.showComparison = () => SammenlignInit.showComparison();
 window.swapPoliticians = () => SammenlignInit.swapPoliticians();
 window.resetComparison = () => SammenlignInit.resetComparison();
