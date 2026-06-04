@@ -7,7 +7,6 @@
     <meta name="description" content="Sammenlign danske politikere side om side på skandaler, økonomisk støtte, internationale netværk og brudte valgløfter. Få et faktabaseret overblik.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- jsPDF for bedre PDF-eksport -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap');
@@ -35,17 +34,6 @@
         
         .metric-box:hover {
             transform: translateY(-2px);
-        }
-
-        .severity-star {
-            color: #f59e0b;
-        }
-
-        .party-badge {
-            font-size: 0.75rem;
-            padding: 0.125rem 0.5rem;
-            border-radius: 9999px;
-            font-weight: 600;
         }
 
         .tab-btn {
@@ -99,15 +87,6 @@
         @media print {
             .no-print {
                 display: none !important;
-            }
-            
-            .print-only {
-                display: block !important;
-            }
-            
-            body {
-                background: white !important;
-                color: black !important;
             }
             
             .politician-card {
@@ -167,7 +146,6 @@
     <nav class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50 no-print">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <!-- Logo -->
                 <div class="flex items-center gap-x-3">
                     <div class="w-9 h-9 bg-blue-700 rounded-xl flex items-center justify-center">
                         <span class="text-white font-bold text-2xl tracking-tighter">S</span>
@@ -177,7 +155,6 @@
                     </div>
                 </div>
 
-                <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
                     <a href="index.html" class="hover:text-blue-700 dark:hover:text-blue-400 transition-colors">Forside</a>
                     <a href="tidslinje.html" class="hover:text-blue-700 dark:hover:text-blue-400 transition-colors">Tidslinje</a>
@@ -187,9 +164,7 @@
                     <a href="om.html" class="hover:text-blue-700 dark:hover:text-blue-400 transition-colors">Om projektet</a>
                 </div>
 
-                <!-- Right side actions -->
                 <div class="flex items-center gap-x-3">
-                    <!-- Dark mode toggle -->
                     <button onclick="toggleDarkMode()" 
                             class="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                             aria-label="Skift mellem lys og mørkt tema">
@@ -197,7 +172,6 @@
                         <i class="fas fa-sun text-yellow-500 hidden dark:block"></i>
                     </button>
 
-                    <!-- Mobile menu button -->
                     <button class="md:hidden w-9 h-9 flex items-center justify-center rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800"
                             onclick="toggleMobileMenu()">
                         <i class="fas fa-bars text-gray-600 dark:text-gray-400"></i>
@@ -247,7 +221,7 @@
         <div class="mb-8 no-print">
             <div class="flex items-end justify-between mb-4">
                 <div>
-                    <h2 class="text-2xl font-semibold tracking-tight">Vælg two politikere</h2>
+                    <h2 class="text-2xl font-semibold tracking-tight">Vælg to politikere</h2>
                     <p class="text-gray-600 dark:text-gray-400 text-sm mt-1">Søg og klik for at vælge. Du kan bytte om når som helst.</p>
                 </div>
                 <button onclick="resetComparison()" 
@@ -271,7 +245,6 @@
                         </div>
                     </div>
                     
-                    <!-- Search input for p1 -->
                     <div class="relative mb-3">
                         <input type="text" id="search1" 
                                class="w-full pl-10 pr-4 py-2.5 bg-gray-50 dark:bg-gray-950 border border-gray-300 dark:border-gray-700 rounded-2xl text-sm focus:outline-none focus:border-blue-500 dark:focus:border-blue-400"
@@ -280,10 +253,8 @@
                         <i class="fas fa-search absolute left-4 top-3.5 text-gray-400"></i>
                     </div>
                     
-                    <!-- Politician list for p1 -->
                     <div id="politician-list-1" 
                          class="max-h-[220px] overflow-y-auto border border-gray-200 dark:border-gray-700 rounded-2xl bg-white dark:bg-gray-950 p-1 custom-scroll">
-                        <!-- Populated by JS -->
                     </div>
                 </div>
 
@@ -309,17 +280,15 @@
                     
                     <div id="politician-list-2" 
                          class="max-h-[220px] overflow-y-auto border border-gray-200 dark:border-gray-700 rounded-2xl bg-white dark:bg-gray-950 p-1 custom-scroll">
-                        <!-- Populated by JS -->
                     </div>
                 </div>
             </div>
             
-            <!-- Swap button -->
             <div class="flex justify-center mt-4">
                 <button onclick="swapPoliticians()" 
                         class="flex items-center gap-x-2 px-5 py-2.5 text-sm font-medium rounded-2xl bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all active:scale-[0.985]">
                     <i class="fas fa-exchange-alt mr-2"></i>
-                    Byt om på de two politikere
+                    Byt om på de to politikere
                 </button>
             </div>
         </div>
@@ -354,7 +323,6 @@
                 </div>
             </div>
 
-            <!-- Two politician comparison cards -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 
                 <!-- Politician 1 Card -->
@@ -363,7 +331,6 @@
                         <div class="flex items-start gap-x-4">
                             <div id="p1-avatar" 
                                  class="w-14 h-14 rounded-2xl flex-shrink-0 flex items-center justify-center text-white text-2xl font-bold shadow-inner">
-                                <!-- JS populated -->
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center gap-x-2">
@@ -377,14 +344,10 @@
                         </div>
                     </div>
                     
-                    <!-- Metrics -->
                     <div class="px-6 pt-5 pb-4">
-                        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3" id="p1-metrics">
-                            <!-- Populated by JS -->
-                        </div>
+                        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3" id="p1-metrics"></div>
                     </div>
                     
-                    <!-- Tabs -->
                     <div class="px-6">
                         <div class="flex border-b border-gray-200 dark:border-gray-700 text-sm">
                             <button onclick="switchTab(1, 'scandals')" class="tab-btn active flex-1 text-center" data-tab="scandals-1">Skandaler</button>
@@ -394,7 +357,6 @@
                         </div>
                     </div>
                     
-                    <!-- Tab contents -->
                     <div class="p-6">
                         <div id="p1-scandals" class="tab-content"></div>
                         <div id="p1-support" class="tab-content hidden"></div>
@@ -409,7 +371,6 @@
                         <div class="flex items-start gap-x-4">
                             <div id="p2-avatar" 
                                  class="w-14 h-14 rounded-2xl flex-shrink-0 flex items-center justify-center text-white text-2xl font-bold shadow-inner">
-                                <!-- JS populated -->
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center gap-x-2">
@@ -424,9 +385,7 @@
                     </div>
                     
                     <div class="px-6 pt-5 pb-4">
-                        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3" id="p2-metrics">
-                            <!-- Populated by JS -->
-                        </div>
+                        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3" id="p2-metrics"></div>
                     </div>
                     
                     <div class="px-6">
@@ -457,7 +416,7 @@
             <div class="mx-auto w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-2xl flex items-center justify-center mb-4">
                 <i class="fas fa-balance-scale text-3xl text-gray-400"></i>
             </div>
-            <h3 class="font-semibold text-lg">Vælg two politikere ovenfor</h3>
+            <h3 class="font-semibold text-lg">Vælg to politikere ovenfor</h3>
             <p class="text-gray-500 dark:text-gray-400 mt-2 max-w-md mx-auto">
                 Brug søgefeltene til at finde politikere, klik på dem for at vælge, og se en detaljeret sammenligning.
             </p>
@@ -485,18 +444,17 @@
 
     <!-- Related Politicians Modal -->
     <div id="related-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="hideRelatedModal()"></div>
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="SammenlignModals.hideRelatedModal()"></div>
         
         <div class="modal relative bg-white dark:bg-gray-900 rounded-3xl shadow-2xl max-w-lg w-full max-h-[80vh] overflow-hidden border border-gray-200 dark:border-gray-700">
             <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700">
                 <h3 id="related-modal-title" class="font-semibold text-lg pr-8"></h3>
-                <button onclick="hideRelatedModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                <button onclick="SammenlignModals.hideRelatedModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
                     <i class="fas fa-times text-2xl"></i>
                 </button>
             </div>
             
             <div class="p-6 overflow-y-auto max-h-[60vh]" id="related-modal-content">
-                <!-- Populated by JS -->
             </div>
             
             <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-950 text-xs text-gray-500 dark:text-gray-400">
@@ -507,7 +465,7 @@
 
     <!-- Scandal Detail Modal -->
     <div id="scandal-modal" class="hidden fixed inset-0 z-[110] flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="hideScandalModal()"></div>
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="SammenlignModals.hideScandalModal()"></div>
         
         <div class="modal relative bg-white dark:bg-gray-900 rounded-3xl shadow-2xl max-w-2xl w-full max-h-[85vh] overflow-hidden border border-gray-200 dark:border-gray-700">
             <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-950">
@@ -515,17 +473,16 @@
                     <h3 id="scandal-modal-title" class="font-semibold text-xl"></h3>
                     <div id="scandal-modal-severity" class="mt-1"></div>
                 </div>
-                <button onclick="hideScandalModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                <button onclick="SammenlignModals.hideScandalModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
                     <i class="fas fa-times text-2xl"></i>
                 </button>
             </div>
             
             <div class="p-6 overflow-y-auto max-h-[65vh] space-y-6" id="scandal-modal-content">
-                <!-- Populated dynamically -->
             </div>
             
             <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-950 flex justify-end">
-                <button onclick="hideScandalModal()" 
+                <button onclick="SammenlignModals.hideScandalModal()" 
                         class="px-5 py-2 text-sm font-medium rounded-2xl border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
                     Luk
                 </button>
@@ -533,268 +490,16 @@
         </div>
     </div>
 
-    <!-- ===================================================== -->
-    <!-- MODULÆRE SCRIPTS (ny refaktorering)                 -->
-    <!-- ===================================================== -->
+    <!-- Modulære scripts -->
     <script src="js/sammenlign/sammenlign-data.js"></script>
     <script src="js/sammenlign/sammenlign-pdf.js"></script>
     <script src="js/sammenlign/sammenlign-render.js"></script>
     <script src="js/sammenlign/sammenlign-modals.js"></script>
+    <script src="js/sammenlign/sammenlign-init.js"></script>
 
-    <!-- ===================================================== -->
-    <!-- INITIALISERING & ORKESTRERING (lille & overskuelig) -->
-    <!-- ===================================================== -->
+    <!-- Init -->
     <script>
-        // Globale tilstande
-        window.selectedPoliticians = { 1: null, 2: null };
-
-        function initializeTailwind() {
-            document.documentElement.style.setProperty('--accent', '#1e40af');
-            tailwind.config = { darkMode: 'class' };
-        }
-
-        function initializeDarkMode() {
-            const savedTheme = localStorage.getItem('theme');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-                document.documentElement.classList.add('dark');
-            }
-        }
-
-        function toggleDarkMode() {
-            const html = document.documentElement;
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            } else {
-                html.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-
-        function toggleMobileMenu() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        }
-
-        function initializePoliticianLists() {
-            if (window.SammenlignRender) {
-                SammenlignRender.renderPoliticianList(1);
-                SammenlignRender.renderPoliticianList(2);
-            }
-        }
-
-        function filterPoliticians(side) {
-            if (window.SammenlignRender) {
-                SammenlignRender.filterPoliticians(side);
-            }
-        }
-
-        function swapPoliticians() {
-            if (!window.selectedPoliticians) return;
-            [window.selectedPoliticians[1], window.selectedPoliticians[2]] = 
-            [window.selectedPoliticians[2], window.selectedPoliticians[1]];
-
-            if (window.selectedPoliticians[1]) {
-                document.getElementById('p1-selected-name').textContent = window.selectedPoliticians[1].name;
-                document.getElementById('p1-selected-badge').classList.remove('hidden');
-                document.getElementById('p1-selected-badge').classList.add('flex');
-            }
-            if (window.selectedPoliticians[2]) {
-                document.getElementById('p2-selected-name').textContent = window.selectedPoliticians[2].name;
-                document.getElementById('p2-selected-badge').classList.remove('hidden');
-                document.getElementById('p2-selected-badge').classList.add('flex');
-            }
-            if (window.selectedPoliticians[1] && window.selectedPoliticians[2]) {
-                showComparison();
-            }
-        }
-
-        async function showComparison() {
-            const area = document.getElementById('comparison-area');
-            const empty = document.getElementById('empty-state');
-            area.classList.remove('hidden');
-            empty.classList.add('hidden');
-
-            const p1 = window.selectedPoliticians[1];
-            const p2 = window.selectedPoliticians[2];
-            document.getElementById('comparison-subtitle').textContent = `${p1.name} vs ${p2.name}`;
-
-            if (window.SammenlignRender) {
-                SammenlignRender.renderPoliticianCard(1, p1);
-                SammenlignRender.renderPoliticianCard(2, p2);
-            }
-            updateURL();
-
-            await Promise.all([
-                loadAndRenderDetails(1, p1),
-                loadAndRenderDetails(2, p2)
-            ]);
-
-            const exportBtn = document.getElementById('export-pdf-btn');
-            if (exportBtn) exportBtn.disabled = false;
-
-            area.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        async function loadAndRenderDetails(side, politician) {
-            const prefixes = ['scandals', 'support', 'promises', 'networks'];
-            prefixes.forEach(tab => {
-                const el = document.getElementById(`p${side}-${tab}`);
-                if (el) el.innerHTML = `<div class="loading-placeholder text-sm text-gray-400 py-4">Indlæser ${tab}...</div>`;
-            });
-
-            const data = await SammenlignData.loadDetailedData(politician.slug);
-            
-            politician.loadedScandals = data.scandals || [];
-            politician.loadedPromises = data.promises || [];
-            politician.loadedSupport = data.support || [];
-            politician.loadedNetworks = data.networks || [];
-
-            if (window.SammenlignRender) {
-                SammenlignRender.renderTabContentWithData(side, 'scandals', data.scandals);
-                SammenlignRender.renderTabContentWithData(side, 'support', data.support);
-                SammenlignRender.renderTabContentWithData(side, 'promises', data.promises);
-                SammenlignRender.renderTabContentWithData(side, 'networks', data.networks);
-            }
-        }
-
-        function switchTab(side, tab) {
-            if (window.SammenlignRender) {
-                SammenlignRender.switchTab(side, tab);
-            }
-        }
-
-        function updateURL() {
-            if (!window.selectedPoliticians[1] || !window.selectedPoliticians[2]) return;
-            const params = new URLSearchParams();
-            params.set('p1', window.selectedPoliticians[1].slug);
-            params.set('p2', window.selectedPoliticians[2].slug);
-            window.history.replaceState({}, '', `${window.location.pathname}?${params.toString()}`);
-        }
-
-        function loadFromURL() {
-            const params = new URLSearchParams(window.location.search);
-            const p1 = SammenlignData.POLITICIANS.find(p => p.slug === params.get('p1'));
-            const p2 = SammenlignData.POLITICIANS.find(p => p.slug === params.get('p2'));
-            if (p1 && p2) {
-                window.selectedPoliticians[1] = p1;
-                window.selectedPoliticians[2] = p2;
-
-                document.getElementById('p1-selected-name').textContent = p1.name;
-                document.getElementById('p1-selected-badge').classList.remove('hidden');
-                document.getElementById('p1-selected-badge').classList.add('flex');
-
-                document.getElementById('p2-selected-name').textContent = p2.name;
-                document.getElementById('p2-selected-badge').classList.remove('hidden');
-                document.getElementById('p2-selected-badge').classList.add('flex');
-
-                showComparison();
-            }
-        }
-
-        function shareComparison() {
-            if (!window.selectedPoliticians[1] || !window.selectedPoliticians[2]) return;
-            navigator.clipboard.writeText(window.location.href).then(() => {
-                const toast = document.createElement('div');
-                toast.className = `fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-900 text-white px-5 py-2.5 rounded-2xl text-sm flex items-center gap-x-2`;
-                toast.innerHTML = `<i class="fas fa-check mr-2"></i> Link kopieret`;
-                document.body.appendChild(toast);
-                setTimeout(() => {
-                    toast.style.transition = 'all 0.3s';
-                    toast.style.opacity = '0';
-                    setTimeout(() => toast.remove(), 200);
-                }, 1800);
-            });
-        }
-
-        function resetComparison() {
-            window.selectedPoliticians = { 1: null, 2: null };
-            document.getElementById('comparison-area').classList.add('hidden');
-            document.getElementById('empty-state').classList.remove('hidden');
-
-            document.getElementById('p1-selected-badge').classList.add('hidden');
-            document.getElementById('p1-selected-badge').classList.remove('flex');
-            document.getElementById('p2-selected-badge').classList.add('hidden');
-            document.getElementById('p2-selected-badge').classList.remove('flex');
-
-            document.querySelectorAll('.selected-politician').forEach(el => 
-                el.classList.remove('selected-politician', 'ring-2', 'ring-offset-2', 'ring-blue-500', 'dark:ring-blue-400')
-            );
-
-            document.getElementById('search1').value = '';
-            document.getElementById('search2').value = '';
-
-            if (window.SammenlignRender) {
-                SammenlignRender.filterPoliticians(1);
-                SammenlignRender.filterPoliticians(2);
-            }
-
-            window.history.replaceState({}, '', window.location.pathname);
-
-            if (window.SammenlignModals) {
-                SammenlignModals.hideRelatedModal();
-                SammenlignModals.hideScandalModal();
-            }
-
-            const exportBtn = document.getElementById('export-pdf-btn');
-            if (exportBtn) {
-                exportBtn.disabled = false;
-                exportBtn.innerHTML = '<i class="fas fa-file-pdf mr-2"></i> Eksporter til PDF';
-            }
-        }
-
-        function setupKeyboardSupport() {
-            document.addEventListener('keydown', function(e) {
-                if (e.key === '/' && document.activeElement.tagName === 'BODY') {
-                    e.preventDefault();
-                    document.getElementById('search1').focus();
-                }
-                if (e.key.toLowerCase() === 'r' && (e.metaKey || e.ctrlKey) && 
-                    window.selectedPoliticians[1] && window.selectedPoliticians[2]) {
-                    e.preventDefault();
-                    resetComparison();
-                }
-                if (e.key === 'Escape') {
-                    if (window.SammenlignModals) {
-                        const r = document.getElementById('related-modal');
-                        const s = document.getElementById('scandal-modal');
-                        if (r && !r.classList.contains('hidden')) SammenlignModals.hideRelatedModal();
-                        else if (s && !s.classList.contains('hidden')) SammenlignModals.hideScandalModal();
-                    }
-                }
-            });
-
-            const search1 = document.getElementById('search1');
-            if (search1) search1.placeholder = 'Søg... (tryk / for at fokusere)';
-        }
-
-        async function initializeComparisonPage() {
-            initializeTailwind();
-            initializeDarkMode();
-            initializePoliticianLists();
-            setupKeyboardSupport();
-
-            await SammenlignData.buildCrossReferenceIndex();
-
-            const exportBtn = document.getElementById('export-pdf-btn');
-            if (exportBtn) exportBtn.disabled = true;
-
-            loadFromURL();
-
-            console.log('%c[Sammenlign] Refaktorering færdig – modulær version aktiv.', 'color:#64748b');
-        }
-
-        window.onload = initializeComparisonPage;
-
-        // Gør vigtige funktioner globalt tilgængelige (til onclick i HTML)
-        window.filterPoliticians = filterPoliticians;
-        window.swapPoliticians = swapPoliticians;
-        window.resetComparison = resetComparison;
-        window.shareComparison = shareComparison;
-        window.switchTab = switchTab;
-        window.exportComparisonToPDF = exportComparisonToPDF;
-        window.toggleDarkMode = toggleDarkMode;
-        window.toggleMobileMenu = toggleMobileMenu;
+        window.onload = () => SammenlignInit.init();
     </script>
 </body>
 </html>
