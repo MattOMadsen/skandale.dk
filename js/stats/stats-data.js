@@ -1,23 +1,20 @@
 // js/stats/stats-data.js
 // Data loading, politician meta and aggregation for the stats page
 
-const POLITICIAN_META = {
-    "mette-frederiksen": { name: "Mette Frederiksen", party: "Socialdemokratiet", partyShort: "S", color: "#E30613" },
-    "inger-stoejberg": { name: "Inger Støjberg", party: "Danmarksdemokraterne", partyShort: "DD", color: "#0055A5" },
-    "morten-oestergaard": { name: "Morten Østergaard", party: "Radikale Venstre", partyShort: "RV", color: "#00AEEF" },
-    "helle-thorning-schmidt": { name: "Helle Thorning-Schmidt", party: "Socialdemokratiet", partyShort: "S", color: "#E30613" },
-    "lars-loekke-rasmussen": { name: "Lars Løkke Rasmussen", party: "Moderaterne", partyShort: "M", color: "#6B2D7B" },
-    "pia-kjaersgaard": { name: "Pia Kjærsgaard", party: "Dansk Folkeparti", partyShort: "DF", color: "#F7C948" },
-    "anders-fogh-rasmussen": { name: "Anders Fogh Rasmussen", party: "Venstre", partyShort: "V", color: "#0033A0" },
-    "morten-messerschmidt": { name: "Morten Messerschmidt", party: "Dansk Folkeparti", partyShort: "DF", color: "#F7C948" },
-    "kristian-thulesen-dahl": { name: "Kristian Thulesen Dahl", party: "Dansk Folkeparti", partyShort: "DF", color: "#F7C948" },
-    "soeren-pape-poulsen": { name: "Søren Pape Poulsen", party: "Det Konservative Folkeparti", partyShort: "K", color: "#0066B3" },
-    "uffe-elbaek": { name: "Uffe Elbæk", party: "Frie Grønne", partyShort: "FG", color: "#4CAF50" },
-    "claus-hjort-frederiksen": { name: "Claus Hjort Frederiksen", party: "Venstre", partyShort: "V", color: "#0033A0" },
-    "pernille-skipper": { name: "Pernille Skipper", party: "Enhedslisten", partyShort: "EL", color: "#E30613" },
-    "pernille-vermund": { name: "Pernille Vermund", party: "Nye Borgerlige", partyShort: "NB", color: "#8B5CF6" },
-    "alex-vanopslagh": { name: "Alex Vanopslagh", party: "Liberal Alliance", partyShort: "LA", color: "#F59E0B" },
-    "ida-auken": { name: "Ida Auken", party: "Socialdemokratiet", partyShort: "S", color: "#E30613" }
+const PARTY_SHORT = {
+    'Socialdemokratiet': 'S',
+    'Danmarksdemokraterne': 'DD',
+    'Radikale Venstre': 'RV',
+    'Moderaterne': 'M',
+    'Dansk Folkeparti': 'DF',
+    'Venstre': 'V',
+    'Det Konservative Folkeparti': 'K',
+    'Enhedslisten': 'EL',
+    'Nye Borgerlige': 'NB',
+    'Liberal Alliance': 'LA',
+    'Alternativet / Uafhængig': 'Å',
+    'Frie Grønne': 'FG',
+    'Socialistisk Folkeparti': 'SF'
 };
 
 let politiciansData = [];
@@ -32,6 +29,47 @@ async function fetchJSON(path) {
         console.warn('Kunne ikke hente', path, e);
         return null;
     }
+}
+
+async function loadScandalsForStats(slug) {
+    const manifest = await fetchJSON(`data/scandals/${slug}/manifest.json`);
+    if (manifest?.scandals && Array.isArray(manifest.scandals)) {
+        const items = await Promise.all(
+            manifest.scandals.map(f => fetchJSON(`data/scandals/${slug}/${f}`))
+        );
+        return items.filter(Boolean);
+    }
+
+    const single = await fetchJSON(`data/scandals/${slug}.json`);
+    if (single?.scandals) return single.scandals;
+    if (Array.isArray(single)) return single;
+    return [];
+}
+
+async function loadBrokenPromisesForStats(slug) {
+    const manifest = await fetchJSON(`data/broken-promises/${slug}/manifest.json`);
+    if (manifest?.brokenPromises && Array.isArray(manifest.brokenPromises)) {
+        const items = await Promise.all(
+            manifest.brokenPromises.map(f => fetchJSON(`data/broken-promises/${slug}/${f}`))
+        );
+        return items.filter(Boolean);
+    }
+
+    const single = await fetchJSON(`data/broken-promises/${slug}.json`);
+    if (single?.brokenPromises) return single.brokenPromises;
+    return [];
+}
+
+function metaFromCore(slug, core) {
+    if (!core) {
+        return { name: slug, party: 'Ukendt', partyShort: '?', color: '#6B7280' };
+    }
+    return {
+        name: core.name || slug,
+        party: core.party || 'Ukendt',
+        partyShort: PARTY_SHORT[core.party] || '?',
+        color: core.partyColor || core.avatarColor || '#6B7280'
+    };
 }
 
 async function loadAllStatsData() {
@@ -49,44 +87,29 @@ async function loadAllStatsData() {
         const countEl = document.getElementById('politicianCount');
         if (countEl) countEl.textContent = slugs.length;
 
-        const scandalPromises = slugs.map(slug => fetchJSON(`data/scandals/${slug}.json`));
-        const promisePromises = slugs.map(slug => fetchJSON(`data/broken-promises/${slug}.json`));
-        const donationPromises = slugs.map(slug => fetchJSON(`data/economic-support/${slug}.json`));
+        politiciansData = await Promise.all(slugs.map(async (slug) => {
+            const [core, scandals, brokenPromises, donationData] = await Promise.all([
+                fetchJSON(`data/politicians/${slug}.json`),
+                loadScandalsForStats(slug),
+                loadBrokenPromisesForStats(slug),
+                fetchJSON(`data/economic-support/${slug}.json`)
+            ]);
 
-        const [scandalResults, promiseResults, donationResults] = await Promise.all([
-            Promise.all(scandalPromises),
-            Promise.all(promisePromises),
-            Promise.all(donationPromises)
-        ]);
-
-        politiciansData = slugs.map((slug, index) => {
-            const meta = POLITICIAN_META[slug] || { name: slug, party: 'Ukendt', partyShort: '?', color: '#6B7280' };
-            const scandalData = scandalResults[index];
-            const promiseData = promiseResults[index];
-            const donationData = donationResults[index];
+            const meta = metaFromCore(slug, core);
 
             let scandalCount = 0;
             let totalSeverity = 0;
-            let severityCounts = {1:0, 2:0, 3:0, 4:0, 5:0};
+            const severityCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
 
-            if (scandalData && scandalData.scandals) {
-                scandalCount = scandalData.scandals.length;
-                scandalData.scandals.forEach(s => {
-                    const sev = s.ourSeverity || s.severity || 3;
-                    totalSeverity += sev;
-                    if (severityCounts[sev] !== undefined) severityCounts[sev]++;
-                });
-            }
+            scandalCount = scandals.length;
+            scandals.forEach(s => {
+                const sev = s.ourSeverity || s.severity || 3;
+                totalSeverity += sev;
+                if (severityCounts[sev] !== undefined) severityCounts[sev]++;
+            });
 
-            let brokenPromiseCount = 0;
-            if (promiseData && promiseData.brokenPromises) {
-                brokenPromiseCount = promiseData.brokenPromises.length;
-            }
-
-            let donationCount = 0;
-            if (donationData && donationData.donations) {
-                donationCount = donationData.donations.length;
-            }
+            const brokenPromiseCount = brokenPromises.length;
+            const donationCount = donationData?.donations?.length || 0;
 
             return {
                 slug,
@@ -100,14 +123,12 @@ async function loadAllStatsData() {
                 brokenPromiseCount,
                 donationCount
             };
-        });
+        }));
 
-        // Trigger render after data is ready
         if (typeof renderAll === 'function') {
             renderAll();
         }
 
-        // Update last updated
         const lastUpdatedEl = document.getElementById('lastUpdated');
         if (lastUpdatedEl) {
             lastUpdatedEl.textContent = new Date().toLocaleDateString('da-DK');
@@ -137,6 +158,5 @@ function createSkeletonMetrics() {
     `).join('');
 }
 
-// Expose for other modules if needed
 window.loadAllStatsData = loadAllStatsData;
 window.politiciansData = politiciansData;

@@ -46,7 +46,11 @@ async function loadPoliticians() {
         'kristian-thulesen-dahl', 'soeren-pape-poulsen', 'uffe-elbaek', 'claus-hjort-frederiksen',
         'pernille-skipper', 'pernille-vermund', 'alex-vanopslagh', 'ida-auken',
         'nicolai-wammen', 'troels-lund-poulsen', 'sophie-loehde', 'pia-olsen-dyhr',
-        'henrik-dahl', 'mona-juul', 'mattias-tesfaye', 'rosa-lund'
+        'henrik-dahl', 'mona-juul', 'mattias-tesfaye', 'rosa-lund',
+        'magnus-heunicke', 'dan-jorgensen', 'ane-halsboe-jorgensen', 'stephanie-lose',
+        'karina-lorentzen', 'mette-abildgaard', 'jeppe-bruus', 'marcus-knuth',
+        'rasmus-stoklund', 'morten-boedskov', 'christine-egelund', 'jakob-engel-schmidt',
+        'mai-mercado', 'pelle-dragsted', 'peter-skaarup', 'jakob-ellemann-jensen'
       ];
     }
 
