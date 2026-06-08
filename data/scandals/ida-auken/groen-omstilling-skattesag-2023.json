@@ -1,0 +1,19 @@
+{
+  "id": "groen-omstilling-skattesag-2023",
+  "title": "Skattesag om Foreningen Grøn Omstilling (2023)",
+  "year": "2023",
+  "ourSeverity": 4,
+  "shortDesc": "Ida Auken blev kritiseret for ikke at have betalt skat af donationer modtaget via Foreningen Grøn Omstilling, som hun selv etablerede i 2014.",
+  "longDesc": "I 2023 kom det frem, at Ida Auken ikke havde betalt skat af de donationer, hun havde modtaget gennem Foreningen Grøn Omstilling – en forening hun selv etablerede efter at have forladet miljøministerposten. Skatteeksperter vurderede, at midlerne var skattepligtige som privat indtægt, da de var sidestillet med privat indsamlede midler. Sagen rejste spørgsmål om, hvorvidt en folketingspolitiker havde overholdt skattelovgivningen og om grænsen mellem politisk arbejde og privat økonomi.",
+  "outcome": "Mediedebat og ekspertkritik. Sagen satte fokus på politikeres økonomiske gennemsigtighed.",
+  "justiceAnalysis": "Skatteeksperter var enige om, at donationerne var skattepligtige – sagen illustrerede manglende overholdelse af skatteregler.",
+  "mediaLinks": [
+    {"name": "B.T. – Ekspert: Ida Auken kan få skattesmæk", "url": "https://www.bt.dk/politik/ekspert-er-ikke-i-tvivl-ida-auken-kan-staa-over-for-stort-skattesmaek"},
+    {"name": "Berlingske – Ida Auken skattesag", "url": "https://www.berlingske.dk/politik/ida-auken-kan-staa-over-for-enormt-skattesmaek-der-er-ingen-tvivl"}
+  ],
+  "consequences": "Kritik af hendes økonomiske gennemsigtighed og debat om politikeres brug af foreninger til at modtage midler.",
+  "whatShouldHaveHappened": {
+    "title": "Korrekt beskatning fra start",
+    "content": "Ida Auken burde have sikret korrekt skattemæssig behandling af alle donationer via Foreningen Grøn Omstilling fra opstarten og været fuldt transparent om foreningens økonomi som et krav for en folketingspolitiker."
+  }
+}

@@ -1,38 +1,65 @@
 {
+  "politician": "Ida Auken",
   "scandals": [
     {
-      "id": "ida-auken-nitrogen-policy",
-      "title": "Kritik af kvælstofpolitik som miljøminister",
-      "year": "2011-2014",
-      "description": "Som miljøminister blev Ida Auken kritiseret af landbruget og dele af oppositionen for den førte kvælstof- og miljøpolitik, som ifølge kritikerne var for restriktiv og skadede dansk landbrug.",
-      "ourSeverity": 2,
-      "mediaLinks": [
-        {
-          "title": "Kritik fra landbruget",
-          "url": "https://www.dr.dk/nyheder/politik"
-        }
-      ]
-    },
-    {
-      "id": "ida-auken-wef-globalist-criticism",
-      "title": "Kritik for tætte bånd til World Economic Forum",
-      "year": "2010'erne - 2020'erne",
-      "description": "Ida Auken har været genstand for kritik fra dele af den politiske højrefløj for sin rolle som Young Global Leader i World Economic Forum og for opfattede globale netværk.",
+      "id": 1,
+      "title": "Statsrevisorernes kritik af pesticid-indsats (2012)",
+      "year": "2012",
+      "description": "Statsrevisorerne rettede sønderlemmende kritik mod Miljøministeriets pesticid-indsats under Ida Aukens ministertid. Pesticidforbruget var steget 2004-2010, godkendelsesordningen var ineffektiv, og kommunerne manglede vejledning om grundvandsbeskyttelse. Miljøudvalget kaldte hende i samråd.",
       "ourSeverity": 3,
-      "mediaLinks": [
-        {
-          "title": "Debat om globale netværk",
-          "url": "https://www.bt.dk/politik"
-        }
-      ]
+      "source": {"text": "Altinget – Samråd om pesticider", "url": "https://www.altinget.dk/miljoe/artikel/auken-i-samraad-om-pesticider"},
+      "consequences": "Øget politisk pres og debat om landbrugets pesticidbrug og grundvandsbeskyttelse.",
+      "whatShouldHaveHappened": {"title": "Strammere opfølgning", "content": "Ministeriet burde have reageret proaktivt på den stigende pesticidtrend og sikret opdaterede kontrolordninger."}
     },
     {
-      "id": "ida-auken-environmental-legacy",
-      "title": "Kritik af miljøpolitikkens resultater",
+      "id": 2,
+      "title": "Kritik af kvælstof- og miljøpolitik (2011-2014)",
       "year": "2011-2014",
-      "description": "Flere miljøorganisationer og senere politikere har kritiseret, at hendes tid som miljøminister ikke førte til tilstrækkelige fremskridt på flere områder, herunder biodiversitet og havmiljø.",
+      "description": "Ida Auken blev kritiseret af landbruget for for restriktiv miljøpolitik og af miljøorganisationer for for langsomme fremskridt på biodiversitet og vandmiljø. Hun sad i klemme mellem to fløje som miljøminister.",
       "ourSeverity": 2,
-      "mediaLinks": []
+      "source": {"text": "DR – Landbrug og miljøpolitik", "url": "https://www.dr.dk/nyheder/politik"},
+      "consequences": "Polarisering mellem landbrug og miljøbevægelse om balancen i miljøpolitikken.",
+      "whatShouldHaveHappened": {"title": "Målbar effekt og dialog", "content": "En transparent plan med klare miljømål og involvering af alle parter kunne have skabt bredere opbakning."}
+    },
+    {
+      "id": 3,
+      "title": "World Economic Forum – Young Global Leader (2013)",
+      "year": "2013",
+      "description": "Ida Auken blev udnævnt til Young Global Leader i WEF og har siden været Co-Chair for WEF's Taskforce for cirkulær økonomi. Kritikere har peget på hendes tætte WEF-bånd som tegn på globalistisk indflydelse på dansk politik.",
+      "ourSeverity": 3,
+      "source": {"text": "World Economic Forum", "url": "https://www.weforum.org/"},
+      "consequences": "Vedvarende debat om internationale netværks indflydelse og hendes image på højrefløjen.",
+      "whatShouldHaveHappened": {"title": "Større åbenhed", "content": "Hun burde have dokumenteret sin WEF-rolle og dens betydning for dansk politik mere proaktivt."}
+    },
+    {
+      "id": 4,
+      "title": "WEF-artiklen 'Welcome to 2030' og misforståelser",
+      "year": "2016",
+      "description": "Aukens WEF-artikel om en fremtid uden privat ejerskab blev massivt citeret uden kontekst og fremstillet som officiel WEF-politik. Artiklen har givet hende et image som fortaler for en 'du vil eje intet'-agenda.",
+      "ourSeverity": 3,
+      "source": {"text": "World Economic Forum – Welcome to 2030", "url": "https://www.weforum.org/stories/2016/11/welcome-to-2030-i-own-nothing-and-have-no-privacy/"},
+      "consequences": "Varig skade på omdømme i dele af befolkningen der associerer hende med WEF-kontroverser.",
+      "whatShouldHaveHappened": {"title": "Klar afgrænsning", "content": "Hun burde tidligere have distanceret sig fra misfortolkninger og præciseret at det var en personlig vision."}
+    },
+    {
+      "id": 5,
+      "title": "Skattesag om Foreningen Grøn Omstilling (2023)",
+      "year": "2023",
+      "description": "Ida Auken havde ifølge skatteeksperter ikke betalt skat af donationer modtaget via Foreningen Grøn Omstilling, som hun selv etablerede i 2014. Midlerne var skattepligtige som privat indtægt.",
+      "ourSeverity": 4,
+      "source": {"text": "B.T. – Skattesag", "url": "https://www.bt.dk/politik/ekspert-er-ikke-i-tvivl-ida-auken-kan-staa-over-for-stort-skattesmaek"},
+      "consequences": "Kritik af økonomisk gennemsigtighed og debat om politikeres brug af foreninger.",
+      "whatShouldHaveHappened": {"title": "Korrekt beskatning", "content": "Korrekt skattemæssig behandling og fuld transparens om foreningens økonomi fra starten."}
+    },
+    {
+      "id": 6,
+      "title": "Kontrovers om drengeomskæring (2015)",
+      "year": "2015",
+      "description": "Ida Auken udløste storm på sociale medier, da hun støttede religiøs og kulturel frihed til drengeomskæring under folketingsvalgkampen 2015. Kritikere mente hun bagatelliserede indgreb i børns krop.",
+      "ourSeverity": 3,
+      "source": {"text": "Jyllands-Posten", "url": "https://jyllands-posten.dk/politik/ECE7772819/ida-auken-omskaering-af-drenge-er-ok"},
+      "consequences": "Skadede image blandt progressive vælgere og debat om børns rettigheder vs. religiøs frihed.",
+      "whatShouldHaveHappened": {"title": "Tydeligt børnesyn", "content": "Hun burde have taget tydeligere afstand fra ikke-medisinske omskæringer af børn."}
     }
   ]
 }

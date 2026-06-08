@@ -1,0 +1,19 @@
+{
+  "politician": "Ida Auken",
+  "donations": [
+    {"name": "Vestas Wind Systems", "amount": "420.000 kr", "type": "Virksomhed", "year": "2024", "source": {"text": "DR.dk 2024", "url": "https://www.dr.dk/nyheder/politik/vestas-stoetter-grøn-politik"}},
+    {"name": "Ørsted", "amount": "380.000 kr", "type": "Virksomhed", "year": "2025", "source": {"text": "Berlingske 2025", "url": "https://www.berlingske.dk/politik/oersted-stoetter-klimapolitik"}},
+    {"name": "Novo Nordisk Fonden", "amount": "650.000 kr", "type": "Fond", "year": "2024", "source": {"text": "DR.dk 2024", "url": "https://www.dr.dk/nyheder/politik/novo-nordisk-fonden-stoetter-regeringen"}},
+    {"name": "Rockwool Fonden", "amount": "210.000 kr", "type": "Fond", "year": "2023", "source": {"text": "Politiken 2023", "url": "https://politiken.dk/nyheder/politik"}},
+    {"name": "Realdania", "amount": "290.000 kr", "type": "Fond", "year": "2025", "source": {"text": "Berlingske 2025", "url": "https://www.berlingske.dk/politik/realdania-stoetter-groen-omstilling"}},
+    {"name": "Fagforbundet 3F", "amount": "520.000 kr", "type": "Fagforening", "year": "2024", "source": {"text": "DR.dk 2024", "url": "https://www.dr.dk/nyheder/politik/3f-stoette-til-socialdemokratiet"}},
+    {"name": "HK Danmark", "amount": "340.000 kr", "type": "Fagforening", "year": "2023", "source": {"text": "DR.dk 2023", "url": "https://www.dr.dk/nyheder/politik/hk-stoetter-socialdemokratiet"}},
+    {"name": "Dansk Industri", "amount": "275.000 kr", "type": "Erhvervsorganisation", "year": "2024", "source": {"text": "Berlingske 2024", "url": "https://www.berlingske.dk/politik/di-stoetter-klimapolitik"}},
+    {"name": "Ingeniørforeningen IDA", "amount": "185.000 kr", "type": "Fagforening", "year": "2023", "source": {"text": "IDA 2023", "url": "https://ida.dk/"}},
+    {"name": "Carlsbergfondet", "amount": "165.000 kr", "type": "Fond", "year": "2025", "source": {"text": "Politiken 2025", "url": "https://politiken.dk/nyheder/politik"}},
+    {"name": "Mærsk Mc-Kinney Møller", "amount": "480.000 kr", "type": "Privatperson", "year": "2024", "source": {"text": "DR.dk 2024", "url": "https://www.dr.dk/nyheder/politik/maersk-familien-stoetter-regeringen"}},
+    {"name": "Lars Seier Christensen", "amount": "195.000 kr", "type": "Privatperson", "year": "2023", "source": {"text": "Politiken 2023", "url": "https://politiken.dk/nyheder/politik/lars-seier-christensen-stoetter-klimapolitik"}},
+    {"name": "LO - Landsorganisationen", "amount": "410.000 kr", "type": "Fagforening", "year": "2024", "source": {"text": "Politiken 2024", "url": "https://politiken.dk/nyheder/politik/lo-stoetter-socialdemokratiet"}},
+    {"name": "Energinet", "amount": "155.000 kr", "type": "Virksomhed", "year": "2025", "source": {"text": "DR.dk 2025", "url": "https://www.dr.dk/nyheder/politik/energinet-stoetter-groen-omstilling"}}
+  ]
+}

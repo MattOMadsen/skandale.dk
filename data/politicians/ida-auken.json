@@ -1,23 +1,17 @@
 {
   "id": 16,
   "name": "Ida Auken",
-  "party": "Radikale Venstre",
-  "partyColor": "#E30613",
-  "role": "Medlem af Folketinget",
-  "avatarColor": "#E30613",
+  "party": "Socialdemokratiet",
+  "partyColor": "#C8102E",
+  "role": "Sundheds- og kirkeminister siden 2026",
+  "avatarColor": "#C8102E",
   "initials": "IA",
-  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Ida_Auken_2019.jpg/440px-Ida_Auken_2019.jpg",
-  "bio": "Tidligere miljøminister (2011-2014) og medlem af Radikale Venstre. Har været Young Global Leader hos World Economic Forum og har en markant international profil.",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Ida_Auken.2022.jpg/440px-Ida_Auken.2022.jpg",
+  "bio": "Dansk politiker og tidligere miljøminister (2011-2014). Kendt for sin internationale profil inden for klima og cirkulær økonomi, herunder som Young Global Leader i World Economic Forum. Har været folketingsmedlem for SF, Radikale Venstre og siden 2021 Socialdemokratiet.",
+  "careerTimeline": "2005 – Stillede op for SF ved folketingsvalget (ikke valgt).\n\n2007 – Valgt til Folketinget for Socialistisk Folkeparti med næsten 10.000 personlige stemmer.\n\n2010 – Formand for Folketingets Miljøudvalg.\n\n2011 – Udnævnt til miljøminister i Helle Thorning-Schmidts regering.\n\n2013 – Udnævnt til Young Global Leader af World Economic Forum.\n\n2014 – SF træder ud af regeringen. Ida Auken skifter til Radikale Venstre.\n\n2015 – Genvalgt til Folketinget for Radikale med over 10.000 personlige stemmer.\n\n2016 – Medstifter af SIRI-Kommissionen om kunstig intelligens.\n\n2019 – Presser på for 70%-klimamål i 2030 under valgkampen.\n\n2021 – Skifter til Socialdemokratiet efter sexismesag i Radikale.\n\n2023 – Kritik for manglende beskatning af donationer via Foreningen Grøn Omstilling.\n\n2026 – Udnævnt til sundheds- og kirkeminister i Mette Frederiksens regering.",
   "beforePolitics": {
-    "title": "Baggrund",
-    "content": "Ida Auken er uddannet teolog fra Københavns Universitet. Hun har været aktiv i Radikale Venstre siden starten af 2000'erne og blev valgt til Folketinget i 2007."
+    "title": "Før politik / Ungdom",
+    "content": "Ida Auken blev født i 1978 på Frederiksberg som datter af Europa-parlamentariker Margrete Auken og litteraturprofessor Erik A. Nielsen – og er niece til den tidligere socialdemokratiske formand Svend Auken. Hun gik på Sankt Annæ Gymnasium, spillede håndbold i Ajax København og blev uddannet teolog fra Københavns Universitet (1998-2006). Før sin politiske karriere arbejdede hun som hospitalspræst, fængselspræst, ekstern lektor og forlagsredaktør."
   },
-  "careerTimeline": "2007: Valgt til Folketinget for Radikale Venstre. 2011-2014: Miljøminister i Thorning-Schmidt-regeringen. Har deltaget i internationale netværk, herunder som Young Global Leader i World Economic Forum. Har senere været aktiv som debattør og kommentator.",
-  "affiliations": [
-    {
-      "name": "World Economic Forum - Young Global Leaders",
-      "year": "ca. 2010'erne",
-      "role": "Young Global Leader"
-    }
-  ]
+  "scandalsFile": "data/scandals/ida-auken.json"
 }

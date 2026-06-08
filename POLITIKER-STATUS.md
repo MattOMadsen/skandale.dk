@@ -1,6 +1,6 @@
 # Politiker Status Oversigt – Skandale.dk
 
-**Sidst opdateret:** 3. juni 2026
+**Sidst opdateret:** 8. juni 2026
 
 ## Formål
 Denne fil giver et overblik over, hvor komplette de enkelte politikere er i forhold til den struktur der er defineret i `MODAL-STRUKTUR.md`.
@@ -15,7 +15,7 @@ Fokus er primært på de sidst tilføjede politikere, da de oprindelige 12 gener
 | **Pernille Skipper**      | **Nej**         | Ja                             | Ja                 | Ja                        | ?                | ?                    | Mangler `image` |
 | **Pernille Vermund**      | **Nej**         | Ja                             | Ja                 | Ja                        | ?                | ?                    | Mangler `image` |
 | **Alex Vanopslagh**       | **Nej**         | Ja                             | Ja                 | **Nej**                   | ?                | ?                    | Mangler både `image` og broken-promises mappe |
-| **Ida Auken**             | Ja              | Ja                             | Ja                 | Ja                        | Ja               | ?                    | Bedst af de nye – har `image` |
+| **Ida Auken**             | Ja              | Ja                             | Ja                 | Ja                        | Ja               | Ja                   | Komplet (reference-niveau som Mette F.) |
 
 ## Detaljer pr. nyere politiker
 
@@ -37,9 +37,12 @@ Fokus er primært på de sidst tilføjede politikere, da de oprindelige 12 gener
 - Anbefaling: Høj prioritet – både billede og broken-promises data mangler
 
 ### Ida Auken
-- Har: `image` felt (Wikimedia)
-- Har: affiliations array
-- Ser relativt komplet ud sammenlignet med de andre nye
+- Har: `image` felt (Wikimedia 2022)
+- Har: 6 skandaler (granulær mappe + single-file)
+- Har: 6 brudte løfter (granulær mappe + single-file)
+- Har: 14 donorer i economic-support
+- Har: 6 internationale netværk/tilknytninger
+- Opdateret: Socialdemokratiet, sundheds- og kirkeminister (2026)
 
 ## Anbefalinger
 

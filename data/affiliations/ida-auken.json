@@ -1,10 +1,40 @@
 {
   "affiliations": [
     {
-      "name": "World Economic Forum - Young Global Leaders",
-      "year": "ca. 2010'erne",
-      "role": "Young Global Leader",
-      "description": "Udvalgt som Young Global Leader af World Economic Forum."
+      "name": "Young Global Leaders",
+      "organization": "World Economic Forum (WEF)",
+      "year": "2013",
+      "role": "Young Global Leader"
+    },
+    {
+      "name": "Taskforce for Cirkulær Økonomi",
+      "organization": "World Economic Forum (WEF)",
+      "year": "2014-",
+      "role": "Co-Chair"
+    },
+    {
+      "name": "Future of Urban Development & Services",
+      "organization": "World Economic Forum (WEF)",
+      "year": "2014-",
+      "role": "Advisory Board"
+    },
+    {
+      "name": "40 under 40 European Young Leaders",
+      "organization": "Friends of Europe",
+      "year": "2012",
+      "role": "Udvalgt leder"
+    },
+    {
+      "name": "SIRI-Kommissionen",
+      "organization": "IDA (Ingeniørforeningen i Danmark)",
+      "year": "2016",
+      "role": "Medstifter"
+    },
+    {
+      "name": "UNICEF Danmark",
+      "organization": "UNICEF",
+      "year": "2016-",
+      "role": "Præsidie"
     }
   ]
 }

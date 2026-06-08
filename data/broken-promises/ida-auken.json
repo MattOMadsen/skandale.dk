@@ -1,11 +1,53 @@
 {
+  "politician": "Ida Auken",
   "brokenPromises": [
     {
-      "id": "ida-auken-environment-promises",
-      "title": "Miljømål ikke fuldt indfriet",
-      "year": "2011-2014",
-      "description": "Som miljøminister lovede Ida Auken ambitiøse miljøforbedringer, men flere mål inden for vandmiljø og biodiversitet blev ifølge kritikere ikke fuldt indfriet i perioden.",
-      "severity": 2
+      "id": 1,
+      "title": "Vi lover ambitiøse miljøforbedringer for vandmiljø og biodiversitet",
+      "year": "2011",
+      "whatHappened": "Som miljøminister lovede Ida Auken ambitiøse forbedringer, men flere mål for vandmiljø og biodiversitet blev ifølge kritikere ikke fuldt indfriet i perioden 2011-2014.",
+      "source": {"text": "Danmarks Naturfredningsforening & DR", "url": "https://www.dn.dk/"},
+      "otherPoliticians": ["Helle Thorning-Schmidt", "Kirsten Brosbøl"]
+    },
+    {
+      "id": 2,
+      "title": "Vi lover at reducere pesticidforbruget",
+      "year": "2011",
+      "whatHappened": "Statsrevisorerne dokumenterede, at pesticidforbruget var steget 2004-2010 – stik imod den politiske målsætning – og ministeriets indsats blev kaldt utilstrækkelig.",
+      "source": {"text": "Altinget – Statsrevisorernes pesticidkritik", "url": "https://www.altinget.dk/miljoe/artikel/auken-i-samraad-om-pesticider"},
+      "otherPoliticians": ["Mette Frederiksen"]
+    },
+    {
+      "id": 3,
+      "title": "Vi lover stærkere beskyttelse af grundvandet",
+      "year": "2011",
+      "whatHappened": "Kommunerne manglede vejledning om grundvandsbeskyttelse, og kontrollisten over pesticider i grundvand var forældet under hendes ministertid.",
+      "source": {"text": "Statsrevisorerne & GEUS", "url": "https://www.rigsrevisionen.dk/"},
+      "otherPoliticians": []
+    },
+    {
+      "id": 4,
+      "title": "Vi lover ambitiøse klimamål – 70% reduktion i 2030",
+      "year": "2019",
+      "whatHappened": "Ida Auken var indledningsvis skeptisk over for 70%-målet som radikal ordfører, men blev overtalt under valgkampen 2019. Kritikere mente, at modstanden viste manglende klimalederskab.",
+      "source": {"text": "Information – Radikale og 70%-mål", "url": "https://www.information.dk/indland/2019/05/radikale-kritiserede-klimakrav-paa-70-procent-kraever"},
+      "otherPoliticians": ["Morten Østergaard", "Pernille Skipper"]
+    },
+    {
+      "id": 5,
+      "title": "Vi lover at føre an i den grønne og cirkulære omstilling",
+      "year": "2014",
+      "whatHappened": "Kritikere har peget på, at konkrete politiske resultater ikke levede op til retorikken om grøn omstillingslederskab og cirkulær økonomi.",
+      "source": {"text": "The Guardian & CONCITO", "url": "https://concito.dk/"},
+      "otherPoliticians": ["Lars Løkke Rasmussen"]
+    },
+    {
+      "id": 6,
+      "title": "Vi lover forbedring af havmiljøet og reduktion af kvælstofudledning",
+      "year": "2011",
+      "whatHappened": "Havmiljøet og kvælstofudledning fra landbruget forblev store udfordringer. Kritikere mente, at tiltag mod landbrugets udledning gik for langsomt.",
+      "source": {"text": "Aarhus Universitet DCE & DR", "url": "https://dce.au.dk/"},
+      "otherPoliticians": ["Mette Frederiksen"]
     }
   ]
 }
