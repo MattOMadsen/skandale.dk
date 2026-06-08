@@ -1,4 +1,4 @@
-// js/modal-donor.js - Sikker version uden rekursion (v2.00.46)
+// js/modal-donor.js - Økonomisk støtte med krydsreferencer
 
 function addEconomicSupportSection(politician) {
   let supportHTML = '';
@@ -11,12 +11,12 @@ function addEconomicSupportSection(politician) {
     donations.forEach((s, index) => {
       const hiddenClass = index >= initialCount ? 'hidden donation-row' : '';
       const yearDisplay = s.year || '-';
-      const kildeHTML = s.source && s.source.url 
-        ? `<a href="${s.source.url}" target="_blank" class="text-[#C8102E] underline text-xs">${s.source.text || 'Kilde'}</a>` 
+      const kildeHTML = s.source && s.source.url
+        ? `<a href="${s.source.url}" target="_blank" class="text-[#C8102E] underline text-xs">${s.source.text || 'Kilde'}</a>`
         : '';
 
       tableRows += `
-        <tr class="border-t border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 cursor-pointer ${hiddenClass}" onclick="showDonorModal('${s.name}')">
+        <tr class="donor-row border-t border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 cursor-pointer ${hiddenClass}" data-donor="${encodeURIComponent(s.name)}">
           <td class="px-4 py-3 text-[#C8102E] hover:underline">${s.name}</td>
           <td class="px-4 py-3 text-right font-medium">${s.amount}</td>
           <td class="px-4 py-3 text-xs text-slate-500">${s.type}</td>
@@ -30,11 +30,11 @@ function addEconomicSupportSection(politician) {
     if (donations.length > initialCount) {
       showMoreHTML = `
         <div class="px-4 py-3 bg-slate-100 dark:bg-slate-700 border-t border-slate-200 dark:border-slate-700 flex justify-center gap-x-3" id="show-more-container-${politician.id}">
-          <button onclick="showMoreDonations(${politician.id}, ${initialCount}, ${showMoreCount})" 
+          <button onclick="showMoreDonations(${politician.id}, ${initialCount}, ${showMoreCount})"
                   class="px-4 py-1.5 text-sm font-medium text-[#C8102E] hover:bg-white dark:hover:bg-slate-600 rounded-xl border border-[#C8102E]/30 transition-colors">
             Vis ${Math.min(showMoreCount, donations.length - initialCount)} flere
           </button>
-          <button onclick="hideAllDonations(${politician.id})" 
+          <button onclick="hideAllDonations(${politician.id})"
                   class="px-4 py-1.5 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-600 rounded-xl border border-slate-300 dark:border-slate-600 transition-colors hidden" id="hide-all-btn-${politician.id}">
             Skjul alle
           </button>
@@ -66,7 +66,7 @@ function addEconomicSupportSection(politician) {
           </table>
           ${showMoreHTML}
         </div>
-        <p class="text-[10px] text-slate-400 mt-2">Klik på et navn for at se alle de har støttet</p>
+        <p class="text-[10px] text-slate-400 mt-2">Klik på et navn for at se alle politikere denne donor har støttet</p>
       </div>
     `;
   }
@@ -80,6 +80,13 @@ function addEconomicSupportSection(politician) {
     supportDiv.className = 'economic-support';
     supportDiv.innerHTML = supportHTML;
     modalContent.appendChild(supportDiv);
+
+    supportDiv.querySelectorAll('.donor-row').forEach(row => {
+      row.addEventListener('click', () => {
+        const donorName = decodeURIComponent(row.dataset.donor || '');
+        if (donorName) showDonorModal(donorName);
+      });
+    });
   }
 }
 
@@ -90,7 +97,7 @@ function showMoreDonations(politicianId, startIndex, count) {
   const rows = tbody.querySelectorAll('.donation-row.hidden');
   let shown = 0;
 
-  rows.forEach((row, index) => {
+  rows.forEach(row => {
     if (shown < count) {
       row.classList.remove('hidden');
       shown++;
@@ -102,7 +109,7 @@ function showMoreDonations(politicianId, startIndex, count) {
     const remaining = tbody.querySelectorAll('.donation-row.hidden').length;
     if (remaining === 0) {
       container.innerHTML = `
-        <button onclick="hideAllDonations(${politicianId})" 
+        <button onclick="hideAllDonations(${politicianId})"
                 class="px-4 py-1.5 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-600 rounded-xl border border-slate-300 dark:border-slate-600 transition-colors">
           Skjul alle
         </button>
@@ -126,7 +133,7 @@ function hideAllDonations(politicianId) {
   if (container) {
     const total = tbody.querySelectorAll('tr').length;
     container.innerHTML = `
-      <button onclick="showMoreDonations(${politicianId}, 5, 10)" 
+      <button onclick="showMoreDonations(${politicianId}, 5, 10)"
               class="px-4 py-1.5 text-sm font-medium text-[#C8102E] hover:bg-white dark:hover:bg-slate-600 rounded-xl border border-[#C8102E]/30 transition-colors">
         Vis ${Math.min(10, total - 5)} flere
       </button>
@@ -134,58 +141,47 @@ function hideAllDonations(politicianId) {
   }
 }
 
-function showDonorModal(donorName) {
+async function showDonorModal(donorName) {
+  if (typeof window.ensureAllDetailsLoaded === 'function') {
+    await window.ensureAllDetailsLoaded();
+  }
+
   const politicianModal = document.getElementById('politicianModal');
   if (politicianModal) {
     politicianModal.classList.remove('flex');
     politicianModal.classList.add('hidden');
   }
 
-  let supportedPoliticians = [];
-
-  politicians.forEach(politician => {
-    if (politician.economicSupport) {
-      politician.economicSupport.forEach(support => {
-        if (support.name.toLowerCase() === donorName.toLowerCase()) {
-          supportedPoliticians.push({
-            name: politician.name,
-            amount: support.amount,
-            type: support.type,
-            year: support.year || '-',
-            source: support.source,
-            id: politician.id
-          });
-        }
-      });
-    }
-  });
+  const supportedPoliticians = typeof window.findPoliticiansByDonor === 'function'
+    ? window.findPoliticiansByDonor(donorName)
+    : [];
 
   const html = `
     <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[200] flex items-center justify-center p-4" id="donorModal">
-      <div onclick="event.target.id === 'donorModal' && closeDonorModal()" 
+      <div onclick="event.target.id === 'donorModal' && closeDonorModal()"
            class="bg-white dark:bg-slate-800 rounded-3xl max-w-2xl w-full shadow-2xl max-h-[90vh] overflow-hidden">
-        
+
         <div class="px-8 pt-8 pb-6 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
           <div>
             <h3 class="text-2xl font-bold text-slate-900 dark:text-white">${donorName}</h3>
-            <p class="text-sm text-slate-500 dark:text-slate-400">Har støttet følgende politikere</p>
+            <p class="text-sm text-slate-500 dark:text-slate-400">${supportedPoliticians.length} politiker${supportedPoliticians.length === 1 ? '' : 'e'} har modtaget støtte fra denne bidragyder</p>
           </div>
           <button onclick="closeDonorModal()" class="text-3xl text-slate-400 hover:text-slate-600 dark:hover:text-white">×</button>
         </div>
-        
+
         <div class="p-8 overflow-y-auto max-h-[60vh]">
           ${supportedPoliticians.length > 0 ? `
             <div class="space-y-3">
               ${supportedPoliticians.map(p => {
-                const kildeHTML = p.source && p.source.url 
-                  ? `<a href="${p.source.url}" target="_blank" class="text-[#C8102E] underline text-xs">${p.source.text || 'Kilde'}</a>` 
+                const kildeHTML = p.source && p.source.url
+                  ? `<a href="${p.source.url}" target="_blank" class="text-[#C8102E] underline text-xs">${p.source.text || 'Kilde'}</a>`
                   : '';
                 return `
                   <div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-[#C8102E]/30 transition-colors cursor-pointer"
                        onclick="closeDonorModalAndShowPolitician(${p.id})">
                     <div>
                       <div class="font-semibold text-slate-900 dark:text-white">${p.name}</div>
-                      <div class="text-xs text-slate-500 dark:text-slate-400">${p.type} • ${p.year}</div>
+                      <div class="text-xs text-slate-500 dark:text-slate-400">${p.party} • ${p.type} • ${p.year}</div>
                       ${kildeHTML ? `<div class="text-xs mt-1">${kildeHTML}</div>` : ''}
                     </div>
                     <div class="text-right">
@@ -202,7 +198,7 @@ function showDonorModal(donorName) {
             </div>
           `}
         </div>
-        
+
         <div class="px-8 py-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-400 dark:text-slate-500 text-center rounded-b-3xl">
           Data er baseret på offentligt tilgængelige kilder • 2023–2025
         </div>
@@ -216,6 +212,12 @@ function showDonorModal(donorName) {
 function closeDonorModal() {
   const modal = document.getElementById('donorModal');
   if (modal) modal.remove();
+
+  const politicianModal = document.getElementById('politicianModal');
+  if (politicianModal) {
+    politicianModal.classList.remove('hidden');
+    politicianModal.classList.add('flex');
+  }
 }
 
 function closeDonorModalAndShowPolitician(politicianId) {
@@ -226,3 +228,10 @@ function closeDonorModalAndShowPolitician(politicianId) {
     }
   }, 50);
 }
+
+window.addEconomicSupportSection = addEconomicSupportSection;
+window.showDonorModal = showDonorModal;
+window.showMoreDonations = showMoreDonations;
+window.hideAllDonations = hideAllDonations;
+window.closeDonorModal = closeDonorModal;
+window.closeDonorModalAndShowPolitician = closeDonorModalAndShowPolitician;

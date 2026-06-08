@@ -44,23 +44,9 @@ function initializeEverything() {
           })
         )
       ).then(() => {
-        window.networkIndex = {};
-        window.politicians.forEach(p => {
-          if (p.affiliations && Array.isArray(p.affiliations)) {
-            p.affiliations.forEach(aff => {
-              const netName = aff.name || aff.organization || aff;
-              if (typeof netName !== 'string') return;
-              if (!window.networkIndex[netName]) window.networkIndex[netName] = [];
-              window.networkIndex[netName].push({
-                id: p.id,
-                name: p.name,
-                party: p.party,
-                year: aff.year || '',
-                role: aff.role || ''
-              });
-            });
-          }
-        });
+        if (typeof window.buildCrossReferenceIndices === 'function') {
+          window.buildCrossReferenceIndices();
+        }
 
         if (typeof window.renderStatsSnapshot === 'function') {
           window.renderStatsSnapshot();

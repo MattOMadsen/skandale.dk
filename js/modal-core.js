@@ -29,24 +29,8 @@ async function showPoliticianModal(politicianId, targetScandalId = null) {
       try {
         await window.loadPoliticianDetails(politician);
 
-        // Opdater networkIndex
-        if (politician.affiliations && Array.isArray(politician.affiliations)) {
-          if (!window.networkIndex) window.networkIndex = {};
-          politician.affiliations.forEach(aff => {
-            const netName = aff.name || aff.organization || aff;
-            if (typeof netName !== 'string') return;
-            if (!window.networkIndex[netName]) window.networkIndex[netName] = [];
-            const alreadyExists = window.networkIndex[netName].some(p => p.id === politician.id);
-            if (!alreadyExists) {
-              window.networkIndex[netName].push({
-                id: politician.id,
-                name: politician.name,
-                party: politician.party,
-                year: aff.year || '',
-                role: aff.role || ''
-              });
-            }
-          });
+        if (typeof window.buildCrossReferenceIndices === 'function') {
+          window.buildCrossReferenceIndices();
         }
       } catch (e) {
         console.warn('Kunne ikke loade detaljer for', politician.name, e);
@@ -66,6 +50,10 @@ async function showPoliticianModal(politicianId, targetScandalId = null) {
       console.warn('Kunne ikke loade scandals for', politician.name, e);
       politician.scandals = [];
     }
+  }
+
+  if (typeof window.ensureAllDetailsLoaded === 'function') {
+    await window.ensureAllDetailsLoaded();
   }
 
   currentPolitician = politician;
@@ -170,7 +158,7 @@ async function showPoliticianModal(politicianId, targetScandalId = null) {
                 ${politician.affiliations.map((aff, index) => {
                   const networkName = aff.name || aff.organization || 'Ukendt';
                   return `
-                    <div class="network-affiliation-item p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700 rounded-2xl hover:border-[#C8102E]/30 dark:hover:border-[#C8102E]/50 cursor-pointer transition-all" data-network-name="${networkName.replace(/"/g, '\"')}">
+                    <div class="network-affiliation-item p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700 rounded-2xl hover:border-[#C8102E]/30 dark:hover:border-[#C8102E]/50 cursor-pointer transition-all" data-network-name="${networkName.replace(/"/g, '\"')}" data-network-org="${(aff.organization || '').replace(/"/g, '\"')}">
                       <div class="font-semibold text-[#C8102E]">${networkName}</div>
                       <div class="text-xs text-slate-500 dark:text-slate-400">${aff.organization || ''} • ${aff.year || ''}</div>
                       ${aff.role ? `<div class="text-sm text-slate-600 dark:text-slate-300 mt-1">${aff.role}</div>` : ''}
@@ -187,7 +175,7 @@ async function showPoliticianModal(politicianId, targetScandalId = null) {
         </div>
         
         <div class="px-8 py-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-400 dark:text-slate-500 text-center">
-          Data er baseret på offentligt tilgængelige kilder • v2.00.86
+          Data er baseret på offentligt tilgængelige kilder • v2.00.87
         </div>
       </div>
     </div>
@@ -211,10 +199,11 @@ async function showPoliticianModal(politicianId, targetScandalId = null) {
     if (networkContainer) {
       networkContainer.querySelectorAll('.network-affiliation-item').forEach(item => {
         const networkName = item.dataset.networkName;
+        const networkOrg = item.dataset.networkOrg || '';
         if (networkName) {
           item.addEventListener('click', () => {
             if (typeof window.showNetworkConnections === 'function') {
-              window.showNetworkConnections(networkName);
+              window.showNetworkConnections(networkName, networkOrg);
             } else {
               console.warn('showNetworkConnections ikke tilgængelig');
             }

@@ -1,6 +1,10 @@
 // js/modal-network-overview.js - Oversigt over internationale netværk & overlap (fixed v2)
 
-function showNetworkOverviewModal() {
+async function showNetworkOverviewModal() {
+    if (typeof window.ensureAllDetailsLoaded === 'function') {
+        await window.ensureAllDetailsLoaded();
+    }
+
     if (!window.networkIndex || Object.keys(window.networkIndex).length === 0) {
         alert('Ingen netværksdata tilgængelig endnu. Prøv igen senere.');
         return;
@@ -58,8 +62,14 @@ function showNetworkOverviewModal() {
     document.body.insertAdjacentHTML('beforeend', html);
 }
 
-function showNetworkDetail(networkName) {
-    const politiciansInNetwork = window.networkIndex[networkName] || [];
+async function showNetworkDetail(networkName) {
+    if (typeof window.ensureAllDetailsLoaded === 'function') {
+        await window.ensureAllDetailsLoaded();
+    }
+
+    const politiciansInNetwork = typeof window.findPoliticiansByNetwork === 'function'
+        ? window.findPoliticiansByNetwork(networkName)
+        : (window.networkIndex[networkName] || []);
 
     let listHTML = '';
     if (politiciansInNetwork.length > 0) {

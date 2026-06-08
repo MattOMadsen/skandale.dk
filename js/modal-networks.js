@@ -1,38 +1,20 @@
 // js/modal-networks.js - Internationale netværk & tilknytninger
-// Meget robust version med flere fallbacks
 
-function showNetworkConnections(networkName) {
-  let connectedPoliticians = [];
-
-  // 1. Prøv globale networkIndex
-  if (window.networkIndex && Array.isArray(window.networkIndex[networkName])) {
-    connectedPoliticians = window.networkIndex[networkName];
+async function showNetworkConnections(networkName, organization = '') {
+  if (typeof window.ensureAllDetailsLoaded === 'function') {
+    await window.ensureAllDetailsLoaded();
   }
 
-  // 2. Fallback: Søg i window.politicians (case-insensitive)
-  if (connectedPoliticians.length === 0 && window.politicians && Array.isArray(window.politicians)) {
-    const searchName = networkName.toLowerCase();
-    window.politicians.forEach(p => {
-      if (p.affiliations && Array.isArray(p.affiliations)) {
-        const hasMatch = p.affiliations.some(aff => {
-          const name = (aff.name || aff.organization || aff || '').toString().toLowerCase();
-          return name === searchName;
-        });
-        if (hasMatch) {
-          connectedPoliticians.push({
-            id: p.id,
-            name: p.name,
-            party: p.party,
-            year: '',
-            role: ''
-          });
-        }
-      }
-    });
-  }
+  const connectedPoliticians = typeof window.findPoliticiansByNetwork === 'function'
+    ? window.findPoliticiansByNetwork(networkName, organization)
+    : [];
+
+  const displayName = typeof window.normalizeNetworkName === 'function'
+    ? window.normalizeNetworkName(networkName, organization)
+    : networkName;
 
   if (connectedPoliticians.length === 0) {
-    alert('Ingen andre politikere fundet med netværket: ' + networkName);
+    alert('Ingen politikere fundet med netværket: ' + displayName);
     return;
   }
 
@@ -41,7 +23,7 @@ function showNetworkConnections(networkName) {
       <div onclick="event.target.id === 'networkModal' && closeNetworkModal()" class="bg-white dark:bg-slate-800 rounded-3xl max-w-2xl w-full shadow-2xl">
         <div class="px-8 pt-8 pb-6 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
           <div>
-            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">${networkName}</h3>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">${displayName}</h3>
             <p class="text-slate-500 dark:text-slate-400">${connectedPoliticians.length} politikere har været tilknyttet dette netværk</p>
           </div>
           <button onclick="closeNetworkModal()" class="text-3xl text-slate-400 hover:text-slate-600 dark:hover:text-white">×</button>

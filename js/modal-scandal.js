@@ -30,6 +30,9 @@ function renderScandalsDirect(politician, container) {
     const stars = createStars(ourSeverity);
     const polId = politician.id || politician.name.replace(/\s+/g, '-').toLowerCase();
     const scId = s.id || s.title.replace(/\s+/g, '-').toLowerCase();
+    const relatedPoliticians = typeof window.findRelatedPoliticiansForScandal === 'function'
+      ? window.findRelatedPoliticiansForScandal(politician, s)
+      : [];
 
     html += `
       <div class="border border-slate-200 dark:border-slate-700 rounded-2xl mb-4 overflow-hidden" data-sc-id="${scId}">
@@ -39,6 +42,7 @@ function renderScandalsDirect(politician, container) {
             <div class="flex items-center gap-x-3">
               <div class="font-bold text-lg text-slate-900 dark:text-white">${s.title}</div>
               <div class="text-xs px-2 py-0.5 bg-slate-200 dark:bg-slate-600 text-slate-600 dark:text-slate-300 rounded-full">${s.year || ''}</div>
+              ${relatedPoliticians.length > 0 ? `<div class="text-xs px-2 py-0.5 bg-[#C8102E]/10 text-[#C8102E] rounded-full">${relatedPoliticians.length} relaterede</div>` : ''}
             </div>
             <div class="flex items-center gap-x-2 mt-1">
               <div class="flex items-center text-amber-500">${stars}</div>
@@ -84,6 +88,28 @@ function renderScandalsDirect(politician, container) {
                   <i class="fa-solid fa-balance-scale"></i> ${s.whatShouldHaveHappened.title || 'Hvad burde være sket?'}
                 </div>
                 <div class="text-slate-700 dark:text-slate-300">${s.whatShouldHaveHappened.content}</div>
+              </div>
+            ` : ''}
+
+            ${relatedPoliticians.length > 0 ? `
+              <div class="bg-slate-50 dark:bg-slate-700/40 border border-slate-200 dark:border-slate-700 rounded-2xl p-4">
+                <div class="font-semibold text-sm text-slate-500 dark:text-slate-400 mb-3 flex items-center gap-x-2">
+                  <i class="fa-solid fa-users text-[#C8102E]"></i>
+                  Andre involverede / relaterede politikere
+                </div>
+                <div class="space-y-2">
+                  ${relatedPoliticians.map(rel => `
+                    <div onclick="event.stopPropagation(); if (typeof window.showPoliticianModal === 'function') window.showPoliticianModal(${rel.id});"
+                         class="flex items-center justify-between p-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl hover:border-[#C8102E]/40 cursor-pointer transition-all">
+                      <div>
+                        <div class="font-semibold text-slate-900 dark:text-white">${rel.name}</div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400">${rel.party}</div>
+                        <div class="text-[11px] text-slate-400 mt-1">${rel.reason}${rel.scandalTitle ? ` • ${rel.scandalTitle}` : ''}</div>
+                      </div>
+                      <div class="text-[#C8102E] text-xs">Se profil →</div>
+                    </div>
+                  `).join('')}
+                </div>
               </div>
             ` : ''}
 

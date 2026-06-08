@@ -70,6 +70,7 @@
     </div>
 
     <script src="js/data.js"></script>
+    <script src="js/cross-reference.js"></script>
     <script src="js/modal-core.js"></script>
     <script src="js/modal-scandal.js"></script>
     <script src="js/modal-affiliations.js"></script>
@@ -140,27 +141,13 @@
                 await loadPoliticians();
                 await loadAllPoliticianDetails();
 
-                const pols = window.politicians || [];
-                const map = new Map();
+                if (typeof window.buildCrossReferenceIndices === 'function') {
+                    window.buildCrossReferenceIndices();
+                }
 
-                pols.forEach(p => {
-                    (p.affiliations || []).forEach(aff => {
-                        const name = String(aff.name || aff.organization || '').trim();
-                        if (!name) return;
-                        if (!map.has(name)) map.set(name, { name, politicians: [] });
-                        const entry = map.get(name);
-                        if (!entry.politicians.some(x => x.id === p.id)) {
-                            entry.politicians.push({ id: p.id, name: p.name, party: p.party || '', year: aff.year || '', role: aff.role || '' });
-                        }
-                    });
-                });
-
-                allNetworks = Array.from(map.values()).sort((a,b) => b.politicians.length - a.politicians.length);
-
-                window.networkIndex = {};
-                allNetworks.forEach(net => {
-                    window.networkIndex[net.name] = net.politicians;
-                });
+                allNetworks = Object.entries(window.networkIndex || {})
+                    .map(([name, politicians]) => ({ name, politicians }))
+                    .sort((a, b) => b.politicians.length - a.politicians.length);
 
                 const grid = document.getElementById('networksGrid');
                 document.getElementById('loadingState').classList.add('hidden');
