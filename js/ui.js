@@ -1,28 +1,43 @@
-// js/ui.js - Render politikere på forsiden (med global open funktion + stjerner + billed-avatar + bruger-påvirket score)
+// js/ui.js - Render politikere på forsiden (incremental DOM + IntersectionObserver)
 
-// ============================================
-// INFINITE SCROLL STATE (tilføjet juni 2026 - godkendt plan)
-// ============================================
 let visibleCount = 8;
 let isLoadingMore = false;
 let isSearchActive = false;
+let renderedCount = 0;
+let scrollObserver = null;
+let userRatingsCache = null;
 
-// Hjælpefunktion til stjerner (duplikeret fra modal for uafhængighed)
+function getUserRatingsCache() {
+  if (userRatingsCache) return userRatingsCache;
+  userRatingsCache = new Map();
+  try {
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith('userSeverity_')) {
+        const val = parseInt(localStorage.getItem(key) || '0', 10);
+        if (val > 0) userRatingsCache.set(key, val);
+      }
+    }
+  } catch (e) {}
+  return userRatingsCache;
+}
+
+function invalidateUserRatingsCache() {
+  userRatingsCache = null;
+}
+
 function createStars(severity) {
   if (!severity || severity < 1) severity = 1;
   if (severity > 5) severity = 5;
   let html = '';
   for (let i = 1; i <= 5; i++) {
-    if (i <= severity) {
-      html += '<i class="fa-solid fa-star text-[#C8102E]"></i>';
-    } else {
-      html += '<i class="fa-solid fa-star text-slate-300 dark:text-slate-600"></i>';
-    }
+    html += i <= severity
+      ? '<i class="fa-solid fa-star text-[#C8102E]"></i>'
+      : '<i class="fa-solid fa-star text-slate-300 dark:text-slate-600"></i>';
   }
   return html;
 }
 
-// Global funktion der altid er tilgængelig
 window.openPoliticianModal = function(id) {
   if (typeof window.showPoliticianModal === 'function') {
     window.showPoliticianModal(id);
@@ -32,130 +47,172 @@ window.openPoliticianModal = function(id) {
   }
 };
 
-function renderPoliticians(filteredPoliticians = null) {
+function getPoliticianStats(politician) {
+  const scandalCount = politician.scandals
+    ? politician.scandals.length
+    : (politician._scandalCount ?? null);
+  const brokenCount = politician.brokenPromises
+    ? politician.brokenPromises.length
+    : (politician._brokenCount ?? null);
+
+  let avgSeverity = null;
+  let userAvgSeverity = null;
+  let userRatedCount = 0;
+
+  if (politician.scandals && politician.scandals.length > 0) {
+    const severities = politician.scandals.map(s => s.ourSeverity || s.severity || 3);
+    avgSeverity = severities.reduce((a, b) => a + b, 0) / severities.length;
+
+    const ratings = getUserRatingsCache();
+    const polId = politician.id || politician.name.replace(/\s+/g, '-').toLowerCase();
+    let userSum = 0;
+    politician.scandals.forEach(s => {
+      const scId = s.id || s.title.replace(/\s+/g, '-').toLowerCase();
+      const userRating = ratings.get(`userSeverity_${polId}_${scId}`) || 0;
+      if (userRating > 0) {
+        userSum += userRating;
+        userRatedCount++;
+      }
+    });
+    if (userRatedCount > 0) {
+      userAvgSeverity = userSum / userRatedCount;
+    }
+  }
+
+  return { scandalCount, brokenCount, avgSeverity, userAvgSeverity, userRatedCount };
+}
+
+function buildPoliticianCardHTML(politician) {
+  const { scandalCount, brokenCount, avgSeverity, userAvgSeverity, userRatedCount } = getPoliticianStats(politician);
+
+  const scandalLabel = scandalCount == null ? '…' : scandalCount;
+  const brokenLabel = brokenCount == null ? '…' : brokenCount;
+
+  const starsHTML = avgSeverity != null ? createStars(Math.round(avgSeverity)) : '<span class="text-white/50">…</span>';
+  const severityLabel = avgSeverity != null ? `${avgSeverity.toFixed(1)}/5` : '…';
+  const userStarsHTML = userRatedCount > 0 ? createStars(Math.round(userAvgSeverity)) : '';
+
+  const avatarColor = politician.avatarColor || politician.partyColor || '#C8102E';
+  const initials = politician.initials || politician.name.split(' ').map(n => n[0]).join('');
+
+  let avatarHTML = '';
+  if (politician.image) {
+    avatarHTML = `<div class="w-14 h-14 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 flex-shrink-0">
+      <img src="${politician.image}" alt="${politician.name}" class="w-full h-full object-cover" loading="lazy" decoding="async" width="56" height="56" onerror="this.parentElement.innerHTML = \`<div class='w-full h-full flex items-center justify-center text-white font-bold text-xl' style='background-color: ${avatarColor}'>${initials}</div>\`;">
+    </div>`;
+  } else {
+    avatarHTML = `<div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-bold text-xl flex-shrink-0" style="background-color: ${avatarColor}">${initials}</div>`;
+  }
+
+  return `
+    <div onclick="window.openPoliticianModal(${politician.id})"
+         class="politician-card bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 cursor-pointer hover:border-[#C8102E]/30 dark:hover:border-[#C8102E]/50 shadow-sm hover:shadow-md group"
+         data-id="${politician.id}">
+      <div class="flex items-start justify-between mb-4">
+        ${avatarHTML}
+        <div class="text-right">
+          <div class="text-xs text-slate-400 dark:text-slate-500">${politician.party}</div>
+          <div class="text-[10px] text-slate-400 dark:text-slate-500">${politician.role || ''}</div>
+        </div>
+      </div>
+
+      <div class="font-bold text-xl mb-1 group-hover:text-[#C8102E] transition-colors">${politician.name}</div>
+
+      <div class="flex items-center gap-x-3 text-xs text-slate-500 dark:text-slate-400 mb-2">
+        <div class="flex items-center gap-x-1">
+          <i class="fa-solid fa-exclamation-triangle text-[#C8102E]"></i>
+          <span data-stat="scandals">${scandalLabel} skandaler</span>
+        </div>
+        <div class="flex items-center gap-x-1">
+          <i class="fa-solid fa-link text-[#C8102E]"></i>
+          <span data-stat="promises">${brokenLabel} løfter</span>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <div class="flex items-center gap-x-2 text-xs text-slate-500 dark:text-slate-400">
+          <div class="flex items-center gap-x-1">
+            <span class="font-medium">Vores vurdering:</span>
+            <span class="text-amber-500" data-stat="stars">${starsHTML}</span>
+            <span data-stat="severity">${severityLabel}</span>
+          </div>
+          ${userRatedCount > 0 ? `
+          <div class="flex items-center gap-x-1 border-l pl-2 border-slate-200 dark:border-slate-700">
+            <span class="font-medium">Dine stemmer:</span>
+            <span class="text-[#C8102E]">${userStarsHTML}</span>
+            <span>${userAvgSeverity.toFixed(1)}/5</span>
+          </div>` : ''}
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between text-xs">
+        <div class="text-[#C8102E] group-hover:underline">Se detaljer →</div>
+      </div>
+    </div>
+  `;
+}
+
+function appendPoliticianCards(grid, politicians) {
+  if (!politicians.length) return;
+
+  const fragment = document.createDocumentFragment();
+  politicians.forEach(politician => {
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = buildPoliticianCardHTML(politician).trim();
+    fragment.appendChild(wrapper.firstElementChild);
+  });
+  grid.appendChild(fragment);
+}
+
+function updatePoliticianCard(politician) {
+  const grid = document.getElementById('politiciansGrid');
+  if (!grid || !politician) return;
+
+  const card = grid.querySelector(`.politician-card[data-id="${politician.id}"]`);
+  if (!card) return;
+
+  const wrapper = document.createElement('div');
+  wrapper.innerHTML = buildPoliticianCardHTML(politician).trim();
+  const fresh = wrapper.firstElementChild;
+  if (fresh) card.replaceWith(fresh);
+}
+
+function renderPoliticians(filteredPoliticians = null, options = {}) {
   const grid = document.getElementById('politiciansGrid');
   if (!grid) return;
 
-  let toRender;
+  const appendOnly = options.appendOnly === true;
 
   if (filteredPoliticians && Array.isArray(filteredPoliticians)) {
-    // Søgning aktiv → vis ALLE matchende resultater med det samme
-    toRender = filteredPoliticians;
     isSearchActive = true;
+    grid.innerHTML = '';
+    renderedCount = 0;
+    appendPoliticianCards(grid, filteredPoliticians);
+    renderedCount = filteredPoliticians.length;
   } else {
     isSearchActive = false;
     const source = (typeof window.getFilteredPoliticians === 'function')
       ? window.getFilteredPoliticians()
       : (window.politicians || []);
-    toRender = source.slice(0, visibleCount);
+    const targetCount = Math.min(visibleCount, source.length);
+
+    if (!appendOnly || renderedCount === 0 || targetCount < renderedCount) {
+      grid.innerHTML = '';
+      renderedCount = 0;
+      appendPoliticianCards(grid, source.slice(0, targetCount));
+      renderedCount = targetCount;
+    } else if (targetCount > renderedCount) {
+      appendPoliticianCards(grid, source.slice(renderedCount, targetCount));
+      renderedCount = targetCount;
+    }
   }
 
-  let html = '';
-  toRender.forEach(politician => {
-    const scandalCount = politician.scandals ? politician.scandals.length : 0;
-    const brokenCount = politician.brokenPromises ? politician.brokenPromises.length : 0;
-
-    // Beregn gennemsnitlig voresSeverity
-    let avgSeverity = 0;
-    let userAvgSeverity = 0;
-    let userRatedCount = 0;
-    if (politician.scandals && politician.scandals.length > 0) {
-      const severities = politician.scandals.map(s => s.ourSeverity || s.severity || 3);
-      avgSeverity = severities.reduce((a, b) => a + b, 0) / severities.length;
-
-      // Brugerens egne bedømmelser fra localStorage
-      const polId = politician.id || politician.name.replace(/\s+/g, '-').toLowerCase();
-      let userSum = 0;
-      politician.scandals.forEach(s => {
-        const scId = s.id || s.title.replace(/\s+/g, '-').toLowerCase();
-        const key = `userSeverity_${polId}_${scId}`;
-        const userRating = parseInt(localStorage.getItem(key) || '0');
-        if (userRating > 0) {
-          userSum += userRating;
-          userRatedCount++;
-        }
-      });
-      if (userRatedCount > 0) {
-        userAvgSeverity = userSum / userRatedCount;
-      }
-    }
-
-    const starsHTML = createStars(Math.round(avgSeverity));
-    const userStarsHTML = userRatedCount > 0 ? createStars(Math.round(userAvgSeverity)) : '';
-
-    // Avatar: billede hvis tilgængeligt, ellers initialer (forbedret version med fast container)
-    let avatarHTML = '';
-    const avatarColor = politician.avatarColor || politician.partyColor || '#C8102E';
-    const initials = politician.initials || politician.name.split(' ').map(n => n[0]).join('');
-    if (politician.image) {
-      avatarHTML = `<div class="w-14 h-14 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 flex-shrink-0">
-        <img src="${politician.image}" alt="${politician.name}" class="w-full h-full object-cover" loading="lazy" onerror="this.parentElement.innerHTML = \`<div class='w-full h-full flex items-center justify-center text-white font-bold text-xl' style='background-color: ${avatarColor}'>${initials}</div>\`;">
-      </div>`;
-    } else {
-      avatarHTML = `<div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-bold text-xl flex-shrink-0" style="background-color: ${avatarColor}">${initials}</div>`;
-    }
-
-    html += `
-      <div onclick="window.openPoliticianModal(${politician.id})" 
-           class="politician-card bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 cursor-pointer hover:border-[#C8102E]/30 dark:hover:border-[#C8102E]/50 shadow-sm hover:shadow-md transition-all group" data-id="${politician.id}">
-        <div class="flex items-start justify-between mb-4">
-          ${avatarHTML}
-          <div class="text-right">
-            <div class="text-xs text-slate-400 dark:text-slate-500">${politician.party}</div>
-            <div class="text-[10px] text-slate-400 dark:text-slate-500">${politician.role || ''}</div>
-          </div>
-        </div>
-        
-        <div class="font-bold text-xl mb-1 group-hover:text-[#C8102E] transition-colors">${politician.name}</div>
-        
-        <div class="flex items-center gap-x-3 text-xs text-slate-500 dark:text-slate-400 mb-2">
-          <div class="flex items-center gap-x-1">
-            <i class="fa-solid fa-exclamation-triangle text-[#C8102E]"></i>
-            <span>${scandalCount} skandaler</span>
-          </div>
-          <div class="flex items-center gap-x-1">
-            <i class="fa-solid fa-link text-[#C8102E]"></i>
-            <span>${brokenCount} løfter</span>
-          </div>
-        </div>
-
-        <!-- STJERNER PÅ FORSIDEN - Opdateret: Renere visning uden prompt-tekst -->
-        <div class="mb-3">
-          <div class="flex items-center gap-x-2 text-xs text-slate-500 dark:text-slate-400">
-            <div class="flex items-center gap-x-1">
-              <span class="font-medium">Vores vurdering:</span> 
-              <span class="text-amber-500">${starsHTML}</span>
-              <span>${avgSeverity.toFixed(1)}/5</span>
-            </div>
-            ${userRatedCount > 0 ? `
-            <div class="flex items-center gap-x-1 border-l pl-2 border-slate-200 dark:border-slate-700">
-              <span class="font-medium">Dine stemmer:</span> 
-              <span class="text-[#C8102E]">${userStarsHTML}</span>
-              <span>${userAvgSeverity.toFixed(1)}/5</span>
-            </div>` : ''}
-          </div>
-        </div>
-
-        <div class="flex items-center justify-between text-xs">
-          <div class="text-[#C8102E] group-hover:underline">Se detaljer →</div>
-        </div>
-      </div>
-    `;
-  });
-
-  grid.innerHTML = html;
-
-  // Opdater "Alle vist" besked
   updateAllShownMessage();
 }
 
-// Gør renderPoliticians global så search.js kan kalde den
 window.renderPoliticians = renderPoliticians;
-
-
-// ============================================
-// INFINITE SCROLL FUNKTIONER (ny funktionalitet)
-// ============================================
+window.updatePoliticianCard = updatePoliticianCard;
+window.invalidateUserRatingsCache = invalidateUserRatingsCache;
 
 function updateAllShownMessage() {
   const shownEl = document.getElementById('all-politicians-shown');
@@ -165,7 +222,8 @@ function updateAllShownMessage() {
     ? window.getFilteredPoliticians()
     : (window.politicians || []);
   const total = source.length;
-  if (!isSearchActive && visibleCount >= total && total > 0) {
+
+  if (!isSearchActive && renderedCount >= total && total > 0) {
     shownEl.classList.remove('hidden');
   } else {
     shownEl.classList.add('hidden');
@@ -174,20 +232,11 @@ function updateAllShownMessage() {
 
 function showInfiniteLoader(show) {
   const loader = document.getElementById('infinite-scroll-loader');
-  if (loader) {
-    if (show) {
-      loader.classList.remove('hidden');
-      loader.classList.add('flex');
-    } else {
-      loader.classList.add('hidden');
-      loader.classList.remove('flex');
-    }
-  }
+  if (!loader) return;
+  loader.classList.toggle('hidden', !show);
+  loader.classList.toggle('flex', show);
 }
 
-/**
- * Øger visibleCount og gen-render
- */
 function loadMorePoliticians() {
   if (isLoadingMore || isSearchActive) return;
 
@@ -195,7 +244,8 @@ function loadMorePoliticians() {
     ? window.getFilteredPoliticians()
     : (window.politicians || []);
   const total = source.length;
-  if (visibleCount >= total) {
+
+  if (renderedCount >= total) {
     updateAllShownMessage();
     return;
   }
@@ -203,84 +253,46 @@ function loadMorePoliticians() {
   isLoadingMore = true;
   showInfiniteLoader(true);
 
-  // Simuler kort delay for bedre UX (kan fjernes hvis ønsket)
-  setTimeout(() => {
+  requestAnimationFrame(() => {
     visibleCount = Math.min(visibleCount + 8, total);
-    
-    if (typeof window.renderPoliticians === 'function') {
-      window.renderPoliticians(); // uden argument = normal visning
-    }
-
+    renderPoliticians(null, { appendOnly: true });
     showInfiniteLoader(false);
     isLoadingMore = false;
-
-    // Tjek igen om vi har vist alle
-    if (visibleCount >= total) {
-      updateAllShownMessage();
-    }
-  }, 180);
+    updateAllShownMessage();
+  });
 }
 
-/**
- * Nulstiller til start-tilstand (8 politikere)
- * Kaldes fra search.js når søgning ryddes
- */
 function resetVisibleCount() {
   visibleCount = 8;
+  renderedCount = 0;
   isSearchActive = false;
   const shownEl = document.getElementById('all-politicians-shown');
   if (shownEl) shownEl.classList.add('hidden');
 }
 
-// Gør funktionerne globale så search.js og andre kan bruge dem
 window.resetVisibleCount = resetVisibleCount;
 window.loadMorePoliticians = loadMorePoliticians;
 
-/**
- * Sætter scroll listener op for infinite scroll
- */
 function setupInfiniteScroll() {
-  let scrollTimeout = null;
+  const sentinel = document.getElementById('scroll-sentinel');
+  if (!sentinel) return;
 
-  window.addEventListener('scroll', () => {
-    if (isSearchActive || isLoadingMore) return;
+  if (scrollObserver) scrollObserver.disconnect();
 
-    const source = (typeof window.getFilteredPoliticians === 'function')
-      ? window.getFilteredPoliticians()
-      : (window.politicians || []);
-    const total = source.length;
-    if (visibleCount >= total) return;
-
-    // Tjek om vi er tæt på bunden (ca. 200px)
-    const scrollPosition = window.innerHeight + window.scrollY;
-    const documentHeight = document.documentElement.scrollHeight;
-
-    if (scrollPosition >= documentHeight - 220) {
-      // Debounce for at undgå for mange kald
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        if (!isLoadingMore && visibleCount < total) {
-          loadMorePoliticians();
-        }
-      }, 80);
+  scrollObserver = new IntersectionObserver((entries) => {
+    if (entries[0]?.isIntersecting) {
+      loadMorePoliticians();
     }
-  });
+  }, { rootMargin: '240px', threshold: 0 });
 
-  console.log('%c[ui.js] Infinite Scroll aktiveret (visibleCount starter på 8)', 'color: #10b981; font-size: 10px');
+  scrollObserver.observe(sentinel);
 }
 
-// Initialiser infinite scroll når DOM er klar
- document.addEventListener('DOMContentLoaded', () => {
-  // Start infinite scroll (kun på index.html hvor politiciansGrid findes)
+document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('politiciansGrid')) {
     setupInfiniteScroll();
   }
 });
-
-
-// ============================================
-// MOBIL MENU (gendannet)
-// ============================================
 
 function initMobileMenu() {
   const menuButton = document.getElementById('mobile-menu-button');
@@ -289,24 +301,17 @@ function initMobileMenu() {
 
   if (!menuButton || !mobileMenu) return;
 
-  // Åbn menu
   menuButton.addEventListener('click', () => {
     mobileMenu.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
   });
 
-  // Luk via X-knap
   if (closeButton) {
-    closeButton.addEventListener('click', () => {
-      closeMobileMenu();
-    });
+    closeButton.addEventListener('click', closeMobileMenu);
   }
 
-  // Luk hvis man klikker udenfor
   mobileMenu.addEventListener('click', (e) => {
-    if (e.target === mobileMenu) {
-      closeMobileMenu();
-    }
+    if (e.target === mobileMenu) closeMobileMenu();
   });
 }
 
@@ -318,10 +323,6 @@ function closeMobileMenu() {
   }
 }
 
-// Gør closeMobileMenu global
 window.closeMobileMenu = closeMobileMenu;
 
-// Initialiser mobil menu
-document.addEventListener('DOMContentLoaded', () => {
-  initMobileMenu();
-});
+document.addEventListener('DOMContentLoaded', initMobileMenu);

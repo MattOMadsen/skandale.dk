@@ -1,16 +1,73 @@
-// js/main.js - Hovedfil der starter alt (med parti-filter + folketing-filter + dynamisk count + stats snapshot)
+// js/main.js - Hovedfil (batch-loading + progressive rendering)
 
 let currentPartyFilter = '';
 let currentFolketingFilter = 'folketing';
+let detailsLoadStarted = false;
+
+function getVisiblePoliticiansForEnrichment() {
+  if (typeof window.getFilteredPoliticians !== 'function') {
+    return (window.politicians || []).slice(0, 8);
+  }
+  return window.getFilteredPoliticians().slice(0, 8);
+}
+
+async function loadDetailsInBackground() {
+  if (detailsLoadStarted || !window.politicians?.length || !window.SiteStats) return;
+  detailsLoadStarted = true;
+
+  const all = window.politicians;
+  const visibleIds = new Set(getVisiblePoliticiansForEnrichment().map(p => p.id));
+
+  await SiteStats.enrichSummariesBatch(all, 6);
+
+  getVisiblePoliticiansForEnrichment().forEach(p => {
+    if (typeof window.updatePoliticianCard === 'function') {
+      window.updatePoliticianCard(p);
+    }
+  });
+
+  if (typeof window.renderStatsSnapshot === 'function') {
+    window.renderStatsSnapshot();
+  }
+
+  for (let i = 0; i < all.length; i += 3) {
+    const batch = all.slice(i, i + 3);
+    await Promise.all(
+      batch.map(p => window.loadPoliticianDetails(p).catch(() => p))
+    );
+
+    batch.forEach(p => {
+      if (visibleIds.has(p.id) && typeof window.updatePoliticianCard === 'function') {
+        window.updatePoliticianCard(p);
+      }
+    });
+
+    await new Promise(resolve => setTimeout(resolve, 16));
+  }
+
+  if (typeof window.buildCrossReferenceIndices === 'function') {
+    window.buildCrossReferenceIndices();
+  }
+
+  if (typeof window.renderStatsSnapshot === 'function') {
+    window.renderStatsSnapshot();
+  }
+}
 
 function initializeEverything() {
-  loadPoliticians().then(() => {
-    if (typeof renderPoliticians === 'function') {
-      renderPoliticians();
-    } else if (typeof window.renderPoliticians === 'function') {
+  if (typeof window.renderPoliticianSkeletons === 'function') {
+    window.renderPoliticianSkeletons(8);
+  }
+
+  loadPoliticians().then(async () => {
+    const visible = getVisiblePoliticiansForEnrichment();
+
+    if (window.SiteStats) {
+      await SiteStats.enrichSummariesBatch(visible, visible.length || 8);
+    }
+
+    if (typeof window.renderPoliticians === 'function') {
       window.renderPoliticians();
-    } else {
-      console.error('renderPoliticians er stadig ikke defineret');
     }
 
     updatePoliticianCount();
@@ -27,7 +84,7 @@ function initializeEverything() {
       grid.addEventListener('click', function(e) {
         const card = e.target.closest('.politician-card');
         if (card && card.dataset.id) {
-          const id = parseInt(card.dataset.id);
+          const id = parseInt(card.dataset.id, 10);
           if (typeof window.showPoliticianModal === 'function') {
             window.showPoliticianModal(id);
           }
@@ -35,33 +92,15 @@ function initializeEverything() {
       });
     }
 
-    if (window.politicians && window.loadPoliticianDetails) {
-      Promise.all(
-        window.politicians.map(p =>
-          window.loadPoliticianDetails(p).catch(err => {
-            console.warn('Kunne ikke loade detaljer for', p.name, err);
-            return p;
-          })
-        )
-      ).then(() => {
-        if (typeof window.buildCrossReferenceIndices === 'function') {
-          window.buildCrossReferenceIndices();
-        }
-
-        if (typeof window.renderStatsSnapshot === 'function') {
-          window.renderStatsSnapshot();
-        }
-        applyFilters();
-
-        console.log('%c[Skandale.dk] Baggrundsdetaljer + networkIndex loaded', 'color:#10b981');
-      });
-    }
-
     if (typeof setVersion === 'function') {
       setVersion();
     }
 
-    console.log(`%c[Skandale.dk ${APP_VERSION}] Klar med folketing-filter + parti-filter + stats snapshot`, 'color:#10b981');
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => loadDetailsInBackground(), { timeout: 2500 });
+    } else {
+      setTimeout(loadDetailsInBackground, 400);
+    }
   });
 }
 
@@ -165,14 +204,14 @@ function initPartyFilterChips() {
 
   let html = `
     <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory">
-      <button class="party-chip active shrink-0 snap-start px-5 py-2 text-sm font-medium rounded-full transition-all bg-[#C8102E] text-white shadow-sm" data-party="">
+      <button class="party-chip active shrink-0 snap-start px-5 py-2 text-sm font-medium rounded-full transition-colors bg-[#C8102E] text-white shadow-sm" data-party="">
         Alle partier
       </button>
   `;
 
   parties.forEach(party => {
     html += `
-      <button class="party-chip shrink-0 snap-start px-5 py-2 text-sm font-medium rounded-full border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 active:bg-slate-200 transition-all whitespace-nowrap" data-party="${party}">
+      <button class="party-chip shrink-0 snap-start px-5 py-2 text-sm font-medium rounded-full border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 active:bg-slate-200 transition-colors whitespace-nowrap" data-party="${party}">
         ${party}
       </button>
     `;
@@ -238,3 +277,10 @@ function applyFilters() {
 
 window.getFilteredPoliticians = getFilteredPoliticians;
 window.applyFilters = applyFilters;
+window.initializeEverything = initializeEverything;
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (document.getElementById('politiciansGrid')) {
+    initializeEverything();
+  }
+});

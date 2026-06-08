@@ -72,6 +72,8 @@
             <!-- Politikere indsættes dynamisk via js/ui.js -->
         </div>
 
+        <div id="scroll-sentinel" class="h-px w-full" aria-hidden="true"></div>
+
         <!-- Infinite Scroll Loader (ny) -->
         <div id="infinite-scroll-loader" class="hidden justify-center items-center py-8">
             <div class="flex items-center gap-x-3 text-slate-500">
@@ -87,6 +89,7 @@
     </div>
     <script src="js/site-stats.js"></script>
     <script src="js/site-meta.js"></script>
+    <script src="js/skeleton-loader.js"></script>
     <script src="js/data.js"></script>
     <script src="js/cross-reference.js"></script>
     <script src="js/main.js"></script>
@@ -154,16 +157,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(function() {
-                if (typeof window.renderPoliticians === 'function') {
-                    if (typeof window.politicians !== 'undefined' && window.politicians.length > 0) {
-                        window.renderPoliticians();
-                    } else if (typeof initializeEverything === 'function') {
-                        initializeEverything();
-                    }
-                }
-                tryOpenPoliticianFromStorage();
-            }, 500);
+            tryOpenPoliticianFromStorage();
         });
     </script>
 

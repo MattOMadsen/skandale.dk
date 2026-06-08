@@ -1,3 +1,16 @@
 {
-  "affiliations": []
+  "affiliations": [
+    {
+      "name": "Folketinget",
+      "organization": "Folketinget",
+      "year": "2001-",
+      "role": "Folketingsmedlem"
+    },
+    {
+      "name": "Venstre",
+      "organization": "Venstre",
+      "year": "2001-",
+      "role": "Forsvarsminister og gruppeformand"
+    }
+  ]
 }

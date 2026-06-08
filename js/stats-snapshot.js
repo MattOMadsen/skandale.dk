@@ -7,7 +7,11 @@ function renderStatsSnapshot() {
     const politicians = window.politicians;
 
     const totalPoliticians = politicians.length;
-    const totalScandals = politicians.reduce((sum, p) => sum + (p.scandals ? p.scandals.length : 0), 0);
+    const totalScandals = politicians.reduce((sum, p) => {
+        if (p.scandals && p.scandals.length) return sum + p.scandals.length;
+        if (typeof p._scandalCount === 'number') return sum + p._scandalCount;
+        return sum;
+    }, 0);
 
     let totalSeverity = 0;
     let severityCount = 0;
@@ -27,7 +31,10 @@ function renderStatsSnapshot() {
     const partyStats = {};
     politicians.forEach(p => {
         if (!partyStats[p.party]) partyStats[p.party] = 0;
-        partyStats[p.party] += (p.scandals ? p.scandals.length : 0);
+        const count = (p.scandals && p.scandals.length)
+            ? p.scandals.length
+            : (typeof p._scandalCount === 'number' ? p._scandalCount : 0);
+        partyStats[p.party] += count;
     });
 
     let topParty = '';

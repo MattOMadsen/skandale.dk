@@ -137,6 +137,50 @@ const SiteStats = {
     return data?.donations || data?.economicSupport || [];
   },
 
+  async loadCountsForSlug(slug) {
+    let scandalCount = 0;
+    let brokenPromiseCount = 0;
+
+    const scManifest = await this.fetchJSON(`data/scandals/${slug}/manifest.json`);
+    if (scManifest?.scandals) {
+      scandalCount = scManifest.scandals.length;
+    } else {
+      const single = await this.fetchJSON(`data/scandals/${slug}.json`);
+      if (single?.scandals) scandalCount = single.scandals.length;
+      else if (Array.isArray(single)) scandalCount = single.length;
+    }
+
+    const bpManifest = await this.fetchJSON(`data/broken-promises/${slug}/manifest.json`);
+    if (bpManifest?.brokenPromises) {
+      brokenPromiseCount = bpManifest.brokenPromises.length;
+    } else {
+      const single = await this.fetchJSON(`data/broken-promises/${slug}.json`);
+      if (single?.brokenPromises) brokenPromiseCount = single.brokenPromises.length;
+    }
+
+    return { scandalCount, brokenPromiseCount };
+  },
+
+  async enrichPoliticianSummary(politician) {
+    if (!politician || politician._summaryLoaded) return politician;
+    const slug = this.slugFromName(politician.name);
+    const counts = await this.loadCountsForSlug(slug);
+    politician._scandalCount = counts.scandalCount;
+    politician._brokenCount = counts.brokenPromiseCount;
+    politician._summaryLoaded = true;
+    return politician;
+  },
+
+  async enrichSummariesBatch(politicians, batchSize = 6) {
+    const list = politicians || [];
+    for (let i = 0; i < list.length; i += batchSize) {
+      const batch = list.slice(i, i + batchSize);
+      await Promise.all(batch.map(p => this.enrichPoliticianSummary(p)));
+      await new Promise(resolve => setTimeout(resolve, 0));
+    }
+    return list;
+  },
+
   metaFromCore(slug, core) {
     if (!core) {
       return { name: slug, party: 'Ukendt', partyShort: '?', color: '#6B7280' };

@@ -1,3 +1,16 @@
 {
-  "affiliations": []
+  "affiliations": [
+    {
+      "name": "Folketinget",
+      "organization": "Folketinget",
+      "year": "2015-",
+      "role": "Folketingsmedlem"
+    },
+    {
+      "name": "Det Konservative Folkeparti",
+      "organization": "Konservative",
+      "year": "2015-",
+      "role": "Minister for børn og undervisning"
+    }
+  ]
 }

@@ -1,3 +1,16 @@
 {
-  "affiliations": []
+  "affiliations": [
+    {
+      "name": "Folketinget",
+      "organization": "Folketinget",
+      "year": "2015-",
+      "role": "Folketingsmedlem"
+    },
+    {
+      "name": "Venstre",
+      "organization": "Venstre",
+      "year": "2015-",
+      "role": "Partiformand 2022-2023"
+    }
+  ]
 }

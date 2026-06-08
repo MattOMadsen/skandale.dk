@@ -10,12 +10,19 @@ body {
 }
 
 .politician-card {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    content-visibility: auto;
+    contain-intrinsic-size: auto 280px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .politician-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px -5px rgb(0 0 0 / 0.1), 0 6px 8px -6px rgb(0 0 0 / 0.1);
+}
+
+#stats-snapshot .backdrop-blur-md {
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
 }
 
 .scandal-card {
