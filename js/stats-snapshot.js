@@ -6,15 +6,11 @@ function renderStatsSnapshot() {
 
     const politicians = window.politicians;
 
-    // === Beregninger ===
     const totalPoliticians = politicians.length;
-
     const totalScandals = politicians.reduce((sum, p) => sum + (p.scandals ? p.scandals.length : 0), 0);
 
-    // Gennemsnitlig alvorlighed (global)
     let totalSeverity = 0;
     let severityCount = 0;
-
     politicians.forEach(p => {
         if (p.scandals && p.scandals.length > 0) {
             p.scandals.forEach(s => {
@@ -26,10 +22,8 @@ function renderStatsSnapshot() {
             });
         }
     });
-
     const avgSeverity = severityCount > 0 ? (totalSeverity / severityCount).toFixed(1) : '—';
 
-    // Parti med flest skandaler
     const partyStats = {};
     politicians.forEach(p => {
         if (!partyStats[p.party]) partyStats[p.party] = 0;
@@ -45,7 +39,6 @@ function renderStatsSnapshot() {
         }
     });
 
-    // === MØRK VERSION ===
     container.innerHTML = `
         <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-6 text-white">
             <div class="flex items-center justify-between mb-4">
@@ -68,7 +61,7 @@ function renderStatsSnapshot() {
                     <div class="text-sm text-white/70 mt-1">Gennemsnitlig alvorlighed</div>
                 </div>
 
-                <div onclick="filterByTopParty('${topParty}')" class="bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-4 cursor-pointer transition-all active:scale-[0.985]">
+                <div onclick="filterByTopParty('${topParty.replace(/'/g, "\\'")}')" class="bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-4 cursor-pointer transition-all active:scale-[0.985]">
                     <div class="text-lg font-semibold leading-tight">${topParty}</div>
                     <div class="text-sm text-white/70 mt-1">Flest skandaler</div>
                 </div>
@@ -77,18 +70,52 @@ function renderStatsSnapshot() {
     `;
 }
 
-// ============================================
-// Forbedrede modals (klikbar partifordeling)
-// ============================================
+function escapeStatsHtml(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+function closeStatsDetailModal(el) {
+    const overlay = el?.closest?.('.stats-detail-overlay');
+    if (overlay) overlay.remove();
+}
+
+function buildStatsDetailShell(title, bodyHtml, options = {}) {
+    const wide = options.wide ? ' stats-detail-panel--wide' : '';
+    const footer = options.showFooter !== false ? `
+        <div class="stats-detail-footer">
+            <button type="button" onclick="closeStatsDetailModal(this)" class="stats-detail-btn">Luk</button>
+        </div>
+    ` : '';
+
+    return `
+        <div class="stats-detail-panel${wide}">
+            <div class="stats-detail-header">
+                <h3 class="stats-detail-title">${escapeStatsHtml(title)}</h3>
+                <button type="button" onclick="closeStatsDetailModal(this)" class="stats-detail-close" aria-label="Luk">×</button>
+            </div>
+            <div class="stats-detail-body">${bodyHtml}</div>
+            ${footer}
+        </div>
+    `;
+}
 
 function showStatsDetail(type) {
+    document.querySelectorAll('.stats-detail-overlay').forEach(el => el.remove());
+
     const modal = document.createElement('div');
-    modal.className = 'fixed inset-0 bg-black/70 backdrop-blur-sm z-[200] flex items-center justify-center p-4';
+    modal.className = 'stats-detail-overlay';
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.remove();
+    });
 
     let html = '';
 
     if (type === 'politicians') {
-        // === PARTIFORDELING (klikbar) ===
         const partyCount = {};
         window.politicians.forEach(p => {
             if (!partyCount[p.party]) partyCount[p.party] = 0;
@@ -96,60 +123,37 @@ function showStatsDetail(type) {
         });
 
         const sortedParties = Object.entries(partyCount).sort((a, b) => b[1] - a[1]);
-
         let list = '';
         sortedParties.forEach(([party, count]) => {
+            const jsParty = party.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
             list += `
-                <div onclick="filterByTopParty('${party}'); this.closest('.fixed').remove();" 
-                     class="flex justify-between items-center p-3 border border-slate-200 dark:border-slate-700 rounded-2xl mb-2 hover:border-[#C8102E]/30 dark:hover:border-[#C8102E]/50 cursor-pointer transition-colors">
-                    <span class="font-medium text-slate-900 dark:text-slate-100">${party}</span>
-                    <span class="text-sm font-bold text-[#C8102E]">${count} politikere</span>
+                <div onclick="filterByTopParty('${jsParty}'); closeStatsDetailModal(this);" class="stats-detail-item">
+                    <span class="stats-detail-item-name">${escapeStatsHtml(party)}</span>
+                    <span class="stats-detail-item-value">${count} politikere</span>
                 </div>
             `;
         });
 
-        html = `
-            <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-md w-full shadow-2xl border border-slate-200 dark:border-slate-700">
-                <div class="px-6 pt-6 pb-4 border-b border-slate-200 dark:border-slate-700 flex justify-between">
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">Politikere fordelt på partier</h3>
-                    <button onclick="this.closest('.fixed').remove()" class="text-3xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">×</button>
-                </div>
-                <div class="p-6 max-h-[60vh] overflow-y-auto">
-                    ${list}
-                </div>
-                <div class="px-6 py-4 border-t border-slate-200 dark:border-slate-700 flex justify-end">
-                    <button onclick="this.closest('.fixed').remove()" class="px-5 py-2 text-sm bg-slate-900 dark:bg-slate-700 text-white rounded-2xl hover:bg-black dark:hover:bg-slate-600 transition-colors">
-                        Luk
-                    </button>
-                </div>
-            </div>
-        `;
+        html = buildStatsDetailShell('Politikere fordelt på partier', list);
     }
 
     else if (type === 'scandals') {
-        const sorted = [...window.politicians].sort((a, b) => (b.scandals?.length || 0) - (a.scandals?.length || 0)).slice(0, 5);
+        const sorted = [...window.politicians]
+            .sort((a, b) => (b.scandals?.length || 0) - (a.scandals?.length || 0))
+            .slice(0, 5);
 
         let list = '';
         sorted.forEach(p => {
             const count = p.scandals ? p.scandals.length : 0;
             list += `
-                <div onclick="window.openPoliticianModal(${p.id}); this.closest('.fixed').remove();" 
-                     class="flex justify-between items-center p-3 border border-slate-200 dark:border-slate-700 rounded-2xl mb-2 hover:border-[#C8102E]/30 dark:hover:border-[#C8102E]/50 cursor-pointer">
-                    <span class="font-medium text-slate-900 dark:text-slate-100">${p.name}</span>
-                    <span class="text-sm font-bold text-[#C8102E]">${count} skandaler</span>
+                <div onclick="window.openPoliticianModal(${p.id}); closeStatsDetailModal(this);" class="stats-detail-item">
+                    <span class="stats-detail-item-name">${escapeStatsHtml(p.name)}</span>
+                    <span class="stats-detail-item-value">${count} skandaler</span>
                 </div>
             `;
         });
 
-        html = `
-            <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-lg w-full shadow-2xl border border-slate-200 dark:border-slate-700">
-                <div class="px-6 pt-6 pb-4 border-b border-slate-200 dark:border-slate-700 flex justify-between">
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">Top 5 med flest skandaler</h3>
-                    <button onclick="this.closest('.fixed').remove()" class="text-3xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">×</button>
-                </div>
-                <div class="p-6">${list}</div>
-            </div>
-        `;
+        html = buildStatsDetailShell('Top 5 med flest skandaler', list, { wide: true, showFooter: false });
     }
 
     else if (type === 'severity') {
@@ -163,30 +167,21 @@ function showStatsDetail(type) {
         withAvg.forEach(p => {
             if (p.avg === 0) return;
             list += `
-                <div onclick="window.openPoliticianModal(${p.id}); this.closest('.fixed').remove();" 
-                     class="flex justify-between items-center p-3 border border-slate-200 dark:border-slate-700 rounded-2xl mb-2 hover:border-[#C8102E]/30 dark:hover:border-[#C8102E]/50 cursor-pointer">
-                    <span class="font-medium text-slate-900 dark:text-slate-100">${p.name}</span>
-                    <span class="text-sm font-bold text-amber-600 dark:text-amber-400">${p.avg.toFixed(1)} / 5</span>
+                <div onclick="window.openPoliticianModal(${p.id}); closeStatsDetailModal(this);" class="stats-detail-item">
+                    <span class="stats-detail-item-name">${escapeStatsHtml(p.name)}</span>
+                    <span class="stats-detail-item-value stats-detail-item-value--amber">${p.avg.toFixed(1)} / 5</span>
                 </div>
             `;
         });
 
-        html = `
-            <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-lg w-full shadow-2xl border border-slate-200 dark:border-slate-700">
-                <div class="px-6 pt-6 pb-4 border-b border-slate-200 dark:border-slate-700 flex justify-between">
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">Højeste gennemsnitlige alvorlighed</h3>
-                    <button onclick="this.closest('.fixed').remove()" class="text-3xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">×</button>
-                </div>
-                <div class="p-6 text-slate-700 dark:text-slate-300">${list || '<p>Ingen data endnu.</p>'}</div>
-            </div>
-        `;
+        const body = list || '<p class="stats-detail-empty">Ingen data endnu.</p>';
+        html = buildStatsDetailShell('Højeste gennemsnitlige alvorlighed', body, { wide: true, showFooter: false });
     }
 
     modal.innerHTML = html;
     document.body.appendChild(modal);
 }
 
-// Filtrer side til parti med flest skandaler
 function filterByTopParty(party) {
     if (!party || !window.politicians) return;
 
@@ -203,3 +198,6 @@ function filterByTopParty(party) {
 }
 
 window.renderStatsSnapshot = renderStatsSnapshot;
+window.showStatsDetail = showStatsDetail;
+window.closeStatsDetailModal = closeStatsDetailModal;
+window.filterByTopParty = filterByTopParty;
