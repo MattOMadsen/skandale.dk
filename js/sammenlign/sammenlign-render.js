@@ -2,6 +2,35 @@
 // Renderingslogik for sammenlign-siden (lister, cards, metrics, tabs, indhold)
 
 const SammenlignRender = {
+    renderAvatar(politician, sizeClass, roundedClass, textSize) {
+        const color = politician.color;
+        const initials = politician.initials;
+        const baseClass = `${sizeClass} ${roundedClass} flex-shrink-0`;
+
+        if (politician.image) {
+            const fallback = `this.onerror=null;const p=this.parentElement;p.className='${baseClass} flex items-center justify-center text-white font-bold ${textSize} shadow-inner';p.style.backgroundColor='${color}';p.innerHTML='${initials}';`;
+            return `<div class="${baseClass} overflow-hidden border border-gray-200 dark:border-gray-700 shadow-inner">
+                <img src="${politician.image}" alt="${politician.name}" class="w-full h-full object-cover" loading="lazy" onerror="${fallback}">
+            </div>`;
+        }
+
+        return `<div class="${baseClass} flex items-center justify-center text-white font-bold ${textSize} shadow-sm" style="background-color: ${color}">${initials}</div>`;
+    },
+
+    setAvatarElement(el, politician, sizeClass, roundedClass, textSize) {
+        if (!el) return;
+        if (politician.image) {
+            el.className = `${sizeClass} ${roundedClass} flex-shrink-0 overflow-hidden border border-gray-200 dark:border-gray-700 shadow-inner`;
+            el.style.backgroundColor = '';
+            const fallback = `this.onerror=null;const p=this.parentElement;p.className='${sizeClass} ${roundedClass} flex-shrink-0 flex items-center justify-center text-white font-bold ${textSize} shadow-inner';p.style.backgroundColor='${politician.color}';p.innerHTML='${politician.initials}';`;
+            el.innerHTML = `<img src="${politician.image}" alt="${politician.name}" class="w-full h-full object-cover" loading="lazy" onerror="${fallback}">`;
+        } else {
+            el.className = `${sizeClass} ${roundedClass} flex-shrink-0 flex items-center justify-center text-white font-bold ${textSize} shadow-inner`;
+            el.style.backgroundColor = politician.color;
+            el.innerHTML = politician.initials;
+        }
+    },
+
     renderPoliticianList(side) {
         const container = document.getElementById(`politician-list-${side}`);
         if (!container) return;
@@ -11,7 +40,7 @@ const SammenlignRender = {
             const div = document.createElement('div');
             div.className = `politician-option flex items-center gap-x-3 px-3 py-2.5 rounded-xl cursor-pointer text-sm`;
             div.innerHTML = `
-                <div class="w-8 h-8 rounded-xl flex-shrink-0 flex items-center justify-center text-white text-xs font-bold shadow-sm" style="background-color: ${p.color}">${p.initials}</div>
+                ${this.renderAvatar(p, 'w-8 h-8', 'rounded-xl', 'text-xs')}
                 <div class="flex-1 min-w-0">
                     <div class="font-medium">${p.name}</div>
                     <div class="text-xs text-gray-500 dark:text-gray-400">${p.party}</div>
@@ -74,11 +103,13 @@ const SammenlignRender = {
     },
 
     renderPoliticianCard(side, politician) {
-        const avatar = document.getElementById(`p${side}-avatar`);
-        if (avatar) {
-            avatar.innerHTML = politician.initials;
-            avatar.style.backgroundColor = politician.color;
-        }
+        this.setAvatarElement(
+            document.getElementById(`p${side}-avatar`),
+            politician,
+            'w-14 h-14',
+            'rounded-2xl',
+            'text-2xl'
+        );
 
         const nameEl = document.getElementById(`p${side}-name`);
         if (nameEl) nameEl.textContent = politician.name;

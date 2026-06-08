@@ -29,7 +29,7 @@
 
 - [ ] **Sammenlign-siden – finpudsning**
   - [x] Alle 16 politikere tilgængelige
-  - [ ] Profilbillede i sammenlign-kort (viser stadig initialer)
+  - [x] Profilbillede i sammenlign-kort (liste + sammenligningskort)
   - [ ] PDF-eksport kan gøres rigere
   - [ ] Mere polish på mobil
   - [ ] «Sammenlign med…»-knap fra politiker-modal
