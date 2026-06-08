@@ -101,24 +101,24 @@ function showStatsDetail(type) {
         sortedParties.forEach(([party, count]) => {
             list += `
                 <div onclick="filterByTopParty('${party}'); this.closest('.fixed').remove();" 
-                     class="flex justify-between items-center p-3 border border-slate-200 rounded-2xl mb-2 hover:border-[#C8102E]/30 cursor-pointer transition-colors">
-                    <span class="font-medium">${party}</span>
+                     class="flex justify-between items-center p-3 border border-slate-200 dark:border-slate-700 rounded-2xl mb-2 hover:border-[#C8102E]/30 dark:hover:border-[#C8102E]/50 cursor-pointer transition-colors">
+                    <span class="font-medium text-slate-900 dark:text-slate-100">${party}</span>
                     <span class="text-sm font-bold text-[#C8102E]">${count} politikere</span>
                 </div>
             `;
         });
 
         html = `
-            <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl">
-                <div class="px-6 pt-6 pb-4 border-b flex justify-between">
-                    <h3 class="text-xl font-bold">Politikere fordelt på partier</h3>
-                    <button onclick="this.closest('.fixed').remove()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+            <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-md w-full shadow-2xl border border-slate-200 dark:border-slate-700">
+                <div class="px-6 pt-6 pb-4 border-b border-slate-200 dark:border-slate-700 flex justify-between">
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">Politikere fordelt på partier</h3>
+                    <button onclick="this.closest('.fixed').remove()" class="text-3xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">×</button>
                 </div>
                 <div class="p-6 max-h-[60vh] overflow-y-auto">
                     ${list}
                 </div>
-                <div class="px-6 py-4 border-t flex justify-end">
-                    <button onclick="this.closest('.fixed').remove()" class="px-5 py-2 text-sm bg-slate-900 text-white rounded-2xl hover:bg-black transition-colors">
+                <div class="px-6 py-4 border-t border-slate-200 dark:border-slate-700 flex justify-end">
+                    <button onclick="this.closest('.fixed').remove()" class="px-5 py-2 text-sm bg-slate-900 dark:bg-slate-700 text-white rounded-2xl hover:bg-black dark:hover:bg-slate-600 transition-colors">
                         Luk
                     </button>
                 </div>
@@ -134,18 +134,18 @@ function showStatsDetail(type) {
             const count = p.scandals ? p.scandals.length : 0;
             list += `
                 <div onclick="window.openPoliticianModal(${p.id}); this.closest('.fixed').remove();" 
-                     class="flex justify-between items-center p-3 border border-slate-200 rounded-2xl mb-2 hover:border-[#C8102E]/30 cursor-pointer">
-                    <span class="font-medium">${p.name}</span>
+                     class="flex justify-between items-center p-3 border border-slate-200 dark:border-slate-700 rounded-2xl mb-2 hover:border-[#C8102E]/30 dark:hover:border-[#C8102E]/50 cursor-pointer">
+                    <span class="font-medium text-slate-900 dark:text-slate-100">${p.name}</span>
                     <span class="text-sm font-bold text-[#C8102E]">${count} skandaler</span>
                 </div>
             `;
         });
 
         html = `
-            <div class="bg-white rounded-3xl max-w-lg w-full shadow-2xl">
-                <div class="px-6 pt-6 pb-4 border-b flex justify-between">
-                    <h3 class="text-xl font-bold">Top 5 med flest skandaler</h3>
-                    <button onclick="this.closest('.fixed').remove()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+            <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-lg w-full shadow-2xl border border-slate-200 dark:border-slate-700">
+                <div class="px-6 pt-6 pb-4 border-b border-slate-200 dark:border-slate-700 flex justify-between">
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">Top 5 med flest skandaler</h3>
+                    <button onclick="this.closest('.fixed').remove()" class="text-3xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">×</button>
                 </div>
                 <div class="p-6">${list}</div>
             </div>
@@ -164,20 +164,20 @@ function showStatsDetail(type) {
             if (p.avg === 0) return;
             list += `
                 <div onclick="window.openPoliticianModal(${p.id}); this.closest('.fixed').remove();" 
-                     class="flex justify-between items-center p-3 border border-slate-200 rounded-2xl mb-2 hover:border-[#C8102E]/30 cursor-pointer">
-                    <span class="font-medium">${p.name}</span>
-                    <span class="text-sm font-bold text-amber-600">${p.avg.toFixed(1)} / 5</span>
+                     class="flex justify-between items-center p-3 border border-slate-200 dark:border-slate-700 rounded-2xl mb-2 hover:border-[#C8102E]/30 dark:hover:border-[#C8102E]/50 cursor-pointer">
+                    <span class="font-medium text-slate-900 dark:text-slate-100">${p.name}</span>
+                    <span class="text-sm font-bold text-amber-600 dark:text-amber-400">${p.avg.toFixed(1)} / 5</span>
                 </div>
             `;
         });
 
         html = `
-            <div class="bg-white rounded-3xl max-w-lg w-full shadow-2xl">
-                <div class="px-6 pt-6 pb-4 border-b flex justify-between">
-                    <h3 class="text-xl font-bold">Højeste gennemsnitlige alvorlighed</h3>
-                    <button onclick="this.closest('.fixed').remove()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+            <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-lg w-full shadow-2xl border border-slate-200 dark:border-slate-700">
+                <div class="px-6 pt-6 pb-4 border-b border-slate-200 dark:border-slate-700 flex justify-between">
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">Højeste gennemsnitlige alvorlighed</h3>
+                    <button onclick="this.closest('.fixed').remove()" class="text-3xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">×</button>
                 </div>
-                <div class="p-6">${list || '<p>Ingen data endnu.</p>'}</div>
+                <div class="p-6 text-slate-700 dark:text-slate-300">${list || '<p>Ingen data endnu.</p>'}</div>
             </div>
         `;
     }

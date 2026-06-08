@@ -4,6 +4,27 @@
 let politicians = [];
 let networkIndex = {};
 
+function extractYearFromDate(dateStr) {
+  if (dateStr == null || dateStr === '') return null;
+  if (typeof dateStr === 'number') return String(dateStr);
+  const years = String(dateStr).match(/\d{4}/g);
+  if (!years || !years.length) return null;
+  return years[years.length - 1];
+}
+
+function normalizeScandal(scandal) {
+  if (!scandal) return scandal;
+  const year = scandal.year || extractYearFromDate(scandal.date) || null;
+  const severity = scandal.ourSeverity ?? scandal.severity ?? 3;
+  return {
+    ...scandal,
+    year,
+    shortDesc: scandal.shortDesc || scandal.description || scandal.longDesc || '',
+    severity,
+    ourSeverity: scandal.ourSeverity ?? scandal.severity ?? severity
+  };
+}
+
 async function loadPoliticians() {
   try {
     let politicianSlugs = [];
@@ -74,7 +95,7 @@ async function loadPoliticianDetails(politician) {
           fetch(`data/scandals/${slug}/${filename}`).then(r => r.ok ? r.json() : null)
         );
         const loaded = await Promise.all(scandalPromises);
-        scandals = loaded.filter(Boolean);
+        scandals = loaded.filter(Boolean).map(normalizeScandal);
       }
     }
   } catch (e) {}
@@ -84,7 +105,8 @@ async function loadPoliticianDetails(politician) {
       const s = await fetch(`data/scandals/${slug}.json`);
       if (s.ok) {
         const sData = await s.json();
-        scandals = sData.scandals || (Array.isArray(sData) ? sData : []);
+        const raw = sData.scandals || (Array.isArray(sData) ? sData : []);
+        scandals = raw.filter(Boolean).map(normalizeScandal);
       }
     } catch (e) {}
   }
