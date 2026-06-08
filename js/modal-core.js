@@ -187,7 +187,7 @@ async function showPoliticianModal(politicianId, targetScandalId = null) {
         </div>
         
         <div class="px-8 py-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-400 dark:text-slate-500 text-center">
-          Data er baseret på offentligt tilgængelige kilder • v2.00.85
+          Data er baseret på offentligt tilgængelige kilder • v2.00.86
         </div>
       </div>
     </div>

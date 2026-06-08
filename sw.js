@@ -1,7 +1,7 @@
 // sw.js - Service Worker for Skandale.dk PWA
 // Grundlæggende offline-support og caching
 
-const CACHE_NAME = 'skandale-dk-v1';
+const CACHE_NAME = 'skandale-dk-v2';
 const urlsToCache = [
   '/',
   '/index.html',

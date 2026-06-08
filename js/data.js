@@ -129,6 +129,16 @@ async function loadPoliticianDetails(politician) {
     }
   } catch (e) {}
 
+  brokenPromises = brokenPromises.map(bp => ({
+    ...bp,
+    whatHappened: bp.whatHappened
+      || bp.description
+      || bp.whatShouldHaveHappened
+      || bp.shortDesc
+      || bp.longDesc
+      || ''
+  }));
+
   politician.scandals = scandals;
   politician.affiliations = affiliations;
   politician.brokenPromises = brokenPromises;

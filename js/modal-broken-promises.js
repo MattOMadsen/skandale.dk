@@ -1,5 +1,15 @@
 // js/modal-broken-promises.js - Opdateret til at understøtte flere kilde links (sources array) + backward compat med single source
 
+function getBrokenPromiseText(promise) {
+  if (!promise) return 'Ingen beskrivelse tilgængelig.';
+  return promise.whatHappened
+    || promise.description
+    || promise.whatShouldHaveHappened
+    || promise.shortDesc
+    || promise.longDesc
+    || 'Ingen beskrivelse tilgængelig.';
+}
+
 function addBrokenPromisesSection(politician) {
   const container = document.querySelector('#politicianModal .p-8');
   if (!container || !politician.brokenPromises) return;
@@ -30,7 +40,7 @@ function addBrokenPromisesSection(politician) {
       <div class="broken-promise-item bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700 hover:border-[#C8102E]/30 rounded-2xl p-4 mb-3 cursor-pointer" data-index="${i}">
         <div class="font-semibold text-base text-slate-900 dark:text-white">${p.title}</div>
         <div class="text-xs text-slate-500 dark:text-slate-400">Lovet i ${p.year}</div>
-        <div class="text-sm text-slate-700 dark:text-slate-300 my-2">${p.whatHappened}</div>
+        <div class="text-sm text-slate-700 dark:text-slate-300 my-2">${getBrokenPromiseText(p)}</div>
         <div class="text-[10px] text-slate-400">Kilder: ${kildeHTML}</div>
         <div class="text-[10px] text-[#C8102E] mt-2">Klik for detaljer →</div>
       </div>
@@ -71,7 +81,7 @@ function showBrokenPromiseDetail(promise) {
         <div class="p-8">
           <div>
             <div class="font-semibold text-sm text-slate-500 dark:text-slate-400">Hvad skete der?</div>
-            <div class="text-slate-700 dark:text-slate-300">${promise.whatHappened}</div>
+            <div class="text-slate-700 dark:text-slate-300">${getBrokenPromiseText(promise)}</div>
           </div>
           ${kildeHTML ? `<div class="mt-6"><div class="font-semibold text-sm text-slate-500 dark:text-slate-400 mb-1">Kilder</div><div class="text-sm text-slate-700 dark:text-slate-300">${kildeHTML}</div></div>` : ''}
         </div>
