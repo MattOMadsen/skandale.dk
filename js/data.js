@@ -44,7 +44,9 @@ async function loadPoliticians() {
         'mette-frederiksen', 'inger-stoejberg', 'morten-oestergaard', 'helle-thorning-schmidt',
         'lars-loekke-rasmussen', 'pia-kjaersgaard', 'anders-fogh-rasmussen', 'morten-messerschmidt',
         'kristian-thulesen-dahl', 'soeren-pape-poulsen', 'uffe-elbaek', 'claus-hjort-frederiksen',
-        'pernille-skipper'
+        'pernille-skipper', 'pernille-vermund', 'alex-vanopslagh', 'ida-auken',
+        'nicolai-wammen', 'troels-lund-poulsen', 'sophie-loehde', 'pia-olsen-dyhr',
+        'henrik-dahl', 'mona-juul', 'mattias-tesfaye', 'rosa-lund'
       ];
     }
 

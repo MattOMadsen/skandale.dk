@@ -13,7 +13,8 @@ const PARTY_SHORT = {
   'Nye Borgerlige': 'NB',
   'Liberal Alliance': 'LA',
   'Alternativet / Uafhængig': 'Å',
-  'Frie Grønne': 'FG'
+  'Frie Grønne': 'FG',
+  'Socialistisk Folkeparti': 'SF'
 };
 
 const SammenlignData = {
