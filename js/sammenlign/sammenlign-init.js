@@ -2,20 +2,30 @@
 // Initialisering + orkestrering – holder HTML-filen slank
 
 const SammenlignInit = {
-    init() {
+    async init() {
         this.initializeTailwind();
         this.initializeDarkMode();
-        this.initializePoliticianLists();
         this.setupKeyboardSupport();
-        this.updatePoliticianCount();
 
-        SammenlignData.buildCrossReferenceIndex().then(() => {
-            const exportBtn = document.getElementById('export-pdf-btn');
-            if (exportBtn) exportBtn.disabled = true;
+        const loadingEl = document.getElementById('politician-loading');
+        if (loadingEl) loadingEl.classList.remove('hidden');
+
+        try {
+            await SammenlignData.loadPoliticians();
+            this.initializePoliticianLists();
+            this.updatePoliticianCount();
+            await SammenlignData.buildCrossReferenceIndex();
             this.loadFromURL();
-        });
+        } catch (e) {
+            console.error('[Sammenlign] Fejl ved indlæsning:', e);
+        } finally {
+            if (loadingEl) loadingEl.classList.add('hidden');
+        }
 
-        console.log('%c[Sammenlign] Init færdig – slank version aktiv.', 'color:#64748b');
+        const exportBtn = document.getElementById('export-pdf-btn');
+        if (exportBtn && !window.selectedPoliticians?.[1]) exportBtn.disabled = true;
+
+        console.log(`%c[Sammenlign] Init færdig – ${SammenlignData.POLITICIANS.length} politikere`, 'color:#64748b');
     },
 
     updatePoliticianCount() {

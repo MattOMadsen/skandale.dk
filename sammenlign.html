@@ -174,7 +174,7 @@
                 <div class="mt-4 flex items-center gap-x-4 text-sm">
                     <div class="flex items-center gap-x-2 text-green-600 dark:text-green-400">
                         <i class="fas fa-check-circle"></i>
-                        <span id="politician-count">12</span> politikere
+                        <span id="politician-count">–</span> politikere
                     </div>
                     <div class="flex items-center gap-x-2 text-gray-500 dark:text-gray-400">
                         <i class="fas fa-sync-alt"></i>
@@ -199,6 +199,11 @@
                     <i class="fas fa-undo mr-2"></i>
                     Nulstil
                 </button>
+            </div>
+
+            <div id="politician-loading" class="flex items-center justify-center gap-x-2 py-6 text-sm text-gray-500 dark:text-gray-400">
+                <i class="fas fa-spinner fa-spin text-red-600"></i>
+                <span>Indlæser politikere...</span>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
