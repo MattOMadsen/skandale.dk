@@ -1,76 +1,7 @@
-// js/stats/stats-data.js
-// Data loading, politician meta and aggregation for the stats page
-
-const PARTY_SHORT = {
-    'Socialdemokratiet': 'S',
-    'Danmarksdemokraterne': 'DD',
-    'Radikale Venstre': 'RV',
-    'Moderaterne': 'M',
-    'Dansk Folkeparti': 'DF',
-    'Venstre': 'V',
-    'Det Konservative Folkeparti': 'K',
-    'Enhedslisten': 'EL',
-    'Nye Borgerlige': 'NB',
-    'Liberal Alliance': 'LA',
-    'Alternativet / Uafhængig': 'Å',
-    'Frie Grønne': 'FG',
-    'Socialistisk Folkeparti': 'SF'
-};
+// js/stats/stats-data.js – bruger fælles SiteStats til dataaggregering
 
 let politiciansData = [];
 let currentPartyFilter = null;
-
-async function fetchJSON(path) {
-    try {
-        const res = await fetch(path);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return await res.json();
-    } catch (e) {
-        console.warn('Kunne ikke hente', path, e);
-        return null;
-    }
-}
-
-async function loadScandalsForStats(slug) {
-    const manifest = await fetchJSON(`data/scandals/${slug}/manifest.json`);
-    if (manifest?.scandals && Array.isArray(manifest.scandals)) {
-        const items = await Promise.all(
-            manifest.scandals.map(f => fetchJSON(`data/scandals/${slug}/${f}`))
-        );
-        return items.filter(Boolean);
-    }
-
-    const single = await fetchJSON(`data/scandals/${slug}.json`);
-    if (single?.scandals) return single.scandals;
-    if (Array.isArray(single)) return single;
-    return [];
-}
-
-async function loadBrokenPromisesForStats(slug) {
-    const manifest = await fetchJSON(`data/broken-promises/${slug}/manifest.json`);
-    if (manifest?.brokenPromises && Array.isArray(manifest.brokenPromises)) {
-        const items = await Promise.all(
-            manifest.brokenPromises.map(f => fetchJSON(`data/broken-promises/${slug}/${f}`))
-        );
-        return items.filter(Boolean);
-    }
-
-    const single = await fetchJSON(`data/broken-promises/${slug}.json`);
-    if (single?.brokenPromises) return single.brokenPromises;
-    return [];
-}
-
-function metaFromCore(slug, core) {
-    if (!core) {
-        return { name: slug, party: 'Ukendt', partyShort: '?', color: '#6B7280' };
-    }
-    return {
-        name: core.name || slug,
-        party: core.party || 'Ukendt',
-        partyShort: PARTY_SHORT[core.party] || '?',
-        color: core.partyColor || core.avatarColor || '#6B7280'
-    };
-}
 
 async function loadAllStatsData() {
     const metricsGrid = document.getElementById('metricsGrid');
@@ -80,22 +11,20 @@ async function loadAllStatsData() {
     }
 
     try {
-        const manifest = await fetchJSON('data/politicians/manifest.json');
-        if (!manifest || !manifest.politicians) throw new Error('Manifest ikke fundet');
+        if (!window.SiteStats) throw new Error('SiteStats ikke indlæst');
 
-        const slugs = manifest.politicians;
-        const countEl = document.getElementById('politicianCount');
-        if (countEl) countEl.textContent = slugs.length;
+        const slugs = await SiteStats.getPoliticianSlugs();
+        if (!slugs.length) throw new Error('Manifest ikke fundet');
 
         politiciansData = await Promise.all(slugs.map(async (slug) => {
             const [core, scandals, brokenPromises, donationData] = await Promise.all([
-                fetchJSON(`data/politicians/${slug}.json`),
-                loadScandalsForStats(slug),
-                loadBrokenPromisesForStats(slug),
-                fetchJSON(`data/economic-support/${slug}.json`)
+                SiteStats.loadPoliticianCore(slug),
+                SiteStats.loadScandalsForSlug(slug),
+                SiteStats.loadBrokenPromisesForSlug(slug),
+                SiteStats.fetchJSON(`data/economic-support/${slug}.json`)
             ]);
 
-            const meta = metaFromCore(slug, core);
+            const meta = SiteStats.metaFromCore(slug, core);
 
             let scandalCount = 0;
             let totalSeverity = 0;
@@ -131,7 +60,7 @@ async function loadAllStatsData() {
 
         const lastUpdatedEl = document.getElementById('lastUpdated');
         if (lastUpdatedEl) {
-            lastUpdatedEl.textContent = new Date().toLocaleDateString('da-DK');
+            lastUpdatedEl.textContent = SiteStats.formatDaDate();
         }
 
     } catch (error) {

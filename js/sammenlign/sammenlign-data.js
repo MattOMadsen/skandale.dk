@@ -158,22 +158,18 @@ const SammenlignData = {
   },
 
   async loadPoliticians() {
-    const manifest = await this.fetchJSON('data/politicians/manifest.json');
-    let slugs = manifest?.politicians;
+    let slugs = [];
+    if (window.SiteStats) {
+      slugs = await SiteStats.getPoliticianSlugs();
+    } else {
+      const manifest = await this.fetchJSON('data/politicians/manifest.json');
+      slugs = manifest?.politicians || [];
+    }
 
-    if (!slugs || !Array.isArray(slugs) || slugs.length === 0) {
-      slugs = [
-        'mette-frederiksen', 'inger-stoejberg', 'morten-oestergaard', 'helle-thorning-schmidt',
-        'lars-loekke-rasmussen', 'pia-kjaersgaard', 'anders-fogh-rasmussen', 'morten-messerschmidt',
-        'kristian-thulesen-dahl', 'soeren-pape-poulsen', 'uffe-elbaek', 'claus-hjort-frederiksen',
-        'pernille-skipper', 'pernille-vermund', 'alex-vanopslagh', 'ida-auken',
-        'nicolai-wammen', 'troels-lund-poulsen', 'sophie-loehde', 'pia-olsen-dyhr',
-        'henrik-dahl', 'mona-juul', 'mattias-tesfaye', 'rosa-lund',
-        'magnus-heunicke', 'dan-jorgensen', 'ane-halsboe-jorgensen', 'stephanie-lose',
-        'karina-lorentzen', 'mette-abildgaard', 'jeppe-bruus', 'marcus-knuth',
-        'rasmus-stoklund', 'morten-boedskov', 'christine-egelund', 'jakob-engel-schmidt',
-        'mai-mercado', 'pelle-dragsted', 'peter-skaarup', 'jakob-ellemann-jensen'
-      ];
+    if (!slugs.length) {
+      console.warn('[SammenlignData] Ingen politikere i manifest');
+      this.POLITICIANS = [];
+      return this.POLITICIANS;
     }
 
     const entries = await Promise.all(slugs.map(slug => this.buildPoliticianEntry(slug)));

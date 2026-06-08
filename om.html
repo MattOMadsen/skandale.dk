@@ -19,7 +19,7 @@
         .section-anchor { scroll-margin-top: 80px; }
     </style>
 </head>
-<body class="bg-slate-50 dark:bg-gray-950 text-slate-900 dark:text-slate-100">
+<body class="bg-slate-50 dark:bg-gray-950 text-slate-900 dark:text-slate-100" data-site-meta="full">
 
     <!-- Navbar indlæses via js/navbar.js -->
 
@@ -54,13 +54,39 @@
             </div>
         </div>
 
-        <!-- Kort intro + anker-navigation -->
-        <div class="prose prose-slate dark:prose-invert max-w-none mb-10 prose-custom">
+        <!-- Kort intro + live statistik -->
+        <div class="prose prose-slate dark:prose-invert max-w-none mb-6 prose-custom">
             <p class="text-lg text-slate-700 dark:text-slate-300">
                 Skandale.dk samler offentligt tilgængelige oplysninger om politiske skandaler, økonomisk støtte, 
                 internationale netværk og brudte valgløfter – alt på ét sted. Målet er at give danskerne et bedre 
                 grundlag for at forstå magtforhold og ansvar i dansk politik.
             </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+            <div class="bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-800 rounded-2xl p-4 text-center">
+                <div class="text-2xl font-bold text-[#C8102E] dark:text-red-400" id="om-scandal-count">…</div>
+                <div class="text-xs text-slate-500 dark:text-slate-400 mt-1">Skandaler</div>
+            </div>
+            <div class="bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-800 rounded-2xl p-4 text-center">
+                <div class="text-2xl font-bold text-[#C8102E] dark:text-red-400" id="om-promise-count">…</div>
+                <div class="text-xs text-slate-500 dark:text-slate-400 mt-1">Brudte løfter</div>
+            </div>
+            <div class="bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-800 rounded-2xl p-4 text-center">
+                <div class="text-2xl font-bold text-[#C8102E] dark:text-red-400" id="om-avg-severity">…</div>
+                <div class="text-xs text-slate-500 dark:text-slate-400 mt-1">Gns. alvorlighed</div>
+            </div>
+            <div class="bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-800 rounded-2xl p-4 text-center">
+                <div class="text-2xl font-bold text-[#C8102E] dark:text-red-400" id="om-party-count-stat">…</div>
+                <div class="text-xs text-slate-500 dark:text-slate-400 mt-1">Partier dækket</div>
+            </div>
+        </div>
+
+        <div class="mb-10">
+            <p class="text-sm text-slate-500 dark:text-slate-400 mb-2">Fordeling pr. parti</p>
+            <div id="om-party-breakdown" class="flex flex-wrap gap-2">
+                <span class="text-xs text-slate-400">Indlæser…</span>
+            </div>
         </div>
 
         <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm mb-12 border-b border-slate-200 dark:border-gray-800 pb-6">
@@ -173,21 +199,15 @@
                 Fremtidsplaner
             </h2>
             <div class="prose prose-slate dark:prose-invert max-w-none prose-custom text-slate-700 dark:text-slate-300">
-                <p>
-                    Projektet er under løbende udvikling. Her er de vigtigste planer (se den fulde og opdaterede liste i 
-                    <a href="TODO.md" class="text-[#C8102E] dark:text-red-400 hover:underline">TODO.md</a>):
-                </p>
-                <ul class="list-disc pl-6">
-                    <li>Kommentar-system med voting og moderation</li>
-                    <li>Delt afstemning om skandaler (central database, f.eks. Supabase)</li>
-                    <li>Flere politikere og udvidelse af datagrundlaget</li>
-                    <li>Forbedret PDF-eksport af politikeres rapporter</li>
-                    <li>Yderligere PWA-forbedringer (offline-funktion, bedre installation)</li>
-                    <li>Mulighed for at tilføje nye skandaler direkte via admin-dashboard</li>
+                <p>Projektet er under løbende udvikling. Status på de vigtigste områder:</p>
+                <ul class="list-none pl-0 space-y-2">
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span><strong>Kommentarer &amp; fælles stjerne-bedømmelser</strong> – implementeret via Supabase</span></li>
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span><strong>40+ politikere</strong> – løbende udvidelse via manifest.json</span></li>
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i><span><strong>Dark mode, mobil polish og sammenlign</strong> – på plads på tværs af sider</span></li>
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-circle text-amber-400 mt-1 text-[0.5rem]"></i><span><strong>Flere donor- og netværksdata</strong> – mange profiler har endnu tomme affiliations</span></li>
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-circle text-amber-400 mt-1 text-[0.5rem]"></i><span><strong>Forbedret PDF-eksport</strong> – planlagt</span></li>
+                    <li class="flex items-start gap-2"><i class="fa-solid fa-circle text-slate-400 mt-1 text-[0.5rem]"></i><span><strong>PWA offline &amp; admin-dashboard</strong> – planlagt</span></li>
                 </ul>
-                <p class="mt-4 text-sm text-slate-500 dark:text-slate-400">
-                    Sidst opdateret i TODO.md: 2. juni 2026
-                </p>
             </div>
         </section>
 
@@ -207,9 +227,12 @@
                     <li><strong>Politikere & journalister:</strong> Der findes et password-beskyttet admin-dashboard, 
                         hvor godkendte brugere kan foreslå ændringer og nye skandaler.</li>
                     <li><strong>Del siden:</strong> Jo flere der kender til projektet, jo større gennemsigtighed skaber vi sammen.</li>
+                    <li><strong>Tilføj data:</strong> Se guiden 
+                        <a href="TILFOEJ-NY-POLITIKER.md" class="text-[#C8102E] dark:text-red-400 hover:underline">Sådan tilføjer du en ny politiker</a> 
+                        og <a href="TILFOEJ-NY-POLITIKER-CHECKLISTE.md" class="text-[#C8102E] dark:text-red-400 hover:underline">checklisten</a> for korrekt datastruktur.</li>
                 </ul>
                 <p class="mt-4">
-                    Mere information om bidragsmuligheder kommer, når de tekniske rammer er på plads.
+                    <a href="kontakt.html" class="text-[#C8102E] dark:text-red-400 hover:underline">Kontaktformularen</a> er åben for tips og feedback.
                 </p>
             </div>
         </section>
@@ -246,6 +269,7 @@
     </div>
 
     <script src="js/version.js"></script>
+    <script src="js/site-stats.js"></script>
     <script src="js/om-stats.js"></script>
     <script src="js/navbar.js"></script>
 </body>
