@@ -7,15 +7,15 @@ function showCompareModal() {
     const html = `
         <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[150] flex items-center justify-center p-4" id="compareModal">
             <div onclick="event.target.id === 'compareModal' && closeCompareModal()" 
-                 class="bg-white rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-hidden shadow-2xl">
+                 class="bg-white dark:bg-slate-800 rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-hidden shadow-2xl">
                 
                 <!-- Header -->
-                <div class="px-8 pt-8 pb-6 border-b flex items-center justify-between">
+                <div class="px-8 pt-8 pb-6 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
                     <div>
-                        <h3 class="text-3xl font-bold tracking-tight">Sammenlign to politikere</h3>
-                        <p class="text-slate-500 mt-1">Vælg to politikere for at sammenligne dem</p>
+                        <h3 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Sammenlign to politikere</h3>
+                        <p class="text-slate-500 dark:text-slate-400 mt-1">Vælg to politikere for at sammenligne dem</p>
                     </div>
-                    <button onclick="closeCompareModal()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+                    <button onclick="closeCompareModal()" class="text-3xl text-slate-400 hover:text-slate-600 dark:hover:text-white">×</button>
                 </div>
                 
                 <div class="p-8">
@@ -25,16 +25,16 @@ function showCompareModal() {
                         <div>
                             <label class="block text-sm font-semibold text-slate-500 mb-2">Politiker 1</label>
                             <select id="politician1-select" onchange="selectPolitician(1, this.value)" 
-                                    class="w-full border border-slate-300 rounded-2xl px-4 py-3 text-lg focus:border-[#C8102E] outline-none">
+                                    class="w-full border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-2xl px-4 py-3 text-lg focus:border-[#C8102E] outline-none">
                                 <option value="">Vælg politiker...</option>
                             </select>
                         </div>
                         
                         <!-- Politiker 2 -->
                         <div>
-                            <label class="block text-sm font-semibold text-slate-500 mb-2">Politiker 2</label>
+                            <label class="block text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2">Politiker 2</label>
                             <select id="politician2-select" onchange="selectPolitician(2, this.value)" 
-                                    class="w-full border border-slate-300 rounded-2xl px-4 py-3 text-lg focus:border-[#C8102E] outline-none">
+                                    class="w-full border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-2xl px-4 py-3 text-lg focus:border-[#C8102E] outline-none">
                                 <option value="">Vælg politiker...</option>
                             </select>
                         </div>
@@ -44,12 +44,12 @@ function showCompareModal() {
                     <div id="comparison-result" class="hidden">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <!-- Politiker 1 Result -->
-                            <div id="result-1" class="border border-slate-200 rounded-3xl p-6">
+                            <div id="result-1" class="border border-slate-200 dark:border-slate-700 rounded-3xl p-6">
                                 <!-- JS populates -->
                             </div>
                             
                             <!-- Politiker 2 Result -->
-                            <div id="result-2" class="border border-slate-200 rounded-3xl p-6">
+                            <div id="result-2" class="border border-slate-200 dark:border-slate-700 rounded-3xl p-6">
                                 <!-- JS populates -->
                             </div>
                         </div>
@@ -127,30 +127,30 @@ function createPoliticianComparisonHTML(politician) {
                  style="background-color: ${politician.avatarColor || politician.partyColor}">
                 ${politician.initials}
             </div>
-            <div class="font-bold text-2xl">${politician.name}</div>
-            <div class="text-sm text-slate-500">${politician.party}</div>
+            <div class="font-bold text-2xl text-slate-900 dark:text-white">${politician.name}</div>
+            <div class="text-sm text-slate-500 dark:text-slate-400">${politician.party}</div>
         </div>
         
         <div class="space-y-4">
-            <div class="flex justify-between items-center py-2 border-b">
-                <span class="text-slate-600">Skandaler</span>
-                <span class="font-bold text-xl">${scandals.length}</span>
+            <div class="flex justify-between items-center py-2 border-b border-slate-200 dark:border-slate-700">
+                <span class="text-slate-600 dark:text-slate-400">Skandaler</span>
+                <span class="font-bold text-xl text-slate-900 dark:text-white">${scandals.length}</span>
             </div>
-            <div class="flex justify-between items-center py-2 border-b">
-                <span class="text-slate-600">Gennemsnitlig alvorlighed</span>
-                <span class="font-bold text-xl">${avgSeverity}</span>
+            <div class="flex justify-between items-center py-2 border-b border-slate-200 dark:border-slate-700">
+                <span class="text-slate-600 dark:text-slate-400">Gennemsnitlig alvorlighed</span>
+                <span class="font-bold text-xl text-slate-900 dark:text-white">${avgSeverity}</span>
             </div>
-            <div class="flex justify-between items-center py-2 border-b">
-                <span class="text-slate-600">Økonomisk støtte</span>
-                <span class="font-bold text-xl">${(totalSupport / 1000).toFixed(0)}k kr</span>
+            <div class="flex justify-between items-center py-2 border-b border-slate-200 dark:border-slate-700">
+                <span class="text-slate-600 dark:text-slate-400">Økonomisk støtte</span>
+                <span class="font-bold text-xl text-slate-900 dark:text-white">${(totalSupport / 1000).toFixed(0)}k kr</span>
             </div>
-            <div class="flex justify-between items-center py-2 border-b">
-                <span class="text-slate-600">Brudte valgløfter</span>
-                <span class="font-bold text-xl">${brokenPromises}</span>
+            <div class="flex justify-between items-center py-2 border-b border-slate-200 dark:border-slate-700">
+                <span class="text-slate-600 dark:text-slate-400">Brudte valgløfter</span>
+                <span class="font-bold text-xl text-slate-900 dark:text-white">${brokenPromises}</span>
             </div>
             <div class="flex justify-between items-center py-2">
-                <span class="text-slate-600">Internationale netværk</span>
-                <span class="font-bold text-xl">${affiliations}</span>
+                <span class="text-slate-600 dark:text-slate-400">Internationale netværk</span>
+                <span class="font-bold text-xl text-slate-900 dark:text-white">${affiliations}</span>
             </div>
         </div>
     `;

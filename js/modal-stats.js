@@ -70,41 +70,41 @@ function showStatsModal() {
     let html = `
         <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[150] flex items-center justify-center p-4" id="statsModal">
             <div onclick="event.target.id === 'statsModal' && closeStatsModal()" 
-                 class="bg-white rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-hidden shadow-2xl">
+                 class="bg-white dark:bg-slate-800 rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-hidden shadow-2xl">
                 
-                <div class="px-8 pt-8 pb-6 border-b flex items-center justify-between">
+                <div class="px-8 pt-8 pb-6 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
                     <div>
-                        <h3 class="text-3xl font-bold tracking-tight">Statistik Dashboard</h3>
-                        <p class="text-slate-500 mt-1">Overblik over dansk politik</p>
+                        <h3 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Statistik Dashboard</h3>
+                        <p class="text-slate-500 dark:text-slate-400 mt-1">Overblik over dansk politik</p>
                     </div>
-                    <button onclick="closeStatsModal()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+                    <button onclick="closeStatsModal()" class="text-3xl text-slate-400 hover:text-slate-600 dark:hover:text-white">×</button>
                 </div>
                 
                 <div class="p-8 overflow-y-auto max-h-[calc(92vh-120px)]">
                     
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                        <div class="bg-slate-50 rounded-2xl p-6 text-center">
+                        <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-6 text-center">
                             <div class="text-4xl font-bold text-[#C8102E]">${totalScandals}</div>
-                            <div class="text-sm text-slate-500 mt-1">Skandaler i alt</div>
+                            <div class="text-sm text-slate-500 dark:text-slate-400 mt-1">Skandaler i alt</div>
                         </div>
-                        <div class="bg-slate-50 rounded-2xl p-6 text-center">
+                        <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-6 text-center">
                             <div class="text-4xl font-bold text-[#C8102E]">${avgSeverity}</div>
-                            <div class="text-sm text-slate-500 mt-1">Gennemsnitlig alvorlighed</div>
+                            <div class="text-sm text-slate-500 dark:text-slate-400 mt-1">Gennemsnitlig alvorlighed</div>
                         </div>
-                        <div class="bg-slate-50 rounded-2xl p-6 text-center">
+                        <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-6 text-center">
                             <div class="text-4xl font-bold text-[#C8102E]">${Object.keys(partyStats).length}</div>
-                            <div class="text-sm text-slate-500 mt-1">Partier repræsenteret</div>
+                            <div class="text-sm text-slate-500 dark:text-slate-400 mt-1">Partier repræsenteret</div>
                         </div>
-                        <div class="bg-slate-50 rounded-2xl p-6 text-center">
+                        <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-6 text-center">
                             <div class="text-4xl font-bold text-[#C8102E]">${window.politicians.length}</div>
-                            <div class="text-sm text-slate-500 mt-1">Politikere</div>
+                            <div class="text-sm text-slate-500 dark:text-slate-400 mt-1">Politikere</div>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         
-                        <div class="border border-slate-200 rounded-3xl p-6">
-                            <h4 class="font-bold text-lg mb-4">Flest skandaler per parti</h4>
+                        <div class="border border-slate-200 dark:border-slate-700 rounded-3xl p-6">
+                            <h4 class="font-bold text-lg text-slate-900 dark:text-white mb-4">Flest skandaler per parti</h4>
                             <div class="space-y-3">
     `;
 
@@ -127,8 +127,8 @@ function showStatsModal() {
                             </div>
                         </div>
 
-                        <div class="border border-slate-200 rounded-3xl p-6">
-                            <h4 class="font-bold text-lg mb-4">Mest økonomisk støttede</h4>
+                        <div class="border border-slate-200 dark:border-slate-700 rounded-3xl p-6">
+                            <h4 class="font-bold text-lg text-slate-900 dark:text-white mb-4">Mest økonomisk støttede</h4>
                             <div class="space-y-3">
     `;
 
@@ -148,8 +148,8 @@ function showStatsModal() {
                             </div>
                         </div>
 
-                        <div class="border border-slate-200 rounded-3xl p-6">
-                            <h4 class="font-bold text-lg mb-4">Flest brudte valgløfter</h4>
+                        <div class="border border-slate-200 dark:border-slate-700 rounded-3xl p-6">
+                            <h4 class="font-bold text-lg text-slate-900 dark:text-white mb-4">Flest brudte valgløfter</h4>
                             <div class="space-y-3">
     `;
 
@@ -171,8 +171,8 @@ function showStatsModal() {
                             </div>
                         </div>
 
-                        <div class="border border-slate-200 rounded-3xl p-6">
-                            <h4 class="font-bold text-lg mb-4">Mest alvorlige skandaler</h4>
+                        <div class="border border-slate-200 dark:border-slate-700 rounded-3xl p-6">
+                            <h4 class="font-bold text-lg text-slate-900 dark:text-white mb-4">Mest alvorlige skandaler</h4>
                             <div class="space-y-3 text-sm">
     `;
 

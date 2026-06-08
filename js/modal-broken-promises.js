@@ -7,10 +7,10 @@ function addBrokenPromisesSection(politician) {
   const old = container.querySelector('.broken-promises');
   if (old) old.remove();
 
-  let html = `<div class="mt-8 pt-6 border-t broken-promises">
+  let html = `<div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-700 broken-promises">
     <div class="flex items-center gap-x-2 mb-4">
       <i class="fa-solid fa-exclamation-triangle text-[#C8102E]"></i>
-      <span class="font-bold text-lg">Brudte valgløfter</span>
+      <span class="font-bold text-lg text-slate-900 dark:text-white">Brudte valgløfter</span>
     </div>`;
 
   politician.brokenPromises.forEach((p, i) => {
@@ -27,10 +27,10 @@ function addBrokenPromisesSection(politician) {
     }
 
     html += `
-      <div class="broken-promise-item bg-slate-50 border border-slate-200 hover:border-[#C8102E]/30 rounded-2xl p-4 mb-3 cursor-pointer" data-index="${i}">
-        <div class="font-semibold text-base">${p.title}</div>
-        <div class="text-xs text-slate-500">Lovet i ${p.year}</div>
-        <div class="text-sm text-slate-700 my-2">${p.whatHappened}</div>
+      <div class="broken-promise-item bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700 hover:border-[#C8102E]/30 rounded-2xl p-4 mb-3 cursor-pointer" data-index="${i}">
+        <div class="font-semibold text-base text-slate-900 dark:text-white">${p.title}</div>
+        <div class="text-xs text-slate-500 dark:text-slate-400">Lovet i ${p.year}</div>
+        <div class="text-sm text-slate-700 dark:text-slate-300 my-2">${p.whatHappened}</div>
         <div class="text-[10px] text-slate-400">Kilder: ${kildeHTML}</div>
         <div class="text-[10px] text-[#C8102E] mt-2">Klik for detaljer →</div>
       </div>
@@ -60,22 +60,22 @@ function showBrokenPromiseDetail(promise) {
 
   const html = `
     <div class="fixed inset-0 bg-black/70 z-[200] flex items-center justify-center p-4" id="brokenPromiseModal">
-      <div class="bg-white rounded-3xl max-w-lg w-full">
-        <div class="px-8 pt-8 pb-6 border-b flex justify-between">
+      <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-lg w-full">
+        <div class="px-8 pt-8 pb-6 border-b border-slate-200 dark:border-slate-700 flex justify-between">
           <div>
-            <h3 class="text-2xl font-bold">${promise.title}</h3>
-            <p class="text-sm text-slate-500">Lovet i ${promise.year}</p>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">${promise.title}</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400">Lovet i ${promise.year}</p>
           </div>
-          <button onclick="closeBrokenPromiseModal()" class="text-3xl">×</button>
+          <button onclick="closeBrokenPromiseModal()" class="text-3xl text-slate-400 hover:text-slate-600 dark:hover:text-white">×</button>
         </div>
         <div class="p-8">
           <div>
-            <div class="font-semibold text-sm text-slate-500">Hvad skete der?</div>
-            <div class="text-slate-700">${promise.whatHappened}</div>
+            <div class="font-semibold text-sm text-slate-500 dark:text-slate-400">Hvad skete der?</div>
+            <div class="text-slate-700 dark:text-slate-300">${promise.whatHappened}</div>
           </div>
-          ${kildeHTML ? `<div class="mt-6"><div class="font-semibold text-sm text-slate-500 mb-1">Kilder</div><div class="text-sm">${kildeHTML}</div></div>` : ''}
+          ${kildeHTML ? `<div class="mt-6"><div class="font-semibold text-sm text-slate-500 dark:text-slate-400 mb-1">Kilder</div><div class="text-sm text-slate-700 dark:text-slate-300">${kildeHTML}</div></div>` : ''}
         </div>
-        <div class="px-8 py-4 border-t text-xs text-center text-slate-400">Data er baseret på offentligt tilgængelige kilder</div>
+        <div class="px-8 py-4 border-t border-slate-200 dark:border-slate-700 text-xs text-center text-slate-400 dark:text-slate-500">Data er baseret på offentligt tilgængelige kilder</div>
       </div>
     </div>
   `;

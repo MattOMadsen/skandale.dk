@@ -15,12 +15,12 @@ function showAdminLogin() {
 function createAdminLoginModal() {
     const modalHTML = `
         <div id="adminLoginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-            <div class="bg-white rounded-xl p-8 w-full max-w-md mx-4">
-                <h2 class="text-2xl font-bold mb-6 text-gray-900">Admin Login</h2>
+            <div class="bg-white dark:bg-slate-800 rounded-xl p-8 w-full max-w-md mx-4">
+                <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Admin Login</h2>
                 
                 <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Adgangskode</label>
-                    <input type="password" id="adminPassword" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500" placeholder="Indtast adgangskode">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2">Adgangskode</label>
+                    <input type="password" id="adminPassword" class="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-lg focus:ring-2 focus:ring-red-500" placeholder="Indtast adgangskode">
                 </div>
                 
                 <div id="adminLoginError" class="hidden text-red-600 text-sm mb-4"></div>
@@ -73,14 +73,14 @@ function showAdminDashboard() {
 function createAdminDashboardModal() {
     const modalHTML = `
         <div id="adminDashboardModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-            <div class="bg-white rounded-2xl w-full max-w-3xl mx-4 max-h-[90vh] overflow-hidden flex flex-col">
+            <div class="bg-white dark:bg-slate-800 rounded-2xl w-full max-w-3xl mx-4 max-h-[90vh] overflow-hidden flex flex-col">
                 <!-- Header -->
-                <div class="px-8 py-6 border-b flex justify-between items-center bg-gray-50">
+                <div class="px-8 py-6 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center bg-gray-50 dark:bg-slate-700/50">
                     <div>
-                        <h2 class="text-2xl font-bold text-gray-900">Admin Dashboard</h2>
-                        <p class="text-sm text-gray-500">Godkend og tilføj skandaler manuelt</p>
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Admin Dashboard</h2>
+                        <p class="text-sm text-gray-500 dark:text-slate-400">Godkend og tilføj skandaler manuelt</p>
                     </div>
-                    <button onclick="closeAdminDashboard()" class="text-gray-400 hover:text-gray-600 text-3xl leading-none">&times;</button>
+                    <button onclick="closeAdminDashboard()" class="text-gray-400 hover:text-gray-600 dark:hover:text-white text-3xl leading-none">&times;</button>
                 </div>
 
                 <div class="p-8 overflow-y-auto flex-1 space-y-8">

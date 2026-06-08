@@ -35,14 +35,14 @@ function showPartyOverview() {
     let html = `
         <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[150] flex items-center justify-center p-4" id="partyModal">
             <div onclick="event.target.id === 'partyModal' && closePartyModal()" 
-                 class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
+                 class="bg-white dark:bg-slate-800 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
                 
-                <div class="px-8 pt-8 pb-6 border-b flex items-center justify-between">
+                <div class="px-8 pt-8 pb-6 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
                     <div>
-                        <h3 class="text-3xl font-bold tracking-tight">Parti-oversigt</h3>
-                        <p class="text-slate-500 mt-1">Klik på et parti for detaljer</p>
+                        <h3 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Parti-oversigt</h3>
+                        <p class="text-slate-500 dark:text-slate-400 mt-1">Klik på et parti for detaljer</p>
                     </div>
-                    <button onclick="closePartyModal()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+                    <button onclick="closePartyModal()" class="text-3xl text-slate-400 hover:text-slate-600 dark:hover:text-white">×</button>
                 </div>
                 
                 <div class="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
@@ -58,7 +58,7 @@ function showPartyOverview() {
 
         html += `
             <div onclick="showPartyDetail('${party.name}', '${party.color}')" 
-                 class="border border-slate-200 hover:border-[#C8102E]/30 rounded-2xl p-5 cursor-pointer transition-all hover:shadow-md">
+                 class="border border-slate-200 dark:border-slate-700 hover:border-[#C8102E]/30 rounded-2xl p-5 cursor-pointer transition-all hover:shadow-md">
                 <div class="flex items-center justify-between mb-3">
                     <div class="font-bold text-lg" style="color: ${party.color}">${party.name}</div>
                     <div class="text-xs px-3 py-1 rounded-full" style="background-color: ${party.color}20; color: ${party.color}">
@@ -126,9 +126,9 @@ function showPartyDetail(partyName, partyColor) {
     let html = `
         <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[160] flex items-center justify-center p-4" id="partyDetailModal">
             <div onclick="event.target.id === 'partyDetailModal' && closePartyDetailModal()" 
-                 class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
+                 class="bg-white dark:bg-slate-800 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
                 
-                <div class="px-8 pt-8 pb-6 border-b flex items-center justify-between" style="border-color: ${partyColor}30">
+                <div class="px-8 pt-8 pb-6 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between" style="border-color: ${partyColor}30">
                     <div class="flex items-center gap-x-4">
                         <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white text-3xl font-bold" 
                              style="background-color: ${partyColor}">
@@ -136,7 +136,7 @@ function showPartyDetail(partyName, partyColor) {
                         </div>
                         <div>
                             <h3 class="text-3xl font-bold" style="color: ${partyColor}">${partyName}</h3>
-                            <p class="text-slate-500">${partyPoliticians.length} politikere • ${totalScandals} skandaler</p>
+                            <p class="text-slate-500 dark:text-slate-400">${partyPoliticians.length} politikere • ${totalScandals} skandaler</p>
                         </div>
                     </div>
                     <button onclick="closePartyDetailModal()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
@@ -144,22 +144,22 @@ function showPartyDetail(partyName, partyColor) {
                 
                 <div class="p-8">
                     <div class="grid grid-cols-3 gap-4 mb-8">
-                        <div class="bg-slate-50 rounded-2xl p-4 text-center">
-                            <div class="text-3xl font-bold">${totalScandals}</div>
-                            <div class="text-sm text-slate-500">Skandaler</div>
+                        <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-4 text-center">
+                            <div class="text-3xl font-bold text-slate-900 dark:text-white">${totalScandals}</div>
+                            <div class="text-sm text-slate-500 dark:text-slate-400">Skandaler</div>
                         </div>
-                        <div class="bg-slate-50 rounded-2xl p-4 text-center">
-                            <div class="text-3xl font-bold">${avgSeverity}</div>
-                            <div class="text-sm text-slate-500">Gennemsnit</div>
+                        <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-4 text-center">
+                            <div class="text-3xl font-bold text-slate-900 dark:text-white">${avgSeverity}</div>
+                            <div class="text-sm text-slate-500 dark:text-slate-400">Gennemsnit</div>
                         </div>
-                        <div class="bg-slate-50 rounded-2xl p-4 text-center">
-                            <div class="text-3xl font-bold">${supportFormatted}</div>
-                            <div class="text-sm text-slate-500">Samlet støtte</div>
+                        <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-4 text-center">
+                            <div class="text-3xl font-bold text-slate-900 dark:text-white">${supportFormatted}</div>
+                            <div class="text-sm text-slate-500 dark:text-slate-400">Samlet støtte</div>
                         </div>
                     </div>
 
                     <div class="mb-4">
-                        <div class="font-bold text-lg mb-3">Politikere i partiet</div>
+                        <div class="font-bold text-lg text-slate-900 dark:text-white mb-3">Politikere i partiet</div>
                         <div class="space-y-3">
     `;
 
@@ -167,15 +167,15 @@ function showPartyDetail(partyName, partyColor) {
         const scandals = p.scandals ? p.scandals.length : 0;
         html += `
             <div onclick="closePartyDetailModal(); showPoliticianModal(${p.id})" 
-                 class="flex items-center justify-between p-4 bg-white border border-slate-200 hover:border-[#C8102E]/30 rounded-2xl cursor-pointer transition-all">
+                 class="flex items-center justify-between p-4 bg-white dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700 hover:border-[#C8102E]/30 rounded-2xl cursor-pointer transition-all">
                 <div class="flex items-center gap-x-4">
                     <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-white font-bold text-xl" 
                          style="background-color: ${p.avatarColor || p.partyColor}">
                         ${p.initials}
                     </div>
                     <div>
-                        <div class="font-semibold">${p.name}</div>
-                        <div class="text-sm text-slate-500">${p.role}</div>
+                        <div class="font-semibold text-slate-900 dark:text-white">${p.name}</div>
+                        <div class="text-sm text-slate-500 dark:text-slate-400">${p.role}</div>
                     </div>
                 </div>
                 <div class="text-right">

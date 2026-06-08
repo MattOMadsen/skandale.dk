@@ -16,7 +16,7 @@ function addEconomicSupportSection(politician) {
         : '';
 
       tableRows += `
-        <tr class="border-t border-slate-200 hover:bg-slate-100 cursor-pointer ${hiddenClass}" onclick="showDonorModal('${s.name}')">
+        <tr class="border-t border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 cursor-pointer ${hiddenClass}" onclick="showDonorModal('${s.name}')">
           <td class="px-4 py-3 text-[#C8102E] hover:underline">${s.name}</td>
           <td class="px-4 py-3 text-right font-medium">${s.amount}</td>
           <td class="px-4 py-3 text-xs text-slate-500">${s.type}</td>
@@ -29,13 +29,13 @@ function addEconomicSupportSection(politician) {
     let showMoreHTML = '';
     if (donations.length > initialCount) {
       showMoreHTML = `
-        <div class="px-4 py-3 bg-slate-100 border-t flex justify-center gap-x-3" id="show-more-container-${politician.id}">
+        <div class="px-4 py-3 bg-slate-100 dark:bg-slate-700 border-t border-slate-200 dark:border-slate-700 flex justify-center gap-x-3" id="show-more-container-${politician.id}">
           <button onclick="showMoreDonations(${politician.id}, ${initialCount}, ${showMoreCount})" 
-                  class="px-4 py-1.5 text-sm font-medium text-[#C8102E] hover:bg-white rounded-xl border border-[#C8102E]/30 transition-colors">
+                  class="px-4 py-1.5 text-sm font-medium text-[#C8102E] hover:bg-white dark:hover:bg-slate-600 rounded-xl border border-[#C8102E]/30 transition-colors">
             Vis ${Math.min(showMoreCount, donations.length - initialCount)} flere
           </button>
           <button onclick="hideAllDonations(${politician.id})" 
-                  class="px-4 py-1.5 text-sm font-medium text-slate-500 hover:bg-white rounded-xl border border-slate-300 transition-colors hidden" id="hide-all-btn-${politician.id}">
+                  class="px-4 py-1.5 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-600 rounded-xl border border-slate-300 dark:border-slate-600 transition-colors hidden" id="hide-all-btn-${politician.id}">
             Skjul alle
           </button>
         </div>
@@ -46,12 +46,12 @@ function addEconomicSupportSection(politician) {
       <div class="mt-10 pt-8 border-t">
         <div class="flex items-center gap-x-2 mb-4">
           <i class="fa-solid fa-handshake text-[#C8102E]"></i>
-          <span class="font-bold text-lg">Økonomisk støtte (2023–2025)</span>
-          <span class="text-xs text-slate-500 ml-2">(${donations.length} donorer)</span>
+          <span class="font-bold text-lg text-slate-900 dark:text-white">Økonomisk støtte (2023–2025)</span>
+          <span class="text-xs text-slate-500 dark:text-slate-400 ml-2">(${donations.length} donorer)</span>
         </div>
-        <div class="bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden">
+        <div class="bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden">
           <table class="w-full text-sm">
-            <thead class="bg-slate-100">
+            <thead class="bg-slate-100 dark:bg-slate-700">
               <tr>
                 <th class="text-left px-4 py-3 font-semibold">Bidragyder</th>
                 <th class="text-right px-4 py-3 font-semibold">Beløb</th>
@@ -103,7 +103,7 @@ function showMoreDonations(politicianId, startIndex, count) {
     if (remaining === 0) {
       container.innerHTML = `
         <button onclick="hideAllDonations(${politicianId})" 
-                class="px-4 py-1.5 text-sm font-medium text-slate-500 hover:bg-white rounded-xl border border-slate-300 transition-colors">
+                class="px-4 py-1.5 text-sm font-medium text-slate-500 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-600 rounded-xl border border-slate-300 dark:border-slate-600 transition-colors">
           Skjul alle
         </button>
       `;
@@ -127,7 +127,7 @@ function hideAllDonations(politicianId) {
     const total = tbody.querySelectorAll('tr').length;
     container.innerHTML = `
       <button onclick="showMoreDonations(${politicianId}, 5, 10)" 
-              class="px-4 py-1.5 text-sm font-medium text-[#C8102E] hover:bg-white rounded-xl border border-[#C8102E]/30 transition-colors">
+              class="px-4 py-1.5 text-sm font-medium text-[#C8102E] hover:bg-white dark:hover:bg-slate-600 rounded-xl border border-[#C8102E]/30 transition-colors">
         Vis ${Math.min(10, total - 5)} flere
       </button>
     `;
@@ -163,14 +163,14 @@ function showDonorModal(donorName) {
   const html = `
     <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[200] flex items-center justify-center p-4" id="donorModal">
       <div onclick="event.target.id === 'donorModal' && closeDonorModal()" 
-           class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl max-h-[90vh] overflow-hidden">
+           class="bg-white dark:bg-slate-800 rounded-3xl max-w-2xl w-full shadow-2xl max-h-[90vh] overflow-hidden">
         
-        <div class="px-8 pt-8 pb-6 border-b flex items-center justify-between">
+        <div class="px-8 pt-8 pb-6 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
           <div>
-            <h3 class="text-2xl font-bold">${donorName}</h3>
-            <p class="text-sm text-slate-500">Har støttet følgende politikere</p>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">${donorName}</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400">Har støttet følgende politikere</p>
           </div>
-          <button onclick="closeDonorModal()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+          <button onclick="closeDonorModal()" class="text-3xl text-slate-400 hover:text-slate-600 dark:hover:text-white">×</button>
         </div>
         
         <div class="p-8 overflow-y-auto max-h-[60vh]">
@@ -181,11 +181,11 @@ function showDonorModal(donorName) {
                   ? `<a href="${p.source.url}" target="_blank" class="text-[#C8102E] underline text-xs">${p.source.text || 'Kilde'}</a>` 
                   : '';
                 return `
-                  <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-200 hover:border-[#C8102E]/30 transition-colors cursor-pointer"
+                  <div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-[#C8102E]/30 transition-colors cursor-pointer"
                        onclick="closeDonorModalAndShowPolitician(${p.id})">
                     <div>
-                      <div class="font-semibold">${p.name}</div>
-                      <div class="text-xs text-slate-500">${p.type} • ${p.year}</div>
+                      <div class="font-semibold text-slate-900 dark:text-white">${p.name}</div>
+                      <div class="text-xs text-slate-500 dark:text-slate-400">${p.type} • ${p.year}</div>
                       ${kildeHTML ? `<div class="text-xs mt-1">${kildeHTML}</div>` : ''}
                     </div>
                     <div class="text-right">
@@ -203,7 +203,7 @@ function showDonorModal(donorName) {
           `}
         </div>
         
-        <div class="px-8 py-4 border-t bg-slate-50 text-xs text-slate-400 text-center rounded-b-3xl">
+        <div class="px-8 py-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-400 dark:text-slate-500 text-center rounded-b-3xl">
           Data er baseret på offentligt tilgængelige kilder • 2023–2025
         </div>
       </div>

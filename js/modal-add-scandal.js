@@ -13,14 +13,14 @@ function showAddScandalModal(politician = null) {
 
     const html = `
         <div id="addScandalModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[200] flex items-center justify-center p-4">
-            <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
+            <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
                 
-                <div class="px-8 pt-8 pb-6 border-b flex items-center justify-between">
+                <div class="px-8 pt-8 pb-6 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
                     <div>
-                        <h3 class="text-2xl font-bold">Tilføj ny skandale</h3>
-                        <p class="text-sm text-slate-500">Data sendes til gennemgang</p>
+                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Tilføj ny skandale</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Data sendes til gennemgang</p>
                     </div>
-                    <button onclick="closeAddScandalModal()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+                    <button onclick="closeAddScandalModal()" class="text-3xl text-slate-400 hover:text-slate-600 dark:hover:text-white">×</button>
                 </div>
 
                 <div class="p-8 overflow-y-auto max-h-[calc(90vh-160px)]">
@@ -28,8 +28,8 @@ function showAddScandalModal(politician = null) {
                         
                         <!-- Politiker valg -->
                         <div class="mb-6">
-                            <label class="block text-sm font-semibold text-slate-600 mb-2">Politiker</label>
-                            <select id="politicianSelect" class="w-full border border-slate-300 rounded-2xl px-4 py-3" required>
+                            <label class="block text-sm font-semibold text-slate-600 dark:text-slate-400 mb-2">Politiker</label>
+                            <select id="politicianSelect" class="w-full border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-2xl px-4 py-3" required>
                                 <option value="">Vælg eksisterende politiker...</option>
                                 ${politicianOptions}
                                 <option value="new">-- Tilføj ny politiker --</option>
@@ -37,19 +37,19 @@ function showAddScandalModal(politician = null) {
                         </div>
 
                         <!-- Ny politiker felter (skjult som standard) -->
-                        <div id="newPoliticianFields" class="hidden mb-6 space-y-4 border border-slate-200 rounded-2xl p-4">
+                        <div id="newPoliticianFields" class="hidden mb-6 space-y-4 border border-slate-200 dark:border-slate-700 rounded-2xl p-4">
                             <div>
-                                <label class="block text-sm font-medium mb-1">Navn</label>
-                                <input type="text" id="newPoliticianName" class="w-full border border-slate-300 rounded-xl px-4 py-2" placeholder="Fuld navn">
+                                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Navn</label>
+                                <input type="text" id="newPoliticianName" class="w-full border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-xl px-4 py-2" placeholder="Fuld navn">
                             </div>
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-sm font-medium mb-1">Parti</label>
-                                    <input type="text" id="newPoliticianParty" class="w-full border border-slate-300 rounded-xl px-4 py-2">
+                                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Parti</label>
+                                    <input type="text" id="newPoliticianParty" class="w-full border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-xl px-4 py-2">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium mb-1">Rolle</label>
-                                    <input type="text" id="newPoliticianRole" class="w-full border border-slate-300 rounded-xl px-4 py-2">
+                                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Rolle</label>
+                                    <input type="text" id="newPoliticianRole" class="w-full border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-xl px-4 py-2">
                                 </div>
                             </div>
                         </div>
@@ -57,18 +57,18 @@ function showAddScandalModal(politician = null) {
                         <!-- Skandale felter -->
                         <div class="space-y-4">
                             <div>
-                                <label class="block text-sm font-semibold text-slate-600 mb-1">Titel på skandalen *</label>
-                                <input type="text" id="scandalTitle" class="w-full border border-slate-300 rounded-2xl px-4 py-3" required>
+                                <label class="block text-sm font-semibold text-slate-600 dark:text-slate-400 mb-1">Titel på skandalen *</label>
+                                <input type="text" id="scandalTitle" class="w-full border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-2xl px-4 py-3" required>
                             </div>
 
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-sm font-semibold text-slate-600 mb-1">År</label>
-                                    <input type="text" id="scandalYear" class="w-full border border-slate-300 rounded-2xl px-4 py-3" placeholder="f.eks. 2020-2022">
+                                    <label class="block text-sm font-semibold text-slate-600 dark:text-slate-400 mb-1">År</label>
+                                    <input type="text" id="scandalYear" class="w-full border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-2xl px-4 py-3" placeholder="f.eks. 2020-2022">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-semibold text-slate-600 mb-1">Alvorlighed (1-5)</label>
-                                    <select id="scandalSeverity" class="w-full border border-slate-300 rounded-2xl px-4 py-3">
+                                    <label class="block text-sm font-semibold text-slate-600 dark:text-slate-400 mb-1">Alvorlighed (1-5)</label>
+                                    <select id="scandalSeverity" class="w-full border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-2xl px-4 py-3">
                                         <option value="1">1 - Lav</option>
                                         <option value="2">2</option>
                                         <option value="3" selected>3 - Medium</option>
@@ -79,24 +79,24 @@ function showAddScandalModal(politician = null) {
                             </div>
 
                             <div>
-                                <label class="block text-sm font-semibold text-slate-600 mb-1">Kort beskrivelse *</label>
-                                <textarea id="scandalShortDesc" rows="2" class="w-full border border-slate-300 rounded-2xl px-4 py-3" required></textarea>
+                                <label class="block text-sm font-semibold text-slate-600 dark:text-slate-400 mb-1">Kort beskrivelse *</label>
+                                <textarea id="scandalShortDesc" rows="2" class="w-full border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-2xl px-4 py-3" required></textarea>
                             </div>
 
                             <div>
-                                <label class="block text-sm font-semibold text-slate-600 mb-1">Lang beskrivelse</label>
-                                <textarea id="scandalLongDesc" rows="4" class="w-full border border-slate-300 rounded-2xl px-4 py-3"></textarea>
+                                <label class="block text-sm font-semibold text-slate-600 dark:text-slate-400 mb-1">Lang beskrivelse</label>
+                                <textarea id="scandalLongDesc" rows="4" class="w-full border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-2xl px-4 py-3"></textarea>
                             </div>
 
                             <div>
-                                <label class="block text-sm font-semibold text-slate-600 mb-1">Kilder (en pr. linje)</label>
-                                <textarea id="scandalSources" rows="2" class="w-full border border-slate-300 rounded-2xl px-4 py-3" placeholder="https://...\nhttps://..."></textarea>
+                                <label class="block text-sm font-semibold text-slate-600 dark:text-slate-400 mb-1">Kilder (en pr. linje)</label>
+                                <textarea id="scandalSources" rows="2" class="w-full border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-2xl px-4 py-3" placeholder="https://...\nhttps://..."></textarea>
                             </div>
                         </div>
 
                         <div class="mt-8 flex gap-x-3">
                             <button type="button" onclick="closeAddScandalModal()" 
-                                    class="flex-1 px-6 py-3 border border-slate-300 rounded-2xl font-medium hover:bg-slate-50">
+                                    class="flex-1 px-6 py-3 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 rounded-2xl font-medium hover:bg-slate-50 dark:hover:bg-slate-700">
                                 Annuller
                             </button>
                             <button type="submit" 

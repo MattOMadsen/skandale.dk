@@ -38,13 +38,13 @@ function showNetworkConnections(networkName) {
 
   let html = `
     <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[200] flex items-center justify-center p-4" id="networkModal">
-      <div onclick="event.target.id === 'networkModal' && closeNetworkModal()" class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl">
-        <div class="px-8 pt-8 pb-6 border-b flex items-center justify-between">
+      <div onclick="event.target.id === 'networkModal' && closeNetworkModal()" class="bg-white dark:bg-slate-800 rounded-3xl max-w-2xl w-full shadow-2xl">
+        <div class="px-8 pt-8 pb-6 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
           <div>
-            <h3 class="text-2xl font-bold">${networkName}</h3>
-            <p class="text-slate-500">${connectedPoliticians.length} politikere har været tilknyttet dette netværk</p>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">${networkName}</h3>
+            <p class="text-slate-500 dark:text-slate-400">${connectedPoliticians.length} politikere har været tilknyttet dette netværk</p>
           </div>
-          <button onclick="closeNetworkModal()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+          <button onclick="closeNetworkModal()" class="text-3xl text-slate-400 hover:text-slate-600 dark:hover:text-white">×</button>
         </div>
         <div class="p-8 max-h-[70vh] overflow-y-auto">
           <div class="space-y-3">
@@ -52,10 +52,10 @@ function showNetworkConnections(networkName) {
 
   connectedPoliticians.forEach(p => {
     html += `
-      <div onclick="closeNetworkModal(); if (typeof window.showPoliticianModal === 'function') window.showPoliticianModal(${p.id});" class="flex justify-between items-center p-4 border border-slate-200 rounded-2xl hover:border-[#C8102E]/30 cursor-pointer">
+      <div onclick="closeNetworkModal(); if (typeof window.showPoliticianModal === 'function') window.showPoliticianModal(${p.id});" class="flex justify-between items-center p-4 border border-slate-200 dark:border-slate-700 rounded-2xl hover:border-[#C8102E]/30 cursor-pointer">
         <div>
-          <div class="font-semibold">${p.name}</div>
-          <div class="text-sm text-slate-500">${p.party}</div>
+          <div class="font-semibold text-slate-900 dark:text-white">${p.name}</div>
+          <div class="text-sm text-slate-500 dark:text-slate-400">${p.party}</div>
         </div>
         <div class="text-right text-sm">
           <div class="font-medium">${p.year || ''}</div>

@@ -6,7 +6,7 @@
 
 function renderScandalsDirect(politician, container) {
   if (!container || !politician.scandals || politician.scandals.length === 0) {
-    container.innerHTML = `<div class="text-center py-8 text-slate-500">Ingen skandaler registreret for denne politiker.</div>`;
+    container.innerHTML = `<div class="text-center py-8 text-slate-500 dark:text-slate-400">Ingen skandaler registreret for denne politiker.</div>`;
     return;
   }
 
@@ -32,17 +32,17 @@ function renderScandalsDirect(politician, container) {
     const scId = s.id || s.title.replace(/\s+/g, '-').toLowerCase();
 
     html += `
-      <div class="border border-slate-200 rounded-2xl mb-4 overflow-hidden" data-sc-id="${scId}">
+      <div class="border border-slate-200 dark:border-slate-700 rounded-2xl mb-4 overflow-hidden" data-sc-id="${scId}">
         <!-- Header -->
-        <div id="scandal-header-${index}" class="flex items-center justify-between p-4 bg-slate-50 cursor-pointer hover:bg-slate-100 transition-colors">
+        <div id="scandal-header-${index}" class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-700/50 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
           <div class="flex-1">
             <div class="flex items-center gap-x-3">
-              <div class="font-bold text-lg">${s.title}</div>
-              <div class="text-xs px-2 py-0.5 bg-slate-200 text-slate-600 rounded-full">${s.year || ''}</div>
+              <div class="font-bold text-lg text-slate-900 dark:text-white">${s.title}</div>
+              <div class="text-xs px-2 py-0.5 bg-slate-200 dark:bg-slate-600 text-slate-600 dark:text-slate-300 rounded-full">${s.year || ''}</div>
             </div>
             <div class="flex items-center gap-x-2 mt-1">
               <div class="flex items-center text-amber-500">${stars}</div>
-              <div class="text-xs text-slate-500">Vores vurdering: ${ourSeverity}/5</div>
+              <div class="text-xs text-slate-500 dark:text-slate-400">Vores vurdering: ${ourSeverity}/5</div>
             </div>
           </div>
           
@@ -50,7 +50,7 @@ function renderScandalsDirect(politician, container) {
           <div class="flex items-center gap-x-1">
             <button 
               onclick="shareSpecificScandal('${polId}', '${scId}', '${s.title.replace(/'/g, "\\'")}', event)" 
-              class="p-2 text-slate-400 hover:text-[#C8102E] hover:bg-white rounded-xl transition-colors"
+              class="p-2 text-slate-400 hover:text-[#C8102E] hover:bg-white dark:hover:bg-slate-600 rounded-xl transition-colors"
               title="Del denne skandale">
               <i class="fa-solid fa-share-alt"></i>
             </button>
@@ -59,41 +59,41 @@ function renderScandalsDirect(politician, container) {
         </div>
 
         <!-- Content -->
-        <div id="scandal-content-${index}" class="hidden p-4 border-t">
+        <div id="scandal-content-${index}" class="hidden p-4 border-t border-slate-200 dark:border-slate-700">
           <div class="space-y-4">
             <!-- Hvad skete der? -->
             <div>
-              <div class="font-semibold text-sm text-slate-500 mb-1">Hvad skete der?</div>
-              <div class="text-slate-700">${s.longDesc || s.shortDesc || s.description || ''}</div>
+              <div class="font-semibold text-sm text-slate-500 dark:text-slate-400 mb-1">Hvad skete der?</div>
+              <div class="text-slate-700 dark:text-slate-300">${s.longDesc || s.shortDesc || s.description || ''}</div>
             </div>
 
             <!-- KONSEKVENSER (ny) -->
             ${s.consequences ? `
-              <div class="bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-r-2xl">
-                <div class="font-semibold text-sm text-emerald-600 mb-1 flex items-center gap-x-2">
+              <div class="bg-emerald-50 dark:bg-emerald-900/30 border-l-4 border-emerald-500 p-4 rounded-r-2xl">
+                <div class="font-semibold text-sm text-emerald-600 dark:text-emerald-400 mb-1 flex items-center gap-x-2">
                   <i class="fa-solid fa-gavel"></i> Konsekvenser
                 </div>
-                <div class="text-slate-700">${s.consequences}</div>
+                <div class="text-slate-700 dark:text-slate-300">${s.consequences}</div>
               </div>
             ` : ''}
 
             <!-- HVAD BURDE VÆRE SKET? (ny) -->
             ${s.whatShouldHaveHappened ? `
-              <div class="bg-orange-50 border-l-4 border-orange-500 p-4 rounded-r-2xl">
-                <div class="font-semibold text-sm text-orange-600 mb-1 flex items-center gap-x-2">
+              <div class="bg-orange-50 dark:bg-orange-900/30 border-l-4 border-orange-500 p-4 rounded-r-2xl">
+                <div class="font-semibold text-sm text-orange-600 dark:text-orange-400 mb-1 flex items-center gap-x-2">
                   <i class="fa-solid fa-balance-scale"></i> ${s.whatShouldHaveHappened.title || 'Hvad burde være sket?'}
                 </div>
-                <div class="text-slate-700">${s.whatShouldHaveHappened.content}</div>
+                <div class="text-slate-700 dark:text-slate-300">${s.whatShouldHaveHappened.content}</div>
               </div>
             ` : ''}
 
             <!-- Media Links -->
             ${s.mediaLinks && s.mediaLinks.length > 0 ? `
               <div>
-                <div class="font-semibold text-sm text-slate-500 mb-2">Kilder & Medier</div>
+                <div class="font-semibold text-sm text-slate-500 dark:text-slate-400 mb-2">Kilder & Medier</div>
                 <div class="flex flex-wrap gap-2">
                   ${s.mediaLinks.map(link => `
-                    <a href="${link.url}" target="_blank" class="inline-flex items-center gap-x-1 px-3 py-1.5 bg-white border border-slate-200 rounded-xl text-xs hover:border-[#C8102E]/50 transition-colors">
+                    <a href="${link.url}" target="_blank" class="inline-flex items-center gap-x-1 px-3 py-1.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-xs text-slate-700 dark:text-slate-300 hover:border-[#C8102E]/50 transition-colors">
                       <i class="fa-solid fa-external-link-alt text-[#C8102E]"></i>
                       <span>${link.name}</span>
                     </a>
@@ -103,27 +103,27 @@ function renderScandalsDirect(politician, container) {
             ` : ''}
 
             <!-- INTERAKTIV BRUGER-BEDØMMELSE (erstatter Godt/Dårligt/Neutral) -->
-            <div class="pt-4 border-t">
-              <div class="font-semibold text-sm text-slate-500 mb-2">Hvor alvorlig synes DU sagen er? (1-5 stjerner)</div>
+            <div class="pt-4 border-t border-slate-200 dark:border-slate-700">
+              <div class="font-semibold text-sm text-slate-500 dark:text-slate-400 mb-2">Hvor alvorlig synes DU sagen er? (1-5 stjerner)</div>
               <div id="user-severity-container-${index}" data-our-severity="${ourSeverity}" data-pol-id="${polId}" data-sc-id="${scId}" class="flex items-center gap-x-1 text-2xl cursor-pointer"></div>
-              <div id="user-severity-label-${index}" class="mt-1 text-xs text-slate-500"></div>
-              <button id="reset-severity-btn-${index}" onclick="resetUserSeverityAndCommunity(${index}, '${polId}', '${scId}')" class="hidden mt-2 px-3 py-1 text-xs text-red-600 hover:bg-red-50 rounded-xl transition-colors">
+              <div id="user-severity-label-${index}" class="mt-1 text-xs text-slate-500 dark:text-slate-400"></div>
+              <button id="reset-severity-btn-${index}" onclick="resetUserSeverityAndCommunity(${index}, '${polId}', '${scId}')" class="hidden mt-2 px-3 py-1 text-xs text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-xl transition-colors">
                 <i class="fa-solid fa-undo mr-1"></i> Nulstil min bedømmelse
               </button>
 
               <!-- SAMLET FÆLLES VURDERING -->
-              <div class="mt-4 pt-4 border-t">
-                <div class="font-semibold text-sm text-slate-500 mb-1">Samlet vurdering (alle brugere)</div>
+              <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
+                <div class="font-semibold text-sm text-slate-500 dark:text-slate-400 mb-1">Samlet vurdering (alle brugere)</div>
                 <div id="community-severity-${index}" class="flex items-center gap-x-2 text-lg"></div>
-                <div class="text-[10px] text-slate-400">Vores vurdering: ${ourSeverity}/5 • Fælles gennemsnit opdateres live</div>
+                <div class="text-[10px] text-slate-400 dark:text-slate-500">Vores vurdering: ${ourSeverity}/5 • Fælles gennemsnit opdateres live</div>
               </div>
             </div>
 
             <!-- Kommentarer (fixed to use postComment) -->
-            <div class="pt-4 border-t">
-              <div class="font-semibold text-sm text-slate-500 mb-2">Kommentarer</div>
+            <div class="pt-4 border-t border-slate-200 dark:border-slate-700">
+              <div class="font-semibold text-sm text-slate-500 dark:text-slate-400 mb-2">Kommentarer</div>
               <div class="flex gap-x-2 mb-3">
-                <input type="text" id="comment-input-${index}" placeholder="Skriv en kommentar..." class="flex-1 px-3 py-2 border border-slate-200 rounded-xl text-sm">
+                <input type="text" id="comment-input-${index}" placeholder="Skriv en kommentar..." class="flex-1 px-3 py-2 border border-slate-200 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 rounded-xl text-sm">
                 <button onclick="postComment(${index})" class="px-4 py-2 bg-[#C8102E] text-white rounded-xl text-sm font-medium hover:bg-[#C8102E]/90 transition-colors">
                   Send
                 </button>
