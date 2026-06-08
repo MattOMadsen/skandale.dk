@@ -2,9 +2,12 @@
   "id": 15,
   "name": "Alex Vanopslagh",
   "party": "Liberal Alliance",
+  "partyColor": "#003087",
   "role": "Partiformand og medlem af Folketinget",
+  "inFolketinget": true,
   "avatarColor": "#003087",
   "initials": "AV",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Alex_Vanopslagh_by_Christian_Ursilva_%282026%29.jpg",
   "bio": "Alex Vanopslagh er formand for Liberal Alliance og har været en markant liberal stemme i dansk politik siden han blev valgt til Folketinget i 2019. Han er kendt for sit klare fokus på personlig frihed, lavere skatter, mindre statslig regulering og kritik af den store velfærdsstat.",
   "beforePolitics": {
     "title": "Før politik",

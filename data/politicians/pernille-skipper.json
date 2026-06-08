@@ -2,9 +2,12 @@
   "id": 13,
   "name": "Pernille Skipper",
   "party": "Enhedslisten",
-  "role": "Politisk ordfører",
+  "partyColor": "#E30613",
+  "role": "Politisk ordfører og medlem af Folketinget",
+  "inFolketinget": true,
   "avatarColor": "#E30613",
   "initials": "PS",
+  "image": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Pernille_Skipper_%28cropped_2%29.jpg",
   "bio": "Pernille Skipper er politisk ordfører for Enhedslisten og har været en central figur i dansk venstrefløjspolitik i mange år. Hun er kendt for sit skarpe fokus på social retfærdighed, ulighed, klima og en kritisk holdning til EU og NATO.",
   "beforePolitics": {
     "title": "Før politik / Ungdom",

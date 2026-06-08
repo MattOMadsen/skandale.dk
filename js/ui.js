@@ -43,9 +43,10 @@ function renderPoliticians(filteredPoliticians = null) {
     toRender = filteredPoliticians;
     isSearchActive = true;
   } else {
-    // Normal visning / infinite scroll
     isSearchActive = false;
-    const source = window.politicians || [];
+    const source = (typeof window.getFilteredPoliticians === 'function')
+      ? window.getFilteredPoliticians()
+      : (window.politicians || []);
     toRender = source.slice(0, visibleCount);
   }
 
@@ -160,7 +161,10 @@ function updateAllShownMessage() {
   const shownEl = document.getElementById('all-politicians-shown');
   if (!shownEl) return;
 
-  const total = (window.politicians || []).length;
+  const source = (typeof window.getFilteredPoliticians === 'function')
+    ? window.getFilteredPoliticians()
+    : (window.politicians || []);
+  const total = source.length;
   if (!isSearchActive && visibleCount >= total && total > 0) {
     shownEl.classList.remove('hidden');
   } else {
@@ -187,7 +191,10 @@ function showInfiniteLoader(show) {
 function loadMorePoliticians() {
   if (isLoadingMore || isSearchActive) return;
 
-  const total = (window.politicians || []).length;
+  const source = (typeof window.getFilteredPoliticians === 'function')
+    ? window.getFilteredPoliticians()
+    : (window.politicians || []);
+  const total = source.length;
   if (visibleCount >= total) {
     updateAllShownMessage();
     return;
@@ -238,7 +245,10 @@ function setupInfiniteScroll() {
   window.addEventListener('scroll', () => {
     if (isSearchActive || isLoadingMore) return;
 
-    const total = (window.politicians || []).length;
+    const source = (typeof window.getFilteredPoliticians === 'function')
+      ? window.getFilteredPoliticians()
+      : (window.politicians || []);
+    const total = source.length;
     if (visibleCount >= total) return;
 
     // Tjek om vi er tæt på bunden (ca. 200px)

@@ -23,7 +23,7 @@
         <div class="max-w-5xl mx-auto px-6 text-center">
             <div class="inline-flex items-center gap-x-2 bg-white/10 px-4 py-1 rounded-full text-sm mb-4">
                 <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                <span>Opdateret maj 2026</span>
+                <span>Opdateret juni 2026</span>
             </div>
 
             <h1 class="text-5xl md:text-6xl font-bold tracking-tighter mb-4">Gennemsigtighed i dansk politik</h1>
@@ -48,11 +48,24 @@
 
     <!-- Politikere sektion -->
     <div id="politicians-section" class="max-w-7xl mx-auto px-6 py-12">
-        <div class="flex items-end justify-between mb-6">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
             <div>
                 <h2 class="text-3xl font-bold tracking-tight">Politikere</h2>
                 <p class="text-slate-600 dark:text-slate-400">Klik på en politiker for at se detaljer, skandaler og vurderinger</p>
             </div>
+            <div id="politician-count" class="text-sm text-slate-500 dark:text-slate-400 shrink-0"></div>
+        </div>
+
+        <div class="flex flex-col gap-4 mb-6">
+            <div id="folketing-filter" class="inline-flex self-start rounded-full border border-slate-200 dark:border-slate-700 p-1 bg-slate-100 dark:bg-slate-800">
+                <button data-folketing="folketing" class="folketing-chip active shrink-0 px-5 py-2 text-sm font-medium rounded-full transition-all bg-[#C8102E] text-white shadow-sm">
+                    Folketinget nu
+                </button>
+                <button data-folketing="all" class="folketing-chip shrink-0 px-5 py-2 text-sm font-medium rounded-full transition-all text-slate-700 dark:text-slate-300 hover:bg-white/60 dark:hover:bg-slate-700/60">
+                    Alle politikere
+                </button>
+            </div>
+            <div id="party-filter-chips"></div>
         </div>
 
         <div id="politiciansGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

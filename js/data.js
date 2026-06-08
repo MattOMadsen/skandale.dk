@@ -98,12 +98,28 @@ async function loadPoliticianDetails(politician) {
   } catch (e) {}
 
   try {
-    const b = await fetch(`data/broken-promises/${slug}.json`);
-    if (b.ok) {
-      const bData = await b.json();
-      brokenPromises = bData.brokenPromises || [];
+    const bpManifestRes = await fetch(`data/broken-promises/${slug}/manifest.json`);
+    if (bpManifestRes.ok) {
+      const bpManifest = await bpManifestRes.json();
+      if (bpManifest.brokenPromises && Array.isArray(bpManifest.brokenPromises)) {
+        const promisePromises = bpManifest.brokenPromises.map(filename =>
+          fetch(`data/broken-promises/${slug}/${filename}`).then(r => r.ok ? r.json() : null)
+        );
+        const loaded = await Promise.all(promisePromises);
+        brokenPromises = loaded.filter(Boolean);
+      }
     }
   } catch (e) {}
+
+  if (brokenPromises.length === 0) {
+    try {
+      const b = await fetch(`data/broken-promises/${slug}.json`);
+      if (b.ok) {
+        const bData = await b.json();
+        brokenPromises = bData.brokenPromises || [];
+      }
+    } catch (e) {}
+  }
 
   try {
     const e = await fetch(`data/economic-support/${slug}.json`);

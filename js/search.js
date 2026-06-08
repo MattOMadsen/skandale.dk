@@ -1,5 +1,4 @@
 // js/search.js - Avanceret søgefunktion til Skandale.dk (dedikeret modul)
-// Holder ui.js lille og ren
 
 let searchTimeout = null;
 
@@ -30,18 +29,14 @@ function calculateSearchScore(politician, term) {
   const party = normalizeText(politician.party || '');
   const role = normalizeText(politician.role || '');
 
-  // Prioritet 1: Navn (højest vægt)
   if (name === normalizedTerm) score += 100;
   else if (name.startsWith(normalizedTerm)) score += 80;
   else if (name.includes(normalizedTerm)) score += 60;
 
-  // Prioritet 2: Parti
   if (party.includes(normalizedTerm)) score += 40;
 
-  // Prioritet 3: Rolle
   if (role.includes(normalizedTerm)) score += 30;
 
-  // Prioritet 4: Skandaler (så man kan søge på "mink" eller "skattesag")
   if (politician.scandals && politician.scandals.length > 0) {
     const scandalText = politician.scandals
       .map(s => normalizeText((s.title || '') + ' ' + (s.description || '')))
@@ -56,23 +51,19 @@ function updateSearchUI(count, total, hasTerm) {
   const inputContainer = document.getElementById('searchInput')?.parentNode;
   if (!inputContainer) return;
 
-  // Fjern gammel tæller
   const oldCount = document.getElementById('search-result-count');
   if (oldCount) oldCount.remove();
 
-  // Fjern gammel clear-knap
   const oldClear = document.getElementById('search-clear-btn');
   if (oldClear) oldClear.remove();
 
   if (hasTerm) {
-    // Live resultat-tæller
     const countEl = document.createElement('div');
     countEl.id = 'search-result-count';
     countEl.className = 'text-center text-sm text-slate-500 mt-2';
     countEl.textContent = `Viser ${count} af ${total} politikere`;
     inputContainer.appendChild(countEl);
 
-    // Dynamisk clear-knap (✕)
     const clearBtn = document.createElement('button');
     clearBtn.id = 'search-clear-btn';
     clearBtn.type = 'button';
@@ -85,7 +76,9 @@ function updateSearchUI(count, total, hasTerm) {
         if (typeof window.resetVisibleCount === 'function') {
           window.resetVisibleCount();
         }
-        filterPoliticians();
+        if (typeof window.applyFilters === 'function') {
+          window.applyFilters();
+        }
       }
     };
     inputContainer.style.position = 'relative';
@@ -94,56 +87,21 @@ function updateSearchUI(count, total, hasTerm) {
 }
 
 function filterPoliticians() {
-  const input = document.getElementById('searchInput');
-  if (!input || !window.politicians || !Array.isArray(window.politicians)) {
+  if (!window.politicians || !Array.isArray(window.politicians)) {
     console.warn('[search.js] politicians array ikke klar endnu');
     return;
   }
 
-  const term = input.value.trim();
-  const hasTerm = term.length > 0;
-
-  let filtered = window.politicians;
-
-  if (hasTerm) {
-    // Score + sortér efter relevans
-    const scored = window.politicians
-      .map(p => ({
-        politician: p,
-        score: calculateSearchScore(p, term)
-      }))
-      .filter(item => item.score > 0);
-
-    scored.sort((a, b) => b.score - a.score);
-    filtered = scored.map(item => item.politician);
-
-    // Nulstil visibleCount så alle matchende vises
-    if (typeof window.resetVisibleCount === 'function') {
-      window.resetVisibleCount();
-    }
-  } else {
-    // Søgning ryddet → gå tilbage til infinite scroll start
-    if (typeof window.resetVisibleCount === 'function') {
-      window.resetVisibleCount();
-    }
+  if (typeof window.applyFilters === 'function') {
+    window.applyFilters();
   }
-
-  // Render de filtrerede politikere
-  if (typeof window.renderPoliticians === 'function') {
-    window.renderPoliticians(filtered);
-  } else if (typeof renderPoliticians === 'function') {
-    renderPoliticians(filtered);
-  }
-
-  // Opdater UI (tæller + clear-knap)
-  updateSearchUI(filtered.length, window.politicians.length, hasTerm);
 }
 
-// Gør funktionen global så onkeyup i HTML virker
+window.calculateSearchScore = calculateSearchScore;
+window.updateSearchUI = updateSearchUI;
 window.filterPoliticians = filterPoliticians;
 
-// ESC-tast rydder søgefeltet
- document.addEventListener('keydown', (e) => {
+document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     const input = document.getElementById('searchInput');
     if (input && input.value) {
@@ -151,15 +109,16 @@ window.filterPoliticians = filterPoliticians;
       if (typeof window.resetVisibleCount === 'function') {
         window.resetVisibleCount();
       }
-      filterPoliticians();
+      if (typeof window.applyFilters === 'function') {
+        window.applyFilters();
+      }
     }
   }
 });
 
-// Lyt efter når data er loadet (sikrer at søgning virker med det samme)
 window.addEventListener('politiciansLoaded', () => {
   const input = document.getElementById('searchInput');
   if (input && input.value) filterPoliticians();
 });
 
-console.log('%c[search.js] Avanceret søgefunktion (v1.0) indlæst – klar til brug', 'color: #10b981; font-size: 10px');
+console.log('%c[search.js] Avanceret søgefunktion (v1.1) indlæst – klar til brug', 'color: #10b981; font-size: 10px');
