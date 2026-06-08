@@ -35,8 +35,9 @@
   - [ ] «Sammenlign med…»-knap fra politiker-modal
 
 - [ ] **Kommentar-system + voting**
-  - JS-filer findes (`modal-comments.js`, `modal-voting.js`)
-  - Kun localStorage — ingen moderation eller central database
+  - [x] Supabase-klient + `supabase-data.js` (kommentarer + fælles stjerne-bedømmelser)
+  - [ ] Kør `supabase/schema.sql` i Supabase SQL Editor
+  - [ ] Kommentar-moderation (admin-godkendelse)
 
 - [ ] **Relaterede skandaler i data**
   - Logik findes i `cross-reference.js`

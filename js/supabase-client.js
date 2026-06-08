@@ -8,7 +8,11 @@
   let loadPromise = null;
 
   function getConfig() {
-    return window.SKANDALE_SECRETS?.supabase || {};
+    const cfg = window.SKANDALE_SECRETS?.supabase || {};
+    return {
+      url: (cfg.url || '').replace(/\.supabase\.com\b/i, '.supabase.co'),
+      apiKey: cfg.publishableKey || cfg.anonKey || ''
+    };
   }
 
   async function loadLibrary() {
@@ -19,17 +23,17 @@
 
   window.SkandaleSupabase = {
     isEnabled() {
-      const { url, anonKey } = getConfig();
-      return Boolean(url && anonKey);
+      const { url, apiKey } = getConfig();
+      return Boolean(url && apiKey);
     },
 
     async getClient() {
       if (!this.isEnabled()) return null;
       if (client) return client;
 
-      const { url, anonKey } = getConfig();
+      const { url, apiKey } = getConfig();
       const { createClient } = await loadLibrary();
-      client = createClient(url, anonKey);
+      client = createClient(url, apiKey);
       return client;
     }
   };

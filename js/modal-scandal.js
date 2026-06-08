@@ -141,7 +141,7 @@ function renderScandalsDirect(politician, container) {
               <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
                 <div class="font-semibold text-sm text-slate-500 dark:text-slate-400 mb-1">Samlet vurdering (alle brugere)</div>
                 <div id="community-severity-${index}" class="flex items-center gap-x-2 text-lg"></div>
-                <div class="text-[10px] text-slate-400 dark:text-slate-500">Vores vurdering: ${ourSeverity}/5 • Fælles gennemsnit opdateres live</div>
+                <div class="text-[10px] text-slate-400 dark:text-slate-500">Vores vurdering: ${ourSeverity}/5 • Fælles gennemsnit${window.SkandaleData?.isLive?.() ? ' (Supabase)' : ''}</div>
               </div>
             </div>
 
@@ -178,28 +178,37 @@ function renderScandalsDirect(politician, container) {
       });
     }
 
-    // Init interaktiv stjerne-bedømmelse + fælles vurdering
+    // Init interaktiv stjerne-bedømmelse + fælles vurdering + kommentarer
     initUserSeverityWithCommunity(index, politician, scandal);
+    if (typeof loadCommentsForScandal === 'function') {
+      loadCommentsForScandal(index);
+    }
   });
 }
 
 // === Interaktiv stjerne-bedømmelse + fælles vurdering ===
 
-function initUserSeverityWithCommunity(index, politician, scandal) {
+async function initUserSeverityWithCommunity(index, politician, scandal) {
   const container = document.getElementById(`user-severity-container-${index}`);
   if (!container) return;
 
   const polId = container.dataset.polId || (politician.id || politician.name.replace(/\s+/g, '-').toLowerCase());
   const scId = container.dataset.scId || (scandal.id || scandal.title.replace(/\s+/g, '-').toLowerCase());
   const ourSeverity = parseInt(container.dataset.ourSeverity) || 3;
+  const scandalKey = `${polId}_${scId}`;
 
-  // Personlig bedømmelse (localStorage)
-  const personalKey = `userSeverity_${polId}_${scId}`;
-  let userRating = parseInt(localStorage.getItem(personalKey) || '0');
+  let userRating = parseInt(localStorage.getItem(`userSeverity_${scandalKey}`) || '0');
+  let communityRatings = [];
 
-  // Fælles bedømmelse
-  renderCommunitySeverity(index, polId, scId, ourSeverity);
+  if (window.SkandaleData) {
+    const result = await SkandaleData.fetchSeverityRatings(scandalKey);
+    communityRatings = result.ratings || [];
+    if (result.voterRating) userRating = result.voterRating;
+  }
+
+  renderCommunitySeverity(index, ourSeverity, communityRatings);
   renderInteractiveStarsWithCommunity(container, index, polId, scId, userRating, ourSeverity);
+  updateSeverityLabelWithCommunity(index, userRating, ourSeverity);
 
   const resetBtn = document.getElementById(`reset-severity-btn-${index}`);
   if (resetBtn) resetBtn.classList.toggle('hidden', userRating === 0);
@@ -239,26 +248,33 @@ function highlightStars(container, hoverRating, currentRating) {
   });
 }
 
-function saveUserSeverityAndUpdateCommunity(index, polId, scId, rating, ourSeverity) {
-  // Gem personlig bedømmelse
-  const personalKey = `userSeverity_${polId}_${scId}`;
-  localStorage.setItem(personalKey, rating);
+async function saveUserSeverityAndUpdateCommunity(index, polId, scId, rating, ourSeverity) {
+  const scandalKey = `${polId}_${scId}`;
 
-  // Gem i fælles array (community)
-  const communityKey = `communityRatings_${polId}_${scId}`;
-  let ratings = JSON.parse(localStorage.getItem(communityKey) || '[]');
-  ratings.push(rating);
-  localStorage.setItem(communityKey, JSON.stringify(ratings));
+  if (window.SkandaleData) {
+    await SkandaleData.saveSeverityRating(scandalKey, rating);
+  } else {
+    localStorage.setItem(`userSeverity_${scandalKey}`, rating);
+    const communityKey = `communityRatings_${scandalKey}`;
+    const ratings = JSON.parse(localStorage.getItem(communityKey) || '[]');
+    ratings.push(rating);
+    localStorage.setItem(communityKey, JSON.stringify(ratings));
+  }
 
-  // Re-render
   const container = document.getElementById(`user-severity-container-${index}`);
   if (container) {
     renderInteractiveStarsWithCommunity(container, index, polId, scId, rating, ourSeverity);
   }
 
-  // Opdater labels
   updateSeverityLabelWithCommunity(index, rating, ourSeverity);
-  renderCommunitySeverity(index, polId, scId, ourSeverity);
+
+  if (window.SkandaleData) {
+    const result = await SkandaleData.fetchSeverityRatings(scandalKey);
+    renderCommunitySeverity(index, ourSeverity, result.ratings || []);
+  } else {
+    const ratings = JSON.parse(localStorage.getItem(`communityRatings_${scandalKey}`) || '[]');
+    renderCommunitySeverity(index, ourSeverity, ratings);
+  }
 
   const resetBtn = document.getElementById(`reset-severity-btn-${index}`);
   if (resetBtn) resetBtn.classList.remove('hidden');
@@ -275,14 +291,11 @@ function updateSeverityLabelWithCommunity(index, userRating, ourSeverity) {
   }
 }
 
-function renderCommunitySeverity(index, polId, scId, ourSeverity) {
+function renderCommunitySeverity(index, ourSeverity, ratings = []) {
   const container = document.getElementById(`community-severity-${index}`);
   if (!container) return;
 
-  const communityKey = `communityRatings_${polId}_${scId}`;
-  const ratings = JSON.parse(localStorage.getItem(communityKey) || '[]');
-
-  if (ratings.length === 0) {
+  if (!ratings.length) {
     container.innerHTML = `
       <div class="flex items-center gap-x-2">
         <span class="text-slate-400">Ingen fælles bedømmelser endnu</span>
@@ -306,15 +319,29 @@ function renderCommunitySeverity(index, polId, scId, ourSeverity) {
   `;
 }
 
-function resetUserSeverityAndCommunity(index, polId, scId) {
-  const personalKey = `userSeverity_${polId}_${scId}`;
-  localStorage.removeItem(personalKey);
+async function resetUserSeverityAndCommunity(index, polId, scId) {
+  const scandalKey = `${polId}_${scId}`;
+
+  if (window.SkandaleData) {
+    await SkandaleData.removeSeverityRating(scandalKey);
+  } else {
+    localStorage.removeItem(`userSeverity_${scandalKey}`);
+  }
 
   const container = document.getElementById(`user-severity-container-${index}`);
+  const ourSeverity = parseInt(container?.dataset.ourSeverity) || 3;
+
   if (container) {
-    const ourSeverity = parseInt(container.dataset.ourSeverity) || 3;
     renderInteractiveStarsWithCommunity(container, index, polId, scId, 0, ourSeverity);
     updateSeverityLabelWithCommunity(index, 0, ourSeverity);
+  }
+
+  if (window.SkandaleData) {
+    const result = await SkandaleData.fetchSeverityRatings(scandalKey);
+    renderCommunitySeverity(index, ourSeverity, result.ratings || []);
+  } else {
+    const ratings = JSON.parse(localStorage.getItem(`communityRatings_${scandalKey}`) || '[]');
+    renderCommunitySeverity(index, ourSeverity, ratings);
   }
 
   const resetBtn = document.getElementById(`reset-severity-btn-${index}`);

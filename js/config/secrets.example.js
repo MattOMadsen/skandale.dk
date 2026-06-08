@@ -12,6 +12,6 @@ window.SKANDALE_SECRETS = {
 
   supabase: {
     url: 'https://DIT_PROJEKT.supabase.co',
-    anonKey: 'DIN_ANON_KEY'
+    publishableKey: 'sb_publishable_...'
   }
 };
