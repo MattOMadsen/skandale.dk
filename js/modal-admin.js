@@ -2,7 +2,9 @@
 // Admin Dashboard v2 - Password-beskyttet + forbedret UX
 // Uploadet 27. maj 2026
 
-const ADMIN_PASSWORD = "skandale2026";
+function getAdminPassword() {
+  return window.SKANDALE_SECRETS?.adminPassword || null;
+}
 
 let pendingNotes = JSON.parse(localStorage.getItem('adminPendingNotes') || '[]');
 
@@ -46,7 +48,14 @@ function attemptAdminLogin() {
     const passwordInput = document.getElementById('adminPassword');
     const errorDiv = document.getElementById('adminLoginError');
     
-    if (passwordInput.value === ADMIN_PASSWORD) {
+    const adminPassword = getAdminPassword();
+    if (!adminPassword) {
+        errorDiv.textContent = 'Admin er ikke konfigureret (mangler js/config/secrets.js).';
+        errorDiv.classList.remove('hidden');
+        return;
+    }
+
+    if (passwordInput.value === adminPassword) {
         closeAdminLoginModal();
         showAdminDashboard();
     } else {

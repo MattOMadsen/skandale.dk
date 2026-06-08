@@ -31,7 +31,7 @@
   - [x] Alle 16 politikere tilgængelige
   - [x] Profilbillede i sammenlign-kort (liste + sammenligningskort)
   - [ ] PDF-eksport kan gøres rigere
-  - [ ] Mere polish på mobil
+  - [x] Mere polish på mobil (sticky handlingslinje, scroll-tabs, touch targets)
   - [ ] «Sammenlign med…»-knap fra politiker-modal
 
 - [ ] **Kommentar-system + voting**
@@ -58,7 +58,7 @@
 
 ## Ikke startet
 
-1. **Central database** (Supabase) til delt afstemning + kommentar-moderation
+1. **Central database** (Supabase) til delt afstemning + kommentar-moderation — grundstruktur klar (`supabase-client.js` + `secrets.example.js`)
 2. **Kilde-kvalitetsindikatorer** (grøn/gul/rød badges på kilder)
 3. **«Sidst opdateret» + versionshistorik** på skandaler
 4. **Billede i politiker-modal-header** (forsiden har billeder, modal har initialer)

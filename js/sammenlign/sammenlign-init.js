@@ -69,11 +69,22 @@ const SammenlignInit = {
         if (search1) search1.placeholder = 'Søg... (tryk / for at fokusere)';
     },
 
+    setMobileCompareBar(visible) {
+        const bar = document.getElementById('mobile-compare-bar');
+        const area = document.getElementById('comparison-area');
+        if (!bar) return;
+
+        bar.classList.toggle('hidden', !visible);
+        document.body.classList.toggle('has-mobile-compare-bar', visible);
+        if (area) area.classList.toggle('has-mobile-bar', visible);
+    },
+
     async showComparison() {
         const area = document.getElementById('comparison-area');
         const empty = document.getElementById('empty-state');
         area.classList.remove('hidden');
         empty.classList.add('hidden');
+        this.setMobileCompareBar(true);
 
         const p1 = window.selectedPoliticians[1];
         const p2 = window.selectedPoliticians[2];
@@ -91,7 +102,9 @@ const SammenlignInit = {
         ]);
 
         const exportBtn = document.getElementById('export-pdf-btn');
+        const exportBtnMobile = document.getElementById('export-pdf-btn-mobile');
         if (exportBtn) exportBtn.disabled = false;
+        if (exportBtnMobile) exportBtnMobile.disabled = false;
 
         area.scrollIntoView({ behavior: 'smooth', block: 'start' });
     },
@@ -142,6 +155,7 @@ const SammenlignInit = {
         window.selectedPoliticians = { 1: null, 2: null };
         document.getElementById('comparison-area').classList.add('hidden');
         document.getElementById('empty-state').classList.remove('hidden');
+        this.setMobileCompareBar(false);
 
         document.getElementById('p1-selected-badge').classList.add('hidden');
         document.getElementById('p1-selected-badge').classList.remove('flex');
@@ -170,10 +184,12 @@ const SammenlignInit = {
         }
 
         const exportBtn = document.getElementById('export-pdf-btn');
+        const exportBtnMobile = document.getElementById('export-pdf-btn-mobile');
         if (exportBtn) {
             exportBtn.disabled = false;
-            exportBtn.innerHTML = '<i class="fas fa-file-pdf mr-2"></i> Eksporter til PDF';
+            exportBtn.innerHTML = '<i class="fas fa-file-pdf"></i> Eksporter til PDF';
         }
+        if (exportBtnMobile) exportBtnMobile.disabled = false;
     },
 
     updateURL() {

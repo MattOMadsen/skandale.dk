@@ -115,6 +115,52 @@
             from { opacity: 0; transform: scale(0.8) translateY(20px); }
             to { opacity: 1; transform: scale(1) translateY(0); }
         }
+
+        .tab-scroll {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .tab-scroll::-webkit-scrollbar { display: none; }
+
+        .custom-scroll {
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .politician-option {
+            min-height: 44px;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        @media (max-width: 767px) {
+            .comparison-header { padding-left: 1rem; padding-right: 1rem; }
+            .politician-card .tab-content { padding-left: 1rem; padding-right: 1rem; }
+            .tab-btn {
+                min-width: 5.25rem;
+                flex-shrink: 0;
+                padding: 0.75rem 0.625rem;
+                font-size: 0.8125rem;
+            }
+            .compare-name { font-size: 1.25rem; line-height: 1.3; }
+            .compare-role { display: block; margin-top: 0.25rem; }
+            .party-badge { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            #comparison-area.has-mobile-bar { padding-bottom: 5.5rem; }
+            .mobile-modal-panel {
+                width: 100%;
+                max-height: 92vh;
+                border-radius: 1.25rem 1.25rem 0 0;
+                margin-top: auto;
+            }
+        }
+
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            #mobile-compare-bar {
+                padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
+            }
+            body.has-mobile-compare-bar {
+                padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100">
@@ -125,8 +171,8 @@
     <div class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 no-print">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="max-w-3xl">
-                <h1 class="text-4xl md:text-5xl font-bold tracking-tighter heading-serif">Sammenlign to politikere</h1>
-                <p class="mt-3 text-xl text-gray-600 dark:text-gray-400">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter heading-serif">Sammenlign to politikere</h1>
+                <p class="mt-3 text-base sm:text-xl text-gray-600 dark:text-gray-400">
                     Få et faktabaseret, side-om-side overblik over skandaler, økonomisk støtte, internationale netværk og brudte valgløfter.
                 </p>
                 <div class="mt-4 flex items-center gap-x-4 text-sm">
@@ -153,9 +199,9 @@
                     <p class="text-gray-600 dark:text-gray-400 text-sm mt-1">Søg og klik for at vælge. Du kan bytte om når som helst.</p>
                 </div>
                 <button onclick="resetComparison()" 
-                        class="hidden md:flex items-center gap-x-2 px-4 py-2 text-sm font-medium rounded-xl border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                    <i class="fas fa-undo mr-2"></i>
-                    Nulstil
+                        class="flex items-center gap-x-2 px-4 py-2.5 text-sm font-medium rounded-xl border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors min-h-[44px]">
+                    <i class="fas fa-undo"></i>
+                    <span class="hidden sm:inline">Nulstil</span>
                 </button>
             </div>
 
@@ -187,7 +233,7 @@
                     </div>
                     
                     <div id="politician-list-1" 
-                         class="max-h-[220px] overflow-y-auto border border-gray-200 dark:border-gray-700 rounded-2xl bg-white dark:bg-gray-950 p-1 custom-scroll">
+                         class="max-h-[42vh] sm:max-h-[220px] overflow-y-auto border border-gray-200 dark:border-gray-700 rounded-2xl bg-white dark:bg-gray-950 p-1 custom-scroll">
                     </div>
                 </div>
 
@@ -212,7 +258,7 @@
                     </div>
                     
                     <div id="politician-list-2" 
-                         class="max-h-[220px] overflow-y-auto border border-gray-200 dark:border-gray-700 rounded-2xl bg-white dark:bg-gray-950 p-1 custom-scroll">
+                         class="max-h-[42vh] sm:max-h-[220px] overflow-y-auto border border-gray-200 dark:border-gray-700 rounded-2xl bg-white dark:bg-gray-950 p-1 custom-scroll">
                     </div>
                 </div>
             </div>
@@ -229,29 +275,23 @@
         <!-- Comparison Results Area -->
         <div id="comparison-area" class="hidden">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-y-3 mb-5 no-print">
-                <div>
-                    <h2 class="text-2xl font-semibold tracking-tight">Sammenligning</h2>
-                    <p class="text-sm text-gray-500 dark:text-gray-400" id="comparison-subtitle"></p>
+                <div class="min-w-0">
+                    <h2 class="text-xl sm:text-2xl font-semibold tracking-tight">Sammenligning</h2>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 truncate" id="comparison-subtitle"></p>
                 </div>
                 
-                <div class="flex items-center gap-x-2">
+                <div class="hidden md:flex items-center gap-x-2 shrink-0">
                     <button onclick="shareComparison()" 
-                            class="flex items-center gap-x-2 px-4 py-2 text-sm font-medium rounded-2xl border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                        <i class="fas fa-link mr-2"></i>
+                            class="flex items-center justify-center gap-x-2 px-4 py-2.5 text-sm font-medium rounded-2xl border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors min-h-[44px]">
+                        <i class="fas fa-link"></i>
                         Del link
                     </button>
                     
                     <button onclick="exportComparisonToPDF()" 
                             id="export-pdf-btn"
-                            class="flex items-center gap-x-2 px-4 py-2 text-sm font-medium rounded-2xl bg-red-600 hover:bg-red-700 text-white transition-colors">
-                        <i class="fas fa-file-pdf mr-2"></i>
+                            class="flex items-center justify-center gap-x-2 px-4 py-2.5 text-sm font-medium rounded-2xl bg-red-600 hover:bg-red-700 text-white transition-colors min-h-[44px]">
+                        <i class="fas fa-file-pdf"></i>
                         Eksporter til PDF
-                    </button>
-                    
-                    <button onclick="resetComparison()" 
-                            class="flex items-center gap-x-2 px-4 py-2 text-sm font-medium rounded-2xl border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors md:hidden">
-                        <i class="fas fa-undo mr-2"></i>
-                        Nulstil
                     </button>
                 </div>
             </div>
@@ -260,29 +300,27 @@
                 
                 <!-- Politician 1 Card -->
                 <div id="p1-card" class="politician-card bg-white dark:bg-gray-900 rounded-3xl border border-gray-200 dark:border-gray-800 overflow-hidden">
-                    <div class="comparison-header px-6 pt-6 pb-4 border-b border-gray-100 dark:border-gray-800">
-                        <div class="flex items-start gap-x-4">
+                    <div class="comparison-header px-4 sm:px-6 pt-5 sm:pt-6 pb-4 border-b border-gray-100 dark:border-gray-800">
+                        <div class="flex items-start gap-x-3 sm:gap-x-4">
                             <div id="p1-avatar" 
-                                 class="w-14 h-14 rounded-2xl flex-shrink-0 flex items-center justify-center text-white text-2xl font-bold shadow-inner">
+                                 class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex-shrink-0 flex items-center justify-center text-white text-xl sm:text-2xl font-bold shadow-inner">
                             </div>
                             <div class="flex-1 min-w-0">
-                                <div class="flex items-center gap-x-2">
-                                    <h3 id="p1-name" class="text-2xl font-semibold tracking-tight"></h3>
-                                </div>
-                                <div class="flex items-center gap-x-2 mt-1">
-                                    <span id="p1-party-badge" class="party-badge"></span>
-                                    <span id="p1-role" class="text-sm text-gray-500 dark:text-gray-400"></span>
+                                <h3 id="p1-name" class="compare-name text-2xl font-semibold tracking-tight break-words"></h3>
+                                <div class="flex flex-col sm:flex-row sm:items-center gap-x-2 mt-1 min-w-0">
+                                    <span id="p1-party-badge" class="party-badge text-xs sm:text-sm"></span>
+                                    <span id="p1-role" class="compare-role text-sm text-gray-500 dark:text-gray-400"></span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="px-6 pt-5 pb-4">
-                        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3" id="p1-metrics"></div>
+                    <div class="px-4 sm:px-6 pt-4 sm:pt-5 pb-4">
+                        <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3" id="p1-metrics"></div>
                     </div>
                     
-                    <div class="px-6">
-                        <div class="flex border-b border-gray-200 dark:border-gray-700 text-sm">
+                    <div class="px-4 sm:px-6">
+                        <div class="tab-scroll flex border-b border-gray-200 dark:border-gray-700 text-sm">
                             <button onclick="switchTab(1, 'scandals')" class="tab-btn active flex-1 text-center" data-tab="scandals-1">Skandaler</button>
                             <button onclick="switchTab(1, 'support')" class="tab-btn flex-1 text-center" data-tab="support-1">Støtte</button>
                             <button onclick="switchTab(1, 'promises')" class="tab-btn flex-1 text-center" data-tab="promises-1">Løfter</button>
@@ -290,7 +328,7 @@
                         </div>
                     </div>
                     
-                    <div class="p-6">
+                    <div class="p-4 sm:p-6">
                         <div id="p1-scandals" class="tab-content"></div>
                         <div id="p1-support" class="tab-content hidden"></div>
                         <div id="p1-promises" class="tab-content hidden"></div>
@@ -300,29 +338,27 @@
 
                 <!-- Politician 2 Card -->
                 <div id="p2-card" class="politician-card bg-white dark:bg-gray-900 rounded-3xl border border-gray-200 dark:border-gray-800 overflow-hidden">
-                    <div class="comparison-header px-6 pt-6 pb-4 border-b border-gray-100 dark:border-gray-800">
-                        <div class="flex items-start gap-x-4">
+                    <div class="comparison-header px-4 sm:px-6 pt-5 sm:pt-6 pb-4 border-b border-gray-100 dark:border-gray-800">
+                        <div class="flex items-start gap-x-3 sm:gap-x-4">
                             <div id="p2-avatar" 
-                                 class="w-14 h-14 rounded-2xl flex-shrink-0 flex items-center justify-center text-white text-2xl font-bold shadow-inner">
+                                 class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex-shrink-0 flex items-center justify-center text-white text-xl sm:text-2xl font-bold shadow-inner">
                             </div>
                             <div class="flex-1 min-w-0">
-                                <div class="flex items-center gap-x-2">
-                                    <h3 id="p2-name" class="text-2xl font-semibold tracking-tight"></h3>
-                                </div>
-                                <div class="flex items-center gap-x-2 mt-1">
-                                    <span id="p2-party-badge" class="party-badge"></span>
-                                    <span id="p2-role" class="text-sm text-gray-500 dark:text-gray-400"></span>
+                                <h3 id="p2-name" class="compare-name text-2xl font-semibold tracking-tight break-words"></h3>
+                                <div class="flex flex-col sm:flex-row sm:items-center gap-x-2 mt-1 min-w-0">
+                                    <span id="p2-party-badge" class="party-badge text-xs sm:text-sm"></span>
+                                    <span id="p2-role" class="compare-role text-sm text-gray-500 dark:text-gray-400"></span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="px-6 pt-5 pb-4">
-                        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3" id="p2-metrics"></div>
+                    <div class="px-4 sm:px-6 pt-4 sm:pt-5 pb-4">
+                        <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3" id="p2-metrics"></div>
                     </div>
                     
-                    <div class="px-6">
-                        <div class="flex border-b border-gray-200 dark:border-gray-700 text-sm">
+                    <div class="px-4 sm:px-6">
+                        <div class="tab-scroll flex border-b border-gray-200 dark:border-gray-700 text-sm">
                             <button onclick="switchTab(2, 'scandals')" class="tab-btn active flex-1 text-center" data-tab="scandals-2">Skandaler</button>
                             <button onclick="switchTab(2, 'support')" class="tab-btn flex-1 text-center" data-tab="support-2">Støtte</button>
                             <button onclick="switchTab(2, 'promises')" class="tab-btn flex-1 text-center" data-tab="promises-2">Løfter</button>
@@ -330,7 +366,7 @@
                         </div>
                     </div>
                     
-                    <div class="p-6">
+                    <div class="p-4 sm:p-6">
                         <div id="p2-scandals" class="tab-content"></div>
                         <div id="p2-support" class="tab-content hidden"></div>
                         <div id="p2-promises" class="tab-content hidden"></div>
@@ -357,6 +393,23 @@
 
     </main>
 
+    <!-- Mobil handlingslinje (kun når sammenligning er aktiv) -->
+    <div id="mobile-compare-bar" class="hidden fixed bottom-0 inset-x-0 z-40 md:hidden no-print border-t border-gray-200 dark:border-gray-800 bg-white/95 dark:bg-gray-900/95 backdrop-blur px-4 pt-3">
+        <div class="grid grid-cols-2 gap-2 max-w-lg mx-auto">
+            <button onclick="shareComparison()" 
+                    class="flex items-center justify-center gap-x-2 px-3 py-3 text-sm font-medium rounded-2xl border border-gray-300 dark:border-gray-700 min-h-[44px]">
+                <i class="fas fa-link"></i>
+                Del
+            </button>
+            <button onclick="exportComparisonToPDF()" 
+                    id="export-pdf-btn-mobile"
+                    class="flex items-center justify-center gap-x-2 px-3 py-3 text-sm font-medium rounded-2xl bg-red-600 hover:bg-red-700 text-white min-h-[44px]">
+                <i class="fas fa-file-pdf"></i>
+                PDF
+            </button>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 mt-12 no-print">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-sm text-gray-500 dark:text-gray-400">
@@ -376,10 +429,10 @@
     </footer>
 
     <!-- Related Modal -->
-    <div id="related-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+    <div id="related-modal" class="hidden fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4">
         <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="SammenlignModals.hideRelatedModal()"></div>
         
-        <div class="modal relative bg-white dark:bg-gray-900 rounded-3xl shadow-2xl max-w-lg w-full max-h-[80vh] overflow-hidden border border-gray-200 dark:border-gray-700">
+        <div class="modal mobile-modal-panel relative bg-white dark:bg-gray-900 sm:rounded-3xl shadow-2xl sm:max-w-lg w-full max-h-[85vh] sm:max-h-[80vh] overflow-hidden border border-gray-200 dark:border-gray-700">
             <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700">
                 <h3 id="related-modal-title" class="font-semibold text-lg pr-8"></h3>
                 <button onclick="SammenlignModals.hideRelatedModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
@@ -396,10 +449,10 @@
     </div>
 
     <!-- Scandal Modal -->
-    <div id="scandal-modal" class="hidden fixed inset-0 z-[110] flex items-center justify-center p-4">
+    <div id="scandal-modal" class="hidden fixed inset-0 z-[110] flex items-end sm:items-center justify-center p-0 sm:p-4">
         <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="SammenlignModals.hideScandalModal()"></div>
         
-        <div class="modal relative bg-white dark:bg-gray-900 rounded-3xl shadow-2xl max-w-2xl w-full max-h-[85vh] overflow-hidden border border-gray-200 dark:border-gray-700">
+        <div class="modal mobile-modal-panel relative bg-white dark:bg-gray-900 sm:rounded-3xl shadow-2xl sm:max-w-2xl w-full max-h-[92vh] sm:max-h-[85vh] overflow-hidden border border-gray-200 dark:border-gray-700">
             <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-950">
                 <div>
                     <h3 id="scandal-modal-title" class="font-semibold text-xl"></h3>

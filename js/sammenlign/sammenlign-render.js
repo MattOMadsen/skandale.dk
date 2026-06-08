@@ -38,7 +38,7 @@ const SammenlignRender = {
 
         SammenlignData.POLITICIANS.forEach(p => {
             const div = document.createElement('div');
-            div.className = `politician-option flex items-center gap-x-3 px-3 py-2.5 rounded-xl cursor-pointer text-sm`;
+            div.className = `politician-option flex items-center gap-x-3 px-3 py-2.5 rounded-xl cursor-pointer text-sm active:bg-gray-100 dark:active:bg-gray-800`;
             div.innerHTML = `
                 ${this.renderAvatar(p, 'w-8 h-8', 'rounded-xl', 'text-xs')}
                 <div class="flex-1 min-w-0">
@@ -106,9 +106,9 @@ const SammenlignRender = {
         this.setAvatarElement(
             document.getElementById(`p${side}-avatar`),
             politician,
-            'w-14 h-14',
+            'w-12 h-12 sm:w-14 sm:h-14',
             'rounded-2xl',
-            'text-2xl'
+            'text-xl sm:text-2xl'
         );
 
         const nameEl = document.getElementById(`p${side}-name`);
@@ -133,25 +133,25 @@ const SammenlignRender = {
         if (!c) return;
 
         c.innerHTML = `
-            <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-3 text-center border border-gray-100 dark:border-gray-800">
-                <div class="text-2xl font-semibold">${politician.scandalCount}</div>
-                <div class="text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">SKANDALER</div>
+            <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-2.5 sm:p-3 text-center border border-gray-100 dark:border-gray-800">
+                <div class="text-xl sm:text-2xl font-semibold">${politician.scandalCount}</div>
+                <div class="text-[9px] sm:text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">SKANDALER</div>
             </div>
-            <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-3 text-center border border-gray-100 dark:border-gray-800">
-                <div class="text-2xl font-semibold flex items-center justify-center gap-x-0.5">${politician.avgSeverity} <span class="text-amber-500 text-lg">★</span></div>
-                <div class="text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">ALVORLIGHED</div>
+            <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-2.5 sm:p-3 text-center border border-gray-100 dark:border-gray-800">
+                <div class="text-xl sm:text-2xl font-semibold flex items-center justify-center gap-x-0.5">${politician.avgSeverity} <span class="text-amber-500 text-base sm:text-lg">★</span></div>
+                <div class="text-[9px] sm:text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">ALVORLIGHED</div>
             </div>
-            <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-3 text-center border border-gray-100 dark:border-gray-800">
-                <div class="text-2xl font-semibold">${politician.brokenPromises}</div>
-                <div class="text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">BRUDTE LØFTER</div>
+            <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-2.5 sm:p-3 text-center border border-gray-100 dark:border-gray-800">
+                <div class="text-xl sm:text-2xl font-semibold">${politician.brokenPromises}</div>
+                <div class="text-[9px] sm:text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">BRUDTE LØFTER</div>
             </div>
-            <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-3 text-center border border-gray-100 dark:border-gray-800">
-                <div class="text-2xl font-semibold">${politician.donorCount}</div>
-                <div class="text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">DONORER</div>
+            <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-2.5 sm:p-3 text-center border border-gray-100 dark:border-gray-800">
+                <div class="text-xl sm:text-2xl font-semibold">${politician.donorCount}</div>
+                <div class="text-[9px] sm:text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">DONORER</div>
             </div>
-            <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-3 text-center border border-gray-100 dark:border-gray-800">
-                <div class="text-2xl font-semibold">${politician.networkCount}</div>
-                <div class="text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">NETVÆRK</div>
+            <div class="metric-box bg-gray-50 dark:bg-gray-950 rounded-2xl p-2.5 sm:p-3 text-center border border-gray-100 dark:border-gray-800">
+                <div class="text-xl sm:text-2xl font-semibold">${politician.networkCount}</div>
+                <div class="text-[9px] sm:text-[10px] text-gray-500 dark:text-gray-400 tracking-wider">NETVÆRK</div>
             </div>
         `;
     },
