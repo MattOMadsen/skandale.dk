@@ -73,7 +73,7 @@
 
 - [ ] Ryd op i legacy script-referencer
 - [ ] Erstat Tailwind Play CDN (7 HTML-sider)
-- [ ] Sammenlign dark mode — egen toggle, ikke `dark-mode.js`
+- [x] Ens navbar + dark mode på alle sider (`navbar.js` + `dark-mode.js`)
 - [ ] Opdater CHANGELOG.md med juni-2026 ændringer
 
 ## Fremtidige større features

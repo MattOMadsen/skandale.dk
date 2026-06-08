@@ -10,6 +10,14 @@
     const storageKey = 'theme';
 
     function getPreferredTheme() {
+        const legacyDarkMode = localStorage.getItem('darkMode');
+        if (legacyDarkMode !== null && !localStorage.getItem(storageKey)) {
+            const migrated = legacyDarkMode === 'true' ? 'dark' : 'light';
+            localStorage.setItem(storageKey, migrated);
+            localStorage.removeItem('darkMode');
+            return migrated;
+        }
+
         if (localStorage.getItem(storageKey)) {
             return localStorage.getItem(storageKey);
         }
@@ -25,6 +33,9 @@
             localStorage.setItem(storageKey, 'light');
         }
     }
+
+    // Anvend tema med det samme for at undgå flash ved sideskift
+    setTheme(getPreferredTheme());
 
     function toggleTheme() {
         const current = html.classList.contains('dark') ? 'dark' : 'light';
@@ -72,9 +83,6 @@
     }
 
     function initDarkMode() {
-        const preferred = getPreferredTheme();
-        setTheme(preferred);
-
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
             if (!localStorage.getItem(storageKey)) {
                 setTheme(e.matches ? 'dark' : 'light');

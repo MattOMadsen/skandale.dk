@@ -4,7 +4,7 @@
 function loadNavbar() {
     const navbarHTML = `
         <!-- Desktop + Tablet Navbar -->
-        <nav class="bg-white dark:bg-slate-900 border-b sticky top-0 z-50">
+        <nav class="bg-white dark:bg-slate-900 border-b sticky top-0 z-50 no-print">
             <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
                 <!-- Logo -->
                 <div class="flex items-center gap-x-3">
@@ -82,8 +82,33 @@ function loadNavbar() {
     // Indsæt navbaren
     document.body.insertAdjacentHTML('afterbegin', navbarHTML);
 
+    highlightActiveNavLink();
+    populateNavbarVersion();
+
     // Initialiser mobil menu
     initMobileMenu();
+}
+
+function highlightActiveNavLink() {
+    const current = window.location.pathname.split('/').pop() || 'index.html';
+
+    document.querySelectorAll('nav a[href], #mobile-menu a[href]').forEach(link => {
+        const href = link.getAttribute('href');
+        if (!href || href.startsWith('http') || href.startsWith('#')) return;
+
+        const isActive = href === current || (current === '' && href === 'index.html');
+        if (!isActive) return;
+
+        link.classList.add('text-[#C8102E]', 'font-semibold');
+        link.classList.remove('text-slate-600', 'dark:text-slate-300', 'hover:text-[#C8102E]', 'dark:hover:text-[#C8102E]');
+    });
+}
+
+function populateNavbarVersion() {
+    const el = document.getElementById('navbar-version');
+    if (el && typeof APP_VERSION !== 'undefined') {
+        el.textContent = APP_VERSION;
+    }
 }
 
 function initMobileMenu() {

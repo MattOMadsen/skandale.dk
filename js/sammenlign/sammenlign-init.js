@@ -4,7 +4,6 @@
 const SammenlignInit = {
     async init() {
         this.initializeTailwind();
-        this.initializeDarkMode();
         this.setupKeyboardSupport();
 
         const loadingEl = document.getElementById('politician-loading');
@@ -38,30 +37,6 @@ const SammenlignInit = {
     initializeTailwind() {
         document.documentElement.style.setProperty('--accent', '#c8102e');
         tailwind.config = { darkMode: 'class' };
-    },
-
-    initializeDarkMode() {
-        const savedTheme = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-            document.documentElement.classList.add('dark');
-        }
-    },
-
-    toggleDarkMode() {
-        const html = document.documentElement;
-        if (html.classList.contains('dark')) {
-            html.classList.remove('dark');
-            localStorage.setItem('theme', 'light');
-        } else {
-            html.classList.add('dark');
-            localStorage.setItem('theme', 'dark');
-        }
-    },
-
-    toggleMobileMenu() {
-        const menu = document.getElementById('mobile-menu');
-        if (menu) menu.classList.toggle('hidden');
     },
 
     initializePoliticianLists() {
@@ -246,8 +221,6 @@ const SammenlignInit = {
 };
 
 window.SammenlignInit = SammenlignInit;
-window.toggleDarkMode = () => SammenlignInit.toggleDarkMode();
-window.toggleMobileMenu = () => SammenlignInit.toggleMobileMenu();
 window.showComparison = () => SammenlignInit.showComparison();
 window.swapPoliticians = () => SammenlignInit.swapPoliticians();
 window.resetComparison = () => SammenlignInit.resetComparison();

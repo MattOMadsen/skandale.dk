@@ -6,7 +6,12 @@
     <title>Sammenlign to politikere | Skandale.dk – Politisk gennemsigtighed</title>
     <meta name="description" content="Sammenlign danske politikere side om side på skandaler, økonomisk støtte, internationale netværk og brudte valgløfter. Få et faktabaseret overblik.">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class' };
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/dark-mode.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap');
@@ -113,55 +118,8 @@
     </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100">
-    <!-- Navbar -->
-    <nav class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50 no-print">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center gap-x-3">
-                    <div class="w-9 h-9 bg-red-600 rounded-xl flex items-center justify-center">
-                        <span class="text-white font-bold text-2xl tracking-tighter">S</span>
-                    </div>
-                    <div>
-                        <span class="font-bold text-2xl tracking-tight">Skandale.dk</span>
-                    </div>
-                </div>
 
-                <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
-                    <a href="index.html" class="hover:text-red-600 dark:hover:text-red-400 transition-colors">Forside</a>
-                    <a href="tidslinje.html" class="hover:text-red-600 dark:hover:text-red-400 transition-colors">Tidslinje</a>
-                    <a href="sammenlign.html" class="nav-active">Sammenlign</a>
-                    <a href="stats.html" class="hover:text-red-600 dark:hover:text-red-400 transition-colors">Statistik</a>
-                    <a href="netvaerk.html" class="hover:text-red-600 dark:hover:text-red-400 transition-colors">Netværk</a>
-                    <a href="om.html" class="hover:text-red-600 dark:hover:text-red-400 transition-colors">Om projektet</a>
-                </div>
-
-                <div class="flex items-center gap-x-3">
-                    <button onclick="toggleDarkMode()" 
-                            class="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                            aria-label="Skift mellem lys og mørkt tema">
-                        <i class="fas fa-moon text-gray-600 dark:text-gray-400 dark:hidden"></i>
-                        <i class="fas fa-sun text-yellow-500 hidden dark:block"></i>
-                    </button>
-
-                    <button class="md:hidden w-9 h-9 flex items-center justify-center rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800"
-                            onclick="toggleMobileMenu()">
-                        <i class="fas fa-bars text-gray-600 dark:text-gray-400"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-            <div class="px-4 py-3 space-y-1 text-sm">
-                <a href="index.html" class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">Forside</a>
-                <a href="tidslinje.html" class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">Tidslinje</a>
-                <a href="sammenlign.html" class="block px-3 py-2 rounded-lg bg-red-50 dark:bg-red-950 text-red-600 dark:text-red-400 font-medium">Sammenlign</a>
-                <a href="stats.html" class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">Statistik</a>
-                <a href="netvaerk.html" class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">Netværk</a>
-                <a href="om.html" class="block px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">Om projektet</a>
-            </div>
-        </div>
-    </nav>
+    <!-- Navbar indlæses via js/navbar.js -->
 
     <!-- Hero -->
     <div class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 no-print">
@@ -462,6 +420,9 @@
             </div>
         </div>
     </div>
+
+    <script src="js/version.js"></script>
+    <script src="js/navbar.js"></script>
 
     <!-- Modulære scripts -->
     <script src="js/sammenlign/sammenlign-data.js"></script>

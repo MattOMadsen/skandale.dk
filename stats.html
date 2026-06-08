@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Statistik • Skandale.dk</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class' };
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/dark-mode.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap');
@@ -36,54 +41,8 @@
     </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-    <!-- Navbar -->
-    <nav class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center">
-                    <a href="index.html" class="flex items-center gap-x-3">
-                        <div class="w-9 h-9 bg-red-600 rounded-xl flex items-center justify-center">
-                            <span class="text-white font-bold text-2xl">S</span>
-                        </div>
-                        <div>
-                            <span class="font-bold text-2xl tracking-tight">Skandale.dk</span>
-                        </div>
-                    </a>
-                </div>
 
-                <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
-                    <a href="index.html" class="hover:text-red-600 dark:hover:text-red-400 transition-colors">Forside</a>
-                    <a href="tidslinje.html" class="hover:text-red-600 dark:hover:text-red-400 transition-colors">Tidslinje</a>
-                    <a href="sammenlign.html" class="hover:text-red-600 dark:hover:text-red-400 transition-colors">Sammenlign</a>
-                    <a href="stats.html" class="text-red-600 font-semibold">Statistik</a>
-                    <a href="netvaerk.html" class="hover:text-red-600 dark:hover:text-red-400 transition-colors">Netværk</a>
-                    <a href="om.html" class="hover:text-red-600 dark:hover:text-red-400 transition-colors">Om</a>
-                </div>
-
-                <div class="flex items-center gap-x-4">
-                    <button id="darkModeToggle" class="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-                        <i class="fa-solid fa-moon text-xl dark:hidden"></i>
-                        <i class="fa-solid fa-sun text-xl hidden dark:block text-yellow-400"></i>
-                    </button>
-                    <button id="mobileMenuBtn" class="md:hidden w-10 h-10 flex items-center justify-center rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <i class="fa-solid fa-bars text-xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobil menu -->
-        <div id="mobileMenu" class="hidden md:hidden border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-            <div class="px-4 py-4 flex flex-col gap-y-1 text-sm font-medium">
-                <a href="index.html" class="px-4 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700">Forside</a>
-                <a href="tidslinje.html" class="px-4 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700">Tidslinje</a>
-                <a href="sammenlign.html" class="px-4 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700">Sammenlign</a>
-                <a href="stats.html" class="px-4 py-2.5 rounded-xl bg-red-50 dark:bg-red-950 text-red-600 dark:text-red-400 font-semibold">Statistik</a>
-                <a href="netvaerk.html" class="px-4 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700">Netværk</a>
-                <a href="om.html" class="px-4 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700">Om</a>
-            </div>
-        </div>
-    </nav>
+    <!-- Navbar indlæses via js/navbar.js -->
 
     <!-- Hero / Header -->
     <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
@@ -164,6 +123,8 @@
         Modal scripts (samme rækkefølge som på netværk-siden + nødvendige for politiker-modal)
         Skal indlæses FØR stats-scriptene, så window.showPoliticianModal findes allerede
     -->
+    <script src="js/version.js"></script>
+    <script src="js/navbar.js"></script>
     <script src="js/data.js"></script>
     <script src="js/modal-core.js"></script>
     <script src="js/modal-scandal.js"></script>
