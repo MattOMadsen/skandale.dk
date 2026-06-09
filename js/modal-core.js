@@ -6,6 +6,7 @@
 // - Efter render: auto-expand + highlight af specifik skandale ved deep link
 // - Ny helper: expandSpecificScandal()
 // - Ny initDeepLink() der kører ved load og håndterer ?politician=...&scandal=...
+// - Eksporteret initDeepLink til window + bedre timing-støtte (retry hvis politicians ikke klar endnu)
 // INGEN eksisterende funktioner, kode eller logik er slettet eller ændret.
 
 let currentPolitician = null;
@@ -194,7 +195,7 @@ async function showPoliticianModal(politicianId, targetScandalId = null) {
     if (typeof addBrokenPromisesSection === 'function') addBrokenPromisesSection(politician);
     if (typeof initShareButton === 'function') initShareButton(politician);
 
-    // === NY: Attach click listeners på netværks-kort (robust) ===
+    // === NY: Attach click listeners på netværs-kort (robust) ===
     const networkContainer = document.getElementById('networkAffiliationsContainer');
     if (networkContainer) {
       networkContainer.querySelectorAll('.network-affiliation-item').forEach(item => {
@@ -272,30 +273,35 @@ function initDeepLink() {
 
     if (!polSlug) return;
 
-    if (typeof politicians === 'undefined' || !Array.isArray(politicians)) {
-      console.log('politicians array ikke klar endnu til deep link');
-      return;
-    }
+    // Robust tjek: vent på at politicians er klar
+    const tryOpen = () => {
+      const polArray = (typeof politicians !== 'undefined' && Array.isArray(politicians)) ? politicians : (window.politicians || []);
+      if (!polArray || polArray.length === 0) {
+        setTimeout(tryOpen, 300);
+        return;
+      }
 
-    const pol = politicians.find(p => {
-      const slug = p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-      return slug === polSlug;
-    });
+      const pol = polArray.find(p => {
+        const slug = p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        return slug === polSlug;
+      });
 
-    if (pol) {
-      // Åbn modal med valgfri scandalId
-      setTimeout(() => {
-        if (typeof window.showPoliticianModal === 'function') {
-          window.showPoliticianModal(pol.id || pol.name, scandalId);
-        }
-      }, 650);
-    }
+      if (pol) {
+        setTimeout(() => {
+          if (typeof window.showPoliticianModal === 'function') {
+            window.showPoliticianModal(pol.id || pol.name, scandalId);
+          }
+        }, 400);
+      }
+    };
+
+    tryOpen();
   } catch (e) {
     console.warn('Deep link init fejlede:', e);
   }
 }
 
-// Start deep link check
+// Start deep link check (DOMContentLoaded + fallback)
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initDeepLink);
 } else {
@@ -305,3 +311,4 @@ if (document.readyState === 'loading') {
 window.showPoliticianModal = showPoliticianModal;
 window.closePoliticianModal = closePoliticianModal;
 window.expandSpecificScandal = expandSpecificScandal;
+window.initDeepLink = initDeepLink;
