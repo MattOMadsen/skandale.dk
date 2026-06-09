@@ -53,6 +53,11 @@ function initializeEverything() {
         }
         applyFilters();
 
+        // === Deep link support: åbn modal hvis ?politician= eller ?scandal= er i URL ===
+        if (typeof window.initDeepLink === 'function') {
+          window.initDeepLink();
+        }
+
         console.log('%c[Skandale.dk] Baggrundsdetaljer + networkIndex loaded', 'color:#10b981');
       });
     }
@@ -117,7 +122,7 @@ function getFilteredPoliticians() {
     }
   } else {
     filtered = sortPoliticians(filtered);
-  }
+    }
 
   return filtered;
 }
