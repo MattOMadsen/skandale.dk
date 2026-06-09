@@ -22,6 +22,13 @@ function initializeEverything() {
       window.renderStatsSnapshot();
     }
 
+    // Sikker deep link support på forsiden (køres efter grundlæggende render)
+    setTimeout(() => {
+      if (typeof window.initDeepLink === 'function') {
+        window.initDeepLink();
+      }
+    }, 900);
+
     const grid = document.getElementById('politiciansGrid');
     if (grid) {
       grid.addEventListener('click', function(e) {
@@ -53,7 +60,7 @@ function initializeEverything() {
         }
         applyFilters();
 
-        // === Deep link support: åbn modal hvis ?politician= eller ?scandal= er i URL ===
+        // Deep link efter fuld data-load (backup)
         if (typeof window.initDeepLink === 'function') {
           window.initDeepLink();
         }
@@ -122,7 +129,7 @@ function getFilteredPoliticians() {
     }
   } else {
     filtered = sortPoliticians(filtered);
-    }
+  }
 
   return filtered;
 }
