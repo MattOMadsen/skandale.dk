@@ -62,7 +62,7 @@ function renderStatsSnapshot() {
                 </div>
 
                 <div onclick="filterByTopParty('${topParty.replace(/'/g, "\\'")}')" class="bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-4 cursor-pointer transition-all active:scale-[0.985]">
-                    <div class="text-lg font-semibold leading-tight">${topParty}</div>
+                    <div class="text-base md:text-lg font-semibold leading-tight break-words">${topParty}</div>
                     <div class="text-sm text-white/70 mt-1">Flest skandaler</div>
                 </div>
             </div>
@@ -72,10 +72,10 @@ function renderStatsSnapshot() {
 
 function escapeStatsHtml(str) {
     return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
+        .replace(/&/g, '&')
+        .replace(/</g, '<')
+        .replace(/>/g, '>')
+        .replace(/"/g, '"')
         .replace(/'/g, '&#39;');
 }
 
