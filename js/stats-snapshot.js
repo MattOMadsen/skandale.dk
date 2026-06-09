@@ -61,9 +61,9 @@ function renderStatsSnapshot() {
                     <div class="text-sm text-white/70 mt-1">Gennemsnitlig alvorlighed</div>
                 </div>
 
-                <div onclick="filterByTopParty('${topParty.replace(/'/g, "\\'")}')" class="bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-4 cursor-pointer transition-all active:scale-[0.985] flex flex-col justify-start min-h-[92px]">
+                <div onclick="filterByTopParty('${topParty.replace(/'/g, "\\'")}')" class="bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-4 cursor-pointer transition-all active:scale-[0.985] flex flex-col justify-start gap-1 min-h-[92px]">
                     <div class="text-sm md:text-base font-semibold leading-tight break-words">${topParty}</div>
-                    <div class="text-sm text-white/70 mt-1">Flest skandaler</div>
+                    <div class="text-sm text-white/70">Flest skandaler</div>
                 </div>
             </div>
         </div>
