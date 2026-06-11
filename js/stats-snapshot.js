@@ -53,24 +53,24 @@ function renderStatsSnapshot() {
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div onclick="showStatsDetail('politicians')" class="bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-4 cursor-pointer transition-all active:scale-[0.985]">
+                <div onclick="showStatsDetail('politicians')" class="bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-4 cursor-pointer transition-all active:scale-[0.985] flex flex-col justify-between min-h-[92px]">
                     <div class="text-3xl font-bold">${totalPoliticians}</div>
                     <div class="text-sm text-white/70 mt-1">Politikere</div>
                 </div>
 
-                <div onclick="showStatsDetail('scandals')" class="bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-4 cursor-pointer transition-all active:scale-[0.985]">
+                <div onclick="showStatsDetail('scandals')" class="bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-4 cursor-pointer transition-all active:scale-[0.985] flex flex-col justify-between min-h-[92px]">
                     <div class="text-3xl font-bold">${totalScandals}</div>
                     <div class="text-sm text-white/70 mt-1">Skandaler i alt</div>
                 </div>
 
-                <div onclick="showStatsDetail('severity')" class="bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-4 cursor-pointer transition-all active:scale-[0.985]">
+                <div onclick="showStatsDetail('severity')" class="bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-4 cursor-pointer transition-all active:scale-[0.985] flex flex-col justify-between min-h-[92px]">
                     <div class="text-3xl font-bold">${avgSeverity}</div>
                     <div class="text-sm text-white/70 mt-1">Gennemsnitlig alvorlighed</div>
                 </div>
 
-                <div onclick="filterByTopParty('${topParty.replace(/'/g, "\\'")}')" class="bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-4 cursor-pointer transition-all active:scale-[0.985]">
-                    <div class="text-lg font-semibold leading-tight">${topParty}</div>
-                    <div class="text-sm text-white/70 mt-1">Flest skandaler</div>
+                <div onclick="filterByTopParty('${topParty.replace(/'/g, "\\'")}')" class="bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-4 cursor-pointer transition-all active:scale-[0.985] flex flex-col justify-center items-center text-center gap-1 min-h-[92px]">
+                    <div class="text-sm md:text-base font-semibold leading-tight break-words">${topParty}</div>
+                    <div class="text-sm text-white/70">Flest skandaler</div>
                 </div>
             </div>
         </div>
@@ -79,10 +79,10 @@ function renderStatsSnapshot() {
 
 function escapeStatsHtml(str) {
     return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
+        .replace(/&/g, '&')
+        .replace(/</g, '<')
+        .replace(/>/g, '>')
+        .replace(/"/g, '"')
         .replace(/'/g, '&#39;');
 }
 

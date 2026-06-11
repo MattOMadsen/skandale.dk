@@ -1,6 +1,8 @@
 # TODO-liste for Skandale.dk
 
-**Sidst opdateret:** 8. juni 2026
+**Sidst opdateret:** 9. juni 2026
+
+**Aktuelt antal (juni 2026):** Ca. 40 politikere og 90+ skandaler (baseret på live stats på forsiden). Nogle ældre referencer til 12/16 politikere er gradvist opdateret.
 
 ## Fuldførte features
 
@@ -10,25 +12,25 @@
 - [x] Password-beskyttet Admin Dashboard
 - [x] Dedikeret tidslinje-side (`tidslinje.html`)
 - [x] Modular JS-arkitektur
-- [x] Stats-dashboard (`stats.html`) med alle 16 politikere via manifest
+- [x] Stats-dashboard (`stats.html`) med alle politikere via manifest
 - [x] Infinite scroll på forsiden
 - [x] Dedikeret `netvaerk.html` med filtre, sortering og dark mode
 - [x] Dark mode på index, netværk, om, kontakt, tidslinje
 - [x] Dynamisk politiker-antal i hero/stats
 - [x] Folketing-filter på forsiden («Folketinget nu» / «Alle politikere»)
 - [x] Parti-filter på forsiden
-- [x] Billeder på alle 16 politikere (forside-grid)
+- [x] Billeder på alle politikere (forside-grid)
 - [x] Krydsreferencer: netværk, donorer og relaterede politikere i skandaler (`cross-reference.js`)
 - [x] Brudte løfter: granulær mappe-loading + undefined-fix
 - [x] Del specifik skandale + deep link (`?politician=&scandal=`)
 - [x] Relaterede politikere i skandaler (auto-match + `otherPoliticians` i data)
 - [x] Søgning inkl. skandale-tekst (scoring i `search.js`)
-- [x] **Sammenlign-siden loader alle 16 politikere dynamisk fra manifest.json** (juni 2026)
+- [x] **Sammenlign-siden loader alle politikere dynamisk fra manifest.json** (juni 2026)
 
 ## Delvist implementeret
 
 - [ ] **Sammenlign-siden – finpudsning**
-  - [x] Alle 16 politikere tilgængelige
+  - [x] Alle politikere tilgængelige
   - [x] Profilbillede i sammenlign-kort (liste + sammenligningskort)
   - [ ] PDF-eksport kan gøres rigere
   - [x] Mere polish på mobil (sticky handlingslinje, scroll-tabs, touch targets)
@@ -44,7 +46,7 @@
   - Kun 3 skandaler har `otherPoliticians` / `relatedTopics` — flere kan udfyldes
 
 - [ ] **Stats-side data-loading**
-  - Loader 16 politikere fra manifest
+  - Loader politikere fra manifest
   - Skandaler hentes kun fra single-file JSON — misser granulære mapper for nogle
 
 - [ ] **Skeleton loader**
@@ -61,7 +63,7 @@
 
 1. **Central database** (Supabase) til delt afstemning + kommentar-moderation — grundstruktur klar (`supabase-client.js` + `secrets.example.js`)
 2. **Kilde-kvalitetsindikatorer** (grøn/gul/rød badges på kilder)
-3. **«Sidst opdateret» + versionshistorik** på skandaler
+3. **«Sidst opdateret» + versionshistorik på skandaler
 4. **Billede i politiker-modal-header** (forsiden har billeder, modal har initialer)
 5. **Loading-spinner i politiker-modal** ved `ensureAllDetailsLoaded()`
 6. **«Sammenlign med…»-knap** i politiker-modal

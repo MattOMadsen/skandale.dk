@@ -6,6 +6,7 @@
 // - Efter render: auto-expand + highlight af specifik skandale ved deep link
 // - Ny helper: expandSpecificScandal()
 // - Ny initDeepLink() der kører ved load og håndterer ?politician=...&scandal=...
+// - Eksporteret initDeepLink til window + bedre timing-støtte (retry hvis politicians ikke klar endnu)
 // INGEN eksisterende funktioner, kode eller logik er slettet eller ændret.
 
 let currentPolitician = null;
@@ -63,10 +64,10 @@ async function showPoliticianModal(politicianId, targetScandalId = null) {
   const html = `
     <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4" id="politicianModal" data-current-politician-id="${politicianId}">
       <div onclick="event.target.id === 'politicianModal' && closePoliticianModal()" 
-           class="bg-white dark:bg-slate-800 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
+           class="bg-white dark:bg-slate-800 rounded-3xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
         
         <!-- Header -->
-        <div class="px-8 pt-8 pb-6 border-b border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row sm:items-start justify-between gap-y-4">
+        <div class="px-8 pt-8 pb-6 border-b border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row sm:items-start justify-between gap-y-4 flex-shrink-0">
           <div class="flex items-center gap-x-4">
             <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-white font-bold text-2xl" 
                  style="background-color: ${politician.avatarColor || politician.partyColor || '#C8102E'}">
@@ -94,7 +95,7 @@ async function showPoliticianModal(politicianId, targetScandalId = null) {
           </div>
         </div>
         
-        <div class="p-8 overflow-y-auto max-h-[calc(90vh-140px)]">
+        <div class="flex-1 overflow-y-auto p-8" id="modalScrollable">
           
           <!-- Om Politikeren -->
           <div class="mb-6">
@@ -174,7 +175,7 @@ async function showPoliticianModal(politicianId, targetScandalId = null) {
           
         </div>
         
-        <div class="px-8 py-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-400 dark:text-slate-500 text-center">
+        <div class="px-8 py-4 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-400 dark:text-slate-500 text-center flex-shrink-0">
           Data er baseret på offentligt tilgængelige kilder • v2.00.87
         </div>
       </div>
@@ -194,7 +195,7 @@ async function showPoliticianModal(politicianId, targetScandalId = null) {
     if (typeof addBrokenPromisesSection === 'function') addBrokenPromisesSection(politician);
     if (typeof initShareButton === 'function') initShareButton(politician);
 
-    // === NY: Attach click listeners på netværks-kort (robust) ===
+    // === NY: Attach click listeners på netværs-kort (robust) ===
     const networkContainer = document.getElementById('networkAffiliationsContainer');
     if (networkContainer) {
       networkContainer.querySelectorAll('.network-affiliation-item').forEach(item => {
@@ -221,7 +222,7 @@ async function showPoliticianModal(politicianId, targetScandalId = null) {
       }, 350);
     }
 
-    console.log('%c[Skandale.dk] Modal initialiseret med robust netværks-håndtering', 'color:#10b981');
+    console.log('%c[Skandale.dk] Modal initialiseret med robust netværk-håndtering', 'color:#10b981');
   }, 60);
 }
 
@@ -272,30 +273,35 @@ function initDeepLink() {
 
     if (!polSlug) return;
 
-    if (typeof politicians === 'undefined' || !Array.isArray(politicians)) {
-      console.log('politicians array ikke klar endnu til deep link');
-      return;
-    }
+    // Robust tjek: vent på at politicians er klar
+    const tryOpen = () => {
+      const polArray = (typeof politicians !== 'undefined' && Array.isArray(politicians)) ? politicians : (window.politicians || []);
+      if (!polArray || polArray.length === 0) {
+        setTimeout(tryOpen, 300);
+        return;
+      }
 
-    const pol = politicians.find(p => {
-      const slug = p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-      return slug === polSlug;
-    });
+      const pol = polArray.find(p => {
+        const slug = p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        return slug === polSlug;
+      });
 
-    if (pol) {
-      // Åbn modal med valgfri scandalId
-      setTimeout(() => {
-        if (typeof window.showPoliticianModal === 'function') {
-          window.showPoliticianModal(pol.id || pol.name, scandalId);
-        }
-      }, 650);
-    }
+      if (pol) {
+        setTimeout(() => {
+          if (typeof window.showPoliticianModal === 'function') {
+            window.showPoliticianModal(pol.id || pol.name, scandalId);
+          }
+        }, 400);
+      }
+    };
+
+    tryOpen();
   } catch (e) {
     console.warn('Deep link init fejlede:', e);
   }
 }
 
-// Start deep link check
+// Start deep link check (DOMContentLoaded + fallback)
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initDeepLink);
 } else {
@@ -305,3 +311,4 @@ if (document.readyState === 'loading') {
 window.showPoliticianModal = showPoliticianModal;
 window.closePoliticianModal = closePoliticianModal;
 window.expandSpecificScandal = expandSpecificScandal;
+window.initDeepLink = initDeepLink;

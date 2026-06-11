@@ -26,11 +26,12 @@ Se den fulde og opdaterede todo-liste her:
 
 **[`TODO.md`](TODO.md)**
 
-**Seneste tjek:** 26. maj 2026
+**Seneste tjek:** 9. juni 2026  
+**Aktuelt antal:** Ca. 40 politikere og 90+ skandaler (live statistik juni 2026).
 
 **Hovedstatus:**
-- Flere større features er implementeret (Sammenlign to politikere, PDF-eksport, Tilføj skandale direkte, PWA)
-- Dark mode og central database til delt afstemning/kommentar-moderation mangler stadig
+- Flere større features er implementeret (Sammenlign to politikere, PDF-eksport, Tilføj skandale direkte, PWA, Infinite scroll, Dark mode på flere sider, Granulær data-struktur)
+- Central database til delt afstemning/kommentar-moderation mangler stadig som største udestående
 
 ## Bidrag
 
@@ -61,3 +62,4 @@ Se guiden her:
 git clone https://github.com/MattOMadsen/skandale.dk.git
 cd skandale.dk
 # Åbn index.html i browseren
+```

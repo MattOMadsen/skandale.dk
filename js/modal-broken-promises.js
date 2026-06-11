@@ -11,7 +11,7 @@ function getBrokenPromiseText(promise) {
 }
 
 function addBrokenPromisesSection(politician) {
-  const container = document.querySelector('#politicianModal .p-8');
+  const container = document.getElementById('brokenPromisesSection') || document.querySelector('#politicianModal .p-8');
   if (!container || !politician.brokenPromises) return;
 
   const old = container.querySelector('.broken-promises');
