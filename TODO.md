@@ -2,7 +2,7 @@
 
 **Sidst opdateret:** 11. juni 2026
 
-**Aktuelt antal (juni 2026):** Ca. 40 politikere og 90+ skandaler (baseret på live stats på forsiden). Nogle ældre referencer til 12/16 politikere er gradvist opdateret.
+**Aktuelt antal (juni 2026):** **40 politikere**, **105 skandaler**, **33 folketingsmedlemmer** + **7 tidligere**. Se `POLITIKER-STATUS.md` for live audit.
 
 ## Fuldførte features
 
@@ -50,6 +50,9 @@
 - [x] **Lazy load** på tidslinje og netværk (ingen fuld `loadAllPoliticianDetails()` ved opstart)
 - [x] **Økonomisk støtte** for alle 40 politikere
 - [x] **Profilbilleder** for alle 40 politikere
+- [x] **Internationale affiliations oprydning** — domestic/parti fjernet; 39/40 udfyldt (v2.01.01)
+- [x] **Netværksprofiler** for OECD, ITF, WHO Europa og Europarådet (`network-profiles.js`)
+- [x] **POLITIKER-STATUS.md** opdateret med live audit-tal (juni 2026)
 
 ## Skal testes manuelt
 
@@ -70,6 +73,11 @@
 8. ~~**Erstat Tailwind CDN** med lokal optimeret CSS~~ (implementeret: `npm run build:css` → `css/tailwind.css`)
 9. **Admin: slet/rediger skandaler** i dashboard
 10. ~~**Alvorligheds-diagram** på stats-siden~~ (implementeret juni 2026)
+
+## Data / indhold (åbent)
+
+- [ ] **Pernille Vermund** — research internationale tilknytninger (affiliations-fil er bevidst tom)
+- [ ] Flere `otherPoliticians` / `relatedTopics` i skandale-data (kun 3 skandaler har det pt.)
 
 ## Teknisk gæld / oprydning
 
