@@ -1,3 +1,10 @@
+## [v2.01.04] - 2026-06-11
+### Fix: profilbillede i politiker-modal
+- Avatar renderes nu via DOM (`setPoliticianModalAvatar`) i stedet for HTML-streng med `onerror`-backticks
+- `loading="eager"` + `referrerpolicy="no-referrer"` for Wikimedia-billeder
+- Fallback henter `image` fra politiker-JSON hvis feltet mangler på objektet
+- Service worker cache bumped til v7
+
 ## [v2.01.03] - 2026-06-11
 ### Modal UX & data-krydsreferencer
 - Politiker-modal: profilbillede i header, loading-spinner ved indlæsning, «Sammenlign med…»-knap

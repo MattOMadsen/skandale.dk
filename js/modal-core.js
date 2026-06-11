@@ -19,15 +19,51 @@ function getPoliticianSlug(politician) {
     .replace(/[^a-z0-9]+/g, '-');
 }
 
-function buildPoliticianAvatarHTML(politician, sizeClass = 'w-16 h-16', textClass = 'text-2xl') {
+function setPoliticianModalAvatar(el, politician, sizeClass = 'w-16 h-16', textClass = 'text-2xl') {
+  if (!el || !politician) return;
+
   const avatarColor = politician.avatarColor || politician.partyColor || '#C8102E';
   const initials = politician.initials || politician.name.split(' ').map(n => n[0]).join('');
-  if (politician.image) {
-    return `<div class="${sizeClass} rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 flex-shrink-0">
-      <img src="${politician.image}" alt="${politician.name}" class="w-full h-full object-cover" loading="lazy" decoding="async" onerror="this.parentElement.innerHTML = \`<div class='w-full h-full flex items-center justify-center text-white font-bold ${textClass}' style='background-color: ${avatarColor}'>${initials}</div>\`;">
-    </div>`;
+
+  const showInitials = () => {
+    el.className = `${sizeClass} rounded-2xl flex-shrink-0 flex items-center justify-center text-white font-bold ${textClass}`;
+    el.style.backgroundColor = avatarColor;
+    el.replaceChildren();
+    el.textContent = initials;
+  };
+
+  if (!politician.image) {
+    showInitials();
+    return;
   }
-  return `<div class="${sizeClass} rounded-2xl flex items-center justify-center text-white font-bold ${textClass} flex-shrink-0" style="background-color: ${avatarColor}">${initials}</div>`;
+
+  el.className = `${sizeClass} rounded-2xl flex-shrink-0 overflow-hidden border border-slate-200 dark:border-slate-700`;
+  el.style.backgroundColor = '';
+  el.replaceChildren();
+
+  const img = document.createElement('img');
+  img.src = politician.image;
+  img.alt = politician.name;
+  img.className = 'w-full h-full object-cover';
+  img.loading = 'eager';
+  img.decoding = 'async';
+  img.referrerPolicy = 'no-referrer';
+  img.onerror = () => showInitials();
+  el.appendChild(img);
+}
+
+async function ensurePoliticianImage(politician) {
+  if (!politician || politician.image) return politician;
+  const slug = getPoliticianSlug(politician);
+  if (window.SiteStats?.loadPoliticianCore) {
+    try {
+      const core = await SiteStats.loadPoliticianCore(slug);
+      if (core?.image) politician.image = core.image;
+    } catch (e) {
+      console.warn('Kunne ikke hente profilbillede for', politician.name, e);
+    }
+  }
+  return politician;
 }
 
 function buildLoadingModalHTML(politician, politicianId) {
@@ -36,7 +72,7 @@ function buildLoadingModalHTML(politician, politicianId) {
       <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
         <div class="px-8 pt-8 pb-6 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between flex-shrink-0">
           <div class="flex items-center gap-x-4">
-            ${buildPoliticianAvatarHTML(politician)}
+            <div id="politicianModalAvatar" class="w-16 h-16 flex-shrink-0"></div>
             <div>
               <h2 class="text-3xl font-bold text-slate-900 dark:text-white">${politician.name}</h2>
               <div class="flex items-center gap-x-2 mt-1">
@@ -75,6 +111,8 @@ async function showPoliticianModal(politicianId, targetScandalId = null) {
 
   document.querySelectorAll('#politicianModal, #networkModal').forEach(m => m.remove());
   document.body.insertAdjacentHTML('beforeend', buildLoadingModalHTML(politician, politicianId));
+  await ensurePoliticianImage(politician);
+  setPoliticianModalAvatar(document.getElementById('politicianModalAvatar'), politician);
 
   // === Lazy load detaljer ===
   if (!politician._detailsLoaded || !politician.scandals || politician.scandals.length === 0) {
@@ -123,7 +161,7 @@ async function showPoliticianModal(politicianId, targetScandalId = null) {
         <!-- Header -->
         <div class="px-8 pt-8 pb-6 border-b border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row sm:items-start justify-between gap-y-4 flex-shrink-0">
           <div class="flex items-center gap-x-4">
-            ${buildPoliticianAvatarHTML(politician)}
+            <div id="politicianModalAvatar" class="w-16 h-16 flex-shrink-0"></div>
             <div>
               <h2 class="text-3xl font-bold text-slate-900 dark:text-white">${politician.name}</h2>
               <div class="flex items-center gap-x-2 mt-1">
@@ -244,6 +282,7 @@ async function showPoliticianModal(politicianId, targetScandalId = null) {
   `;
 
   document.body.insertAdjacentHTML('beforeend', html);
+  setPoliticianModalAvatar(document.getElementById('politicianModalAvatar'), politician);
 
   // Initialize after DOM is ready
   setTimeout(() => {

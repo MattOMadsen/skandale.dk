@@ -1,7 +1,7 @@
 // sw.js - Service Worker for Skandale.dk PWA
 // Grundlæggende offline-support og caching
 
-const CACHE_NAME = 'skandale-dk-v6';
+const CACHE_NAME = 'skandale-dk-v7';
 
 function getScopeBase() {
   const scope = self.registration?.scope || self.location.href;
