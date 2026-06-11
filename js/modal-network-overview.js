@@ -102,6 +102,8 @@ async function showNetworkDetail(networkName) {
                     <button onclick="closeNetworkDetailModal()" class="text-3xl text-slate-400 hover:text-slate-600 dark:hover:text-white">×</button>
                 </div>
                 <div class="p-8 max-h-[60vh] overflow-y-auto">
+                    ${typeof window.renderNetworkProfileSection === 'function' ? window.renderNetworkProfileSection(networkName) : ''}
+                    <h4 class="text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400 mb-3">Danske politikere i netværket</h4>
                     ${listHTML}
                 </div>
             </div>

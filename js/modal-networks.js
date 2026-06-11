@@ -29,6 +29,8 @@ async function showNetworkConnections(networkName, organization = '') {
           <button onclick="closeNetworkModal()" class="text-3xl text-slate-400 hover:text-slate-600 dark:hover:text-white">×</button>
         </div>
         <div class="p-8 max-h-[70vh] overflow-y-auto">
+          ${typeof window.renderNetworkProfileSection === 'function' ? window.renderNetworkProfileSection(displayName) : ''}
+          <h4 class="text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400 mb-3">Danske politikere i netværket</h4>
           <div class="space-y-3">
   `;
 
