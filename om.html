@@ -12,6 +12,37 @@
     <style>
         .prose-custom { max-width: 65ch; }
         .section-anchor { scroll-margin-top: 80px; }
+
+        .donation-box {
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+            box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
+        }
+        .dark .donation-box {
+            background: linear-gradient(180deg, #111827 0%, #0f172a 100%);
+            border-color: rgba(200, 16, 46, 0.22);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        }
+        .donation-box__methods {
+            background: rgba(248, 250, 252, 0.9);
+        }
+        .dark .donation-box__methods {
+            background: rgba(15, 23, 42, 0.65);
+            border-color: rgba(71, 85, 105, 0.55);
+        }
+        .donation-box__bank {
+            background: #ffffff;
+        }
+        .dark .donation-box__bank {
+            background: rgba(30, 41, 59, 0.85);
+            border-color: rgba(71, 85, 105, 0.6);
+        }
+        .donation-box__qr-wrap {
+            background: #ffffff;
+            box-shadow: 0 2px 12px rgba(15, 23, 42, 0.08);
+        }
+        .dark .donation-box__qr-wrap {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+        }
     </style>
 </head>
 <body class="bg-slate-50 dark:bg-gray-950 text-slate-900 dark:text-slate-100" data-site-meta="full">
@@ -275,12 +306,12 @@
                 </p>
             </div>
 
-            <div id="doner" class="section-anchor donation-box bg-slate-100 dark:bg-slate-800/80 p-8 md:p-10 rounded-3xl text-center my-4 border border-slate-300 dark:border-slate-700 shadow-sm">
-                <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#C8102E]/10 mb-4">
-                    <i class="fa-solid fa-hand-holding-heart text-[#C8102E] text-2xl"></i>
+            <div id="doner" class="section-anchor donation-box p-8 md:p-10 rounded-3xl text-center my-4 border border-slate-200">
+                <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#C8102E]/10 dark:bg-[#C8102E]/20 mb-4">
+                    <i class="fa-solid fa-hand-holding-heart text-[#C8102E] dark:text-red-400 text-2xl"></i>
                 </div>
                 <h3 class="text-3xl font-bold mb-3 text-slate-900 dark:text-white">Støt Skandale.dk</h3>
-                <p class="text-lg mb-8 text-slate-700 dark:text-slate-300 max-w-xl mx-auto">
+                <p class="text-lg mb-8 text-slate-600 dark:text-slate-300 max-w-xl mx-auto">
                     Hjælp med at holde siden uafhængig og annoncerfri — hosting, research og vedligeholdelse koster tid og penge.
                 </p>
 
@@ -292,29 +323,33 @@
                     Donér via PayPal
                 </a>
 
-                <div class="mt-10 pt-8 border-t border-slate-300 dark:border-slate-600">
-                    <p class="text-sm font-medium text-slate-600 dark:text-slate-400 mb-6 uppercase tracking-wide">Eller scan med PayPal / overfør</p>
+                <div class="mt-10 pt-8 border-t border-slate-200 dark:border-slate-700/80">
+                    <p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-6 uppercase tracking-wide">Eller scan med PayPal / overfør</p>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-lg mx-auto text-left sm:text-center">
-                        <div class="flex flex-col items-center">
-                            <img src="qr/qrcode.png" alt="PayPal QR-kode til donation til Skandale.dk" width="160" height="160"
-                                 class="rounded-2xl border border-slate-200 dark:border-slate-600 bg-white p-2 mb-3 shadow-sm">
-                            <p class="text-sm text-slate-600 dark:text-slate-400">
-                                <i class="fa-brands fa-paypal text-[#0070BA] mr-1"></i>
-                                PayPal QR-kode — scan med PayPal-appen
-                            </p>
-                        </div>
-
-                        <div class="flex flex-col justify-center">
-                            <p class="text-sm text-slate-600 dark:text-slate-400 mb-3 sm:text-center">
-                                <i class="fa-solid fa-building-columns text-[#C8102E] mr-1"></i>
-                                Bankoverførsel
-                            </p>
-                            <div class="rounded-xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-600 p-4 font-mono text-sm text-slate-800 dark:text-slate-200">
-                                <p>Reg: <span class="font-semibold">9070</span></p>
-                                <p class="mt-1">Konto: <span class="font-semibold">8060896667</span></p>
+                    <div class="donation-box__methods rounded-2xl border border-slate-200 p-6 md:p-8 max-w-xl mx-auto">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 text-left sm:text-center">
+                            <div class="flex flex-col items-center">
+                                <div class="donation-box__qr-wrap rounded-2xl p-3 mb-3">
+                                    <img src="qr/qrcode.png" alt="PayPal QR-kode til donation til Skandale.dk" width="160" height="160"
+                                         class="rounded-xl block">
+                                </div>
+                                <p class="text-sm text-slate-600 dark:text-slate-300">
+                                    <i class="fa-brands fa-paypal text-[#0070BA] mr-1"></i>
+                                    PayPal QR-kode — scan med PayPal-appen
+                                </p>
                             </div>
-                            <p class="text-xs text-slate-500 dark:text-slate-500 mt-3 sm:text-center">Skriv gerne «Skandale.dk» i beskedfeltet</p>
+
+                            <div class="flex flex-col justify-center">
+                                <p class="text-sm text-slate-600 dark:text-slate-300 mb-3 sm:text-center">
+                                    <i class="fa-solid fa-building-columns text-[#C8102E] dark:text-red-400 mr-1"></i>
+                                    Bankoverførsel
+                                </p>
+                                <div class="donation-box__bank rounded-xl border border-slate-200 p-4 font-mono text-sm text-slate-800 dark:text-slate-100">
+                                    <p>Reg: <span class="font-semibold">9070</span></p>
+                                    <p class="mt-1">Konto: <span class="font-semibold">8060896667</span></p>
+                                </div>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-3 sm:text-center">Skriv gerne «Skandale.dk» i beskedfeltet</p>
+                            </div>
                         </div>
                     </div>
                 </div>
