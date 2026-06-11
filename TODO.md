@@ -41,7 +41,7 @@
   - [ ] Kør `supabase/schema.sql` i Supabase SQL Editor
   - [ ] Kommentar-moderation (admin-godkendelse)
 
-- [x] **Relaterede skandaler i data** (v2.01.03 — 9 skandaler med krydsreferencer)
+- [x] **Relaterede skandaler i data** (v2.01.03 — 8 skandaler med krydsreferencer)
   - Logik findes i `cross-reference.js`
   - WEF, mink og Bilderberg-klynger udfyldt; flere kan tilføjes løbende
 
