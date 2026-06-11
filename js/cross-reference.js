@@ -91,6 +91,53 @@ function detectScandalTopics(scandal) {
   return Array.from(topics);
 }
 
+const DOMESTIC_NETWORK_NAMES = new Set([
+  'folketinget',
+  'socialdemokratiet',
+  'venstre',
+  'danmarksdemokraterne',
+  'radikale venstre',
+  'moderaterne',
+  'dansk folkeparti',
+  'det konservative folkeparti',
+  'enhedslisten',
+  'nye borgerlige',
+  'liberal alliance',
+  'alternativet',
+  'alternativet / uafhaengig',
+  'frie gronne',
+  'socialistisk folkeparti',
+  'dsu',
+  'danmarks socialdemokratiske ungdom',
+  'ungdomsbureauet',
+  'statsministeriet',
+  'ministeriet'
+]);
+
+function isDomesticNetworkCandidate(candidate) {
+  if (!candidate) return false;
+  if (candidate.includes('folketinget')) return true;
+  if (DOMESTIC_NETWORK_NAMES.has(candidate)) return true;
+  for (const domestic of DOMESTIC_NETWORK_NAMES) {
+    if (
+      candidate === domestic ||
+      candidate.startsWith(domestic + ' ') ||
+      candidate.startsWith(domestic + '(')
+    ) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function isInternationalNetwork(name, organization = '') {
+  const candidates = [name, organization].map(normalizeText).filter(Boolean);
+  for (const candidate of candidates) {
+    if (isDomesticNetworkCandidate(candidate)) return false;
+  }
+  return Boolean((name || organization || '').toString().trim());
+}
+
 function buildCrossReferenceIndices() {
   const networkIndex = {};
   const donorIndex = {};
@@ -98,8 +145,10 @@ function buildCrossReferenceIndices() {
 
   (window.politicians || []).forEach(politician => {
     (politician.affiliations || []).forEach(aff => {
+      if (!isInternationalNetwork(aff.name, aff.organization)) return;
+
       const canonical = normalizeNetworkName(aff.name, aff.organization);
-      if (!canonical) return;
+      if (!canonical || !isInternationalNetwork(canonical)) return;
       if (!networkIndex[canonical]) networkIndex[canonical] = [];
 
       const exists = networkIndex[canonical].some(entry => entry.id === politician.id);
@@ -281,41 +330,6 @@ function findRelatedPoliticiansForScandal(politician, scandal) {
   });
 
   return Array.from(results.values()).sort((a, b) => a.name.localeCompare(b.name, 'da'));
-}
-
-const DOMESTIC_NETWORK_NAMES = new Set([
-  'folketinget',
-  'socialdemokratiet',
-  'venstre',
-  'danmarksdemokraterne',
-  'radikale venstre',
-  'moderaterne',
-  'dansk folkeparti',
-  'det konservative folkeparti',
-  'enhedslisten',
-  'nye borgerlige',
-  'liberal alliance',
-  'alternativet',
-  'alternativet / uafhaengig',
-  'frie gronne',
-  'socialistisk folkeparti',
-  'dsu',
-  'danmarks socialdemokratiske ungdom',
-  'ungdomsbureauet',
-  'statsministeriet',
-  'ministeriet'
-]);
-
-function isInternationalNetwork(name, organization = '') {
-  const candidates = [name, organization].map(normalizeText).filter(Boolean);
-  for (const candidate of candidates) {
-    if (candidate.includes('folketinget')) return false;
-    if (DOMESTIC_NETWORK_NAMES.has(candidate)) return false;
-    for (const domestic of DOMESTIC_NETWORK_NAMES) {
-      if (candidate === domestic || candidate.startsWith(domestic + ' ')) return false;
-    }
-  }
-  return Boolean((name || organization || '').toString().trim());
 }
 
 function getInternationalNetworkEntries(networkIndex = window.networkIndex) {

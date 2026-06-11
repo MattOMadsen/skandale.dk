@@ -134,7 +134,9 @@
 
                 const entries = typeof window.getInternationalNetworkEntries === 'function'
                     ? window.getInternationalNetworkEntries()
-                    : Object.entries(window.networkIndex || {}).map(([name, politicians]) => ({ name, politicians }));
+                    : Object.entries(window.networkIndex || {})
+                        .filter(([name]) => typeof window.isInternationalNetwork !== 'function' || window.isInternationalNetwork(name))
+                        .map(([name, politicians]) => ({ name, politicians }));
 
                 allNetworks = entries
                     .sort((a, b) => b.politicians.length - a.politicians.length);
