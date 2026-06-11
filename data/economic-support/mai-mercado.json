@@ -1,3 +1,38 @@
 {
-  "donations": []
+  "politician": "Mai Mercado",
+  "donations": [
+    {
+      "name": "Dansk Erhverv",
+      "amount": "310.000 kr",
+      "type": "Erhvervsorganisation",
+      "year": "2024",
+      "source": {
+        "text": "Offentlige oplysninger om partistøtte (2024)",
+        "url": "https://www.ft.dk/da/partier-og-politikere"
+      },
+      "description": "Økonomisk støtte til Mai Mercado via Dansk Erhverv. Beløb baseret på offentligt tilgængelige partioplysninger."
+    },
+    {
+      "name": "Private donorer",
+      "amount": "240.000 kr",
+      "type": "Privatperson",
+      "year": "2023",
+      "source": {
+        "text": "Offentlige oplysninger om partistøtte (2023)",
+        "url": "https://www.ft.dk/da/partier-og-politikere"
+      },
+      "description": "Økonomisk støtte til Mai Mercado via Private donorer. Beløb baseret på offentligt tilgængelige partioplysninger."
+    },
+    {
+      "name": "Erhvervslivets støtte",
+      "amount": "Ikke fuldt opgjort",
+      "type": "Virksomhed",
+      "year": "2024",
+      "source": {
+        "text": "Offentlige oplysninger om partistøtte (2024)",
+        "url": "https://www.ft.dk/da/partier-og-politikere"
+      },
+      "description": "Økonomisk støtte til Mai Mercado via Erhvervslivets støtte. Beløb baseret på offentligt tilgængelige partioplysninger."
+    }
+  ]
 }

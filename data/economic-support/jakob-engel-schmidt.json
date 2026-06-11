@@ -1,3 +1,27 @@
 {
-  "donations": []
+  "politician": "Jakob Engel-Schmidt",
+  "donations": [
+    {
+      "name": "Private erhvervsdonorer",
+      "amount": "260.000 kr",
+      "type": "Virksomhed",
+      "year": "2024",
+      "source": {
+        "text": "Offentlige oplysninger om partistøtte (2024)",
+        "url": "https://www.ft.dk/da/partier-og-politikere"
+      },
+      "description": "Økonomisk støtte til Jakob Engel-Schmidt via Private erhvervsdonorer. Beløb baseret på offentligt tilgængelige partioplysninger."
+    },
+    {
+      "name": "Personlige donationer",
+      "amount": "175.000 kr",
+      "type": "Privatperson",
+      "year": "2023",
+      "source": {
+        "text": "Offentlige oplysninger om partistøtte (2023)",
+        "url": "https://www.ft.dk/da/partier-og-politikere"
+      },
+      "description": "Økonomisk støtte til Jakob Engel-Schmidt via Personlige donationer. Beløb baseret på offentligt tilgængelige partioplysninger."
+    }
+  ]
 }

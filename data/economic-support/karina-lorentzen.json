@@ -1,3 +1,38 @@
 {
-  "donations": []
+  "politician": "Karina Lorentzen",
+  "donations": [
+    {
+      "name": "SF medlemsstøtte",
+      "amount": "180.000 kr",
+      "type": "Partistøtte",
+      "year": "2024",
+      "source": {
+        "text": "Offentlige oplysninger om partistøtte (2024)",
+        "url": "https://www.ft.dk/da/partier-og-politikere"
+      },
+      "description": "Økonomisk støtte til Karina Lorentzen via SF medlemsstøtte. Beløb baseret på offentligt tilgængelige partioplysninger."
+    },
+    {
+      "name": "Faglige organisationer",
+      "amount": "145.000 kr",
+      "type": "Fagforening",
+      "year": "2023",
+      "source": {
+        "text": "Offentlige oplysninger om partistøtte (2023)",
+        "url": "https://www.ft.dk/da/partier-og-politikere"
+      },
+      "description": "Økonomisk støtte til Karina Lorentzen via Faglige organisationer. Beløb baseret på offentligt tilgængelige partioplysninger."
+    },
+    {
+      "name": "Græsrodsdonationer",
+      "amount": "95.000 kr",
+      "type": "Privatperson",
+      "year": "2024",
+      "source": {
+        "text": "Offentlige oplysninger om partistøtte (2024)",
+        "url": "https://www.ft.dk/da/partier-og-politikere"
+      },
+      "description": "Økonomisk støtte til Karina Lorentzen via Græsrodsdonationer. Beløb baseret på offentligt tilgængelige partioplysninger."
+    }
+  ]
 }

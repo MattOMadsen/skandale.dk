@@ -60,6 +60,7 @@
     </div>
 
     <script src="js/version.js"></script>
+    <script src="js/pwa.js"></script>
     <script src="js/navbar.js"></script>
     <script src="js/site-stats.js"></script>
     <script src="js/data.js"></script>
@@ -151,35 +152,12 @@
         async function loadData() {
             const container = document.getElementById('timelineContent');
             try {
-                if (container) container.innerHTML = '<div class="text-center py-10 text-slate-500">Indlæser politikere...</div>';
-
-                if (typeof loadPoliticians === 'function') {
-                    await loadPoliticians();
-                }
-
                 if (container) container.innerHTML = '<div class="text-center py-10 text-slate-500">Henter skandaler...</div>';
 
-                if (typeof loadAllPoliticianDetails === 'function') {
-                    await loadAllPoliticianDetails();
-                }
+                if (!window.SiteStats) throw new Error('SiteStats ikke indlæst');
 
-                const pols = window.politicians || [];
-                allScandals = [];
-
-                pols.forEach(p => {
-                    if (p.scandals && Array.isArray(p.scandals) && p.scandals.length > 0) {
-                        p.scandals.forEach(sc => {
-                            allScandals.push(normalizeTimelineItem({
-                                ...sc,
-                                politicianName: p.name,
-                                politicianId: p.id,
-                                party: p.party,
-                                partyColor: p.partyColor || '#64748b'
-                            }));
-                        });
-                    }
-                });
-
+                const entries = await SiteStats.loadTimelineEntries();
+                allScandals = entries.map(normalizeTimelineItem);
                 allScandals.sort((a, b) => (b.year || '').localeCompare(a.year || ''));
 
                 const partySelect = document.getElementById('filterParty');

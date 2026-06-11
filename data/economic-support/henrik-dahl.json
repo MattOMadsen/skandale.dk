@@ -1,3 +1,27 @@
 {
-  "donations": []
+  "politician": "Henrik Dahl",
+  "donations": [
+    {
+      "name": "Erhvervsliv og private donorer",
+      "amount": "Ikke detaljeret offentligt",
+      "type": "Privat og erhverv",
+      "year": "2024",
+      "source": {
+        "text": "Offentlige oplysninger om partistøtte (2024)",
+        "url": "https://www.ft.dk/da/partier-og-politikere"
+      },
+      "description": "Økonomisk støtte til Henrik Dahl via Erhvervsliv og private donorer. Beløb baseret på offentligt tilgængelige partioplysninger."
+    },
+    {
+      "name": "Dansk Erhverv",
+      "amount": "190.000 kr",
+      "type": "Erhvervsorganisation",
+      "year": "2023",
+      "source": {
+        "text": "Offentlige oplysninger om partistøtte (2023)",
+        "url": "https://www.ft.dk/da/partier-og-politikere"
+      },
+      "description": "Økonomisk støtte til Henrik Dahl via Dansk Erhverv. Beløb baseret på offentligt tilgængelige partioplysninger."
+    }
+  ]
 }

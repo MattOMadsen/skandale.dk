@@ -1,12 +1,12 @@
 # TODO-liste for Skandale.dk
 
-**Sidst opdateret:** 9. juni 2026
+**Sidst opdateret:** 11. juni 2026
 
 **Aktuelt antal (juni 2026):** Ca. 40 politikere og 90+ skandaler (baseret på live stats på forsiden). Nogle ældre referencer til 12/16 politikere er gradvist opdateret.
 
 ## Fuldførte features
 
-- [x] PWA (manifest.json + sw.js + ikoner)
+- [x] PWA (manifest.json + sw.js + ikoner + `js/pwa.js` registrering)
 - [x] PDF-eksport af en politikers rapport
 - [x] Tilføj ny skandale direkte på siden (Formspree)
 - [x] Password-beskyttet Admin Dashboard
@@ -45,12 +45,11 @@
   - Logik findes i `cross-reference.js`
   - Kun 3 skandaler har `otherPoliticians` / `relatedTopics` — flere kan udfyldes
 
-- [ ] **Stats-side data-loading**
-  - Loader politikere fra manifest
-  - Skandaler hentes kun fra single-file JSON — misser granulære mapper for nogle
-
-- [ ] **Skeleton loader**
-  - `js/skeleton-loader.js` findes men er ikke koblet på `index.html`
+- [x] **Stats-side Top 5 → politiker-modal** (bruger numerisk id)
+- [x] **Alvorligheds-diagram** på stats-siden
+- [x] **Lazy load** på tidslinje og netværk (ingen fuld `loadAllPoliticianDetails()` ved opstart)
+- [x] **Økonomisk støtte** for alle 40 politikere
+- [x] **Profilbilleder** for alle 40 politikere
 
 ## Skal testes manuelt
 
@@ -70,7 +69,7 @@
 7. **Granulær broken-promises mappe** for Pernille Vermund
 8. **Erstat Tailwind CDN** med lokal optimeret CSS
 9. **Admin: slet/rediger skandaler** i dashboard
-10. **Alvorligheds-diagram** på stats-siden
+10. ~~**Alvorligheds-diagram** på stats-siden~~ (implementeret juni 2026)
 
 ## Teknisk gæld / oprydning
 

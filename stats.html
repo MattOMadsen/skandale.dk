@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#C8102E">
     <title>Statistik • Skandale.dk</title>
+    <link rel="manifest" href="manifest.json">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = { darkMode: 'class' };
@@ -106,7 +108,12 @@
             </div>
         </div>
 
-        <!-- Andre sektioner (kan udvides senere) -->
+        <!-- Alvorlighedsfordeling -->
+        <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-6 mb-8">
+            <h3 class="font-bold text-lg mb-4">Alvorlighedsfordeling</h3>
+            <div id="severityDistribution"></div>
+        </div>
+
         <div class="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
             Senest opdateret: <span id="lastUpdated"></span>
         </div>
@@ -124,15 +131,21 @@
         Skal indlæses FØR stats-scriptene, så window.showPoliticianModal findes allerede
     -->
     <script src="js/version.js"></script>
-    <script src="js/navbar.js"></script>
     <script src="js/site-stats.js"></script>
     <script src="js/data.js"></script>
+    <script src="js/cross-reference.js"></script>
+    <script src="js/modal-helpers.js"></script>
     <script src="js/modal-core.js"></script>
     <script src="js/modal-scandal.js"></script>
     <script src="js/modal-comments.js"></script>
     <script src="js/modal-donor.js"></script>
     <script src="js/modal-affiliations.js"></script>
     <script src="js/modal-broken-promises.js"></script>
+    <script src="js/modal-stats.js"></script>
+    <script src="js/modal-networks.js"></script>
+    <script src="js/modal-share.js"></script>
+    <script src="js/pwa.js"></script>
+    <script src="js/navbar.js"></script>
 
     <!-- Stats scripts -->
     <script src="js/stats/stats-data.js"></script>

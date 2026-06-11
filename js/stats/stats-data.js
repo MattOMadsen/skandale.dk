@@ -41,6 +41,7 @@ async function loadAllStatsData() {
             const donationCount = donationData?.donations?.length || 0;
 
             return {
+                id: core?.id ?? null,
                 slug,
                 name: meta.name,
                 party: meta.party,

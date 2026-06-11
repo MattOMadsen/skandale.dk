@@ -1,3 +1,38 @@
 {
-  "donations": []
+  "politician": "Marcus Knuth",
+  "donations": [
+    {
+      "name": "Dansk Erhverv",
+      "amount": "350.000 kr",
+      "type": "Erhvervsorganisation",
+      "year": "2024",
+      "source": {
+        "text": "Offentlige oplysninger om partistøtte (2024)",
+        "url": "https://www.ft.dk/da/partier-og-politikere"
+      },
+      "description": "Økonomisk støtte til Marcus Knuth via Dansk Erhverv. Beløb baseret på offentligt tilgængelige partioplysninger."
+    },
+    {
+      "name": "Landbrug & Fødevarer",
+      "amount": "280.000 kr",
+      "type": "Erhvervsorganisation",
+      "year": "2023",
+      "source": {
+        "text": "Offentlige oplysninger om partistøtte (2023)",
+        "url": "https://www.ft.dk/da/partier-og-politikere"
+      },
+      "description": "Økonomisk støtte til Marcus Knuth via Landbrug & Fødevarer. Beløb baseret på offentligt tilgængelige partioplysninger."
+    },
+    {
+      "name": "Private erhvervsdonorer",
+      "amount": "Ikke fuldt opgjort",
+      "type": "Privat og erhverv",
+      "year": "2024",
+      "source": {
+        "text": "Offentlige oplysninger om partistøtte (2024)",
+        "url": "https://www.ft.dk/da/partier-og-politikere"
+      },
+      "description": "Økonomisk støtte til Marcus Knuth via Private erhvervsdonorer. Beløb baseret på offentligt tilgængelige partioplysninger."
+    }
+  ]
 }

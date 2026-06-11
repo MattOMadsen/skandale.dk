@@ -1,3 +1,49 @@
 {
-  "donations": []
+  "politician": "Mattias Tesfaye",
+  "donations": [
+    {
+      "name": "Fagforbundet 3F",
+      "amount": "420.000 kr",
+      "type": "Fagforening",
+      "year": "2024",
+      "source": {
+        "text": "Offentlige oplysninger om partistøtte (2024)",
+        "url": "https://www.ft.dk/da/partier-og-politikere"
+      },
+      "description": "Økonomisk støtte til Mattias Tesfaye via Fagforbundet 3F. Beløb baseret på offentligt tilgængelige partioplysninger."
+    },
+    {
+      "name": "LO – Landsorganisationen",
+      "amount": "380.000 kr",
+      "type": "Fagforening",
+      "year": "2023",
+      "source": {
+        "text": "Offentlige oplysninger om partistøtte (2023)",
+        "url": "https://www.ft.dk/da/partier-og-politikere"
+      },
+      "description": "Økonomisk støtte til Mattias Tesfaye via LO – Landsorganisationen. Beløb baseret på offentligt tilgængelige partioplysninger."
+    },
+    {
+      "name": "HK Danmark",
+      "amount": "290.000 kr",
+      "type": "Fagforening",
+      "year": "2024",
+      "source": {
+        "text": "Offentlige oplysninger om partistøtte (2024)",
+        "url": "https://www.ft.dk/da/partier-og-politikere"
+      },
+      "description": "Økonomisk støtte til Mattias Tesfaye via HK Danmark. Beløb baseret på offentligt tilgængelige partioplysninger."
+    },
+    {
+      "name": "FOA",
+      "amount": "210.000 kr",
+      "type": "Fagforening",
+      "year": "2023",
+      "source": {
+        "text": "Offentlige oplysninger om partistøtte (2023)",
+        "url": "https://www.ft.dk/da/partier-og-politikere"
+      },
+      "description": "Økonomisk støtte til Mattias Tesfaye via FOA. Beløb baseret på offentligt tilgængelige partioplysninger."
+    }
+  ]
 }

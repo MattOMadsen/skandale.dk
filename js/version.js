@@ -1,4 +1,4 @@
-const APP_VERSION = 'v2.00.88';
+const APP_VERSION = 'v2.00.89';
 
 function setVersion() {
   const el = document.getElementById('navbar-version');

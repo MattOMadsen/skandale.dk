@@ -77,9 +77,9 @@
     <script src="js/modal-scandal.js"></script>
     <script src="js/modal-affiliations.js"></script>
     <script src="js/modal-network-overview.js"></script>
-    <script src="js/about-modal.js"></script>
     <script src="js/modal-networks.js"></script>
     <script src="js/version.js"></script>
+    <script src="js/pwa.js"></script>
     <script src="js/navbar.js"></script>
 
     <script>
@@ -140,8 +140,9 @@
 
         async function loadNetworkData() {
             try {
-                await loadPoliticians();
-                await loadAllPoliticianDetails();
+                if (!window.SiteStats) throw new Error('SiteStats ikke indlæst');
+
+                window.politicians = await SiteStats.loadPoliticiansForCrossReference(5);
 
                 if (typeof window.buildCrossReferenceIndices === 'function') {
                     window.buildCrossReferenceIndices();

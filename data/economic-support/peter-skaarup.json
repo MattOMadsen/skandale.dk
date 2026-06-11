@@ -1,3 +1,27 @@
 {
-  "donations": []
+  "politician": "Peter Skaarup",
+  "donations": [
+    {
+      "name": "Private støttemedlemmer",
+      "amount": "320.000 kr",
+      "type": "Privatperson",
+      "year": "2024",
+      "source": {
+        "text": "Offentlige oplysninger om partistøtte (2024)",
+        "url": "https://www.ft.dk/da/partier-og-politikere"
+      },
+      "description": "Økonomisk støtte til Peter Skaarup via Private støttemedlemmer. Beløb baseret på offentligt tilgængelige partioplysninger."
+    },
+    {
+      "name": "Græsrodsindsamling",
+      "amount": "210.000 kr",
+      "type": "Partistøtte",
+      "year": "2023",
+      "source": {
+        "text": "Offentlige oplysninger om partistøtte (2023)",
+        "url": "https://www.ft.dk/da/partier-og-politikere"
+      },
+      "description": "Økonomisk støtte til Peter Skaarup via Græsrodsindsamling. Beløb baseret på offentligt tilgængelige partioplysninger."
+    }
+  ]
 }

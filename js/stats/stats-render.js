@@ -88,7 +88,7 @@ function renderTop5Scandals(data) {
     let html = '';
     sorted.forEach(p => {
         html += `
-            <div onclick="showPoliticianModal('${p.slug}')" class="flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-2xl cursor-pointer transition-colors">
+            <div onclick="openStatsPoliticianModal(${p.id})" class="flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-2xl cursor-pointer transition-colors">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-2xl flex items-center justify-center text-white font-bold" style="background-color: ${p.color}">
                         ${p.partyShort}
@@ -121,55 +121,68 @@ function renderAll() {
     renderPartyDistribution(filteredData);
     renderTop5Scandals(filteredData);
 
-    const severityContainer = document.getElementById('severityDistribution');
-    if (severityContainer) {
-        severityContainer.innerHTML = '<p class="text-sm text-gray-500">Alvorlighedsfordeling kommer snart...</p>';
+    renderSeverityDistribution(filteredData);
+}
+
+function renderSeverityDistribution(data) {
+    const container = document.getElementById('severityDistribution');
+    if (!container) return;
+
+    const totals = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+    data.forEach(p => {
+        Object.keys(totals).forEach(level => {
+            totals[level] += p.severityCounts?.[level] || 0;
+        });
+    });
+
+    const max = Math.max(...Object.values(totals), 1);
+    const labels = { 1: 'Meget lav', 2: 'Lav', 3: 'Middel', 4: 'Høj', 5: 'Meget høj' };
+    const colors = { 1: '#94a3b8', 2: '#fbbf24', 3: '#f97316', 4: '#ef4444', 5: '#991b1b' };
+
+    let html = '<div class="space-y-3">';
+    [5, 4, 3, 2, 1].forEach(level => {
+        const count = totals[level];
+        const pct = Math.round((count / max) * 100);
+        html += `
+            <div>
+                <div class="flex justify-between text-sm mb-1">
+                    <span>${level} — ${labels[level]}</span>
+                    <span class="font-medium">${count}</span>
+                </div>
+                <div class="h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                    <div class="h-full rounded-full transition-all" style="width:${pct}%;background-color:${colors[level]}"></div>
+                </div>
+            </div>
+        `;
+    });
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+async function openStatsPoliticianModal(politicianId) {
+    if (!politicianId) return;
+
+    if ((!window.politicians || window.politicians.length === 0) && typeof loadPoliticians === 'function') {
+        try {
+            await loadPoliticians();
+        } catch (e) {
+            console.error('[stats] Fejl ved loadPoliticians:', e);
+        }
     }
+
+    if (typeof window.showPoliticianModal === 'function') {
+        const politician = window.politicians?.find(p => p.id == politicianId);
+        if (politician && !politician._detailsLoaded && typeof window.loadPoliticianDetails === 'function') {
+            await window.loadPoliticianDetails(politician);
+        }
+        window.showPoliticianModal(politicianId);
+        return;
+    }
+
+    const entry = politiciansData.find(p => p.id == politicianId);
+    const slug = entry?.slug;
+    window.location.href = slug ? `index.html?politician=${slug}` : 'index.html';
 }
 
 window.renderAll = renderAll;
-
-// =====================================================
-// ROBUST + TÅLMODIG showPoliticianModal (samme side)
-// =====================================================
-(function() {
-    const realModalFn = window.showPoliticianModal; // Gem den rigtige fra modal-core.js
-
-    window.showPoliticianModal = async function(slug) {
-        console.log('[stats] Åbner modal for:', slug);
-
-        // 1. Hvis den rigtige modal-funktion findes og politicians-arrayet er fyldt
-        if (typeof realModalFn === 'function' && 
-            Array.isArray(window.politicians) && 
-            window.politicians.length > 0) {
-
-            console.log('[stats] Bruger rigtig modal (politicians er klar)');
-            realModalFn(slug);
-            return;
-        }
-
-        // 2. Prøv at loade data hvis det mangler
-        if (typeof loadPoliticians === 'function' && (!window.politicians || window.politicians.length === 0)) {
-            console.log('[stats] Loader politicians data...');
-            try {
-                await loadPoliticians();
-            } catch (e) {
-                console.error('[stats] Fejl ved loadPoliticians:', e);
-            }
-        }
-
-        // 3. Vent lidt længere og prøv igen (mere tålmodig)
-        setTimeout(() => {
-            if (typeof realModalFn === 'function' && 
-                Array.isArray(window.politicians) && 
-                window.politicians.length > 0) {
-
-                console.log('[stats] Modal åbnes efter ventetid');
-                realModalFn(slug);
-            } else {
-                console.warn('[stats] Kunne stadig ikke finde politikeren – redirecter som fallback');
-                window.location.href = `index.html?politiker=${slug}`;
-            }
-        }, 600);
-    };
-})();
+window.openStatsPoliticianModal = openStatsPoliticianModal;

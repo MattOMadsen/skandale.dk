@@ -192,6 +192,64 @@ const SiteStats = {
     return politician;
   },
 
+  async loadInBatches(items, fn, batchSize = 6) {
+    const results = [];
+    for (let i = 0; i < items.length; i += batchSize) {
+      const batch = items.slice(i, i + batchSize);
+      const batchResults = await Promise.all(batch.map(fn));
+      results.push(...batchResults.filter(Boolean));
+      await new Promise(resolve => setTimeout(resolve, 0));
+    }
+    return results;
+  },
+
+  async loadTimelineEntries() {
+    const slugs = await this.getPoliticianSlugs();
+    const cores = await this.loadPoliticianCores(slugs);
+    const coreBySlug = Object.fromEntries(cores.map(core => [core.slug, core]));
+
+    const groups = await this.loadInBatches(slugs, async (slug) => {
+      const core = coreBySlug[slug] || await this.loadPoliticianCore(slug);
+      if (!core) return [];
+
+      const scandals = await this.loadScandalsForSlug(slug);
+      return scandals.map(scandal => ({
+        ...this.normalizeScandal(scandal),
+        politicianName: core.name,
+        politicianId: core.id,
+        party: core.party,
+        partyColor: core.partyColor || core.avatarColor || '#64748b'
+      }));
+    }, 6);
+
+    return groups.flat();
+  },
+
+  async loadPoliticiansForCrossReference(batchSize = 5) {
+    const slugs = await this.getPoliticianSlugs();
+
+    return this.loadInBatches(slugs, async (slug) => {
+      const core = await this.loadPoliticianCore(slug);
+      if (!core) return null;
+
+      const [affiliations, scandals, economicSupport] = await Promise.all([
+        this.loadAffiliationsForSlug(slug),
+        this.loadScandalsForSlug(slug),
+        this.loadEconomicSupportForSlug(slug)
+      ]);
+
+      return {
+        ...core,
+        slug,
+        affiliations,
+        scandals,
+        economicSupport,
+        brokenPromises: [],
+        _detailsLoaded: true
+      };
+    }, batchSize);
+  },
+
   async enrichSummariesBatch(politicians, batchSize = 6) {
     const list = politicians || [];
     for (let i = 0; i < list.length; i += batchSize) {
