@@ -11,6 +11,52 @@
 
 let currentPolitician = null;
 
+function getPoliticianSlug(politician) {
+  if (politician.slug) return politician.slug;
+  if (window.SiteStats?.slugFromName) return SiteStats.slugFromName(politician.name);
+  return politician.name.toLowerCase()
+    .replace(/æ/g, 'ae').replace(/ø/g, 'oe').replace(/å/g, 'aa')
+    .replace(/[^a-z0-9]+/g, '-');
+}
+
+function buildPoliticianAvatarHTML(politician, sizeClass = 'w-16 h-16', textClass = 'text-2xl') {
+  const avatarColor = politician.avatarColor || politician.partyColor || '#C8102E';
+  const initials = politician.initials || politician.name.split(' ').map(n => n[0]).join('');
+  if (politician.image) {
+    return `<div class="${sizeClass} rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 flex-shrink-0">
+      <img src="${politician.image}" alt="${politician.name}" class="w-full h-full object-cover" loading="lazy" decoding="async" onerror="this.parentElement.innerHTML = \`<div class='w-full h-full flex items-center justify-center text-white font-bold ${textClass}' style='background-color: ${avatarColor}'>${initials}</div>\`;">
+    </div>`;
+  }
+  return `<div class="${sizeClass} rounded-2xl flex items-center justify-center text-white font-bold ${textClass} flex-shrink-0" style="background-color: ${avatarColor}">${initials}</div>`;
+}
+
+function buildLoadingModalHTML(politician, politicianId) {
+  return `
+    <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4" id="politicianModal" data-current-politician-id="${politicianId}">
+      <div class="bg-white dark:bg-slate-800 rounded-3xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
+        <div class="px-8 pt-8 pb-6 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between flex-shrink-0">
+          <div class="flex items-center gap-x-4">
+            ${buildPoliticianAvatarHTML(politician)}
+            <div>
+              <h2 class="text-3xl font-bold text-slate-900 dark:text-white">${politician.name}</h2>
+              <div class="flex items-center gap-x-2 mt-1">
+                <span class="px-3 py-1 rounded-full text-sm" style="background-color: ${politician.partyColor}20; color: ${politician.partyColor}">${politician.party}</span>
+              </div>
+            </div>
+          </div>
+          <button onclick="closePoliticianModal()" class="flex items-center justify-center w-10 h-10 text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-700 rounded-2xl transition-all text-3xl leading-none">×</button>
+        </div>
+        <div class="flex-1 flex items-center justify-center py-24">
+          <div class="flex flex-col items-center gap-y-4 text-slate-500 dark:text-slate-400">
+            <i class="fa-solid fa-spinner fa-spin text-3xl text-[#C8102E]"></i>
+            <span class="text-sm">Indlæser politikerdata...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 async function showPoliticianModal(politicianId, targetScandalId = null) {
   // FIX: Bruger det globale politicians-array (samme som ui.js)
   // Bruger loose equality (==) i stedet for strict (===) fordi:
@@ -26,6 +72,9 @@ async function showPoliticianModal(politicianId, targetScandalId = null) {
     alert('Kunne ikke finde politikeren. Prøv at genindlæse siden.');
     return;
   }
+
+  document.querySelectorAll('#politicianModal, #networkModal').forEach(m => m.remove());
+  document.body.insertAdjacentHTML('beforeend', buildLoadingModalHTML(politician, politicianId));
 
   // === Lazy load detaljer ===
   if (!politician._detailsLoaded || !politician.scandals || politician.scandals.length === 0) {
@@ -62,7 +111,9 @@ async function showPoliticianModal(politicianId, targetScandalId = null) {
 
   currentPolitician = politician;
 
-  document.querySelectorAll('#politicianModal, #networkModal').forEach(m => m.remove());
+  document.getElementById('politicianModal')?.remove();
+
+  const slug = getPoliticianSlug(politician);
 
   const html = `
     <div class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4" id="politicianModal" data-current-politician-id="${politicianId}">
@@ -72,10 +123,7 @@ async function showPoliticianModal(politicianId, targetScandalId = null) {
         <!-- Header -->
         <div class="px-8 pt-8 pb-6 border-b border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row sm:items-start justify-between gap-y-4 flex-shrink-0">
           <div class="flex items-center gap-x-4">
-            <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-white font-bold text-2xl" 
-                 style="background-color: ${politician.avatarColor || politician.partyColor || '#C8102E'}">
-              ${politician.initials || politician.name.split(' ').map(n => n[0]).join('')}
-            </div>
+            ${buildPoliticianAvatarHTML(politician)}
             <div>
               <h2 class="text-3xl font-bold text-slate-900 dark:text-white">${politician.name}</h2>
               <div class="flex items-center gap-x-2 mt-1">
@@ -86,6 +134,10 @@ async function showPoliticianModal(politicianId, targetScandalId = null) {
           </div>
 
           <div class="flex items-center gap-x-2">
+            <a href="sammenlign.html?p1=${slug}" class="flex items-center gap-x-2 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-2xl transition-all">
+              <i class="fa-solid fa-scale-balanced"></i>
+              <span class="hidden sm:inline">Sammenlign med…</span>
+            </a>
             <button id="share-btn" class="flex items-center gap-x-2 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-2xl transition-all">
               <i class="fa-solid fa-share-alt"></i>
               <span class="hidden sm:inline">Del</span>

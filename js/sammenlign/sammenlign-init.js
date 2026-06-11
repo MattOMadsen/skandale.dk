@@ -202,18 +202,32 @@ const SammenlignInit = {
     loadFromURL() {
         const params = new URLSearchParams(window.location.search);
         const p1 = SammenlignData.POLITICIANS.find(p => p.slug === params.get('p1'));
-        const p2 = SammenlignData.POLITICIANS.find(p => p.slug === params.get('p2'));
-        if (p1 && p2) {
-            window.selectedPoliticians[1] = p1;
-            window.selectedPoliticians[2] = p2;
+        const p2Slug = params.get('p2');
+        const p2 = p2Slug ? SammenlignData.POLITICIANS.find(p => p.slug === p2Slug) : null;
 
-            document.getElementById('p1-selected-name').textContent = p1.name;
-            document.getElementById('p1-selected-badge').classList.remove('hidden');
-            document.getElementById('p1-selected-badge').classList.add('flex');
+        if (!p1) return;
+
+        if (!window.selectedPoliticians) window.selectedPoliticians = { 1: null, 2: null };
+        window.selectedPoliticians[1] = p1;
+
+        document.getElementById('p1-selected-name').textContent = p1.name;
+        document.getElementById('p1-selected-badge').classList.remove('hidden');
+        document.getElementById('p1-selected-badge').classList.add('flex');
+
+        if (window.SammenlignRender) {
+            SammenlignRender.highlightSelectedInList(1, p1.slug);
+        }
+
+        if (p2) {
+            window.selectedPoliticians[2] = p2;
 
             document.getElementById('p2-selected-name').textContent = p2.name;
             document.getElementById('p2-selected-badge').classList.remove('hidden');
             document.getElementById('p2-selected-badge').classList.add('flex');
+
+            if (window.SammenlignRender) {
+                SammenlignRender.highlightSelectedInList(2, p2.slug);
+            }
 
             this.showComparison();
         }

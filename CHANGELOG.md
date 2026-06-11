@@ -1,3 +1,10 @@
+## [v2.01.03] - 2026-06-11
+### Modal UX & data-krydsreferencer
+- Politiker-modal: profilbillede i header, loading-spinner ved indlæsning, «Sammenlign med…»-knap
+- Sammenlign-siden: `?p1=slug` forudvælger politiker 1 (uden at kræve p2)
+- Pernille Vermund: granulær `broken-promises/pernille-vermund/` mappe (2 poster)
+- Skandaler: `otherPoliticians` / `relatedTopics` på 6 nye filer (WEF, mink, Bilderberg)
+
 ## [v2.01.02] - 2026-06-11
 ### Pernille Vermund — research & affiliations
 - Research: Nye Borgerlige havde ingen dokumenteret tilknytning til ECR, IDU, CPAC eller WCF

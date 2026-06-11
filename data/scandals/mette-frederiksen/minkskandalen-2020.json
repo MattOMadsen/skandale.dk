@@ -1,5 +1,7 @@
 {
   "id": "minkskandalen-2020",
+  "relatedTopics": ["mink"],
+  "otherPoliticians": ["Magnus Heunicke", "Nicolai Wammen", "Morten Bødskov"],
   "title": "Minkskandalen (2020)",
   "year": "2020",
   "ourSeverity": 5,

@@ -34,16 +34,16 @@
   - [x] Profilbillede i sammenlign-kort (liste + sammenligningskort)
   - [ ] PDF-eksport kan gøres rigere
   - [x] Mere polish på mobil (sticky handlingslinje, scroll-tabs, touch targets)
-  - [ ] «Sammenlign med…»-knap fra politiker-modal
+  - [x] «Sammenlign med…»-knap fra politiker-modal (v2.01.03)
 
 - [ ] **Kommentar-system + voting**
   - [x] Supabase-klient + `supabase-data.js` (kommentarer + fælles stjerne-bedømmelser)
   - [ ] Kør `supabase/schema.sql` i Supabase SQL Editor
   - [ ] Kommentar-moderation (admin-godkendelse)
 
-- [ ] **Relaterede skandaler i data**
+- [x] **Relaterede skandaler i data** (v2.01.03 — 9 skandaler med krydsreferencer)
   - Logik findes i `cross-reference.js`
-  - Kun 3 skandaler har `otherPoliticians` / `relatedTopics` — flere kan udfyldes
+  - WEF, mink og Bilderberg-klynger udfyldt; flere kan tilføjes løbende
 
 - [x] **Stats-side Top 5 → politiker-modal** (bruger numerisk id)
 - [x] **Alvorligheds-diagram** på stats-siden
@@ -68,10 +68,10 @@
 1. **Central database** (Supabase) til delt afstemning + kommentar-moderation — grundstruktur klar (`supabase-client.js` + `secrets.example.js`)
 2. **Kilde-kvalitetsindikatorer** (grøn/gul/rød badges på kilder)
 3. **«Sidst opdateret» + versionshistorik på skandaler
-4. **Billede i politiker-modal-header** (forsiden har billeder, modal har initialer)
-5. **Loading-spinner i politiker-modal** ved `ensureAllDetailsLoaded()`
-6. **«Sammenlign med…»-knap** i politiker-modal
-7. **Granulær broken-promises mappe** for Pernille Vermund
+4. ~~**Billede i politiker-modal-header**~~ (v2.01.03)
+5. ~~**Loading-spinner i politiker-modal**~~ (v2.01.03)
+6. ~~**«Sammenlign med…»-knap** i politiker-modal~~ (v2.01.03)
+7. ~~**Granulær broken-promises mappe** for Pernille Vermund~~ (v2.01.03)
 8. ~~**Erstat Tailwind CDN** med lokal optimeret CSS~~ (implementeret: `npm run build:css` → `css/tailwind.css`)
 9. **Admin: slet/rediger skandaler** i dashboard
 10. ~~**Alvorligheds-diagram** på stats-siden~~ (implementeret juni 2026)
