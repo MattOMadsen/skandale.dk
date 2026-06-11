@@ -20,8 +20,16 @@ const SCANDAL_TOPIC_KEYWORDS = {
   'wef': ['world economic forum', 'weforum', 'wef-artikel', 'wef '],
   'bilderberg': ['bilderberg'],
   'mink': ['minkskandal', 'mink-afliv', 'minkgrave', 'minkkommission', 'mink '],
-  'party-funding': ['partistøtte', 'partistotte', 'donor', 'donation', 'gennemsigtighed', 'penge til folketing', 'partistøtte', 'fond og økonomiske'],
-  'nato': ['nato', 'ukraine', 'forsvarsbudget', 'forsvarspolitik', 'forsvarsforlig']
+  'party-funding': ['partistøtte', 'partistotte', 'donor', 'donation', 'gennemsigtighed', 'penge til folketing', 'fond og økonomiske'],
+  'nato': ['nato', 'ukraine', 'forsvarsbudget', 'forsvarspolitik', 'forsvarsforlig', 'militære anskaffelser', 'militaer-anskaffelser'],
+  'iraq-war': ['irak-krigen', 'irak-kr', 'invasion af irak', 'irak '],
+  'tax-scandal': ['skattesag', 'skattesnyd', 'skatteforhold', 'skattevæsen', 'skattevaesen', 'fejludbetaling', 'skattereform'],
+  'immigration': ['udlænding', 'udlaending', 'indvandring', 'asylpar', 'integrationspolitik', 'udvisning', 'islam og integration', 'rigsret'],
+  'climate-policy': ['klimapolitik', 'klimaminister', 'grøn omstilling', 'groen omstilling', 'klimamål', 'klimamaal', 'kvælstof', 'kvaelstof'],
+  'eu-politics': ['europa-parlament', 'eu-parlament', 'eu parlament', 'europaparlament', 'mep', 'eu-midler', 'eu fond'],
+  'bank-crisis': ['bankpakke', 'finanskrise', 'statsgaranti til banker'],
+  'corruption-power': ['magtmisbrug', 'toejskandal', 'tøjskandal', 'tøjs-sag'],
+  'welfare-reform': ['velfærdsreform', 'velfaerdsreform', 'kontanthjælp', 'kontanthjaelp', 'beskæftigelsesreform']
 };
 
 const TOPIC_TO_NETWORK = {

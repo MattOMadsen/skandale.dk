@@ -41,9 +41,9 @@
   - [ ] Kør `supabase/schema.sql` i Supabase SQL Editor
   - [ ] Kommentar-moderation (admin-godkendelse)
 
-- [x] **Relaterede skandaler i data** (v2.02.00 — 22 skandaler med krydsreferencer)
+- [x] **Relaterede skandaler i data** (v2.02.01 — 49/105 skandaler med krydsreferencer)
   - Logik findes i `cross-reference.js`
-  - WEF, mink, Bilderberg, NATO og partistøtte-klynger udfyldt; flere kan tilføjes løbende
+  - 15 emneklynger: WEF, mink, Bilderberg, NATO, partistøtte, Irak, skat, udlænding, klima, EU, bank, magtmisbrug, velfærd
 
 - [x] **Stats-side Top 5 → politiker-modal** (bruger numerisk id)
 - [x] **Alvorligheds-diagram** på stats-siden
@@ -78,7 +78,7 @@
 
 ## Data / indhold (åbent)
 
-- [ ] Flere `otherPoliticians` / `relatedTopics` i skandale-data (22/105 har det pt. — v2.02.00)
+- [ ] Flere `otherPoliticians` / `relatedTopics` i skandale-data (49/105 har det pt. — v2.02.01)
 
 ## Teknisk gæld / oprydning
 

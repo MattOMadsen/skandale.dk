@@ -1,3 +1,9 @@
+## [v2.02.01] - 2026-06-11
+### Data: 7 nye skandale-klynger
+- 27 nye skandaler med krydsreferencer (49/105 i alt)
+- Nye emner: `iraq-war`, `tax-scandal`, `immigration`, `climate-policy`, `eu-politics`, `bank-crisis`, `corruption-power`, `welfare-reform`
+- Klynger: Irak-krigen, skattesager, udlændingepolitik, klima, EU-parlament, bankpakken, magtmisbrug
+
 ## [v2.02.00] - 2026-06-11
 ### Data: krydsreferencer + sidst opdateret
 - 14 nye skandaler med `otherPoliticians` / `relatedTopics` (22 i alt; mink, WEF, NATO, partistøtte)

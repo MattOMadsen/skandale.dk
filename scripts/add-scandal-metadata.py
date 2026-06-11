@@ -76,6 +76,115 @@ CROSS_REF_UPDATES = {
         "relatedTopics": ["party-funding"],
         "otherPoliticians": ["Lars Løkke Rasmussen", "Pia Kjærsgaard"],
     },
+    # --- Bølge 2: Irak, skat, udlændingepolitik, klima, EU, bank, magtmisbrug ---
+    "anders-fogh-rasmussen/irak-krigen-2003.json": {
+        "relatedTopics": ["iraq-war"],
+        "otherPoliticians": ["Claus Hjort Frederiksen", "Pia Kjærsgaard", "Lars Løkke Rasmussen"],
+    },
+    "helle-thorning-schmidt/skattesag-2014.json": {
+        "relatedTopics": ["tax-scandal"],
+        "otherPoliticians": ["Claus Hjort Frederiksen", "Mette Frederiksen"],
+    },
+    "claus-hjort-frederiksen/personlig-skatte-sag.json": {
+        "relatedTopics": ["tax-scandal"],
+        "otherPoliticians": ["Helle Thorning-Schmidt", "Lars Løkke Rasmussen"],
+    },
+    "claus-hjort-frederiksen/skat-administration-2010.json": {
+        "relatedTopics": ["tax-scandal"],
+        "otherPoliticians": ["Helle Thorning-Schmidt", "Anders Fogh Rasmussen"],
+    },
+    "anders-fogh-rasmussen/skattereform-2007.json": {
+        "relatedTopics": ["tax-scandal"],
+        "otherPoliticians": ["Claus Hjort Frederiksen", "Lars Løkke Rasmussen"],
+    },
+    "inger-stoejberg/rigsretssagen-2020-2021.json": {
+        "relatedTopics": ["immigration"],
+        "otherPoliticians": ["Mette Frederiksen", "Mattias Tesfaye", "Kristian Thulesen Dahl"],
+    },
+    "inger-stoejberg/stram-udlaendingepolitik-2015-2019.json": {
+        "relatedTopics": ["immigration"],
+        "otherPoliticians": ["Mette Frederiksen", "Marcus Knuth", "Peter Skaarup"],
+    },
+    "kristian-thulesen-dahl/udlaendingepolitik-2018.json": {
+        "relatedTopics": ["immigration"],
+        "otherPoliticians": ["Inger Støjberg", "Pia Kjærsgaard", "Marcus Knuth"],
+    },
+    "mattias-tesfaye/udlaendingepolitik-2020.json": {
+        "relatedTopics": ["immigration"],
+        "otherPoliticians": ["Inger Støjberg", "Mette Frederiksen", "Marcus Knuth"],
+    },
+    "marcus-knuth/udlaendingepolitik-2021.json": {
+        "relatedTopics": ["immigration"],
+        "otherPoliticians": ["Inger Støjberg", "Mattias Tesfaye", "Peter Skaarup"],
+    },
+    "peter-skaarup/udlaendingepolitik-2023.json": {
+        "relatedTopics": ["immigration"],
+        "otherPoliticians": ["Inger Støjberg", "Marcus Knuth", "Kristian Thulesen Dahl"],
+    },
+    "pia-kjaersgaard/udlaendingepolitik-2001.json": {
+        "relatedTopics": ["immigration"],
+        "otherPoliticians": ["Inger Støjberg", "Kristian Thulesen Dahl", "Pernille Vermund"],
+    },
+    "pernille-vermund/udtalelser-om-islam-og-integration.json": {
+        "relatedTopics": ["immigration"],
+        "otherPoliticians": ["Inger Støjberg", "Pia Kjærsgaard", "Marcus Knuth"],
+    },
+    "rasmus-stoklund/integrationspolitik-2024.json": {
+        "relatedTopics": ["immigration"],
+        "otherPoliticians": ["Mattias Tesfaye", "Mette Frederiksen", "Marcus Knuth"],
+    },
+    "dan-jorgensen/klimapolitik-2023.json": {
+        "relatedTopics": ["climate-policy"],
+        "otherPoliticians": ["Mette Frederiksen", "Ida Auken", "Morten Østergaard"],
+    },
+    "morten-oestergaard/klima-loefter-2019.json": {
+        "relatedTopics": ["climate-policy"],
+        "otherPoliticians": ["Dan Jørgensen", "Mette Frederiksen", "Pia Olsen Dyhr"],
+    },
+    "mette-abildgaard/klima-minister-2019.json": {
+        "relatedTopics": ["climate-policy"],
+        "otherPoliticians": ["Dan Jørgensen", "Morten Bødskov", "Mette Frederiksen"],
+    },
+    "pia-olsen-dyhr/klima-sf-2022.json": {
+        "relatedTopics": ["climate-policy"],
+        "otherPoliticians": ["Morten Østergaard", "Ida Auken", "Dan Jørgensen"],
+    },
+    "ida-auken/kvælstof-landbrug-kritik-2011-2014.json": {
+        "relatedTopics": ["climate-policy"],
+        "otherPoliticians": ["Mette Frederiksen", "Dan Jørgensen", "Pia Olsen Dyhr"],
+    },
+    "henrik-dahl/eu-parlament-2019.json": {
+        "relatedTopics": ["eu-politics"],
+        "otherPoliticians": ["Morten Messerschmidt", "Marcus Knuth"],
+    },
+    "morten-messerschmidt/eu-parlament-aktiviteter.json": {
+        "relatedTopics": ["eu-politics"],
+        "otherPoliticians": ["Henrik Dahl", "Pia Kjærsgaard"],
+    },
+    "anders-fogh-rasmussen/bankpakke-2008.json": {
+        "relatedTopics": ["bank-crisis"],
+        "otherPoliticians": ["Claus Hjort Frederiksen", "Lars Løkke Rasmussen", "Helle Thorning-Schmidt"],
+    },
+    "helle-thorning-schmidt/oekonomisk-politik-2008-2015.json": {
+        "relatedTopics": ["bank-crisis", "welfare-reform"],
+        "otherPoliticians": ["Anders Fogh Rasmussen", "Claus Hjort Frederiksen", "Nicolai Wammen"],
+    },
+    "lars-loekke-rasmussen/hustruens-fyring-2018.json": {
+        "relatedTopics": ["corruption-power"],
+        "otherPoliticians": ["Mette Frederiksen", "Helle Thorning-Schmidt"],
+    },
+    "lars-loekke-rasmussen/toejskandalen-2014.json": {
+        "relatedTopics": ["corruption-power", "party-funding"],
+        "otherPoliticians": ["Helle Thorning-Schmidt", "Anders Fogh Rasmussen"],
+    },
+    "troels-lund-poulsen/militaer-anskaffelser.json": {
+        "relatedTopics": ["nato"],
+        "otherPoliticians": ["Morten Bødskov", "Claus Hjort Frederiksen"],
+    },
+    "helle-thorning-schmidt/velfaerdsreformer-2013.json": {
+        "relatedTopics": ["welfare-reform"],
+        "otherPoliticians": ["Mette Frederiksen", "Ane Halsboe-Jørgensen", "Magnus Heunicke"],
+    },
 }
 
 
