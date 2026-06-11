@@ -22,10 +22,10 @@
             border-color: rgba(200, 16, 46, 0.22);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.04);
         }
-        .donation-box__methods {
+        .donation-box__block {
             background: rgba(248, 250, 252, 0.9);
         }
-        .dark .donation-box__methods {
+        .dark .donation-box__block {
             background: rgba(15, 23, 42, 0.65);
             border-color: rgba(71, 85, 105, 0.55);
         }
@@ -323,34 +323,32 @@
                     Donér via PayPal
                 </a>
 
-                <div class="mt-10 pt-8 border-t border-slate-200 dark:border-slate-700/80">
-                    <p class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-6 uppercase tracking-wide">Eller scan med PayPal / overfør</p>
-
-                    <div class="donation-box__methods rounded-2xl border border-slate-200 p-6 md:p-8 max-w-xl mx-auto">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 text-left sm:text-center">
-                            <div class="flex flex-col items-center">
-                                <div class="donation-box__qr-wrap rounded-2xl p-3 mb-3">
-                                    <img src="qr/qrcode.png" alt="PayPal QR-kode til donation til Skandale.dk" width="160" height="160"
-                                         class="rounded-xl block">
-                                </div>
-                                <p class="text-sm text-slate-600 dark:text-slate-300">
-                                    <i class="fa-brands fa-paypal text-[#0070BA] mr-1"></i>
-                                    PayPal QR-kode — scan med PayPal-appen
-                                </p>
-                            </div>
-
-                            <div class="flex flex-col justify-center">
-                                <p class="text-sm text-slate-600 dark:text-slate-300 mb-3 sm:text-center">
-                                    <i class="fa-solid fa-building-columns text-[#C8102E] dark:text-red-400 mr-1"></i>
-                                    Bankoverførsel
-                                </p>
-                                <div class="donation-box__bank rounded-xl border border-slate-200 p-4 font-mono text-sm text-slate-800 dark:text-slate-100">
-                                    <p>Reg: <span class="font-semibold">9070</span></p>
-                                    <p class="mt-1">Konto: <span class="font-semibold">8060896667</span></p>
-                                </div>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-3 sm:text-center">Skriv gerne «Skandale.dk» i beskedfeltet</p>
-                            </div>
+                <div class="mt-10 pt-8 border-t border-slate-200 dark:border-slate-700/80 max-w-md mx-auto">
+                    <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1 flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-paypal text-[#0070BA]"></i>
+                        PayPal QR-kode
+                    </p>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-5">Scan med PayPal-appen på mobilen</p>
+                    <div class="donation-box__block rounded-2xl border border-slate-200 p-6">
+                        <div class="donation-box__qr-wrap rounded-2xl p-3 inline-block">
+                            <img src="qr/qrcode.png" alt="PayPal QR-kode til donation til Skandale.dk" width="180" height="180"
+                                 class="rounded-xl block mx-auto">
                         </div>
+                    </div>
+                </div>
+
+                <div class="mt-10 pt-8 border-t border-slate-200 dark:border-slate-700/80 max-w-md mx-auto">
+                    <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-building-columns text-[#C8102E] dark:text-red-400"></i>
+                        Bankoverførsel
+                    </p>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-5">Overfør direkte til kontoen herunder</p>
+                    <div class="donation-box__block rounded-2xl border border-slate-200 p-6">
+                        <div class="donation-box__bank rounded-xl border border-slate-200 p-5 font-mono text-base text-slate-800 dark:text-slate-100 text-left">
+                            <p>Reg: <span class="font-semibold">9070</span></p>
+                            <p class="mt-2">Konto: <span class="font-semibold">8060896667</span></p>
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-4">Skriv gerne «Skandale.dk» i beskedfeltet</p>
                     </div>
                 </div>
             </div>
