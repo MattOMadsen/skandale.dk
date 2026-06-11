@@ -1,7 +1,13 @@
 {
   "id": "slettede-sms-2022",
-  "relatedTopics": ["mink"],
-  "otherPoliticians": ["Magnus Heunicke", "Nicolai Wammen", "Morten Bødskov"],
+  "relatedTopics": [
+    "mink"
+  ],
+  "otherPoliticians": [
+    "Magnus Heunicke",
+    "Nicolai Wammen",
+    "Morten Bødskov"
+  ],
   "title": "Slettede SMS'er (2022)",
   "year": "2022",
   "ourSeverity": 5,
@@ -10,11 +16,15 @@
   "outcome": "Øget mistillid til regeringens åbenhed, krav om revision af offentlighedsloven og yderligere politisk pres.",
   "justiceAnalysis": "Der burde have været en hurtigere og mere uafhængig undersøgelse af slettepraksissen.",
   "mediaLinks": [
-    {"name": "Berlingske", "url": "https://www.berlingske.dk"}
+    {
+      "name": "Berlingske",
+      "url": "https://www.berlingske.dk"
+    }
   ],
   "consequences": "Øget mistillid til regeringens åbenhed og krav om bedre arkiveringsregler for ministre.",
   "whatShouldHaveHappened": {
     "title": "Uafhængig revision og klare regler",
     "content": "Der burde have været en grundig, uafhængig gennemgang af alle slettede beskeder og indført klare, bindende regler for arkivering af officiel kommunikation, inklusive SMS."
-  }
+  },
+  "lastUpdated": "2026-06-01"
 }

@@ -8,12 +8,19 @@
   "outcome": "Massiv kritik på sociale medier og i pressen. Auken måtte forholde sig til sagen offentligt.",
   "justiceAnalysis": "Ingen juridiske konsekvenser – en politisk og etisk kontrovers.",
   "mediaLinks": [
-    {"name": "Jyllands-Posten – Ida Auken: Omskæring af drenge er ok", "url": "https://jyllands-posten.dk/politik/ECE7772819/ida-auken-omskaering-af-drenge-er-ok"},
-    {"name": "TV 2 – Ida Auken i strid modvind", "url": "https://nyheder.tv2.dk/valg2015/2015-06-09-ida-auken-i-strid-modvind-omskaering-af-drengeboern-er-ok-men-ikke-piger"}
+    {
+      "name": "Jyllands-Posten – Ida Auken: Omskæring af drenge er ok",
+      "url": "https://jyllands-posten.dk/politik/ECE7772819/ida-auken-omskaering-af-drenge-er-ok"
+    },
+    {
+      "name": "TV 2 – Ida Auken i strid modvind",
+      "url": "https://nyheder.tv2.dk/valg2015/2015-06-09-ida-auken-i-strid-modvind-omskaering-af-drengeboern-er-ok-men-ikke-piger"
+    }
   ],
   "consequences": "Skadede hendes image blandt progressive vælgere og gav genklang i debatten om religiøse rettigheder vs. børns rettigheder.",
   "whatShouldHaveHappened": {
     "title": "Klarere børnesynspunkt",
     "content": "Ida Auken burde have taget tydeligere afstand fra ikke-medisinske omskæringer af børn og fremhævet børns ret til kropslig integritet frem for at tale om 'kulturel frihed' i en valgkamp."
-  }
+  },
+  "lastUpdated": "2026-06-01"
 }

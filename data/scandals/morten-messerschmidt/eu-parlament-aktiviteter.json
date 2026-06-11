@@ -6,11 +6,15 @@
   "shortDesc": "Messerschmidt blev kritiseret for lavt fremmøde og begrænset aktivitet i Europa-Parlamentet.",
   "longDesc": "Messerschmidt blev kritiseret for lavt fremmøde og begrænset aktivitet i Europa-Parlamentet, mens han samtidig modtog fuld løn og godtgørelser.",
   "mediaLinks": [
-    {"name": "DR og EUobserver", "url": "https://www.dr.dk/nyheder/politik/messerschmidt-eu-parlament"}
+    {
+      "name": "DR og EUobserver",
+      "url": "https://www.dr.dk/nyheder/politik/messerschmidt-eu-parlament"
+    }
   ],
   "consequences": "Kritik for lavt fremmøde trods fuld løn.",
   "whatShouldHaveHappened": {
     "title": "Større ansvarlighed",
     "content": "Der burde have været større fokus på at leve op til de forventninger der er til folkevalgte i Europa-Parlamentet."
-  }
+  },
+  "lastUpdated": "2026-06-01"
 }

@@ -6,11 +6,15 @@
   "shortDesc": "Søren Pape Poulsen blev stoppet af politiet for at køre bil med for højt promilleindhold.",
   "longDesc": "Søren Pape Poulsen blev stoppet af politiet for at køre bil med for højt promilleindhold. Sagen førte til stor medieomtale og kritik af hans dømmekraft som justitsminister og partileder.",
   "mediaLinks": [
-    {"name": "DR, Berlingske og Folketinget", "url": "https://www.dr.dk/nyheder/politik/pape-poulsen-alkohol"}
+    {
+      "name": "DR, Berlingske og Folketinget",
+      "url": "https://www.dr.dk/nyheder/politik/pape-poulsen-alkohol"
+    }
   ],
   "consequences": "Stor medieomtale og kritik af dømmekraft.",
   "whatShouldHaveHappened": {
     "title": "Bedre personlig ansvarlighed",
     "content": "Der burde have været større personlig ansvarlighed fra ledende politikere i forhold til overholdelse af loven."
-  }
+  },
+  "lastUpdated": "2026-06-01"
 }

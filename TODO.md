@@ -41,9 +41,9 @@
   - [ ] Kør `supabase/schema.sql` i Supabase SQL Editor
   - [ ] Kommentar-moderation (admin-godkendelse)
 
-- [x] **Relaterede skandaler i data** (v2.01.03 — 8 skandaler med krydsreferencer)
+- [x] **Relaterede skandaler i data** (v2.02.00 — 22 skandaler med krydsreferencer)
   - Logik findes i `cross-reference.js`
-  - WEF, mink og Bilderberg-klynger udfyldt; flere kan tilføjes løbende
+  - WEF, mink, Bilderberg, NATO og partistøtte-klynger udfyldt; flere kan tilføjes løbende
 
 - [x] **Stats-side Top 5 → politiker-modal** (bruger numerisk id)
 - [x] **Alvorligheds-diagram** på stats-siden
@@ -67,7 +67,7 @@
 
 1. **Central database** (Supabase) til delt afstemning + kommentar-moderation — grundstruktur klar (`supabase-client.js` + `secrets.example.js`)
 2. **Kilde-kvalitetsindikatorer** (grøn/gul/rød badges på kilder)
-3. **«Sidst opdateret» + versionshistorik på skandaler
+3. ~~**«Sidst opdateret» på skandaler**~~ (v2.02.00 — `lastUpdated` felt + badge i modal)
 4. ~~**Billede i politiker-modal-header**~~ (v2.01.03)
 5. ~~**Loading-spinner i politiker-modal**~~ (v2.01.03)
 6. ~~**«Sammenlign med…»-knap** i politiker-modal~~ (v2.01.03)
@@ -78,7 +78,7 @@
 
 ## Data / indhold (åbent)
 
-- [ ] Flere `otherPoliticians` / `relatedTopics` i skandale-data (kun 3 skandaler har det pt.)
+- [ ] Flere `otherPoliticians` / `relatedTopics` i skandale-data (22/105 har det pt. — v2.02.00)
 
 ## Teknisk gæld / oprydning
 

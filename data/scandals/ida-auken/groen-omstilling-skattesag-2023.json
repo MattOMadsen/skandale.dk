@@ -8,12 +8,27 @@
   "outcome": "Mediedebat og ekspertkritik. Sagen satte fokus på politikeres økonomiske gennemsigtighed.",
   "justiceAnalysis": "Skatteeksperter var enige om, at donationerne var skattepligtige – sagen illustrerede manglende overholdelse af skatteregler.",
   "mediaLinks": [
-    {"name": "B.T. – Ekspert: Ida Auken kan få skattesmæk", "url": "https://www.bt.dk/politik/ekspert-er-ikke-i-tvivl-ida-auken-kan-staa-over-for-stort-skattesmaek"},
-    {"name": "Berlingske – Ida Auken skattesag", "url": "https://www.berlingske.dk/politik/ida-auken-kan-staa-over-for-enormt-skattesmaek-der-er-ingen-tvivl"}
+    {
+      "name": "B.T. – Ekspert: Ida Auken kan få skattesmæk",
+      "url": "https://www.bt.dk/politik/ekspert-er-ikke-i-tvivl-ida-auken-kan-staa-over-for-stort-skattesmaek"
+    },
+    {
+      "name": "Berlingske – Ida Auken skattesag",
+      "url": "https://www.berlingske.dk/politik/ida-auken-kan-staa-over-for-enormt-skattesmaek-der-er-ingen-tvivl"
+    }
   ],
   "consequences": "Kritik af hendes økonomiske gennemsigtighed og debat om politikeres brug af foreninger til at modtage midler.",
   "whatShouldHaveHappened": {
     "title": "Korrekt beskatning fra start",
     "content": "Ida Auken burde have sikret korrekt skattemæssig behandling af alle donationer via Foreningen Grøn Omstilling fra opstarten og været fuldt transparent om foreningens økonomi som et krav for en folketingspolitiker."
-  }
+  },
+  "relatedTopics": [
+    "party-funding",
+    "wef"
+  ],
+  "otherPoliticians": [
+    "Mette Frederiksen",
+    "Uffe Elbæk"
+  ],
+  "lastUpdated": "2026-06-11"
 }

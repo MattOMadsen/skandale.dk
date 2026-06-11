@@ -19,7 +19,9 @@ const SCANDAL_TOPIC_KEYWORDS = {
   'young-global-leaders': ['young global leader', 'young global leaders'],
   'wef': ['world economic forum', 'weforum', 'wef-artikel', 'wef '],
   'bilderberg': ['bilderberg'],
-  'mink': ['minkskandal', 'mink-afliv', 'minkgrave', 'minkkommission', 'mink ']
+  'mink': ['minkskandal', 'mink-afliv', 'minkgrave', 'minkkommission', 'mink '],
+  'party-funding': ['partistøtte', 'partistotte', 'donor', 'donation', 'gennemsigtighed', 'penge til folketing', 'partistøtte', 'fond og økonomiske'],
+  'nato': ['nato', 'ukraine', 'forsvarsbudget', 'forsvarspolitik', 'forsvarsforlig']
 };
 
 const TOPIC_TO_NETWORK = {

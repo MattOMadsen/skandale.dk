@@ -6,11 +6,15 @@
   "shortDesc": "Helle Thorning-Schmidt og hendes mand Stephen Kinnock blev anklaget for skattesnyd i forbindelse med deres bopæl i Schweiz. Sagen førte til massiv kritik og truede hendes position som statsminister.",
   "longDesc": "Helle Thorning-Schmidt og hendes mand Stephen Kinnock blev anklaget for skattesnyd i forbindelse med deres bopæl i Schweiz. Sagen førte til massiv kritik og truede hendes position som statsminister.",
   "mediaLinks": [
-    {"name": "DR, Politiken og Ekstra Bladet", "url": "https://www.dr.dk/nyheder/politik/helle-thorning-schmidt-skattesag"}
+    {
+      "name": "DR, Politiken og Ekstra Bladet",
+      "url": "https://www.dr.dk/nyheder/politik/helle-thorning-schmidt-skattesag"
+    }
   ],
   "consequences": "Massiv kritik og trussel mod hendes position som statsminister.",
   "whatShouldHaveHappened": {
     "title": "Større åbenhed om privatøkonomi",
     "content": "Der burde have været større åbenhed og klarhed omkring ministre og deres ægtefællers skatteforhold for at undgå mistanke om urent trav."
-  }
+  },
+  "lastUpdated": "2026-06-01"
 }

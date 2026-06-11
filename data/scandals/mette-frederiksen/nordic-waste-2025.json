@@ -8,11 +8,23 @@
   "outcome": "Øget kritik af regeringens miljøpolitik og krisehåndtering.",
   "justiceAnalysis": "Regeringen burde have taget fuldt ansvar for de langsigtede konsekvenser af mink-aflivningen i stedet for at pege på andre.",
   "mediaLinks": [
-    {"name": "Effektivt Landbrug", "url": "https://effektivtlandbrug.landbrugnet.dk"}
+    {
+      "name": "Effektivt Landbrug",
+      "url": "https://effektivtlandbrug.landbrugnet.dk"
+    }
   ],
   "consequences": "Øget kritik af regeringens miljøpolitik og håndtering af minkgrave.",
   "whatShouldHaveHappened": {
     "title": "Fuldt ansvar og oprydning",
     "content": "Regeringen burde have taget fuldt ansvar for de langsigtede konsekvenser af mink-aflivningen og iværksat en hurtig handlingsplan for oprydning."
-  }
+  },
+  "relatedTopics": [
+    "mink"
+  ],
+  "otherPoliticians": [
+    "Magnus Heunicke",
+    "Nicolai Wammen",
+    "Morten Bødskov"
+  ],
+  "lastUpdated": "2026-06-11"
 }

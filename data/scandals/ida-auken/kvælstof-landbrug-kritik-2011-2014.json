@@ -8,12 +8,19 @@
   "outcome": "Politisk debat uden direkte konsekvenser for ministerposten. Sagen illustrerede spændingen mellem grøn omstilling og landbrugserhverv.",
   "justiceAnalysis": "Kritikken var primært politisk og faglig – ikke en retssag eller kommissionsundersøgelse.",
   "mediaLinks": [
-    {"name": "DR – Landbrug og miljøpolitik", "url": "https://www.dr.dk/nyheder/politik"},
-    {"name": "Landbrug & Fødevarer", "url": "https://www.lf.dk/"}
+    {
+      "name": "DR – Landbrug og miljøpolitik",
+      "url": "https://www.dr.dk/nyheder/politik"
+    },
+    {
+      "name": "Landbrug & Fødevarer",
+      "url": "https://www.lf.dk/"
+    }
   ],
   "consequences": "Øget polarisering mellem landbrug og miljøbevægelse, og debat om balancen i miljøministerens politik.",
   "whatShouldHaveHappened": {
     "title": "Bedre dialog og målbar effekt",
     "content": "En mere transparent plan med klare, målbare miljømål og tættere involvering af både landbrug og miljøorganisationer kunne have reduceret konfliktniveauet og skabt bredere opbakning."
-  }
+  },
+  "lastUpdated": "2026-06-01"
 }

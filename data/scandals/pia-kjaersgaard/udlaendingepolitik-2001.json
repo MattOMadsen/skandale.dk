@@ -6,12 +6,19 @@
   "shortDesc": "Pia Kjærsgaard førte DF ind i støtte til VK-regeringen og gennemførte stramme udlændingelove. Kritikere mente, at politikken var inhuman og skabte unødvendig polarisering i samfundet.",
   "longDesc": "Pia Kjærsgaard førte DF ind i støtte til VK-regeringen og gennemførte stramme udlændingelove. Kritikere mente, at politikken var inhuman og skabte unødvendig polarisering i samfundet.",
   "mediaLinks": [
-    {"name": "Udlændinge- og Integrationsministeriet", "url": "https://www.uim.dk/historik/udlaendingelove"},
-    {"name": "Amnesty International", "url": "https://www.amnesty.dk/pia-kjaersgaard"}
+    {
+      "name": "Udlændinge- og Integrationsministeriet",
+      "url": "https://www.uim.dk/historik/udlaendingelove"
+    },
+    {
+      "name": "Amnesty International",
+      "url": "https://www.amnesty.dk/pia-kjaersgaard"
+    }
   ],
   "consequences": "Kritik for inhuman politik og skabelse af polarisering i samfundet.",
   "whatShouldHaveHappened": {
     "title": "Mere balanceret og human politik",
     "content": "Der burde have været større fokus på humane løsninger og mindre polariserende retorik i udlændingepolitikken."
-  }
+  },
+  "lastUpdated": "2026-06-01"
 }

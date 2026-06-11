@@ -8,12 +8,19 @@
   "outcome": "Ministeren måtte redegøre i samråd, men sagen førte ikke til ministerfald. Kritikken satte fokus på mangler i miljøforvaltningen.",
   "justiceAnalysis": "Statsrevisorerne dokumenterede systematiske svigt i ministeriets opfølgning på pesticidpolitikken.",
   "mediaLinks": [
-    {"name": "Altinget – Samråd om pesticider", "url": "https://www.altinget.dk/miljoe/artikel/auken-i-samraad-om-pesticider"},
-    {"name": "DR – Politik", "url": "https://www.dr.dk/nyheder/politik"}
+    {
+      "name": "Altinget – Samråd om pesticider",
+      "url": "https://www.altinget.dk/miljoe/artikel/auken-i-samraad-om-pesticider"
+    },
+    {
+      "name": "DR – Politik",
+      "url": "https://www.dr.dk/nyheder/politik"
+    }
   ],
   "consequences": "Øget politisk pres på miljøministeren, debat om landbrugets brug af pesticider og krav om skærpelse af grundvandsbeskyttelse.",
   "whatShouldHaveHappened": {
     "title": "Strammere opfølgning og kontrol",
     "content": "Miljøministeriet burde have reageret proaktivt på den stigende pesticidtrend og sikret, at godkendelsesordninger og kommunale påbud var opdaterede og effektive – ikke først efter Statsrevisorernes kritik."
-  }
+  },
+  "lastUpdated": "2026-06-01"
 }

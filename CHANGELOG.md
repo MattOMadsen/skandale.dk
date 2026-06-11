@@ -1,3 +1,10 @@
+## [v2.02.00] - 2026-06-11
+### Data: krydsreferencer + sidst opdateret
+- 14 nye skandaler med `otherPoliticians` / `relatedTopics` (22 i alt; mink, WEF, NATO, partistøtte)
+- Nye emner i `cross-reference.js`: `party-funding`, `nato`
+- `lastUpdated` på alle 105 skandaler; vises i politiker-modal
+- Script: `scripts/add-scandal-metadata.py`
+
 ## [v2.01.04] - 2026-06-11
 ### Fix: profilbillede i politiker-modal
 - Avatar renderes nu via DOM (`setPoliticianModalAvatar`) i stedet for HTML-streng med `onerror`-backticks

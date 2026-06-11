@@ -8,11 +8,19 @@
   "outcome": "Officiel undskyldning og krav om erstatning fra ofre. Sagen har genåbnet debatten om Danmarks koloniale fortid.",
   "justiceAnalysis": "Undskyldningen var vigtig, men mange mener, at Danmark stadig skylder ofrene økonomisk kompensation og en mere grundig undersøgelse.",
   "mediaLinks": [
-    {"name": "BBC", "url": "https://www.bbc.com/news/articles/c80gxd4x0z5o"}
+    {
+      "name": "BBC",
+      "url": "https://www.bbc.com/news/articles/c80gxd4x0z5o"
+    }
   ],
   "consequences": "Officiel undskyldning og krav om erstatning fra ofre. Genåbnet debat om Danmarks koloniale ansvar over for Grønland.",
   "whatShouldHaveHappened": {
     "title": "Sandhedskommission og erstatning",
     "content": "Der burde have været en fuld, uafhængig sandhedskommission tidligere for at kortlægge omfanget af overgrebene og yde erstatning til ofrene."
-  }
+  },
+  "otherPoliticians": [
+    "Magnus Heunicke",
+    "Ane Halsboe-Jørgensen"
+  ],
+  "lastUpdated": "2026-06-11"
 }

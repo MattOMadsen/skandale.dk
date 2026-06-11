@@ -1,18 +1,30 @@
 {
   "id": "bilderberg-2010erne",
-  "relatedTopics": ["bilderberg"],
-  "otherPoliticians": ["Mette Frederiksen", "Lars Løkke Rasmussen", "Anders Fogh Rasmussen", "Claus Hjort Frederiksen", "Ida Auken"],
+  "relatedTopics": [
+    "bilderberg"
+  ],
+  "otherPoliticians": [
+    "Mette Frederiksen",
+    "Lars Løkke Rasmussen",
+    "Anders Fogh Rasmussen",
+    "Claus Hjort Frederiksen",
+    "Ida Auken"
+  ],
   "title": "Bilderberg-møder og manglende åbenhed",
   "year": "2010'erne",
   "ourSeverity": 2,
   "shortDesc": "Helle Thorning-Schmidt deltog gentagne gange i lukkede Bilderberg-møder uden fuld information til Folketinget.",
   "longDesc": "Helle Thorning-Schmidt deltog gentagne gange i lukkede Bilderberg-møder uden fuld information til Folketinget. Kritik for manglende gennemsigtighed.",
   "mediaLinks": [
-    {"name": "Information og Altinget", "url": "https://www.information.dk/"}
+    {
+      "name": "Information og Altinget",
+      "url": "https://www.information.dk/"
+    }
   ],
   "consequences": "Kritik for manglende åbenhed om internationale møder.",
   "whatShouldHaveHappened": {
     "title": "Større åbenhed",
     "content": "Der burde have været større åbenhed om ministres deltagelse i lukkede internationale fora."
-  }
+  },
+  "lastUpdated": "2026-06-01"
 }

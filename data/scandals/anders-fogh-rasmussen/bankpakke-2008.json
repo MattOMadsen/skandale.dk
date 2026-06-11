@@ -6,11 +6,15 @@
   "shortDesc": "Under finanskrisen indførte regeringen bankpakker med statsgaranti for bankernes gæld.",
   "longDesc": "Under finanskrisen indførte regeringen bankpakker med statsgaranti for bankernes gæld. Kritikere mente, at det var en redningspakke til bankerne på skatteydernes regning uden tilstrækkelig regulering.",
   "mediaLinks": [
-    {"name": "DR.dk og Rigsrevisionen", "url": "https://www.dr.dk/nyheder/politik/bankpakken-2008"}
+    {
+      "name": "DR.dk og Rigsrevisionen",
+      "url": "https://www.dr.dk/nyheder/politik/bankpakken-2008"
+    }
   ],
   "consequences": "Kritik for redning af banker på skatteydernes regning.",
   "whatShouldHaveHappened": {
     "title": "Mere ansvar fra bankerne",
     "content": "Der burde have været større krav til bankerne om regulering og ansvar i forbindelse med statsgarantien."
-  }
+  },
+  "lastUpdated": "2026-06-01"
 }

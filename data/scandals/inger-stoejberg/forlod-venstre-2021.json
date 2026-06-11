@@ -6,6 +6,10 @@
   "shortDesc": "Efter at have været en central figur i Venstre i over 20 år forlod Inger Støjberg partiet og stiftede Danmarksdemokraterne. Kritikere kaldte det for et personligt magtspil.",
   "longDesc": "Efter at have været en central figur i Venstre i over 20 år forlod Inger Støjberg partiet og stiftede Danmarksdemokraterne. Kritikere kaldte det for et personligt magtspil.",
   "mediaLinks": [
-    {"name": "DR.dk og Politiken 2021", "url": "https://www.dr.dk/nyheder/politik"}
-  ]
+    {
+      "name": "DR.dk og Politiken 2021",
+      "url": "https://www.dr.dk/nyheder/politik"
+    }
+  ],
+  "lastUpdated": "2026-06-01"
 }

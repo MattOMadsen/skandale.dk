@@ -8,12 +8,26 @@
   "outcome": "Det har skabt forvirring hos nogle vælgere om, hvad partiet egentlig står for i EU-spørgsmål.",
   "justiceAnalysis": "Kritikere har efterlyst større gennemsigtighed i partiets faktiske EU-politik versus den retoriske linje.",
   "mediaLinks": [
-    {"name": "Altinget", "url": "https://www.altinget.dk/"},
-    {"name": "DR", "url": "https://www.dr.dk/nyheder/politik"}
+    {
+      "name": "Altinget",
+      "url": "https://www.altinget.dk/"
+    },
+    {
+      "name": "DR",
+      "url": "https://www.dr.dk/nyheder/politik"
+    }
   ],
   "consequences": "Det har skabt forvirring hos nogle vælgere om, hvad partiet egentlig står for i EU-spørgsmål.",
   "whatShouldHaveHappened": {
     "title": "Større gennemsigtighed",
     "content": "Partiet burde have været mere transparent om, hvor det er principfast, og hvor det er villigt til at indgå kompromiser."
-  }
+  },
+  "relatedTopics": [
+    "nato"
+  ],
+  "otherPoliticians": [
+    "Pelle Dragsted",
+    "Morten Messerschmidt"
+  ],
+  "lastUpdated": "2026-06-11"
 }

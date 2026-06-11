@@ -6,11 +6,21 @@
   "shortDesc": "En lækket video viste Lars Løkke tilbyde tidligere Moderaterne-MF Mike Fonseca 370.000 kr for at forlade Folketinget og give sit mandat til partiet.",
   "longDesc": "En lækket video viste Lars Løkke tilbyde tidligere Moderaterne-MF Mike Fonseca 370.000 kr for at forlade Folketinget og give sit mandat til partiet. Sagen førte til mistillidsvotum og politianmeldelse.",
   "mediaLinks": [
-    {"name": "DR.dk og Mads Brügger", "url": "https://www.dr.dk/nyheder/politik"}
+    {
+      "name": "DR.dk og Mads Brügger",
+      "url": "https://www.dr.dk/nyheder/politik"
+    }
   ],
   "consequences": "Mistillidsvotum og politianmeldelse.",
   "whatShouldHaveHappened": {
     "title": "Større etisk ansvarlighed",
     "content": "Der burde have været større etisk ansvarlighed og klarere regler for partiledere i forhold til at tilbyde økonomisk kompensation til folketingsmedlemmer."
-  }
+  },
+  "relatedTopics": [
+    "party-funding"
+  ],
+  "otherPoliticians": [
+    "Mette Frederiksen"
+  ],
+  "lastUpdated": "2026-06-11"
 }

@@ -1,7 +1,14 @@
 {
   "id": "wef-young-global-leader",
-  "relatedTopics": ["young-global-leaders", "wef"],
-  "otherPoliticians": ["Mette Frederiksen", "Uffe Elbæk", "Claus Hjort Frederiksen"],
+  "relatedTopics": [
+    "young-global-leaders",
+    "wef"
+  ],
+  "otherPoliticians": [
+    "Mette Frederiksen",
+    "Uffe Elbæk",
+    "Claus Hjort Frederiksen"
+  ],
   "title": "World Economic Forum – Young Global Leader (2013)",
   "year": "2013",
   "ourSeverity": 3,
@@ -10,12 +17,19 @@
   "outcome": "Vedvarende debat om internationale netværks indflydelse på dansk politik – især i forbindelse med hendes WEF-artikler og klimaengagement.",
   "justiceAnalysis": "Ingen juridiske konsekvenser – sagen handler om politisk tillid og gennemsigtighed.",
   "mediaLinks": [
-    {"name": "World Economic Forum", "url": "https://www.weforum.org/"},
-    {"name": "DR – Ida Auken Young Global Leader", "url": "https://www.dr.dk/nyheder/politik"}
+    {
+      "name": "World Economic Forum",
+      "url": "https://www.weforum.org/"
+    },
+    {
+      "name": "DR – Ida Auken Young Global Leader",
+      "url": "https://www.dr.dk/nyheder/politik"
+    }
   ],
   "consequences": "Hun er blevet et symbol i debatten om WEF og globalisme i dansk politik, hvilket har påvirket hendes offentlige image på højrefløjen.",
   "whatShouldHaveHappened": {
     "title": "Større åbenhed om internationale netværk",
     "content": "Ida Auken burde have været mere proaktiv i at dokumentere og forklare sin rolle i WEF-netværk og hvilken indflydelse det har – eller ikke har – på hendes danske politik for at modvirke konspirationsteorier og mistillid."
-  }
+  },
+  "lastUpdated": "2026-06-01"
 }

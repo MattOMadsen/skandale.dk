@@ -6,11 +6,22 @@
   "shortDesc": "Uffe Elbæk grundlagde Alternativet med fokus på 'ny politik'. Partiet oplevede økonomiske problemer og kritik af manglende gennemsigtighed.",
   "longDesc": "Uffe Elbæk grundlagde Alternativet med fokus på 'ny politik'. Partiet oplevede økonomiske problemer og kritik af manglende gennemsigtighed i brugen af medlemsbidrag og støtte.",
   "mediaLinks": [
-    {"name": "DR og Berlingske", "url": "https://www.dr.dk/nyheder/politik/alternativet-oekonomi"}
+    {
+      "name": "DR og Berlingske",
+      "url": "https://www.dr.dk/nyheder/politik/alternativet-oekonomi"
+    }
   ],
   "consequences": "Kritik for manglende gennemsigtighed i partiets økonomi.",
   "whatShouldHaveHappened": {
     "title": "Større åbenhed",
     "content": "Der burde have været større åbenhed om partiets økonomiske forhold og brug af midler."
-  }
+  },
+  "relatedTopics": [
+    "party-funding"
+  ],
+  "otherPoliticians": [
+    "Lars Løkke Rasmussen",
+    "Ida Auken"
+  ],
+  "lastUpdated": "2026-06-11"
 }

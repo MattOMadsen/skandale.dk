@@ -6,11 +6,23 @@
   "shortDesc": "Moderaterne har som det eneste parti valgt ikke at offentliggøre sine største donorer fra valgåret 2022.",
   "longDesc": "Moderaterne har som det eneste parti valgt ikke at offentliggøre sine største donorer fra valgåret 2022, på trods af krav om gennemsigtighed.",
   "mediaLinks": [
-    {"name": "Altinget & DR.dk", "url": "https://www.altinget.dk/artikel/moderaterne-skjuler-sine-stoerste-pengedonorer-fra-valgaaret"}
+    {
+      "name": "Altinget & DR.dk",
+      "url": "https://www.altinget.dk/artikel/moderaterne-skjuler-sine-stoerste-pengedonorer-fra-valgaaret"
+    }
   ],
   "consequences": "Kritik for manglende gennemsigtighed om partistøtte.",
   "whatShouldHaveHappened": {
     "title": "Fuld gennemsigtighed",
     "content": "Alle partier burde have fuld gennemsigtighed om deres største donorer for at sikre tillid til det politiske system."
-  }
+  },
+  "relatedTopics": [
+    "party-funding"
+  ],
+  "otherPoliticians": [
+    "Mette Frederiksen",
+    "Alex Vanopslagh",
+    "Henrik Dahl"
+  ],
+  "lastUpdated": "2026-06-11"
 }

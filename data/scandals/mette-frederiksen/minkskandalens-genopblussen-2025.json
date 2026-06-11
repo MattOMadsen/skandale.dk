@@ -1,7 +1,13 @@
 {
   "id": "minkskandalens-genopblussen-2025",
-  "relatedTopics": ["mink"],
-  "otherPoliticians": ["Magnus Heunicke", "Nicolai Wammen", "Morten Bødskov"],
+  "relatedTopics": [
+    "mink"
+  ],
+  "otherPoliticians": [
+    "Magnus Heunicke",
+    "Nicolai Wammen",
+    "Morten Bødskov"
+  ],
   "title": "Minkskandalens genopblussen og mistanke om coverup (2025)",
   "year": "2025",
   "ourSeverity": 5,
@@ -10,11 +16,15 @@
   "outcome": "Politisk uro og krav om ny undersøgelse, hvilket svækkede regeringens position yderligere.",
   "justiceAnalysis": "Der burde have været nedsat en ny, uafhængig kommission med fuld adgang til alle arkiver.",
   "mediaLinks": [
-    {"name": "Berlingske & DR", "url": "https://www.berlingske.dk"}
+    {
+      "name": "Berlingske & DR",
+      "url": "https://www.berlingske.dk"
+    }
   ],
   "consequences": "Politisk uro og krav om ny undersøgelse.",
   "whatShouldHaveHappened": {
     "title": "Ny uafhængig kommission",
     "content": "Der burde have været nedsat en ny, bredt sammensat undersøgelseskommission med fuld adgang til alle arkiver for at kortlægge det fulde forløb og placere ansvar."
-  }
+  },
+  "lastUpdated": "2026-06-01"
 }

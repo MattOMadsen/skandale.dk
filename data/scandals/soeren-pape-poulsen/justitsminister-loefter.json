@@ -6,11 +6,15 @@
   "shortDesc": "Som justitsminister lovede Pape Poulsen hårdere straffe og mere politi. Kritikere pegede på, at kriminalitetsstatistikkerne ikke viste markante forbedringer.",
   "longDesc": "Som justitsminister lovede Pape Poulsen hårdere straffe og mere politi. Kritikere pegede på, at kriminalitetsstatistikkerne ikke viste markante forbedringer, og at flere love blev kritiseret for at være symbolpolitik.",
   "mediaLinks": [
-    {"name": "Justitsministeriet og DR", "url": "https://www.justitsministeriet.dk/nyheder/2021/straffe"}
+    {
+      "name": "Justitsministeriet og DR",
+      "url": "https://www.justitsministeriet.dk/nyheder/2021/straffe"
+    }
   ],
   "consequences": "Kritik for manglende resultater trods løfter.",
   "whatShouldHaveHappened": {
     "title": "Mere reel handling",
     "content": "Der burde have været større fokus på reel handling og målbare resultater i kriminalitetsbekæmpelsen."
-  }
+  },
+  "lastUpdated": "2026-06-01"
 }

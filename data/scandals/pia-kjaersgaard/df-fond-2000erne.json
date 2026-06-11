@@ -6,12 +6,26 @@
   "shortDesc": "Som partileder var Pia Kjærsgaard central i opbygningen af DF's økonomi, herunder fonden. Der var kritik af manglende gennemsigtighed i partiets økonomiske støtte og brug af midler.",
   "longDesc": "Som partileder var Pia Kjærsgaard central i opbygningen af DF's økonomi, herunder fonden. Der var kritik af manglende gennemsigtighed i partiets økonomiske støtte og brug af midler.",
   "mediaLinks": [
-    {"name": "DR.dk", "url": "https://www.dr.dk/nyheder/politik/df-fond-pia-kjaersgaard"},
-    {"name": "Berlingske", "url": "https://www.berlingske.dk/politik/2012/05/10/df-oekonomi"}
+    {
+      "name": "DR.dk",
+      "url": "https://www.dr.dk/nyheder/politik/df-fond-pia-kjaersgaard"
+    },
+    {
+      "name": "Berlingske",
+      "url": "https://www.berlingske.dk/politik/2012/05/10/df-oekonomi"
+    }
   ],
   "consequences": "Kritik af manglende gennemsigtighed i partiets økonomi og brug af midler.",
   "whatShouldHaveHappened": {
     "title": "Større gennemsigtighed",
     "content": "Der burde have været større åbenhed om partiets økonomiske forhold og fonden for at sikre offentlig tillid."
-  }
+  },
+  "relatedTopics": [
+    "party-funding"
+  ],
+  "otherPoliticians": [
+    "Lars Løkke Rasmussen",
+    "Morten Messerschmidt"
+  ],
+  "lastUpdated": "2026-06-11"
 }

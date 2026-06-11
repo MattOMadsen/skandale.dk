@@ -6,11 +6,15 @@
   "shortDesc": "Claus Hjort Frederiksen blev kritiseret for sin personlige håndtering af en lejlighedssag og skatteforhold.",
   "longDesc": "Claus Hjort Frederiksen blev kritiseret for sin personlige håndtering af en lejlighedssag og skatteforhold. Sagen blev undersøgt, men han blev ikke dømt.",
   "mediaLinks": [
-    {"name": "Berlingske og DR", "url": "https://www.berlingske.dk/politik/2016/03/15/claus-hjort-og-lejligheden"}
+    {
+      "name": "Berlingske og DR",
+      "url": "https://www.berlingske.dk/politik/2016/03/15/claus-hjort-og-lejligheden"
+    }
   ],
   "consequences": "Debat om ministres troværdighed.",
   "whatShouldHaveHappened": {
     "title": "Større åbenhed",
     "content": "Der burde have været større åbenhed om ministres personlige økonomiske forhold."
-  }
+  },
+  "lastUpdated": "2026-06-01"
 }

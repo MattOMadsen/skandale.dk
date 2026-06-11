@@ -8,12 +8,19 @@
   "outcome": "Flere medlemmer forlod partiet, og der opstod offentlig debat om intern kultur og ledelse.",
   "justiceAnalysis": "Partiets interne håndtering af konflikter blev kritiseret for at mangle åbenhed og klare processer.",
   "mediaLinks": [
-    {"name": "DR", "url": "https://www.dr.dk/nyheder/politik"},
-    {"name": "Politiken", "url": "https://politiken.dk/"}
+    {
+      "name": "DR",
+      "url": "https://www.dr.dk/nyheder/politik"
+    },
+    {
+      "name": "Politiken",
+      "url": "https://politiken.dk/"
+    }
   ],
   "consequences": "Flere medlemmer forlod partiet, og der opstod offentlig debat om intern kultur og ledelse. Det svækkede midlertidigt partiets troværdighed hos nogle vælgere.",
   "whatShouldHaveHappened": {
     "title": "Bedre intern konfliktløsning",
     "content": "Partiet burde have håndteret de interne uenigheder mere åbent og demokratisk, med klarere processer for konfliktløsning og medlemsinddragelse."
-  }
+  },
+  "lastUpdated": "2026-06-01"
 }

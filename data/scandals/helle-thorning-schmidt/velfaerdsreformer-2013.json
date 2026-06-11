@@ -6,11 +6,15 @@
   "shortDesc": "Under Helle Thorning-Schmidts regering blev der gennemført reformer der blev kritiseret for at ramme de svageste og skære i velfærden.",
   "longDesc": "Under Helle Thorning-Schmidts regering blev der gennemført reformer der blev kritiseret for at ramme de svageste og skære i velfærden (bl.a. kontanthjælpsloft og førtidspension).",
   "mediaLinks": [
-    {"name": "Rådet for Socialt Udsatte og DR", "url": "https://www.udsatte.dk/"}
+    {
+      "name": "Rådet for Socialt Udsatte og DR",
+      "url": "https://www.udsatte.dk/"
+    }
   ],
   "consequences": "Kritik for at ramme de svageste i samfundet.",
   "whatShouldHaveHappened": {
     "title": "Mere socialt retfærdige reformer",
     "content": "Der burde have været større hensyn til de svageste grupper i samfundet ved gennemførelse af velfærdsreformer."
-  }
+  },
+  "lastUpdated": "2026-06-01"
 }

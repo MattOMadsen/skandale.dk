@@ -4,6 +4,17 @@
 // ÆNDRING: Tilføjet data-sc-id på ydre div + delingsknap i header + ny funktion shareSpecificScandal()
 // INGEN eksisterende kode eller funktioner er slettet. Kun additive ændringer.
 
+function formatScandalLastUpdated(value) {
+  if (!value) return '';
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) return value;
+  return parsed.toLocaleDateString('da-DK', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+}
+
 function renderScandalsDirect(politician, container) {
   if (!container || !politician.scandals || politician.scandals.length === 0) {
     container.innerHTML = `<div class="text-center py-8 text-slate-500 dark:text-slate-400">Ingen skandaler registreret for denne politiker.</div>`;
@@ -42,6 +53,7 @@ function renderScandalsDirect(politician, container) {
             <div class="flex items-center gap-x-3">
               <div class="font-bold text-lg text-slate-900 dark:text-white">${s.title}</div>
               <div class="text-xs px-2 py-0.5 bg-slate-200 dark:bg-slate-600 text-slate-600 dark:text-slate-300 rounded-full">${s.year || ''}</div>
+              ${s.lastUpdated ? `<div class="text-xs px-2 py-0.5 bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 rounded-full" title="Sidst opdateret i databasen">Opdat. ${formatScandalLastUpdated(s.lastUpdated)}</div>` : ''}
               ${relatedPoliticians.length > 0 ? `<div class="text-xs px-2 py-0.5 bg-[#C8102E]/10 text-[#C8102E] rounded-full">${relatedPoliticians.length} relaterede</div>` : ''}
             </div>
             <div class="flex items-center gap-x-2 mt-1">

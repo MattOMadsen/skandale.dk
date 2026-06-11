@@ -6,11 +6,15 @@
   "shortDesc": "Efter folketingsvalget i 2019 oplevede Alternativet stor intern uro, flere udmeldelser og dårlige meningsmålinger.",
   "longDesc": "Efter folketingsvalget i 2019 oplevede Alternativet stor intern uro, flere udmeldelser og dårlige meningsmålinger. Elbæk trådte tilbage som leder i 2020.",
   "mediaLinks": [
-    {"name": "DR og Berlingske", "url": "https://www.dr.dk/nyheder/politik/alternativet-krisen-2019"}
+    {
+      "name": "DR og Berlingske",
+      "url": "https://www.dr.dk/nyheder/politik/alternativet-krisen-2019"
+    }
   ],
   "consequences": "Stor intern krise og svækkelse af partiet.",
   "whatShouldHaveHappened": {
     "title": "Bedre partikultur",
     "content": "Der burde have været større fokus på at leve op til egne idealer om åbenhed og bedre håndtering af interne konflikter."
-  }
+  },
+  "lastUpdated": "2026-06-01"
 }

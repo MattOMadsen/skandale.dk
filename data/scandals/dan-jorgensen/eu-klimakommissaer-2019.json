@@ -10,5 +10,14 @@
       "name": "DR",
       "url": "https://www.dr.dk/nyheder/politik"
     }
-  ]
+  ],
+  "relatedTopics": [
+    "wef"
+  ],
+  "otherPoliticians": [
+    "Helle Thorning-Schmidt",
+    "Jakob Ellemann-Jensen",
+    "Ida Auken"
+  ],
+  "lastUpdated": "2026-06-11"
 }

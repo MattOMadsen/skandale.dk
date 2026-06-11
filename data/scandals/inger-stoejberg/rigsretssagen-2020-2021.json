@@ -6,11 +6,15 @@
   "shortDesc": "Inger Støjberg blev dømt i rigsretten for ulovlig adskillelse af asylpar (2016-beslutningen). Hun fik 60 dages fængsel (betinget) og mistede sin ministerpost.",
   "longDesc": "Inger Støjberg blev dømt i rigsretten for ulovlig adskillelse af asylpar (2016-beslutningen). Hun fik 60 dages fængsel (betinget) og mistede sin ministerpost.",
   "mediaLinks": [
-    {"name": "Rigsretten, DR og Politiken", "url": "https://www.dr.dk/nyheder/politik/inger-stoejberg-doemt-i-rigsretten"}
+    {
+      "name": "Rigsretten, DR og Politiken",
+      "url": "https://www.dr.dk/nyheder/politik/inger-stoejberg-doemt-i-rigsretten"
+    }
   ],
   "consequences": "Dømt i rigsretten, betinget fængsel og mistede ministerposten.",
   "whatShouldHaveHappened": {
     "title": "Større respekt for lovgivning",
     "content": "Der burde have været større fokus på at overholde gældende lovgivning og undgå beslutninger der senere blev kendt ulovlige."
-  }
+  },
+  "lastUpdated": "2026-06-01"
 }

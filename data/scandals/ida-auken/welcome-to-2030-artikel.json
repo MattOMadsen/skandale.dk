@@ -1,7 +1,13 @@
 {
   "id": "welcome-to-2030-artikel",
-  "relatedTopics": ["wef"],
-  "otherPoliticians": ["Mette Frederiksen", "Uffe Elbæk", "Claus Hjort Frederiksen"],
+  "relatedTopics": [
+    "wef"
+  ],
+  "otherPoliticians": [
+    "Mette Frederiksen",
+    "Uffe Elbæk",
+    "Claus Hjort Frederiksen"
+  ],
   "title": "WEF-artiklen 'Welcome to 2030' og misforståelser",
   "year": "2016",
   "ourSeverity": 3,
@@ -10,12 +16,19 @@
   "outcome": "Artiklen cirkulerer fortsat på sociale medier og bruges i kritik af WEF og globale elitesammenhænge.",
   "justiceAnalysis": "Ingen juridiske konsekvenser – sagen er en debat om retorik, kontekst og misinformation.",
   "mediaLinks": [
-    {"name": "World Economic Forum – Welcome to 2030", "url": "https://www.weforum.org/stories/2016/11/welcome-to-2030-i-own-nothing-and-have-no-privacy/"},
-    {"name": "The Guardian – Ida Auken", "url": "https://www.theguardian.com/profile/ida-auken"}
+    {
+      "name": "World Economic Forum – Welcome to 2030",
+      "url": "https://www.weforum.org/stories/2016/11/welcome-to-2030-i-own-nothing-and-have-no-privacy/"
+    },
+    {
+      "name": "The Guardian – Ida Auken",
+      "url": "https://www.theguardian.com/profile/ida-auken"
+    }
   ],
   "consequences": "Varig skade på hendes omdømme i dele af befolkningen, der associerer hende med WEF's mest kontroversielle fortolkninger.",
   "whatShouldHaveHappened": {
     "title": "Klarere afgrænsning af personlig vision",
     "content": "Ida Auken burde tidligere have distanceret sig tydeligt fra misfortolkninger og præciseret, at artiklen var en personlig fremtidsvision – ikke dansk eller WEF-politik – for at begrænse spredningen af vildledende narrativer."
-  }
+  },
+  "lastUpdated": "2026-06-01"
 }
