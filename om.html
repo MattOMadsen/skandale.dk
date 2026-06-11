@@ -275,61 +275,46 @@
                 </p>
             </div>
 
-            <div id="doner" class="section-anchor border-t border-slate-200 dark:border-gray-800 pt-8">
-                <h3 class="text-2xl font-semibold tracking-tight mb-2 flex items-center gap-x-3 text-slate-900 dark:text-white">
-                    <i class="fa-solid fa-heart text-[#C8102E] dark:text-red-500"></i>
-                    Støt projektet
-                </h3>
-                <p class="text-sm text-slate-600 dark:text-slate-400 mb-6 max-w-2xl">
-                    Skandale.dk er gratis og uafhængigt. Hvis du vil støtte arbejdet med hosting, research og vedligeholdelse, 
-                    kan du donere via PayPal, MobilePay (QR) eller bankoverførsel. Enhver støtte er frivillig og meget værdsat.
+            <div id="doner" class="section-anchor donation-box bg-slate-100 dark:bg-slate-800/80 p-8 md:p-10 rounded-3xl text-center my-4 border border-slate-300 dark:border-slate-700 shadow-sm">
+                <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#C8102E]/10 mb-4">
+                    <i class="fa-solid fa-hand-holding-heart text-[#C8102E] text-2xl"></i>
+                </div>
+                <h3 class="text-3xl font-bold mb-3 text-slate-900 dark:text-white">Støt Skandale.dk</h3>
+                <p class="text-lg mb-8 text-slate-700 dark:text-slate-300 max-w-xl mx-auto">
+                    Hjælp med at holde siden uafhængig og annoncerfri — hosting, research og vedligeholdelse koster tid og penge.
                 </p>
 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                    <div class="bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-800 rounded-2xl p-6 flex flex-col">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 rounded-xl bg-[#003087]/10 flex items-center justify-center">
-                                <i class="fa-brands fa-paypal text-[#003087] text-xl"></i>
-                            </div>
-                            <h4 class="font-semibold text-slate-900 dark:text-white">PayPal</h4>
-                        </div>
-                        <p class="text-sm text-slate-600 dark:text-slate-400 flex-1">
-                            Donér direkte via PayPal — hurtigt og nemt fra mobil eller computer.
-                        </p>
-                        <a href="https://paypal.me/Skandale" target="_blank" rel="noopener noreferrer"
-                           class="inline-flex items-center justify-center gap-2 mt-5 px-4 py-3 rounded-xl bg-[#003087] hover:bg-[#00256b] text-white text-sm font-semibold transition-colors">
-                            <i class="fa-brands fa-paypal"></i>
-                            Donér via PayPal
-                        </a>
-                    </div>
+                <a href="https://paypal.me/Skandale"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="inline-flex items-center justify-center gap-3 bg-[#0070BA] hover:bg-[#003087] text-white font-bold text-lg md:text-xl px-10 py-5 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+                    <i class="fa-brands fa-paypal text-2xl"></i>
+                    Donér via PayPal
+                </a>
 
-                    <div class="bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-800 rounded-2xl p-6 flex flex-col items-center text-center">
-                        <div class="flex items-center gap-3 mb-4 w-full">
-                            <div class="w-10 h-10 rounded-xl bg-[#C8102E]/10 flex items-center justify-center shrink-0">
-                                <i class="fa-solid fa-qrcode text-[#C8102E]"></i>
-                            </div>
-                            <h4 class="font-semibold text-slate-900 dark:text-white text-left">MobilePay / QR</h4>
-                        </div>
-                        <img src="qr/qrcode.png" alt="QR-kode til donation til Skandale.dk" width="180" height="180"
-                             class="rounded-xl border border-slate-200 dark:border-gray-700 bg-white p-2 mb-3">
-                        <p class="text-sm text-slate-600 dark:text-slate-400">
-                            Scan QR-koden med MobilePay eller din bank-app.
-                        </p>
-                    </div>
+                <div class="mt-10 pt-8 border-t border-slate-300 dark:border-slate-600">
+                    <p class="text-sm font-medium text-slate-600 dark:text-slate-400 mb-6 uppercase tracking-wide">Eller scan / overfør</p>
 
-                    <div class="bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-800 rounded-2xl p-6 flex flex-col">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 rounded-xl bg-[#C8102E]/10 flex items-center justify-center">
-                                <i class="fa-solid fa-building-columns text-[#C8102E]"></i>
-                            </div>
-                            <h4 class="font-semibold text-slate-900 dark:text-white">Bankoverførsel</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-lg mx-auto text-left sm:text-center">
+                        <div class="flex flex-col items-center">
+                            <img src="qr/qrcode.png" alt="QR-kode til donation til Skandale.dk" width="160" height="160"
+                                 class="rounded-2xl border border-slate-200 dark:border-slate-600 bg-white p-2 mb-3 shadow-sm">
+                            <p class="text-sm text-slate-600 dark:text-slate-400">
+                                <i class="fa-solid fa-qrcode text-[#C8102E] mr-1"></i>
+                                MobilePay eller bank-app
+                            </p>
                         </div>
-                        <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">
-                            Overfør direkte til kontoen herunder. Husk evt. at skrive «Skandale.dk» i beskedfeltet.
-                        </p>
-                        <div class="mt-auto rounded-xl bg-slate-50 dark:bg-gray-800/60 border border-slate-200 dark:border-gray-700 p-4 font-mono text-sm text-slate-800 dark:text-slate-200 space-y-1">
-                            <div><span class="text-slate-500 dark:text-slate-400">Reg.:</span> <strong>9070</strong></div>
-                            <div><span class="text-slate-500 dark:text-slate-400">Konto:</span> <strong>8060896667</strong></div>
+
+                        <div class="flex flex-col justify-center">
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mb-3 sm:text-center">
+                                <i class="fa-solid fa-building-columns text-[#C8102E] mr-1"></i>
+                                Bankoverførsel
+                            </p>
+                            <div class="rounded-xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-600 p-4 font-mono text-sm text-slate-800 dark:text-slate-200">
+                                <p>Reg: <span class="font-semibold">9070</span></p>
+                                <p class="mt-1">Konto: <span class="font-semibold">8060896667</span></p>
+                            </div>
+                            <p class="text-xs text-slate-500 dark:text-slate-500 mt-3 sm:text-center">Skriv gerne «Skandale.dk» i beskedfeltet</p>
                         </div>
                     </div>
                 </div>
