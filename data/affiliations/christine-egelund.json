@@ -1,3 +1,16 @@
 {
-  "affiliations": []
+  "affiliations": [
+    {
+      "name": "Alliance of Liberals and Democrats for Europe (ALDE)",
+      "organization": "ALDE Party",
+      "year": "2025-",
+      "role": "Moderaterne som medlemsparti i europæisk liberal familie"
+    },
+    {
+      "name": "OECD",
+      "organization": "Organisation for Economic Co-operation and Development",
+      "year": "2024-",
+      "role": "Ministerdeltagelse i OECD-ministermøder om forskning og innovation"
+    }
+  ]
 }

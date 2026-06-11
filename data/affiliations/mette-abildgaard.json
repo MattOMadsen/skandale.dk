@@ -1,3 +1,16 @@
 {
-  "affiliations": []
+  "affiliations": [
+    {
+      "name": "International Democrat Union (IDU)",
+      "organization": "International Democrat Union",
+      "year": "2011-",
+      "role": "Konservativt internationalt partinetværk"
+    },
+    {
+      "name": "European People's Party (EPP)",
+      "organization": "European People's Party",
+      "year": "2011-",
+      "role": "Europæisk borgerlig partifamilie"
+    }
+  ]
 }

@@ -1,3 +1,10 @@
 {
-  "affiliations": []
+  "affiliations": [
+    {
+      "name": "WHO Regional Office for Europe",
+      "organization": "World Health Organization",
+      "year": "2015-2024",
+      "role": "Sundhedsminister ved WHO Europas regionale komité"
+    }
+  ]
 }

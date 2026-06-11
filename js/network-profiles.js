@@ -229,6 +229,30 @@ const NETWORK_PROFILES = {
     why: 'Når data siger “internationale liberale netværk” uden præcisering, er det netop problemet: vælgerne ser en etiket; ikke hvilken dør der blev åbnet i Bruxelles, Berlin eller Davos.',
     footnote: 'Skandale.dk viser detaljer på den enkelte politikers profil, når kilderne tillader det.'
   },
+  'OECD': {
+    tagline: 'Rige landes klub — hvor ministre koordinerer uden valgkamp.',
+    what: 'OECD (Organisation for Economic Co-operation and Development) er en mellemstatslig organisation med 38 medlemslande. Den samler ministre, embedsmænd og eksperter om økonomi, skat, uddannelse, forskning, transport og miljø gennem faste møder og rapporter.',
+    why: 'OECD er legitimt samarbejde — men det er også et forum, hvor politiske retninger kan afstemmes internationalt, før de når dansk debat. Når ministre deltager, repræsenterer de både Danmark og et koordineret “best practice”-apparat, som vælgerne sjældent følger tæt.',
+    footnote: 'OECD offentliggør møder, rapporter og ministerdeltagelser.'
+  },
+  'International Transport Forum': {
+    tagline: 'Transportministrenes globale koordineringsbane.',
+    what: 'International Transport Forum (ITF) er et OECD-tilknyttet organ, der samler transportministre og brancheledere til årlige summit-møder om infrastruktur, mobilitet, klima og logistik.',
+    why: 'Transportpolitik påvirker hverdagen direkte — men meget af den internationale afstemning sker på ITF-møder langt fra danske valgkredse. Det er ikke hemmeligt; det er bare sjældent hovedemne i folketingsdebatten.',
+    footnote: 'ITF offentliggør deltagerlister og summit-programmer.'
+  },
+  'WHO Regional Office for Europe': {
+    tagline: 'Sundhedspolitikens europæiske korridor.',
+    what: 'WHO’s regionalkontor for Europa samler sundhedsministre og embedsmænd i den regionale komité og i kriser som COVID-19. Danmark deltager som medlemsstat via sine ministre.',
+    why: 'Sundhed er nationalt ansvar — men store kriser og vaccinestrategier koordineres ofte via WHO Europa, før de lander i Folketinget. Offentligheden ser pressemøder; de ser sjældent hele det internationale koordineringslag.',
+    footnote: 'WHO Europa offentliggør møder og regionale beslutninger.'
+  },
+  'Council of Europe': {
+    tagline: 'Europas menneskerettigheds- og demokratiforum — med politisk tyngde.',
+    what: 'Europarådet er en mellemstatslig organisation med 46 medlemslande, adskilt fra EU. Den arbejder med menneskerettigheder, demokrati og retsstatsprincipper — og huser Den Europæiske Menneskerettighedsdomstol (EMD).',
+    why: 'Når danske ministre mødes med Europarådets ledelse, handler det ofte om migration, domstolsafgørelser og internationale forpligtelser — emner med direkte betydning for dansk lovgivning. Samarbejdet er officielt; den politiske indflydelse er det, vælgerne bør kunne følge.',
+    footnote: 'Europarådet offentliggør officielle besøg og møder med ministre.'
+  },
   'SIRI-Kommissionen': {
     tagline: 'National kommission — ikke et globalt magtnetværk.',
     what: 'SIRI-Kommissionen var en dansk kommission, der undersøgte udfordringer i social- og integrationsområdet. Den er national forvaltning — ikke et internationalt eliteforum.',
@@ -265,7 +289,14 @@ const NETWORK_PROFILE_ALIASES = {
   'european council on foreign relations (ecfr)': 'European Council on Foreign Relations (ECFR)',
   'ecfr': 'European Council on Foreign Relations (ECFR)',
   '40 under 40 european young leaders': '40 under 40 European Young Leaders',
-  'friends of europe': '40 under 40 European Young Leaders'
+  'friends of europe': '40 under 40 European Young Leaders',
+  'oecd': 'OECD',
+  'international transport forum': 'International Transport Forum',
+  'itf': 'International Transport Forum',
+  'who regional office for europe': 'WHO Regional Office for Europe',
+  'who europe': 'WHO Regional Office for Europe',
+  'council of europe': 'Council of Europe',
+  'europaradet': 'Council of Europe'
 };
 
 function normalizeProfileLookupKey(name) {
