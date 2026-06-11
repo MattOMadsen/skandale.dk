@@ -1,5 +1,7 @@
 {
   "brokenPromises": [
-    "lofte-1.json"
+    "lofte-1.json",
+    "liberalisme-2015.json",
+    "skattelettelser-2019.json"
   ]
 }

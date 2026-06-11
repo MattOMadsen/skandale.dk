@@ -1,5 +1,7 @@
 {
   "brokenPromises": [
-    "venstre-enhed-2022.json"
+    "venstre-enhed-2022.json",
+    "venstre-valg-2022.json",
+    "borgerlig-politik-2022.json"
   ]
 }

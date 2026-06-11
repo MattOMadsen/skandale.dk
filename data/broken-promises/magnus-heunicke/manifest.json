@@ -1,5 +1,7 @@
 {
   "brokenPromises": [
-    "sundhedsløfter-2019.json"
+    "sundhedsløfter-2019.json",
+    "corona-lofter-2020.json",
+    "sundhed-2022.json"
   ]
 }

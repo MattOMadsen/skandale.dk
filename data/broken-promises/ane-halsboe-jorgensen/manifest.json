@@ -1,5 +1,7 @@
 {
   "brokenPromises": [
-    "arbejdsmarkedsløfter-2023.json"
+    "arbejdsmarkedsløfter-2023.json",
+    "beskaeftigelse-2019.json",
+    "uddannelse-2020.json"
   ]
 }

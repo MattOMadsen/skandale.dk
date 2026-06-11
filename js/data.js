@@ -18,8 +18,9 @@ async function loadPoliticians() {
 
     const cores = await SiteStats.loadPoliticianCores(politicianSlugs);
 
-    politicians = cores.map(core => ({
+    politicians = cores.map((core, index) => ({
       ...core,
+      slug: politicianSlugs[index] || SiteStats.slugFromName(core.name),
       scandals: [],
       affiliations: [],
       economicSupport: [],
@@ -47,7 +48,7 @@ async function loadPoliticianDetails(politician) {
     return politician;
   }
 
-  const slug = SiteStats.slugFromName(politician.name);
+  const slug = politician.slug || SiteStats.slugFromName(politician.name);
 
   const [scandals, affiliations, brokenPromises, economicSupport] = await Promise.all([
     SiteStats.loadScandalsForSlug(slug),

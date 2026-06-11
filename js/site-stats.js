@@ -163,7 +163,7 @@ const SiteStats = {
 
   async enrichPoliticianSummary(politician) {
     if (!politician || politician._summaryLoaded) return politician;
-    const slug = this.slugFromName(politician.name);
+    const slug = politician.slug || this.slugFromName(politician.name);
     const counts = await this.loadCountsForSlug(slug);
     politician._scandalCount = counts.scandalCount;
     politician._brokenCount = counts.brokenPromiseCount;

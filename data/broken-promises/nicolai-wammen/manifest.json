@@ -1,5 +1,7 @@
 {
   "brokenPromises": [
-    "lofte-1.json"
+    "lofte-1.json",
+    "velfaerd-2019.json",
+    "skat-2019.json"
   ]
 }

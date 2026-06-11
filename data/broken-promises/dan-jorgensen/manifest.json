@@ -1,5 +1,7 @@
 {
   "brokenPromises": [
-    "klimamaal-2022.json"
+    "klimamaal-2022.json",
+    "co2-2030.json",
+    "groen-omstilling-2021.json"
   ]
 }

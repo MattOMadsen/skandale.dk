@@ -1,5 +1,7 @@
 {
   "brokenPromises": [
-    "lofte-1.json"
+    "lofte-1.json",
+    "konservativ-profil-2020.json",
+    "kultur-2022.json"
   ]
 }

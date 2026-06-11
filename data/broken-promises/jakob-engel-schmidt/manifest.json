@@ -1,5 +1,7 @@
 {
   "brokenPromises": [
-    "lofte-1.json"
+    "lofte-1.json",
+    "kultur-2024.json",
+    "medier-2024.json"
   ]
 }
