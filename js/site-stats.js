@@ -66,6 +66,44 @@ const SiteStats = {
     return years[years.length - 1];
   },
 
+  normalizeMediaLink(link, index = 0) {
+    if (!link) return null;
+    if (typeof link === 'string') {
+      const url = link.trim();
+      return url ? { name: `Kilde ${index + 1}`, url } : null;
+    }
+    const url = (link.url || '').trim();
+    const name = (link.name || link.title || link.text || '').trim()
+      || (url ? `Kilde ${index + 1}` : '');
+    if (!name && !url) return null;
+    return { name: name || `Kilde ${index + 1}`, url };
+  },
+
+  normalizeMediaLinks(scandal) {
+    if (!scandal) return [];
+    if (Array.isArray(scandal.mediaLinks) && scandal.mediaLinks.length) {
+      return scandal.mediaLinks
+        .map((link, i) => this.normalizeMediaLink(link, i))
+        .filter(Boolean);
+    }
+    if (scandal.source && (scandal.source.url || scandal.source.text)) {
+      const link = this.normalizeMediaLink({
+        name: scandal.source.text,
+        url: scandal.source.url
+      }, 0);
+      return link ? [link] : [];
+    }
+    if (Array.isArray(scandal.sources) && scandal.sources.length) {
+      return scandal.sources
+        .map((source, i) => this.normalizeMediaLink(
+          typeof source === 'string' ? { url: source } : source,
+          i
+        ))
+        .filter(Boolean);
+    }
+    return [];
+  },
+
   normalizeScandal(scandal) {
     if (!scandal) return scandal;
     const year = scandal.year || this.extractYearFromDate(scandal.date) || null;
@@ -75,12 +113,33 @@ const SiteStats = {
       year,
       shortDesc: scandal.shortDesc || scandal.description || scandal.longDesc || '',
       severity,
-      ourSeverity: scandal.ourSeverity ?? scandal.severity ?? severity
+      ourSeverity: scandal.ourSeverity ?? scandal.severity ?? severity,
+      mediaLinks: this.normalizeMediaLinks(scandal)
     };
   },
 
   normalizeBrokenPromise(bp) {
     if (!bp) return bp;
+    const sources = [];
+    if (Array.isArray(bp.sources) && bp.sources.length) {
+      bp.sources.forEach((source, i) => {
+        const normalized = this.normalizeMediaLink(
+          typeof source === 'string' ? { text: source, url: source } : source,
+          i
+        );
+        if (normalized) {
+          sources.push({ text: normalized.name, url: normalized.url });
+        }
+      });
+    } else if (bp.source) {
+      const normalized = this.normalizeMediaLink({
+        name: bp.source.text,
+        url: bp.source.url
+      }, 0);
+      if (normalized) {
+        sources.push({ text: normalized.name, url: normalized.url });
+      }
+    }
     return {
       ...bp,
       whatHappened: bp.whatHappened
@@ -88,7 +147,8 @@ const SiteStats = {
         || bp.whatShouldHaveHappened
         || bp.shortDesc
         || bp.longDesc
-        || ''
+        || '',
+      sources
     };
   },
 

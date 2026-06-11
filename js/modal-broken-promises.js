@@ -27,9 +27,11 @@ function addBrokenPromisesSection(politician) {
     // Byg kilde HTML - understøtter både sources[] array og enkelt source
     let kildeHTML = '';
     if (p.sources && Array.isArray(p.sources) && p.sources.length > 0) {
-      kildeHTML = p.sources.map(s => 
-        `<a href="${s.url}" target="_blank" class="text-[#C8102E] underline hover:text-[#C8102E]/80">${s.text || s.url}</a>`
-      ).join(' • ');
+      kildeHTML = p.sources.map(s => {
+        const label = s.text || s.name || s.title || s.url || 'Kilde';
+        if (!s.url) return `<span>${label}</span>`;
+        return `<a href="${s.url}" target="_blank" class="text-[#C8102E] underline hover:text-[#C8102E]/80">${label}</a>`;
+      }).join(' • ');
     } else if (p.source && p.source.url) {
       kildeHTML = `<a href="${p.source.url}" target="_blank" class="text-[#C8102E] underline">${p.source.text || p.source.url}</a>`;
     } else {
@@ -61,9 +63,11 @@ function showBrokenPromiseDetail(promise) {
   // Byg kilde HTML til detalje modal
   let kildeHTML = '';
   if (promise.sources && Array.isArray(promise.sources) && promise.sources.length > 0) {
-    kildeHTML = promise.sources.map(s => 
-      `<a href="${s.url}" target="_blank" class="text-[#C8102E] underline hover:text-[#C8102E]/80 block mb-1">${s.text || s.url}</a>`
-    ).join('');
+    kildeHTML = promise.sources.map(s => {
+      const label = s.text || s.name || s.title || s.url || 'Kilde';
+      if (!s.url) return `<span class="block mb-1">${label}</span>`;
+      return `<a href="${s.url}" target="_blank" class="text-[#C8102E] underline hover:text-[#C8102E]/80 block mb-1">${label}</a>`;
+    }).join('');
   } else if (promise.source && promise.source.url) {
     kildeHTML = `<a href="${promise.source.url}" target="_blank" class="text-[#C8102E] underline">${promise.source.text || promise.source.url}</a>`;
   }

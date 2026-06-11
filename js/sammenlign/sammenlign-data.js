@@ -47,7 +47,9 @@ const SammenlignData = {
       severity: item.ourSeverity || item.severity || 3,
       shortDesc: item.shortDesc || item.description || '',
       longDesc: item.longDesc || item.description || '',
-      sources: item.mediaLinks || item.sources || [],
+      sources: window.SiteStats?.normalizeMediaLinks
+        ? SiteStats.normalizeMediaLinks(item)
+        : (item.mediaLinks || item.sources || []),
       consequences: item.consequences || '',
       whatShouldHaveHappened: item.whatShouldHaveHappened || null
     };

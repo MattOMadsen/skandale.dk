@@ -29,13 +29,9 @@ function renderScandalsDirect(politician, container) {
     if (!s.year && s.date) s.year = s.date;
     if (!s.shortDesc && s.description) s.shortDesc = s.description;
 
-    if (!s.mediaLinks) {
-      if (s.source && s.source.url) {
-        s.mediaLinks = [{ name: s.source.text || 'Kilde', url: s.source.url }];
-      } else if (s.sources && Array.isArray(s.sources)) {
-        s.mediaLinks = s.sources.map((url, i) => ({ name: `Kilde ${i+1}`, url }));
-      }
-    }
+    s.mediaLinks = window.SiteStats?.normalizeMediaLinks
+      ? SiteStats.normalizeMediaLinks(s)
+      : (s.mediaLinks || []);
 
     const ourSeverity = s.severity || 3;
     const stars = createStars(ourSeverity);
@@ -130,12 +126,16 @@ function renderScandalsDirect(politician, container) {
               <div>
                 <div class="font-semibold text-sm text-slate-500 dark:text-slate-400 mb-2">Kilder & Medier</div>
                 <div class="flex flex-wrap gap-2">
-                  ${s.mediaLinks.map(link => `
-                    <a href="${link.url}" target="_blank" class="inline-flex items-center gap-x-1 px-3 py-1.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-xs text-slate-700 dark:text-slate-300 hover:border-[#C8102E]/50 transition-colors">
+                  ${s.mediaLinks.map(link => {
+                    const label = link.name || link.title || link.text || 'Kilde';
+                    if (!link.url) {
+                      return `<span class="inline-flex items-center gap-x-1 px-3 py-1.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-xs text-slate-700 dark:text-slate-300">${label}</span>`;
+                    }
+                    return `<a href="${link.url}" target="_blank" class="inline-flex items-center gap-x-1 px-3 py-1.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-xs text-slate-700 dark:text-slate-300 hover:border-[#C8102E]/50 transition-colors">
                       <i class="fa-solid fa-external-link-alt text-[#C8102E]"></i>
-                      <span>${link.name}</span>
-                    </a>
-                  `).join('')}
+                      <span>${label}</span>
+                    </a>`;
+                  }).join('')}
                 </div>
               </div>
             ` : ''}

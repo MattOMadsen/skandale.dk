@@ -32,9 +32,13 @@ const SammenlignModals = {
                 <div>
                     <h4 class="font-semibold mb-2">Kilder</h4>
                     <div class="space-y-1">
-                        ${(scandal.sources || []).map(s => 
-                            `<a href="${s.url}" target="_blank" class="block text-sm text-blue-600 dark:text-blue-400 hover:underline">${s.name} →</a>`
-                        ).join('') || '<p class="text-sm text-gray-500">Ingen kilder angivet.</p>'}
+                        ${(scandal.sources || []).map(s => {
+                            const label = s.name || s.title || s.text || s.url || 'Kilde';
+                            if (!s.url) {
+                                return `<span class="block text-sm text-gray-600 dark:text-gray-300">${label}</span>`;
+                            }
+                            return `<a href="${s.url}" target="_blank" class="block text-sm text-blue-600 dark:text-blue-400 hover:underline">${label} →</a>`;
+                        }).join('') || '<p class="text-sm text-gray-500">Ingen kilder angivet.</p>'}
                     </div>
                 </div>
             `;

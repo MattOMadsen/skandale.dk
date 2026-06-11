@@ -1,3 +1,9 @@
+## [v2.02.02] - 2026-06-11
+### Fix: kilder viste «undefined»
+- `normalizeMediaLinks()` i `site-stats.js` — understøtter `name`, `title` og `text`
+- Modal, sammenlign og brudte løfter viser tekst uden link når URL mangler
+- Rettet 3 skandaler med `title` i stedet for `name` i `mediaLinks`
+
 ## [v2.02.01] - 2026-06-11
 ### Data: 7 nye skandale-klynger
 - 27 nye skandaler med krydsreferencer (49/105 i alt)
