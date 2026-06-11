@@ -1,3 +1,27 @@
+## [v2.01.02] - 2026-06-11
+### Pernille Vermund — research & affiliations
+- Research: Nye Borgerlige havde ingen dokumenteret tilknytning til ECR, IDU, CPAC eller WCF
+- Tilføjet **European Liberal Forum** og **Liberal International** via medlemskab af Liberal Alliance (jan. 2024, TV2/DR/Berlingske)
+- Opdateret `data/politicians/pernille-vermund.json`: parti skiftet til Liberal Alliance
+- `POLITIKER-STATUS.md` og `TODO.md` opdateret — nu 40/40 affiliations udfyldt
+
+## [v2.01.01] - 2026-06-11
+### Internationale affiliations for 9 politikere
+- Udfyldt affiliations for Peter Skaarup, Mette Abildgaard, Ane Halsboe-Jørgensen, Christine Egelund, Jakob Engel-Schmidt, Jeppe Bruus, Magnus Heunicke og Rasmus Stoklund
+- Nye netværksprofiler: OECD, International Transport Forum, WHO Regional Office for Europe, Council of Europe
+- Verifikation: 0 domestic entries på tværs af alle 40 affiliations-filer
+
+## [v2.01.00] - 2026-06-10
+### Om-siden & donation
+- Donationssektion med PayPal, QR-kode og bankoverførsel (9070 / 8060896667)
+- Dark mode-fix for donationsboks; fjernet døde `.md`-links fra bidragsektionen
+
+## [v2.00.94] - 2026-06-09
+### Netværk & affiliations-oprydning
+- `cross-reference.js` filtrerer domestic/parti-netværk fra modaler og netværkssiden
+- `network-profiles.js` + `modal-network-overview.js`: faktuelle profiler før politikerliste
+- 25 affiliations-filer ryddet for Folketinget/partinavne; internationale tilknytninger tilføjet hvor kendt
+
 ## [v2.00.87] - 2026-06-02
 ### netvaerk.html – Fuld genopbygning & forbedringer
 - Gendannet fuld working version efter trunkering under dark-mode arbejde

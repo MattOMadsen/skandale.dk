@@ -1,6 +1,6 @@
 # Politiker Status Oversigt – Skandale.dk
 
-**Sidst opdateret:** 11. juni 2026 (v2.01.01)
+**Sidst opdateret:** 11. juni 2026 (v2.01.02)
 
 ## Formål
 
@@ -17,7 +17,7 @@ Denne fil giver et overblik over, hvor komplette de enkelte politikere er i forh
 | Skandaler (politikere med data) | **40/40** | **105** skandale-poster i alt |
 | Brudte løfter | **40/40** | Granulær mappe eller single-file |
 | Økonomisk støtte | **40/40** | Komplet |
-| Internationale affiliations | **39/40** | 1 tom (bevidst) |
+| Internationale affiliations | **40/40** | Komplet |
 | Unikke internationale netværk | **47** | Filtreret via `cross-reference.js` |
 
 ## Folketinget nu (33 politikere)
@@ -34,8 +34,7 @@ Disse har `inFolketinget: true` og vises som standard på forsiden:
 | **Dansk Folkeparti** (2) | Kristian Thulesen Dahl, Morten Messerschmidt |
 | **Enhedslisten** (2) | Pernille Skipper, Rosa Lund |
 | **Socialistisk Folkeparti** (3) | Karina Lorentzen, Pelle Dragsted, Pia Olsen Dyhr |
-| **Liberal Alliance** (2) | Alex Vanopslagh, Henrik Dahl |
-| **Nye Borgerlige** (1) | Pernille Vermund |
+| **Liberal Alliance** (3) | Alex Vanopslagh, Henrik Dahl, Pernille Vermund |
 
 ## Tidligere politikere (7)
 
@@ -57,8 +56,7 @@ Disse har `inFolketinget: false` og vises under «Alle politikere» (sorteret ef
 
 - Alle **40** affiliations-filer eksisterer
 - **0** domestic/parti-entries (Folketinget, partinavne osv. er filtreret fra)
-- **39** politikere har mindst én international tilknytning
-- **1** politiker har bevidst tom affiliations-fil: **Pernille Vermund** (ingen solid kilde til elite-netværk)
+- **40** politikere har mindst én international tilknytning
 
 ### Senest udfyldt (v2.01.01)
 
@@ -113,7 +111,14 @@ Alle 40 politikere har følgende datastruktur på plads:
 - `js/data.js` loader affiliations, skandaler, brudte løfter og økonomisk støtte per politiker
 - Billeder hentes fra Wikimedia Commons
 
+### Pernille Vermund (research v2.01.02)
+
+| Fund | Konklusion |
+|------|------------|
+| Nye Borgerlige (2015–2024) | Ingen dokumenteret ECR, IDU, CPAC eller WCF-tilknytning |
+| Liberal Alliance (fra jan. 2024) | European Liberal Forum + Liberal International (som øvrige LA-politikere) |
+| Det Konservative Folkeparti (2009–2015) | Lokalpolitik; ingen dokumenteret personlig elite-netværkstilknytning |
+
 ## Åbne punkter
 
-- [ ] Research internationale tilknytninger for **Pernille Vermund** (hvis kilder findes)
 - [ ] Flere `otherPoliticians` / `relatedTopics` i skandale-data (se `TODO.md`)

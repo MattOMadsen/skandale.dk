@@ -1,17 +1,17 @@
 {
   "id": 14,
   "name": "Pernille Vermund",
-  "party": "Nye Borgerlige",
-  "partyColor": "#1E3A5F",
+  "party": "Liberal Alliance",
+  "partyColor": "#003087",
   "role": "Medlem af Folketinget",
   "inFolketinget": true,
-  "avatarColor": "#1E3A5F",
+  "avatarColor": "#003087",
   "initials": "PV",
   "image": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Pernille_Vermund_by_Christian_Ursilva_%282025%29.jpg",
-  "bio": "Pernille Vermund er grundlægger af Nye Borgerlige og var partiformand fra partiets start i 2015 til 2023. Hun er kendt for sin konservative og nationalkonservative linje med stærkt fokus på stram udlændingepolitik, kritik af globalisme og ønske om at bevare dansk kultur og suverænitet.",
+  "bio": "Pernille Vermund stiftede Nye Borgerlige i 2015 og var partiformand indtil 2023. Hun blev valgt til Folketinget i 2019 og meldte sig i januar 2024 ind i Liberal Alliance, hvor hun siden har været folketingsmedlem.",
   "beforePolitics": {
     "title": "Før politik",
-    "content": "Pernille Vermund er uddannet arkitekt og har arbejdet i byggebranchen. Hun blev politisk aktiv i 2015 hvor hun stiftede Nye Borgerlige som et nyt parti uden for det etablerede system."
+    "content": "Pernille Vermund er uddannet arkitekt og har arbejdet i byggebranchen. Hun var konservativ byrådsmedlem i Helsingør 2009–2011, før hun i 2015 stiftede Nye Borgerlige."
   },
-  "careerTimeline": "2015: Stifter og formand for Nye Borgerlige\n2019: Valgt ind i Folketinget\n2023: Trådte tilbage som partiformand\nHar været en markant stemme i debatten om udlændingepolitik, EU-modstand og bevarelse af danske værdier."
+  "careerTimeline": "2009–2011: Byrådsmedlem for Det Konservative Folkeparti i Helsingør\n2015: Stifter Nye Borgerlige\n2019: Valgt til Folketinget\n2023: Træder tilbage som NB-formand\n2024: Melder sig ind i Liberal Alliance (17. januar)"
 }

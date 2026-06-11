@@ -50,7 +50,9 @@
 - [x] **Lazy load** på tidslinje og netværk (ingen fuld `loadAllPoliticianDetails()` ved opstart)
 - [x] **Økonomisk støtte** for alle 40 politikere
 - [x] **Profilbilleder** for alle 40 politikere
-- [x] **Internationale affiliations oprydning** — domestic/parti fjernet; 39/40 udfyldt (v2.01.01)
+- [x] **Internationale affiliations oprydning** — domestic/parti fjernet; 40/40 udfyldt (v2.01.02)
+- [x] **Pernille Vermund research** — ELF + Liberal International via LA; parti opdateret (v2.01.02)
+- [x] **CHANGELOG.md** opdateret med v2.00.94–v2.01.02 (juni 2026)
 - [x] **Netværksprofiler** for OECD, ITF, WHO Europa og Europarådet (`network-profiles.js`)
 - [x] **POLITIKER-STATUS.md** opdateret med live audit-tal (juni 2026)
 
@@ -76,7 +78,6 @@
 
 ## Data / indhold (åbent)
 
-- [ ] **Pernille Vermund** — research internationale tilknytninger (affiliations-fil er bevidst tom)
 - [ ] Flere `otherPoliticians` / `relatedTopics` i skandale-data (kun 3 skandaler har det pt.)
 
 ## Teknisk gæld / oprydning
@@ -84,7 +85,7 @@
 - [ ] Ryd op i legacy script-referencer
 - [x] Erstat Tailwind Play CDN (lokal build: `npm run build:css`) (7 HTML-sider)
 - [x] Ens navbar + dark mode på alle sider (`navbar.js` + `dark-mode.js`)
-- [ ] Opdater CHANGELOG.md med juni-2026 ændringer
+- [x] Opdater CHANGELOG.md med juni-2026 ændringer (v2.00.94–v2.01.02)
 
 ## Fremtidige større features
 
