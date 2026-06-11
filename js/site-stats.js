@@ -1,6 +1,15 @@
 // js/site-stats.js – fælles data-loading og live site-meta
 
+function getSiteBasePath() {
+  const path = window.location.pathname || '/';
+  const match = path.match(/^(.*\/skandale\.dk)\/?/i);
+  if (match) return `${match[1]}/`;
+  const dir = path.endsWith('/') ? path : path.replace(/\/[^/]*$/, '/');
+  return dir || '/';
+}
+
 const SiteStats = {
+  getBasePath: getSiteBasePath,
   PARTY_SHORT: {
     'Socialdemokratiet': 'S',
     'Danmarksdemokraterne': 'DD',
@@ -17,9 +26,16 @@ const SiteStats = {
     'Socialistisk Folkeparti': 'SF'
   },
 
+  resolvePath(path) {
+    if (!path || /^https?:\/\//i.test(path)) return path;
+    const base = this.getBasePath();
+    const normalized = path.replace(/^\//, '');
+    return `${base}${normalized}`;
+  },
+
   async fetchJSON(path) {
     try {
-      const res = await fetch(path);
+      const res = await fetch(this.resolvePath(path));
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return await res.json();
     } catch (e) {
@@ -86,8 +102,13 @@ const SiteStats = {
   },
 
   async loadPoliticianCores(slugs) {
-    const cores = await Promise.all(slugs.map(slug => this.loadPoliticianCore(slug)));
-    return cores.filter(Boolean);
+    const results = await Promise.all(
+      slugs.map(async (slug) => {
+        const core = await this.loadPoliticianCore(slug);
+        return core ? { ...core, slug } : null;
+      })
+    );
+    return results.filter(Boolean);
   },
 
   async loadScandalsForSlug(slug) {

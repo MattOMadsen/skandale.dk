@@ -54,12 +54,58 @@ async function loadDetailsInBackground() {
   }
 }
 
-function initializeEverything() {
+function showHomeLoadError(message) {
+  const grid = document.getElementById('politiciansGrid');
+  const stats = document.getElementById('stats-snapshot');
+
+  if (stats) {
+    stats.innerHTML = `
+      <div class="bg-white/10 border border-white/20 rounded-3xl p-6 text-white text-sm">
+        Kunne ikke indlæse statistik. ${message}
+      </div>
+    `;
+  }
+
+  if (grid) {
+    grid.innerHTML = `
+      <div class="col-span-full rounded-3xl border border-red-200 bg-red-50 dark:bg-red-950/40 dark:border-red-800 p-6 text-red-800 dark:text-red-200">
+        <p class="font-semibold mb-2">Kunne ikke indlæse politikere</p>
+        <p class="text-sm mb-4">${message}</p>
+        <button type="button" onclick="window.location.reload()" class="px-4 py-2 rounded-xl bg-[#C8102E] text-white text-sm font-medium">Prøv igen</button>
+      </div>
+    `;
+  }
+}
+
+function bindPoliticianGridClicks() {
+  const grid = document.getElementById('politiciansGrid');
+  if (!grid || grid.dataset.clickBound === 'true') return;
+
+  grid.dataset.clickBound = 'true';
+  grid.addEventListener('click', function(e) {
+    const card = e.target.closest('.politician-card');
+    if (card && card.dataset.id) {
+      const id = parseInt(card.dataset.id, 10);
+      if (typeof window.showPoliticianModal === 'function') {
+        window.showPoliticianModal(id);
+      }
+    }
+  });
+}
+
+async function initializeEverything() {
   if (typeof window.renderPoliticianSkeletons === 'function') {
     window.renderPoliticianSkeletons(8);
   }
 
-  loadPoliticians().then(async () => {
+  try {
+    const loaded = await loadPoliticians();
+
+    if (!loaded || loaded.length === 0) {
+      showHomeLoadError('Tjek din internetforbindelse og genindlæs siden (Ctrl+Shift+R).');
+      return;
+    }
+
     const visible = getVisiblePoliticiansForEnrichment();
 
     if (window.SiteStats) {
@@ -79,21 +125,10 @@ function initializeEverything() {
       window.renderStatsSnapshot();
     }
 
-    const grid = document.getElementById('politiciansGrid');
-    if (grid) {
-      grid.addEventListener('click', function(e) {
-        const card = e.target.closest('.politician-card');
-        if (card && card.dataset.id) {
-          const id = parseInt(card.dataset.id, 10);
-          if (typeof window.showPoliticianModal === 'function') {
-            window.showPoliticianModal(id);
-          }
-        }
-      });
-    }
+    bindPoliticianGridClicks();
 
-    if (typeof setVersion === 'function') {
-      setVersion();
+    if (typeof window.setVersion === 'function') {
+      window.setVersion();
     }
 
     if ('requestIdleCallback' in window) {
@@ -101,7 +136,10 @@ function initializeEverything() {
     } else {
       setTimeout(loadDetailsInBackground, 400);
     }
-  });
+  } catch (error) {
+    console.error('[main] initializeEverything fejlede:', error);
+    showHomeLoadError('Der opstod en uventet fejl under indlæsning.');
+  }
 }
 
 function getFolketingCount() {
@@ -279,8 +317,11 @@ window.getFilteredPoliticians = getFilteredPoliticians;
 window.applyFilters = applyFilters;
 window.initializeEverything = initializeEverything;
 
-document.addEventListener('DOMContentLoaded', () => {
+function bootHomePage() {
   if (document.getElementById('politiciansGrid')) {
     initializeEverything();
   }
-});
+}
+
+document.addEventListener('DOMContentLoaded', bootHomePage);
+window.bootHomePage = bootHomePage;

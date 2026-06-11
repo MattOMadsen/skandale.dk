@@ -18,9 +18,9 @@ async function loadPoliticians() {
 
     const cores = await SiteStats.loadPoliticianCores(politicianSlugs);
 
-    politicians = cores.map((core, index) => ({
+    politicians = cores.map((core) => ({
       ...core,
-      slug: politicianSlugs[index] || SiteStats.slugFromName(core.name),
+      slug: core.slug || SiteStats.slugFromName(core.name),
       scandals: [],
       affiliations: [],
       economicSupport: [],
@@ -32,7 +32,9 @@ async function loadPoliticians() {
     return politicians;
   } catch (error) {
     console.error('Fejl ved loading:', error);
-    return [];
+    politicians = [];
+    window.politicians = politicians;
+    return politicians;
   }
 }
 

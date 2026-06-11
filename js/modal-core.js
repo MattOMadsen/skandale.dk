@@ -17,7 +17,10 @@ async function showPoliticianModal(politicianId, targetScandalId = null) {
   // - p.id fra JSON/data er altid et number (f.eks. 1)
   // - politicianId fra localStorage (via sammenlign.html) er altid en string ("1")
   // Dette sikrer at auto-open fra Sammenlign-siden virker.
-  let politician = typeof politicians !== 'undefined' ? politicians.find(p => p.id == politicianId) : null;
+  const polArray = (typeof politicians !== 'undefined' && Array.isArray(politicians) && politicians.length)
+    ? politicians
+    : (window.politicians || []);
+  let politician = polArray.find(p => p.id == politicianId) || null;
   if (!politician) {
     console.error('Politiker ikke fundet:', politicianId);
     alert('Kunne ikke finde politikeren. Prøv at genindlæse siden.');
