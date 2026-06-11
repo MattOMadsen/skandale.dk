@@ -36,7 +36,6 @@ const SammenlignInit = {
 
     initializeTailwind() {
         document.documentElement.style.setProperty('--accent', '#c8102e');
-        tailwind.config = { darkMode: 'class' };
     },
 
     initializePoliticianLists() {

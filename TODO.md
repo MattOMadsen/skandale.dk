@@ -67,14 +67,14 @@
 5. **Loading-spinner i politiker-modal** ved `ensureAllDetailsLoaded()`
 6. **«Sammenlign med…»-knap** i politiker-modal
 7. **Granulær broken-promises mappe** for Pernille Vermund
-8. **Erstat Tailwind CDN** med lokal optimeret CSS
+8. ~~**Erstat Tailwind CDN** med lokal optimeret CSS~~ (implementeret: `npm run build:css` → `css/tailwind.css`)
 9. **Admin: slet/rediger skandaler** i dashboard
 10. ~~**Alvorligheds-diagram** på stats-siden~~ (implementeret juni 2026)
 
 ## Teknisk gæld / oprydning
 
 - [ ] Ryd op i legacy script-referencer
-- [ ] Erstat Tailwind Play CDN (7 HTML-sider)
+- [x] Erstat Tailwind Play CDN (lokal build: `npm run build:css`) (7 HTML-sider)
 - [x] Ens navbar + dark mode på alle sider (`navbar.js` + `dark-mode.js`)
 - [ ] Opdater CHANGELOG.md med juni-2026 ændringer
 
