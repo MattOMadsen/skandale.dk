@@ -119,7 +119,9 @@ function createPoliticianComparisonHTML(politician) {
     }, 0);
     
     const brokenPromises = politician.brokenPromises ? politician.brokenPromises.length : 0;
-    const affiliations = politician.affiliations ? politician.affiliations.length : 0;
+    const affiliations = typeof window.filterInternationalAffiliations === 'function'
+        ? window.filterInternationalAffiliations(politician.affiliations).length
+        : (politician.affiliations ? politician.affiliations.length : 0);
     
     return `
         <div class="text-center mb-6">

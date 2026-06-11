@@ -1,16 +1,3 @@
 {
-  "affiliations": [
-    {
-      "name": "Folketinget",
-      "organization": "Folketinget",
-      "year": "2011-",
-      "role": "Folketingsmedlem"
-    },
-    {
-      "name": "Moderaterne",
-      "organization": "Moderaterne",
-      "year": "2022-",
-      "role": "Kulturminister"
-    }
-  ]
+  "affiliations": []
 }

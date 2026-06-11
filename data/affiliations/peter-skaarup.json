@@ -1,16 +1,3 @@
 {
-  "affiliations": [
-    {
-      "name": "Folketinget",
-      "organization": "Folketinget",
-      "year": "2001-",
-      "role": "Folketingsmedlem"
-    },
-    {
-      "name": "Danmarksdemokraterne",
-      "organization": "Danmarksdemokraterne",
-      "year": "2022-",
-      "role": "Gruppeformand"
-    }
-  ]
+  "affiliations": []
 }

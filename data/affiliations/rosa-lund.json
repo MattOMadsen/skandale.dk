@@ -1,16 +1,22 @@
 {
   "affiliations": [
     {
-      "name": "Folketinget",
-      "organization": "Folketinget",
+      "name": "Party of the European Left",
+      "organization": "European Left",
       "year": "2019-",
-      "role": "Folketingsmedlem"
+      "role": "Enhedslisten i europæisk venstrefløjsnetværk"
     },
     {
-      "name": "Enhedslisten",
-      "organization": "Enhedslisten",
+      "name": "Nordic Green Left Alliance",
+      "organization": "Nordic Green Left",
       "year": "2019-",
-      "role": "Formand"
+      "role": "Nordisk venstrefløj i EU-sammenhæng"
+    },
+    {
+      "name": "GUE/NGL (European Parliament)",
+      "organization": "European United Left – Nordic Green Left",
+      "year": "2019-",
+      "role": "Europæisk parlamentarisk venstrefløjsgruppe"
     }
   ]
 }

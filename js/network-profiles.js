@@ -217,6 +217,12 @@ const NETWORK_PROFILES = {
     why: 'Dette netværk er mindre “eliteklub” og mere civilsamfund — men stadig værd at kende, når politikere bruger videnskabelig tilknytning som autoritet i debatter, vælgerne ikke har fact-checket.',
     footnote: null
   },
+  'The Trilateral Commission': {
+    tagline: 'Davos’ mindre kendte storebror siden 1973.',
+    what: 'The Trilateral Commission er et inviteret netværk af ledere fra Nordamerika, Europa og Asien-Stillehavet, grundlagt af David Rockefeller og Zbigniew Brzezinski. Det samler politikere, centralbankfolk, topchefer og akademikere til lukkede drøftelser om global økonomi og geopolitik.',
+    why: 'Kommissionen er officielt et “uformelt” forum — men den er også en klassisk elitekanal, hvor beslutningstagere mødes uden vælgere i rummet. Når danske politikere er med, låner de prestige fra et netværk, de fleste danskere aldrig har hørt valgt om.',
+    footnote: 'Medlemslister offentliggøres på trilateral.org.'
+  },
   'Internationale liberale netværk': {
     tagline: 'Samlet betegnelse for et spredt liberalt web.',
     what: 'Dansk betegnelse for tilknytning til liberale internationale organisationer — fra partiføderationer til politiske institutter og seminarer i Europa og globalt.',

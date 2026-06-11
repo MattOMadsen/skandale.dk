@@ -1,16 +1,10 @@
 {
   "affiliations": [
     {
-      "name": "Folketinget",
-      "organization": "Folketinget",
-      "year": "2005-",
-      "role": "Folketingsmedlem"
-    },
-    {
-      "name": "Socialdemokratiet",
-      "organization": "Socialdemokratiet",
-      "year": "2005-",
-      "role": "Forsvarsminister"
+      "name": "NATO",
+      "organization": "North Atlantic Treaty Organization",
+      "year": "2022-",
+      "role": "Forsvarsminister i NATO-alliance"
     }
   ]
 }

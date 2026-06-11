@@ -1,15 +1,16 @@
 {
-  "id": "alex-vanopslagh",
   "affiliations": [
     {
-      "name": "Liberal Alliance",
-      "type": "Parti",
-      "description": "Formand for Liberal Alliance siden 2022."
+      "name": "European Liberal Forum",
+      "organization": "European Liberal Forum",
+      "year": "2022-",
+      "role": "Liberal Alliance i europæisk liberalt netværk"
     },
     {
-      "name": "Internationale liberale netværk",
-      "type": "Internationalt",
-      "description": "Aktiv i liberale europæiske og internationale sammenhænge."
+      "name": "Liberal International",
+      "organization": "Liberal International",
+      "year": "2022-",
+      "role": "Global liberal partiføderation"
     }
   ]
 }

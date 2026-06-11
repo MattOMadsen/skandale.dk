@@ -152,14 +152,19 @@ async function showPoliticianModal(politicianId, targetScandalId = null) {
           <div id="economicSupportSection"></div>
           
           <!-- Internationale netværk & tilknytninger (uden inline onclick - attaches nedenfor) -->
-          ${politician.affiliations && politician.affiliations.length > 0 ? `
+          ${(() => {
+            const internationalAffiliations = typeof window.filterInternationalAffiliations === 'function'
+              ? window.filterInternationalAffiliations(politician.affiliations)
+              : (politician.affiliations || []);
+            if (!internationalAffiliations.length) return '';
+            return `
             <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-700">
               <div class="flex items-center gap-x-2 mb-4">
                 <i class="fa-solid fa-globe text-[#C8102E]"></i>
                 <span class="font-bold text-lg text-slate-900 dark:text-white">Internationale netværk & tilknytninger</span>
               </div>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="networkAffiliationsContainer">
-                ${politician.affiliations.map((aff, index) => {
+                ${internationalAffiliations.map((aff, index) => {
                   const networkName = aff.name || aff.organization || 'Ukendt';
                   return `
                     <div class="network-affiliation-item p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700 rounded-2xl hover:border-[#C8102E]/30 dark:hover:border-[#C8102E]/50 cursor-pointer transition-all" data-network-name="${networkName.replace(/"/g, '\"')}" data-network-org="${(aff.organization || '').replace(/"/g, '\"')}">
@@ -171,7 +176,8 @@ async function showPoliticianModal(politicianId, targetScandalId = null) {
                 }).join('')}
               </div>
             </div>
-          ` : ''}
+          `;
+          })()}
           
           <!-- Brudte valgløfter -->
           <div id="brokenPromisesSection"></div>

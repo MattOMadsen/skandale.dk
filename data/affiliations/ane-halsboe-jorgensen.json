@@ -1,16 +1,3 @@
 {
-  "affiliations": [
-    {
-      "name": "Folketinget",
-      "organization": "Folketinget",
-      "year": "2007-",
-      "role": "Folketingsmedlem"
-    },
-    {
-      "name": "Socialdemokratiet",
-      "organization": "Socialdemokratiet",
-      "year": "2007-",
-      "role": "Beskæftigelsesminister"
-    }
-  ]
+  "affiliations": []
 }

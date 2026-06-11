@@ -138,6 +138,11 @@ function isInternationalNetwork(name, organization = '') {
   return Boolean((name || organization || '').toString().trim());
 }
 
+function filterInternationalAffiliations(affiliations) {
+  if (!Array.isArray(affiliations)) return [];
+  return affiliations.filter(aff => isInternationalNetwork(aff.name, aff.organization));
+}
+
 function buildCrossReferenceIndices() {
   const networkIndex = {};
   const donorIndex = {};
@@ -340,6 +345,7 @@ function getInternationalNetworkEntries(networkIndex = window.networkIndex) {
 
 window.normalizeNetworkName = normalizeNetworkName;
 window.isInternationalNetwork = isInternationalNetwork;
+window.filterInternationalAffiliations = filterInternationalAffiliations;
 window.getInternationalNetworkEntries = getInternationalNetworkEntries;
 window.buildCrossReferenceIndices = buildCrossReferenceIndices;
 window.ensureAllDetailsLoaded = ensureAllDetailsLoaded;

@@ -1,16 +1,16 @@
 {
   "affiliations": [
     {
-      "name": "Folketinget",
-      "organization": "Folketinget",
-      "year": "2001-",
-      "role": "Folketingsmedlem"
+      "name": "NATO",
+      "organization": "North Atlantic Treaty Organization",
+      "year": "2022-",
+      "role": "Forsvarsminister i NATO-alliance"
     },
     {
-      "name": "Venstre",
-      "organization": "Venstre",
+      "name": "European People's Party (EPP)",
+      "organization": "European People's Party",
       "year": "2001-",
-      "role": "Forsvarsminister og gruppeformand"
+      "role": "Venstre i europæisk borgerlig partifamilie"
     }
   ]
 }

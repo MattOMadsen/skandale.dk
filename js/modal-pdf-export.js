@@ -200,7 +200,10 @@ function exportPoliticianToPDF(politician) {
     }
 
     // === INTERNATIONALE NETVÆRK ===
-    if (politician.affiliations && politician.affiliations.length > 0) {
+    const pdfAffiliations = typeof window.filterInternationalAffiliations === 'function'
+        ? window.filterInternationalAffiliations(politician.affiliations)
+        : (politician.affiliations || []);
+    if (pdfAffiliations.length > 0) {
         if (y > 230) { doc.addPage(); y = 20; }
         doc.setFontSize(14);
         doc.setTextColor(200, 16, 46);
@@ -208,7 +211,7 @@ function exportPoliticianToPDF(politician) {
         y += 8;
         doc.setTextColor(0, 0, 0);
         doc.setFontSize(10);
-        politician.affiliations.forEach(a => {
+        pdfAffiliations.forEach(a => {
             if (y > 240) { doc.addPage(); y = 20; }
             doc.text(`• ${a.name || a.organization} ${a.year ? '(' + a.year + ')' : ''}`, 15, y);
             y += 6;
