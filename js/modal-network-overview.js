@@ -10,11 +10,15 @@ async function showNetworkOverviewModal() {
         return;
     }
 
-    const networks = Object.entries(window.networkIndex)
-        .map(([name, pols]) => ({
+    const entries = typeof window.getInternationalNetworkEntries === 'function'
+        ? window.getInternationalNetworkEntries()
+        : Object.entries(window.networkIndex).map(([name, politicians]) => ({ name, politicians }));
+
+    const networks = entries
+        .map(({ name, politicians }) => ({
             name,
-            count: pols.length,
-            politicians: pols
+            count: politicians.length,
+            politicians
         }))
         .sort((a, b) => b.count - a.count);
 

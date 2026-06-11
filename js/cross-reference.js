@@ -283,7 +283,50 @@ function findRelatedPoliticiansForScandal(politician, scandal) {
   return Array.from(results.values()).sort((a, b) => a.name.localeCompare(b.name, 'da'));
 }
 
+const DOMESTIC_NETWORK_NAMES = new Set([
+  'folketinget',
+  'socialdemokratiet',
+  'venstre',
+  'danmarksdemokraterne',
+  'radikale venstre',
+  'moderaterne',
+  'dansk folkeparti',
+  'det konservative folkeparti',
+  'enhedslisten',
+  'nye borgerlige',
+  'liberal alliance',
+  'alternativet',
+  'alternativet / uafhaengig',
+  'frie gronne',
+  'socialistisk folkeparti',
+  'dsu',
+  'danmarks socialdemokratiske ungdom',
+  'ungdomsbureauet',
+  'statsministeriet',
+  'ministeriet'
+]);
+
+function isInternationalNetwork(name, organization = '') {
+  const candidates = [name, organization].map(normalizeText).filter(Boolean);
+  for (const candidate of candidates) {
+    if (candidate.includes('folketinget')) return false;
+    if (DOMESTIC_NETWORK_NAMES.has(candidate)) return false;
+    for (const domestic of DOMESTIC_NETWORK_NAMES) {
+      if (candidate === domestic || candidate.startsWith(domestic + ' ')) return false;
+    }
+  }
+  return Boolean((name || organization || '').toString().trim());
+}
+
+function getInternationalNetworkEntries(networkIndex = window.networkIndex) {
+  return Object.entries(networkIndex || {})
+    .filter(([name]) => isInternationalNetwork(name))
+    .map(([name, politicians]) => ({ name, politicians }));
+}
+
 window.normalizeNetworkName = normalizeNetworkName;
+window.isInternationalNetwork = isInternationalNetwork;
+window.getInternationalNetworkEntries = getInternationalNetworkEntries;
 window.buildCrossReferenceIndices = buildCrossReferenceIndices;
 window.ensureAllDetailsLoaded = ensureAllDetailsLoaded;
 window.findPoliticiansByNetwork = findPoliticiansByNetwork;
