@@ -8,11 +8,13 @@
   "mediaLinks": [
     {
       "name": "DR.dk",
-      "url": "https://www.dr.dk/nyheder/politik/fogh-og-irak-krigen"
+      "url": "https://www.dr.dk/nyheder/politik/fogh-bebudede-irak-stoette-til-usa-et-aar-foer-krig",
+      "lastVerified": "2026-06-14"
     },
     {
       "name": "Berlingske - Fogh-rapporten",
-      "url": "https://www.berlingske.dk/politik/2016/07/06/fogh-og-irak-rapporten"
+      "url": "https://www.berlingske.dk/politik/krigen-i-irak-var-foghs-foghs-og-foghs",
+      "lastVerified": "2026-06-14"
     }
   ],
   "consequences": "Kritik for utilstrækkeligt efterretningsgrundlag og vildledning af Folketinget.",

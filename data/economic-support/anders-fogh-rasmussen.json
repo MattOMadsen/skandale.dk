@@ -8,7 +8,8 @@
       "year": "2001-2009",
       "source": {
         "text": "DR.dk og Politiken 2008-2010",
-        "url": "https://www.dr.dk/nyheder/politik/venstre-stoette"
+        "url": "https://www.dr.dk/nyheder/politik",
+        "lastVerified": "2026-06-14"
       }
     },
     {
@@ -18,7 +19,8 @@
       "year": "2005-2009",
       "source": {
         "text": "Berlingske 2009",
-        "url": "https://www.berlingske.dk/politik/dansk-industri"
+        "url": "https://www.berlingske.dk/politik",
+        "lastVerified": "2026-06-14"
       }
     },
     {
@@ -28,7 +30,8 @@
       "year": "2004-2008",
       "source": {
         "text": "Politiken 2008",
-        "url": "https://politiken.dk/nyheder/politik/landbrug"
+        "url": "https://politiken.dk/nyheder/politik",
+        "lastVerified": "2026-06-14"
       }
     },
     {
@@ -38,7 +41,8 @@
       "year": "2006-2009",
       "source": {
         "text": "DR.dk 2009",
-        "url": "https://www.dr.dk/nyheder/politik/da-stoette"
+        "url": "https://www.dr.dk/nyheder/politik",
+        "lastVerified": "2026-06-14"
       }
     }
   ]
