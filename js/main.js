@@ -163,10 +163,7 @@ function getFilteredPoliticians() {
 
   let filtered = window.politicians;
 
-  if (currentFolketingFilter === 'folketing') {
-    filtered = filtered.filter(p => p.inFolketinget === true);
-  }
-
+  // Party filter always applies
   if (currentPartyFilter) {
     filtered = filtered.filter(p => p.party === currentPartyFilter);
   }
@@ -175,6 +172,7 @@ function getFilteredPoliticians() {
   const term = searchInput ? searchInput.value.trim() : '';
 
   if (term !== '') {
+    // Search always works across (party-filtered) full list so former politicians like Anders Fogh Rasmussen can be found
     if (typeof window.calculateSearchScore === 'function') {
       const scored = filtered
         .map(p => ({
@@ -188,11 +186,15 @@ function getFilteredPoliticians() {
     } else {
       const normalizedTerm = term.toLowerCase();
       filtered = filtered.filter(p =>
-        p.name.toLowerCase().includes(normalizedTerm) ||
-        p.party.toLowerCase().includes(normalizedTerm)
+        (p.name && p.name.toLowerCase().includes(normalizedTerm)) ||
+        (p.party && p.party.toLowerCase().includes(normalizedTerm))
       );
     }
   } else {
+    // Only apply Folketinget filter when NOT searching
+    if (currentFolketingFilter === 'folketing') {
+      filtered = filtered.filter(p => p.inFolketinget === true);
+    }
     filtered = sortPoliticians(filtered);
   }
 
@@ -204,7 +206,7 @@ function updatePoliticianCount(filteredLength = null) {
   if (!countEl || !window.politicians) return;
 
   const count = filteredLength !== null ? filteredLength : getFilteredPoliticians().length;
-  const suffix = currentFolketingFilter === 'folketing' ? ' i Folketinget' : '';
+  const suffix = (currentFolketingFilter === 'folketing' && !document.getElementById('searchInput')?.value) ? ' i Folketinget' : '';
   countEl.textContent = `${count} politikere${suffix}`;
 }
 
@@ -214,7 +216,6 @@ function initFolketingFilter() {
 
   const chips = container.querySelectorAll('[data-folketing]');
   chips.forEach(chip => {
-    // Direkte onclick for maksimal pålidelighed (undgår event-delegation edge cases)
     chip.onclick = () => {
       chips.forEach(c => {
         c.classList.remove('active', 'bg-[#C8102E]', 'text-white', 'shadow-sm');
@@ -309,7 +310,7 @@ function applyFilters() {
   updatePoliticianCount(filtered.length);
 
   if (typeof window.updateSearchUI === 'function') {
-    const total = currentFolketingFilter === 'folketing'
+    const total = currentFolketingFilter === 'folketing' && !hasTerm
       ? getFolketingCount()
       : window.politicians.length;
     window.updateSearchUI(filtered.length, total, hasTerm);
