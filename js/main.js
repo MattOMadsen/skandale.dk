@@ -212,25 +212,28 @@ function initFolketingFilter() {
   const container = document.getElementById('folketing-filter');
   if (!container) return;
 
-  container.addEventListener('click', (e) => {
-    const chip = e.target.closest('[data-folketing]');
-    if (!chip) return;
+  const chips = container.querySelectorAll('[data-folketing]');
+  chips.forEach(chip => {
+    // Direkte onclick for maksimal pålidelighed (undgår event-delegation edge cases)
+    chip.onclick = () => {
+      chips.forEach(c => {
+        c.classList.remove('active', 'bg-[#C8102E]', 'text-white', 'shadow-sm');
+        c.classList.add('text-slate-700', 'dark:text-slate-300', 'hover:bg-white/60', 'dark:hover:bg-slate-700/60');
+      });
 
-    container.querySelectorAll('[data-folketing]').forEach(c => {
-      c.classList.remove('active', 'bg-[#C8102E]', 'text-white', 'shadow-sm');
-      c.classList.add('text-slate-700', 'dark:text-slate-300', 'hover:bg-white/60', 'dark:hover:bg-slate-700/60');
-    });
+      chip.classList.add('active', 'bg-[#C8102E]', 'text-white', 'shadow-sm');
+      chip.classList.remove('text-slate-700', 'dark:text-slate-300', 'hover:bg-white/60', 'dark:hover:bg-slate-700/60');
 
-    chip.classList.add('active', 'bg-[#C8102E]', 'text-white', 'shadow-sm');
-    chip.classList.remove('text-slate-700', 'dark:text-slate-300', 'hover:bg-white/60', 'dark:hover:bg-slate-700/60');
+      currentFolketingFilter = chip.dataset.folketing || 'folketing';
 
-    currentFolketingFilter = chip.dataset.folketing || 'folketing';
+      if (typeof window.resetVisibleCount === 'function') {
+        window.resetVisibleCount();
+      }
 
-    if (typeof window.resetVisibleCount === 'function') {
-      window.resetVisibleCount();
-    }
-
-    applyFilters();
+      if (typeof applyFilters === 'function') {
+        applyFilters();
+      }
+    };
   });
 }
 
