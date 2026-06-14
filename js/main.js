@@ -148,14 +148,8 @@ function getFolketingCount() {
 }
 
 function sortPoliticians(list) {
-  return [...list].sort((a, b) => {
-    if (currentFolketingFilter === 'all') {
-      const aFolk = a.inFolketinget ? 0 : 1;
-      const bFolk = b.inFolketinget ? 0 : 1;
-      if (aFolk !== bFolk) return aFolk - bFolk;
-    }
-    return (a.name || '').localeCompare(b.name || '', 'da');
-  });
+  // Ren alfabetisk sortering (tidligere politikere vises nu tidligere i "Alle politikere"-visningen)
+  return [...list].sort((a, b) => (a.name || '').localeCompare(b.name || '', 'da'));
 }
 
 function getFilteredPoliticians() {
@@ -163,7 +157,6 @@ function getFilteredPoliticians() {
 
   let filtered = window.politicians;
 
-  // Party filter always applies
   if (currentPartyFilter) {
     filtered = filtered.filter(p => p.party === currentPartyFilter);
   }
@@ -172,7 +165,6 @@ function getFilteredPoliticians() {
   const term = searchInput ? searchInput.value.trim() : '';
 
   if (term !== '') {
-    // Search always works across (party-filtered) full list so former politicians like Anders Fogh Rasmussen can be found
     if (typeof window.calculateSearchScore === 'function') {
       const scored = filtered
         .map(p => ({
@@ -191,7 +183,6 @@ function getFilteredPoliticians() {
       );
     }
   } else {
-    // Only apply Folketinget filter when NOT searching
     if (currentFolketingFilter === 'folketing') {
       filtered = filtered.filter(p => p.inFolketinget === true);
     }
