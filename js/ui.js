@@ -1,6 +1,12 @@
 // js/ui.js - Render politikere på forsiden (incremental DOM + IntersectionObserver)
+// Forbedret version: Konstanter ekstraheret for bedre vedligeholdelse + robusthed
 
-let visibleCount = 8;
+// === Konfiguration (nem at tune performance uden at ændre logik) ===
+const INITIAL_VISIBLE_COUNT = 8;
+const LOAD_BATCH_SIZE = 8;
+const SCROLL_ROOT_MARGIN = '240px';
+
+let visibleCount = INITIAL_VISIBLE_COUNT;
 let isLoadingMore = false;
 let isSearchActive = false;
 let renderedCount = 0;
@@ -18,7 +24,10 @@ function getUserRatingsCache() {
         if (val > 0) userRatingsCache.set(key, val);
       }
     }
-  } catch (e) {}
+  } catch (e) {
+    // Silent fail i produktion - localStorage kan være deaktiveret eller fuld
+    console.warn('Kunne ikke læse bruger-ratings fra localStorage');
+  }
   return userRatingsCache;
 }
 
@@ -113,6 +122,7 @@ function buildPoliticianCardHTML(politician) {
         <div class="text-right">
           <div class="text-xs text-slate-400 dark:text-slate-500">${politician.party}</div>
           <div class="text-[10px] text-slate-400 dark:text-slate-500">${politician.role || ''}</div>
+          ${!politician.inFolketinget ? `<div class="mt-1 text-[10px] px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 font-medium">Tidligere</div>` : ''}
         </div>
       </div>
 
@@ -254,7 +264,7 @@ function loadMorePoliticians() {
   showInfiniteLoader(true);
 
   requestAnimationFrame(() => {
-    visibleCount = Math.min(visibleCount + 8, total);
+    visibleCount = Math.min(visibleCount + LOAD_BATCH_SIZE, total);
     renderPoliticians(null, { appendOnly: true });
     showInfiniteLoader(false);
     isLoadingMore = false;
@@ -263,7 +273,7 @@ function loadMorePoliticians() {
 }
 
 function resetVisibleCount() {
-  visibleCount = 8;
+  visibleCount = INITIAL_VISIBLE_COUNT;
   renderedCount = 0;
   isSearchActive = false;
   const shownEl = document.getElementById('all-politicians-shown');
@@ -283,7 +293,7 @@ function setupInfiniteScroll() {
     if (entries[0]?.isIntersecting) {
       loadMorePoliticians();
     }
-  }, { rootMargin: '240px', threshold: 0 });
+  }, { rootMargin: SCROLL_ROOT_MARGIN, threshold: 0 });
 
   scrollObserver.observe(sentinel);
 }
