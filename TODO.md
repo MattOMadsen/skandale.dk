@@ -1,6 +1,6 @@
 # TODO-liste for Skandale.dk
 
-**Sidst opdateret:** 11. juni 2026
+**Sidst opdateret:** 19. juni 2026
 
 **Aktuelt antal (juni 2026):** **40 politikere**, **105 skandaler**, **33 folketingsmedlemmer** + **7 tidligere**. Se `POLITIKER-STATUS.md` for live audit.
 
@@ -52,7 +52,7 @@
 - [x] **Profilbilleder** for alle 40 politikere
 - [x] **Internationale affiliations oprydning** — domestic/parti fjernet; 40/40 udfyldt (v2.01.02)
 - [x] **Pernille Vermund research** — ELF + Liberal International via LA; parti opdateret (v2.01.02)
-- [x] **CHANGELOG.md** opdateret med v2.00.94–v2.01.02 (juni 2026)
+- [x] **CHANGELOG.md** opdateret med juni-2026 ændringer (v2.00.94–v2.01.02 (juni 2026)
 - [x] **Netværksprofiler** for OECD, ITF, WHO Europa og Europarådet (`network-profiles.js`)
 - [x] **POLITIKER-STATUS.md** opdateret med live audit-tal (juni 2026)
 
@@ -78,6 +78,7 @@
 
 ## Data / indhold (åbent)
 
+- [x] **Kilde-link oprydning** — Erstattet generiske frontpage- og sektions-links med specifikke artikler. A-politikere færdige: Alex Vanopslagh (19. juni 2026), Anders Fogh Rasmussen, Ane Halsboe-Jørgensen. `lastVerified` tilføjet på flere links.
 - [ ] Flere `otherPoliticians` / `relatedTopics` i skandale-data (49/105 har det pt. — v2.02.01)
 
 ## Teknisk gæld / oprydning
