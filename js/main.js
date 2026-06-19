@@ -148,14 +148,8 @@ function getFolketingCount() {
 }
 
 function sortPoliticians(list) {
-  return [...list].sort((a, b) => {
-    // Aktive Folketing-medlemmer først, derefter tidligere (alfabetisk inden for hver gruppe)
-    if (a.inFolketinget !== b.inFolketinget) {
-      return a.inFolketinget ? -1 : 1;
-    }
-    // Alfabetisk sortering på dansk
-    return (a.name || '').localeCompare(b.name || '', 'da');
-  });
+  // Ren alfabetisk sortering på dansk (A-Å). Gælder både "Folketinget nu" og "Alle politikere".
+  return [...list].sort((a, b) => (a.name || '').localeCompare(b.name || '', 'da'));
 }
 
 function getFilteredPoliticians() {
