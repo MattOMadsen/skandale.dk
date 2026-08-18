@@ -5,6 +5,39 @@ body {
     font-family: 'Inter', system_ui, sans-serif;
 }
 
+.support-bar {
+    background: #1a1610;
+    border-bottom: 1px solid rgba(200, 16, 46, 0.45);
+    color: #f3e6c8;
+    font-size: 0.88rem;
+    line-height: 1.4;
+}
+
+.support-bar p {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0.5rem 1.25rem;
+    text-align: center;
+}
+
+.support-bar a {
+    color: #f87171;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    margin-left: 0.35rem;
+    white-space: nowrap;
+}
+
+.support-bar a:hover {
+    color: #fff;
+}
+
+.dark .support-bar {
+    background: #0b0a08;
+    border-bottom-color: rgba(248, 113, 113, 0.35);
+}
+
 .heading-font {
     font-family: 'Playfair Display', Georgia, serif;
 }

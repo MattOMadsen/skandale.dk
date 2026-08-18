@@ -3,6 +3,12 @@
 
 function loadNavbar() {
     const navbarHTML = `
+        <div class="support-bar no-print" role="region" aria-label="Støt projektet">
+            <p>
+                Hjælp med at få projektet ud på en rigtig hjemmeside.
+                <a href="om.html#doner">Støt os</a>
+            </p>
+        </div>
         <!-- Desktop + Tablet Navbar -->
         <nav class="bg-white dark:bg-slate-900 border-b sticky top-0 z-50 no-print">
             <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -25,6 +31,7 @@ function loadNavbar() {
                     <a href="stats.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-[#C8102E] dark:hover:text-[#C8102E] transition-colors">Statistik</a>
                     <a href="netvaerk.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-[#C8102E] dark:hover:text-[#C8102E] transition-colors">Netværk</a>
                     <a href="om.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-[#C8102E] dark:hover:text-[#C8102E] transition-colors">Om</a>
+                    <a href="om.html#doner" class="nav-link text-slate-600 dark:text-slate-300 hover:text-[#C8102E] dark:hover:text-[#C8102E] transition-colors">Støt</a>
                     <a href="kontakt.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-[#C8102E] dark:hover:text-[#C8102E] transition-colors">Kontakt</a>
                 </div>
 
@@ -72,6 +79,7 @@ function loadNavbar() {
                         <a href="stats.html" class="block px-4 py-3 rounded-xl text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700">Statistik</a>
                         <a href="netvaerk.html" class="block px-4 py-3 rounded-xl text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700">Netværk</a>
                         <a href="om.html" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-xl text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700">Om projektet</a>
+                        <a href="om.html#doner" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-xl text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700">Støt os</a>
                         <a href="kontakt.html" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-xl text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700">Kontakt</a>
                     </div>
                 </div>
