@@ -2,7 +2,7 @@
 
 function getSiteBasePath() {
   const path = window.location.pathname || '/';
-  const match = path.match(/^(.*\/skandale\.dk)\/?/i);
+  const match = path.match(/^(.*\/(?:skandale\.dk|apps\/skandale))\/?/i);
   if (match) return `${match[1]}/`;
   const dir = path.endsWith('/') ? path : path.replace(/\/[^/]*$/, '/');
   return dir || '/';

@@ -2,6 +2,7 @@
 
 (function() {
   if (!('serviceWorker' in navigator)) return;
+  if (window.self !== window.top) return;
 
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js', { scope: './' })

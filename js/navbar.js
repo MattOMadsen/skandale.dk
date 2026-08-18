@@ -99,6 +99,10 @@ function loadNavbar() {
     // Indsæt navbaren
     document.body.insertAdjacentHTML('afterbegin', navbarHTML);
 
+    if (window.self !== window.top) {
+        document.querySelectorAll('.house-switch, .support-bar').forEach((el) => el.remove());
+    }
+
     highlightActiveNavLink();
     populateNavbarVersion();
 
@@ -161,5 +165,16 @@ function closeMobileMenu() {
 // Gør closeMobileMenu globalt tilgængelig
 window.closeMobileMenu = closeMobileMenu;
 
+function redirectStandaloneToFolketsMedie() {
+    if (window.self !== window.top) return;
+    if (location.hostname !== 'mattomadsen.github.io') return;
+    if (!/\/skandale\.dk(\/|$)/i.test(location.pathname)) return;
+    const dest = 'https://mattomadsen.github.io/folketsmedie/skandale/' + location.search + location.hash;
+    location.replace(dest);
+}
+
 // Auto-load navbar når scriptet er indlæst
-document.addEventListener('DOMContentLoaded', loadNavbar);
+document.addEventListener('DOMContentLoaded', () => {
+    redirectStandaloneToFolketsMedie();
+    loadNavbar();
+});
