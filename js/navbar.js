@@ -3,6 +3,14 @@
 
 function loadNavbar() {
     const navbarHTML = `
+        <div class="site-top no-print">
+        <nav class="house-switch no-print" aria-label="Vælg sted">
+            <div class="house-switch__inner">
+                <a href="https://mattomadsen.github.io/folketsmedie/">Folkets Medie</a>
+                <a href="https://mattomadsen.github.io/skandale.dk/" aria-current="page">Skandale</a>
+                <a href="https://mattomadsen.github.io/skattejaegeren/">Skattejægeren</a>
+            </div>
+        </nav>
         <div class="support-bar no-print" role="region" aria-label="Støt projektet">
             <p>
                 Hjælp med at få projektet ud på en rigtig hjemmeside.
@@ -10,7 +18,7 @@ function loadNavbar() {
             </p>
         </div>
         <!-- Desktop + Tablet Navbar -->
-        <nav class="bg-white dark:bg-slate-900 border-b sticky top-0 z-50 no-print">
+        <nav class="bg-white dark:bg-slate-900 border-b no-print">
             <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
                 <!-- Logo -->
                 <div class="flex items-center gap-x-3">
@@ -55,6 +63,7 @@ function loadNavbar() {
                 </div>
             </div>
         </nav>
+        </div>
 
         <!-- Mobile Menu Overlay -->
         <div id="mobile-menu" class="hidden fixed inset-0 bg-black/60 z-[200] md:hidden">
