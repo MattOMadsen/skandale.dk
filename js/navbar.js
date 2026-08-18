@@ -14,20 +14,32 @@ function loadNavbar() {
         <div class="support-bar no-print" role="region" aria-label="Støt projektet">
             <p>
                 Hjælp med at få projektet ud på en rigtig hjemmeside.
-                <a href="om.html#doner">Støt os</a>
+                <a href="https://mattomadsen.github.io/folketsmedie/stoet/" target="_top">Støt os</a>
             </p>
         </div>
         <!-- Desktop + Tablet Navbar -->
         <nav class="fm-local-nav no-print">
             <div class="fm-local-nav__inner">
                 <a class="fm-logo" href="index.html">Politiske <span>skandaler</span></a>
-                <div class="fm-nav hidden md:flex">
+                <div class="fm-nav">
                     <a href="index.html">Politikere</a>
-                    <a href="tidslinje.html">Tidslinje</a>
-                    <a href="sammenlign.html">Sammenlign</a>
-                    <a href="netvaerk.html">Netværk</a>
-                    <a href="om.html">Om</a>
-                    <a href="om.html#doner">Støt</a>
+                    <details class="nav-drop" data-group="vaerktoejer">
+                        <summary>Værktøjer</summary>
+                        <div class="nav-drop__menu">
+                            <a href="tidslinje.html">Tidslinje</a>
+                            <a href="sammenlign.html">Sammenlign</a>
+                            <a href="stats.html">Statistik</a>
+                            <a href="netvaerk.html">Netværk</a>
+                        </div>
+                    </details>
+                    <details class="nav-drop" data-group="om">
+                        <summary>Om</summary>
+                        <div class="nav-drop__menu">
+                            <a href="https://mattomadsen.github.io/folketsmedie/om/" target="_top">Om projektet</a>
+                            <a href="https://mattomadsen.github.io/folketsmedie/kontakt/" target="_top">Kontakt os</a>
+                            <a href="https://mattomadsen.github.io/folketsmedie/stoet/" target="_top">Støt os</a>
+                        </div>
+                    </details>
                 </div>
                 <button id="mobile-menu-button"
                         class="md:hidden w-10 h-10 flex items-center justify-center text-xl text-[#c8c4bb]"
@@ -48,13 +60,15 @@ function loadNavbar() {
                     </div>
                     <div class="flex-1 px-2 py-4 text-lg">
                         <a href="index.html" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Politikere</a>
+                        <p class="px-4 pt-3 pb-1 text-xs uppercase tracking-wider text-[#8b918c]">Værktøjer</p>
                         <a href="tidslinje.html" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Tidslinje</a>
                         <a href="sammenlign.html" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Sammenlign</a>
                         <a href="stats.html" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Statistik</a>
                         <a href="netvaerk.html" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Netværk</a>
-                        <a href="om.html" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Om</a>
-                        <a href="om.html#doner" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Støt</a>
-                        <a href="kontakt.html" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Kontakt</a>
+                        <p class="px-4 pt-3 pb-1 text-xs uppercase tracking-wider text-[#8b918c]">Om</p>
+                        <a href="https://mattomadsen.github.io/folketsmedie/om/" target="_top" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Om projektet</a>
+                        <a href="https://mattomadsen.github.io/folketsmedie/kontakt/" target="_top" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Kontakt os</a>
+                        <a href="https://mattomadsen.github.io/folketsmedie/stoet/" target="_top" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Støt os</a>
                     </div>
                 </div>
             </div>
@@ -88,6 +102,12 @@ function highlightActiveNavLink() {
         link.setAttribute('aria-current', 'page');
         link.classList.add('is-on');
     });
+
+    const tools = ['tidslinje.html', 'sammenlign.html', 'stats.html', 'netvaerk.html'];
+    if (tools.includes(current)) {
+        const drop = document.querySelector('[data-group="vaerktoejer"]');
+        if (drop) drop.classList.add('is-on');
+    }
 }
 
 function populateNavbarVersion() {
