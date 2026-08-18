@@ -7,7 +7,7 @@ function loadNavbar() {
         <nav class="house-switch no-print" aria-label="Vælg sted">
             <div class="house-switch__inner">
                 <a href="https://mattomadsen.github.io/folketsmedie/">Folkets Medie</a>
-                <a href="https://mattomadsen.github.io/skandale.dk/" aria-current="page">Skandale</a>
+                <a href="https://mattomadsen.github.io/folketsmedie/skandale/" aria-current="page">Skandaler</a>
                 <a href="https://mattomadsen.github.io/skattejaegeren/">Skattejægeren</a>
             </div>
         </nav>
@@ -18,49 +18,22 @@ function loadNavbar() {
             </p>
         </div>
         <!-- Desktop + Tablet Navbar -->
-        <nav class="bg-white dark:bg-slate-900 border-b no-print">
-            <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-                <!-- Logo -->
-                <div class="flex items-center gap-x-3">
-                    <div class="w-10 h-10 bg-[#C8102E] rounded-2xl flex items-center justify-center">
-                        <i class="fa-solid fa-balance-scale text-white text-2xl"></i>
-                    </div>
-                    <div>
-                        <div class="font-bold text-2xl tracking-tight">Skandale.dk</div>
-                        <div class="text-[10px] text-slate-500 dark:text-slate-400 -mt-1">Politisk gennemsigtighed</div>
-                    </div>
+        <nav class="fm-local-nav no-print">
+            <div class="fm-local-nav__inner">
+                <a class="fm-logo" href="index.html">Skandaler <small>Politik</small></a>
+                <div class="fm-nav hidden md:flex">
+                    <a href="index.html">Politikere</a>
+                    <a href="tidslinje.html">Tidslinje</a>
+                    <a href="sammenlign.html">Sammenlign</a>
+                    <a href="netvaerk.html">Netværk</a>
+                    <a href="om.html">Om</a>
+                    <a href="om.html#doner">Støt</a>
                 </div>
-
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
-                    <a href="index.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-[#C8102E] dark:hover:text-[#C8102E] transition-colors">Politikere</a>
-                    <a href="tidslinje.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-[#C8102E] dark:hover:text-[#C8102E] transition-colors">Tidslinje</a>
-                    <a href="sammenlign.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-[#C8102E] dark:hover:text-[#C8102E] transition-colors">Sammenlign</a>
-                    <a href="stats.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-[#C8102E] dark:hover:text-[#C8102E] transition-colors">Statistik</a>
-                    <a href="netvaerk.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-[#C8102E] dark:hover:text-[#C8102E] transition-colors">Netværk</a>
-                    <a href="om.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-[#C8102E] dark:hover:text-[#C8102E] transition-colors">Om</a>
-                    <a href="om.html#doner" class="nav-link text-slate-600 dark:text-slate-300 hover:text-[#C8102E] dark:hover:text-[#C8102E] transition-colors">Støt</a>
-                    <a href="kontakt.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-[#C8102E] dark:hover:text-[#C8102E] transition-colors">Kontakt</a>
-                </div>
-
-                <!-- Right side -->
-                <div class="flex items-center gap-x-3">
-                    <div id="navbar-version" class="hidden md:block text-xs px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-500 dark:text-slate-400 font-mono"></div>
-                    
-                    <!-- Dark mode toggle -->
-                    <button id="theme-toggle" 
-                            class="w-10 h-10 flex items-center justify-center text-xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
-                            aria-label="Skift mellem lyst og mørkt tema">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                    
-                    <!-- Mobile menu button -->
-                    <button id="mobile-menu-button" 
-                            class="md:hidden w-10 h-10 flex items-center justify-center text-2xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
-                            aria-label="Åbn menu">
-                        <i class="fa-solid fa-bars"></i>
-                    </button>
-                </div>
+                <button id="mobile-menu-button"
+                        class="md:hidden w-10 h-10 flex items-center justify-center text-xl text-[#c8c4bb]"
+                        aria-label="Åbn menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
             </div>
         </nav>
         </div>
@@ -75,7 +48,7 @@ function loadNavbar() {
                             <div class="w-9 h-9 bg-[#C8102E] rounded-2xl flex items-center justify-center">
                                 <i class="fa-solid fa-balance-scale text-white text-xl"></i>
                             </div>
-                            <div class="font-bold text-xl">Skandale.dk</div>
+                            <div class="font-bold text-xl">Skandaler</div>
                         </div>
                         <button onclick="closeMobileMenu()" class="text-3xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">×</button>
                     </div>
@@ -120,8 +93,8 @@ function highlightActiveNavLink() {
         const isActive = href === current || (current === '' && href === 'index.html');
         if (!isActive) return;
 
-        link.classList.add('text-[#C8102E]', 'font-semibold');
-        link.classList.remove('text-slate-600', 'dark:text-slate-300', 'hover:text-[#C8102E]', 'dark:hover:text-[#C8102E]');
+        link.setAttribute('aria-current', 'page');
+        link.classList.add('is-on');
     });
 }
 
