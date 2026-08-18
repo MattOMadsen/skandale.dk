@@ -7,7 +7,7 @@ function loadNavbar() {
         <nav class="house-switch no-print" aria-label="Vælg sted">
             <div class="house-switch__inner">
                 <a href="https://mattomadsen.github.io/folketsmedie/">Folkets Medie</a>
-                <a href="https://mattomadsen.github.io/folketsmedie/skandale/" aria-current="page">Skandaler</a>
+                <a href="https://mattomadsen.github.io/folketsmedie/skandale/" aria-current="page">Politiske skandaler</a>
                 <a href="https://mattomadsen.github.io/skattejaegeren/">Skattejægeren</a>
             </div>
         </nav>
@@ -20,7 +20,7 @@ function loadNavbar() {
         <!-- Desktop + Tablet Navbar -->
         <nav class="fm-local-nav no-print">
             <div class="fm-local-nav__inner">
-                <a class="fm-logo" href="index.html">Skand<span>aler</span> <small>Opslag</small></a>
+                <a class="fm-logo" href="index.html">Politiske <span>skandaler</span></a>
                 <div class="fm-nav hidden md:flex">
                     <a href="index.html">Politikere</a>
                     <a href="tidslinje.html">Tidslinje</a>
@@ -43,7 +43,7 @@ function loadNavbar() {
             <div class="fm-drawer w-4/5 max-w-xs h-full flex flex-col" onclick="event.target.closest('#mobile-menu-content') || closeMobileMenu()">
                 <div id="mobile-menu-content" class="flex flex-col h-full">
                     <div class="px-6 py-5 border-b border-white/10 flex items-center justify-between">
-                        <div class="font-bold text-xl text-[#f2f0eb]">Skandaler</div>
+                        <div class="font-bold text-xl text-[#f2f0eb]">Politiske <span style="color:#e8b84a">skandaler</span></div>
                         <button onclick="closeMobileMenu()" class="text-3xl text-[#8b918c] hover:text-white">×</button>
                     </div>
                     <div class="flex-1 px-2 py-4 text-lg">
