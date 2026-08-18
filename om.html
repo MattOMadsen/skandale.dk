@@ -306,52 +306,35 @@
                 </p>
             </div>
 
-            <div id="doner" class="section-anchor donation-box p-8 md:p-10 rounded-3xl text-center my-4 border border-slate-200">
-                <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#C8102E]/10 dark:bg-[#C8102E]/20 mb-4">
-                    <i class="fa-solid fa-hand-holding-heart text-[#C8102E] dark:text-red-400 text-2xl"></i>
+            <div id="doner" class="section-anchor donation-box p-8 md:p-10 rounded-3xl my-4 border border-slate-200">
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#C8102E]/10 dark:bg-[#C8102E]/20 mb-4">
+                        <i class="fa-solid fa-hand-holding-heart text-[#C8102E] dark:text-red-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-3 text-slate-900 dark:text-white">Støt projektet</h3>
+                    <p class="text-base md:text-lg text-slate-600 dark:text-slate-300 max-w-xl mx-auto">
+                        Siden ligger midlertidigt på GitHub Pages. Vi ejer ikke skandale.dk. Hjælp med at få den ud på en rigtig hjemmeside — uden reklamer.
+                    </p>
                 </div>
-                <h3 class="text-3xl font-bold mb-3 text-slate-900 dark:text-white">Støt projektet</h3>
-                <p class="text-lg mb-8 text-slate-600 dark:text-slate-300 max-w-xl mx-auto">
-                    Siden ligger midlertidigt på GitHub Pages. Vi ejer ikke skandale.dk. Hjælp med at få den ud på en rigtig hjemmeside — uden reklamer.
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+                    <div class="donation-box__block rounded-2xl border border-slate-200 p-6 text-center">
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">MobilePay</p>
+                        <p class="text-3xl font-bold tracking-wide text-slate-900 dark:text-white font-mono">28896782</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-3">Kun nummeret. Ingen kontonavn.</p>
+                    </div>
+                    <div class="donation-box__block rounded-2xl border border-slate-200 p-6 text-center">
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">Bankoverførsel</p>
+                        <p class="text-lg text-slate-900 dark:text-white">Reg. <span class="font-bold font-mono">9070</span></p>
+                        <p class="text-lg text-slate-900 dark:text-white mt-1">Konto <span class="font-bold font-mono">8060896667</span></p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-3">Skriv gerne "Skandale" i beskedfeltet</p>
+                    </div>
+                </div>
+
+                <p class="text-center text-sm text-slate-600 dark:text-slate-400 mt-6">
+                    Mail:
+                    <a href="mailto:mattomadsen@proton.me" class="font-semibold text-[#C8102E] dark:text-red-400 hover:underline">mattomadsen@proton.me</a>
                 </p>
-
-                <a href="https://paypal.me/Skandale"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="inline-flex items-center justify-center gap-3 bg-[#0070BA] hover:bg-[#003087] text-white font-bold text-lg md:text-xl px-10 py-5 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
-                    <i class="fa-brands fa-paypal text-2xl"></i>
-                    Donér via PayPal
-                </a>
-
-                <div class="mt-10 pt-8 border-t border-slate-200 dark:border-slate-700/80 max-w-md mx-auto">
-                    <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1 flex items-center justify-center gap-2">
-                        <i class="fa-brands fa-paypal text-[#0070BA]"></i>
-                        PayPal QR-kode
-                    </p>
-                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-5">Scan med PayPal-appen på mobilen</p>
-                    <div class="donation-box__block rounded-2xl border border-slate-200 p-6">
-                        <div class="donation-box__qr-wrap rounded-2xl p-3 inline-block">
-                            <img src="qr/qrcode.png" alt="PayPal QR-kode til donation til Skandale.dk" width="180" height="180"
-                                 class="rounded-xl block mx-auto">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-10 pt-8 border-t border-slate-200 dark:border-slate-700/80 max-w-md mx-auto">
-                    <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1 flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-building-columns text-[#C8102E] dark:text-red-400"></i>
-                        Bankoverførsel
-                    </p>
-                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-5">Overfør direkte til kontoen herunder</p>
-                    <div class="donation-box__block rounded-2xl border border-slate-200 p-6">
-                        <div class="donation-box__bank rounded-xl border border-slate-200 p-5 font-mono text-base text-slate-800 dark:text-slate-100 text-left">
-                            <p>Reg: <span class="font-semibold">9070</span></p>
-                            <p class="mt-2">Konto: <span class="font-semibold">8060896667</span></p>
-                        </div>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-4">Skriv gerne "Skandale" i beskedfeltet</p>
-                    <p class="text-sm text-slate-600 dark:text-slate-300 mt-5">MobilePay: <span class="font-semibold font-mono">28896782</span></p>
-                    </div>
-                </div>
             </div>
         </section>
 
