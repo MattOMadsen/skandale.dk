@@ -41,37 +41,8 @@ function loadNavbar() {
                         </div>
                     </details>
                 </div>
-                <button id="mobile-menu-button"
-                        class="md:hidden w-10 h-10 flex items-center justify-center text-xl text-[#c8c4bb]"
-                        aria-label="Åbn menu">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
             </div>
         </nav>
-        </div>
-
-        <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="hidden fixed inset-0 bg-black/60 z-[200] md:hidden">
-            <div class="fm-drawer w-4/5 max-w-xs h-full flex flex-col" onclick="event.target.closest('#mobile-menu-content') || closeMobileMenu()">
-                <div id="mobile-menu-content" class="flex flex-col h-full">
-                    <div class="px-6 py-5 border-b border-white/10 flex items-center justify-between">
-                        <div class="font-bold text-xl text-[#f2f0eb]">Politiske <span style="color:#e8b84a">skandaler</span></div>
-                        <button onclick="closeMobileMenu()" class="text-3xl text-[#8b918c] hover:text-white">×</button>
-                    </div>
-                    <div class="flex-1 px-2 py-4 text-lg">
-                        <a href="index.html" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Politikere</a>
-                        <p class="px-4 pt-3 pb-1 text-xs uppercase tracking-wider text-[#8b918c]">Værktøjer</p>
-                        <a href="tidslinje.html" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Tidslinje</a>
-                        <a href="sammenlign.html" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Sammenlign</a>
-                        <a href="stats.html" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Statistik</a>
-                        <a href="netvaerk.html" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Netværk</a>
-                        <p class="px-4 pt-3 pb-1 text-xs uppercase tracking-wider text-[#8b918c]">Om</p>
-                        <a href="https://mattomadsen.github.io/folketsmedie/om/" target="_top" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Om projektet</a>
-                        <a href="https://mattomadsen.github.io/folketsmedie/kontakt/" target="_top" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Kontakt os</a>
-                        <a href="https://mattomadsen.github.io/folketsmedie/stoet/" target="_top" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Støt os</a>
-                    </div>
-                </div>
-            </div>
         </div>
     `;
 
@@ -83,16 +54,12 @@ function loadNavbar() {
     }
 
     highlightActiveNavLink();
-    populateNavbarVersion();
-
-    // Initialiser mobil menu
-    initMobileMenu();
 }
 
 function highlightActiveNavLink() {
     const current = window.location.pathname.split('/').pop() || 'index.html';
 
-    document.querySelectorAll('nav a[href], #mobile-menu a[href]').forEach(link => {
+    document.querySelectorAll('nav a[href]').forEach(link => {
         const href = link.getAttribute('href');
         if (!href || href.startsWith('http') || href.startsWith('#')) return;
 
@@ -109,46 +76,6 @@ function highlightActiveNavLink() {
         if (drop) drop.classList.add('is-on');
     }
 }
-
-function populateNavbarVersion() {
-    const el = document.getElementById('navbar-version');
-    if (el && typeof APP_VERSION !== 'undefined') {
-        el.textContent = APP_VERSION;
-    }
-}
-
-function initMobileMenu() {
-    const menuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    if (!menuButton || !mobileMenu) return;
-
-    // Åbn mobil menu
-    menuButton.addEventListener('click', () => {
-        mobileMenu.classList.remove('hidden');
-        mobileMenu.classList.add('flex');
-        document.body.style.overflow = 'hidden';
-    });
-
-    // Luk når man klikker på overlayet
-    mobileMenu.addEventListener('click', (e) => {
-        if (e.target === mobileMenu) {
-            closeMobileMenu();
-        }
-    });
-}
-
-function closeMobileMenu() {
-    const mobileMenu = document.getElementById('mobile-menu');
-    if (!mobileMenu) return;
-
-    mobileMenu.classList.remove('flex');
-    mobileMenu.classList.add('hidden');
-    document.body.style.overflow = '';
-}
-
-// Gør closeMobileMenu globalt tilgængelig
-window.closeMobileMenu = closeMobileMenu;
 
 function redirectStandaloneToFolketsMedie() {
     if (window.self !== window.top) return;
