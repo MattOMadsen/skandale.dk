@@ -23,10 +23,10 @@ function loadNavbar() {
                 <a class="fm-logo" href="index.html">Politiske <span>skandaler</span></a>
                 <div class="fm-nav">
                     <a href="index.html">Politikere</a>
+                    <a href="tidslinje.html">Tidslinje</a>
                     <details class="nav-drop" data-group="vaerktoejer">
                         <summary>Værktøjer</summary>
                         <div class="nav-drop__menu">
-                            <a href="tidslinje.html">Tidslinje</a>
                             <a href="sammenlign.html">Sammenlign</a>
                             <a href="stats.html">Statistik</a>
                             <a href="netvaerk.html">Netværk</a>
@@ -70,7 +70,7 @@ function highlightActiveNavLink() {
         link.classList.add('is-on');
     });
 
-    const tools = ['tidslinje.html', 'sammenlign.html', 'stats.html', 'netvaerk.html'];
+    const tools = ['sammenlign.html', 'stats.html', 'netvaerk.html'];
     if (tools.includes(current)) {
         const drop = document.querySelector('[data-group="vaerktoejer"]');
         if (drop) drop.classList.add('is-on');
