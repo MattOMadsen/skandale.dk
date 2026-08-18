@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#C8102E">
+    <meta name="theme-color" content="#0a0b0c">
     <title>Skandaler – Politisk gennemsigtighed</title>
     <link rel="stylesheet" href="css/tailwind.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -17,15 +17,11 @@
     <!-- Navbar bliver nu indlæst dynamisk via js/navbar.js -->
 
     <!-- Hero -->
-    <div class="bg-[#0a0b0c] text-white py-16 border-b border-white/5">
-        <div class="max-w-5xl mx-auto px-6 text-center">
-            <div class="inline-flex items-center gap-x-2 bg-white/10 px-4 py-1 rounded-full text-sm mb-4">
-                <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                <span id="site-updated-label">Opdateret …</span>
-            </div>
-
-            <h1 class="text-5xl md:text-6xl font-bold tracking-tighter mb-4">Gennemsigtighed i dansk politik</h1>
-            <p class="text-xl text-slate-300 max-w-2xl mx-auto mb-8">Én samlet platform til skandaler, støtte, netværk og brudte løfter.</p>
+    <div class="fm-intro">
+        <div class="max-w-5xl mx-auto px-6">
+            <p class="fm-intro__kicker" id="site-updated-label">Opdateret …</p>
+            <h1>Gennemsigtighed i dansk politik</h1>
+            <p>Skandaler, støtte, netværk og brudte løfter — samlet ét sted.</p>
 
             <!-- Hurtig statistik -->
             <div id="stats-snapshot" class="max-w-4xl mx-auto mb-10">
@@ -33,12 +29,12 @@
             </div>
 
             <!-- Søgefelt -->
-            <div class="max-w-md mx-auto">
+            <div class="max-w-md">
                 <div class="relative">
-                    <input id="searchInput" type="text" placeholder="Søg efter politiker..." 
+                    <input id="searchInput" type="text" placeholder="Søg efter politiker…"
                            onkeyup="if (typeof filterPoliticians === 'function') filterPoliticians()"
-                           class="w-full bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 border-0 rounded-3xl px-6 py-4 text-lg focus:outline-none focus:ring-2 focus:ring-[#C8102E]">
-                    <i class="fa-solid fa-search absolute right-6 top-5 text-slate-400"></i>
+                           class="fm-search">
+                    <i class="fa-solid fa-search absolute right-4 top-3.5 text-[#8b918c]"></i>
                 </div>
             </div>
         </div>

@@ -20,7 +20,7 @@ function loadNavbar() {
         <!-- Desktop + Tablet Navbar -->
         <nav class="fm-local-nav no-print">
             <div class="fm-local-nav__inner">
-                <a class="fm-logo" href="index.html">Skandaler <small>Politik</small></a>
+                <a class="fm-logo" href="index.html">Skand<span>aler</span> <small>Opslag</small></a>
                 <div class="fm-nav hidden md:flex">
                     <a href="index.html">Politikere</a>
                     <a href="tidslinje.html">Tidslinje</a>
@@ -40,29 +40,21 @@ function loadNavbar() {
 
         <!-- Mobile Menu Overlay -->
         <div id="mobile-menu" class="hidden fixed inset-0 bg-black/60 z-[200] md:hidden">
-            <div class="bg-white dark:bg-slate-800 w-4/5 max-w-xs h-full shadow-xl flex flex-col" onclick="event.target.closest('#mobile-menu-content') || closeMobileMenu()">
+            <div class="fm-drawer w-4/5 max-w-xs h-full flex flex-col" onclick="event.target.closest('#mobile-menu-content') || closeMobileMenu()">
                 <div id="mobile-menu-content" class="flex flex-col h-full">
-                    <!-- Header -->
-                    <div class="px-6 py-5 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
-                        <div class="flex items-center gap-x-3">
-                            <div class="w-9 h-9 bg-[#C8102E] rounded-2xl flex items-center justify-center">
-                                <i class="fa-solid fa-balance-scale text-white text-xl"></i>
-                            </div>
-                            <div class="font-bold text-xl">Skandaler</div>
-                        </div>
-                        <button onclick="closeMobileMenu()" class="text-3xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">×</button>
+                    <div class="px-6 py-5 border-b border-white/10 flex items-center justify-between">
+                        <div class="font-bold text-xl text-[#f2f0eb]">Skandaler</div>
+                        <button onclick="closeMobileMenu()" class="text-3xl text-[#8b918c] hover:text-white">×</button>
                     </div>
-
-                    <!-- Links -->
                     <div class="flex-1 px-2 py-4 text-lg">
-                        <a href="index.html" class="block px-4 py-3 rounded-xl text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700">Politikere</a>
-                        <a href="tidslinje.html" class="block px-4 py-3 rounded-xl text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700">Tidslinje</a>
-                        <a href="sammenlign.html" class="block px-4 py-3 rounded-xl text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700">Sammenlign</a>
-                        <a href="stats.html" class="block px-4 py-3 rounded-xl text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700">Statistik</a>
-                        <a href="netvaerk.html" class="block px-4 py-3 rounded-xl text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700">Netværk</a>
-                        <a href="om.html" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-xl text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700">Om projektet</a>
-                        <a href="om.html#doner" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-xl text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700">Støt os</a>
-                        <a href="kontakt.html" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-xl text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700">Kontakt</a>
+                        <a href="index.html" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Politikere</a>
+                        <a href="tidslinje.html" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Tidslinje</a>
+                        <a href="sammenlign.html" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Sammenlign</a>
+                        <a href="stats.html" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Statistik</a>
+                        <a href="netvaerk.html" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Netværk</a>
+                        <a href="om.html" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Om</a>
+                        <a href="om.html#doner" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Støt</a>
+                        <a href="kontakt.html" onclick="closeMobileMenu()" class="block px-4 py-3 rounded-xl text-[#f2f0eb] hover:bg-white/5">Kontakt</a>
                     </div>
                 </div>
             </div>
